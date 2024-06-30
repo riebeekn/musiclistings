@@ -135,7 +135,7 @@ jobs:
         run: mix deps.unlock --check-unused
       # Step: Run Sobelow
       - name: Check for Sobelow security vulnerabilities
-        run: mix sobelow --exit low
+        run: mix sobelow --config --exit low
 
       - name: Restore PLT cache
         uses: actions/cache/restore@v4
