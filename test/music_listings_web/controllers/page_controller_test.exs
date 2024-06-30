@@ -1,5 +1,5 @@
 defmodule MusicListingsWeb.PageControllerTest do
-  use MusicListingsWeb.ConnCase
+  use MusicListingsWeb.ConnCase, async: true
 
   test "GET /", %{conn: conn} do
     conn = get(conn, ~p"/")

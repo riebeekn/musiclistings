@@ -1,0 +1,16 @@
+{
+  "skip_files": [
+    "test",
+    "lib/music_listings/application.ex",
+    "lib/music_listings_web/components/core_components.ex",
+    "lib/music_listings_web/router.ex",
+    "lib/music_listings_web/telemetry.ex"
+  ],
+  "terminal_options": {
+    "file_column_width": 80
+  },
+  "coverage_options": {
+    "treat_no_relevant_lines_as_covered": true,
+    "minimum_coverage": 95
+  }
+}

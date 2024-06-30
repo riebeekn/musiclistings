@@ -24,10 +24,10 @@ defmodule MusicListingsWeb.ConnCase do
 
       use MusicListingsWeb, :verified_routes
 
+      import MusicListingsWeb.ConnCase
+      import Phoenix.ConnTest
       # Import conveniences for testing with connections
       import Plug.Conn
-      import Phoenix.ConnTest
-      import MusicListingsWeb.ConnCase
     end
   end
 

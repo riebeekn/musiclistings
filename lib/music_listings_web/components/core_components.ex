@@ -16,8 +16,9 @@ defmodule MusicListingsWeb.CoreComponents do
   """
   use Phoenix.Component
 
-  alias Phoenix.LiveView.JS
   import MusicListingsWeb.Gettext
+
+  alias Phoenix.LiveView.JS
 
   @doc """
   Renders a modal.
@@ -305,6 +306,7 @@ defmodule MusicListingsWeb.CoreComponents do
   def input(%{type: "checkbox"} = assigns) do
     assigns =
       assign_new(assigns, :checked, fn ->
+        # credo:disable-for-next-line
         Phoenix.HTML.Form.normalize_value("checkbox", assigns[:value])
       end)
 

@@ -23,10 +23,10 @@ defmodule MusicListingsWeb do
     quote do
       use Phoenix.Router, helpers: false
 
-      # Import common connection and controller functions to use in pipelines
-      import Plug.Conn
       import Phoenix.Controller
       import Phoenix.LiveView.Router
+      # Import common connection and controller functions to use in pipelines
+      import Plug.Conn
     end
   end
 
@@ -42,8 +42,8 @@ defmodule MusicListingsWeb do
         formats: [:html, :json],
         layouts: [html: MusicListingsWeb.Layouts]
 
-      import Plug.Conn
       import MusicListingsWeb.Gettext
+      import Plug.Conn
 
       unquote(verified_routes())
     end
@@ -81,11 +81,11 @@ defmodule MusicListingsWeb do
 
   defp html_helpers do
     quote do
-      # HTML escaping functionality
-      import Phoenix.HTML
       # Core UI components and translation
       import MusicListingsWeb.CoreComponents
       import MusicListingsWeb.Gettext
+      # HTML escaping functionality
+      import Phoenix.HTML
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS
