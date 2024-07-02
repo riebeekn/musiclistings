@@ -1,5 +1,6 @@
 defmodule MusicListings.Crawler do
   alias MusicListings.Repo
+  alias MusicListings.Spiders.DanforthMusicHall
   alias MusicListings.Spiders.VelvetUnderground
   alias MusicListingsSchema.Event
   alias MusicListingsSchema.Venue
@@ -8,7 +9,7 @@ defmodule MusicListings.Crawler do
   require Logger
 
   def crawl_all do
-    [VelvetUnderground]
+    [DanforthMusicHall, VelvetUnderground]
     |> Enum.each(&crawl/1)
   end
 
@@ -47,7 +48,14 @@ defmodule MusicListings.Crawler do
   end
 
   # for testing:
+  # index_file_path = Path.expand("#{File.cwd!()}/test/data/danforth_music_hall/index.html")
+  # index = File.read!(index_file_path)
+  # FOR A SINGLE EVENT FOR INITIAL TESTING
   # events = [index |> Meeseeks.all(css(".event-block")) |> List.last]
+  # FOR ALL EVENTS
+  # events = index |> Meeseeks.all(css(".event-block"))
+  # venue = Repo.get_by!(Venue, name: "Danforth Music Hall")
+  # Crawler.parse_events(events, DanforthMusicHall, venue)
   def parse_events(events, spider, venue) do
     events
     |> Enum.map(fn event ->
@@ -58,6 +66,7 @@ defmodule MusicListings.Crawler do
         title: spider.event_title_selector(event),
         headliner: headliner,
         openers: openers,
+        # TODO: need to figure out how to specify year
         date: spider.date_selector(event),
         time: spider.time_selector(event),
         price: spider.price_selector(event),
