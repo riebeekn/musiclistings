@@ -16,7 +16,7 @@ defmodule MusicListings.Repo.Migrations.CreateEvents do
       add :price, :string, null: false
       add :age_restriction, :string
       add :original_url, :string
-      add :ticket_url, :string
+      add :ticket_url, :string, size: 2048
 
       add :venue_id, references(:venues), null: false
 
