@@ -16,7 +16,7 @@ defmodule MusicListingsSchema.Event do
     # TODO: should this be split out more?  for instance some shows
     # have price ranges, i.e. $25.00 - $45.00 (plus service fees)
     field :price, :string
-    field :age_restriction, Ecto.Enum, values: [:all_ages, :nineteen_plus]
+    field :age_restriction, Ecto.Enum, values: [:all_ages, :nineteen_plus, :tbd]
     field :original_url, :string
     field :ticket_url, :string
 
