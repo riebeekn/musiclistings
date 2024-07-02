@@ -17,7 +17,7 @@ defmodule MusicListingsSchema.Event do
     # have price ranges, i.e. $25.00 - $45.00 (plus service fees)
     field :price, :string
     field :age_restriction, Ecto.Enum, values: [:all_ages, :nineteen_plus, :tbd]
-    field :original_url, :string
+    field :source_url, :string
     field :ticket_url, :string
 
     belongs_to :venue, MusicListingsSchema.Venue
