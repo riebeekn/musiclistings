@@ -73,7 +73,6 @@ defmodule MusicListings.Parsing.DanforthMusicHallParser do
           |> String.trim()
           |> String.to_integer()
 
-        # %{hour: hour, minute: minute}
         Time.new!(hour, minute, 0)
 
       _ ->
@@ -89,34 +88,37 @@ defmodule MusicListings.Parsing.DanforthMusicHallParser do
     end
   end
 
+  # TODO: should we have helper methods for common stuff like downcase / trime etc?
   def price_selector(event) do
-    [lo_string, hi_string] =
+    price_string =
       event
       |> Meeseeks.one(xpath("//div[@class='tickets']/following-sibling::div[1]"))
       |> Meeseeks.Result.text()
-      # should we have helper methods for common stuff like downcase / trime etc?
       |> String.downcase()
       |> String.replace("(plus service fees)", "")
       |> String.replace("$", "")
-      # TODO: in this case need to set variable price format
+
+    variable_price? = String.contains?(price_string, "+")
+
+    [lo_string, hi_string] =
+      price_string
       |> String.replace("+", "")
-      |> parse_lo_hi_price()
+      |> String.split("-")
+      |> case do
+        [lo, hi] -> [lo, hi]
+        [single_price] -> [single_price, single_price]
+      end
 
     %{
       price_lo: Decimal.new(lo_string |> String.trim()),
-      price_hi: Decimal.new(hi_string |> String.trim())
+      price_hi: Decimal.new(hi_string |> String.trim()),
+      price_format: price_format(lo_string, hi_string, variable_price?)
     }
   end
 
-  def parse_lo_hi_price(price_string) do
-    price_string
-    |> String.split("-")
-    |> case do
-      [lo_string, hi_string] -> [lo_string, hi_string]
-      # TODO: need to change price format for this case
-      [single_price] -> [single_price, single_price]
-    end
-  end
+  defp price_format(_, _, true), do: :variable
+  defp price_format(lo, hi, _) when lo == hi, do: :fixed
+  defp price_format(_, _, _), do: :range
 
   def age_selector(event) do
     time_age =

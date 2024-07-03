@@ -20,7 +20,7 @@ defmodule MusicListings.Crawler do
     spider
     |> download_events(spider.url())
     |> parse_events(spider, venue)
-    |> maybe_insert_events()
+    |> upsert_events()
   end
 
   def download_events(spider, url, events \\ []) do
@@ -65,7 +65,9 @@ defmodule MusicListings.Crawler do
       # TODO: these should probably be structs so we can specify
       # the type in a behaviour
       [headliner | openers] = spider.artists_selector(event)
-      %{price_lo: price_lo, price_hi: price_hi} = spider.price_selector(event)
+
+      %{price_lo: price_lo, price_hi: price_hi, price_format: price_format} =
+        spider.price_selector(event)
 
       %Event{
         external_id: spider.event_id_selector(event),
@@ -74,7 +76,7 @@ defmodule MusicListings.Crawler do
         openers: openers,
         date: spider.date_selector(event),
         time: spider.time_selector(event),
-        price_format: :range,
+        price_format: price_format,
         price_lo: price_lo,
         price_hi: price_hi,
         age_restriction: spider.age_selector(event),
@@ -85,7 +87,7 @@ defmodule MusicListings.Crawler do
     end)
   end
 
-  def maybe_insert_events(events) do
+  def upsert_events(events) do
     events
     |> Enum.each(fn event ->
       event
