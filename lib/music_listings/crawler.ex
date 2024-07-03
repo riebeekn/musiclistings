@@ -47,7 +47,7 @@ defmodule MusicListings.Crawler do
     end
   end
 
-  # for testing:
+  # for testing: ... maybe should move these comments into the parsers?
   # index_file_path = Path.expand("#{File.cwd!()}/test/data/velvet_underground/index.html")
   # index_file_path = Path.expand("#{File.cwd!()}/test/data/danforth_music_hall/index.html")
   # index = File.read!(index_file_path)
@@ -58,7 +58,7 @@ defmodule MusicListings.Crawler do
   # venue = Repo.get_by!(Venue, name: "Danforth Music Hall")
   # venue = Repo.get_by!(Venue, name: "Velvet Underground")
   # Crawler.parse_events(events, DanforthMusicHallParser, venue)
-  # Crawler.parse_events(events, VelvetUnderground, venue)
+  # Crawler.parse_events(events, VelvetUndergroundParser, venue)
   def parse_events(events, spider, venue) do
     events
     |> Enum.map(fn event ->

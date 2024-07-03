@@ -9,6 +9,8 @@ defmodule MusicListings.Parsing.VelvetUndergroundParser do
     Meeseeks.all(body, css(".event-block"))
   end
 
+  def source_url_selector(_event), do: url()
+
   def next_page_selector(body) do
     Meeseeks.one(body, css(".nav-previous a"))
   end
@@ -53,6 +55,33 @@ defmodule MusicListings.Parsing.VelvetUndergroundParser do
     |> Enum.at(0)
     |> String.split(" ")
     |> Enum.at(1)
+    |> String.trim()
+    |> String.downcase()
+    |> String.split(":")
+    |> case do
+      [hour_string, minute_string] ->
+        hour =
+          String.to_integer(hour_string)
+          |> maybe_adjust_for_pm(minute_string)
+
+        minute =
+          String.replace(minute_string, "pm", "")
+          |> String.trim()
+          |> String.to_integer()
+
+        Time.new!(hour, minute, 0)
+
+      _ ->
+        nil
+    end
+  end
+
+  defp maybe_adjust_for_pm(hour, minute_string) do
+    if String.contains?(minute_string, "pm") do
+      hour + 12
+    else
+      hour
+    end
   end
 
   def price_selector(event) do
@@ -61,10 +90,42 @@ defmodule MusicListings.Parsing.VelvetUndergroundParser do
     |> Enum.find(fn element -> element |> Meeseeks.text() |> String.contains?("Price:") end)
     |> Meeseeks.text()
     |> case do
-      nil -> "NO PRICE FOUND!"
-      price -> price |> String.replace("Price: ", "")
+      nil ->
+        %{price_lo: Decimal.new("0"), price_hi: Decimal.new("0"), price_format: :tbd}
+
+      price_string ->
+        price_string =
+          price_string
+          |> String.downcase()
+          |> String.replace("(plus service fees)", "")
+          |> String.replace("(plus fees)", "")
+          |> String.replace("price:", "")
+          |> String.replace("$", "")
+          |> String.trim()
+          |> IO.inspect(label: "price string")
+
+        variable_price? = String.contains?(price_string, "+")
+
+        [lo_string, hi_string] =
+          price_string
+          |> String.replace("+", "")
+          |> String.split("-")
+          |> case do
+            [lo, hi] -> [lo, hi]
+            [single_price] -> [single_price, single_price]
+          end
+
+        %{
+          price_lo: Decimal.new(lo_string |> String.trim() |> String.replace("$", "")),
+          price_hi: Decimal.new(hi_string |> String.trim() |> String.replace("$", "")),
+          price_format: price_format(lo_string, hi_string, variable_price?)
+        }
     end
   end
+
+  defp price_format(_, _, true), do: :variable
+  defp price_format(lo, hi, _) when lo == hi, do: :fixed
+  defp price_format(_, _, _), do: :range
 
   def age_selector(event) do
     event
