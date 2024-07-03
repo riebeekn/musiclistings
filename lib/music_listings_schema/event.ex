@@ -10,12 +10,10 @@ defmodule MusicListingsSchema.Event do
     field :headliner, :string
     field :openers, {:array, :string}
     field :date, :date
-    # TODO: should we have a time type?  i.e. is this the door time
-    # or the show time?
-    field :time, :string
-    # TODO: should this be split out more?  for instance some shows
-    # have price ranges, i.e. $25.00 - $45.00 (plus service fees)
-    field :price, :string
+    field :time, :time
+    field :price_format, Ecto.Enum, values: [:fixed, :range, :variable]
+    field :price_lo, :decimal
+    field :price_hi, :decimal
     field :age_restriction, Ecto.Enum, values: [:all_ages, :nineteen_plus, :tbd]
     field :source_url, :string
     field :ticket_url, :string

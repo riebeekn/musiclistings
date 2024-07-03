@@ -1,4 +1,4 @@
-defmodule MusicListings.Spiders.VelvetUnderground do
+defmodule MusicListings.Parsing.VelvetUndergroundParser do
   import Meeseeks.CSS
 
   def url, do: "https://thevelvet.ca/events/"
@@ -32,40 +32,16 @@ defmodule MusicListings.Spiders.VelvetUnderground do
   end
 
   def date_selector(event) do
-    [month, day] =
+    date_string =
       event
-      |> Meeseeks.one(css(".event-date h2"))
-      |> Meeseeks.Result.text()
-      |> String.split(",")
-      |> Enum.at(1)
-      |> String.split()
+      |> Meeseeks.one(css(".event-block"))
+      |> Meeseeks.Result.attr("data-event-date")
 
-    day =
-      day
-      |> String.replace("nd", "")
-      |> String.replace("rd", "")
-      |> String.replace("th", "")
-      |> String.replace("st", "")
-      |> String.to_integer()
+    year = String.slice(date_string, 0..3) |> String.to_integer()
+    month = String.slice(date_string, 4..5) |> String.to_integer()
+    day = String.slice(date_string, 6..7) |> String.to_integer()
 
-    month =
-      month
-      |> case do
-        "January" -> 1
-        "February" -> 2
-        "March" -> 3
-        "April" -> 4
-        "May" -> 5
-        "June" -> 6
-        "July" -> 7
-        "August" -> 8
-        "September" -> 9
-        "October" -> 10
-        "November" -> 11
-        "December" -> 12
-      end
-
-    Date.new!(2024, month, day)
+    Date.new!(year, month, day)
   end
 
   def time_selector(event) do

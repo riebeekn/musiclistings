@@ -1,7 +1,7 @@
 defmodule MusicListings.Crawler do
+  alias MusicListings.Parsing.DanforthMusicHall
+  # alias MusicListings.Parsing.VelvetUnderground
   alias MusicListings.Repo
-  alias MusicListings.Spiders.DanforthMusicHall
-  alias MusicListings.Spiders.VelvetUnderground
   alias MusicListingsSchema.Event
   alias MusicListingsSchema.Venue
   alias Req.Response
@@ -9,11 +9,11 @@ defmodule MusicListings.Crawler do
   require Logger
 
   def crawl_all do
-    [DanforthMusicHall, VelvetUnderground]
+    # , VelvetUnderground]
+    [DanforthMusicHall]
     |> Enum.each(&crawl/1)
   end
 
-  # Crawler.crawl(HorseshoeTavern) |> List.last()
   def crawl(spider) do
     venue = Repo.get_by!(Venue, name: spider.venue_name())
 
@@ -48,6 +48,7 @@ defmodule MusicListings.Crawler do
   end
 
   # for testing:
+  # index_file_path = Path.expand("#{File.cwd!()}/test/data/velvet_underground/index.html")
   # index_file_path = Path.expand("#{File.cwd!()}/test/data/danforth_music_hall/index.html")
   # index = File.read!(index_file_path)
   # FOR A SINGLE EVENT FOR INITIAL TESTING
@@ -55,22 +56,29 @@ defmodule MusicListings.Crawler do
   # FOR ALL EVENTS
   # events = index |> Meeseeks.all(css(".event-block"))
   # venue = Repo.get_by!(Venue, name: "Danforth Music Hall")
-  # Crawler.parse_events(events, DanforthMusicHall, venue)
+  # venue = Repo.get_by!(Venue, name: "Velvet Underground")
+  # Crawler.parse_events(events, DanforthMusicHallParser, venue)
+  # Crawler.parse_events(events, VelvetUnderground, venue)
   def parse_events(events, spider, venue) do
     events
     |> Enum.map(fn event ->
+      # TODO: these should probably be structs so we can specify
+      # the type in a behaviour
       [headliner | openers] = spider.artists_selector(event)
+      %{price_lo: price_lo, price_hi: price_hi} = spider.price_selector(event)
 
       %Event{
         external_id: spider.event_id_selector(event),
         title: spider.event_title_selector(event),
         headliner: headliner,
         openers: openers,
-        # TODO: need to figure out how to specify year
         date: spider.date_selector(event),
         time: spider.time_selector(event),
-        price: spider.price_selector(event),
+        price_format: :range,
+        price_lo: price_lo,
+        price_hi: price_hi,
         age_restriction: spider.age_selector(event),
+        source_url: spider.source_url_selector(event),
         ticket_url: spider.ticket_url_selector(event),
         venue_id: venue.id
       }
@@ -89,8 +97,11 @@ defmodule MusicListings.Crawler do
             openers: event.openers,
             date: event.date,
             time: event.time,
-            price: event.price,
+            price_format: event.price_format,
+            price_lo: event.price_lo,
+            price_hi: event.price_hi,
             age_restriction: event.age_restriction,
+            source_url: event.source_url,
             ticket_url: event.ticket_url,
             updated_at: DateTime.utc_now()
           ]

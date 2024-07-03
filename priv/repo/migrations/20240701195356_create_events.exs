@@ -8,15 +8,13 @@ defmodule MusicListings.Repo.Migrations.CreateEvents do
       add :headliner, :string, null: false
       add :openers, {:array, :string}
       add :date, :date, null: false
-      # TODO: should we have a time type?  i.e. is this the door time
-      # or the show time?
-      add :time, :string, null: false
-      # TODO: should this be split out more?  for instance some shows
-      # have price ranges, i.e. $25.00 - $45.00 (plus service fees)
-      add :price, :string, null: false
-      add :age_restriction, :string
-      add :source_url, :string
-      add :ticket_url, :string, size: 2048
+      add :time, :time
+      add :price_format, :string, null: false
+      add :price_lo, :decimal, null: false
+      add :price_hi, :decimal, null: false
+      add :age_restriction, :string, null: false
+      add :source_url, :string, null: false
+      add :ticket_url, :string, size: 2048, null: false
 
       add :venue_id, references(:venues), null: false
 
