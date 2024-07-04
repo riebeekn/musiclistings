@@ -1,6 +1,12 @@
 defmodule MusicListings.Parsing.VelvetUndergroundParser do
   import Meeseeks.CSS
 
+  alias MusicListings.Parsing.Parser
+  alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Price
+
+  @behaviour Parser
+
   def source_url, do: "https://thevelvet.ca/events/"
 
   def venue_name, do: "Velvet Underground"
@@ -9,29 +15,32 @@ defmodule MusicListings.Parsing.VelvetUndergroundParser do
     Meeseeks.all(body, css(".event-block"))
   end
 
-  def next_page_selector(body) do
+  def next_page_url(body) do
     Meeseeks.one(body, css(".nav-previous a"))
   end
 
-  def event_id_selector(event) do
+  def event_id(event) do
     event
     |> Meeseeks.one(css(".event-block"))
     |> Meeseeks.Result.attr("id")
   end
 
-  def event_title_selector(event) do
+  def event_title(event) do
     event
     |> Meeseeks.one(css(".event-title"))
     |> Meeseeks.Result.text()
   end
 
-  def artists_selector(event) do
-    event
-    |> Meeseeks.all(css(".event-artist-name"))
-    |> Enum.map(&Meeseeks.Result.text/1)
+  def performers(event) do
+    [headliner | openers] =
+      event
+      |> Meeseeks.all(css(".event-artist-name"))
+      |> Enum.map(&Meeseeks.Result.text/1)
+
+    %Performers{headliner: headliner, openers: openers}
   end
 
-  def date_selector(event) do
+  def event_date(event) do
     date_string =
       event
       |> Meeseeks.one(css(".event-block"))
@@ -44,7 +53,7 @@ defmodule MusicListings.Parsing.VelvetUndergroundParser do
     Date.new!(year, month, day)
   end
 
-  def time_selector(event) do
+  def event_time(event) do
     event
     |> Meeseeks.all(css(".event-meta"))
     |> Enum.find(fn element -> element |> Meeseeks.text() |> String.contains?("Ages:") end)
@@ -82,14 +91,14 @@ defmodule MusicListings.Parsing.VelvetUndergroundParser do
     end
   end
 
-  def price_selector(event) do
+  def price(event) do
     event
     |> Meeseeks.all(css(".event-meta"))
     |> Enum.find(fn element -> element |> Meeseeks.text() |> String.contains?("Price:") end)
     |> Meeseeks.text()
     |> case do
       nil ->
-        %{price_lo: Decimal.new("0"), price_hi: Decimal.new("0"), price_format: :tbd}
+        %Price{lo: Decimal.new("0"), hi: Decimal.new("0"), format: :tbd}
 
       price_string ->
         price_string =
@@ -113,10 +122,10 @@ defmodule MusicListings.Parsing.VelvetUndergroundParser do
             [single_price] -> [single_price, single_price]
           end
 
-        %{
-          price_lo: Decimal.new(lo_string |> String.trim() |> String.replace("$", "")),
-          price_hi: Decimal.new(hi_string |> String.trim() |> String.replace("$", "")),
-          price_format: price_format(lo_string, hi_string, variable_price?)
+        %Price{
+          lo: Decimal.new(lo_string |> String.trim() |> String.replace("$", "")),
+          hi: Decimal.new(hi_string |> String.trim() |> String.replace("$", "")),
+          format: price_format(lo_string, hi_string, variable_price?)
         }
     end
   end
@@ -125,7 +134,7 @@ defmodule MusicListings.Parsing.VelvetUndergroundParser do
   defp price_format(lo, hi, _) when lo == hi, do: :fixed
   defp price_format(_, _, _), do: :range
 
-  def age_selector(event) do
+  def age_restriction(event) do
     event
     |> Meeseeks.all(css(".event-meta"))
     |> Enum.find(fn element -> element |> Meeseeks.text() |> String.contains?("Ages:") end)
@@ -141,7 +150,7 @@ defmodule MusicListings.Parsing.VelvetUndergroundParser do
     end
   end
 
-  def ticket_url_selector(event) do
+  def ticket_url(event) do
     event
     |> Meeseeks.one(css(".event-ticket-link"))
     |> Meeseeks.Result.attr("href")

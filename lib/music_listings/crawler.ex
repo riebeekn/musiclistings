@@ -62,7 +62,6 @@ defmodule MusicListings.Crawler do
   def parse_events(events, spider, venue) do
     events
     |> Enum.map(fn event ->
-
       performers = spider.performers(event)
 
       price_info = spider.price(event)
