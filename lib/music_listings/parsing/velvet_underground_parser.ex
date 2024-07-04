@@ -1,15 +1,13 @@
 defmodule MusicListings.Parsing.VelvetUndergroundParser do
   import Meeseeks.CSS
 
-  def url, do: "https://thevelvet.ca/events/"
+  def source_url, do: "https://thevelvet.ca/events/"
 
   def venue_name, do: "Velvet Underground"
 
   def event_selector(body) do
     Meeseeks.all(body, css(".event-block"))
   end
-
-  def source_url_selector(_event), do: url()
 
   def next_page_selector(body) do
     Meeseeks.one(body, css(".nav-previous a"))

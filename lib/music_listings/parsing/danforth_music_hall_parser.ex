@@ -2,7 +2,13 @@ defmodule MusicListings.Parsing.DanforthMusicHallParser do
   import Meeseeks.CSS
   import Meeseeks.XPath
 
-  def url, do: "https://thedanforth.com/"
+  alias MusicListings.Parsing.Parser
+  alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Price
+
+  @behaviour Parser
+
+  def source_url, do: "https://thedanforth.com/"
 
   def venue_name, do: "Danforth Music Hall"
 
@@ -10,38 +16,37 @@ defmodule MusicListings.Parsing.DanforthMusicHallParser do
     Meeseeks.all(body, css(".event-block"))
   end
 
-  def next_page_selector(body) do
+  def next_page_url(body) do
     Meeseeks.one(body, css(".nav-next a"))
   end
 
-  def event_id_selector(event) do
+  def event_id(event) do
     event
     |> Meeseeks.one(css(".event-block"))
     |> Meeseeks.Result.attr("id")
   end
 
-  def event_title_selector(event) do
+  def event_title(event) do
     event
     |> Meeseeks.one(css(".entry-title"))
     |> Meeseeks.Result.text()
   end
 
-  def artists_selector(event) do
+  def performers(event) do
     artists =
       event
       |> Meeseeks.all(css(".artistname"))
       |> Enum.map(&Meeseeks.Result.text/1)
 
     if artists == [] do
-      ["", ""]
+      %Performers{headliner: "", openers: ""}
     else
-      artists
+      [headliner | openers] = artists
+      %Performers{headliner: headliner, openers: openers}
     end
   end
 
-  def source_url_selector(_event), do: url()
-
-  def date_selector(event) do
+  def event_date(event) do
     event
     |> Meeseeks.one(css(".listingdate"))
     |> Meeseeks.Result.attr("class")
@@ -52,7 +57,7 @@ defmodule MusicListings.Parsing.DanforthMusicHallParser do
     |> DateTime.to_date()
   end
 
-  def time_selector(event) do
+  def event_time(event) do
     event
     |> Meeseeks.one(xpath("//div[@class='doors']/following-sibling::div[1]"))
     |> Meeseeks.Result.text()
@@ -89,7 +94,7 @@ defmodule MusicListings.Parsing.DanforthMusicHallParser do
   end
 
   # TODO: should we have helper methods for common stuff like downcase / trime etc?
-  def price_selector(event) do
+  def price(event) do
     price_string =
       event
       |> Meeseeks.one(xpath("//div[@class='tickets']/following-sibling::div[1]"))
@@ -109,10 +114,11 @@ defmodule MusicListings.Parsing.DanforthMusicHallParser do
         [single_price] -> [single_price, single_price]
       end
 
-    %{
-      price_lo: Decimal.new(lo_string |> String.trim()),
-      price_hi: Decimal.new(hi_string |> String.trim()),
-      price_format: price_format(lo_string, hi_string, variable_price?)
+    # TODO: maybe put some of the logic into a .new function
+    %Price{
+      lo: Decimal.new(lo_string |> String.trim()),
+      hi: Decimal.new(hi_string |> String.trim()),
+      format: price_format(lo_string, hi_string, variable_price?)
     }
   end
 
@@ -120,7 +126,7 @@ defmodule MusicListings.Parsing.DanforthMusicHallParser do
   defp price_format(lo, hi, _) when lo == hi, do: :fixed
   defp price_format(_, _, _), do: :range
 
-  def age_selector(event) do
+  def age_restriction(event) do
     time_age =
       event
       |> Meeseeks.one(xpath("//div[@class='doors']/following-sibling::div[1]"))
@@ -144,7 +150,7 @@ defmodule MusicListings.Parsing.DanforthMusicHallParser do
     end
   end
 
-  def ticket_url_selector(event) do
+  def ticket_url(event) do
     event
     |> Meeseeks.one(css(".ticketlink a"))
     |> Meeseeks.Result.attr("href")

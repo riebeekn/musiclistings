@@ -1,3 +1,3 @@
-defmodule MusicListings.Parsing.EventArtists do
+defmodule MusicListings.Parsing.Performers do
   defstruct [:headliner, :openers]
 end

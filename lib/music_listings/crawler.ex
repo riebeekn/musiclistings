@@ -18,7 +18,7 @@ defmodule MusicListings.Crawler do
     venue = Repo.get_by!(Venue, name: spider.venue_name())
 
     spider
-    |> download_events(spider.url())
+    |> download_events(spider.source_url())
     |> parse_events(spider, venue)
     |> upsert_events()
   end
@@ -30,7 +30,7 @@ defmodule MusicListings.Crawler do
       {:ok, %Response{status: 200, body: body}} ->
         events_from_current_body = spider.event_selector(body)
 
-        next_page_url_result = spider.next_page_selector(body)
+        next_page_url_result = spider.next_page_url(body)
 
         if next_page_url_result do
           next_page_url = next_page_url_result |> Meeseeks.Result.attr("href")
@@ -62,26 +62,24 @@ defmodule MusicListings.Crawler do
   def parse_events(events, spider, venue) do
     events
     |> Enum.map(fn event ->
-      # TODO: these should probably be structs so we can specify
-      # the type in a behaviour
-      [headliner | openers] = spider.artists_selector(event)
 
-      %{price_lo: price_lo, price_hi: price_hi, price_format: price_format} =
-        spider.price_selector(event)
+      performers = spider.performers(event)
+
+      price_info = spider.price(event)
 
       %Event{
-        external_id: spider.event_id_selector(event),
-        title: spider.event_title_selector(event),
-        headliner: headliner,
-        openers: openers,
-        date: spider.date_selector(event),
-        time: spider.time_selector(event),
-        price_format: price_format,
-        price_lo: price_lo,
-        price_hi: price_hi,
-        age_restriction: spider.age_selector(event),
-        source_url: spider.source_url_selector(event),
-        ticket_url: spider.ticket_url_selector(event),
+        external_id: spider.event_id(event),
+        title: spider.event_title(event),
+        headliner: performers.headliner,
+        openers: performers.openers,
+        date: spider.event_date(event),
+        time: spider.event_time(event),
+        price_format: price_info.format,
+        price_lo: price_info.lo,
+        price_hi: price_info.hi,
+        age_restriction: spider.age_restriction(event),
+        source_url: spider.source_url(),
+        ticket_url: spider.ticket_url(event),
         venue_id: venue.id
       }
     end)
@@ -105,6 +103,8 @@ defmodule MusicListings.Crawler do
             age_restriction: event.age_restriction,
             source_url: event.source_url,
             ticket_url: event.ticket_url,
+            # problem with this is it always is updated... even on
+            # no changes... so maybe instead use explict get / insert / update
             updated_at: DateTime.utc_now()
           ]
         ],
