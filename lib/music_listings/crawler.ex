@@ -1,6 +1,6 @@
 defmodule MusicListings.Crawler do
-  alias MusicListings.Parsing.DanforthMusicHall
-  # alias MusicListings.Parsing.VelvetUnderground
+  alias MusicListings.Parsing.DanforthMusicHallParser
+  alias MusicListings.Parsing.VelvetUndergroundParser
   alias MusicListings.Repo
   alias MusicListingsSchema.Event
   alias MusicListingsSchema.Venue
@@ -9,32 +9,31 @@ defmodule MusicListings.Crawler do
   require Logger
 
   def crawl_all do
-    # , VelvetUnderground]
-    [DanforthMusicHall]
-    |> Enum.each(&crawl/1)
+    parsers = [DanforthMusicHallParser, VelvetUndergroundParser]
+    Enum.each(parsers, &crawl/1)
   end
 
-  def crawl(spider) do
-    venue = Repo.get_by!(Venue, name: spider.venue_name())
+  def crawl(parser) do
+    venue = Repo.get_by!(Venue, name: parser.venue_name())
 
-    spider
-    |> download_events(spider.source_url())
-    |> parse_events(spider, venue)
+    parser
+    |> download_events(parser.source_url())
+    |> parse_events(parser, venue)
     |> upsert_events()
   end
 
-  def download_events(spider, url, events \\ []) do
+  def download_events(parser, url, events \\ []) do
     url
     |> Req.get()
     |> case do
       {:ok, %Response{status: 200, body: body}} ->
-        events_from_current_body = spider.event_selector(body)
+        events_from_current_body = parser.event_selector(body)
 
-        next_page_url_result = spider.next_page_url(body)
+        next_page_url_result = parser.next_page_url(body)
 
         if next_page_url_result do
-          next_page_url = next_page_url_result |> Meeseeks.Result.attr("href")
-          download_events(spider, next_page_url, events ++ events_from_current_body)
+          next_page_url = Meeseeks.Result.attr(next_page_url_result, "href")
+          download_events(parser, next_page_url, events ++ events_from_current_body)
         else
           events ++ events_from_current_body
         end
@@ -59,36 +58,35 @@ defmodule MusicListings.Crawler do
   # venue = Repo.get_by!(Venue, name: "Velvet Underground")
   # Crawler.parse_events(events, DanforthMusicHallParser, venue)
   # Crawler.parse_events(events, VelvetUndergroundParser, venue)
-  def parse_events(events, spider, venue) do
-    events
-    |> Enum.map(fn event ->
-      performers = spider.performers(event)
+  def parse_events(events, parser, venue) do
+    Enum.map(events, &parse_event(&1, parser, venue))
+  end
 
-      price_info = spider.price(event)
+  def parse_event(event, parser, venue) do
+    performers = parser.performers(event)
 
-      %Event{
-        external_id: spider.event_id(event),
-        title: spider.event_title(event),
-        headliner: performers.headliner,
-        openers: performers.openers,
-        date: spider.event_date(event),
-        time: spider.event_time(event),
-        price_format: price_info.format,
-        price_lo: price_info.lo,
-        price_hi: price_info.hi,
-        age_restriction: spider.age_restriction(event),
-        source_url: spider.source_url(),
-        ticket_url: spider.ticket_url(event),
-        venue_id: venue.id
-      }
-    end)
+    price_info = parser.price(event)
+
+    %Event{
+      external_id: parser.event_id(event),
+      title: parser.event_title(event),
+      headliner: performers.headliner,
+      openers: performers.openers,
+      date: parser.event_date(event),
+      time: parser.event_time(event),
+      price_format: price_info.format,
+      price_lo: price_info.lo,
+      price_hi: price_info.hi,
+      age_restriction: parser.age_restriction(event),
+      source_url: parser.source_url(),
+      ticket_url: parser.ticket_url(event),
+      venue_id: venue.id
+    }
   end
 
   def upsert_events(events) do
-    events
-    |> Enum.each(fn event ->
-      event
-      |> Repo.insert(
+    Enum.each(events, fn event ->
+      Repo.insert(event,
         on_conflict: [
           set: [
             title: event.title,

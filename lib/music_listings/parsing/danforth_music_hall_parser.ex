@@ -1,12 +1,11 @@
 defmodule MusicListings.Parsing.DanforthMusicHallParser do
+  @behaviour MusicListings.Parsing.Parser
+
   import Meeseeks.CSS
   import Meeseeks.XPath
 
-  alias MusicListings.Parsing.Parser
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
-
-  @behaviour Parser
 
   def source_url, do: "https://thedanforth.com/"
 
@@ -39,7 +38,7 @@ defmodule MusicListings.Parsing.DanforthMusicHallParser do
       |> Enum.map(&Meeseeks.Result.text/1)
 
     if artists == [] do
-      %Performers{headliner: "", openers: ""}
+      %Performers{headliner: "", openers: []}
     else
       [headliner | openers] = artists
       %Performers{headliner: headliner, openers: openers}
@@ -61,7 +60,6 @@ defmodule MusicListings.Parsing.DanforthMusicHallParser do
     event
     |> Meeseeks.one(xpath("//div[@class='doors']/following-sibling::div[1]"))
     |> Meeseeks.Result.text()
-    |> IO.inspect(label: "time text")
     |> String.split("-")
     |> Enum.at(0)
     |> String.trim()
@@ -70,17 +68,19 @@ defmodule MusicListings.Parsing.DanforthMusicHallParser do
     |> case do
       [hour_string, minute_string] ->
         hour =
-          String.to_integer(hour_string)
+          hour_string
+          |> String.to_integer()
           |> maybe_adjust_for_pm(minute_string)
 
         minute =
-          String.replace(minute_string, "pm", "")
+          minute_string
+          |> String.replace("pm", "")
           |> String.trim()
           |> String.to_integer()
 
         Time.new!(hour, minute, 0)
 
-      _ ->
+      _tbd ->
         nil
     end
   end
@@ -116,15 +116,15 @@ defmodule MusicListings.Parsing.DanforthMusicHallParser do
 
     # TODO: maybe put some of the logic into a .new function
     %Price{
-      lo: Decimal.new(lo_string |> String.trim()),
-      hi: Decimal.new(hi_string |> String.trim()),
+      lo: lo_string |> String.trim() |> Decimal.new(),
+      hi: hi_string |> String.trim() |> Decimal.new(),
       format: price_format(lo_string, hi_string, variable_price?)
     }
   end
 
-  defp price_format(_, _, true), do: :variable
-  defp price_format(lo, hi, _) when lo == hi, do: :fixed
-  defp price_format(_, _, _), do: :range
+  defp price_format(_lo, _hi, true), do: :variable
+  defp price_format(lo, hi, _variable_price?) when lo == hi, do: :fixed
+  defp price_format(_lo, _hi, _variable_price?), do: :range
 
   def age_restriction(event) do
     time_age =

@@ -1,11 +1,10 @@
 defmodule MusicListings.Parsing.VelvetUndergroundParser do
+  @behaviour MusicListings.Parsing.Parser
+
   import Meeseeks.CSS
 
-  alias MusicListings.Parsing.Parser
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
-
-  @behaviour Parser
 
   def source_url, do: "https://thevelvet.ca/events/"
 
@@ -46,9 +45,9 @@ defmodule MusicListings.Parsing.VelvetUndergroundParser do
       |> Meeseeks.one(css(".event-block"))
       |> Meeseeks.Result.attr("data-event-date")
 
-    year = String.slice(date_string, 0..3) |> String.to_integer()
-    month = String.slice(date_string, 4..5) |> String.to_integer()
-    day = String.slice(date_string, 6..7) |> String.to_integer()
+    year = date_string |> String.slice(0..3) |> String.to_integer()
+    month = date_string |> String.slice(4..5) |> String.to_integer()
+    day = date_string |> String.slice(6..7) |> String.to_integer()
 
     Date.new!(year, month, day)
   end
@@ -68,17 +67,19 @@ defmodule MusicListings.Parsing.VelvetUndergroundParser do
     |> case do
       [hour_string, minute_string] ->
         hour =
-          String.to_integer(hour_string)
+          hour_string
+          |> String.to_integer()
           |> maybe_adjust_for_pm(minute_string)
 
         minute =
-          String.replace(minute_string, "pm", "")
+          minute_string
+          |> String.replace("pm", "")
           |> String.trim()
           |> String.to_integer()
 
         Time.new!(hour, minute, 0)
 
-      _ ->
+      _tbd ->
         nil
     end
   end
@@ -109,7 +110,6 @@ defmodule MusicListings.Parsing.VelvetUndergroundParser do
           |> String.replace("price:", "")
           |> String.replace("$", "")
           |> String.trim()
-          |> IO.inspect(label: "price string")
 
         variable_price? = String.contains?(price_string, "+")
 
@@ -123,16 +123,16 @@ defmodule MusicListings.Parsing.VelvetUndergroundParser do
           end
 
         %Price{
-          lo: Decimal.new(lo_string |> String.trim() |> String.replace("$", "")),
-          hi: Decimal.new(hi_string |> String.trim() |> String.replace("$", "")),
+          lo: lo_string |> String.trim() |> String.replace("$", "") |> Decimal.new(),
+          hi: hi_string |> String.trim() |> String.replace("$", "") |> Decimal.new(),
           format: price_format(lo_string, hi_string, variable_price?)
         }
     end
   end
 
-  defp price_format(_, _, true), do: :variable
-  defp price_format(lo, hi, _) when lo == hi, do: :fixed
-  defp price_format(_, _, _), do: :range
+  defp price_format(_lo, _hi, true), do: :variable
+  defp price_format(lo, hi, _variable_price?) when lo == hi, do: :fixed
+  defp price_format(_lo, _hi, _variable_price?), do: :range
 
   def age_restriction(event) do
     event

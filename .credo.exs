@@ -180,7 +180,6 @@
           {Credo.Check.Design.DuplicatedCode, []},
           {Credo.Check.Readability.AliasAs, []},
           {Credo.Check.Readability.NestedFunctionCalls, []},
-          {Credo.Check.Readability.SingleFunctionToBlockPipe, []},
           {Credo.Check.Readability.SinglePipe, []},
           {Credo.Check.Refactor.ABCSize, []},
           {Credo.Check.Refactor.AppendSingleItem, []},
@@ -199,6 +198,7 @@
           #
           {Credo.Check.Design.TagTODO, [exit_status: 2]},
           {Credo.Check.Readability.BlockPipe, []},
+          {Credo.Check.Readability.SingleFunctionToBlockPipe, []},
 
           #
           # Checks scheduled for next check update (opt-in for now)
