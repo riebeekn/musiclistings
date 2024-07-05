@@ -4,45 +4,30 @@ defmodule MusicListings.Parsing.DanforthMusicHallParser do
   import Meeseeks.CSS
   import Meeseeks.XPath
 
-  alias MusicListings.Parsing.Performers
-  alias MusicListings.Parsing.Price
+  alias MusicListings.Parsing.Parser
 
   def source_url, do: "https://thedanforth.com/"
 
   def venue_name, do: "Danforth Music Hall"
 
   def event_selector(body) do
-    Meeseeks.all(body, css(".event-block"))
+    Parser.event_selector(body, ".event-block")
   end
 
   def next_page_url(body) do
-    Meeseeks.one(body, css(".nav-next a"))
+    Parser.next_page_url(body, ".nav-next a")
   end
 
   def event_id(event) do
-    event
-    |> Meeseeks.one(css(".event-block"))
-    |> Meeseeks.Result.attr("id")
+    Parser.event_id(event, ".event-block")
   end
 
   def event_title(event) do
-    event
-    |> Meeseeks.one(css(".entry-title"))
-    |> Meeseeks.Result.text()
+    Parser.event_title(event, ".entry-title")
   end
 
   def performers(event) do
-    artists =
-      event
-      |> Meeseeks.all(css(".artistname"))
-      |> Enum.map(&Meeseeks.Result.text/1)
-
-    if artists == [] do
-      %Performers{headliner: "", openers: []}
-    else
-      [headliner | openers] = artists
-      %Performers{headliner: headliner, openers: openers}
-    end
+    Parser.performers(event, ".artistname")
   end
 
   def event_date(event) do
@@ -62,69 +47,15 @@ defmodule MusicListings.Parsing.DanforthMusicHallParser do
     |> Meeseeks.Result.text()
     |> String.split("-")
     |> Enum.at(0)
-    |> String.trim()
-    |> String.downcase()
-    |> String.split(":")
-    |> case do
-      [hour_string, minute_string] ->
-        hour =
-          hour_string
-          |> String.to_integer()
-          |> maybe_adjust_for_pm(minute_string)
-
-        minute =
-          minute_string
-          |> String.replace("pm", "")
-          |> String.trim()
-          |> String.to_integer()
-
-        Time.new!(hour, minute, 0)
-
-      _tbd ->
-        nil
-    end
+    |> Parser.convert_event_time_string_to_time()
   end
 
-  defp maybe_adjust_for_pm(hour, minute_string) do
-    if String.contains?(minute_string, "pm") do
-      hour + 12
-    else
-      hour
-    end
-  end
-
-  # TODO: should we have helper methods for common stuff like downcase / trime etc?
   def price(event) do
-    price_string =
-      event
-      |> Meeseeks.one(xpath("//div[@class='tickets']/following-sibling::div[1]"))
-      |> Meeseeks.Result.text()
-      |> String.downcase()
-      |> String.replace("(plus service fees)", "")
-      |> String.replace("$", "")
-
-    variable_price? = String.contains?(price_string, "+")
-
-    [lo_string, hi_string] =
-      price_string
-      |> String.replace("+", "")
-      |> String.split("-")
-      |> case do
-        [lo, hi] -> [lo, hi]
-        [single_price] -> [single_price, single_price]
-      end
-
-    # TODO: maybe put some of the logic into a .new function
-    %Price{
-      lo: lo_string |> String.trim() |> Decimal.new(),
-      hi: hi_string |> String.trim() |> Decimal.new(),
-      format: price_format(lo_string, hi_string, variable_price?)
-    }
+    event
+    |> Meeseeks.one(xpath("//div[@class='tickets']/following-sibling::div[1]"))
+    |> Meeseeks.Result.text()
+    |> Parser.convert_price_string_to_price()
   end
-
-  defp price_format(_lo, _hi, true), do: :variable
-  defp price_format(lo, hi, _variable_price?) when lo == hi, do: :fixed
-  defp price_format(_lo, _hi, _variable_price?), do: :range
 
   def age_restriction(event) do
     time_age =
@@ -138,21 +69,11 @@ defmodule MusicListings.Parsing.DanforthMusicHallParser do
       time_age
       |> String.split("-")
       |> Enum.at(1)
-      |> String.trim()
-      |> String.downcase()
-      |> case do
-        "all" -> :all_ages
-        "all ages" -> :all_ages
-        "all ages event" -> :all_ages
-        "19+" -> :nineteen_plus
-        "19+ event" -> :nineteen_plus
-      end
+      |> Parser.convert_age_restriction_string_to_enum()
     end
   end
 
   def ticket_url(event) do
-    event
-    |> Meeseeks.one(css(".ticketlink a"))
-    |> Meeseeks.Result.attr("href")
+    Parser.ticket_url(event, ".ticketlink a")
   end
 end

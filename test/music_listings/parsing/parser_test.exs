@@ -1,7 +1,7 @@
-defmodule MusicListings.Parsing.VelvetUndergroundParserTest do
+defmodule MusicListings.Parsing.ParserTest do
   use ExUnit.Case, async: true
-  import Meeseeks.CSS
-  alias MusicListings.Parsing.VelvetUndergroundParser
+
+  alias MusicListings.Parsing.Parser
 
   describe "parse/1" do
     setup do

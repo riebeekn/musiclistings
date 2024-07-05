@@ -29,10 +29,9 @@ defmodule MusicListings.Crawler do
       {:ok, %Response{status: 200, body: body}} ->
         events_from_current_body = parser.event_selector(body)
 
-        next_page_url_result = parser.next_page_url(body)
+        next_page_url = parser.next_page_url(body)
 
-        if next_page_url_result do
-          next_page_url = Meeseeks.Result.attr(next_page_url_result, "href")
+        if next_page_url do
           download_events(parser, next_page_url, events ++ events_from_current_body)
         else
           events ++ events_from_current_body
