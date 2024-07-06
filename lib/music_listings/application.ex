@@ -10,6 +10,7 @@ defmodule MusicListings.Application do
     children = [
       MusicListingsWeb.Telemetry,
       MusicListings.Repo,
+      {Oban, Application.fetch_env!(:music_listings, Oban)},
       {DNSCluster, query: Application.get_env(:music_listings, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: MusicListings.PubSub},
       # Start the Finch HTTP client for sending emails
