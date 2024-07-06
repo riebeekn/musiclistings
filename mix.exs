@@ -65,6 +65,7 @@ defmodule MusicListings.MixProject do
       {:bandit, "~> 1.5"},
       {:req, "~> 0.5.0"},
       {:meeseeks, "~> 0.17.0"},
+      {:oban, "~> 2.17"},
       # build / dev / test related deps
       {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
       {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
