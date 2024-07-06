@@ -35,3 +35,6 @@ music_listings-*.tar
 npm-debug.log
 /assets/node_modules/
 
+.iex.exs
+
+notes.txt
