@@ -1,4 +1,12 @@
 defmodule MusicListings.Parsing.Price do
+  @moduledoc """
+  Struct and functions to represent / parse an event prices
+  """
+  @type t :: %__MODULE__{
+          format: :fixed | :range | :tbd | :variable,
+          lo: Decimal.t(),
+          hi: Decimal.t()
+        }
   defstruct [:format, :lo, :hi]
 
   def new(nil), do: %__MODULE__{lo: Decimal.new("0"), hi: Decimal.new("0"), format: :tbd}

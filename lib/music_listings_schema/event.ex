@@ -1,4 +1,7 @@
 defmodule MusicListingsSchema.Event do
+  @moduledoc """
+  Schema to represent an event
+  """
   use Ecto.Schema
 
   @timestamps_opts [

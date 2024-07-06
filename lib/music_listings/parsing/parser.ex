@@ -1,4 +1,8 @@
 defmodule MusicListings.Parsing.Parser do
+  @moduledoc """
+  Module that defines the behaviour for a Parser and also
+  contains helper / common functions around parsing
+  """
   import Meeseeks.CSS
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
@@ -7,14 +11,14 @@ defmodule MusicListings.Parsing.Parser do
   @callback venue_name() :: String.t()
   @callback event_selector(String.t()) :: [Meeseeks.Result.t()] | {:error, Meeseeks.Error.t()}
   @callback next_page_url(String.t()) :: String.t()
-  @callback event_id(String.t()) :: String.t()
-  @callback event_title(String.t()) :: String.t()
-  @callback performers(String.t()) :: Performers.t()
-  @callback event_date(String.t()) :: Date.t()
-  @callback event_time(String.t()) :: Time.t()
-  @callback price(String.t()) :: Price.t()
-  @callback age_restriction(String.t()) :: [:all_ages | :nineteen_plus | :tbd]
-  @callback ticket_url(String.t()) :: String.t()
+  @callback event_id(Meeseeks.Result.t()) :: String.t()
+  @callback event_title(Meeseeks.Result.t()) :: String.t()
+  @callback performers(Meeseeks.Result.t()) :: Performers.t()
+  @callback event_date(Meeseeks.Result.t()) :: Date.t()
+  @callback event_time(Meeseeks.Result.t()) :: Time.t()
+  @callback price(Meeseeks.Result.t()) :: Price.t()
+  @callback age_restriction(Meeseeks.Result.t()) :: :all_ages | :nineteen_plus | :tbd
+  @callback ticket_url(Meeseeks.Result.t()) :: String.t()
 
   def event_selector(body, event_selector) do
     Meeseeks.all(body, css(event_selector))

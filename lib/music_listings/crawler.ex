@@ -1,4 +1,7 @@
 defmodule MusicListings.Crawler do
+  @moduledoc """
+  Crawler for retrieving events
+  """
   alias MusicListings.Parsing.DanforthMusicHallParser
   alias MusicListings.Parsing.VelvetUndergroundParser
   alias MusicListings.Repo

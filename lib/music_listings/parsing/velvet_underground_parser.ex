@@ -1,4 +1,7 @@
 defmodule MusicListings.Parsing.VelvetUndergroundParser do
+  @moduledoc """
+  Parser for extracing events from https://thevelvet.ca
+  """
   @behaviour MusicListings.Parsing.Parser
 
   import Meeseeks.CSS
