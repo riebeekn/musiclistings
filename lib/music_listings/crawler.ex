@@ -2,8 +2,6 @@ defmodule MusicListings.Crawler do
   @moduledoc """
   Crawler for retrieving events
   """
-  alias MusicListings.Parsing.DanforthMusicHallParser
-  alias MusicListings.Parsing.VelvetUndergroundParser
   alias MusicListings.Repo
   alias MusicListingsSchema.Event
   alias MusicListingsSchema.Venue
@@ -11,18 +9,15 @@ defmodule MusicListings.Crawler do
 
   require Logger
 
-  def crawl_all do
-    parsers = [DanforthMusicHallParser, VelvetUndergroundParser]
-    Enum.each(parsers, &crawl/1)
-  end
+  def crawl(parsers) do
+    Enum.each(parsers, fn parser ->
+      venue = Repo.get_by!(Venue, name: parser.venue_name())
 
-  def crawl(parser) do
-    venue = Repo.get_by!(Venue, name: parser.venue_name())
-
-    parser
-    |> download_events(parser.source_url())
-    |> parse_events(parser, venue)
-    |> upsert_events()
+      parser
+      |> download_events(parser.source_url())
+      |> parse_events(parser, venue)
+      |> upsert_events()
+    end)
   end
 
   def download_events(parser, url, events \\ []) do
