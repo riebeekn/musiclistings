@@ -9,18 +9,25 @@ defmodule MusicListings.Crawler do
 
   require Logger
 
-  def crawl(parsers) do
+  @doc """
+  Crawler.crawl([VelvetUndergroundParser], no_www: true)
+  """
+  def crawl(parsers, opts \\ []) do
+    get_events_from_www? = !Keyword.get(opts, :no_www, false)
+
     Enum.each(parsers, fn parser ->
       venue = Repo.get_by!(Venue, name: parser.venue_name())
 
       parser
-      |> download_events(parser.source_url())
+      |> retrieve_events(parser.source_url(), get_events_from_www?)
       |> parse_events(parser, venue)
       |> upsert_events()
     end)
   end
 
-  def download_events(parser, url, events \\ []) do
+  defp retrieve_events(parser, url, get_events_from_www?, events \\ [])
+
+  defp retrieve_events(parser, url, true, events) do
     url
     |> Req.get()
     |> case do
@@ -30,7 +37,7 @@ defmodule MusicListings.Crawler do
         next_page_url = parser.next_page_url(body)
 
         if next_page_url do
-          download_events(parser, next_page_url, events ++ events_from_current_body)
+          retrieve_events(parser, next_page_url, true, events ++ events_from_current_body)
         else
           events ++ events_from_current_body
         end
@@ -43,23 +50,30 @@ defmodule MusicListings.Crawler do
     end
   end
 
-  # for testing: ... maybe should move these comments into the parsers?
-  # index_file_path = Path.expand("#{File.cwd!()}/test/data/velvet_underground/index.html")
-  # index_file_path = Path.expand("#{File.cwd!()}/test/data/danforth_music_hall/index.html")
-  # index = File.read!(index_file_path)
-  # FOR A SINGLE EVENT FOR INITIAL TESTING
-  # events = [index |> Meeseeks.all(css(".event-block")) |> List.last]
-  # FOR ALL EVENTS
-  # events = index |> Meeseeks.all(css(".event-block"))
-  # venue = Repo.get_by!(Venue, name: "Danforth Music Hall")
-  # venue = Repo.get_by!(Venue, name: "Velvet Underground")
-  # Crawler.parse_events(events, DanforthMusicHallParser, venue)
-  # Crawler.parse_events(events, VelvetUndergroundParser, venue)
-  def parse_events(events, parser, venue) do
+  defp retrieve_events(parser, _url, false, _events) do
+    local_venue_file =
+      parser.venue_name()
+      |> String.replace(" ", "")
+      |> to_snake_case()
+
+    "#{File.cwd!()}/test/data/#{local_venue_file}/index.html"
+    |> Path.expand()
+    |> File.read!()
+    |> parser.event_selector()
+  end
+
+  defp to_snake_case(string) do
+    string
+    |> String.replace(~r/(?=[A-Z])/, "_")
+    |> String.downcase()
+    |> String.trim_leading("_")
+  end
+
+  defp parse_events(events, parser, venue) do
     Enum.map(events, &parse_event(&1, parser, venue))
   end
 
-  def parse_event(event, parser, venue) do
+  defp parse_event(event, parser, venue) do
     performers = parser.performers(event)
 
     price_info = parser.price(event)
@@ -81,7 +95,7 @@ defmodule MusicListings.Crawler do
     }
   end
 
-  def upsert_events(events) do
+  defp upsert_events(events) do
     Enum.each(events, fn event ->
       Repo.insert(event,
         on_conflict: [
