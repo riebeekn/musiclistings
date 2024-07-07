@@ -37,4 +37,4 @@ config :phoenix_live_view,
   enable_expensive_runtime_checks: true
 
 # Oban test config
-config :my_app, Oban, testing: :inline
+config :music_listings, Oban, testing: :inline

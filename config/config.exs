@@ -65,7 +65,14 @@ config :phoenix, :json_library, Jason
 config :music_listings, Oban,
   engine: Oban.Engines.Basic,
   queues: [default: 10],
-  repo: MusicListings.Repo
+  repo: MusicListings.Repo,
+  plugins: [
+    {Oban.Plugins.Cron,
+     crontab: [
+       # run at 7am UTC which is 3am EST
+       {"0 7 * * *", MusicListings.Workers.DataRetrievalWorker, max_attempts: 1}
+     ]}
+  ]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

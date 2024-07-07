@@ -6,5 +6,7 @@ defmodule MusicListingsSchema.Venue do
 
   schema "venues" do
     field :name, :string
+    field :pull_events?, :boolean, source: :pull_events
+    field :parser_module_name, :string
   end
 end
