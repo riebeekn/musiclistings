@@ -9,11 +9,8 @@ defmodule MusicListings.Crawler do
 
   require Logger
 
-  @doc """
-  Crawler.crawl([VelvetUndergroundParser], no_www: true)
-  """
   def crawl(parsers, opts \\ []) do
-    get_events_from_www? = !Keyword.get(opts, :no_www, false)
+    get_events_from_www? = Keyword.get(opts, :pull_data_from_www, false)
 
     Enum.each(parsers, fn parser ->
       venue = Repo.get_by!(Venue, name: parser.venue_name())
