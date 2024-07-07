@@ -73,7 +73,7 @@ defmodule MusicListings.Crawler do
         try do
           parse_event(&1, parser, venue)
         catch
-          _, _ ->
+          _e, _t ->
             {:error, &1}
         end
       end)
@@ -88,14 +88,13 @@ defmodule MusicListings.Crawler do
     receive do
       {ref, result} ->
         acc =
-          result
-          |> case do
+          case result do
             {:error, event} ->
               Logger.info("Parsing failed for: #{inspect(event)}")
               acc
 
             event ->
-              acc ++ [event]
+              [event | acc]
           end
 
         remaining_tasks = Enum.reject(tasks, fn task -> task.ref == ref end)
