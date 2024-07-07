@@ -70,7 +70,47 @@ defmodule MusicListings.Crawler do
   end
 
   defp parse_events(events, parser, venue) do
-    Enum.map(events, &parse_event(&1, parser, venue))
+    events
+    |> Enum.map(
+      &Task.async(fn ->
+        try do
+          parse_event(&1, parser, venue)
+        catch
+          _, _ ->
+            {:error, &1}
+        end
+      end)
+    )
+    |> collect_results()
+  end
+
+  defp collect_results(tasks, acc \\ [])
+  defp collect_results([], acc), do: acc
+
+  defp collect_results(tasks, acc) do
+    receive do
+      {ref, result} ->
+        acc =
+          result
+          |> case do
+            {:error, event} ->
+              Logger.info("Parsing failed for: #{inspect(event)}")
+              acc
+
+            event ->
+              acc ++ [event]
+          end
+
+        remaining_tasks = Enum.reject(tasks, fn task -> task.ref == ref end)
+
+        collect_results(
+          remaining_tasks,
+          acc
+        )
+
+      nil ->
+        collect_results(tasks, acc)
+    end
   end
 
   defp parse_event(event, parser, venue) do
