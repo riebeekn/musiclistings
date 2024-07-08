@@ -16,6 +16,9 @@ defmodule MusicListings.Parsing.DanforthMusicHallParser do
   def venue_name, do: "Danforth Music Hall"
 
   @impl true
+  def example_data_file_location, do: "test/data/danforth_music_hall/index.html"
+
+  @impl true
   def event_selector(body) do
     Parser.event_selector(body, ".event-block")
   end
@@ -51,6 +54,24 @@ defmodule MusicListings.Parsing.DanforthMusicHallParser do
     |> DateTime.from_unix!()
     |> DateTime.to_date()
   end
+
+  # @impl true
+  # def event_date(event) do
+  #   case Enum.random(1..10) do
+  #     5 ->
+  #       5 / 0
+  #
+  #     _w ->
+  #       event
+  #       |> Meeseeks.one(css(".listingdate"))
+  #       |> Meeseeks.Result.attr("class")
+  #       |> String.split()
+  #       |> Enum.at(1)
+  #       |> String.to_integer()
+  #       |> DateTime.from_unix!()
+  #       |> DateTime.to_date()
+  #   end
+  # end
 
   @impl true
   def event_time(event) do

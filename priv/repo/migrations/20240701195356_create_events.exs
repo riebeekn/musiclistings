@@ -5,7 +5,7 @@ defmodule MusicListings.Repo.Migrations.CreateEvents do
     create table(:events) do
       add :external_id, :string, null: false
       add :title, :string, null: false
-      add :headliner, :string, null: false
+      add :headliner, :string
       add :openers, {:array, :string}
       add :date, :date, null: false
       add :time, :time
