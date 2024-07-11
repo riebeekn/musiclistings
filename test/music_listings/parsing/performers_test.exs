@@ -5,7 +5,7 @@ defmodule MusicListings.Parsing.PerformersTest do
 
   describe "new/1" do
     test "handles missing performers" do
-      assert %Performers{headliner: "", openers: []} == Performers.new([])
+      assert %Performers{headliner: nil, openers: []} == Performers.new([])
     end
 
     test "populates headliner when only headliner" do

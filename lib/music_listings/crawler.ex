@@ -2,158 +2,77 @@ defmodule MusicListings.Crawler do
   @moduledoc """
   Crawler for retrieving events
   """
+  alias MusicListings.Crawler.CrawlSummary
+  alias MusicListings.Crawler.DataSource
+  alias MusicListings.Crawler.EventParser
+  alias MusicListings.Crawler.EventStorage
+  alias MusicListings.Parsing.DanforthMusicHallParser
+  alias MusicListings.Parsing.VelvetUndergroundParser
   alias MusicListings.Repo
-  alias MusicListingsSchema.Event
   alias MusicListingsSchema.Venue
-  alias Req.Response
 
   require Logger
 
-  def crawl(parsers, opts \\ []) do
-    get_events_from_www? = Keyword.get(opts, :pull_data_from_www, false)
+  @type crawler_opts :: {:pull_data_from_www, boolean()}
+  @type parser_types :: DanforthMusicHallParser | VelvetUndergroundParser
 
-    Enum.each(parsers, fn parser ->
+  @doc """
+  The crawl function is called to retrieve and store events.  Events will
+  be inserted or updated depending on whether the event already exists
+  in the database.
+
+  ## Parameters
+
+  The function takes in a single required parameter which is a list of
+  modules which implement the MusicListings.Parsing.Parser behaviour.
+  In this way specific parsers or combination of parsers can be run.
+
+  ## Options
+
+  An optional `:pull_data_from_www` option is available which defaults to false.
+  The purpose of this option is to allow for local testing / development to run
+  against existing downloaded data files located at `test/data/`
+
+  ## Example
+
+  iex> Crawler.crawl([DanforthMusicHallParser, VelvetUndergroundParser])
+  """
+  @spec crawl(parsers :: list(parser_types), opts :: list(crawler_opts)) :: list(Payload)
+  def crawl(parsers, opts \\ []) do
+    pull_data_from_www? = Keyword.get(opts, :pull_data_from_www, false)
+
+    Enum.flat_map(parsers, fn parser ->
       venue = Repo.get_by!(Venue, name: parser.venue_name())
 
       parser
-      |> retrieve_events(parser.source_url(), get_events_from_www?)
-      |> parse_events(parser, venue)
-      |> upsert_events()
+      |> DataSource.retrieve_events(parser.source_url(), pull_data_from_www?)
+      |> EventParser.parse_events(parser, venue)
+      |> EventStorage.save_events()
     end)
   end
 
-  defp retrieve_events(parser, url, get_events_from_www?, events \\ [])
+  @doc """
+  Takes a list of completed payloads and produces a summary of the result
+  of the crawl process
+  """
+  @spec crawl_summary(payloads :: list(Payload)) :: CrawlSummary
+  defdelegate crawl_summary(payloads), to: CrawlSummary, as: :new
 
-  defp retrieve_events(parser, url, true, events) do
-    url
-    |> Req.get()
-    |> case do
-      {:ok, %Response{status: 200, body: body}} ->
-        events_from_current_body = parser.event_selector(body)
-
-        next_page_url = parser.next_page_url(body)
-
-        if next_page_url do
-          retrieve_events(parser, next_page_url, true, events ++ events_from_current_body)
-        else
-          events ++ events_from_current_body
-        end
-
-      {:ok, %Response{status: status}} ->
-        Logger.info("Failed to get data from #{url}, status code: #{status}")
-
-      {:error, error} ->
-        Logger.error("Error occured getting #{url}, #{inspect(error)}")
-    end
-  end
-
-  defp retrieve_events(parser, _url, false, _events) do
-    local_venue_file =
-      parser.venue_name()
-      |> String.replace(" ", "")
-      |> to_snake_case()
-
-    "#{File.cwd!()}/test/data/#{local_venue_file}/index.html"
-    |> Path.expand()
-    |> File.read!()
-    |> parser.event_selector()
-  end
-
-  defp to_snake_case(string) do
-    string
-    |> String.replace(~r/(?=[A-Z])/, "_")
-    |> String.downcase()
-    |> String.trim_leading("_")
-  end
-
-  defp parse_events(events, parser, venue) do
-    events
-    |> Enum.map(
-      &Task.async(fn ->
-        try do
-          parse_event(&1, parser, venue)
-        catch
-          _e, _t ->
-            {:error, &1}
-        end
-      end)
-    )
-    |> collect_results()
-  end
-
-  defp collect_results(tasks, acc \\ [])
-  defp collect_results([], acc), do: acc
-
-  defp collect_results(tasks, acc) do
-    receive do
-      {ref, result} ->
-        acc =
-          case result do
-            {:error, event} ->
-              Logger.info("Parsing failed for: #{inspect(event)}")
-              acc
-
-            event ->
-              [event | acc]
-          end
-
-        remaining_tasks = Enum.reject(tasks, fn task -> task.ref == ref end)
-
-        collect_results(
-          remaining_tasks,
-          acc
-        )
-
-      nil ->
-        collect_results(tasks, acc)
-    end
-  end
-
-  defp parse_event(event, parser, venue) do
-    performers = parser.performers(event)
-
-    price_info = parser.price(event)
-
-    %Event{
-      external_id: parser.event_id(event),
-      title: parser.event_title(event),
-      headliner: performers.headliner,
-      openers: performers.openers,
-      date: parser.event_date(event),
-      time: parser.event_time(event),
-      price_format: price_info.format,
-      price_lo: price_info.lo,
-      price_hi: price_info.hi,
-      age_restriction: parser.age_restriction(event),
-      source_url: parser.source_url(),
-      ticket_url: parser.ticket_url(event),
-      venue_id: venue.id
+  @doc """
+  Saves a crawl summary to the database
+  """
+  @spec save_crawl_summary(CrawlSummary) ::
+          {:ok, MusicListingsSchema.CrawlSummary} | {:error, Ecto.Changset.Error}
+  def save_crawl_summary(crawl_summary) do
+    %MusicListingsSchema.CrawlSummary{
+      new: crawl_summary.new,
+      updated: crawl_summary.updated,
+      duplicate: crawl_summary.duplicate,
+      parse_errors: crawl_summary.parse_errors,
+      errors: crawl_summary.errors,
+      parse_errors_dump: crawl_summary.parse_errors_dump,
+      errors_dump: crawl_summary.errors_dump
     }
-  end
-
-  defp upsert_events(events) do
-    Enum.each(events, fn event ->
-      Repo.insert(event,
-        on_conflict: [
-          set: [
-            title: event.title,
-            headliner: event.headliner,
-            openers: event.openers,
-            date: event.date,
-            time: event.time,
-            price_format: event.price_format,
-            price_lo: event.price_lo,
-            price_hi: event.price_hi,
-            age_restriction: event.age_restriction,
-            source_url: event.source_url,
-            ticket_url: event.ticket_url,
-            # problem with this is it always is updated... even on
-            # no changes... so maybe instead use explict get / insert / update
-            updated_at: DateTime.utc_now()
-          ]
-        ],
-        conflict_target: [:external_id, :venue_id]
-      )
-    end)
+    |> Repo.insert()
   end
 end

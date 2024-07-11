@@ -16,6 +16,9 @@ defmodule MusicListings.Parsing.DanforthMusicHallParser do
   def venue_name, do: "Danforth Music Hall"
 
   @impl true
+  def example_data_file_location, do: "test/data/danforth_music_hall/index.html"
+
+  @impl true
   def event_selector(body) do
     Parser.event_selector(body, ".event-block")
   end
