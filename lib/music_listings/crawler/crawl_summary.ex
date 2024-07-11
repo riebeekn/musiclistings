@@ -11,7 +11,15 @@ defmodule MusicListings.Crawler.CrawlSummary do
   def new(payloads) do
     Enum.reduce(
       payloads,
-      %__MODULE__{duplicate: 0, new: 0, updated: 0, parse_errors: 0, errors: 0, parse_errors_dump: [], errors_dump: []},
+      %__MODULE__{
+        duplicate: 0,
+        new: 0,
+        updated: 0,
+        parse_errors: 0,
+        errors: 0,
+        parse_errors_dump: [],
+        errors_dump: []
+      },
       fn payload, acc -> summarize_payload(payload, acc) end
     )
   end

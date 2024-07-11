@@ -58,6 +58,11 @@ defmodule MusicListings.Crawler do
   @spec crawl_summary(payloads :: list(Payload)) :: CrawlSummary
   defdelegate crawl_summary(payloads), to: CrawlSummary, as: :new
 
+  @doc """
+  Saves a crawl summary to the database
+  """
+  @spec save_crawl_summary(CrawlSummary) ::
+          {:ok, MusicListingsSchema.CrawlSummary} | {:error, Ecto.Changset.Error}
   def save_crawl_summary(crawl_summary) do
     %MusicListingsSchema.CrawlSummary{
       new: crawl_summary.new,
