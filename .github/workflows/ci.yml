@@ -11,6 +11,7 @@ on:
 # Sets the ENV `MIX_ENV` to `test` for running tests
 env:
   MIX_ENV: test
+  ADMIN_EMAIL: "some_email@example.com"
 
 permissions:
   contents: read
