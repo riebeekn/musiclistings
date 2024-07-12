@@ -20,6 +20,15 @@ if System.get_env("PHX_SERVER") do
   config :music_listings, MusicListingsWeb.Endpoint, server: true
 end
 
+admin_email =
+  System.get_env("ADMIN_EMAIL") ||
+    raise """
+    environment variable ADMIN_EMAIL is missing.
+    For example: admin@example.com
+    """
+
+config :music_listings, :admin_email, admin_email
+
 if config_env() == :prod do
   database_url =
     System.get_env("DATABASE_URL") ||

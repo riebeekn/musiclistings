@@ -37,4 +37,6 @@ npm-debug.log
 
 .iex.exs
 
+.envrc
+
 notes.txt
