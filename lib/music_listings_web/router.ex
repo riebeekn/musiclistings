@@ -7,10 +7,7 @@ defmodule MusicListingsWeb.Router do
     plug :fetch_live_flash
     plug :put_root_layout, html: {MusicListingsWeb.Layouts, :root}
     plug :protect_from_forgery
-
-    plug :put_secure_browser_headers, %{
-      "content-security-policy" => "default-src 'self';img-src data: w3.org/svg/200 'self'"
-    }
+    plug :put_secure_browser_headers
   end
 
   pipeline :api do
@@ -42,6 +39,7 @@ defmodule MusicListingsWeb.Router do
 
       live_dashboard "/dashboard", metrics: MusicListingsWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview
+      forward("/gallery", MusicListings.Emails.Gallery)
     end
   end
 end

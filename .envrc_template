@@ -1,0 +1,7 @@
+# This is a template file containing the environment settings
+# required to run the application.  Copy this file to .envrc
+# and update the setting values if desired
+
+# You will need to run source .envrc from your terminal prior to starting
+# the application.  Or install https://direnv.net/docs/installation.html
+export ADMIN_EMAIL="admin@example.com"
