@@ -16,10 +16,10 @@ defmodule MusicListings.Parsing.Parser do
   @callback event_title(Meeseeks.Result.t()) :: String.t()
   @callback performers(Meeseeks.Result.t()) :: Performers.t()
   @callback event_date(Meeseeks.Result.t()) :: Date.t()
-  @callback event_time(Meeseeks.Result.t()) :: Time.t()
+  @callback event_time(Meeseeks.Result.t()) :: Time.t() | nil
   @callback price(Meeseeks.Result.t()) :: Price.t()
   @callback age_restriction(Meeseeks.Result.t()) :: :all_ages | :nineteen_plus | :tbd
-  @callback ticket_url(Meeseeks.Result.t()) :: String.t()
+  @callback ticket_url(Meeseeks.Result.t()) :: String.t() | nil
 
   def event_selector(body, event_selector) do
     Meeseeks.all(body, css(event_selector))
