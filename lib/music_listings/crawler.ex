@@ -6,15 +6,13 @@ defmodule MusicListings.Crawler do
   alias MusicListings.Crawler.DataSource
   alias MusicListings.Crawler.EventParser
   alias MusicListings.Crawler.EventStorage
-  alias MusicListings.Parsing.DanforthMusicHallParser
-  alias MusicListings.Parsing.VelvetUndergroundParser
+  alias MusicListings.Parsing.Parser
   alias MusicListings.Repo
   alias MusicListingsSchema.Venue
 
   require Logger
 
   @type crawler_opts :: {:pull_data_from_www, boolean()}
-  @type parser_types :: DanforthMusicHallParser | VelvetUndergroundParser
 
   @doc """
   The crawl function is called to retrieve and store events.  Events will
@@ -37,7 +35,8 @@ defmodule MusicListings.Crawler do
 
   iex> Crawler.crawl([DanforthMusicHallParser, VelvetUndergroundParser])
   """
-  @spec crawl(parsers :: list(parser_types), opts :: list(crawler_opts)) :: list(Payload)
+  @spec crawl(parsers :: list(Parser), opts :: list(crawler_opts)) ::
+          list(Payload)
   def crawl(parsers, opts \\ []) do
     pull_data_from_www? = Keyword.get(opts, :pull_data_from_www, false)
 
