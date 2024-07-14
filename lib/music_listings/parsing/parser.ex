@@ -106,4 +106,28 @@ defmodule MusicListings.Parsing.Parser do
       "19+ event" -> :nineteen_plus
     end
   end
+
+  def convert_month_string_to_number("January"), do: 1
+  def convert_month_string_to_number("Jan"), do: 1
+  def convert_month_string_to_number("February"), do: 2
+  def convert_month_string_to_number("Feb"), do: 2
+  def convert_month_string_to_number("March"), do: 3
+  def convert_month_string_to_number("Mar"), do: 3
+  def convert_month_string_to_number("April"), do: 4
+  def convert_month_string_to_number("Apr"), do: 4
+  def convert_month_string_to_number("May"), do: 5
+  def convert_month_string_to_number("June"), do: 6
+  def convert_month_string_to_number("Jun"), do: 6
+  def convert_month_string_to_number("July"), do: 7
+  def convert_month_string_to_number("Jul"), do: 7
+  def convert_month_string_to_number("August"), do: 8
+  def convert_month_string_to_number("Aug"), do: 8
+  def convert_month_string_to_number("September"), do: 9
+  def convert_month_string_to_number("Sep"), do: 9
+  def convert_month_string_to_number("October"), do: 10
+  def convert_month_string_to_number("Oct"), do: 10
+  def convert_month_string_to_number("November"), do: 11
+  def convert_month_string_to_number("Nov"), do: 11
+  def convert_month_string_to_number("December"), do: 12
+  def convert_month_string_to_number("Dec"), do: 12
 end

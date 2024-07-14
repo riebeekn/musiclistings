@@ -1,8 +1,6 @@
 defmodule MusicListings.Parsing.HorseshoeTavernParserTest do
   use ExUnit.Case, async: true
 
-  import Meeseeks.CSS
-
   alias MusicListings.Parsing.HorseshoeTavernParser
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
@@ -18,7 +16,8 @@ defmodule MusicListings.Parsing.HorseshoeTavernParserTest do
     event =
       single_event_file_path
       |> File.read!()
-      |> Meeseeks.one(css(".schedule-event"))
+      |> HorseshoeTavernParser.event_selector()
+      |> List.first()
 
     %{index_html: index_html, event: event}
   end

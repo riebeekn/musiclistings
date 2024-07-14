@@ -56,24 +56,11 @@ defmodule MusicListings.Parsing.HorseshoeTavernParser do
     [month_string, day_string] = String.split(day_month_string)
 
     day = String.to_integer(day_string)
-    month = month_number(month_string)
+    month = Parser.convert_month_string_to_number(month_string)
     year = String.to_integer(year_string)
 
     Date.new!(year, month, day)
   end
-
-  defp month_number("January"), do: 1
-  defp month_number("February"), do: 2
-  defp month_number("March"), do: 3
-  defp month_number("April"), do: 4
-  defp month_number("May"), do: 5
-  defp month_number("June"), do: 6
-  defp month_number("July"), do: 7
-  defp month_number("August"), do: 8
-  defp month_number("September"), do: 9
-  defp month_number("October"), do: 10
-  defp month_number("November"), do: 11
-  defp month_number("December"), do: 12
 
   @impl true
   def event_time(event) do
