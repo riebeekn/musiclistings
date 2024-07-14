@@ -1,6 +1,6 @@
 defmodule MusicListings.Parsing.HorseshoeTavernParser do
   @moduledoc """
-  Parser for extracing events from "https://www.horseshoetavern.com
+  Parser for extracing events from https://www.horseshoetavern.com
   """
   @behaviour MusicListings.Parsing.Parser
 
