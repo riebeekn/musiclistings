@@ -38,7 +38,6 @@ defmodule MusicListings.Parsing.VelvetUndergroundParserTest do
     test "returns expected events", %{index_html: index_html} do
       events = VelvetUndergroundParser.event_selector(index_html)
 
-      # should find 56 events
       assert 56 = Enum.count(events)
     end
   end

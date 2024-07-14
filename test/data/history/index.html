@@ -1,0 +1,1082 @@
+<!doctype html>
+<!--[if lt IE 7 ]>
+<html lang="en" class="no-js ie6 ie">
+   <![endif]-->
+   <!--[if IE 7 ]>
+   <html lang="en" class="no-js ie7 ie">
+      <![endif]-->
+      <!--[if (gt IE 9)|!(IE)]><!-->
+      <html lang="en" class="no-js">
+         <!--<![endif]-->
+         <head>
+            <script>
+               if ( /*@cc_on!@*/ false) {
+                   document.documentElement.className += ' ie10';
+               }
+               //detect ie11 by CSS Capability Testing
+               if ('msTextCombineHorizontal' != undefined) {
+
+                   //add class if userAgent isn't Chrome or Safari
+                   var ua = navigator.userAgent;
+                   var chromesafari_check = new RegExp("Safari");
+                   if (chromesafari_check.exec(ua) != null) {
+                       var isMSIE = false;
+                   } else {
+                       var isMSIE = true;
+                   }
+
+                   if (isMSIE) {
+                       document.documentElement.className += ' ie11';
+                   }
+               }
+            </script>
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <title>Events | HISTORY</title>
+            <meta name="author" content="HISTORY" />
+            <meta property="og:title" content="Events | HISTORY" />
+            <meta property="og:description" content="" />
+            <meta property="og:type" content="website" />
+            <meta property="og:url" content="https://www.historytoronto.com/events" />
+            <meta property="og:image:width" content="380"/>
+            <meta property="og:image:height" content="250"/>
+            <meta property="og:image" content="https://www.historytoronto.com/assets/img/default-thumbnail-74e3373174.jpg" />
+            <meta property="thumbnail" content="https://www.historytoronto.com/assets/img/default-thumbnail-74e3373174.jpg" />
+            <meta name="twitter:card" content="summary" />
+            <meta name="twitter:site" content="@historytoronto" />
+            <meta name="twitter:title" content="Events | HISTORY" />
+            <meta name="twitter:description" content="" />
+            <meta name="twitter:image" content="https://www.historytoronto.com/assets/img/default-thumbnail-74e3373174.jpg" />
+            <meta name="viewport" content="width=1200" />
+            <link rel="shortcut icon" href="/favicon.ico">
+            <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+            <link rel="stylesheet" media="screen" href="/assets-hybrid-framework--modular-js/production/1f8b330bf7/css/hybrid_framework.css">
+            <link rel="stylesheet" media="screen" href="https://www.historytoronto.com/assets/production/3b6cfc8b46//css/style.css">
+            <link rel="stylesheet" media="print" href="https://www.historytoronto.com/assets/production/3b6cfc8b46//css/print.css">
+            <script>
+               var BASE_URL = "https://www.historytoronto.com/";
+               var APPLICATION_URL = "https://www.historytoronto.com/";
+               var S3_BUCKET = "historytoronto";
+               var SHOWTIME_TRANSLATION_ID = "engUS";
+               var FRAMEWORK_ASSETS_PATH = "91273917cc";
+               var FRAMEWORK_JS_PATH = "/assets-hybrid-framework--modular-js/production/1f8b330bf7/js/app.optimized";
+               var FRAMEWORK_PATH_TO_JS = "/assets-hybrid-framework--modular-js/production/1f8b330bf7/js";
+               var SITE_S3_URL = "https://www.historytoronto.com/assets/production/3b6cfc8b46//";
+                   var ADMIN_S3_URL = "/assets-showtime/production/a75a188b50/";
+                   var _sf_startpt = (new Date()).getTime();
+            </script>
+            <script src="https://www.historytoronto.com/assets/production/3b6cfc8b46//js/libs/layout.engine.min.js"></script>
+            <script src="https://www.historytoronto.com/assets/production/3b6cfc8b46//js/libs/modernizr.min.js"></script>
+            <!-- Google Tag Manager -->
+            <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+               new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+               j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+               'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+               })(window,document,'script','dataLayer','GTM-M5LS22P');
+            </script>
+            <!-- End Google Tag Manager -->
+            <meta name="facebook-domain-verification" content="4reqskbr0h1gamy78f6riurotjt2hy" />
+            <style>
+               @import url(https://fonts.googleapis.com/css?family=Noto+Serif:400,700);
+               @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700:latin);
+            </style>
+            <script>
+               var firstViewport = document.getElementsByName("viewport")[0];
+               document.head.removeChild(firstViewport);
+            </script>
+            <meta id="variable-viewport" name="viewport" content="width=device-width, initial-scale=1">
+            <script src="https://use.fontawesome.com/fb9ae9118d.js"></script>
+            <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+            <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+            <script>
+               window.addEventListener("load", function(){
+               window.cookieconsent.initialise({
+                 "palette": {
+                   "popup": {
+                     "background": "#FFFFFF",
+                     "text": "#2D2926"
+                   },
+                   "button": {
+                     "background": "#00248C"
+                   }
+                 },
+                 "content": {
+                 	"message": '<a href="http://www.historytoronto.com/" target="_blank">HistoryToronto.com</a> uses cookies and similar technologies. By using the site, you are agreeing to our <a href="http://www.historytoronto.com/privacy-policy" target="_blank">Privacy Policy</a>, including our <a href="http://www.historytoronto.com/privacy-policy#cookies" target="_blank">Cookie Policy</a>.',
+                   "link": "",
+                   "href": "http://www.historytoronto.com/privacy-policy",
+                   "dismiss": "Agree and don't show again"
+                 }
+               })});
+            </script>
+         </head>
+         <body id="events" class="index">
+            <!-- Google Tag Manager (noscript) -->
+            <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M5LS22P"
+               height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+            <!-- End Google Tag Manager (noscript) -->
+            <div class="accessibility_links" style="width: 0px;height: 0;overflow: hidden;" role="complementary" aria-label="Accessibility Toolbar" data-options="default">
+               <ul>
+                  <li><a id="skip_link" class="skip_link" href="#content">Skip to content</a></li>
+                  <li><a href="/accessibility">Accessibility</a></li>
+                  <li><a href="/events">Buy Tickets</a></li>
+                  <li><a href="/search">Search</a></li>
+               </ul>
+            </div>
+            <div id="container">
+               <div id="layout">
+                  <header class="header clearfix">
+                     <div class="wrapper">
+                        <div class="left">
+                           <div class="logo">
+                              <a class="header-logo" href="https://www.historytoronto.com/" aria-label="HISTORY" title="HISTORY">
+                                 <svg aria-hidden="true" width="231px" height="36px" viewBox="0 0 231 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                       <g transform="translate(-45.000000, -199.000000)" fill="#00248C">
+                                          <g transform="translate(0.000000, 164.000000)">
+                                             <path d="M55.0131,48.5238 L58.1431,52.5898 L55.0131,56.6558 L55.0131,69.6588 L45.0001,69.6588 L48.1311,65.5938 L48.1311,39.5848 L45.0001,35.5198 L55.0131,35.5198 L55.0131,48.5238 Z M75.4481,39.5848 L78.5791,35.5198 L68.5661,35.5198 L68.5661,48.5238 L65.4361,52.5898 L68.5661,56.6558 L68.5661,69.6588 L78.5791,69.6588 L75.4481,65.5938 L75.4481,39.5848 Z M147.6531,65.5938 L144.5221,69.6588 L157.6661,69.6588 L154.5351,65.5938 L154.5331,38.3978 L160.6681,38.3978 L166.6871,45.5518 L166.6871,35.5218 L135.6521,35.5218 L135.6521,45.5518 L141.6781,38.3978 L147.6531,38.3978 L147.6531,65.5938 Z M95.9671,39.5848 L99.0971,35.5198 L85.9541,35.5198 L89.0851,39.5858 L89.0851,65.5938 L85.9541,69.6588 L99.0971,69.6588 L95.9671,65.5938 L95.9671,39.5848 Z M262.3691,55.5138 L272.3381,39.5848 L275.4691,35.5218 L267.0311,35.5218 L269.1621,38.8238 L260.8141,52.0668 L252.5621,38.8378 L255.1171,35.5218 L242.1731,35.5218 L245.3131,39.5968 L255.4861,55.8908 L255.4861,65.5928 L252.3561,69.6578 L265.4991,69.6578 L262.3691,65.5928 L262.3691,55.5138 Z M241.8631,69.6588 L232.2521,69.6598 L224.2751,55.6078 C222.3351,56.0008 220.9711,56.0818 219.1971,56.1078 L219.1971,60.2318 L219.1971,69.6598 L212.2081,69.6598 L212.2081,69.6588 L209.1851,69.6588 L212.2301,65.7048 C212.2811,65.6388 212.3091,65.5578 212.3091,65.4748 L212.3151,39.7158 C212.3151,39.6318 212.2881,39.5518 212.2371,39.4858 L209.1851,35.5218 L223.9501,35.5158 C233.7631,35.5158 237.2591,39.0418 237.3251,43.8988 C237.3881,48.4918 234.7411,51.1398 230.3721,53.7458 L237.1941,65.4388 L241.8631,69.6588 Z M230.5811,44.2978 C230.5811,41.0858 228.0221,38.3948 223.0891,38.3948 L219.1971,38.3948 L219.1971,53.3808 C226.0601,53.2058 230.5811,49.5458 230.5811,44.2978 L230.5811,44.2978 Z M122.0661,50.0448 L120.9281,49.4488 C115.2911,46.4678 113.3411,44.5708 113.3411,41.4818 C113.3411,39.1508 115.2371,37.8468 118.1641,37.8468 C125.3491,37.8468 129.4861,45.5518 129.4861,45.5518 L129.4861,36.2668 C127.4891,35.8778 123.7191,35.0358 119.1931,35.0028 C112.1481,34.9518 106.0281,38.8808 106.0281,44.1368 C106.0281,48.9058 109.9261,51.5618 115.6711,54.6508 L116.7011,55.1388 C122.0661,58.0118 124.0171,59.6368 124.0171,62.8348 C124.0171,65.8158 121.5321,67.3118 118.4431,67.3118 C114.9201,67.3118 108.7731,65.7218 107.9761,57.5748 L102.9291,65.3248 C105.9641,67.9258 113.0151,70.1978 118.0551,70.1978 C125.2641,70.1978 130.9131,66.0868 130.9131,60.0168 C130.9131,55.5188 127.1601,52.7548 122.0661,50.0448 L122.0661,50.0448 Z M187.4751,34.9998 C198.0441,34.9998 204.8541,42.8988 204.8541,53.5228 C204.8541,63.3838 197.9351,70.1948 188.0741,70.1948 C177.5051,70.1948 170.6951,62.5128 170.6951,51.6708 C170.6951,41.8098 177.5591,34.9998 187.4751,34.9998 L187.4751,34.9998 Z M189.8721,67.8518 C194.7751,67.8518 197.7721,63.4928 197.7721,56.3558 C197.7721,46.6578 191.9421,37.3418 185.6771,37.3418 C180.8271,37.3418 177.7771,41.6998 177.7771,48.8368 C177.7771,58.5348 183.6071,67.8518 189.8721,67.8518 L189.8721,67.8518 Z"></path>
+                                          </g>
+                                       </g>
+                                    </g>
+                                 </svg>
+                              </a>
+                              <a class="reduced-logo" href="https://www.historytoronto.com/" aria-label="HISTORY" title="HISTORY">
+                                 <svg aria-hidden="true" width="42px" height="43px" viewBox="0 0 42 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                       <g transform="translate(-41.000000, -9.000000)" fill="#00248C">
+                                          <path d="M53.5240775,25.379273 L57.4390244,30.5006298 L53.5240775,35.6219866 L53.5240775,52 L41,52 L44.9161976,46.8799028 L44.9161976,14.1200972 L41,9 L53.5240775,9 L53.5240775,25.379273 Z M79.0838024,14.1200972 L83,9 L70.4759225,9 L70.4759225,25.379273 L66.5609756,30.5006298 L70.4759225,35.6219866 L70.4759225,52 L83,52 L79.0838024,46.8799028 L79.0838024,14.1200972 Z"></path>
+                                       </g>
+                                    </g>
+                                 </svg>
+                              </a>
+                           </div>
+                           <button id="nav-toggle" aria-expanded="false" aria-label="Toggle Navigation">
+                           <span class="top"></span>
+                           <span class="mid"></span>
+                           <span class="mid2"></span>
+                           <span class="bottom"></span>
+                           <span class="close-text">Close</span>
+                           </button>
+                           <div class="nav_wrapper">
+                              <div class="drawer-toolbar">
+                                 <div class="toolbar">
+                                    <div class="inner-toolbar">
+                                       <div class="newsletter-icon">
+                                          <a href="https://www.historytoronto.com/about/contact-us" class="newsletter">
+                                             <span class="icon">
+                                                <svg aria-hidden="true" width="24px" height="16px" viewBox="0 0 24 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                   <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                      <g transform="translate(-1313.000000, -211.000000)" fill="#2D2926" fill-rule="nonzero">
+                                                         <g transform="translate(0.000000, 164.000000)">
+                                                            <g transform="translate(1313.000000, 43.000000)">
+                                                               <g transform="translate(0.000000, 4.000000)">
+                                                                  <path d="M24,0 L24,16 L0,16 L0,0 L24,0 Z M1.846,3.212 L1.84615385,14.1176471 L22.1538462,14.1176471 L22.153,3.213 L12,10.5298713 L1.846,3.212 Z M20.9104615,1.88235294 L3.08861538,1.88235294 L12,8.18070588 L20.9104615,1.88235294 Z"></path>
+                                                               </g>
+                                                            </g>
+                                                         </g>
+                                                      </g>
+                                                   </g>
+                                                </svg>
+                                             </span>
+                                             <span class="text">Newsletter</span>
+                                          </a>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <nav class="main_nav" data-options="default">
+                                 <ul>
+                                    <li class="page_22 has-sub ">
+                                       <a href="https://www.historytoronto.com/events" class="page_22 active">Events</a>
+                                       <button class="close-button level-1" aria-label="Toggle Events Sub Menu" aria-expanded="false">
+                                          <svg aria-hidden="true" width="10px" height="7px" viewBox="0 0 10 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <g transform="translate(-291.000000, -85.000000)" stroke="#FFFFFF" stroke-width="2">
+                                                   <g transform="translate(10.000000, 80.000000)">
+                                                      <polyline points="282 6 286 10 290 6"></polyline>
+                                                   </g>
+                                                </g>
+                                             </g>
+                                          </svg>
+                                       </button>
+                                       <div class="sub">
+                                          <ul>
+                                             <li class="">
+                                                <a href="https://www.historytoronto.com/events" class="page_28">Upcoming Events</a>
+                                             </li>
+                                          </ul>
+                                       </div>
+                                    </li>
+                                    <li class="page_36 has-sub ">
+                                       <a href="https://www.historytoronto.com/venue-information" class="page_36">Venue Information</a>
+                                       <button class="close-button level-1" aria-label="Toggle Venue Information Sub Menu" aria-expanded="false">
+                                          <svg aria-hidden="true" width="10px" height="7px" viewBox="0 0 10 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <g transform="translate(-291.000000, -85.000000)" stroke="#FFFFFF" stroke-width="2">
+                                                   <g transform="translate(10.000000, 80.000000)">
+                                                      <polyline points="282 6 286 10 290 6"></polyline>
+                                                   </g>
+                                                </g>
+                                             </g>
+                                          </svg>
+                                       </button>
+                                       <div class="sub">
+                                          <ul>
+                                             <li class="has-third-level">
+                                                <a href="https://www.historytoronto.com/venue-information/faqs" class="page_42">FAQs</a>																					<!-- <button class="close-button level-2" aria-label="Toggle  Sub Menu" aria-expanded="false"></button> -->
+                                                <ul class="level_3">
+                                                   <li><a href="https://www.historytoronto.com/venue-information/faqs/tickets" class="page_83">Ticket FAQs</a></li>
+                                                   <li><a href="https://www.historytoronto.com/venue-information/faqs/shows" class="page_84">Show FAQs</a></li>
+                                                   <li><a href="https://www.historytoronto.com/venue-information/faqs/venue" class="page_86">Venue FAQs</a></li>
+                                                </ul>
+                                             </li>
+                                             <li class="">
+                                                <a href="https://www.historytoronto.com/venue-information/directions-parking" class="page_37">Directions & Parking</a>
+                                             </li>
+                                             <li class="">
+                                                <a href="https://www.historytoronto.com/venue-information/accessibility" class="page_41">Accessibility</a>
+                                             </li>
+                                             <li class="">
+                                                <a href="https://www.historytoronto.com/venue-information/box-office-1" class="page_89">Box Office</a>
+                                             </li>
+                                             <li class="">
+                                                <a href="https://www.historytoronto.com/venue-information/seating-chart-1" class="page_90">Seating Chart</a>
+                                             </li>
+                                             <li class="">
+                                                <a href="https://www.historytoronto.com/venue-information/health-and-safety" class="page_87">Health and Safety</a>
+                                             </li>
+                                             <li class="">
+                                                <a href="https://www.historytoronto.com/venue-information/fan-code-of-conduct" class="page_93">Fan Code of Conduct </a>
+                                             </li>
+                                             <li class="">
+                                                <a href="https://www.historytoronto.com/venue-information/lost-and-found" class="page_95">Lost and Found </a>
+                                             </li>
+                                          </ul>
+                                       </div>
+                                    </li>
+                                    <li class="page_44 has-sub ">
+                                       <a href="https://www.historytoronto.com/rentals" class="page_44">Private Events</a>
+                                       <button class="close-button level-1" aria-label="Toggle Private Events Sub Menu" aria-expanded="false">
+                                          <svg aria-hidden="true" width="10px" height="7px" viewBox="0 0 10 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <g transform="translate(-291.000000, -85.000000)" stroke="#FFFFFF" stroke-width="2">
+                                                   <g transform="translate(10.000000, 80.000000)">
+                                                      <polyline points="282 6 286 10 290 6"></polyline>
+                                                   </g>
+                                                </g>
+                                             </g>
+                                          </svg>
+                                       </button>
+                                       <div class="sub">
+                                          <ul>
+                                             <li class="has-third-level">
+                                                <a href="https://www.historytoronto.com/rentals/venue_space_overview" class="page_73">Venue Space Overview</a>																					<!-- <button class="close-button level-2" aria-label="Toggle  Sub Menu" aria-expanded="false"></button> -->
+                                                <ul class="level_3">
+                                                   <li><a href="https://www.historytoronto.com/rentals/venue_space_overview/music_hall" class="page_74">Music Hall</a></li>
+                                                   <li><a href="https://www.historytoronto.com/rentals/venue_space_overview/mezzanine" class="page_75">Mezzanine</a></li>
+                                                </ul>
+                                             </li>
+                                             <li class="has-third-level">
+                                                <a href="https://www.historytoronto.com/rentals/event_types" class="page_66">Event Types</a>																					<!-- <button class="close-button level-2" aria-label="Toggle  Sub Menu" aria-expanded="false"></button> -->
+                                                <ul class="level_3">
+                                                   <li><a href="https://www.historytoronto.com/rentals/event_types/corporate_events" class="page_67">Corporate Events</a></li>
+                                                   <li><a href="https://www.historytoronto.com/rentals/event_types/social_gatherings" class="page_68">Social Gatherings</a></li>
+                                                   <li><a href="https://www.historytoronto.com/rentals/event_types/weddings" class="page_69">Weddings</a></li>
+                                                   <li><a href="https://www.historytoronto.com/rentals/event_types/private-dining" class="page_70">Private Dining</a></li>
+                                                   <li><a href="https://www.historytoronto.com/rentals/event_types/private_concerts" class="page_71">Private Concerts</a></li>
+                                                   <li><a href="https://www.historytoronto.com/rentals/event_types/holiday" class="page_72">Holiday</a></li>
+                                                </ul>
+                                             </li>
+                                             <li class="has-third-level">
+                                                <a href="https://www.historytoronto.com/rentals/amenitites" class="page_76">Amenities</a>																					<!-- <button class="close-button level-2" aria-label="Toggle  Sub Menu" aria-expanded="false"></button> -->
+                                                <ul class="level_3">
+                                                   <li><a href="https://www.historytoronto.com/rentals/amenitites/food_and_beverage" class="page_77">Food and Beverage</a></li>
+                                                   <li><a href="https://www.historytoronto.com/rentals/amenitites/entertainment_production_services" class="page_78">Entertainment and Production Services</a></li>
+                                                   <li><a href="https://www.historytoronto.com/rentals/amenitites/event_enhancements" class="page_79">Event Enhancements</a></li>
+                                                </ul>
+                                             </li>
+                                          </ul>
+                                       </div>
+                                    </li>
+                                    <li class="page_32 has-sub ">
+                                       <a href="https://www.historytoronto.com/premium-seating" class="page_32">Premium Seating</a>
+                                       <button class="close-button level-1" aria-label="Toggle Premium Seating Sub Menu" aria-expanded="false">
+                                          <svg aria-hidden="true" width="10px" height="7px" viewBox="0 0 10 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <g transform="translate(-291.000000, -85.000000)" stroke="#FFFFFF" stroke-width="2">
+                                                   <g transform="translate(10.000000, 80.000000)">
+                                                      <polyline points="282 6 286 10 290 6"></polyline>
+                                                   </g>
+                                                </g>
+                                             </g>
+                                          </svg>
+                                       </button>
+                                       <div class="sub">
+                                          <ul>
+                                             <li class="">
+                                                <a href="https://www.historytoronto.com/premium-seating/spaces" class="page_80">Spaces</a>
+                                             </li>
+                                             <li class="">
+                                                <a href="https://www.historytoronto.com/premium-seating/benefits" class="page_81">Benefits</a>
+                                             </li>
+                                             <li class="">
+                                                <a href="https://www.historytoronto.com/premium-seating/contact-us-1" class="page_82">Contact Us</a>
+                                             </li>
+                                          </ul>
+                                       </div>
+                                    </li>
+                                    <li class="page_50 has-sub ">
+                                       <a href="https://www.historytoronto.com/about" class="page_50">About</a>
+                                       <button class="close-button level-1" aria-label="Toggle About Sub Menu" aria-expanded="false">
+                                          <svg aria-hidden="true" width="10px" height="7px" viewBox="0 0 10 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <g transform="translate(-291.000000, -85.000000)" stroke="#FFFFFF" stroke-width="2">
+                                                   <g transform="translate(10.000000, 80.000000)">
+                                                      <polyline points="282 6 286 10 290 6"></polyline>
+                                                   </g>
+                                                </g>
+                                             </g>
+                                          </svg>
+                                       </button>
+                                       <div class="sub">
+                                          <ul>
+                                             <li class="">
+                                                <a href="https://www.historytoronto.com/about/contact-us" class="page_52">Contact Us</a>
+                                             </li>
+                                             <li class="">
+                                                <a href="https://www.historytoronto.com/about/stay-connected" class="page_53">Stay Connected</a>
+                                             </li>
+                                             <li class="">
+                                                <a href="https://www.historytoronto.com/about/employment" class="page_54">Employment</a>
+                                             </li>
+                                          </ul>
+                                       </div>
+                                    </li>
+                                 </ul>
+                              </nav>
+                           </div>
+                        </div>
+                        <div class="right">
+                           <div class="newsletter-icon">
+                              <a href="https://www.historytoronto.com/about/contact-us" class="newsletter">
+                                 <span class="icon">
+                                    <svg aria-hidden="true" width="24px" height="16px" viewBox="0 0 24 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                          <g transform="translate(-1313.000000, -211.000000)" fill="#2D2926" fill-rule="nonzero">
+                                             <g transform="translate(0.000000, 164.000000)">
+                                                <g transform="translate(1313.000000, 43.000000)">
+                                                   <g transform="translate(0.000000, 4.000000)">
+                                                      <path d="M24,0 L24,16 L0,16 L0,0 L24,0 Z M1.846,3.212 L1.84615385,14.1176471 L22.1538462,14.1176471 L22.153,3.213 L12,10.5298713 L1.846,3.212 Z M20.9104615,1.88235294 L3.08861538,1.88235294 L12,8.18070588 L20.9104615,1.88235294 Z"></path>
+                                                   </g>
+                                                </g>
+                                             </g>
+                                          </g>
+                                       </g>
+                                    </svg>
+                                 </span>
+                                 <span class="text">Newsletter</span>
+                              </a>
+                           </div>
+                           <div class="search-wrapper">
+                              <button class="search-trigger" aria-expanded="false" aria-label="Open Search Form">
+                                 <svg aria-hidden="true" class="icon open" width="23px" height="23px" viewBox="0 0 23 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                       <g transform="translate(-1387.000000, -207.000000)" fill="#2D2926" fill-rule="nonzero">
+                                          <g transform="translate(0.000000, 164.000000)">
+                                             <g transform="translate(1313.000000, 43.000000)">
+                                                <g transform="translate(74.000000, 0.000000)">
+                                                   <path d="M16.6,15.05 C17.875,13.45 18.575,11.425 18.575,9.375 C18.575,4.325 14.45,0.2 9.375,0.2 C4.3,0.2 0.2,4.325 0.2,9.375 C0.2,14.425 4.325,18.55 9.375,18.55 C11.4,18.55 13.425,17.85 15.05,16.575 L20.575,22.1 L22.15,20.525 L16.6,15.05 Z M9.375,16.375 C5.55,16.375 2.425,13.25 2.425,9.425 C2.425,5.6 5.55,2.475 9.375,2.475 C13.2,2.475 16.325,5.6 16.325,9.425 C16.325,13.25 13.2,16.375 9.375,16.375 Z"></path>
+                                                </g>
+                                             </g>
+                                          </g>
+                                       </g>
+                                    </g>
+                                 </svg>
+                                 <svg aria-hidden="true" class="icon close" width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                       <g transform="translate(-1396.000000, -47.000000)" fill="#2D2926">
+                                          <g transform="translate(977.000000, 43.000000)">
+                                             <g transform="translate(370.000000, 4.000000)">
+                                                <path d="M61.0208153,3.39284156e-13 L62.4350288,1.41421356 L57.132,6.717 L62.4350288,12.0208153 L61.0208153,13.4350288 L55.717,8.132 L50.4142136,13.4350288 L49,12.0208153 L54.303,6.717 L49,1.41421356 L50.4142136,-2.66453526e-15 L55.717,5.303 L61.0208153,3.39284156e-13 Z"></path>
+                                             </g>
+                                          </g>
+                                       </g>
+                                    </g>
+                                 </svg>
+                                 <span class="close-text close-hidden">Close</span>
+                              </button>
+                              <form action="https://www.historytoronto.com/search" class="search">
+                                 <div>
+                                    <label class="accessible hidden" for="search_field">Search</label>
+                                    <input class="hidden" id="search_field" name="term" size="31" type="text" aria-label="Enter search here" placeholder="Enter search here"/>
+                                    <button class="hidden" type="submit" aria-label="Search">
+                                       <svg aria-hidden="true" class="icon open" width="23px" height="23px" viewBox="0 0 23 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                             <g transform="translate(-1387.000000, -207.000000)" fill="#2D2926" fill-rule="nonzero">
+                                                <g transform="translate(0.000000, 164.000000)">
+                                                   <g transform="translate(1313.000000, 43.000000)">
+                                                      <g transform="translate(74.000000, 0.000000)">
+                                                         <path d="M16.6,15.05 C17.875,13.45 18.575,11.425 18.575,9.375 C18.575,4.325 14.45,0.2 9.375,0.2 C4.3,0.2 0.2,4.325 0.2,9.375 C0.2,14.425 4.325,18.55 9.375,18.55 C11.4,18.55 13.425,17.85 15.05,16.575 L20.575,22.1 L22.15,20.525 L16.6,15.05 Z M9.375,16.375 C5.55,16.375 2.425,13.25 2.425,9.425 C2.425,5.6 5.55,2.475 9.375,2.475 C13.2,2.475 16.325,5.6 16.325,9.425 C16.325,13.25 13.2,16.375 9.375,16.375 Z"></path>
+                                                      </g>
+                                                   </g>
+                                                </g>
+                                             </g>
+                                          </g>
+                                       </svg>
+                                    </button>
+                                 </div>
+                              </form>
+                           </div>
+                        </div>
+                     </div>
+                  </header>
+                  <div id="content" class="clearfix" role="main" tabindex="0" aria-label="Main Content">
+                     <div class="full hybrid event_listing_page clearfix">
+                        <div class="full_column non-widget-area">
+                           <div class="breadcrumbs"><a href="https://www.historytoronto.com/">Home</a><span class="breadcrumb_divider">|</span><span>Events & Tickets</span></div>
+                           <div class="event_list_header">
+                              <div class="overview">
+                                 <h1>Upcoming Events</h1>
+                                 <div class="category-dropdown m-eventList__filter" data-options="filter_events">
+                                    <div class="alert" role="alert" aria-live="polite" aria-label="All Event Types Are Loaded"></div>
+                                    <button class="select" aria-label="Toggle Filter Choices"  aria-expanded="false" >
+                                       <span class="select_text" data-original-text="All Event Types">All Event Types</span>
+                                       <svg aria-hidden="true" width="10px" height="7px" viewBox="0 0 10 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                             <g transform="translate(-326.000000, -259.000000)" stroke="#2D2926" stroke-width="2">
+                                                <g transform="translate(130.000000, 160.000000)">
+                                                   <g transform="translate(0.000000, 81.000000)">
+                                                      <polyline points="197 19 201 23 205 19"></polyline>
+                                                   </g>
+                                                </g>
+                                             </g>
+                                          </g>
+                                       </svg>
+                                    </button>
+                                    <div class="choices">
+                                       <ul>
+                                          <li><span tabindex="0" role="button" aria-pressed="false" aria-label="Filter Events by: All Event Types" class="event_filter_item display_all_events" data-category="0" data-increment="6">All Event Types</span></li>
+                                          <li><span tabindex="0" role="button" aria-pressed="false" aria-label="Filter Events by: Concerts" class="event_filter_item " data-category="1" data-increment="6">Concerts</span></li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                                 <h2 class="events-hidden">Event List</h2>
+                                 <div class="event_list_toggles" data-options="default">
+                                    <button class="toggle is-active" aria-label="Toggle to Grid View" aria-pressed="true" data-event-toggle="grid">
+                                       <svg aria-hidden="true" width="50px" height="8px" viewBox="0 0 50 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.998705487">
+                                             <g transform="translate(-1078.000000, -211.000000)" fill="#2D2926">
+                                                <g transform="translate(130.000000, 160.000000)">
+                                                   <g transform="translate(948.000000, 48.000000)">
+                                                      <path d="M14,3 L14,11 L0,11 L0,3 L14,3 Z M32,3 L32,11 L18,11 L18,3 L32,3 Z M50,3 L50,11 L36,11 L36,3 L50,3 Z"></path>
+                                                   </g>
+                                                </g>
+                                             </g>
+                                          </g>
+                                       </svg>
+                                       <span>Grid</span>
+                                    </button>
+                                    <button class="toggle " aria-label="Toggle to List View" aria-pressed="false" data-event-toggle="listing">
+                                       <svg aria-hidden="true" width="50px" height="8px" viewBox="0 0 50 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                             <g transform="translate(-1209.000000, -211.000000)" fill="#2D2926">
+                                                <g transform="translate(130.000000, 160.000000)">
+                                                   <g transform="translate(1079.000000, 48.000000)">
+                                                      <path d="M14,3 L14,11 L0,11 L0,3 L14,3 Z M50,3 L50,11 L18,11 L18,3 L50,3 Z"></path>
+                                                   </g>
+                                                </g>
+                                             </g>
+                                          </g>
+                                       </svg>
+                                       <span>List</span>
+                                    </button>
+                                    <button class="toggle calendar" aria-label="Toggle to Calendar View" aria-pressed="false" data-event-toggle="calendar">
+                                       <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                                          <path d="M756.387,1725.06v2.21h-3.94v-2.21h-7.092v2.21h-3.94v-2.21h-4.524v21.93h24.021v-21.93h-4.525Zm2.547,19.94H738.869v-15.46h20.065V1745Zm-13.031-5.01h-2.519v2.54H745.9v-2.54Zm4.256,0h-2.516v2.54h2.516v-2.54Zm4.258,0H751.9v2.54h2.518v-2.54Zm-8.514-4.06h-2.519v2.54H745.9v-2.54Zm4.256,0h-2.516v2.54h2.516v-2.54Zm4.258,0H751.9v2.54h2.518v-2.54Zm-8.514-4.06h-2.519v2.54H745.9v-2.54Zm4.256,0h-2.516v2.54h2.516v-2.54Zm4.258,0H751.9v2.54h2.518v-2.54Zm-10.11-5.63v-3.25h-1.844v3.25h1.844Zm11.033,0v-3.25h-1.846v3.25h1.846Z" transform="translate(-736.906 -1723)"/>
+                                       </svg>
+                                       <span>Calendar</span>
+                                    </button>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="eventList event_list_grid event_list">
+                              <div class="eventList__wrapper list" id="list">
+                                 <div class="eventItem entry reserve_your_table clearfix">
+                                    <div class="thumb">
+                                       <a href="https://www.historytoronto.com/events/detail/schoolboy-q" title="More Info for ScHoolboy Q" tabindex="-1"><img src="https://www.historytoronto.com/assets/img/ScHoolboy-Q-Press-2-1_380x250-55fab4f124.jpg" alt="More Info for ScHoolboy Q"/></a>
+                                    </div>
+                                    <div class="info clearfix">
+                                       <div class="date">
+                                          <span class="m-date__singleDate"><span class="m-date__day">18</span><span class="m-date__month"> July </span><span class="m-date__year"> 2024 </span></span>
+                                       </div>
+                                       <div class="presented-by">Live Nation</div>
+                                       <h3 class="title  ">
+                                          <a href="https://www.historytoronto.com/events/detail/schoolboy-q" title="More Info">ScHoolboy Q</a>
+                                       </h3>
+                                       <div class="meta">
+                                          <h5 class="time">
+                                             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                                                <path d="M2465,507a10,10,0,1,0,10,10A10.014,10.014,0,0,0,2465,507Zm0,18a8,8,0,1,1,8-8A8.01,8.01,0,0,1,2465,525Zm1-8v-4.94h-2v5.779l4.28,4.28,1.41-1.414-3.7-3.7Z" transform="translate(-2455 -507)"/>
+                                             </svg>
+                                             <span class="startlang">Event Starts</span> <span class="start"> 8:00 PM</span>
+                                          </h5>
+                                       </div>
+                                       <div class="buttons">
+                                          <a href="https://www.ticketmaster.ca/event/100060953BD64745" target="_blank" class="tickets onsalenow " title="Buy Tickets for ScHoolboy Q ">
+                                             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="32" height="18" viewBox="0 0 32 18">
+                                                <path d="M3422,696l-0.06-4.867h0a4.136,4.136,0,0,1-4.06-4.295,4.286,4.286,0,0,1,4.08-4.4h0.01l0.01-4.431L3412,678v18h10Zm-32-18,0.04,4.877a4.135,4.135,0,0,1,4.06,4.3,4.3,4.3,0,0,1-4.09,4.4L3390,696l20,0V678h-20Z" transform="translate(-3390 -678)"/>
+                                             </svg>
+                                             Buy Tickets
+                                          </a>
+                                          <a href="https://www.historytoronto.com/events/detail/schoolboy-q" class="more buttons-hide" title="ScHoolboy Q More Info">More Info</a>	<a href="https://www.historytoronto.com/reserve-your-table" class="reserve" target="_blank">Reserve Your Table</a>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="eventItem entry alt reserve_your_table clearfix">
+                                    <div class="thumb">
+                                       <a href="https://www.historytoronto.com/events/detail/bnxn" title="More Info for BNXN" tabindex="-1"><img src="https://www.historytoronto.com/assets/img/BNXN_380x250-54c446f3c5.jpg" alt="More Info for BNXN"/></a>
+                                    </div>
+                                    <div class="info clearfix">
+                                       <div class="date">
+                                          <span class="m-date__singleDate"><span class="m-date__day">24</span><span class="m-date__month"> July </span><span class="m-date__year"> 2024 </span></span>
+                                       </div>
+                                       <div class="presented-by">RapSeason</div>
+                                       <h3 class="title  ">
+                                          <a href="https://www.historytoronto.com/events/detail/bnxn" title="More Info">BNXN</a>
+                                       </h3>
+                                       <div class="meta">
+                                          <h5 class="time">
+                                             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                                                <path d="M2465,507a10,10,0,1,0,10,10A10.014,10.014,0,0,0,2465,507Zm0,18a8,8,0,1,1,8-8A8.01,8.01,0,0,1,2465,525Zm1-8v-4.94h-2v5.779l4.28,4.28,1.41-1.414-3.7-3.7Z" transform="translate(-2455 -507)"/>
+                                             </svg>
+                                             <span class="startlang">Event Starts</span> <span class="start"> 8:00 PM</span>
+                                          </h5>
+                                       </div>
+                                       <div class="buttons">
+                                          <a href="https://www.ticketmaster.ca/event/1000609AFBCA4BD5" target="_blank" class="tickets onsalenow " title="Buy Tickets for BNXN ">
+                                             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="32" height="18" viewBox="0 0 32 18">
+                                                <path d="M3422,696l-0.06-4.867h0a4.136,4.136,0,0,1-4.06-4.295,4.286,4.286,0,0,1,4.08-4.4h0.01l0.01-4.431L3412,678v18h10Zm-32-18,0.04,4.877a4.135,4.135,0,0,1,4.06,4.3,4.3,4.3,0,0,1-4.09,4.4L3390,696l20,0V678h-20Z" transform="translate(-3390 -678)"/>
+                                             </svg>
+                                             Buy Tickets
+                                          </a>
+                                          <a href="https://www.historytoronto.com/events/detail/bnxn" class="more buttons-hide" title="BNXN More Info">More Info</a>	<a href="https://www.historytoronto.com/reserve-your-table" class="reserve" target="_blank">Reserve Your Table</a>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="eventItem entry reserve_your_table clearfix">
+                                    <div class="thumb">
+                                       <a href="https://www.historytoronto.com/events/detail/regina-spektor" title="More Info for Regina Spektor" tabindex="-1"><img src="https://www.historytoronto.com/assets/img/ReginaSpektor_380x250-cc023621bf.jpg" alt="More Info for Regina Spektor"/></a>
+                                    </div>
+                                    <div class="info clearfix">
+                                       <div class="date">
+                                          <span class="m-date__singleDate"><span class="m-date__day">25</span><span class="m-date__month"> July </span><span class="m-date__year"> 2024 </span></span>
+                                       </div>
+                                       <div class="presented-by">Live Nation</div>
+                                       <h3 class="title  ">
+                                          <a href="https://www.historytoronto.com/events/detail/regina-spektor" title="More Info">Regina Spektor</a>
+                                       </h3>
+                                       <div class="meta">
+                                          <h5 class="time">
+                                             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                                                <path d="M2465,507a10,10,0,1,0,10,10A10.014,10.014,0,0,0,2465,507Zm0,18a8,8,0,1,1,8-8A8.01,8.01,0,0,1,2465,525Zm1-8v-4.94h-2v5.779l4.28,4.28,1.41-1.414-3.7-3.7Z" transform="translate(-2455 -507)"/>
+                                             </svg>
+                                             <span class="startlang">Event Starts</span> <span class="start"> 8:00 PM</span>
+                                          </h5>
+                                       </div>
+                                       <div class="buttons">
+                                          <a href="https://www.ticketmaster.ca/event/100060932F555206" target="_blank" class="tickets onsalenow " title="Buy Tickets for Regina Spektor ">
+                                             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="32" height="18" viewBox="0 0 32 18">
+                                                <path d="M3422,696l-0.06-4.867h0a4.136,4.136,0,0,1-4.06-4.295,4.286,4.286,0,0,1,4.08-4.4h0.01l0.01-4.431L3412,678v18h10Zm-32-18,0.04,4.877a4.135,4.135,0,0,1,4.06,4.3,4.3,4.3,0,0,1-4.09,4.4L3390,696l20,0V678h-20Z" transform="translate(-3390 -678)"/>
+                                             </svg>
+                                             Buy Tickets
+                                          </a>
+                                          <a href="https://www.historytoronto.com/events/detail/regina-spektor" class="more buttons-hide" title="Regina Spektor More Info">More Info</a>	<a href="https://www.historytoronto.com/reserve-your-table" class="reserve" target="_blank">Reserve Your Table</a>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="eventItem entry alt reserve_your_table clearfix">
+                                    <div class="thumb">
+                                       <a href="https://www.historytoronto.com/events/detail/ski-mask-the-slump-god" title="More Info for Ski Mask the Slump God" tabindex="-1"><img src="https://www.historytoronto.com/assets/img/SkiTour-Photo_380x250-1-507b14d67c.jpg" alt="More Info for Ski Mask the Slump God"/></a>
+                                    </div>
+                                    <div class="info clearfix">
+                                       <div class="date">
+                                          <span class="m-date__singleDate"><span class="m-date__day">29</span><span class="m-date__month"> July </span><span class="m-date__year"> 2024 </span></span>
+                                       </div>
+                                       <div class="presented-by">Live Nation</div>
+                                       <h3 class="title  ">
+                                          <a href="https://www.historytoronto.com/events/detail/ski-mask-the-slump-god" title="More Info">Ski Mask the Slump God</a>
+                                       </h3>
+                                       <div class="meta">
+                                          <h5 class="time">
+                                             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                                                <path d="M2465,507a10,10,0,1,0,10,10A10.014,10.014,0,0,0,2465,507Zm0,18a8,8,0,1,1,8-8A8.01,8.01,0,0,1,2465,525Zm1-8v-4.94h-2v5.779l4.28,4.28,1.41-1.414-3.7-3.7Z" transform="translate(-2455 -507)"/>
+                                             </svg>
+                                             <span class="startlang">Event Starts</span> <span class="start"> 8:00 PM</span>
+                                          </h5>
+                                       </div>
+                                       <div class="buttons">
+                                          <a href="https://www.ticketmaster.ca/event/100060C9ECD938AF" target="_blank" class="tickets onsalenow " title="Buy Tickets for Ski Mask the Slump God ">
+                                             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="32" height="18" viewBox="0 0 32 18">
+                                                <path d="M3422,696l-0.06-4.867h0a4.136,4.136,0,0,1-4.06-4.295,4.286,4.286,0,0,1,4.08-4.4h0.01l0.01-4.431L3412,678v18h10Zm-32-18,0.04,4.877a4.135,4.135,0,0,1,4.06,4.3,4.3,4.3,0,0,1-4.09,4.4L3390,696l20,0V678h-20Z" transform="translate(-3390 -678)"/>
+                                             </svg>
+                                             Buy Tickets
+                                          </a>
+                                          <a href="https://www.historytoronto.com/events/detail/ski-mask-the-slump-god" class="more buttons-hide" title="Ski Mask the Slump God More Info">More Info</a>	<a href="https://www.historytoronto.com/reserve-your-table" class="reserve" target="_blank">Reserve Your Table</a>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="eventItem entry reserve_your_table clearfix">
+                                    <div class="thumb">
+                                       <a href="https://www.historytoronto.com/events/detail/sir" title="More Info for SiR" tabindex="-1"><img src="https://www.historytoronto.com/assets/img/8a208f6d-ca72-4708-8127-ec87960cf93b_380x250-ffab1ec948.jpg" alt="More Info for SiR"/></a>
+                                    </div>
+                                    <div class="info clearfix">
+                                       <div class="date">
+                                          <span class="m-date__singleDate"><span class="m-date__day">30</span><span class="m-date__month"> July </span><span class="m-date__year"> 2024 </span></span>
+                                       </div>
+                                       <div class="presented-by">Live Nation</div>
+                                       <h3 class="title title-withTagline ">
+                                          <a href="https://www.historytoronto.com/events/detail/sir" title="More Info">SiR</a>
+                                       </h3>
+                                       <h4 class="tagline">
+                                          Zacari
+                                       </h4>
+                                       <div class="meta">
+                                          <h5 class="time">
+                                             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                                                <path d="M2465,507a10,10,0,1,0,10,10A10.014,10.014,0,0,0,2465,507Zm0,18a8,8,0,1,1,8-8A8.01,8.01,0,0,1,2465,525Zm1-8v-4.94h-2v5.779l4.28,4.28,1.41-1.414-3.7-3.7Z" transform="translate(-2455 -507)"/>
+                                             </svg>
+                                             <span class="startlang">Event Starts</span> <span class="start"> 8:00 PM</span>
+                                          </h5>
+                                       </div>
+                                       <div class="buttons">
+                                          <a href="https://www.ticketmaster.ca/event/1000607DAA901B5D" target="_blank" class="tickets onsalenow " title="Buy Tickets for SiR ">
+                                             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="32" height="18" viewBox="0 0 32 18">
+                                                <path d="M3422,696l-0.06-4.867h0a4.136,4.136,0,0,1-4.06-4.295,4.286,4.286,0,0,1,4.08-4.4h0.01l0.01-4.431L3412,678v18h10Zm-32-18,0.04,4.877a4.135,4.135,0,0,1,4.06,4.3,4.3,4.3,0,0,1-4.09,4.4L3390,696l20,0V678h-20Z" transform="translate(-3390 -678)"/>
+                                             </svg>
+                                             Buy Tickets
+                                          </a>
+                                          <a href="https://www.historytoronto.com/events/detail/sir" class="more buttons-hide" title="SiR More Info">More Info</a>	<a href="https://www.historytoronto.com/reserve-your-table" class="reserve" target="_blank">Reserve Your Table</a>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="eventItem entry alt reserve_your_table clearfix">
+                                    <div class="thumb">
+                                       <a href="https://www.historytoronto.com/events/detail/lucky-daye" title="More Info for Lucky Daye" tabindex="-1"><img src="https://www.historytoronto.com/assets/img/LuckyDaye-Photocred_Travys-Owen-380x250-3f4e1d941e.jpg" alt="More Info for Lucky Daye"/></a>
+                                    </div>
+                                    <div class="info clearfix">
+                                       <div class="date">
+                                          <span class="m-date__singleDate"><span class="m-date__day">31</span><span class="m-date__month"> July </span><span class="m-date__year"> 2024 </span></span>
+                                       </div>
+                                       <div class="presented-by">Live Nation and RAPSEASON</div>
+                                       <h3 class="title title-withTagline ">
+                                          <a href="https://www.historytoronto.com/events/detail/lucky-daye" title="More Info">Lucky Daye</a>
+                                       </h3>
+                                       <h4 class="tagline">
+                                          Fana Hues
+                                       </h4>
+                                       <div class="meta">
+                                          <h5 class="time">
+                                             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                                                <path d="M2465,507a10,10,0,1,0,10,10A10.014,10.014,0,0,0,2465,507Zm0,18a8,8,0,1,1,8-8A8.01,8.01,0,0,1,2465,525Zm1-8v-4.94h-2v5.779l4.28,4.28,1.41-1.414-3.7-3.7Z" transform="translate(-2455 -507)"/>
+                                             </svg>
+                                             <span class="startlang">Event Starts</span> <span class="start"> 8:00 PM</span>
+                                          </h5>
+                                       </div>
+                                       <div class="buttons">
+                                          <a href="https://www.ticketmaster.ca/event/10006099F25B4189" target="_blank" class="tickets onsalenow " title="Buy Tickets for Lucky Daye ">
+                                             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="32" height="18" viewBox="0 0 32 18">
+                                                <path d="M3422,696l-0.06-4.867h0a4.136,4.136,0,0,1-4.06-4.295,4.286,4.286,0,0,1,4.08-4.4h0.01l0.01-4.431L3412,678v18h10Zm-32-18,0.04,4.877a4.135,4.135,0,0,1,4.06,4.3,4.3,4.3,0,0,1-4.09,4.4L3390,696l20,0V678h-20Z" transform="translate(-3390 -678)"/>
+                                             </svg>
+                                             Buy Tickets
+                                          </a>
+                                          <a href="https://www.historytoronto.com/events/detail/lucky-daye" class="more buttons-hide" title="Lucky Daye More Info">More Info</a>	<a href="https://www.historytoronto.com/reserve-your-table" class="reserve" target="_blank">Reserve Your Table</a>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <button id="loadMoreEvents" class="eventList__showMore" disabled="disabled" data-options="events" data-category="0" data-venue="0" data-team="0" data-offset="6" data-increment="6" data-camefrom="event-list-page">
+                              More Events				    				</button>
+                           </div>
+                           <div class="eventList event_list_grid event_list calendar_event_list">
+                              <div class="ch_calendar" data-options="full-page_hybrid"></div>
+                           </div>
+                        </div>
+                        <div id="venue_widgets_framework" class="widgets_area l-hybrid-widgets">
+                           <div class="content_item_sizer"></div>
+                        </div>
+                     </div>
+                     <button aria-label="Back to Top" class="back-to-top">
+                        <span class="icon" id="backToTop">
+                           <svg aria-hidden="true" width="10px" height="7px" viewBox="0 0 10 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                 <g transform="translate(-1355.000000, -5159.000000)" stroke="#2D2926" stroke-width="2">
+                                    <g transform="translate(1336.000000, 5090.000000)">
+                                       <g transform="translate(0.000000, 52.000000)">
+                                          <polyline transform="translate(24.000000, 21.000000) rotate(-180.000000) translate(-24.000000, -21.000000) " points="20 19 24 23 28 19"></polyline>
+                                       </g>
+                                    </g>
+                                 </g>
+                              </g>
+                           </svg>
+                        </span>
+                        <span class="text">Top</span>
+                     </button>
+                  </div>
+                  <footer class="footer">
+                     <div class="footer_holder clearfix">
+                        <div class="top-footer">
+                           <div class="left">
+                              <div class="footer_address">
+                                 <div class="main">
+                                    <p>
+                                       <strong>HISTORY</strong><br />
+                                       <span class="venue-address">1663 Queen Street East,      Toronto, ON M4L 1G5</span><br />
+                                       <span class="phone">Phone: 416.260.5566</span><br />
+                                    </p>
+                                 </div>
+                                 <div class="box-office">
+                                    <div class="box-wrap">
+                                       <strong>Box Office</strong><br />
+                                       <div class="hours">
+                                          <p>Online at <a href="https://www.ticketmaster.ca/history-tickets-toronto/venue/132501"><u>ticketmaster.com</u></a></p>
+                                          <p>Venue box office will open one hour before door time. Tickets for the night of show will be available based on ticket availablity. You can also puchase tickets for other events at History at the venue box office.</p>
+                                       </div>
+                                       <br />
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="middle">
+                              <div class="logo">
+                                 <a class="logo" href="https://www.historytoronto.com/" aria-label="HISTORY" title="HISTORY">
+                                    <svg aria-hidden="true" width="92px" height="94px" viewBox="0 0 92 94" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                          <g transform="translate(-674.000000, -1725.000000)" fill="#FFFFFF">
+                                             <g transform="translate(0.000000, 1663.000000)">
+                                                <g transform="translate(674.000000, 62.000000)">
+                                                   <path d="M27.4254311,0 L27.4254311,35.8050087 L36,47.0000984 L27.4254311,58.1949913 L27.4254311,94 L0,94 L8.57496032,82.8060907 L8.57496032,11.1937126 L0,0 L27.4254311,0 Z M92,0 L83.4251888,11.1934925 L83.4251888,82.8057206 L92,94 L64.5746155,94 L64.5746155,58.1948695 L56,47 L64.5746155,35.8049338 L64.5746155,0 L92,0 Z"></path>
+                                                </g>
+                                             </g>
+                                          </g>
+                                       </g>
+                                    </svg>
+                                 </a>
+                              </div>
+                              <div class="social">
+                                 <a href="https://www.twitter.com/historytoronto" title="Twitter" aria-label="Twitter" target="_blank" class="fa fa-twitter"></a><a href="https://www.facebook.com/historytoronto" title="Facebook" aria-label="Facebook" target="_blank" class="fa fa-facebook"></a><a href="https://www.instagram.com/historytoronto" title="Instagram" aria-label="Instagram" target="_blank" class="fa fa-instagram"></a>
+                              </div>
+                           </div>
+                           <div class="right">
+                              <div class="faq-list">
+                                 <div class="footer-faqs">
+                                    <div class="dl" data-options="faq_accessible">
+                                       <div class="faq_item_wrapper">
+                                          <div class="icon">
+                                             <svg aria-hidden="true" width="10px" height="7px" viewBox="0 0 10 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                   <g transform="translate(-1298.000000, -5346.000000)" stroke="#FFFFFF" stroke-width="2">
+                                                      <g transform="translate(0.000000, 5236.000000)">
+                                                         <g transform="translate(928.000000, 57.000000)">
+                                                            <g transform="translate(0.000000, 48.000000)">
+                                                               <g transform="translate(371.000000, 6.000000)">
+                                                                  <polyline points="0 0 4 4 8 0"></polyline>
+                                                               </g>
+                                                            </g>
+                                                         </g>
+                                                      </g>
+                                                   </g>
+                                                </g>
+                                             </svg>
+                                          </div>
+                                          <div class="faq_list_item faq_question">
+                                             <p>Do I need to have the COVID-19 vaccine to attend a show?</p>
+                                          </div>
+                                          <div class="faq_answer">
+                                             <div class="cms">
+                                                <p>Please visit our <a href="/venue-information/health-and-safety/">Health &amp; Safety</a> page for full details on this.</p>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="faq_item_wrapper">
+                                          <div class="icon">
+                                             <svg aria-hidden="true" width="10px" height="7px" viewBox="0 0 10 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                   <g transform="translate(-1298.000000, -5346.000000)" stroke="#FFFFFF" stroke-width="2">
+                                                      <g transform="translate(0.000000, 5236.000000)">
+                                                         <g transform="translate(928.000000, 57.000000)">
+                                                            <g transform="translate(0.000000, 48.000000)">
+                                                               <g transform="translate(371.000000, 6.000000)">
+                                                                  <polyline points="0 0 4 4 8 0"></polyline>
+                                                               </g>
+                                                            </g>
+                                                         </g>
+                                                      </g>
+                                                   </g>
+                                                </g>
+                                             </svg>
+                                          </div>
+                                          <div class="faq_list_item faq_question">
+                                             <p>What are the set times for a specific show?</p>
+                                          </div>
+                                          <div class="faq_answer">
+                                             <div class="cms">
+                                                <p>The door time will always be listed on your ticket/order, but we do not have full set times until the day of the show. Once finalized, set times can be found on our social channels:</p>
+                                                <ul>
+                                                   <li data-gc-list-depth="1" data-gc-list-style="bullet">
+                                                      <p>Twitter - <a href="https://twitter.com/HistoryToronto">@HistoryToronto</a></p>
+                                                   </li>
+                                                   <li data-gc-list-depth="1" data-gc-list-style="bullet">
+                                                      <p>Instagram - <a href="https://www.instagram.com/historytoronto/">@historytoronto</a></p>
+                                                   </li>
+                                                   <li data-gc-list-depth="1" data-gc-list-style="bullet">
+                                                      <p>Facebook - <a href="https://www.facebook.com/HistoryToronto">HistoryToronto</a></p>
+                                                   </li>
+                                                </ul>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="faq_item_wrapper">
+                                          <div class="icon">
+                                             <svg aria-hidden="true" width="10px" height="7px" viewBox="0 0 10 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                   <g transform="translate(-1298.000000, -5346.000000)" stroke="#FFFFFF" stroke-width="2">
+                                                      <g transform="translate(0.000000, 5236.000000)">
+                                                         <g transform="translate(928.000000, 57.000000)">
+                                                            <g transform="translate(0.000000, 48.000000)">
+                                                               <g transform="translate(371.000000, 6.000000)">
+                                                                  <polyline points="0 0 4 4 8 0"></polyline>
+                                                               </g>
+                                                            </g>
+                                                         </g>
+                                                      </g>
+                                                   </g>
+                                                </g>
+                                             </svg>
+                                          </div>
+                                          <div class="faq_list_item faq_question">
+                                             <p>Where can I purchase tickets?</p>
+                                          </div>
+                                          <div class="faq_answer">
+                                             <div class="cms">
+                                                <p>Tickets can be purchased online at&nbsp;<a href="http://www.ticketmaster.ca/" target="_blank">www.ticketmaster.ca</a>, or at the venue box office (subject to availability).</p>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="faq_item_wrapper">
+                                          <div class="icon">
+                                             <svg aria-hidden="true" width="10px" height="7px" viewBox="0 0 10 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                   <g transform="translate(-1298.000000, -5346.000000)" stroke="#FFFFFF" stroke-width="2">
+                                                      <g transform="translate(0.000000, 5236.000000)">
+                                                         <g transform="translate(928.000000, 57.000000)">
+                                                            <g transform="translate(0.000000, 48.000000)">
+                                                               <g transform="translate(371.000000, 6.000000)">
+                                                                  <polyline points="0 0 4 4 8 0"></polyline>
+                                                               </g>
+                                                            </g>
+                                                         </g>
+                                                      </g>
+                                                   </g>
+                                                </g>
+                                             </svg>
+                                          </div>
+                                          <div class="faq_list_item faq_question">
+                                             <p>Where can I park?</p>
+                                          </div>
+                                          <div class="faq_answer">
+                                             <div class="cms">
+                                                <p>Add parking to your ticket purchase for a guaranteed space in the parking lot nearest to the venue, conveniently located at 1167 Eastern Avenue (behind the venue, <strong>south of the Green P</strong>).&nbsp;If parking is still available when you complete your ticketing transaction, you will be prompted if you want to purchase a spot.</p>
+                                                <p>If you have already purchased your show tickets and would like to add parking, select the show from this <a href="https://www.ticketmaster.ca/search?q=history%2Bparking">link</a>, and&nbsp;follow the prompts to complete the transaction.&nbsp;</p>
+                                                <p>Parking is also available for purchase from the lot on the night of the show, based on availability.&nbsp;To avoid disappointment, purchase your parking tickets in advance.</p>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="bottom-footer">
+                           <div class="footer_nav">
+                              <ul>
+                                 <li class="page_22 has-sub ">
+                                    <a href="https://www.historytoronto.com/events" class="page_22 active">Events</a>
+                                    <div class="nav_sub">
+                                       <ul>
+                                          <li>
+                                             <a href="https://www.historytoronto.com/events" class="page_28">Upcoming Events</a>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </li>
+                                 <li class="page_36 has-sub ">
+                                    <a href="https://www.historytoronto.com/venue-information" class="page_36">Venue Information</a>
+                                    <div class="nav_sub">
+                                       <ul>
+                                          <li>
+                                             <a href="https://www.historytoronto.com/venue-information/faqs" class="page_42">FAQs</a>
+                                          </li>
+                                          <li>
+                                             <a href="https://www.historytoronto.com/venue-information/directions-parking" class="page_37">Directions & Parking</a>
+                                          </li>
+                                          <li>
+                                             <a href="https://www.historytoronto.com/venue-information/accessibility" class="page_41">Accessibility</a>
+                                          </li>
+                                          <li>
+                                             <a href="https://www.historytoronto.com/venue-information/box-office-1" class="page_89">Box Office</a>
+                                          </li>
+                                          <li>
+                                             <a href="https://www.historytoronto.com/venue-information/seating-chart-1" class="page_90">Seating Chart</a>
+                                          </li>
+                                          <li>
+                                             <a href="https://www.historytoronto.com/venue-information/health-and-safety" class="page_87">Health and Safety</a>
+                                          </li>
+                                          <li>
+                                             <a href="https://www.historytoronto.com/venue-information/fan-code-of-conduct" class="page_93">Fan Code of Conduct </a>
+                                          </li>
+                                          <li>
+                                             <a href="https://www.historytoronto.com/venue-information/lost-and-found" class="page_95">Lost and Found </a>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </li>
+                                 <li class="page_44 has-sub ">
+                                    <a href="https://www.historytoronto.com/rentals" class="page_44">Private Events</a>
+                                    <div class="nav_sub">
+                                       <ul>
+                                          <li>
+                                             <a href="https://www.historytoronto.com/rentals/venue_space_overview" class="page_73">Venue Space Overview</a>
+                                          </li>
+                                          <li>
+                                             <a href="https://www.historytoronto.com/rentals/event_types" class="page_66">Event Types</a>
+                                          </li>
+                                          <li>
+                                             <a href="https://www.historytoronto.com/rentals/amenitites" class="page_76">Amenities</a>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </li>
+                                 <li class="page_32 has-sub ">
+                                    <a href="https://www.historytoronto.com/premium-seating" class="page_32">Premium Seating</a>
+                                    <div class="nav_sub">
+                                       <ul>
+                                          <li>
+                                             <a href="https://www.historytoronto.com/premium-seating/spaces" class="page_80">Spaces</a>
+                                          </li>
+                                          <li>
+                                             <a href="https://www.historytoronto.com/premium-seating/benefits" class="page_81">Benefits</a>
+                                          </li>
+                                          <li>
+                                             <a href="https://www.historytoronto.com/premium-seating/contact-us-1" class="page_82">Contact Us</a>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </li>
+                                 <li class="page_50 has-sub ">
+                                    <a href="https://www.historytoronto.com/about" class="page_50">About</a>
+                                    <div class="nav_sub">
+                                       <ul>
+                                          <li>
+                                             <a href="https://www.historytoronto.com/about/contact-us" class="page_52">Contact Us</a>
+                                          </li>
+                                          <li>
+                                             <a href="https://www.historytoronto.com/about/stay-connected" class="page_53">Stay Connected</a>
+                                          </li>
+                                          <li>
+                                             <a href="https://www.historytoronto.com/about/employment" class="page_54">Employment</a>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </li>
+                              </ul>
+                           </div>
+                           <div class="global-footer">
+                              <p>
+                                 Copyright &copy; 2024				HISTORY.
+                                 <span class="delimiter first_delimiter"></span>
+                                 <a href="https://www.historytoronto.com/terms-conditions">Terms of Use</a>				<span class="delimiter">|</span>
+                                 <a href="https://www.historytoronto.com/privacy-policy">Privacy Policy</a>				<span class="delimiter">|</span>
+                                 <a href="https://www.historytoronto.com/accessibility">Accessibility</a>				<span class="delimiter">|</span>
+                                 <a href="https://www.historytoronto.com/sitemap">Sitemap</a>
+                                 <a href="https://www.livenation.com" class="live-nation" title="Live Nation" target="_blank">
+                                    <svg aria-hidden="true" width="181px" height="39px" viewBox="0 0 181 39" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                          <g transform="translate(-873.000000, -6018.000000)">
+                                             <g transform="translate(0.000000, 5236.000000)">
+                                                <image x="873" y="782" width="181" height="39" xlink:href="data:image/png;base64,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"></image>
+                                             </g>
+                                          </g>
+                                       </g>
+                                    </svg>
+                                 </a>
+                                 <a href="http://www.carbonhouse.com" title="a carbonhouse experience" id="carbonhouse" target="_blank">a <span class="carbon">carbon</span><span class="house">house</span> experience</a>
+                              </p>
+                           </div>
+                        </div>
+                     </div>
+                  </footer>
+               </div>
+               <script type="application/ld+json">
+                  {
+                    "@context": "http://schema.org",
+                    "@type": "Organization",
+                    "name": "HISTORY",
+                    "url": "https://www.historytoronto.com/",
+                    "sameAs": [
+                      "https://www.twitter.com/historytoronto",
+                  "https://www.facebook.com/historytoronto",
+                  "https://www.instagram.com/historytoronto"  ]
+                  }
+               </script>
+               <script>
+                  (function() {
+                    var loadAlertBar = function loadAlertBar(){
+                  		var alertMessage = document.getElementById('alertBarMessage');
+
+
+                  		if(alertMessage){
+                  			var alert = document.createElement('div');
+                  			alert.className = 'alertBars';
+                  			alert.innerHTML = '<strong style="color:#063E4B"> '+alertMessage.value+'</strong>';
+                  			alert.style.position = 'fixed';
+                  			alert.style.top = 0;
+                  			alert.style.left = 0;
+                  			alert.style.width = '100%';
+
+                  			alert.style.background = '50px';
+                  			alert.style.borderColor= "rgba(255, 255, 255, 0.5)";
+                  			alert.style.backgroundColor= "#dcecc9";
+                  			alert.style.marginBottom= "0px";
+                  			alert.style.position= "fixed";
+                  			alert.style.width= "100%";
+                  			alert.style.textAlign= "center";
+                  			alert.style.top= "0";
+                  			alert.style.zIndex= "10000";
+                  			alert.style.padding= "10px 35px 10px 14px";
+                  			document.body.appendChild(alert);
+                  		}
+                  	}
+
+                      var oldonload = window.onload;
+
+                      var loadFunction = (typeof window.onload != 'function') ?
+                        loadAlertBar : function() { oldonload(); loadAlertBar();};
+
+                      window.addEventListener ?
+                          window.addEventListener("load",loadFunction,false) :
+                          window.attachEvent && window.attachEvent("onload",loadFunction);
+                    })();
+
+               </script>
+            </div>
+            <script>
+               /**
+               /* Environemnt set here for javascript app or app.optimized
+                */
+               SHOWTIME_ENV = "production";
+            </script>
+            <script src="https://www.historytoronto.com/assets/production/3b6cfc8b46//js/dist/production/vendor.production.js"></script>
+            <script src="https://www.historytoronto.com/assets/production/3b6cfc8b46//js/dist/production/component-vendor.production.js"></script>
+            <script src="https://www.historytoronto.com/assets/production/3b6cfc8b46//js/dist/production/libs.production.js"></script>
+            <script src="https://www.historytoronto.com/assets/production/3b6cfc8b46//js/dist/production/site.production.js"></script>
+         </body>
+      </html>

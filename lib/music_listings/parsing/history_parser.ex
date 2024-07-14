@@ -1,6 +1,6 @@
-defmodule MusicListings.Parsing.CocaColaColiseumParser do
+defmodule MusicListings.Parsing.HistoryParser do
   @moduledoc """
-  Parser for extracing events from https://www.coca-colacoliseum.com/
+  Parser for extracing events from https://www.historytoronto.com
   """
   @behaviour MusicListings.Parsing.Parser
 
@@ -9,17 +9,17 @@ defmodule MusicListings.Parsing.CocaColaColiseumParser do
   alias MusicListings.Parsing.Parser
 
   @impl true
-  def source_url, do: "https://www.coca-colacoliseum.com/events"
+  def source_url, do: "https://www.historytoronto.com/events/events_ajax/0?per_page=60"
 
   @impl true
-  def venue_name, do: "Coca Cola Coliseum"
+  def venue_name, do: "History"
 
   @impl true
-  def example_data_file_location, do: "test/data/coca_cola_coliseum/index.html"
+  def example_data_file_location, do: "test/data/history/index.html"
 
   @impl true
   def event_selector(body) do
-    Parser.event_selector(body, ".m-venueframework-eventslist__item")
+    Parser.event_selector(body, ".eventItem")
   end
 
   @impl true
@@ -37,12 +37,12 @@ defmodule MusicListings.Parsing.CocaColaColiseumParser do
 
   @impl true
   def event_title(event) do
-    Parser.event_title(event, ".m-eventItem__title")
+    Parser.event_title(event, ".title")
   end
 
   @impl true
   def performers(event) do
-    Parser.performers(event, ".m-eventItem__title")
+    Parser.performers(event, ".title")
   end
 
   @impl true
@@ -53,7 +53,7 @@ defmodule MusicListings.Parsing.CocaColaColiseumParser do
   @impl true
   def event_time(event) do
     event
-    |> Meeseeks.one(css(".m-eventItem__start"))
+    |> Meeseeks.one(css(".start"))
     |> Meeseeks.Result.text()
     |> Parser.convert_event_time_string_to_time()
   end
