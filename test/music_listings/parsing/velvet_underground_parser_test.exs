@@ -1,8 +1,6 @@
 defmodule MusicListings.Parsing.VelvetUndergroundParserTest do
   use ExUnit.Case, async: true
 
-  import Meeseeks.CSS
-
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.VelvetUndergroundParser
@@ -18,7 +16,8 @@ defmodule MusicListings.Parsing.VelvetUndergroundParserTest do
     event =
       single_event_file_path
       |> File.read!()
-      |> Meeseeks.one(css(".event-block"))
+      |> VelvetUndergroundParser.event_selector()
+      |> List.first()
 
     %{index_html: index_html, event: event}
   end
