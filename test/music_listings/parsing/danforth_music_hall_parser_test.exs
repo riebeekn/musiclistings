@@ -38,7 +38,6 @@ defmodule MusicListings.Parsing.DanforthMusicHallParserTest do
     test "returns expected events", %{index_html: index_html} do
       events = DanforthMusicHallParser.event_selector(index_html)
 
-      # should find 56 events
       assert 68 = Enum.count(events)
     end
   end

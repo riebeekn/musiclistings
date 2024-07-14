@@ -38,7 +38,6 @@ defmodule MusicListings.Parsing.CodaParserTest do
     test "returns expected events", %{index_html: index_html} do
       events = CodaParser.event_selector(index_html)
 
-      # should find 56 events
       assert 15 = Enum.count(events)
     end
   end

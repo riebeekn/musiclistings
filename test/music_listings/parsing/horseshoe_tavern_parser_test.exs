@@ -38,7 +38,6 @@ defmodule MusicListings.Parsing.HorseshoeTavernParserTest do
     test "returns expected events", %{index_html: index_html} do
       events = HorseshoeTavernParser.event_selector(index_html)
 
-      # should find 56 events
       assert 51 = Enum.count(events)
     end
   end

@@ -130,4 +130,42 @@ defmodule MusicListings.Parsing.Parser do
   def convert_month_string_to_number("Nov"), do: 11
   def convert_month_string_to_number("December"), do: 12
   def convert_month_string_to_number("Dec"), do: 12
+
+  def extract_event_id_from_ticketmaster_url(ticket_url) do
+    regex = ~r/event\/(?<event_id>[^?\/]+)(?:\?|$)/
+    Regex.named_captures(regex, ticket_url)["event_id"]
+  end
+
+  @doc """
+  A couple of sites use the following format for the date:
+  <span class="m-date__day">31</span>
+  <span class="m-date__month"> July </span>
+  <span class="m-date__year"> 2024 </span>
+  """
+  def extract_date_from_m__xx_format(event) do
+    day_string =
+      event
+      |> Meeseeks.one(css(".m-date__day"))
+      |> Meeseeks.Result.text()
+      |> String.trim()
+
+    month_string =
+      event
+      |> Meeseeks.one(css(".m-date__month"))
+      |> Meeseeks.Result.text()
+      |> String.trim()
+
+    year_string =
+      event
+      |> Meeseeks.one(css(".m-date__year"))
+      |> Meeseeks.Result.text()
+      |> String.replace(",", "")
+      |> String.trim()
+
+    day = String.to_integer(day_string)
+    month = convert_month_string_to_number(month_string)
+    year = String.to_integer(year_string)
+
+    Date.new!(year, month, day)
+  end
 end
