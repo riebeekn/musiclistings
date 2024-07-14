@@ -11,7 +11,7 @@ defmodule MusicListings.Parsing.Parser do
   @callback venue_name() :: String.t()
   @callback example_data_file_location() :: String.t()
   @callback event_selector(String.t()) :: [Meeseeks.Result.t()] | {:error, Meeseeks.Error.t()}
-  @callback next_page_url(String.t()) :: String.t()
+  @callback next_page_url(String.t()) :: String.t() | nil
   @callback event_id(Meeseeks.Result.t()) :: String.t()
   @callback event_title(Meeseeks.Result.t()) :: String.t()
   @callback performers(Meeseeks.Result.t()) :: Performers.t()
@@ -60,7 +60,7 @@ defmodule MusicListings.Parsing.Parser do
   end
 
   def convert_event_time_string_to_time(time_string) do
-    time_string
+    (time_string || "")
     |> String.trim()
     |> String.downcase()
     |> String.split(":")
