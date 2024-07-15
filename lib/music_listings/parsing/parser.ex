@@ -74,6 +74,7 @@ defmodule MusicListings.Parsing.Parser do
         minute =
           minute_string
           |> String.replace("pm", "")
+          |> String.replace("am", "")
           |> String.trim()
           |> String.to_integer()
 
@@ -84,9 +85,13 @@ defmodule MusicListings.Parsing.Parser do
     end
   end
 
-  defp maybe_adjust_for_pm(hour, minute_string) do
+  def maybe_adjust_for_pm(hour, minute_string) do
     if String.contains?(minute_string, "pm") do
-      hour + 12
+      if hour == 12 do
+        12
+      else
+        hour + 12
+      end
     else
       hour
     end

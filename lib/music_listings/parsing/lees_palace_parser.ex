@@ -52,7 +52,6 @@ defmodule MusicListings.Parsing.LeesPalaceParser do
     full_date_string =
       event
       |> Meeseeks.one(css(".schedule-event-time"))
-      # TODO: replace these all with just Meeseeks.text()???
       |> Meeseeks.text()
 
     [_day_of_week_string, month_string, day_string, year_string] = String.split(full_date_string)
