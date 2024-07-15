@@ -54,7 +54,7 @@ defmodule MusicListings.Parsing.CocaColaColiseumParser do
   def event_time(event) do
     event
     |> Meeseeks.one(css(".m-eventItem__start"))
-    |> Meeseeks.Result.text()
+    |> Meeseeks.text()
     |> Parser.convert_event_time_string_to_time()
   end
 
