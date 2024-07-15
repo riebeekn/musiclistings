@@ -23,6 +23,10 @@ defmodule MusicListings.MixProject do
         main: "MusicListings",
         source_url: "https://github.com/tbd",
         formatters: ["html"]
+      ],
+      dialyzer: [
+        plt_local_path: "_dialyzer",
+        plt_core_path: "_dialyzer"
       ]
     ]
   end
