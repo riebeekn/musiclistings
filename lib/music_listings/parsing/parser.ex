@@ -43,7 +43,7 @@ defmodule MusicListings.Parsing.Parser do
   def event_title(%Meeseeks.Result{} = event, event_title_selector) do
     event
     |> Meeseeks.one(css(event_title_selector))
-    |> Meeseeks.Result.text()
+    |> Meeseeks.text()
   end
 
   def performers(%Meeseeks.Result{} = event, performers_selector) do
@@ -146,19 +146,19 @@ defmodule MusicListings.Parsing.Parser do
     day_string =
       event
       |> Meeseeks.one(css(".m-date__day"))
-      |> Meeseeks.Result.text()
+      |> Meeseeks.text()
       |> String.trim()
 
     month_string =
       event
       |> Meeseeks.one(css(".m-date__month"))
-      |> Meeseeks.Result.text()
+      |> Meeseeks.text()
       |> String.trim()
 
     year_string =
       event
       |> Meeseeks.one(css(".m-date__year"))
-      |> Meeseeks.Result.text()
+      |> Meeseeks.text()
       |> String.replace(",", "")
       |> String.trim()
 

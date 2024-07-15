@@ -1,6 +1,6 @@
-defmodule MusicListings.Parsing.HorseshoeTavernParser do
+defmodule MusicListings.Parsing.LeesPalaceParser do
   @moduledoc """
-  Parser for extracing events from https://www.horseshoetavern.com
+  Parser for extracing events from https://www.leespalace.com/
   """
   @behaviour MusicListings.Parsing.Parser
 
@@ -9,13 +9,13 @@ defmodule MusicListings.Parsing.HorseshoeTavernParser do
   alias MusicListings.Parsing.Parser
 
   @impl true
-  def source_url, do: "https://www.horseshoetavern.com/events"
+  def source_url, do: "https://www.leespalace.com/events"
 
   @impl true
-  def venue_name, do: "Horseshoe Tavern"
+  def venue_name, do: "Lee's Palace"
 
   @impl true
-  def example_data_file_location, do: "test/data/horseshoe_tavern/index.html"
+  def example_data_file_location, do: "test/data/lees_palace/index.html"
 
   @impl true
   def event_selector(body) do
@@ -30,9 +30,11 @@ defmodule MusicListings.Parsing.HorseshoeTavernParser do
 
   @impl true
   def event_id(event) do
-    event_title = Parser.event_title(event, ".schedule-speaker-name")
-    event_date = event_date(event)
-    "#{event_title |> String.replace(" ", "") |> String.downcase()}-#{event_date}"
+    # combine date and title
+    event_title = event |> event_title() |> String.downcase() |> String.replace(" ", "")
+    event_date = event |> event_date() |> Date.to_string()
+
+    "#{event_title}_#{event_date}"
   end
 
   @impl true
@@ -50,12 +52,12 @@ defmodule MusicListings.Parsing.HorseshoeTavernParser do
     full_date_string =
       event
       |> Meeseeks.one(css(".schedule-event-time"))
+      # TODO: replace these all with just Meeseeks.text()???
       |> Meeseeks.text()
 
-    [_day_of_week, day_month_string, year_string] = String.split(full_date_string, ", ")
-    [month_string, day_string] = String.split(day_month_string)
+    [_day_of_week_string, month_string, day_string, year_string] = String.split(full_date_string)
 
-    day = String.to_integer(day_string)
+    day = day_string |> String.replace(",", "") |> String.to_integer()
     month = Parser.convert_month_string_to_number(month_string)
     year = String.to_integer(year_string)
 
@@ -63,12 +65,8 @@ defmodule MusicListings.Parsing.HorseshoeTavernParser do
   end
 
   @impl true
-  def event_time(event) do
-    event
-    |> Meeseeks.all(css(".schedule-event-time"))
-    |> Enum.find(fn element -> element |> Meeseeks.text() |> String.contains?("pm") end)
-    |> Meeseeks.text()
-    |> Parser.convert_event_time_string_to_time()
+  def event_time(_event) do
+    nil
   end
 
   @impl true

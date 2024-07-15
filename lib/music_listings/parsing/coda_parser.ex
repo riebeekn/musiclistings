@@ -52,7 +52,7 @@ defmodule MusicListings.Parsing.CodaParser do
     full_date_string =
       event
       |> Meeseeks.one(css(".event-date"))
-      |> Meeseeks.Result.text()
+      |> Meeseeks.text()
 
     [month_string, day_string, year_string] = String.split(full_date_string)
 

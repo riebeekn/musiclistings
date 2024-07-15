@@ -59,7 +59,7 @@ defmodule MusicListings.Parsing.DanforthMusicHallParser do
   def event_time(event) do
     event
     |> Meeseeks.one(xpath("//div[@class='doors']/following-sibling::div[1]"))
-    |> Meeseeks.Result.text()
+    |> Meeseeks.text()
     |> String.split("-")
     |> Enum.at(0)
     |> Parser.convert_event_time_string_to_time()
@@ -69,7 +69,7 @@ defmodule MusicListings.Parsing.DanforthMusicHallParser do
   def price(event) do
     event
     |> Meeseeks.one(xpath("//div[@class='tickets']/following-sibling::div[1]"))
-    |> Meeseeks.Result.text()
+    |> Meeseeks.text()
     |> Parser.convert_price_string_to_price()
   end
 
@@ -78,7 +78,7 @@ defmodule MusicListings.Parsing.DanforthMusicHallParser do
     time_age =
       event
       |> Meeseeks.one(xpath("//div[@class='doors']/following-sibling::div[1]"))
-      |> Meeseeks.Result.text()
+      |> Meeseeks.text()
 
     if time_age == "TBD" do
       :tbd
