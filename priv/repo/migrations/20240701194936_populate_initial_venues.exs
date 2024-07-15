@@ -26,7 +26,11 @@ defmodule MusicListings.Repo.Migrations.PopulateInitialVenues do
 
     execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('Lula Lounge', 'MusicListings.Parsing.LulaLoungeParser', false)"
 
-    execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('Massey Hall', 'MusicListings.Parsing.MasseyHallParser', false)"
+    execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('Massey Hall', 'MusicListings.Parsing.MasseyHallParser', true)"
+
+    execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('Roy Thomson Hall', 'MusicListings.Parsing.RoyThomsonHallParser', false)"
+
+    execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('TD Music Hall', 'MusicListings.Parsing.TDMusicHallParser', false)"
 
     execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('Queen Elizabth Theatre', 'MusicListings.Parsing.QueenElizabthTheatreParser', false)"
 
