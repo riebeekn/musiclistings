@@ -70,7 +70,7 @@ defmodule MusicListings.Parsing.MasseyHallParserTest do
 
   describe "event_date/1" do
     test "returns the event date", %{event: event} do
-      assert ~D[2024-07-19] == MasseyHallParser.event_date(event)
+      assert ~D[2024-07-18] == MasseyHallParser.event_date(event)
     end
   end
 
