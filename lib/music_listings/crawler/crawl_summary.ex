@@ -36,7 +36,7 @@ defmodule MusicListings.Crawler.CrawlSummary do
       :parse_error ->
         err = %{
           error: inspect(payload.error),
-          raw_event: Meeseeks.Result.html(payload.raw_event)
+          raw_event: inspect(payload.raw_event)
         }
 
         acc
