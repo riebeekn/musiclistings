@@ -36,7 +36,7 @@ defmodule MusicListings.Parsing.QueenElizabthTheatreParser do
 
   @impl true
   def event_id(event) do
-    title_slug = event_title(event) |> String.replace(" ", "")
+    title_slug = event |> event_title() |> String.replace(" ", "")
     "#{title_slug}-#{event_date(event)}"
   end
 
