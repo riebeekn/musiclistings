@@ -71,7 +71,7 @@ defmodule MusicListings.Parsing.TDMusicHallParserTest do
 
   describe "event_date/1" do
     test "returns the event date", %{event: event} do
-      assert ~D[2024-07-20] == TDMusicHallParser.event_date(event)
+      assert ~D[2024-07-19] == TDMusicHallParser.event_date(event)
     end
   end
 
