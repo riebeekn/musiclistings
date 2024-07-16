@@ -54,15 +54,16 @@ defmodule MusicListings.Parsing.BudweiserStageParser do
 
   @impl true
   def event_date(event) do
-    {:ok, datetime, _offset} = DateTime.from_iso8601(event["startDate"])
-    DateTime.to_date(datetime)
+    event["startDate"]
+    |> NaiveDateTime.from_iso8601!()
+    |> NaiveDateTime.to_date()
   end
 
   @impl true
   def event_time(event) do
-    regex = ~r/T(\d{2}:\d{2}:\d{2})([+-]\d{2}:\d{2})/
-    [_full_string, time_string, _offset] = Regex.run(regex, event["startDate"])
-    Time.from_iso8601!(time_string)
+    event["startDate"]
+    |> NaiveDateTime.from_iso8601!()
+    |> NaiveDateTime.to_time()
   end
 
   @impl true
