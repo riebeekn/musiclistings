@@ -107,6 +107,7 @@ defmodule MusicListings.Parsing.Parser do
       "all" -> :all_ages
       "all ages" -> :all_ages
       "all ages event" -> :all_ages
+      "18+" -> :eighteen_plus
       "19+" -> :nineteen_plus
       "19+ event" -> :nineteen_plus
     end
