@@ -11,7 +11,7 @@ defmodule MusicListings.Parsing.RoyThomsonHallParserTest do
     single_event_file_path =
       Path.expand("#{File.cwd!()}/test/data/roy_thomson_hall/single_event.json")
 
-    index_html = File.read!(index_file_path)
+    index_html = index_file_path |> File.read!() |> Jason.decode!()
 
     event =
       single_event_file_path

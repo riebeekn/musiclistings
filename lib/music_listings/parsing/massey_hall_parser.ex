@@ -4,13 +4,12 @@ defmodule MusicListings.Parsing.MasseyHallParser do
   """
   @behaviour MusicListings.Parsing.Parser
 
-  alias MusicListings.Parsing.Parser
-  alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.MhRthTdmhParser
 
   @massey_hall_facility_no "314"
 
   @impl true
-  def source_url, do: "https://www.mhrth.com/api/performance-feed/12"
+  defdelegate source_url, to: MhRthTdmhParser
 
   @impl true
   def venue_name, do: "Massey Hall"
@@ -20,59 +19,33 @@ defmodule MusicListings.Parsing.MasseyHallParser do
 
   @impl true
   def event_selector(body) do
-    decoded_body = Jason.decode!(body)
-
-    decoded_body["result"]["GetPerformancesEx4Result"]["Performance"]
-    |> Enum.filter(&(&1["facility_no"] == @massey_hall_facility_no))
+    MhRthTdmhParser.event_selector(body, @massey_hall_facility_no)
   end
 
   @impl true
-  def next_page_url(_body) do
-    # no next page
-    nil
-  end
+  defdelegate next_page_url(body), to: MhRthTdmhParser
 
   @impl true
-  def event_id(event) do
-    event["perf_no"]
-  end
+  defdelegate event_id(event), to: MhRthTdmhParser
 
   @impl true
-  def event_title(event) do
-    event["cmsData"]["Title"]
-  end
+  defdelegate event_title(event), to: MhRthTdmhParser
 
   @impl true
-  def performers(event) do
-    [event["cmsData"]["Title"]]
-    |> Performers.new()
-  end
+  defdelegate performers(event), to: MhRthTdmhParser
 
   @impl true
-  def event_date(event) do
-    {:ok, datetime, _offset} = DateTime.from_iso8601(event["perf_date"])
-    DateTime.to_date(datetime)
-  end
+  defdelegate event_date(event), to: MhRthTdmhParser
 
   @impl true
-  def event_time(event) do
-    regex = ~r/T(\d{2}:\d{2}:\d{2})([+-]\d{2}:\d{2})/
-    [_full_string, time_string, _offset] = Regex.run(regex, event["perf_date"])
-    Time.from_iso8601!(time_string)
-  end
+  defdelegate event_time(event), to: MhRthTdmhParser
 
   @impl true
-  def price(_event) do
-    Parser.convert_price_string_to_price(nil)
-  end
+  defdelegate price(event), to: MhRthTdmhParser
 
   @impl true
-  def age_restriction(_event) do
-    :tbd
-  end
+  defdelegate age_restriction(event), to: MhRthTdmhParser
 
   @impl true
-  def ticket_url(event) do
-    "https://tickets.mhrth.com/#{event["prod_season_no"]}/#{event["perf_no"]}"
-  end
+  defdelegate ticket_url(event), to: MhRthTdmhParser
 end
