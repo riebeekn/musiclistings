@@ -7,7 +7,7 @@ defmodule MusicListings.Repo.Migrations.CreateEvents do
       add :title, :string, null: false
       add :headliner, :string
       add :openers, {:array, :string}
-      add :date, :date, null: false
+      add :date, :date
       add :time, :time
       add :price_format, :string, null: false
       add :price_lo, :decimal, null: false
