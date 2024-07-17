@@ -32,7 +32,7 @@ defmodule MusicListings.Parsing.CodaParser do
   def event_id(event) do
     # combine date and title
     event_title = event |> event_title() |> String.downcase() |> String.replace(" ", "")
-    event_date = event |> event_date() |> Date.to_string()
+    event_date = event |> event_date()
 
     "#{event_title}_#{event_date}"
   end

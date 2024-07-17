@@ -38,7 +38,7 @@ defmodule MusicListings.Repo.Migrations.PopulateInitialVenues do
 
     execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('The Axis Club', 'MusicListings.Parsing.AxisClubParser', true)"
 
-    execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('The Baby G', 'MusicListings.Parsing.TheBabyGParser', false)"
+    execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('The Baby G', 'MusicListings.Parsing.BabyGParser', true)"
 
     execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('The Concert Hall', 'MusicListings.Parsing.TheConcertHallParser', false)"
 
@@ -53,6 +53,12 @@ defmodule MusicListings.Repo.Migrations.PopulateInitialVenues do
     execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('The Rex', 'MusicListings.Parsing.TheRexParser', false)"
 
     execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('Velvet Underground', 'MusicListings.Parsing.VelvetUndergroundParser', true)"
+
+    execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('El Mocambo', 'MusicListings.Parsing.ElMocamboParser', false)"
+
+    execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('The Pilot', 'MusicListings.Parsing.PilotParser', false)"
+
+    execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('Jazz Bistro', 'MusicListings.Parsing.JazzBistroParser', false)"
   end
 
   def down do
