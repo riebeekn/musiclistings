@@ -113,29 +113,35 @@ defmodule MusicListings.Parsing.Parser do
     end
   end
 
-  def convert_month_string_to_number("January"), do: 1
-  def convert_month_string_to_number("Jan"), do: 1
-  def convert_month_string_to_number("February"), do: 2
-  def convert_month_string_to_number("Feb"), do: 2
-  def convert_month_string_to_number("March"), do: 3
-  def convert_month_string_to_number("Mar"), do: 3
-  def convert_month_string_to_number("April"), do: 4
-  def convert_month_string_to_number("Apr"), do: 4
-  def convert_month_string_to_number("May"), do: 5
-  def convert_month_string_to_number("June"), do: 6
-  def convert_month_string_to_number("Jun"), do: 6
-  def convert_month_string_to_number("July"), do: 7
-  def convert_month_string_to_number("Jul"), do: 7
-  def convert_month_string_to_number("August"), do: 8
-  def convert_month_string_to_number("Aug"), do: 8
-  def convert_month_string_to_number("September"), do: 9
-  def convert_month_string_to_number("Sep"), do: 9
-  def convert_month_string_to_number("October"), do: 10
-  def convert_month_string_to_number("Oct"), do: 10
-  def convert_month_string_to_number("November"), do: 11
-  def convert_month_string_to_number("Nov"), do: 11
-  def convert_month_string_to_number("December"), do: 12
-  def convert_month_string_to_number("Dec"), do: 12
+  def convert_month_string_to_number(month_string) do
+    month_string
+    |> String.downcase()
+    |> month_string_to_number()
+  end
+
+  defp month_string_to_number("january"), do: 1
+  defp month_string_to_number("jan"), do: 1
+  defp month_string_to_number("february"), do: 2
+  defp month_string_to_number("feb"), do: 2
+  defp month_string_to_number("march"), do: 3
+  defp month_string_to_number("mar"), do: 3
+  defp month_string_to_number("april"), do: 4
+  defp month_string_to_number("apr"), do: 4
+  defp month_string_to_number("may"), do: 5
+  defp month_string_to_number("june"), do: 6
+  defp month_string_to_number("jun"), do: 6
+  defp month_string_to_number("july"), do: 7
+  defp month_string_to_number("jul"), do: 7
+  defp month_string_to_number("august"), do: 8
+  defp month_string_to_number("aug"), do: 8
+  defp month_string_to_number("september"), do: 9
+  defp month_string_to_number("sep"), do: 9
+  defp month_string_to_number("october"), do: 10
+  defp month_string_to_number("oct"), do: 10
+  defp month_string_to_number("november"), do: 11
+  defp month_string_to_number("nov"), do: 11
+  defp month_string_to_number("december"), do: 12
+  defp month_string_to_number("dec"), do: 12
 
   def extract_event_id_from_ticketmaster_url(ticket_url) do
     regex = ~r/event\/(?<event_id>[^?\/]+)(?:\?|$)/

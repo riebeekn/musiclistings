@@ -183,7 +183,6 @@
           {Credo.Check.Refactor.AppendSingleItem, []},
           {Credo.Check.Refactor.FilterReject, []},
           {Credo.Check.Refactor.IoPuts, []},
-          {Credo.Check.Refactor.MapMap, []},
           {Credo.Check.Refactor.NegatedIsNil, []},
           {Credo.Check.Refactor.PipeChainStart, []},
           {Credo.Check.Refactor.VariableRebinding, []},
@@ -213,7 +212,8 @@
           {Credo.Check.Readability.Specs, []},
           {Credo.Check.Refactor.ModuleDependencies, []},
           {Credo.Check.Readability.SinglePipe, []},
-          {Credo.Check.Refactor.ABCSize, []}
+          {Credo.Check.Refactor.ABCSize, []},
+          {Credo.Check.Refactor.MapMap, []}
 
           # {Credo.Check.Refactor.MapInto, []},
 

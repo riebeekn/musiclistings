@@ -42,7 +42,7 @@ defmodule MusicListings.Repo.Migrations.PopulateInitialVenues do
 
     execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('The Concert Hall', 'MusicListings.Parsing.ConcertHallParser', true)"
 
-    execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('The Garrison', 'MusicListings.Parsing.TheGarrisonParser', false)"
+    execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('The Garrison', 'MusicListings.Parsing.GarrisonParser', true)"
 
     execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('The Monarch Tavern', 'MusicListings.Parsing.TheMonarchTavernParser', false)"
 
@@ -59,6 +59,10 @@ defmodule MusicListings.Repo.Migrations.PopulateInitialVenues do
     execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('The Pilot', 'MusicListings.Parsing.PilotParser', false)"
 
     execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('Jazz Bistro', 'MusicListings.Parsing.JazzBistroParser', false)"
+
+    execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('The Dakota Tavern', 'MusicListings.Parsing.DakotaTavernParser', false)"
+
+    execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('Hugh''s Room', 'MusicListings.Parsing.HughsRoomParser', false)"
   end
 
   def down do
