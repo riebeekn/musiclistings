@@ -80,6 +80,17 @@ defmodule MusicListings.Parsing.Parser do
 
         Time.new!(hour, minute, 0)
 
+      [hour_string] ->
+        hour =
+          hour_string
+          |> String.replace("pm", "")
+          |> String.replace("am", "")
+          |> String.trim()
+          |> String.to_integer()
+          |> maybe_adjust_for_pm(hour_string)
+
+        Time.new!(hour, 0, 0)
+
       _tbd ->
         nil
     end
