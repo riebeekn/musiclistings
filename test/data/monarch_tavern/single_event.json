@@ -1,0 +1,67 @@
+{
+  "calid": "59f4fea1df82fe17e4e1c2cf",
+  "eid": {
+    "uid": "1116",
+    "seq": 0,
+    "tid": 1723161600000,
+    "rid": 0
+  },
+  "when": {
+    "start": {
+      "millis": 1723161600000,
+      "tzid": "America/Toronto",
+      "ltz": "EDT",
+      "offset": -14400000
+    },
+    "end": {
+      "millis": 1723161600000,
+      "tzid": "America/Toronto",
+      "ltz": "EDT",
+      "offset": -14400000
+    },
+    "allDay": false
+  },
+  "content": {
+    "summary": {
+      "text": "Velvet Beach w/ Kicksie, Nutrients"
+    },
+    "description": {
+      "text": "VELVET BEACH \u003E https://www.velvetbeachto.com/ w/ KICKSIE \u003E https://kicksie.bandcamp.com/ + NUTRIENTS \u003E https://nutrientsmusic.bandcamp.com/track/come-along Doors 8pm / advance TICKETS just $14.50 onli"
+    },
+    "tagset": {
+      "tags": {
+        "default": []
+      }
+    },
+    "imageId": "BWC_6675a0bfedc0fa487338c9a2",
+    "attachments": [],
+    "customButtonText": "Get Tickets",
+    "customButtonLink": "https://www.showclix.com/event/velvet-beach-w-kicksie-nutrients?fbclid=IwZXh0bgNhZW0CMTAAAR17BU-juhb_cKEt6DTjTZZTKN2zCOz8J37qh1Pmfzx1ZWYchsXooULdRGQ_aem_ZmFrZWR1bW15MTZieXRlcw",
+    "noDetail": false,
+    "version": 2,
+    "imageIdNg": "6675a0bfedc0fa487338c9a2",
+    "imageSets": [
+      {
+        "ownerId": "59f4fd55df82fe17e4e1c258",
+        "ownerType": "user",
+        "id": "6675a0bfedc0fa487338c9a2",
+        "name": "velvet beach",
+        "altText": "velvet beach",
+        "width": 1536,
+        "height": 2048,
+        "size": 375273,
+        "masterFormat": "jpg",
+        "variantFormat": "jpg",
+        "oldId": "BWC_6675a0bfedc0fa487338c9a2",
+        "tags": []
+      }
+    ]
+  },
+  "sorter": "999_01B63900_0901_01B63900-1-01B63900_1116-01B63900-0-0",
+  "dtstamp": 1718986236697,
+  "status": {
+    "name": "scheduled"
+  },
+  "kind": "singleton",
+  "isExternal": false
+}
