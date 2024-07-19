@@ -1,0 +1,1943 @@
+{
+  "events": [
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "1115",
+        "seq": 0,
+        "tid": 1721347200000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1721347200000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "end": {
+          "millis": 1721347200000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Romeo Romeo w/ Orit, Jasmine"
+        },
+        "description": {
+          "text": "ROMEO ROMEO \u003E https://soundcloud.com/user-202237280 w/ ORIT \u003E https://www.instagram.com/favorit.6/ + JASMINE \u003E https://www.instagram.com/p/C0AuN7gM3Rj/ Doors 8pm / show starts 8:30 - advance TICKETS j"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_6674b647edc0fa4873386de9",
+        "attachments": [],
+        "customButtonText": "Get Tickets",
+        "customButtonLink": "https://www.showclix.com/event/romeo-romeo-w-orit-jasmine?fbclid=IwZXh0bgNhZW0CMTAAAR14-sr8xV3IW7hLTv89Au-XEztmeiL3fa7UBrspw_wQjPHMGD3sfhNY-xg_aem_ZmFrZWR1bW15MTZieXRlcw",
+        "noDetail": false,
+        "version": 2,
+        "imageIdNg": "6674b647edc0fa4873386de9",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "6674b647edc0fa4873386de9",
+            "name": "romeo",
+            "altText": "romeo",
+            "width": 1920,
+            "height": 1080,
+            "size": 92842,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_6674b647edc0fa4873386de9",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B5C2E0_0901_01B5C2E0-1-01B5C2E0_1115-01B5C2E0-0-0",
+      "dtstamp": 1718924954008,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "1089",
+        "seq": 0,
+        "tid": 1721518200000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1721518200000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "end": {
+          "millis": 1721518200000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Motorcycle Sidecar w/ Simon Outhit, Vandersex"
+        },
+        "description": {
+          "text": "MOTORCYCLE SIDECAR celebrate the release of their new EP \u003E https://www.instagram.com/motorcyclesidecar/ w/ SIMON OUTHIT \u003E https://simonouthit.com/ & VANDERSEX \u003E https://simonouthit.com/ Advance TICKET"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_664385365968360cdd7c1473",
+        "attachments": [],
+        "customButtonText": "Get Tickets",
+        "customButtonLink": "https://www.showclix.com/event/motorcycle-sidecar-w-s-outhit-vandersex?fbclid=IwZXh0bgNhZW0CMTAAAR3fCAOXXlRqPJ3FfLTCBJ0nbfBa5cn-mMgaS4UR_ncNlKqaOEM6at59glc_aem_AdXzLbLLMwmq1gY2Uj2MA498tvta_zB-vAQNhWOIFbUwFPiBlmtHqSbqFkTLBNgxEotIwAJwmt25H0T7-uQnkWDn",
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "664385365968360cdd7c1473",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "664385365968360cdd7c1473",
+            "name": "motorcycle",
+            "altText": "motorcycle",
+            "width": 726,
+            "height": 938,
+            "size": 123034,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_664385365968360cdd7c1473",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B5CE02_0901_01B5CE02-1-01B5CE02_1089-01B5CE02-0-0",
+      "dtstamp": 1715701297284,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "1124",
+        "seq": 0,
+        "tid": 1721595600000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1721595600000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "end": {
+          "millis": 1721595600000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "MISTER RABBIT, CHRISTIAN TURNER & SMILT"
+        },
+        "description": {
+          "text": "Hamilton's own MISTER RABBIT have awoken from their slumber to bring you new songs, old songs & their jovial banter for the first time in over 6 months. We swear, we've been working on the banter. The"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_6689a855f5f6a40bef79be56",
+        "attachments": [],
+        "customButtonText": "Get Tickets",
+        "customButtonLink": "https://www.tickettailor.com/events/misterrabbit/1300399?fbclid=IwZXh0bgNhZW0CMTAAAR1cxHBapPD-1d6m-HqNc2Sq2PT1lgg2DUMXUaOUMlczKYoPIUKK_Yk6hlA_aem_pjNeklMgs7hniLvqkgUDVw",
+        "noDetail": false,
+        "version": 2,
+        "imageIdNg": "6689a855f5f6a40bef79be56",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "6689a855f5f6a40bef79be56",
+            "name": "mister rabbit",
+            "altText": "mister rabbit",
+            "width": 1080,
+            "height": 1350,
+            "size": 151557,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_6689a855f5f6a40bef79be56",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B5D30C_0901_01B5D30C-1-01B5D30C_1124-01B5D30C-0-0",
+      "dtstamp": 1720297642480,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "1071",
+        "seq": 0,
+        "tid": 1721689200000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1721689200000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "end": {
+          "millis": 1721689200000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "The Courettes"
+        },
+        "description": {
+          "text": "Collective Concerts Presents: The Courettes Doors 7PM/19+ Tickets on sale now! https://link.dice.fm/hc5197124fdc"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_661c1097dec44d21c93072a9",
+        "attachments": [],
+        "customButtonText": "Get Tickets",
+        "customButtonLink": "https://dice.fm/event/8dml7-the-courettes-22nd-jul-the-monarch-tavern-toronto-tickets?dice_source=ee15ecdb&eventref=fb_oea&fbclid=IwAR1Nk9Lw4Tu9L1AYIlm-qf-1tyVwXlxmCfCPAxJ4r5rkmJAUUaH8bqsMON0_aem_ASf89nGYLApvxL4XR4TBcnMDOD_9jKBRdOE7xy8FhbgVSLFdgoa9TlIUPh2bWXdPyo7r9d-DpB8CKgGyC7WtpZC7",
+        "noDetail": false,
+        "version": 2,
+        "imageIdNg": "661c1097dec44d21c93072a9",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "661c1097dec44d21c93072a9",
+            "name": "courettes",
+            "altText": "courettes",
+            "width": 1080,
+            "height": 1080,
+            "size": 105016,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_661c1097dec44d21c93072a9",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B5D924_0901_01B5D924-1-01B5D924_1071-01B5D924-0-0",
+      "dtstamp": 1713115323750,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "1113",
+        "seq": 0,
+        "tid": 1721952000000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1721952000000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "end": {
+          "millis": 1721952000000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Mountain Movers w/ Stonegrass, Emily Robb"
+        },
+        "description": {
+          "text": "MOUNTAIN MOVERS (New Haven, CT) https://themountainmovers.bandcamp.com/.../walking-after... w/ STONEGRASS https://cosmicrangerecords.bandcamp.com/album/stonegrass + EMILY ROBB (Philadelphia, PA) https"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_667378cdedc0fa487337c6e8",
+        "attachments": [],
+        "customButtonText": "Get Tickets",
+        "customButtonLink": "https://www.showclix.com/event/mountain-movers-w-stonegrass-emily-robb?fbclid=IwZXh0bgNhZW0CMTAAAR2m_kONtyNgj4bWiYU8lsQA0c9G6ml5KLc8XFl7AI3jDnQmDSZXHm8ySUA_aem_ZmFrZWR1bW15MTZieXRlcw",
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "667378cdedc0fa487337c6e8",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "667378cdedc0fa487337c6e8",
+            "name": "mountain movers",
+            "altText": "mountain movers",
+            "width": 640,
+            "height": 427,
+            "size": 38291,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_667378cdedc0fa487337c6e8",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B5EA40_0901_01B5EA40-1-01B5EA40_1113-01B5EA40-0-0",
+      "dtstamp": 1718843635934,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "1118",
+        "seq": 0,
+        "tid": 1722038400000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1722038400000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "end": {
+          "millis": 1722038400000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Blue June EP Release w/ FXRRVST"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_667d816feb9f7833ebf48d6a",
+        "attachments": [],
+        "noDetail": false,
+        "version": 2,
+        "imageIdNg": "667d816feb9f7833ebf48d6a",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "667d816feb9f7833ebf48d6a",
+            "name": "IMG_1259 (1)",
+            "altText": "IMG_1259 (1)",
+            "width": 1300,
+            "height": 1675,
+            "size": 247054,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_667d816feb9f7833ebf48d6a",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B5EFE0_0901_01B5EFE0-1-01B5EFE0_1118-01B5EFE0-0-0",
+      "dtstamp": 1719501255841,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "1122",
+        "seq": 0,
+        "tid": 1722556800000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1722556800000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "end": {
+          "millis": 1722556800000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Zones"
+        },
+        "description": {
+          "text": "DIG presents ☾ ZONES https://zonesmusic.bandcamp.com/music Toronto’s liquid groover ZONES presents the brand new full length offering of pulsing krautrock infused psychedelic disco funk: “Hits Of Suns"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_6686dddaf5f6a40bef78983f",
+        "attachments": [],
+        "customButtonText": "Get Tickets",
+        "customButtonLink": "https://dice.fm/partner/dig-universe/event/7ddr69-zones-1st-aug-the-monarch-tavern-toronto-tickets?dice_id=3503428&dice_channel=web&dice_tags=organic&dice_campaign=DIG+Universe&dice_feature=mio_marketing&fbclid=IwZXh0bgNhZW0CMTAAAR2vsqcv7p-7cTkOLchU54vDab14Jujf71XQcI8pMVbp7fzBYx-UdslYObc_aem_duWEeOgKzKpRY32KyWEOxg&_branch_match_id=1244716981972107915&_branch_referrer=H4sIAAAAAAAAAwXB2wqCMBgA4CfyPFkEEWpemNlINA834v45Z2osPGQ%2Bfd8n5llOR00bunevsg4alY%2Baaxk1QoBsTtmZUxg6dgq%2BZS502t5FmelelDiOE5vr9IEVSwVD0pMbiNRG66WmBrouL46N%2FAHBQUZPKjHf3WJTUjYNBaFQ1c1YsSXzG9KGeyjjwjLDX%2BaTrf0DIOdFE5EAAAA%3D",
+        "noDetail": false,
+        "version": 2,
+        "imageIdNg": "6686dddaf5f6a40bef78983f",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "6686dddaf5f6a40bef78983f",
+            "name": "ZONES",
+            "altText": "ZONES",
+            "width": 2048,
+            "height": 2048,
+            "size": 557642,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_6686dddaf5f6a40bef78983f",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B611A0_0901_01B611A0-1-01B611A0_1122-01B611A0-0-0",
+      "dtstamp": 1720114730138,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "1112",
+        "seq": 0,
+        "tid": 1722641400000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1722641400000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "end": {
+          "millis": 1722641400000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Beams w/ Summer Like The Season, Essie Watts"
+        },
+        "description": {
+          "text": "BEAMS https://beamsbeams.bandcamp.com/ w/ SUMMER LIKE THE SEASON (Detroit) https://summerliketheseason.bandcamp.com/album/aggregator + ESSIE WATTS https://essiewatts.bandcamp.com/album/shadow-box Adva"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_666db3b53957dc19143917ce",
+        "attachments": [],
+        "customButtonText": "Get Tickets",
+        "customButtonLink": "https://www.showclix.com/event/beams-w-summer-season-essiewats?fbclid=IwZXh0bgNhZW0CMTAAAR0ulByZEAPHVaG9-kgRwZBKp5-hlfdM2foLT_xjNgjkzDCkjKL3JzeihOs_aem_ZmFrZWR1bW15MTZieXRlcw",
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "666db3b53957dc19143917ce",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "666db3b53957dc19143917ce",
+            "name": "beams",
+            "altText": "beams",
+            "width": 1920,
+            "height": 1005,
+            "size": 387909,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_666db3b53957dc19143917ce",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B61722_0901_01B61722-1-01B61722_1112-01B61722-0-0",
+      "dtstamp": 1718465634916,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "1125",
+        "seq": 0,
+        "tid": 1722726000000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1722726000000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "end": {
+          "millis": 1722726000000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Danny Lion"
+        },
+        "description": {
+          "text": "https://www.eventbrite.com/.../danny-lion-at-the-monarch... Wanted to do a show where we could all enjoy my album LOVER together and also wanted to share some newer stuff before I move to New York!"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_6689b04ff5f6a40bef79c20b",
+        "attachments": [],
+        "customButtonText": "Get Tickets",
+        "customButtonLink": "https://www.eventbrite.com/e/danny-lion-at-the-monarch-tavern-tickets-942659398637?aff=oddtdtcreator&fbclid=IwZXh0bgNhZW0CMTAAAR11RFva3lMS1JbnLvjFoq0vWwzAZa39WlrjvjCqXRSYdoUwND_lPXJ3l1E_aem_pi8HZkmv77FcCw8PXiMl_g",
+        "noDetail": false,
+        "version": 2,
+        "imageIdNg": "6689b04ff5f6a40bef79c20b",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "6689b04ff5f6a40bef79c20b",
+            "name": "danny lion",
+            "altText": "danny lion",
+            "width": 1920,
+            "height": 1080,
+            "size": 484778,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_6689b04ff5f6a40bef79c20b",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B61CA4_0901_01B61CA4-1-01B61CA4_1125-01B61CA4-0-0",
+      "dtstamp": 1720299670648,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "1116",
+        "seq": 0,
+        "tid": 1723161600000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1723161600000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "end": {
+          "millis": 1723161600000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Velvet Beach w/ Kicksie, Nutrients"
+        },
+        "description": {
+          "text": "VELVET BEACH \u003E https://www.velvetbeachto.com/ w/ KICKSIE \u003E https://kicksie.bandcamp.com/ + NUTRIENTS \u003E https://nutrientsmusic.bandcamp.com/track/come-along Doors 8pm / advance TICKETS just $14.50 onli"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_6675a0bfedc0fa487338c9a2",
+        "attachments": [],
+        "customButtonText": "Get Tickets",
+        "customButtonLink": "https://www.showclix.com/event/velvet-beach-w-kicksie-nutrients?fbclid=IwZXh0bgNhZW0CMTAAAR17BU-juhb_cKEt6DTjTZZTKN2zCOz8J37qh1Pmfzx1ZWYchsXooULdRGQ_aem_ZmFrZWR1bW15MTZieXRlcw",
+        "noDetail": false,
+        "version": 2,
+        "imageIdNg": "6675a0bfedc0fa487338c9a2",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "6675a0bfedc0fa487338c9a2",
+            "name": "velvet beach",
+            "altText": "velvet beach",
+            "width": 1536,
+            "height": 2048,
+            "size": 375273,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_6675a0bfedc0fa487338c9a2",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B63900_0901_01B63900-1-01B63900_1116-01B63900-0-0",
+      "dtstamp": 1718986236697,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "1120",
+        "seq": 0,
+        "tid": 1723248000000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1723248000000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "end": {
+          "millis": 1723248000000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Ichi-Bons"
+        },
+        "description": {
+          "text": "North American rockabilly / roots rock sensations ICHI-BONS -- https://www.instagram.com/ichi_bons/ -- return to the Monarch for 2 liuve sets with special guest Andrew Moljgun on saxophone - plus DJs "
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_66856d991ee06f492c68e9ea",
+        "attachments": [],
+        "customButtonText": "Get Tickets",
+        "customButtonLink": "https://www.showclix.com/event/ichi-bons?fbclid=IwZXh0bgNhZW0CMTAAAR0VQIpAL91V2-KVAqC6wRdML4OGZYxMGaD-3MjiMVrVJrkhhE7jvH_Ues8_aem_H5Kr44_beOcFaDpthnozTw",
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "66856d991ee06f492c68e9ea",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "66856d991ee06f492c68e9ea",
+            "name": "ichi",
+            "altText": "ichi",
+            "width": 1920,
+            "height": 1005,
+            "size": 410145,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_66856d991ee06f492c68e9ea",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B63EA0_0901_01B63EA0-1-01B63EA0_1120-01B63EA0-0-0",
+      "dtstamp": 1720020674054,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "1121",
+        "seq": 0,
+        "tid": 1723332600000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1723332600000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "end": {
+          "millis": 1723332600000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Soft Set w/ Empress Of Nothing, Bats of Paradise"
+        },
+        "description": {
+          "text": "SOFT SET \u003E https://softset.bandcamp.com/ w/ Montreal's EMPRESS OF NOTHING \u003E https://empressofnothing.bandcamp.com/.../empress-of-nothing & BATS OF PARADISE \u003E https://batsofparadise.bandcamp.com/ Advan"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_66856ef21ee06f492c68ebc6",
+        "attachments": [],
+        "customButtonText": "Get Tickets",
+        "customButtonLink": "https://www.showclix.com/event/soft-set-w-empress-nothing-bats-paradise?fbclid=IwZXh0bgNhZW0CMTAAAR3rtThAqXtyJZYQ5ON7SaJ8r6eSvkRpjv7BcgBz2Zluhv1M4JPSq2HQ-zs_aem_1loXMFqgBSDvpCE0tvhgBQ",
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "66856ef21ee06f492c68ebc6",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "66856ef21ee06f492c68ebc6",
+            "name": "soft set",
+            "altText": "soft set",
+            "width": 800,
+            "height": 1000,
+            "size": 149211,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_66856ef21ee06f492c68ebc6",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B64422_0901_01B64422-1-01B64422_1121-01B64422-0-0",
+      "dtstamp": 1720020845986,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "1123",
+        "seq": 0,
+        "tid": 1723851000000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1723851000000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "end": {
+          "millis": 1723851000000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Theo Vandenhoff w/ Amery, Bingo Day"
+        },
+        "description": {
+          "text": "THEO VANDENHOFF https://theovandenhoff.bandcamp.com/.../in-the-throes-of... AMERY (Montreal) Album release https://amery.bandcamp.com/ BINGO DAY https://bingoday.bandcamp.com/ Doors 7:30 / Advance TIC"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_6686f9f6f5f6a40bef78a597",
+        "attachments": [],
+        "customButtonText": "Get Tickets",
+        "customButtonLink": "https://www.showclix.com/event/theo-vandenhoff-w-amery-bingo-day?fbclid=IwZXh0bgNhZW0CMTAAAR15an7XYKzxuKjbcRwk9z311HW7FbHWKT67tq56cuEJfipWb4f8U8QH8mY_aem_TW9-Rlptu3ttMh8AZWOFTg",
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "6686f9f6f5f6a40bef78a597",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "6686f9f6f5f6a40bef78a597",
+            "name": "theo",
+            "altText": "theo",
+            "width": 843,
+            "height": 1124,
+            "size": 139326,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_6686f9f6f5f6a40bef78a597",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B665E2_0901_01B665E2-1-01B665E2_1123-01B665E2-0-0",
+      "dtstamp": 1720121885464,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "919",
+        "seq": 0,
+        "tid": 1725924600000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1725924600000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "end": {
+          "millis": 1725924600000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Martin Loomer and his Orange Devils"
+        },
+        "description": {
+          "text": "Martin Loomer and his Orange Devils are back with their monthly residency! Two hour-long sets of hard swinging big band sounds! Every second Monday. Your $15 cover charge goes directly into the pocket"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_637d7db1d9bdaf7c123b8f76",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "637d7db1d9bdaf7c123b8f76",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "637d7db1d9bdaf7c123b8f76",
+            "name": "martin loomer",
+            "altText": "martin loomer",
+            "width": 1152,
+            "height": 864,
+            "size": 33553,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_637d7db1d9bdaf7c123b8f76",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B6ECE2_0904_01B6ECE2-1-01B6ECE2_919-01B6ECE2-0-0",
+      "dtstamp": 1705859037811,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "1097",
+        "seq": 0,
+        "tid": 1726614000000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1726614000000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "end": {
+          "millis": 1726614000000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Pile w/ Oceanator"
+        },
+        "description": {
+          "text": "Collective Concerts Presents: Pile with Oceanator Doors 7PM/19+ Tickets on sale May 31st at 10AM https://link.dice.fm/Z4b3696024ca"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_6658cd4e27682325a401478d",
+        "attachments": [],
+        "customButtonText": "Get Tickets",
+        "customButtonLink": "https://dice.fm/event/avbdev-pile-17th-sep-the-monarch-tavern-toronto-tickets?dice_source=ee15ecdb&eventref=fb_oea&fbclid=IwZXh0bgNhZW0CMTAAAR2yK7R_nphy_12xEowcFOrMQWO0OCPCDBx5_JN1mGuyghxVq7irFm6xuWQ_aem_AY9wXig2jx2O1CIyrfcDgZWtfYzobRGcSmGmT8Cy3saln5BphNpobooo6DaySnGwNOGgf_PrnMoXfXyBH5_QKuvr",
+        "noDetail": false,
+        "version": 2,
+        "imageIdNg": "6658cd4e27682325a401478d",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "6658cd4e27682325a401478d",
+            "name": "pile",
+            "altText": "pile",
+            "width": 1125,
+            "height": 1125,
+            "size": 107766,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_6658cd4e27682325a401478d",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B719C4_0901_01B719C4-1-01B719C4_1097-01B719C4-0-0",
+      "dtstamp": 1717095862669,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "1094",
+        "seq": 0,
+        "tid": 1726700400000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1726700400000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "end": {
+          "millis": 1726700400000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Talisk"
+        },
+        "description": {
+          "text": "Collective Concerts Presents: Talisk Doors 7PM/19+ Tickets on sale May 23rd at 10AM https://link.dice.fm/if1925856ca7"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_664cc9e454c09b7d1acb26ce",
+        "attachments": [],
+        "customButtonText": "Get Tickets",
+        "customButtonLink": "https://dice.fm/event/oe237r-talisk-18th-sep-the-monarch-tavern-toronto-tickets?dice_source=ee15ecdb&eventref=fb_oea&fbclid=IwZXh0bgNhZW0CMTAAAR26aTHz-2lzl77QmQw6_z74ojE503ExNZImH9WIUDL4DnzADwCWVkzK1o8_aem_AXTjxJgLgHxH6E4IGGU0rm6PlQ-q1lIp1kNawOUtZ3EJEK9GBOs_JaxO_2tbBb2fJyYv1z3g3INNVvFKd-THamdH",
+        "noDetail": false,
+        "version": 2,
+        "imageIdNg": "664cc9e454c09b7d1acb26ce",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "664cc9e454c09b7d1acb26ce",
+            "name": "talisk 2",
+            "altText": "talisk 2",
+            "width": 2000,
+            "height": 2000,
+            "size": 688684,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_664cc9e454c09b7d1acb26ce",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B71F64_0901_01B71F64-1-01B71F64_1094-01B71F64-0-0",
+      "dtstamp": 1716308504817,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "1103",
+        "seq": 0,
+        "tid": 1726873200000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1726873200000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "end": {
+          "millis": 1726873200000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Liana Flores"
+        },
+        "description": {
+          "text": "Collective Concerts Presents: Liana Flores Doors 7PM/19+ Tickets on sale June 7th at 10AM https://link.dice.fm/dc500e9f66ba"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_6660a276a496123bab20f7d1",
+        "attachments": [],
+        "customButtonText": "Get Tickets",
+        "customButtonLink": "https://dice.fm/partner/social-tracking/event/mxb8rr-liana-flores-20th-sep-the-monarch-tavern-toronto-tickets?dice_id=3289196&dice_channel=web&dice_tags=organic&dice_campaign=Social+Tracking&dice_feature=mio_marketing&fbclid=IwZXh0bgNhZW0CMTAAAR1G8RoZqVjIid6Yik5-2Ssz8wN1RlB1YlmOqgh2AD8K8mrC3feXJwWahgI_aem_Ady6XKFhLYuGQxMJj86SyLCJLV33aqlMoYOdbImuJADr3w3PsF9jGmqKY6HND-hKN4MlT_0WjuNR0sSdta8xt6-u&_branch_match_id=1244716981972107915&_branch_referrer=H4sIAAAAAAAAAwXB226CMAAA0C9Cip1NXbIsHUTkVjcwQnkhhQIttjoEgu7rd46c59%2Fp3ba1ul03QjXtpjO2aHYAtPsOoZp%2FdnWjlfgI1rKQoO6pLHPgJmdCSOr4OL2X42UIlEBMXXfWNpv%2B8EqdVH85TJvT2Mst8XCEzcOFXVuEa85lH1S8NRURL1REBxmzxf95JuGAUfaK3TC%2BQMhHndzZSdSBWULiPeAKv6fDfvDNGDF0pJ4lI%2FqW6HMF8mGhKZgyMXP8nJG1%2FAODygC40wAAAA%3D%3D",
+        "noDetail": false,
+        "version": 2,
+        "imageIdNg": "6660a276a496123bab20f7d1",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "6660a276a496123bab20f7d1",
+            "name": "09-20 - Liana Flores",
+            "altText": "09-20 - Liana Flores",
+            "width": 1080,
+            "height": 1080,
+            "size": 82313,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_6660a276a496123bab20f7d1",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B72AA4_0901_01B72AA4-1-01B72AA4_1103-01B72AA4-0-0",
+      "dtstamp": 1717609142020,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "1087",
+        "seq": 0,
+        "tid": 1726963200000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1726963200000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "end": {
+          "millis": 1726963200000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Pansy Division w/ Blush"
+        },
+        "description": {
+          "text": "Collective Concerts Presents: Pansy Division with Blush Doors 8PM/19+ Tickets on sale May 16th at 10AM https://link.dice.fm/hcc45d0bfa17"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_664383295968360cdd7c1262",
+        "attachments": [],
+        "customButtonText": "Get Tickets",
+        "customButtonLink": "https://dice.fm/event/yqdk2-pansy-division-21st-sep-the-monarch-tavern-toronto-tickets?dice_source=ee15ecdb&eventref=fb_oea&fbclid=IwZXh0bgNhZW0CMTAAAR0KUCttFStkVK0IqCKhv2ogVnyfDF1xrpbiYVyYVnU722ds9ouAucAmIpk_aem_AdWE2MeRz_X8_baUSjTvAq5NcCcfd5nRlGLfUFnzUg4LVlMJXmujby-npE83vlT6zyyq-dNpkhFWcU6G6l8Av3YV",
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "664383295968360cdd7c1262",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "664383295968360cdd7c1262",
+            "name": "pansy",
+            "altText": "pansy",
+            "width": 1080,
+            "height": 1080,
+            "size": 175834,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_664383295968360cdd7c1262",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B73080_0901_01B73080-1-01B73080_1087-01B73080-0-0",
+      "dtstamp": 1715700918531,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "1105",
+        "seq": 0,
+        "tid": 1727910000000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1727910000000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "end": {
+          "millis": 1727910000000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "The Cactus Blossoms"
+        },
+        "description": {
+          "text": "Collective Concerts Presents: The Cactus Blossoms Doors 7PM/19+ Tickets on sale June 14th at 10AM https://link.dice.fm/Oa38ee928993"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_6668929b3957dc1914364810",
+        "attachments": [],
+        "customButtonText": "Get Tickets",
+        "customButtonLink": "https://dice.fm/event/eogr5d-the-cactus-blossoms-2nd-oct-the-monarch-tavern-toronto-tickets?dice_source=ee15ecdb&eventref=fb_oea&fbclid=IwZXh0bgNhZW0CMTAAAR0AmplFqiWZP5E4LG-NkEEO572kM_FDVXDy7l495OuX2L5pB-XKxJaqtus_aem_ARavhykxheSV_BnKFdYaIyRuu9DRbC4o1Zar4j-2Pa6Hhi7K58nTwmZigei7zSzVT_C75XljxoKmm46md7aTmOLN",
+        "noDetail": false,
+        "version": 2,
+        "imageIdNg": "6668929b3957dc1914364810",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "6668929b3957dc1914364810",
+            "name": "cactus blossoms",
+            "altText": "cactus blossoms",
+            "width": 2048,
+            "height": 1358,
+            "size": 377304,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_6668929b3957dc1914364810",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B76E24_0901_01B76E24-1-01B76E24_1105-01B76E24-0-0",
+      "dtstamp": 1718129366377,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "1111",
+        "seq": 0,
+        "tid": 1728691200000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1728691200000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "end": {
+          "millis": 1728691200000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Quivers"
+        },
+        "description": {
+          "text": "Transmit Presents: Quivers www.quiversmusic.com 19+ $22.70 Advance (Taxes & Fees Incl) www.transmitpresents.com"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_6669d42e3957dc1914370ce0",
+        "attachments": [],
+        "customButtonText": "Get Tickets",
+        "customButtonLink": "https://dice.fm/partner/dice/event/7d3x2p-quivers-11th-oct-the-monarch-tavern-toronto-tickets?dice_id=3336907&dice_channel=web&dice_tags=organic&dice_campaign=DICE&dice_feature=mio_marketing&fbclid=IwZXh0bgNhZW0CMTAAAR0e2rHpz7yAtzGUDdhk1nF2BLjXzPDIQBvgx5J1v1g08UycPeNNAbKCtnY_aem_AV2Hr9ZgaXpTcel8WjM6cZFrSrmtv2uGvdiYAb_MkNa5zOzbjfBJT5-BGSYom87kQ5BArLsqRSd2z3xT7O_K-mds&_branch_match_id=1244716981972107915&_branch_referrer=H4sIAAAAAAAAAwXB6W6CMAAA4CdSoFrKlixLixEv8AAn8IfQg7uMFca0T7%2Fvq6ZpGN8No6v7dslrJpaFNFwG12tgIxutnM%2BCsq7mH%2Fu%2FNK5MWgZV%2BjBdP8IY30wB1G7Q6IUn7d03vGqtfgvIqYn1ZbO%2Fkrl8woM1W6Xp3F%2FsIoIA06M79UmWC5nhL7BTb2mZx0PEROc8Gt9m6VaFSk4z%2BPVmXieYZn4b5FCfNW0Kcojggnhh8i0d1F4hweo0%2FtxCDvTqGaFzdlxIPv4Dy1bvj9MAAAA%3D",
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "6669d42e3957dc1914370ce0",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "6669d42e3957dc1914370ce0",
+            "name": "quivers",
+            "altText": "quivers",
+            "width": 2048,
+            "height": 1365,
+            "size": 431011,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_6669d42e3957dc1914370ce0",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B7A100_0901_01B7A100-1-01B7A100_1111-01B7A100-0-0",
+      "dtstamp": 1718211734205,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "919",
+        "seq": 0,
+        "tid": 1728948600000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1728948600000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "end": {
+          "millis": 1728948600000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Martin Loomer and his Orange Devils"
+        },
+        "description": {
+          "text": "Martin Loomer and his Orange Devils are back with their monthly residency! Two hour-long sets of hard swinging big band sounds! Every second Monday. Your $15 cover charge goes directly into the pocket"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_637d7db1d9bdaf7c123b8f76",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "637d7db1d9bdaf7c123b8f76",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "637d7db1d9bdaf7c123b8f76",
+            "name": "martin loomer",
+            "altText": "martin loomer",
+            "width": 1152,
+            "height": 864,
+            "size": 33553,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_637d7db1d9bdaf7c123b8f76",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B7B1C2_0904_01B7B1C2-1-01B7B1C2_919-01B7B1C2-0-0",
+      "dtstamp": 1705859037811,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "1126",
+        "seq": 0,
+        "tid": 1729033200000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1729033200000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "end": {
+          "millis": 1729033200000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "John Douglas"
+        },
+        "description": {
+          "text": "Collective Concerts Presents: John Douglas of Trashcan Sinatras with special guest Lauren Calve Doors 7PM/19+ Tickets on sale now https://link.dice.fm/q48fb264ef2e"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_668bfa57f5f6a40bef7a93ec",
+        "attachments": [],
+        "customButtonText": "Get Tickets",
+        "customButtonLink": "https://dice.fm/event/k663eq-john-douglas-15th-oct-the-monarch-tavern-toronto-tickets?dice_source=ee15ecdb&eventref=fb_oea&fbclid=IwZXh0bgNhZW0CMTAAAR1uV096QvHnEsvph5kPvA9U-eT3iHeeLTnP7APtpbE7a4CEZns25ik_QCw_aem_yzNSxiVKqmA-QTf_uU5sjA",
+        "noDetail": false,
+        "version": 2,
+        "imageIdNg": "668bfa57f5f6a40bef7a93ec",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "668bfa57f5f6a40bef7a93ec",
+            "name": "john douglas",
+            "altText": "john douglas",
+            "width": 2048,
+            "height": 2048,
+            "size": 142058,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_668bfa57f5f6a40bef7a93ec",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B7B744_0901_01B7B744-1-01B7B744_1126-01B7B744-0-0",
+      "dtstamp": 1720449689176,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "1106",
+        "seq": 0,
+        "tid": 1729296000000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1729296000000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "end": {
+          "millis": 1729296000000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Delicate Steve"
+        },
+        "description": {
+          "text": "Collective Concerts Presents: Delicate Steve Doors 8PM/19+ Tickets on sale June 14th at 10AM https://link.dice.fm/T5fa30af0b2b"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_666893fd3957dc1914364953",
+        "attachments": [],
+        "customButtonText": "Get Tickets",
+        "customButtonLink": "https://dice.fm/event/bbl8ov-delicate-steve-18th-oct-the-monarch-tavern-toronto-tickets?dice_source=ee15ecdb&eventref=fb_oea&fbclid=IwZXh0bgNhZW0CMTAAAR13C1wkhI4K8ztJ4oCl0faIuiqexHr0xtil1wJ_psV6X0c15jZ0nlQXT44_aem_ARYO1S4s-SKsJutieo2-rIi3VzDEO-Ufr4x5PGaGpJfL5U14hqys-Lq911TlkCA_7L-vCOJtmSIlERwHK3RQ6Cdo",
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "666893fd3957dc1914364953",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "666893fd3957dc1914364953",
+            "name": "Delicate Steve",
+            "altText": "Delicate Steve",
+            "width": 2048,
+            "height": 1536,
+            "size": 281815,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_666893fd3957dc1914364953",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B7C860_0901_01B7C860-1-01B7C860_1106-01B7C860-0-0",
+      "dtstamp": 1718129784886,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "1107",
+        "seq": 0,
+        "tid": 1729382400000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1729382400000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "end": {
+          "millis": 1729382400000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Delicate Steve"
+        },
+        "description": {
+          "text": "Collective Concerts Presents: Delicate Steve Doors 8PM/19+ Tickets on sale June 14th at 10AM https://link.dice.fm/M14f31202bfb"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_666893fd3957dc1914364953",
+        "attachments": [],
+        "customButtonText": "Get Tickets",
+        "customButtonLink": "https://dice.fm/event/l8a9dw-delicate-steve-19th-oct-the-monarch-tavern-toronto-tickets?dice_source=ee15ecdb&eventref=fb_oea&fbclid=IwZXh0bgNhZW0CMTAAAR3c41Aq1TOilrLLABrWCQWOkiyK7mhDRdpd7788hbK7nBUdH6Rk9xEnN1M_aem_ARZmlFqrhWPawzHkfb_IV4LKO3nxiBoD-2ETW-TsvFJYXpcrwM4TDKUwlL3xMreJTkM1VHD_QRaMV5MZ8IutAOGf",
+        "noDetail": false,
+        "version": 2,
+        "imageIdNg": "666893fd3957dc1914364953",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "666893fd3957dc1914364953",
+            "name": "Delicate Steve",
+            "altText": "Delicate Steve",
+            "width": 2048,
+            "height": 1536,
+            "size": 281815,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_666893fd3957dc1914364953",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B7CE00_0901_01B7CE00-1-01B7CE00_1107-01B7CE00-0-0",
+      "dtstamp": 1718131878472,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "1117",
+        "seq": 0,
+        "tid": 1729810800000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1729810800000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "end": {
+          "millis": 1729810800000,
+          "tzid": "America/Toronto",
+          "ltz": "EDT",
+          "offset": -14400000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Summer Dean"
+        },
+        "description": {
+          "text": "Collective Concerts Presents: Summer Dean Doors 7PM/19+ Tickets on sale now https://link.dice.fm/e4a14b8adf8b"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_6679e2d9edc0fa48733aa125",
+        "attachments": [],
+        "customButtonText": "Get Tickets",
+        "customButtonLink": "https://dice.fm/event/6d3ga8-summer-dean-24th-oct-the-monarch-tavern-toronto-tickets?dice_source=ee15ecdb&eventref=fb_oea&fbclid=IwZXh0bgNhZW0CMTAAAR3tdmH8MQCCfvb4LYCQ6fQyRHVspMrtY6SLSPHqxhm3K_mqfB8r41w1z9Q_aem_r3fK4gPlP5le5qcMVuelpg",
+        "noDetail": false,
+        "version": 2,
+        "imageIdNg": "6679e2d9edc0fa48733aa125",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "6679e2d9edc0fa48733aa125",
+            "name": "summer dean",
+            "altText": "summer dean",
+            "width": 1080,
+            "height": 1080,
+            "size": 131492,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_6679e2d9edc0fa48733aa125",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B7E9E4_0901_01B7E9E4-1-01B7E9E4_1117-01B7E9E4-0-0",
+      "dtstamp": 1719264011182,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "919",
+        "seq": 0,
+        "tid": 1731371400000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1731371400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1731371400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Martin Loomer and his Orange Devils"
+        },
+        "description": {
+          "text": "Martin Loomer and his Orange Devils are back with their monthly residency! Two hour-long sets of hard swinging big band sounds! Every second Monday. Your $15 cover charge goes directly into the pocket"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_637d7db1d9bdaf7c123b8f76",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "637d7db1d9bdaf7c123b8f76",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "637d7db1d9bdaf7c123b8f76",
+            "name": "martin loomer",
+            "altText": "martin loomer",
+            "width": 1152,
+            "height": 864,
+            "size": 33553,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_637d7db1d9bdaf7c123b8f76",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B84F7E_0904_01B84F7E-1-01B84F7E_919-01B84F7E-0-0",
+      "dtstamp": 1705859037811,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "1127",
+        "seq": 0,
+        "tid": 1731459600000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1731459600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1731459600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "John Francis Flynn"
+        },
+        "description": {
+          "text": "Collective Concerts Presents: John Francis Flynn Doors 8PM/19+ Tickets on sale July 19th at 10AM https://link.dice.fm/l79274c1a8aa"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_6697d9988bbd8946838c829a",
+        "attachments": [],
+        "customButtonText": "Get Tickets",
+        "customButtonLink": "https://dice.fm/event/bbb8lm-john-francis-flynn-12th-nov-the-monarch-tavern-toronto-tickets?dice_source=ee15ecdb&eventref=fb_oea&fbclid=IwZXh0bgNhZW0CMTAAAR2xK7f6KZciRB1WCeWzhjbE3e2rdeyQPLtNmnVhcUO0alppN4QuapQLh2g_aem_kfa8Y6rmgqa5F93X2BluMw",
+        "noDetail": false,
+        "version": 2,
+        "imageIdNg": "6697d9988bbd8946838c829a",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "6697d9988bbd8946838c829a",
+            "name": "john flynn",
+            "altText": "john flynn",
+            "width": 842,
+            "height": 836,
+            "size": 115975,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_6697d9988bbd8946838c829a",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B8553C_0901_01B8553C-1-01B8553C_1127-01B8553C-0-0",
+      "dtstamp": 1721227733543,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "919",
+        "seq": 0,
+        "tid": 1733790600000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1733790600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1733790600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Martin Loomer and his Orange Devils"
+        },
+        "description": {
+          "text": "Martin Loomer and his Orange Devils are back with their monthly residency! Two hour-long sets of hard swinging big band sounds! Every second Monday. Your $15 cover charge goes directly into the pocket"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_637d7db1d9bdaf7c123b8f76",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "637d7db1d9bdaf7c123b8f76",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "637d7db1d9bdaf7c123b8f76",
+            "name": "martin loomer",
+            "altText": "martin loomer",
+            "width": 1152,
+            "height": 864,
+            "size": 33553,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_637d7db1d9bdaf7c123b8f76",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B8ECFE_0904_01B8ECFE-1-01B8ECFE_919-01B8ECFE-0-0",
+      "dtstamp": 1705859037811,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "59f4fea1df82fe17e4e1c2cf",
+      "eid": {
+        "uid": "919",
+        "seq": 0,
+        "tid": 1736814600000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1736814600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1736814600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Martin Loomer and his Orange Devils"
+        },
+        "description": {
+          "text": "Martin Loomer and his Orange Devils are back with their monthly residency! Two hour-long sets of hard swinging big band sounds! Every second Monday. Your $15 cover charge goes directly into the pocket"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_637d7db1d9bdaf7c123b8f76",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "637d7db1d9bdaf7c123b8f76",
+        "imageSets": [
+          {
+            "ownerId": "59f4fd55df82fe17e4e1c258",
+            "ownerType": "user",
+            "id": "637d7db1d9bdaf7c123b8f76",
+            "name": "martin loomer",
+            "altText": "martin loomer",
+            "width": 1152,
+            "height": 864,
+            "size": 33553,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_637d7db1d9bdaf7c123b8f76",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01B9B1DE_0904_01B9B1DE-1-01B9B1DE_919-01B9B1DE-0-0",
+      "dtstamp": 1705859037811,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    }
+  ],
+  "metaData": {
+    "to": 315,
+    "from": 286,
+    "end": 30,
+    "hasNext": false,
+    "start": 0,
+    "hasPrev": true
+  }
+}
