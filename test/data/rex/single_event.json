@@ -1,0 +1,63 @@
+{
+  "id": "66953788463e0d7186889314",
+  "collectionId": "62099f5a37eb917826df65cc",
+  "recordType": 12,
+  "addedOn": 1721055722735,
+  "updatedOn": 1721055722932,
+  "starred": false,
+  "passthrough": false,
+  "tags": [],
+  "categories": [],
+  "workflowState": 1,
+  "publishOn": 1721055722735,
+  "authorId": "623cdf35b2db1334cc32d749",
+  "mediaFocalPoint": {
+    "x": 0.5,
+    "y": 0.5,
+    "source": 3
+  },
+  "urlId": "adrean-farrugia-brad-goode-quintet",
+  "title": "Adrean Farrugia &  Brad Goode Quintet",
+  "body": null,
+  "excerpt": "",
+  "location": {
+    "mapZoom": 12,
+    "mapLat": 40.7207559,
+    "mapLng": -74.0007613,
+    "markerLat": 40.7207559,
+    "markerLng": -74.0007613
+  },
+  "customContent": null,
+  "likeCount": 0,
+  "commentCount": 0,
+  "publicCommentCount": 0,
+  "commentState": 2,
+  "unsaved": false,
+  "author": {
+    "id": "623cdf35b2db1334cc32d749",
+    "displayName": "TheRex Directory",
+    "firstName": "TheRex",
+    "lastName": "Directory",
+    "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w",
+    "bio": "",
+    "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w"
+  },
+  "fullUrl": "/events/adrean-farrugia-brad-goode-quintet",
+  "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/66953788463e0d7186889314/1721055722932/",
+  "contentType": "text/html",
+  "structuredContent": {
+    "_type": "CalendarEvent",
+    "startDate": 1722472200543,
+    "endDate": 1722481200543
+  },
+  "startDate": 1722472200543,
+  "endDate": 1722481200543,
+  "items": [],
+  "pushedServices": {
+
+  },
+  "pendingPushedServices": {
+
+  },
+  "recordTypeLabel": "event"
+}

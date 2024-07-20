@@ -81,15 +81,20 @@ defmodule MusicListings.Parsing.Parser do
         Time.new!(hour, minute, 0)
 
       [hour_string] ->
-        hour =
-          hour_string
-          |> String.replace("pm", "")
-          |> String.replace("am", "")
-          |> String.trim()
-          |> String.to_integer()
-          |> maybe_adjust_for_pm(hour_string)
+        hour_string
+        |> String.replace("pm", "")
+        |> String.replace("am", "")
+        |> String.trim()
+        |> Integer.parse()
+        |> case do
+          {hour, _remainder} ->
+            hour
+            |> maybe_adjust_for_pm(hour_string)
+            |> Time.new!(0, 0)
 
-        Time.new!(hour, 0, 0)
+          :error ->
+            nil
+        end
 
       _tbd ->
         nil
