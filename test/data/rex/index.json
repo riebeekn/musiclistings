@@ -1,0 +1,4334 @@
+[
+  {
+    "id": "66953788463e0d7186889314",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1721055722735,
+    "updatedOn": 1721055722932,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1721055722735,
+    "authorId": "623cdf35b2db1334cc32d749",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "adrean-farrugia-brad-goode-quintet",
+    "title": "Adrean Farrugia &  Brad Goode Quintet",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "623cdf35b2db1334cc32d749",
+      "displayName": "TheRex Directory",
+      "firstName": "TheRex",
+      "lastName": "Directory",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w"
+    },
+    "fullUrl": "/events/adrean-farrugia-brad-goode-quintet",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/66953788463e0d7186889314/1721055722932/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1722472200543,
+      "endDate": 1722481200543
+    },
+    "startDate": 1722472200543,
+    "endDate": 1722481200543,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6675acf8eb2d892f3369bbc3",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718988042628,
+    "updatedOn": 1718988041641,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718988042628,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "jesse-dietschi-trio-1-2ryct",
+    "title": "Jesse Dietschi Trio ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/jesse-dietschi-trio-1-2ryct",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6675acf8eb2d892f3369bbc3/1718988041641/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1722461400025,
+      "endDate": 1722468600025
+    },
+    "startDate": 1722461400025,
+    "endDate": 1722468600025,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6679a1c5e6f6eb77cbe68d40",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1719247318415,
+    "updatedOn": 1719247317338,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1719247318415,
+    "authorId": "623cdf35b2db1334cc32d749",
+    "systemDataId": "1653612366116-3I99TI69053R2WRF3CL3",
+    "systemDataVariants": "852x1000,100w,300w,500w,750w",
+    "systemDataSourceType": "JPG",
+    "filename": "DxcVaRYXgAQrbpJ.jpg",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "030c3f",
+      "topRightAverage": "03092c",
+      "bottomLeftAverage": "2a2183",
+      "bottomRightAverage": "a72904",
+      "centerAverage": "6c5b71",
+      "suggestedBgColor": "513f4f"
+    },
+    "urlId": "9pxmh6dflxdl2y2-jdpz8-c9j6w-lpjmx-4t2dp-kc9ty-4yx7g-ghnpm-6xwhj-3e7g4-67fnx-j3t57-d6sgn-4zdpj-geatb-xwpyn",
+    "title": "CLASSIC REX JAZZ JAM hosted by CHRIS Banks ",
+    "sourceUrl": "",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003EJam with us! Enjoy our house band (a collection of beloved all-stars) spontaneously creating musical goodness just for you!\u003C/p\u003E\u003Cp class=\"\" data-rte-preserve-empty=\"true\" style=\"white-space:pre-wrap;\"\u003E\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003EHosted by the legendary Chris Banks.\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "623cdf35b2db1334cc32d749",
+      "displayName": "TheRex Directory",
+      "firstName": "TheRex",
+      "lastName": "Directory",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w"
+    },
+    "fullUrl": "/events/9pxmh6dflxdl2y2-jdpz8-c9j6w-lpjmx-4t2dp-kc9ty-4yx7g-ghnpm-6xwhj-3e7g4-67fnx-j3t57-d6sgn-4zdpj-geatb-xwpyn",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/61e26c8e87127058e405cc0c/1653612366116-3I99TI69053R2WRF3CL3/DxcVaRYXgAQrbpJ.jpg",
+    "contentType": "image/jpeg",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1722385800510,
+      "endDate": 1722394800510
+    },
+    "startDate": 1722385800510,
+    "endDate": 1722394800510,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "852x1000",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6675a0a8bd67ae1bf1aaa451",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718985176915,
+    "updatedOn": 1719951316298,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718985176915,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "nick-scott-quartet-ng9rp-tmnnc",
+    "title": "Nick Scott Trio",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/nick-scott-quartet-ng9rp-tmnnc",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6675a0a8bd67ae1bf1aaa451/1719951316298/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1722375000394,
+      "endDate": 1722382200394
+    },
+    "startDate": 1722375000394,
+    "endDate": 1722382200394,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66730182037bcd173c97bcbb",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718813082628,
+    "updatedOn": 1718813081914,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718813082628,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "44kc1y6769dvscau9cn3t7ialk0jr9-l2awx",
+    "title": "joe Bowden quartet",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/44kc1y6769dvscau9cn3t7ialk0jr9-l2awx",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/66730182037bcd173c97bcbb/1718813081914/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1722299400869,
+      "endDate": 1722308400869
+    },
+    "startDate": 1722299400869,
+    "endDate": 1722308400869,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66731c2c8dcc7d5151df0f74",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718819900835,
+    "updatedOn": 1718820005628,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718819900835,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "duncan-wilson-trio-1-e2rfz",
+    "title": "Duncan Wilson Trio ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/duncan-wilson-trio-1-e2rfz",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/66731c2c8dcc7d5151df0f74/1718820005628/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1722288600847,
+      "endDate": 1722295800847
+    },
+    "startDate": 1722288600847,
+    "endDate": 1722295800847,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6672ffc273a7df3e9d055985",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718812835810,
+    "updatedOn": 1718812835215,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718812835810,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "44kc1y6769dvscau9cn3t7ialk0jr9",
+    "title": "joe Bowden quartet",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/44kc1y6769dvscau9cn3t7ialk0jr9",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6672ffc273a7df3e9d055985/1718812835215/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1722213000246,
+      "endDate": 1722222000246
+    },
+    "startDate": 1722213000246,
+    "endDate": 1722222000246,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66730820eb982a3e2ff0023a",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718814772501,
+    "updatedOn": 1718814771874,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718814772501,
+    "authorId": "623cdf35b2db1334cc32d749",
+    "systemDataId": "1666794834724-5DCZW51IFZBTD4OED9HR",
+    "systemDataVariants": "750x422,100w,300w,500w,750w",
+    "systemDataSourceType": "JPG",
+    "filename": "laurahubert.jpg",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "0a0a0b",
+      "topRightAverage": "050506",
+      "bottomLeftAverage": "101010",
+      "bottomRightAverage": "131415",
+      "centerAverage": "937e71",
+      "suggestedBgColor": "201e1d"
+    },
+    "urlId": "dkkgjt5nw25mwxb-g8zm6-8h3ek-cx5fr-5pb74-dk8j2-lfjpg",
+    "title": "Laura Hubert Band ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "623cdf35b2db1334cc32d749",
+      "displayName": "TheRex Directory",
+      "firstName": "TheRex",
+      "lastName": "Directory",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w"
+    },
+    "fullUrl": "/events/dkkgjt5nw25mwxb-g8zm6-8h3ek-cx5fr-5pb74-dk8j2-lfjpg",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/61e26c8e87127058e405cc0c/1666794834724-5DCZW51IFZBTD4OED9HR/laurahubert.jpg",
+    "contentType": "image/jpeg",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1722202200856,
+      "endDate": 1722209400856
+    },
+    "startDate": 1722202200856,
+    "endDate": 1722209400856,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "750x422",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6672eccf8bef9318d2fe4097",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718808046257,
+    "updatedOn": 1718808045701,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718808046257,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "vancouvers-ryan-oliver-quartet-sdyr3-ca786-p42lb",
+    "title": "Vancouver's Ryan Oliver Quartet ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/vancouvers-ryan-oliver-quartet-sdyr3-ca786-p42lb",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6672eccf8bef9318d2fe4097/1718808045701/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1722126600434,
+      "endDate": 1722135600434
+    },
+    "startDate": 1722126600434,
+    "endDate": 1722135600434,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6679916f3b87375405729a0e",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1719243154714,
+    "updatedOn": 1720281764908,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1719243154714,
+    "authorId": "623cdf35b2db1334cc32d749",
+    "systemDataId": "1670953097488-X8VWDYQCKN0US44TT0I7",
+    "systemDataVariants": "683x1024,100w,300w,500w",
+    "systemDataSourceType": "JPG",
+    "filename": "IMG_0920-2-683x1024.jpg",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "0f2226",
+      "topRightAverage": "0f2226",
+      "bottomLeftAverage": "4d3b35",
+      "bottomRightAverage": "11252c",
+      "centerAverage": "2f292d",
+      "suggestedBgColor": "343939"
+    },
+    "urlId": "emily-schultz-and-neon-eagle-83nnb-at39h-ce2ax-pezwh-h5y55-74464-z9lmt-z26cs-n8bjc-r7pab",
+    "title": "Emily Schultz ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "623cdf35b2db1334cc32d749",
+      "displayName": "TheRex Directory",
+      "firstName": "TheRex",
+      "lastName": "Directory",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w"
+    },
+    "fullUrl": "/events/emily-schultz-and-neon-eagle-83nnb-at39h-ce2ax-pezwh-h5y55-74464-z9lmt-z26cs-n8bjc-r7pab",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/61e26c8e87127058e405cc0c/1670953097488-X8VWDYQCKN0US44TT0I7/IMG_0920-2-683x1024.jpg",
+    "contentType": "image/jpeg",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1722115800758,
+      "endDate": 1722123000758
+    },
+    "startDate": 1722115800758,
+    "endDate": 1722123000758,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "683x1024",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66799fc58314ec1ec79d5607",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1719246970461,
+    "updatedOn": 1719247074539,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1719246970461,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "the-big-city-big-band-1",
+    "title": "The big city big band",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/the-big-city-big-band-1",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/66799fc58314ec1ec79d5607/1719247074539/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1722103200212,
+      "endDate": 1722110400212
+    },
+    "startDate": 1722103200212,
+    "endDate": 1722110400212,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6672ecb5429f0a10e02c2ef6",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718807754652,
+    "updatedOn": 1718807753950,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718807754652,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "vancouvers-ryan-oliver-quartet-sdyr3-ca786",
+    "title": "Vancouver's Ryan Oliver Quartet ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/vancouvers-ryan-oliver-quartet-sdyr3-ca786",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6672ecb5429f0a10e02c2ef6/1718807753950/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1722040200016,
+      "endDate": 1722049200016
+    },
+    "startDate": 1722040200016,
+    "endDate": 1722049200016,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "667989afb7fa5d2371d8bc99",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1719241150597,
+    "updatedOn": 1719701438301,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1719241150597,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "david-hodgson-group-ce6k4",
+    "title": "David Hodgson Group ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/david-hodgson-group-ce6k4",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/667989afb7fa5d2371d8bc99/1719701438301/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1722029400533,
+      "endDate": 1722036600533
+    },
+    "startDate": 1722029400533,
+    "endDate": 1722036600533,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6672ec8355b1d6710b389836",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718807704892,
+    "updatedOn": 1718807704186,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718807704892,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "vancouvers-ryan-oliver-quartet-sdyr3",
+    "title": "Vancouver's Ryan Oliver Quartet ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/vancouvers-ryan-oliver-quartet-sdyr3",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6672ec8355b1d6710b389836/1718807704186/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1721953800696,
+      "endDate": 1721962800696
+    },
+    "startDate": 1721953800696,
+    "endDate": 1721962800696,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "667988e1ae2f56478c485659",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1719240954753,
+    "updatedOn": 1719240953588,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1719240954753,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "eric-st-laurent-group-1-g64wa-khnaz-6tnm4",
+    "title": "Eric St. Laurent Group ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/eric-st-laurent-group-1-g64wa-khnaz-6tnm4",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/667988e1ae2f56478c485659/1719240953588/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1721943000484,
+      "endDate": 1721950200484
+    },
+    "startDate": 1721943000484,
+    "endDate": 1721950200484,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6672ea22a0fd0507a9903d74",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718807677249,
+    "updatedOn": 1718807676587,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718807677249,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "vancouvers-ryan-oliver-quartet",
+    "title": "Vancouver's Ryan Oliver Quartet",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/vancouvers-ryan-oliver-quartet",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6672ea22a0fd0507a9903d74/1718807676587/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1721867400399,
+      "endDate": 1721876400399
+    },
+    "startDate": 1721867400399,
+    "endDate": 1721876400399,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6675ace501540d22cded395b",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718988023320,
+    "updatedOn": 1718988022266,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718988023320,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "jesse-dietschi-trio-1-7x3ns",
+    "title": "Jesse Dietschi Trio ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/jesse-dietschi-trio-1-7x3ns",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6675ace501540d22cded395b/1718988022266/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1721856600923,
+      "endDate": 1721863800923
+    },
+    "startDate": 1721856600923,
+    "endDate": 1721863800923,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6679a1b2c6ef31662bd0cc83",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1719247299069,
+    "updatedOn": 1719247297984,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1719247299069,
+    "authorId": "623cdf35b2db1334cc32d749",
+    "systemDataId": "1653612366116-3I99TI69053R2WRF3CL3",
+    "systemDataVariants": "852x1000,100w,300w,500w,750w",
+    "systemDataSourceType": "JPG",
+    "filename": "DxcVaRYXgAQrbpJ.jpg",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "030c3f",
+      "topRightAverage": "03092c",
+      "bottomLeftAverage": "2a2183",
+      "bottomRightAverage": "a72904",
+      "centerAverage": "6c5b71",
+      "suggestedBgColor": "513f4f"
+    },
+    "urlId": "9pxmh6dflxdl2y2-jdpz8-c9j6w-lpjmx-4t2dp-kc9ty-4yx7g-ghnpm-6xwhj-3e7g4-67fnx-j3t57-d6sgn-4zdpj-geatb-exf57",
+    "title": "CLASSIC REX JAZZ JAM hosted by CHRIS Banks ",
+    "sourceUrl": "",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003EJam with us! Enjoy our house band (a collection of beloved all-stars) spontaneously creating musical goodness just for you!\u003C/p\u003E\u003Cp class=\"\" data-rte-preserve-empty=\"true\" style=\"white-space:pre-wrap;\"\u003E\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003EHosted by the legendary Chris Banks.\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "623cdf35b2db1334cc32d749",
+      "displayName": "TheRex Directory",
+      "firstName": "TheRex",
+      "lastName": "Directory",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w"
+    },
+    "fullUrl": "/events/9pxmh6dflxdl2y2-jdpz8-c9j6w-lpjmx-4t2dp-kc9ty-4yx7g-ghnpm-6xwhj-3e7g4-67fnx-j3t57-d6sgn-4zdpj-geatb-exf57",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/61e26c8e87127058e405cc0c/1653612366116-3I99TI69053R2WRF3CL3/DxcVaRYXgAQrbpJ.jpg",
+    "contentType": "image/jpeg",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1721781000316,
+      "endDate": 1721790000316
+    },
+    "startDate": 1721781000316,
+    "endDate": 1721790000316,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "852x1000",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6675a09345481d067be9df41",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718984866535,
+    "updatedOn": 1719951291460,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718984866535,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "nick-scott-quartet-ng9rp-zly7b",
+    "title": "Nick Scott Trio",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/nick-scott-quartet-ng9rp-zly7b",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6675a09345481d067be9df41/1719951291460/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1721770200772,
+      "endDate": 1721777400772
+    },
+    "startDate": 1721770200772,
+    "endDate": 1721777400772,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6672fa01c0893213adaced68",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718811160305,
+    "updatedOn": 1720536823207,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718811160305,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "jacobs-cattle-1-rnskc",
+    "title": "Jacob's Cattle",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/jacobs-cattle-1-rnskc",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6672fa01c0893213adaced68/1720536823207/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1721694600585,
+      "endDate": 1721703600585
+    },
+    "startDate": 1721694600585,
+    "endDate": 1721703600585,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66731c1bdf6a6457acc20dc4",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718819881568,
+    "updatedOn": 1718819880936,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718819881568,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "duncan-wilson-trio-1-pkl29",
+    "title": "Duncan Wilson Trio ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/duncan-wilson-trio-1-pkl29",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/66731c1bdf6a6457acc20dc4/1718819880936/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1721683800118,
+      "endDate": 1721691000118
+    },
+    "startDate": 1721683800118,
+    "endDate": 1721691000118,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6672f7a18bef9318d20269b1",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718811042182,
+    "updatedOn": 1720537072553,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718811042182,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "jacobs-cattle-1",
+    "title": "Jacob's Cattle ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/jacobs-cattle-1",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6672f7a18bef9318d20269b1/1720537072553/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1721608200069,
+      "endDate": 1721617200069
+    },
+    "startDate": 1721608200069,
+    "endDate": 1721617200069,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "667307fceb982a3e2fefefc3",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718814750378,
+    "updatedOn": 1718814749686,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718814750378,
+    "authorId": "623cdf35b2db1334cc32d749",
+    "systemDataId": "1666794834724-5DCZW51IFZBTD4OED9HR",
+    "systemDataVariants": "750x422,100w,300w,500w,750w",
+    "systemDataSourceType": "JPG",
+    "filename": "laurahubert.jpg",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "0a0a0b",
+      "topRightAverage": "050506",
+      "bottomLeftAverage": "101010",
+      "bottomRightAverage": "131415",
+      "centerAverage": "937e71",
+      "suggestedBgColor": "201e1d"
+    },
+    "urlId": "dkkgjt5nw25mwxb-g8zm6-8h3ek-cx5fr-5pb74-dk8j2-nxr28",
+    "title": "Laura Hubert Band ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "623cdf35b2db1334cc32d749",
+      "displayName": "TheRex Directory",
+      "firstName": "TheRex",
+      "lastName": "Directory",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w"
+    },
+    "fullUrl": "/events/dkkgjt5nw25mwxb-g8zm6-8h3ek-cx5fr-5pb74-dk8j2-nxr28",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/61e26c8e87127058e405cc0c/1666794834724-5DCZW51IFZBTD4OED9HR/laurahubert.jpg",
+    "contentType": "image/jpeg",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1721597400602,
+      "endDate": 1721604600602
+    },
+    "startDate": 1721597400602,
+    "endDate": 1721604600602,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "750x422",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6671b9c0b233ea34ea71110a",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718729251432,
+    "updatedOn": 1718729251572,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718729251432,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "harley-card-quintet-special-guest-alex-samaras-23dyk-mks93-aw838",
+    "title": "Harley Card Quintet &amp; Special Guest Alex Samaras ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/harley-card-quintet-special-guest-alex-samaras-23dyk-mks93-aw838",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6671b9c0b233ea34ea71110a/1718729251572/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1721521800700,
+      "endDate": 1721530800700
+    },
+    "startDate": 1721521800700,
+    "endDate": 1721530800700,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "667990ffc64ccd7e0836851a",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1719243047289,
+    "updatedOn": 1719243046244,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1719243047289,
+    "authorId": "623cdf35b2db1334cc32d749",
+    "systemDataId": "1671720794058-XY06BGXE6DMT9K5NX5ES",
+    "systemDataVariants": "1150x768,100w,300w,500w,750w,1000w",
+    "systemDataSourceType": "JPG",
+    "filename": "neon-eagle.jpg",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "060606",
+      "topRightAverage": "9c9c9c",
+      "bottomLeftAverage": "1a1a1a",
+      "bottomRightAverage": "484848",
+      "centerAverage": "3f3f3f",
+      "suggestedBgColor": "535353"
+    },
+    "urlId": "emily-schultz-and-neon-eagle-4d65l-atby2-57ydh-y7nfm-3j7cr-fxhwx-axb3k-3s6wt-8hwce-brayp-mrfk5-t63h8-tszxf-3kfcd-brhzl-txzm6-7hlrd-bbyfz-awsmg-ym793-m3cxc-8f3kn-fh89b",
+    "title": "the Neon Eagle ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "623cdf35b2db1334cc32d749",
+      "displayName": "TheRex Directory",
+      "firstName": "TheRex",
+      "lastName": "Directory",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w"
+    },
+    "fullUrl": "/events/emily-schultz-and-neon-eagle-4d65l-atby2-57ydh-y7nfm-3j7cr-fxhwx-axb3k-3s6wt-8hwce-brayp-mrfk5-t63h8-tszxf-3kfcd-brhzl-txzm6-7hlrd-bbyfz-awsmg-ym793-m3cxc-8f3kn-fh89b",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/61e26c8e87127058e405cc0c/1671720794058-XY06BGXE6DMT9K5NX5ES/neon-eagle.jpg",
+    "contentType": "image/jpeg",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1721511000569,
+      "endDate": 1721518200569
+    },
+    "startDate": 1721511000569,
+    "endDate": 1721518200569,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "1150x768",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6679a090c92dee2c3810b946",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1719247049350,
+    "updatedOn": 1720058973215,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1719247049350,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "the-jazz-mechanics-big-band-r6lnz",
+    "title": "MegaCity Big Band",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/the-jazz-mechanics-big-band-r6lnz",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6679a090c92dee2c3810b946/1720058973215/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1721498400894,
+      "endDate": 1721505600894
+    },
+    "startDate": 1721498400894,
+    "endDate": 1721505600894,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6671b88d1162190d3b2de073",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718728863343,
+    "updatedOn": 1718728863367,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718728863343,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "harley-card-quintet-special-guest-alex-samaras-23dyk-mks93",
+    "title": "Harley Card Quintet &amp; Special Guest Alex Samaras ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/harley-card-quintet-special-guest-alex-samaras-23dyk-mks93",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6671b88d1162190d3b2de073/1718728863367/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1721435400578,
+      "endDate": 1721444400578
+    },
+    "startDate": 1721435400578,
+    "endDate": 1721444400578,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66798998a716616d0991349b",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1719241133804,
+    "updatedOn": 1719701405839,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1719241133804,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "david-hodgson-group-5xsz4",
+    "title": "David Hodgson Group ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/david-hodgson-group-5xsz4",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/66798998a716616d0991349b/1719701405839/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1721424600490,
+      "endDate": 1721431800490
+    },
+    "startDate": 1721424600490,
+    "endDate": 1721431800490,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6671b86d5139e60ec5294e40",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718728841997,
+    "updatedOn": 1718728842131,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718728841997,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "harley-card-quintet-special-guest-alex-samaras-23dyk",
+    "title": "Harley Card Quintet &amp; Special Guest Alex Samaras ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/harley-card-quintet-special-guest-alex-samaras-23dyk",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6671b86d5139e60ec5294e40/1718728842131/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1721349000138,
+      "endDate": 1721358000138
+    },
+    "startDate": 1721349000138,
+    "endDate": 1721358000138,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66798836498b5f39a5d78966",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1719240926589,
+    "updatedOn": 1719240925454,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1719240926589,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "eric-st-laurent-group-1-g64wa-khnaz",
+    "title": "Eric St. Laurent Group ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/eric-st-laurent-group-1-g64wa-khnaz",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/66798836498b5f39a5d78966/1719240925454/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1721338200451,
+      "endDate": 1721345400451
+    },
+    "startDate": 1721338200451,
+    "endDate": 1721345400451,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6671b4d0c046136effe476db",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718728720490,
+    "updatedOn": 1718728806472,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718728720490,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "harley-card-quintet-special-guest-alex-samaras",
+    "title": "Harley Card Quintet & Special Guest Alex Samaras",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/harley-card-quintet-special-guest-alex-samaras",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6671b4d0c046136effe476db/1718728806472/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1721262600120,
+      "endDate": 1721271600120
+    },
+    "startDate": 1721262600120,
+    "endDate": 1721271600120,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6675acd2eee834006e659878",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718988002390,
+    "updatedOn": 1718988001398,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718988002390,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "jesse-dietschi-trio-1-ld6xz",
+    "title": "Jesse Dietschi Trio ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/jesse-dietschi-trio-1-ld6xz",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6675acd2eee834006e659878/1718988001398/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1721251800738,
+      "endDate": 1721259000738
+    },
+    "startDate": 1721251800738,
+    "endDate": 1721259000738,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6679a19e77720e3f1b3e4019",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1719247278466,
+    "updatedOn": 1719247277344,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1719247278466,
+    "authorId": "623cdf35b2db1334cc32d749",
+    "systemDataId": "1653612366116-3I99TI69053R2WRF3CL3",
+    "systemDataVariants": "852x1000,100w,300w,500w,750w",
+    "systemDataSourceType": "JPG",
+    "filename": "DxcVaRYXgAQrbpJ.jpg",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "030c3f",
+      "topRightAverage": "03092c",
+      "bottomLeftAverage": "2a2183",
+      "bottomRightAverage": "a72904",
+      "centerAverage": "6c5b71",
+      "suggestedBgColor": "513f4f"
+    },
+    "urlId": "9pxmh6dflxdl2y2-jdpz8-c9j6w-lpjmx-4t2dp-kc9ty-4yx7g-ghnpm-6xwhj-3e7g4-67fnx-j3t57-d6sgn-4zdpj-geatb-j4ft9",
+    "title": "CLASSIC REX JAZZ JAM hosted by CHRIS Banks ",
+    "sourceUrl": "",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003EJam with us! Enjoy our house band (a collection of beloved all-stars) spontaneously creating musical goodness just for you!\u003C/p\u003E\u003Cp class=\"\" data-rte-preserve-empty=\"true\" style=\"white-space:pre-wrap;\"\u003E\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003EHosted by the legendary Chris Banks.\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "623cdf35b2db1334cc32d749",
+      "displayName": "TheRex Directory",
+      "firstName": "TheRex",
+      "lastName": "Directory",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w"
+    },
+    "fullUrl": "/events/9pxmh6dflxdl2y2-jdpz8-c9j6w-lpjmx-4t2dp-kc9ty-4yx7g-ghnpm-6xwhj-3e7g4-67fnx-j3t57-d6sgn-4zdpj-geatb-j4ft9",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/61e26c8e87127058e405cc0c/1653612366116-3I99TI69053R2WRF3CL3/DxcVaRYXgAQrbpJ.jpg",
+    "contentType": "image/jpeg",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1721176200760,
+      "endDate": 1721185200760
+    },
+    "startDate": 1721176200760,
+    "endDate": 1721185200760,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "852x1000",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6675a07b4b777606e8359ab2",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718984848726,
+    "updatedOn": 1719951261044,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718984848726,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "nick-scott-quartet-ng9rp-dlmg4",
+    "title": "Nick Scott Trio",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/nick-scott-quartet-ng9rp-dlmg4",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6675a07b4b777606e8359ab2/1719951261044/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1721165400953,
+      "endDate": 1721172600953
+    },
+    "startDate": 1721165400953,
+    "endDate": 1721172600953,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66758ecec1463c602428d739",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718980318139,
+    "updatedOn": 1718980317014,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718980318139,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "brian-okane-quintet-k7sh3",
+    "title": "Brian O'Kane Quintet ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/brian-okane-quintet-k7sh3",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/66758ecec1463c602428d739/1718980317014/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1721089800819,
+      "endDate": 1721098800819
+    },
+    "startDate": 1721089800819,
+    "endDate": 1721098800819,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66731bfac86bc8387fcc1a24",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718819849611,
+    "updatedOn": 1718819862752,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718819849611,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "duncan-wilson-trio-1-a2t3g",
+    "title": "Duncan Wilson Trio ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/duncan-wilson-trio-1-a2t3g",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/66731bfac86bc8387fcc1a24/1718819862752/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1721079000661,
+      "endDate": 1721086200661
+    },
+    "startDate": 1721079000661,
+    "endDate": 1721086200661,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66758d915e672c5a940b9403",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718980209291,
+    "updatedOn": 1718980208258,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718980209291,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "brian-okane-quintet",
+    "title": "Brian O'Kane Quintet",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/brian-okane-quintet",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/66758d915e672c5a940b9403/1718980208258/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1721003400084,
+      "endDate": 1721012400084
+    },
+    "startDate": 1721003400084,
+    "endDate": 1721012400084,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "667307e452e12420d739ffba",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718814713002,
+    "updatedOn": 1718814712388,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718814713002,
+    "authorId": "623cdf35b2db1334cc32d749",
+    "systemDataId": "1666794834724-5DCZW51IFZBTD4OED9HR",
+    "systemDataVariants": "750x422,100w,300w,500w,750w",
+    "systemDataSourceType": "JPG",
+    "filename": "laurahubert.jpg",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "0a0a0b",
+      "topRightAverage": "050506",
+      "bottomLeftAverage": "101010",
+      "bottomRightAverage": "131415",
+      "centerAverage": "937e71",
+      "suggestedBgColor": "201e1d"
+    },
+    "urlId": "dkkgjt5nw25mwxb-g8zm6-8h3ek-cx5fr-5pb74-dk8j2-ehdxp",
+    "title": "Laura Hubert Band ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "623cdf35b2db1334cc32d749",
+      "displayName": "TheRex Directory",
+      "firstName": "TheRex",
+      "lastName": "Directory",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w"
+    },
+    "fullUrl": "/events/dkkgjt5nw25mwxb-g8zm6-8h3ek-cx5fr-5pb74-dk8j2-ehdxp",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/61e26c8e87127058e405cc0c/1666794834724-5DCZW51IFZBTD4OED9HR/laurahubert.jpg",
+    "contentType": "image/jpeg",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1720992600773,
+      "endDate": 1720999800773
+    },
+    "startDate": 1720992600773,
+    "endDate": 1720999800773,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "750x422",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6671ad4335f2fe693d3e4236",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718726090991,
+    "updatedOn": 1718726091050,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718726090991,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "new-yorks-dick-oatts-quartet-cbka4-t3chp-46x7j",
+    "title": "New York's Dick Oatts Quartet ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/new-yorks-dick-oatts-quartet-cbka4-t3chp-46x7j",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6671ad4335f2fe693d3e4236/1718726091050/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1720917000484,
+      "endDate": 1720926000484
+    },
+    "startDate": 1720917000484,
+    "endDate": 1720926000484,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6679915c2d251f7bd0de17f3",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1719243117158,
+    "updatedOn": 1720281735710,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1719243117158,
+    "authorId": "623cdf35b2db1334cc32d749",
+    "systemDataId": "1670953097488-X8VWDYQCKN0US44TT0I7",
+    "systemDataVariants": "683x1024,100w,300w,500w",
+    "systemDataSourceType": "JPG",
+    "filename": "IMG_0920-2-683x1024.jpg",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "0f2226",
+      "topRightAverage": "0f2226",
+      "bottomLeftAverage": "4d3b35",
+      "bottomRightAverage": "11252c",
+      "centerAverage": "2f292d",
+      "suggestedBgColor": "343939"
+    },
+    "urlId": "emily-schultz-and-neon-eagle-83nnb-at39h-ce2ax-pezwh-h5y55-74464-z9lmt-z26cs-n8bjc-kmmyf",
+    "title": "MATTAUS GRETZINGER",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "623cdf35b2db1334cc32d749",
+      "displayName": "TheRex Directory",
+      "firstName": "TheRex",
+      "lastName": "Directory",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w"
+    },
+    "fullUrl": "/events/emily-schultz-and-neon-eagle-83nnb-at39h-ce2ax-pezwh-h5y55-74464-z9lmt-z26cs-n8bjc-kmmyf",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/61e26c8e87127058e405cc0c/1670953097488-X8VWDYQCKN0US44TT0I7/IMG_0920-2-683x1024.jpg",
+    "contentType": "image/jpeg",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1720906200829,
+      "endDate": 1720913400829
+    },
+    "startDate": 1720906200829,
+    "endDate": 1720913400829,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "683x1024",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66799b1b95c00b16f274b403",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1719245743381,
+    "updatedOn": 1719245742279,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1719245743381,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "chris-hunt-tentet-2-3",
+    "title": "Chris Hunt Tentet + 2",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/chris-hunt-tentet-2-3",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/66799b1b95c00b16f274b403/1719245742279/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1720893600990,
+      "endDate": 1720902600990
+    },
+    "startDate": 1720893600990,
+    "endDate": 1720902600990,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6671ad07dfad1548d038a058",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718725926471,
+    "updatedOn": 1718725926542,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718725926471,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "new-yorks-dick-oatts-quartet-cbka4-t3chp",
+    "title": "New York's Dick Oatts Quartet ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/new-yorks-dick-oatts-quartet-cbka4-t3chp",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6671ad07dfad1548d038a058/1718725926542/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1720830600283,
+      "endDate": 1720839600283
+    },
+    "startDate": 1720830600283,
+    "endDate": 1720839600283,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66798987a2d5c635cffa2aca",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1719241110658,
+    "updatedOn": 1719701372160,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1719241110658,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "david-hodgson-group-b95l5",
+    "title": "David Hodgson Group ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/david-hodgson-group-b95l5",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/66798987a2d5c635cffa2aca/1719701372160/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1720819800535,
+      "endDate": 1720827000535
+    },
+    "startDate": 1720819800535,
+    "endDate": 1720827000535,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6671ac892939c23c2d261f21",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718725890532,
+    "updatedOn": 1718725890593,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718725890532,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "new-yorks-dick-oatts-quartet-cbka4",
+    "title": "New York's Dick Oatts Quartet ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/new-yorks-dick-oatts-quartet-cbka4",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6671ac892939c23c2d261f21/1718725890593/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1720744200087,
+      "endDate": 1720753200087
+    },
+    "startDate": 1720744200087,
+    "endDate": 1720753200087,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6679881e95c00b16f26d89c5",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1719240757134,
+    "updatedOn": 1719240755952,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1719240757134,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "eric-st-laurent-group-1-g64wa",
+    "title": "Eric St. Laurent Group ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/eric-st-laurent-group-1-g64wa",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6679881e95c00b16f26d89c5/1719240755952/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1720733400016,
+      "endDate": 1720740600016
+    },
+    "startDate": 1720733400016,
+    "endDate": 1720740600016,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6671ab4673e8b14f696e32ad",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718725765137,
+    "updatedOn": 1718725765142,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718725765137,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "new-yorks-dick-oatts-quartet",
+    "title": "New York's Dick Oatts Quartet",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/new-yorks-dick-oatts-quartet",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6671ab4673e8b14f696e32ad/1718725765142/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1720657800990,
+      "endDate": 1720666800990
+    },
+    "startDate": 1720657800990,
+    "endDate": 1720666800990,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "667992100b1524426bb5d235",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1719244040332,
+    "updatedOn": 1719244039188,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1719244040332,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "universal-music-verve-presents-louis-armstrong-concert-screening-event",
+    "title": "Universal Music & Verve Presents : Louis Armstrong Concert Screening Event",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/universal-music-verve-presents-louis-armstrong-concert-screening-event",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/667992100b1524426bb5d235/1719244039188/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1720647000694,
+      "endDate": 1720654200694
+    },
+    "startDate": 1720647000694,
+    "endDate": 1720654200694,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6679a18d7e025f5cd055f738",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1719247260490,
+    "updatedOn": 1719247259366,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1719247260490,
+    "authorId": "623cdf35b2db1334cc32d749",
+    "systemDataId": "1653612366116-3I99TI69053R2WRF3CL3",
+    "systemDataVariants": "852x1000,100w,300w,500w,750w",
+    "systemDataSourceType": "JPG",
+    "filename": "DxcVaRYXgAQrbpJ.jpg",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "030c3f",
+      "topRightAverage": "03092c",
+      "bottomLeftAverage": "2a2183",
+      "bottomRightAverage": "a72904",
+      "centerAverage": "6c5b71",
+      "suggestedBgColor": "513f4f"
+    },
+    "urlId": "9pxmh6dflxdl2y2-jdpz8-c9j6w-lpjmx-4t2dp-kc9ty-4yx7g-ghnpm-6xwhj-3e7g4-67fnx-j3t57-d6sgn-4zdpj-geatb-kpehw",
+    "title": "CLASSIC REX JAZZ JAM hosted by CHRIS Banks ",
+    "sourceUrl": "",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003EJam with us! Enjoy our house band (a collection of beloved all-stars) spontaneously creating musical goodness just for you!\u003C/p\u003E\u003Cp class=\"\" data-rte-preserve-empty=\"true\" style=\"white-space:pre-wrap;\"\u003E\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003EHosted by the legendary Chris Banks.\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "623cdf35b2db1334cc32d749",
+      "displayName": "TheRex Directory",
+      "firstName": "TheRex",
+      "lastName": "Directory",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w"
+    },
+    "fullUrl": "/events/9pxmh6dflxdl2y2-jdpz8-c9j6w-lpjmx-4t2dp-kc9ty-4yx7g-ghnpm-6xwhj-3e7g4-67fnx-j3t57-d6sgn-4zdpj-geatb-kpehw",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/61e26c8e87127058e405cc0c/1653612366116-3I99TI69053R2WRF3CL3/DxcVaRYXgAQrbpJ.jpg",
+    "contentType": "image/jpeg",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1720571400029,
+      "endDate": 1720580400029
+    },
+    "startDate": 1720571400029,
+    "endDate": 1720580400029,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "852x1000",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6675a06897f3b8128012607a",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718984825051,
+    "updatedOn": 1719951197657,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718984825051,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "nick-scott-quartet-ng9rp",
+    "title": "Nick Scott Trio",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/nick-scott-quartet-ng9rp",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6675a06897f3b8128012607a/1719951197657/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1720560600373,
+      "endDate": 1720567800373
+    },
+    "startDate": 1720560600373,
+    "endDate": 1720567800373,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6672f7220dbdf2457c4be402",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718810437821,
+    "updatedOn": 1718810437154,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718810437821,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "jack-zorawski-quartet-1-ha43p",
+    "title": "Jack Zorawski Quartet ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/jack-zorawski-quartet-1-ha43p",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6672f7220dbdf2457c4be402/1718810437154/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1720485000712,
+      "endDate": 1720494000712
+    },
+    "startDate": 1720485000712,
+    "endDate": 1720494000712,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66731be54898177a883743c6",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718819830487,
+    "updatedOn": 1718819829866,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718819830487,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "duncan-wilson-trio-1-82j59",
+    "title": "Duncan Wilson Trio ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/duncan-wilson-trio-1-82j59",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/66731be54898177a883743c6/1718819829866/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1720474200887,
+      "endDate": 1720481400887
+    },
+    "startDate": 1720474200887,
+    "endDate": 1720481400887,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6672f40452e12420d7324633",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718810395710,
+    "updatedOn": 1718810395031,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718810395710,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "jack-zorawski-quartet-1",
+    "title": "Jack Zorawski Quartet",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/jack-zorawski-quartet-1",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6672f40452e12420d7324633/1718810395031/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1720398600330,
+      "endDate": 1720407600330
+    },
+    "startDate": 1720398600330,
+    "endDate": 1720407600330,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "667307a98bef9318d208a64a",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718814684935,
+    "updatedOn": 1718814684303,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718814684935,
+    "authorId": "623cdf35b2db1334cc32d749",
+    "systemDataId": "1666794834724-5DCZW51IFZBTD4OED9HR",
+    "systemDataVariants": "750x422,100w,300w,500w,750w",
+    "systemDataSourceType": "JPG",
+    "filename": "laurahubert.jpg",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "0a0a0b",
+      "topRightAverage": "050506",
+      "bottomLeftAverage": "101010",
+      "bottomRightAverage": "131415",
+      "centerAverage": "937e71",
+      "suggestedBgColor": "201e1d"
+    },
+    "urlId": "dkkgjt5nw25mwxb-g8zm6-8h3ek-cx5fr-5pb74-dk8j2",
+    "title": "Laura Hubert Band ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "623cdf35b2db1334cc32d749",
+      "displayName": "TheRex Directory",
+      "firstName": "TheRex",
+      "lastName": "Directory",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w"
+    },
+    "fullUrl": "/events/dkkgjt5nw25mwxb-g8zm6-8h3ek-cx5fr-5pb74-dk8j2",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/61e26c8e87127058e405cc0c/1666794834724-5DCZW51IFZBTD4OED9HR/laurahubert.jpg",
+    "contentType": "image/jpeg",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1720387800343,
+      "endDate": 1720395000343
+    },
+    "startDate": 1720387800343,
+    "endDate": 1720395000343,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "750x422",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6671aa036c027d55cba1035c",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718725217940,
+    "updatedOn": 1718725218033,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718725217940,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "bob-brough-quartet-eby6t-mbplb-n76rf",
+    "title": "Bob Brough Quartet ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/bob-brough-quartet-eby6t-mbplb-n76rf",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6671aa036c027d55cba1035c/1718725218033/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1720312200016,
+      "endDate": 1720321200016
+    },
+    "startDate": 1720312200016,
+    "endDate": 1720321200016,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "667991331af6f820f85c35dc",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1719243097420,
+    "updatedOn": 1720281713813,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1719243097420,
+    "authorId": "623cdf35b2db1334cc32d749",
+    "systemDataId": "1670953097488-X8VWDYQCKN0US44TT0I7",
+    "systemDataVariants": "683x1024,100w,300w,500w",
+    "systemDataSourceType": "JPG",
+    "filename": "IMG_0920-2-683x1024.jpg",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "0f2226",
+      "topRightAverage": "0f2226",
+      "bottomLeftAverage": "4d3b35",
+      "bottomRightAverage": "11252c",
+      "centerAverage": "2f292d",
+      "suggestedBgColor": "343939"
+    },
+    "urlId": "emily-schultz-and-neon-eagle-83nnb-at39h-ce2ax-pezwh-h5y55-74464-z9lmt-z26cs-n8bjc",
+    "title": "MATTAUS GRETZINGER",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "623cdf35b2db1334cc32d749",
+      "displayName": "TheRex Directory",
+      "firstName": "TheRex",
+      "lastName": "Directory",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w"
+    },
+    "fullUrl": "/events/emily-schultz-and-neon-eagle-83nnb-at39h-ce2ax-pezwh-h5y55-74464-z9lmt-z26cs-n8bjc",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/61e26c8e87127058e405cc0c/1670953097488-X8VWDYQCKN0US44TT0I7/IMG_0920-2-683x1024.jpg",
+    "contentType": "image/jpeg",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1720301400330,
+      "endDate": 1720308600330
+    },
+    "startDate": 1720301400330,
+    "endDate": 1720308600330,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "683x1024",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "667998d1ea173f5fdf69263f",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1719245360889,
+    "updatedOn": 1719245359879,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1719245360889,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "dennis-kwok-jazz-orchestra-ff882-l6xgh",
+    "title": "Dennis Kwok Jazz Orchestra ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/dennis-kwok-jazz-orchestra-ff882-l6xgh",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/667998d1ea173f5fdf69263f/1719245359879/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1720288800074,
+      "endDate": 1720296000074
+    },
+    "startDate": 1720288800074,
+    "endDate": 1720296000074,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6671a9e7b5dc810adc538298",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718725118691,
+    "updatedOn": 1718725118682,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718725118691,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "bob-brough-quartet-eby6t-mbplb",
+    "title": "Bob Brough Quartet",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/bob-brough-quartet-eby6t-mbplb",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6671a9e7b5dc810adc538298/1718725118682/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1720225800681,
+      "endDate": 1720234800681
+    },
+    "startDate": 1720225800681,
+    "endDate": 1720234800681,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "667989211b495f22317d34d4",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1719241093818,
+    "updatedOn": 1719701307625,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1719241093818,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "david-hodgson-group",
+    "title": "David Hodgson Group",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/david-hodgson-group",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/667989211b495f22317d34d4/1719701307625/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1720215000779,
+      "endDate": 1720222200779
+    },
+    "startDate": 1720215000779,
+    "endDate": 1720222200779,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6671a9c505f59e741847b7cf",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718725091256,
+    "updatedOn": 1718725091308,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718725091256,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "bob-brough-quartet-eby6t",
+    "title": "Bob Brough Quartet ",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/bob-brough-quartet-eby6t",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6671a9c505f59e741847b7cf/1718725091308/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1720139400376,
+      "endDate": 1720148400376
+    },
+    "startDate": 1720139400376,
+    "endDate": 1720148400376,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66798705f63a123b32a38d8f",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1719240732668,
+    "updatedOn": 1719240731500,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1719240732668,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "eric-st-laurent-group-1",
+    "title": "Eric St. Laurent Group",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/eric-st-laurent-group-1",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/66798705f63a123b32a38d8f/1719240731500/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1720128600268,
+      "endDate": 1720135800268
+    },
+    "startDate": 1720128600268,
+    "endDate": 1720135800268,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6671a8257551eb1f3e7a719d",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718725029830,
+    "updatedOn": 1718725029924,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718725029830,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "bob-brough-quartet",
+    "title": "Bob Brough Quartet",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/bob-brough-quartet",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6671a8257551eb1f3e7a719d/1718725029924/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1720053000593,
+      "endDate": 1720062000593
+    },
+    "startDate": 1720053000593,
+    "endDate": 1720062000593,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6675a84d8c1f136fa16147c5",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718987466138,
+    "updatedOn": 1718987630757,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718987466138,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "jesse-dietschi-trio-1",
+    "title": "Jesse Dietschi Trio",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/jesse-dietschi-trio-1",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6675a84d8c1f136fa16147c5/1718987630757/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1720042200942,
+      "endDate": 1720049400942
+    },
+    "startDate": 1720042200942,
+    "endDate": 1720049400942,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6679a151ec4cef3aa08a4629",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1719247238177,
+    "updatedOn": 1719247237103,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1719247238177,
+    "authorId": "623cdf35b2db1334cc32d749",
+    "systemDataId": "1653612366116-3I99TI69053R2WRF3CL3",
+    "systemDataVariants": "852x1000,100w,300w,500w,750w",
+    "systemDataSourceType": "JPG",
+    "filename": "DxcVaRYXgAQrbpJ.jpg",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "030c3f",
+      "topRightAverage": "03092c",
+      "bottomLeftAverage": "2a2183",
+      "bottomRightAverage": "a72904",
+      "centerAverage": "6c5b71",
+      "suggestedBgColor": "513f4f"
+    },
+    "urlId": "9pxmh6dflxdl2y2-jdpz8-c9j6w-lpjmx-4t2dp-kc9ty-4yx7g-ghnpm-6xwhj-3e7g4-67fnx-j3t57-d6sgn-4zdpj-geatb",
+    "title": "CLASSIC REX JAZZ JAM hosted by CHRIS Banks ",
+    "sourceUrl": "",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003EJam with us! Enjoy our house band (a collection of beloved all-stars) spontaneously creating musical goodness just for you!\u003C/p\u003E\u003Cp class=\"\" data-rte-preserve-empty=\"true\" style=\"white-space:pre-wrap;\"\u003E\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003EHosted by the legendary Chris Banks.\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "623cdf35b2db1334cc32d749",
+      "displayName": "TheRex Directory",
+      "firstName": "TheRex",
+      "lastName": "Directory",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/623cdf35b2db1334cc32d749/bb2638370d7b42ee85de04282d929022/bb2638370d7b42ee85de04282d929022.jpeg?format=300w"
+    },
+    "fullUrl": "/events/9pxmh6dflxdl2y2-jdpz8-c9j6w-lpjmx-4t2dp-kc9ty-4yx7g-ghnpm-6xwhj-3e7g4-67fnx-j3t57-d6sgn-4zdpj-geatb",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/61e26c8e87127058e405cc0c/1653612366116-3I99TI69053R2WRF3CL3/DxcVaRYXgAQrbpJ.jpg",
+    "contentType": "image/jpeg",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1719966600229,
+      "endDate": 1719975600229
+    },
+    "startDate": 1719966600229,
+    "endDate": 1719975600229,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "852x1000",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6675938c0006ba33913d6254",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718984023158,
+    "updatedOn": 1719951212302,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718984023158,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "nick-scott-quartet",
+    "title": "Nick Scott Trio",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/nick-scott-quartet",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6675938c0006ba33913d6254/1719951212302/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1719955800217,
+      "endDate": 1719963000217
+    },
+    "startDate": 1719955800217,
+    "endDate": 1719963000217,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "6674955e0b59766928eed500",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718916514163,
+    "updatedOn": 1718916513296,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718916514163,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "2024-toronto-jazz-festival-club-concert-series-mike-deicont-trio-wkfl2",
+    "title": "2024 Toronto Jazz Festival Club Concert Series: Mike DeiCont Trio",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/2024-toronto-jazz-festival-club-concert-series-mike-deicont-trio-wkfl2",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/6674955e0b59766928eed500/1718916513296/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1719880200045,
+      "endDate": 1719889200045
+    },
+    "startDate": 1719880200045,
+    "endDate": 1719889200045,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "667309a48bef9318d2095cad",
+    "collectionId": "62099f5a37eb917826df65cc",
+    "recordType": 12,
+    "addedOn": 1718816176610,
+    "updatedOn": 1718816176027,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1718816176610,
+    "authorId": "65392a40d65c7c25682a3d54",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "urlId": "duncan-wilson-trio-1",
+    "title": "Duncan Wilson Trio",
+    "body": null,
+    "excerpt": "",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "65392a40d65c7c25682a3d54",
+      "displayName": "The Rex Hotel",
+      "firstName": "The Rex",
+      "lastName": "Hotel",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/65392a40d65c7c25682a3d54/4cdaba18-26b4-4837-9f3e-e0cdd6e07020/thirdPartyMemberAvatar-65392a40d65c7c25682a3d54-271c9474-2b1c-457a-be4d-8a85976399c3?format=300w"
+    },
+    "fullUrl": "/events/duncan-wilson-trio-1",
+    "assetUrl": "https://static1.squarespace.com/static/61e26c8e87127058e405cc0c/62099f5a37eb917826df65cc/667309a48bef9318d2095cad/1718816176027/",
+    "contentType": "text/html",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1719869400648,
+      "endDate": 1719876600648
+    },
+    "startDate": 1719869400648,
+    "endDate": 1719876600648,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "recordTypeLabel": "event"
+  }
+]
