@@ -5,12 +5,20 @@ defmodule MusicListings.Crawler.EventParser do
   """
   alias MusicListings.Crawler.Payload
   alias MusicListings.Parsing.Parser
+  alias MusicListings.Repo
+  alias MusicListingsSchema.CrawlError
+  alias MusicListingsSchema.CrawlSummary
   alias MusicListingsSchema.Event
   alias MusicListingsSchema.Venue
 
-  @spec parse_events(payloads :: list(Payload), parser :: Parser, venue :: Venue) ::
+  @spec parse_events(
+          payloads :: list(Payload),
+          parser :: Parser,
+          venue :: Venue,
+          crawl_summary :: CrawlSummary
+        ) ::
           list()
-  def parse_events(payloads, parser, venue) do
+  def parse_events(payloads, parser, venue, crawl_summary) do
     payloads
     |> Enum.map(
       &Task.async(fn ->
@@ -18,7 +26,16 @@ defmodule MusicListings.Crawler.EventParser do
           {:ok, parse_event(&1, parser, venue), &1}
         rescue
           error ->
-            {:error, error, &1}
+            %CrawlError{
+              crawl_summary_id: crawl_summary.id,
+              venue_id: venue.id,
+              type: :parse_error,
+              error: Exception.format(:error, error, __STACKTRACE__),
+              raw_event: inspect(&1.raw_event)
+            }
+            |> Repo.insert!()
+
+            {:error, Exception.format(:error, error, __STACKTRACE__), &1}
         end
       end)
     )

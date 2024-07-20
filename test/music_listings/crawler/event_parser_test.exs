@@ -3,6 +3,7 @@ defmodule MusicListings.Crawler.EventParserTest do
 
   alias MusicListings.Crawler.EventParser
   alias MusicListings.Crawler.Payload
+  alias MusicListings.CrawlSummariesFixtures
   alias MusicListings.Parsing.DanforthMusicHallParser
   alias MusicListings.PayloadsFixtures
   alias MusicListingsSchema.Venue
@@ -20,7 +21,12 @@ defmodule MusicListings.Crawler.EventParserTest do
       venue: venue
     } do
       [payload] =
-        EventParser.parse_events(payloads, DanforthMusicHallParser, venue)
+        EventParser.parse_events(
+          payloads,
+          DanforthMusicHallParser,
+          venue,
+          CrawlSummariesFixtures.crawl_summary_fixture()
+        )
 
       venue_id = venue.id
 
@@ -52,7 +58,12 @@ defmodule MusicListings.Crawler.EventParserTest do
         PayloadsFixtures.load_payloads("test/data/danforth_music_hall/parse_error_event.html")
 
       [payload] =
-        EventParser.parse_events(parse_error_payloads, DanforthMusicHallParser, venue)
+        EventParser.parse_events(
+          parse_error_payloads,
+          DanforthMusicHallParser,
+          venue,
+          CrawlSummariesFixtures.crawl_summary_fixture()
+        )
 
       assert :parse_error = payload.status
     end

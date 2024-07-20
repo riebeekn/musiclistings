@@ -2,7 +2,7 @@ defmodule MusicListings.Crawler do
   @moduledoc """
   Crawler for retrieving events
   """
-  alias MusicListings.Crawler.CrawlSummary
+  alias MusicListings.Crawler.CrawlStats
   alias MusicListings.Crawler.DataSource
   alias MusicListings.Crawler.EventParser
   alias MusicListings.Crawler.EventStorage
@@ -36,42 +36,40 @@ defmodule MusicListings.Crawler do
   iex> Crawler.crawl([DanforthMusicHallParser, VelvetUndergroundParser])
   """
   @spec crawl(parsers :: list(Parser), opts :: list(crawler_opts)) ::
-          list(Payload)
+          {:ok, CrawlSummary} | {:error, Ecto.Changeset}
   def crawl(parsers, opts \\ []) do
     pull_data_from_www? = Keyword.get(opts, :pull_data_from_www, false)
 
-    Enum.flat_map(parsers, fn parser ->
+    crawl_summary = init_crawl_summary()
+
+    parsers
+    |> Enum.flat_map(fn parser ->
       venue = Repo.get_by!(Venue, name: parser.venue_name())
 
       parser
       |> DataSource.retrieve_events(parser.source_url(), pull_data_from_www?)
-      |> EventParser.parse_events(parser, venue)
+      |> EventParser.parse_events(parser, venue, crawl_summary)
       |> EventStorage.save_events()
     end)
+    |> CrawlStats.new()
+    |> update_crawl_summary_with_stats(crawl_summary)
   end
 
-  @doc """
-  Takes a list of completed payloads and produces a summary of the result
-  of the crawl process
-  """
-  @spec crawl_summary(payloads :: list(Payload)) :: CrawlSummary
-  defdelegate crawl_summary(payloads), to: CrawlSummary, as: :new
+  defp init_crawl_summary do
+    %MusicListingsSchema.CrawlSummary{}
+    |> Repo.insert!()
+  end
 
-  @doc """
-  Saves a crawl summary to the database
-  """
-  @spec save_crawl_summary(CrawlSummary) ::
-          {:ok, MusicListingsSchema.CrawlSummary} | {:error, Ecto.Changset.Error}
-  def save_crawl_summary(crawl_summary) do
-    %MusicListingsSchema.CrawlSummary{
-      new: crawl_summary.new,
-      updated: crawl_summary.updated,
-      duplicate: crawl_summary.duplicate,
-      parse_errors: crawl_summary.parse_errors,
-      errors: crawl_summary.errors,
-      parse_errors_dump: crawl_summary.parse_errors_dump,
-      errors_dump: crawl_summary.errors_dump
-    }
-    |> Repo.insert()
+  defp update_crawl_summary_with_stats(stats, crawl_summary) do
+    crawl_summary
+    |> Ecto.Changeset.change(%{
+      new: stats.new,
+      updated: stats.updated,
+      duplicate: stats.duplicate,
+      parse_errors: stats.parse_errors,
+      errors: stats.errors,
+      errors_dump: stats.errors_dump
+    })
+    |> Repo.update()
   end
 end

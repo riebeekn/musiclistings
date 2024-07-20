@@ -13,9 +13,8 @@ defmodule MusicListingsSchema.CrawlSummary do
     field :duplicate, :integer
     field :parse_errors, :integer
     field :errors, :integer
-    field :parse_errors_dump, {:array, :map}
     field :errors_dump, {:array, :map}
 
-    timestamps(updated_at: false)
+    timestamps()
   end
 end
