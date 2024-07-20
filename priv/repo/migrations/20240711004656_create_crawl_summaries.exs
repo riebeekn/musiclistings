@@ -3,15 +3,14 @@ defmodule MusicListings.Repo.Migrations.CreateCrawlSummaries do
 
   def change do
     create table(:crawl_summaries) do
-      add :new, :integer, null: false
-      add :updated, :integer, null: false
-      add :duplicate, :integer, null: false
-      add :parse_errors, :integer, null: false
-      add :errors, :integer, null: false
-      add :parse_errors_dump, {:array, :map}
+      add :new, :integer
+      add :updated, :integer
+      add :duplicate, :integer
+      add :parse_errors, :integer
+      add :errors, :integer
       add :errors_dump, {:array, :map}
 
-      timestamps(updated_at: false)
+      timestamps()
     end
   end
 end
