@@ -36,8 +36,7 @@ defmodule MusicListings.Crawler do
 
   iex> Crawler.crawl([DanforthMusicHallParser, VelvetUndergroundParser])
   """
-  @spec crawl(parsers :: list(Parser), opts :: list(crawler_opts)) ::
-          {:ok, CrawlSummary} | {:error, Ecto.Changeset}
+  @spec crawl(parsers :: list(Parser), opts :: list(crawler_opts)) :: any()
   def crawl(parsers, opts \\ []) do
     pull_data_from_www? = Keyword.get(opts, :pull_data_from_www, false)
 

@@ -27,7 +27,7 @@ defmodule MusicListings.Mailer do
         |> text_body(text_body)
       end
 
-      def header(var!(assigns)) do
+      def h1(var!(assigns)) do
         ~H"""
         <mj-text align="center" font-size="24px" font-weight="bold" padding-bottom="16px">
           <%= render_slot(@inner_block) %>
@@ -35,11 +35,55 @@ defmodule MusicListings.Mailer do
         """
       end
 
-      def text(var!(assigns)) do
+      def h2(var!(assigns)) do
         ~H"""
-        <mj-text align="left" font-size="16px" padding-top="5px">
+        <mj-text align="left" font-size="18px" font-weight="bold" padding-top="5px">
           <%= render_slot(@inner_block) %>
         </mj-text>
+        """
+      end
+
+      def text(var!(assigns)) do
+        ~H"""
+        <mj-text align="left" font-size="14px" padding-top="2px">
+          <%= render_slot(@inner_block) %>
+        </mj-text>
+        """
+      end
+
+      def table(var!(assigns)) do
+        ~H"""
+        <mj-table>
+          <thead>
+            <tr style="border-bottom:1px solid #ecedee;text-align:left;padding:15px 0;">
+              <%= for col <- @col do %>
+                <th style="padding: 0 15px 0 0;">
+                  <%= col.label %>
+                </th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <%= for row <- @rows do %>
+              <tr>
+                <%= for col <- @col do %>
+                  <td><%= render_slot(col, row) %></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+          <%= if @include_footer? do %>
+            <tfoot>
+              <tr style="border-top:1px solid #ecedee;text-align:left;padding:15px 0;">
+                <%= for fcol <- @footer_col do %>
+                  <td>
+                    <%= render_slot(fcol) %>
+                  </td>
+                <% end %>
+              </tr>
+            </tfoot>
+          <% end %>
+        </mj-table>
         """
       end
 
