@@ -9,6 +9,7 @@ defmodule MusicListings.Crawler do
   alias MusicListings.Parsing.Parser
   alias MusicListings.Repo
   alias MusicListingsSchema.Venue
+  alias MusicListingsSchema.VenueCrawlSummary
 
   require Logger
 
@@ -50,9 +51,26 @@ defmodule MusicListings.Crawler do
       |> DataSource.retrieve_events(parser.source_url(), pull_data_from_www?)
       |> EventParser.parse_events(parser, venue, crawl_summary)
       |> EventStorage.save_events()
+      |> insert_venue_summary(venue, crawl_summary)
     end)
     |> CrawlStats.new()
     |> update_crawl_summary_with_stats(crawl_summary)
+  end
+
+  defp insert_venue_summary(payloads, venue, crawl_summary) do
+    venue_stats = CrawlStats.new(payloads)
+
+    %VenueCrawlSummary{
+      venue_id: venue.id,
+      crawl_summary_id: crawl_summary.id,
+      new: venue_stats.new,
+      updated: venue_stats.updated,
+      duplicate: venue_stats.duplicate,
+      parse_errors: venue_stats.parse_errors
+    }
+    |> Repo.insert!()
+
+    payloads
   end
 
   defp init_crawl_summary do
