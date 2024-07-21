@@ -66,9 +66,7 @@ defmodule MusicListings.Crawler do
       new: stats.new,
       updated: stats.updated,
       duplicate: stats.duplicate,
-      parse_errors: stats.parse_errors,
-      errors: stats.errors,
-      errors_dump: stats.errors_dump
+      parse_errors: stats.parse_errors
     })
     |> Repo.update()
   end

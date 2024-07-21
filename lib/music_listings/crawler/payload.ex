@@ -37,8 +37,4 @@ defmodule MusicListings.Crawler.Payload do
   def set_operation(%__MODULE__{} = payload, operation) do
     %{payload | operation: operation}
   end
-
-  def set_save_error(%__MODULE__{} = payload, error) do
-    %{payload | status: :save_error, error: error}
-  end
 end

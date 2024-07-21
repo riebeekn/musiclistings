@@ -20,7 +20,7 @@ defmodule MusicListings.Workers.DataRetrievalWorker do
     query
     |> Repo.all()
     |> Enum.map(&String.to_existing_atom("Elixir.#{&1.parser_module_name}"))
-    |> Crawler.crawl(pull_data_from_www: false)
+    |> Crawler.crawl(pull_data_from_www: true)
     |> case do
       {:ok, crawl_summary} ->
         crawl_summary

@@ -33,32 +33,28 @@ defmodule MusicListings.Crawler.EventStorage do
   end
 
   defp insert_event(payload) do
-    %{
-      external_id: payload.parsed_event.external_id,
-      venue_id: payload.parsed_event.venue_id,
-      title: payload.parsed_event.title,
-      headliner: payload.parsed_event.headliner,
-      openers: payload.parsed_event.openers,
-      date: payload.parsed_event.date,
-      time: payload.parsed_event.time,
-      price_format: payload.parsed_event.price_format,
-      price_lo: payload.parsed_event.price_lo,
-      price_hi: payload.parsed_event.price_hi,
-      age_restriction: payload.parsed_event.age_restriction,
-      source_url: payload.parsed_event.source_url,
-      ticket_url: payload.parsed_event.ticket_url
-    }
-    |> Event.changeset()
-    |> Repo.insert()
-    |> case do
-      {:ok, persisted_event} ->
-        payload
-        |> Payload.set_persisted_event(persisted_event)
-        |> Payload.set_operation(:created)
+    persisted_event =
+      %{
+        external_id: payload.parsed_event.external_id,
+        venue_id: payload.parsed_event.venue_id,
+        title: payload.parsed_event.title,
+        headliner: payload.parsed_event.headliner,
+        openers: payload.parsed_event.openers,
+        date: payload.parsed_event.date,
+        time: payload.parsed_event.time,
+        price_format: payload.parsed_event.price_format,
+        price_lo: payload.parsed_event.price_lo,
+        price_hi: payload.parsed_event.price_hi,
+        age_restriction: payload.parsed_event.age_restriction,
+        source_url: payload.parsed_event.source_url,
+        ticket_url: payload.parsed_event.ticket_url
+      }
+      |> Event.changeset()
+      |> Repo.insert!()
 
-      {:error, error} ->
-        Payload.set_save_error(payload, error)
-    end
+    payload
+    |> Payload.set_persisted_event(persisted_event)
+    |> Payload.set_operation(:created)
   end
 
   defp maybe_update_event(payload, existing_event) do
@@ -87,16 +83,12 @@ defmodule MusicListings.Crawler.EventStorage do
   end
 
   defp maybe_update(changeset, payload) do
-    changeset
-    |> Repo.update()
-    |> case do
-      {:ok, persisted_event} ->
-        payload
-        |> Payload.set_persisted_event(persisted_event)
-        |> Payload.set_operation(:updated)
+    persisted_event =
+      changeset
+      |> Repo.update!()
 
-      {:error, error} ->
-        Payload.set_save_error(payload, error)
-    end
+    payload
+    |> Payload.set_persisted_event(persisted_event)
+    |> Payload.set_operation(:updated)
   end
 end

@@ -12,8 +12,6 @@ defmodule MusicListingsSchema.CrawlSummary do
     field :updated, :integer
     field :duplicate, :integer
     field :parse_errors, :integer
-    field :errors, :integer
-    field :errors_dump, {:array, :map}
 
     timestamps()
   end

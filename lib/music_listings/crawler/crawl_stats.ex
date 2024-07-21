@@ -5,7 +5,7 @@ defmodule MusicListings.Crawler.CrawlStats do
   """
   alias MusicListings.Crawler.Payload
 
-  defstruct [:new, :updated, :duplicate, :parse_errors, :errors, :errors_dump]
+  defstruct [:new, :updated, :duplicate, :parse_errors]
 
   @spec new(list(Payload)) :: __MODULE__
   def new(payloads) do
@@ -15,9 +15,7 @@ defmodule MusicListings.Crawler.CrawlStats do
         duplicate: 0,
         new: 0,
         updated: 0,
-        parse_errors: 0,
-        errors: 0,
-        errors_dump: []
+        parse_errors: 0
       },
       fn payload, acc -> summarize_payload(payload, acc) end
     )
@@ -34,16 +32,6 @@ defmodule MusicListings.Crawler.CrawlStats do
 
       :parse_error ->
         Map.update!(acc, :parse_errors, &(&1 + 1))
-
-      :save_error ->
-        err = %{
-          error: inspect(payload.error),
-          parsed_event: inspect(payload.parsed_event)
-        }
-
-        acc
-        |> Map.update!(:errors_dump, &[err | &1])
-        |> Map.update!(:errors, &(&1 + 1))
     end
   end
 end
