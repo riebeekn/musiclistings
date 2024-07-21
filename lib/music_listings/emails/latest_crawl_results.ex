@@ -25,7 +25,6 @@ defmodule MusicListings.Emails.LatestCrawlResults do
         <li>Updated events: <%= @crawl_summary.updated %></li>
         <li>Duplicate events: <%= @crawl_summary.duplicate %></li>
         <li>Parse errors: <%= @crawl_summary.parse_errors %></li>
-        <li>Other errors: <%= @crawl_summary.errors %></li>
       </ul>
     </.text>
     """
@@ -37,7 +36,6 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       new: 4,
       updated: 1,
       parse_errors: 3,
-      errors: 2,
       inserted_at: DateTime.utc_now()
     }
     |> new_email()

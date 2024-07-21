@@ -20,9 +20,7 @@ defmodule MusicListings.CrawlerTest do
                 new: 124,
                 updated: 0,
                 duplicate: 0,
-                parse_errors: 0,
-                errors: 0,
-                errors_dump: []
+                parse_errors: 0
               }} = Crawler.crawl(parsers)
 
       assert 124 = Repo.aggregate(Event, :count)

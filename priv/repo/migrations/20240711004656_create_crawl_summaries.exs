@@ -7,8 +7,6 @@ defmodule MusicListings.Repo.Migrations.CreateCrawlSummaries do
       add :updated, :integer
       add :duplicate, :integer
       add :parse_errors, :integer
-      add :errors, :integer
-      add :errors_dump, {:array, :map}
 
       timestamps()
     end
