@@ -4,6 +4,9 @@ defmodule MusicListingsSchema.CrawlSummary do
   """
   use Ecto.Schema
 
+  alias MusicListingsSchema.CrawlError
+  alias MusicListingsSchema.VenueCrawlSummary
+
   @timestamps_opts [
     type: :utc_datetime_usec
   ]
@@ -13,6 +16,8 @@ defmodule MusicListingsSchema.CrawlSummary do
     field :duplicate, :integer
     field :parse_errors, :integer
 
+    has_many :venue_crawl_summaries, VenueCrawlSummary
+    has_many :crawl_errors, CrawlError
     timestamps()
   end
 end
