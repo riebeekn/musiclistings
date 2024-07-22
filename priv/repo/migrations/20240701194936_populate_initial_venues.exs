@@ -54,7 +54,7 @@ defmodule MusicListings.Repo.Migrations.PopulateInitialVenues do
 
     execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('The Pilot', 'MusicListings.Parsing.PilotParser', true)"
 
-    execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('Jazz Bistro', 'MusicListings.Parsing.JazzBistroParser', false)"
+    execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('Jazz Bistro', 'MusicListings.Parsing.JazzBistroParser', true)"
 
     execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('The Dakota Tavern', 'MusicListings.Parsing.DakotaTavernParser', false)"
 
