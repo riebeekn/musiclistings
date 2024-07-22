@@ -58,6 +58,7 @@ defmodule MusicListings.Parsing.QueenElizabthTheatreParser do
     year = String.to_integer(year_string)
     month = Parser.convert_month_string_to_number(month_string)
 
+    # TODO: common
     day =
       day_string
       |> String.trim()
