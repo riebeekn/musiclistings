@@ -1,53 +1,43 @@
-defmodule MusicListings.Parsing.OperaHouseParser do
+defmodule MusicListings.Parsing.PilotParser do
   @moduledoc """
-  Parser for extracing events from https://theoperahousetoronto.com/
+  Parser for extracing events from https://thepilot.ca/
   """
   @behaviour MusicListings.Parsing.Parser
-
-  import Meeseeks.CSS
 
   alias MusicListings.Parsing.Parser
   alias MusicListings.Parsing.Performers
 
   @impl true
-  def source_url, do: "https://theoperahousetoronto.com/calendar/"
+  def source_url, do: "https://www.thepilot.ca/happening-at-the-pilot"
 
   @impl true
-  def venue_name, do: "The Opera House"
+  def venue_name, do: "The Pilot"
 
   @impl true
-  def example_data_file_location, do: "test/data/opera_house/index.html"
+  def example_data_file_location, do: "test/data/pilot/index.html"
 
   @impl true
   def event_selector(body) do
-    Parser.event_selector(body, ".item_landing")
+    Parser.event_selector(body, "div#scvr-section-013c83e7-396f-4090-a781-83f7097a960c p.fr-tag")
   end
 
   @impl true
   def next_page_url(_body) do
-    # no next page
     nil
   end
 
   @impl true
   def event_id(event) do
+    # TODO: common
     title_slug = event |> event_title() |> String.replace(" ", "")
     "#{title_slug}-#{event_date(event)}"
   end
 
   @impl true
   def event_title(event) do
-    main_title =
-      event
-      |> Meeseeks.one(css(".info_landing h2"))
-      |> Meeseeks.text()
-
-    supplementary_title =
-      event
-      |> Meeseeks.all(css(".info_landing h3"))
-      |> Enum.map(&Meeseeks.text/1)
-
-    "#{main_title} #{supplementary_title}"
+    event
+    |> Parser.event_title(".fr-tag strong, .fr-tag b")
+    |> String.replace(".", "")
   end
 
   @impl true
@@ -58,19 +48,24 @@ defmodule MusicListings.Parsing.OperaHouseParser do
 
   @impl true
   def event_date(event) do
-    day_string =
+    [full_date_string | _rest] =
       event
-      |> Meeseeks.one(css(".date_number_listing"))
-      |> Meeseeks.text()
-      |> String.trim()
+      |> Parser.event_title(".fr-tag")
+      |> String.split("-")
 
-    month_string =
-      event
-      |> Meeseeks.one(css(".date_landing h6:last-of-type"))
-      |> Meeseeks.text()
-      |> String.trim()
+    [_day_of_week, month_string, day_string] = String.split(full_date_string)
 
-    day = String.to_integer(day_string)
+    # TODO: common
+    day =
+      day_string
+      |> String.trim()
+      |> String.replace("st", "")
+      |> String.replace("nd", "")
+      |> String.replace("rd", "")
+      |> String.replace("th", "")
+      |> String.replace(",", "")
+      |> String.to_integer()
+
     month = Parser.convert_month_string_to_number(month_string)
 
     # TODO: common
@@ -95,12 +90,8 @@ defmodule MusicListings.Parsing.OperaHouseParser do
   end
 
   @impl true
-  def event_time(event) do
-    event
-    |> Meeseeks.one(css(".info_landing h5:nth-of-type(2)"))
-    |> Meeseeks.text()
-    |> String.replace("Show: ", "")
-    |> Parser.convert_event_time_string_to_time()
+  def event_time(_event) do
+    nil
   end
 
   @impl true
@@ -109,15 +100,12 @@ defmodule MusicListings.Parsing.OperaHouseParser do
   end
 
   @impl true
-  def age_restriction(event) do
-    event
-    |> Meeseeks.one(css(".info_landing h5:last-of-type"))
-    |> Meeseeks.text()
-    |> Parser.convert_age_restriction_string_to_enum()
+  def age_restriction(_event) do
+    :tbd
   end
 
   @impl true
-  def ticket_url(event) do
-    Parser.ticket_url(event, ".ticket_landing a")
+  def ticket_url(_event) do
+    nil
   end
 end
