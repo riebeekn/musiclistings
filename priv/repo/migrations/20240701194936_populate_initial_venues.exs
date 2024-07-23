@@ -60,7 +60,7 @@ defmodule MusicListings.Repo.Migrations.PopulateInitialVenues do
 
     execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('Hugh''s Room', 'MusicListings.Parsing.HughsRoomParser', false)"
 
-    execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('Rogers Centre', 'MusicListings.Parsing.RogersCentreParser', false)"
+    execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('Rogers Centre', 'MusicListings.Parsing.RogersCentreParser', true)"
 
     execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('Scotiabank Arena', 'MusicListings.Parsing.ScotiabankArenaParser', true)"
   end
