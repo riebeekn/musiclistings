@@ -4,7 +4,7 @@ defmodule MusicListings.Repo.Migrations.PopulateInitialVenues do
   def up do
     execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('Budweiser Stage', 'MusicListings.Parsing.BudweiserStageParser', true)"
 
-    execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('Cameron House', 'MusicListings.Parsing.CameronHouseParser', false)"
+    execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('The Cameron House', 'MusicListings.Parsing.CameronHouseParser', true)"
 
     execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('Coca Cola Coliseum', 'MusicListings.Parsing.CocaColaColiseumParser', true)"
 
