@@ -30,7 +30,7 @@ defmodule MusicListings.Parsing.DanforthMusicHallParserTest do
 
   describe "venue_name/0" do
     test "returns expected value" do
-      assert "Danforth Music Hall" == DanforthMusicHallParser.venue_name()
+      assert "The Danforth Music Hall" == DanforthMusicHallParser.venue_name()
     end
   end
 

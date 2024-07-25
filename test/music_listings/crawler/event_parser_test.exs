@@ -11,7 +11,7 @@ defmodule MusicListings.Crawler.EventParserTest do
   describe "parse_events/3" do
     setup do
       payloads = PayloadsFixtures.load_payloads("test/data/danforth_music_hall/single_event.html")
-      venue = Repo.get_by!(Venue, name: "Danforth Music Hall")
+      venue = Repo.get_by!(Venue, name: "The Danforth Music Hall")
 
       %{payloads: payloads, venue: venue}
     end

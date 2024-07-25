@@ -13,7 +13,7 @@ defmodule MusicListings.Parsing.DanforthMusicHallParser do
   def source_url, do: "https://thedanforth.com/"
 
   @impl true
-  def venue_name, do: "Danforth Music Hall"
+  def venue_name, do: "The Danforth Music Hall"
 
   @impl true
   def example_data_file_location, do: "test/data/danforth_music_hall/index.html"

@@ -30,7 +30,7 @@ defmodule MusicListings.Parsing.HorseshoeTavernParserTest do
 
   describe "venue_name/0" do
     test "returns expected value" do
-      assert "Horseshoe Tavern" == HorseshoeTavernParser.venue_name()
+      assert "The Horseshoe Tavern" == HorseshoeTavernParser.venue_name()
     end
   end
 

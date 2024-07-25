@@ -10,13 +10,13 @@ defmodule MusicListings.Repo.Migrations.PopulateInitialVenues do
 
     execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('CODA', 'MusicListings.Parsing.CodaParser', true)"
 
-    execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('Danforth Music Hall', 'MusicListings.Parsing.DanforthMusicHallParser', true)"
+    execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('The Danforth Music Hall', 'MusicListings.Parsing.DanforthMusicHallParser', true)"
 
     execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('Drake Underground', 'MusicListings.Parsing.DrakeUndergroundParser', true)"
 
     execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('History', 'MusicListings.Parsing.HistoryParser', true)"
 
-    execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('Horseshoe Tavern', 'MusicListings.Parsing.HorseshoeTavernParser', true)"
+    execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('The Horseshoe Tavern', 'MusicListings.Parsing.HorseshoeTavernParser', true)"
 
     execute "INSERT INTO venues(name, parser_module_name, pull_events) VALUES('Lee''s Palace', 'MusicListings.Parsing.LeesPalaceParser', true)"
 
