@@ -24,7 +24,7 @@ defmodule MusicListings.Parsing.DanforthMusicHallParserTest do
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://thedanforth.com/" == DanforthMusicHallParser.source_url()
+      assert "https://thedanforth.com" == DanforthMusicHallParser.source_url()
     end
   end
 

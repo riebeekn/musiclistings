@@ -10,7 +10,7 @@ defmodule MusicListings.Parsing.DanforthMusicHallParser do
   alias MusicListings.Parsing.Parser
 
   @impl true
-  def source_url, do: "https://thedanforth.com/"
+  def source_url, do: "https://thedanforth.com"
 
   @impl true
   def venue_name, do: "The Danforth Music Hall"

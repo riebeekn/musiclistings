@@ -24,7 +24,7 @@ defmodule MusicListings.Parsing.VelvetUndergroundParserTest do
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://thevelvet.ca/events/" == VelvetUndergroundParser.source_url()
+      assert "https://thevelvet.ca/events" == VelvetUndergroundParser.source_url()
     end
   end
 

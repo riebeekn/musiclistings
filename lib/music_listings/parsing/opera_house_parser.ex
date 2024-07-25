@@ -10,7 +10,7 @@ defmodule MusicListings.Parsing.OperaHouseParser do
   alias MusicListings.Parsing.Performers
 
   @impl true
-  def source_url, do: "https://theoperahousetoronto.com/calendar/"
+  def source_url, do: "https://theoperahousetoronto.com/calendar"
 
   @impl true
   def venue_name, do: "The Opera House"

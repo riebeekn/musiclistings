@@ -10,7 +10,7 @@ defmodule MusicListings.Parsing.PhoenixParser do
   alias MusicListings.Parsing.Performers
 
   @impl true
-  def source_url, do: "https://thephoenixconcerttheatre.com/events/"
+  def source_url, do: "https://thephoenixconcerttheatre.com/events"
 
   @impl true
   def venue_name, do: "The Phoenix Concert Theatre"

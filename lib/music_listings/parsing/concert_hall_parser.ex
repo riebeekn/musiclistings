@@ -10,7 +10,7 @@ defmodule MusicListings.Parsing.ConcertHallParser do
   alias MusicListings.Parsing.Performers
 
   @impl true
-  def source_url, do: "https://888yonge.com/"
+  def source_url, do: "https://888yonge.com"
 
   @impl true
   def venue_name, do: "The Concert Hall"

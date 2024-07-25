@@ -24,7 +24,7 @@ defmodule MusicListings.Parsing.ConcertHallParserTest do
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://888yonge.com/" == ConcertHallParser.source_url()
+      assert "https://888yonge.com" == ConcertHallParser.source_url()
     end
   end
 

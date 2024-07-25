@@ -10,7 +10,7 @@ defmodule MusicListings.Parsing.ElMocamboParser do
   alias MusicListings.Parsing.Performers
 
   @impl true
-  def source_url, do: "https://elmocambo.com/events-new/"
+  def source_url, do: "https://elmocambo.com/events-new"
 
   @impl true
   def venue_name, do: "El Mocambo"

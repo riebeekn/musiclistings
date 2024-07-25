@@ -9,7 +9,7 @@ defmodule MusicListings.Parsing.VelvetUndergroundParser do
   alias MusicListings.Parsing.Parser
 
   @impl true
-  def source_url, do: "https://thevelvet.ca/events/"
+  def source_url, do: "https://thevelvet.ca/events"
 
   @impl true
   def venue_name, do: "Velvet Underground"
