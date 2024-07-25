@@ -24,7 +24,7 @@ defmodule MusicListings.Parsing.BabyGParserTest do
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "http://thebabyg.com/" == BabyGParser.source_url()
+      assert "http://thebabyg.com" == BabyGParser.source_url()
     end
   end
 

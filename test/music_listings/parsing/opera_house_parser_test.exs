@@ -24,7 +24,7 @@ defmodule MusicListings.Parsing.OperaHouseParserTest do
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://theoperahousetoronto.com/calendar/" == OperaHouseParser.source_url()
+      assert "https://theoperahousetoronto.com/calendar" == OperaHouseParser.source_url()
     end
   end
 

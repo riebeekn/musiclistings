@@ -24,7 +24,7 @@ defmodule MusicListings.Parsing.GreatHallParserTest do
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://thegreathall.ca/calendar/" == GreatHallParser.source_url()
+      assert "https://thegreathall.ca/calendar" == GreatHallParser.source_url()
     end
   end
 

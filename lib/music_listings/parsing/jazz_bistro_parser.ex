@@ -10,7 +10,7 @@ defmodule MusicListings.Parsing.JazzBistroParser do
   alias MusicListings.Parsing.Performers
 
   @impl true
-  def source_url, do: "https://jazzbistro.ca/event-calendar/"
+  def source_url, do: "https://jazzbistro.ca/event-calendar"
 
   @impl true
   def venue_name, do: "Jazz Bistro"

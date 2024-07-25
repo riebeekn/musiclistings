@@ -23,7 +23,7 @@ defmodule MusicListings.Parsing.AxisClubParserTest do
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://theaxisclub.com/all-events/" == AxisClubParser.source_url()
+      assert "https://theaxisclub.com/all-events" == AxisClubParser.source_url()
     end
   end
 

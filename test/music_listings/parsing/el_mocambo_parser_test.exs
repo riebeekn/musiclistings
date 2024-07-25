@@ -24,7 +24,7 @@ defmodule MusicListings.Parsing.ElMocamboParserTest do
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://elmocambo.com/events-new/" == ElMocamboParser.source_url()
+      assert "https://elmocambo.com/events-new" == ElMocamboParser.source_url()
     end
   end
 

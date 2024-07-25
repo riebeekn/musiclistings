@@ -24,7 +24,7 @@ defmodule MusicListings.Parsing.JazzBistroParserTest do
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://jazzbistro.ca/event-calendar/" == JazzBistroParser.source_url()
+      assert "https://jazzbistro.ca/event-calendar" == JazzBistroParser.source_url()
     end
   end
 

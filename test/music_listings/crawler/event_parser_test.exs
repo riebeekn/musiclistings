@@ -46,7 +46,7 @@ defmodule MusicListings.Crawler.EventParserTest do
                  price_lo: ^decimal_30,
                  price_hi: ^decimal_50,
                  age_restriction: :all_ages,
-                 source_url: "https://thedanforth.com/",
+                 source_url: "https://thedanforth.com",
                  ticket_url: "https://www.ticketmaster.ca/event/1000603D7B880DBA",
                  venue_id: ^venue_id
                }

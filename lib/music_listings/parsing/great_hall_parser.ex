@@ -9,7 +9,7 @@ defmodule MusicListings.Parsing.GreatHallParser do
   alias MusicListings.Parsing.Parser
 
   @impl true
-  def source_url, do: "https://thegreathall.ca/calendar/"
+  def source_url, do: "https://thegreathall.ca/calendar"
 
   @impl true
   def venue_name, do: "The Great Hall"

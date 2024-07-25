@@ -10,7 +10,7 @@ defmodule MusicListings.Parsing.BabyGParser do
   alias MusicListings.Parsing.Performers
 
   @impl true
-  def source_url, do: "http://thebabyg.com/"
+  def source_url, do: "http://thebabyg.com"
 
   @impl true
   def venue_name, do: "The Baby G"
