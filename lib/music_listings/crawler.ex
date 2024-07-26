@@ -43,7 +43,10 @@ defmodule MusicListings.Crawler do
 
     venues
     |> Enum.flat_map(fn venue ->
-      parser = String.to_existing_atom("Elixir.MusicListings.Parsing.#{venue.parser_module_name}")
+      parser =
+        String.to_existing_atom(
+          "Elixir.MusicListings.Parsing.VenueParsers.#{venue.parser_module_name}"
+        )
 
       parser
       |> DataSource.retrieve_events(parser.source_url(), pull_data_from_www?)
