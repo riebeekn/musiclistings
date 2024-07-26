@@ -16,7 +16,7 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParserTest do
     event =
       single_event_file_path
       |> File.read!()
-      |> HistoryParser.event_selector()
+      |> HistoryParser.event()
       |> List.first()
 
     %{index_html: index_html, event: event}
@@ -29,9 +29,9 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParserTest do
     end
   end
 
-  describe "event_selector/1" do
+  describe "event/1" do
     test "returns expected events", %{index_html: index_html} do
-      events = HistoryParser.event_selector(index_html)
+      events = HistoryParser.event(index_html)
 
       assert 6 = Enum.count(events)
     end

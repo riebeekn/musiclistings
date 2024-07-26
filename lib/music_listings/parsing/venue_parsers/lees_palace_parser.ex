@@ -15,7 +15,7 @@ defmodule MusicListings.Parsing.VenueParsers.LeesPalaceParser do
   def example_data_file_location, do: "test/data/lees_palace/index.html"
 
   @impl true
-  def event_selector(body) do
+  def event(body) do
     ParseHelpers.event_selector(body, ".schedule-event")
   end
 

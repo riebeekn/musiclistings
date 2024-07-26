@@ -16,7 +16,7 @@ defmodule MusicListings.Parsing.VenueParsers.AxisClubParserTest do
     event =
       single_event_file_path
       |> File.read!()
-      |> AxisClubParser.event_selector()
+      |> AxisClubParser.event()
 
     %{index_html: index_html, event: event}
   end
@@ -27,9 +27,9 @@ defmodule MusicListings.Parsing.VenueParsers.AxisClubParserTest do
     end
   end
 
-  describe "event_selector/1" do
+  describe "event/1" do
     test "returns expected events", %{index_html: index_html} do
-      events = AxisClubParser.event_selector(index_html)
+      events = AxisClubParser.event(index_html)
 
       assert 35 = Enum.count(events)
     end

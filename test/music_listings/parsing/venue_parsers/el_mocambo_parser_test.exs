@@ -16,7 +16,7 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParserTest do
     event =
       single_event_file_path
       |> File.read!()
-      |> ElMocamboParser.event_selector()
+      |> ElMocamboParser.event()
       |> List.first()
 
     %{index_html: index_html, event: event}
@@ -28,9 +28,9 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParserTest do
     end
   end
 
-  describe "event_selector/1" do
+  describe "event/1" do
     test "returns expected events", %{index_html: index_html} do
-      events = ElMocamboParser.event_selector(index_html)
+      events = ElMocamboParser.event(index_html)
 
       assert 15 == Enum.count(events)
     end

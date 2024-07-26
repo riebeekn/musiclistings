@@ -16,7 +16,7 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParser do
   def example_data_file_location, do: "test/data/jazz_bistro/index.html"
 
   @impl true
-  def event_selector(body) do
+  def event(body) do
     body
     |> Meeseeks.parse()
     |> Meeseeks.one(css("script[type=\"application/ld+json\"]"))

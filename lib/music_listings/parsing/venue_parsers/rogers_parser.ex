@@ -19,7 +19,7 @@ defmodule MusicListings.Parsing.VenueParsers.RogersParser do
   def example_data_file_location, do: "test/data/rogers/index.html"
 
   @impl true
-  def event_selector(body) do
+  def event(body) do
     body
     |> Meeseeks.parse()
     |> Meeseeks.all(css("script[type=\"application/ld+json\"]"))
