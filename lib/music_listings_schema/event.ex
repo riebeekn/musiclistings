@@ -18,7 +18,6 @@ defmodule MusicListingsSchema.Event do
     field :price_lo, :decimal
     field :price_hi, :decimal
     field :age_restriction, Ecto.Enum, values: [:all_ages, :eighteen_plus, :nineteen_plus, :tbd]
-    field :source_url, :string
     field :ticket_url, :string
 
     belongs_to :venue, MusicListingsSchema.Venue
@@ -40,7 +39,6 @@ defmodule MusicListingsSchema.Event do
       :price_lo,
       :price_hi,
       :age_restriction,
-      :source_url,
       :ticket_url
     ])
   end
