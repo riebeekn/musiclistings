@@ -5,15 +5,20 @@ defmodule MusicListings.CrawlerTest do
   use MusicListings.DataCase, async: true
 
   alias MusicListings.Crawler
-  alias MusicListings.Parsing.DanforthMusicHallParser
-  alias MusicListings.Parsing.VelvetUndergroundParser
   alias MusicListings.Repo
+  alias MusicListings.VenuesFixtures
   alias MusicListingsSchema.CrawlSummary
   alias MusicListingsSchema.Event
 
   describe "crawl/1" do
     test "expected number of events are inserted" do
-      parsers = [DanforthMusicHallParser, VelvetUndergroundParser]
+      danforth = VenuesFixtures.venue_fixture()
+
+      velvet_underground =
+        VenuesFixtures.venue_fixture(%{
+          name: "Velvet Underground",
+          parser_module_name: "VelvetUndergroundParser"
+        })
 
       assert {:ok,
               %CrawlSummary{
@@ -21,7 +26,7 @@ defmodule MusicListings.CrawlerTest do
                 updated: 0,
                 duplicate: 0,
                 parse_errors: 0
-              }} = Crawler.crawl(parsers)
+              }} = Crawler.crawl([danforth, velvet_underground])
 
       assert 124 = Repo.aggregate(Event, :count)
     end

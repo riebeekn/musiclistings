@@ -6,7 +6,6 @@ defmodule MusicListings.Crawler do
   alias MusicListings.Crawler.DataSource
   alias MusicListings.Crawler.EventParser
   alias MusicListings.Crawler.EventStorage
-  alias MusicListings.Parsing.Parser
   alias MusicListings.Repo
   alias MusicListingsSchema.Venue
   alias MusicListingsSchema.VenueCrawlSummary
@@ -36,15 +35,15 @@ defmodule MusicListings.Crawler do
 
   iex> Crawler.crawl([DanforthMusicHallParser, VelvetUndergroundParser])
   """
-  @spec crawl(parsers :: list(Parser), opts :: list(crawler_opts)) :: any()
-  def crawl(parsers, opts \\ []) do
+  @spec crawl(venues :: list(Venue), opts :: list(crawler_opts)) :: any()
+  def crawl(venues, opts \\ []) do
     pull_data_from_www? = Keyword.get(opts, :pull_data_from_www, false)
 
     crawl_summary = init_crawl_summary()
 
-    parsers
-    |> Enum.flat_map(fn parser ->
-      venue = Repo.get_by!(Venue, name: parser.venue_name())
+    venues
+    |> Enum.flat_map(fn venue ->
+      parser = String.to_existing_atom("Elixir.MusicListings.Parsing.#{venue.parser_module_name}")
 
       parser
       |> DataSource.retrieve_events(parser.source_url(), pull_data_from_www?)
