@@ -21,7 +21,6 @@ defmodule MusicListings.Crawler.EventStorageTest do
             price_lo: Decimal.new("30.00"),
             price_hi: Decimal.new("50.00"),
             age_restriction: :all_ages,
-            source_url: "https://thedanforth.com/",
             ticket_url: "https://www.ticketmaster.ca/event/1000603D7B880DBA",
             venue_id: 2
           }
@@ -52,7 +51,6 @@ defmodule MusicListings.Crawler.EventStorageTest do
                price_lo: ^decimal_30,
                price_hi: ^decimal_50,
                age_restriction: :all_ages,
-               source_url: "https://thedanforth.com/",
                ticket_url: "https://www.ticketmaster.ca/event/1000603D7B880DBA",
                venue_id: 2
              } = payload.persisted_event

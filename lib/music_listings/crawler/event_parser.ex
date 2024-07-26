@@ -58,7 +58,6 @@ defmodule MusicListings.Crawler.EventParser do
       price_lo: price_info.lo,
       price_hi: price_info.hi,
       age_restriction: parser.age_restriction(payload.raw_event),
-      source_url: parser.source_url(),
       ticket_url: parser.ticket_url(payload.raw_event),
       venue_id: venue.id
     }
