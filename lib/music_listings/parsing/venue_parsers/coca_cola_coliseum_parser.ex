@@ -12,9 +12,6 @@ defmodule MusicListings.Parsing.VenueParsers.CocaColaColiseumParser do
   def source_url, do: "https://www.coca-colacoliseum.com/events"
 
   @impl true
-  def venue_name, do: "Coca Cola Coliseum"
-
-  @impl true
   def example_data_file_location, do: "test/data/coca_cola_coliseum/index.html"
 
   @impl true

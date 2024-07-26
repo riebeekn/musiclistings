@@ -30,12 +30,6 @@ defmodule MusicListings.Parsing.VenueParsers.MonarchTavernParserTest do
     end
   end
 
-  describe "venue_name/0" do
-    test "returns expected value" do
-      assert "The Monarch Tavern" == MonarchTavernParser.venue_name()
-    end
-  end
-
   describe "event_selector/1" do
     test "returns expected events", %{index_html: index_html} do
       events = MonarchTavernParser.event_selector(index_html)

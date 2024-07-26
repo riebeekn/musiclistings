@@ -6,7 +6,6 @@ defmodule MusicListings.Parsing.VenueParser do
   alias MusicListings.Parsing.Price
 
   @callback source_url() :: String.t()
-  @callback venue_name() :: String.t()
   @callback example_data_file_location() :: String.t()
   @callback event_selector(String.t()) :: [Meeseeks.Result.t()] | {:error, Meeseeks.Error.t()}
   @callback next_page_url(String.t()) :: String.t() | nil

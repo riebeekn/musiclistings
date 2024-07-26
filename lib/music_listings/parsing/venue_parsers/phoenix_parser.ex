@@ -13,9 +13,6 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParser do
   def source_url, do: "https://thephoenixconcerttheatre.com/events"
 
   @impl true
-  def venue_name, do: "The Phoenix Concert Theatre"
-
-  @impl true
   def example_data_file_location, do: "test/data/phoenix/index.html"
 
   @impl true

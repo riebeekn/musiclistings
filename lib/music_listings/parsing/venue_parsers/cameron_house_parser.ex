@@ -13,9 +13,6 @@ defmodule MusicListings.Parsing.VenueParsers.CameronHouseParser do
   def source_url, do: "https://www.thecameron.com/shows"
 
   @impl true
-  def venue_name, do: "The Cameron House"
-
-  @impl true
   def example_data_file_location, do: "test/data/cameron_house/index.html"
 
   @impl true

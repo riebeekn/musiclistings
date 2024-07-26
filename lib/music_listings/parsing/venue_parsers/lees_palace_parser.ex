@@ -12,9 +12,6 @@ defmodule MusicListings.Parsing.VenueParsers.LeesPalaceParser do
   def source_url, do: "https://www.leespalace.com/events"
 
   @impl true
-  def venue_name, do: "Lee's Palace"
-
-  @impl true
   def example_data_file_location, do: "test/data/lees_palace/index.html"
 
   @impl true

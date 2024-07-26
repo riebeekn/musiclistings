@@ -13,9 +13,6 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParser do
   def source_url, do: "https://theoperahousetoronto.com/calendar"
 
   @impl true
-  def venue_name, do: "The Opera House"
-
-  @impl true
   def example_data_file_location, do: "test/data/opera_house/index.html"
 
   @impl true

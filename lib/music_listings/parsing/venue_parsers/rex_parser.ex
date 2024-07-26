@@ -15,9 +15,6 @@ defmodule MusicListings.Parsing.VenueParsers.RexParser do
   end
 
   @impl true
-  def venue_name, do: "The Rex"
-
-  @impl true
   def example_data_file_location, do: "test/data/rex/index.json"
 
   @impl true

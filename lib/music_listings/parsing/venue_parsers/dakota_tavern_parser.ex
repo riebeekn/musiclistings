@@ -13,9 +13,6 @@ defmodule MusicListings.Parsing.VenueParsers.DakotaTavernParser do
   def source_url, do: "https://www.dakotatavern.ca"
 
   @impl true
-  def venue_name, do: "The Dakota Tavern"
-
-  @impl true
   def example_data_file_location, do: "test/data/dakota_tavern/index.html"
 
   @impl true

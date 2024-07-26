@@ -13,9 +13,6 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParser do
   def source_url, do: "https://jazzbistro.ca/event-calendar"
 
   @impl true
-  def venue_name, do: "Jazz Bistro"
-
-  @impl true
   def example_data_file_location, do: "test/data/jazz_bistro/index.html"
 
   @impl true

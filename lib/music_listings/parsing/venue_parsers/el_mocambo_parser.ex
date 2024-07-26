@@ -13,9 +13,6 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
   def source_url, do: "https://elmocambo.com/events-new"
 
   @impl true
-  def venue_name, do: "El Mocambo"
-
-  @impl true
   def example_data_file_location, do: "test/data/el_mocambo/index.html"
 
   @impl true

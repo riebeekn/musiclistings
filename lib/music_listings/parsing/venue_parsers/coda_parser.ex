@@ -12,9 +12,6 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParser do
   def source_url, do: "https://www.codatoronto.com/events"
 
   @impl true
-  def venue_name, do: "CODA"
-
-  @impl true
   def example_data_file_location, do: "test/data/coda/index.html"
 
   @impl true
