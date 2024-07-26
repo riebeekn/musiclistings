@@ -2,7 +2,7 @@ defmodule MusicListings.Crawler.DataSourceTest do
   use MusicListings.DataCase, async: true
 
   alias MusicListings.Crawler.DataSource
-  alias MusicListings.Parsing.DanforthMusicHallParser
+  alias MusicListings.Parsing.VenueParsers.DanforthMusicHallParser
 
   describe "retrieve_events/4" do
     test "returns payload populated with raw event" do

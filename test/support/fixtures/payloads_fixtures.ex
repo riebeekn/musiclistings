@@ -3,7 +3,7 @@ defmodule MusicListings.PayloadsFixtures do
   Payloads related fixtures
   """
   alias MusicListings.Crawler.Payload
-  alias MusicListings.Parsing.DanforthMusicHallParser
+  alias MusicListings.Parsing.VenueParsers.DanforthMusicHallParser
 
   def load_payloads(source_file) do
     "#{File.cwd!()}/#{source_file}"

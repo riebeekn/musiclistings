@@ -4,7 +4,7 @@ defmodule MusicListings.Crawler.EventParserTest do
   alias MusicListings.Crawler.EventParser
   alias MusicListings.Crawler.Payload
   alias MusicListings.CrawlSummariesFixtures
-  alias MusicListings.Parsing.DanforthMusicHallParser
+  alias MusicListings.Parsing.VenueParsers.DanforthMusicHallParser
   alias MusicListings.PayloadsFixtures
   alias MusicListingsSchema.Venue
 
