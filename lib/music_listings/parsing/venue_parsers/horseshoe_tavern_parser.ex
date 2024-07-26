@@ -12,9 +12,6 @@ defmodule MusicListings.Parsing.VenueParsers.HorseshoeTavernParser do
   def source_url, do: "https://www.horseshoetavern.com/events"
 
   @impl true
-  def venue_name, do: "The Horseshoe Tavern"
-
-  @impl true
   def example_data_file_location, do: "test/data/horseshoe_tavern/index.html"
 
   @impl true

@@ -12,9 +12,6 @@ defmodule MusicListings.Parsing.VenueParsers.TDMusicHallParser do
   defdelegate source_url, to: MhRthTdmhParser
 
   @impl true
-  def venue_name, do: "TD Music Hall"
-
-  @impl true
   def example_data_file_location, do: "test/data/td_music_hall/index.json"
 
   @impl true

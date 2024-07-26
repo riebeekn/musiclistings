@@ -13,9 +13,6 @@ defmodule MusicListings.Parsing.VenueParsers.QueenElizabthTheatreParser do
       "https://gateway.admitone.com/embed/live-events?venueId=5f2c38d9b49c22464830180a&order=asc"
 
   @impl true
-  def venue_name, do: "Queen Elizabeth Theatre"
-
-  @impl true
   def example_data_file_location, do: "test/data/queen_elizabeth_theatre/index.json"
 
   @impl true

@@ -12,9 +12,6 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
     do: "https://www.thedrake.ca/wp-json/drake/v2/drake_events"
 
   @impl true
-  def venue_name, do: "Drake Underground"
-
-  @impl true
   def example_data_file_location, do: "test/data/drake_underground/index.json"
 
   @impl true

@@ -13,9 +13,6 @@ defmodule MusicListings.Parsing.VenueParsers.RebelParser do
       "https://core.service.elfsight.com/p/boot/?page=https%3A%2F%2Frebeltoronto.com%2Fevents%2F&w=737e2434-3a70-460f-aa98-a1ec67d0b60b"
 
   @impl true
-  def venue_name, do: "Rebel"
-
-  @impl true
   def example_data_file_location, do: "test/data/rebel/index.json"
 
   @impl true

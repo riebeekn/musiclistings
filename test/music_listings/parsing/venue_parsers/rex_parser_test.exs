@@ -30,12 +30,6 @@ defmodule MusicListings.Parsing.VenueParsers.RexParserTest do
     end
   end
 
-  describe "venue_name/0" do
-    test "returns expected value" do
-      assert "The Rex" == RexParser.venue_name()
-    end
-  end
-
   describe "event_selector/1" do
     test "returns expected events", %{index_html: index_html} do
       events = RexParser.event_selector(index_html)

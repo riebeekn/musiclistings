@@ -12,9 +12,6 @@ defmodule MusicListings.Parsing.VenueParsers.RoyThomsonHallParser do
   defdelegate source_url, to: MhRthTdmhParser
 
   @impl true
-  def venue_name, do: "Roy Thomson Hall"
-
-  @impl true
   def example_data_file_location, do: "test/data/roy_thomson_hall/index.json"
 
   @impl true

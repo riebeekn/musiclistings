@@ -27,12 +27,6 @@ defmodule MusicListings.Parsing.VenueParsers.RoyThomsonHallParserTest do
     end
   end
 
-  describe "venue_name/0" do
-    test "returns expected value" do
-      assert "Roy Thomson Hall" == RoyThomsonHallParser.venue_name()
-    end
-  end
-
   describe "event_selector/1" do
     test "returns expected events", %{index_html: index_html} do
       events = RoyThomsonHallParser.event_selector(index_html)

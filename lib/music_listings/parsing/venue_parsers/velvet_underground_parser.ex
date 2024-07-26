@@ -12,9 +12,6 @@ defmodule MusicListings.Parsing.VenueParsers.VelvetUndergroundParser do
   def source_url, do: "https://thevelvet.ca/events"
 
   @impl true
-  def venue_name, do: "Velvet Underground"
-
-  @impl true
   def example_data_file_location, do: "test/data/velvet_underground/index.html"
 
   @impl true

@@ -11,9 +11,6 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
   def source_url, do: "https://www.thepilot.ca/happening-at-the-pilot"
 
   @impl true
-  def venue_name, do: "The Pilot"
-
-  @impl true
   def example_data_file_location, do: "test/data/pilot/index.html"
 
   @impl true

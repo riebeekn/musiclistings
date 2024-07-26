@@ -16,9 +16,6 @@ defmodule MusicListings.Parsing.VenueParsers.RogersParser do
   def source_url, do: "https://www.livenation.com/venue/KovZpa3Bbe/rogers-centre-events"
 
   @impl true
-  def venue_name, do: "Rogers Centre"
-
-  @impl true
   def example_data_file_location, do: "test/data/rogers/index.html"
 
   @impl true
