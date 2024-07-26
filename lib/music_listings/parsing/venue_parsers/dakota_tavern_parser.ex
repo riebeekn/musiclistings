@@ -16,7 +16,7 @@ defmodule MusicListings.Parsing.VenueParsers.DakotaTavernParser do
   def example_data_file_location, do: "test/data/dakota_tavern/index.html"
 
   @impl true
-  def event_selector(body) do
+  def event(body) do
     ParseHelpers.event_selector(body, ".grid-item")
   end
 

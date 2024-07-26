@@ -9,7 +9,7 @@ defmodule MusicListings.PayloadsFixtures do
     "#{File.cwd!()}/#{source_file}"
     |> Path.expand()
     |> File.read!()
-    |> DanforthMusicHallParser.event_selector()
+    |> DanforthMusicHallParser.event()
     |> Enum.map(&Payload.new/1)
   end
 end

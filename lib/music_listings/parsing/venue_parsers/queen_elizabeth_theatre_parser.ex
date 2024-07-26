@@ -16,7 +16,7 @@ defmodule MusicListings.Parsing.VenueParsers.QueenElizabthTheatreParser do
   def example_data_file_location, do: "test/data/queen_elizabeth_theatre/index.json"
 
   @impl true
-  def event_selector(body) do
+  def event(body) do
     # bit of a hack to facilitate pulling data locally... Req converts it
     # to a map when pulling from www, where-as locally we just have a file
     # so when pulling local we get a string and need to decode! it

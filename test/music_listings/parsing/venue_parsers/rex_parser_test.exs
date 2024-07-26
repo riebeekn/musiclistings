@@ -30,9 +30,9 @@ defmodule MusicListings.Parsing.VenueParsers.RexParserTest do
     end
   end
 
-  describe "event_selector/1" do
+  describe "event/1" do
     test "returns expected events", %{index_html: index_html} do
-      events = RexParser.event_selector(index_html)
+      events = RexParser.event(index_html)
 
       assert 66 = Enum.count(events)
     end

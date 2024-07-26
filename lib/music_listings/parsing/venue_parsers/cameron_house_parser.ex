@@ -16,7 +16,7 @@ defmodule MusicListings.Parsing.VenueParsers.CameronHouseParser do
   def example_data_file_location, do: "test/data/cameron_house/index.html"
 
   @impl true
-  def event_selector(body) do
+  def event(body) do
     json =
       body
       |> Meeseeks.parse()

@@ -16,7 +16,7 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParserTest do
     event =
       single_event_file_path
       |> File.read!()
-      |> ScotiabankParser.event_selector()
+      |> ScotiabankParser.event()
       |> List.first()
 
     %{index_html: index_html, event: event}
@@ -29,9 +29,9 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParserTest do
     end
   end
 
-  describe "event_selector/1" do
+  describe "event/1" do
     test "returns expected events", %{index_html: index_html} do
-      events = ScotiabankParser.event_selector(index_html)
+      events = ScotiabankParser.event(index_html)
 
       assert 9 = Enum.count(events)
     end

@@ -52,7 +52,7 @@ defmodule MusicListings.Crawler.DataSource do
     local_data_file
     |> Path.expand()
     |> File.read!()
-    |> parser.event_selector()
+    |> parser.event()
     |> Enum.map(&Payload.new/1)
   end
 end

@@ -9,7 +9,7 @@ defmodule MusicListings.Parsing.VenueParsers.MhRthTdmhParser do
 
   def source_url, do: "https://www.mhrth.com/api/performance-feed/12"
 
-  def event_selector(body, facility_no) do
+  def event(body, facility_no) do
     # bit of a hack to facilitate pulling data locally... Req converts it
     # to a map when pulling from www, where-as locally we just have a file
     # so when pulling local we get a string and need to decode! it

@@ -15,7 +15,7 @@ defmodule MusicListings.Parsing.VenueParsers.VelvetUndergroundParser do
   def example_data_file_location, do: "test/data/velvet_underground/index.html"
 
   @impl true
-  def event_selector(body) do
+  def event(body) do
     ParseHelpers.event_selector(body, ".event-block")
   end
 

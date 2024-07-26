@@ -16,7 +16,7 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParserTest do
     event =
       single_event_file_path
       |> File.read!()
-      |> CodaParser.event_selector()
+      |> CodaParser.event()
       |> List.first()
 
     %{index_html: index_html, event: event}
@@ -28,9 +28,9 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParserTest do
     end
   end
 
-  describe "event_selector/1" do
+  describe "event/1" do
     test "returns expected events", %{index_html: index_html} do
-      events = CodaParser.event_selector(index_html)
+      events = CodaParser.event(index_html)
 
       assert 15 = Enum.count(events)
     end
