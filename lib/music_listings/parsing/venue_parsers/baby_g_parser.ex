@@ -2,11 +2,11 @@ defmodule MusicListings.Parsing.VenueParsers.BabyGParser do
   @moduledoc """
   Parser for extracing events from http://thebabyg.com/
   """
-  @behaviour MusicListings.Parsing.Parser
+  @behaviour MusicListings.Parsing.VenueParser
 
   import Meeseeks.CSS
 
-  alias MusicListings.Parsing.Parser
+  alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
 
   @impl true
@@ -20,7 +20,7 @@ defmodule MusicListings.Parsing.VenueParsers.BabyGParser do
 
   @impl true
   def event_selector(body) do
-    Parser.event_selector(body, "#calendar_wrap")
+    ParseHelpers.event_selector(body, "#calendar_wrap")
   end
 
   @impl true
@@ -40,7 +40,7 @@ defmodule MusicListings.Parsing.VenueParsers.BabyGParser do
 
   @impl true
   def event_title(event) do
-    Parser.event_title(event, "#calendar_info_headliner")
+    ParseHelpers.event_title(event, "#calendar_info_headliner")
   end
 
   @openers_time_price_regex ~r/^(.*)\s+(\d{1,2}:[APM]{2})\s+\$([\d.]+)(?:\s+\w+)?$/
@@ -103,7 +103,7 @@ defmodule MusicListings.Parsing.VenueParsers.BabyGParser do
     [_original_string, _openers, _time, price] =
       Regex.run(@openers_time_price_regex, openers_time_price_string)
 
-    Parser.convert_price_string_to_price(price)
+    ParseHelpers.convert_price_string_to_price(price)
   end
 
   @impl true

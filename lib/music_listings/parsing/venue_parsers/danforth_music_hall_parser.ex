@@ -2,12 +2,12 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParser do
   @moduledoc """
   Parser for extracing events from https://thedanforth.com/
   """
-  @behaviour MusicListings.Parsing.Parser
+  @behaviour MusicListings.Parsing.VenueParser
 
   import Meeseeks.CSS
   import Meeseeks.XPath
 
-  alias MusicListings.Parsing.Parser
+  alias MusicListings.Parsing.ParseHelpers
 
   @impl true
   def source_url, do: "https://thedanforth.com"
@@ -20,27 +20,27 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParser do
 
   @impl true
   def event_selector(body) do
-    Parser.event_selector(body, ".event-block")
+    ParseHelpers.event_selector(body, ".event-block")
   end
 
   @impl true
   def next_page_url(body) do
-    Parser.next_page_url(body, ".nav-next a")
+    ParseHelpers.next_page_url(body, ".nav-next a")
   end
 
   @impl true
   def event_id(event) do
-    Parser.event_id(event, ".event-block")
+    ParseHelpers.event_id(event, ".event-block")
   end
 
   @impl true
   def event_title(event) do
-    Parser.event_title(event, ".entry-title")
+    ParseHelpers.event_title(event, ".entry-title")
   end
 
   @impl true
   def performers(event) do
-    Parser.performers(event, ".artistname")
+    ParseHelpers.performers(event, ".artistname")
   end
 
   @impl true
@@ -62,7 +62,7 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParser do
     |> Meeseeks.text()
     |> String.split("-")
     |> Enum.at(0)
-    |> Parser.convert_event_time_string_to_time()
+    |> ParseHelpers.convert_event_time_string_to_time()
   end
 
   @impl true
@@ -70,7 +70,7 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParser do
     event
     |> Meeseeks.one(xpath("//div[@class='tickets']/following-sibling::div[1]"))
     |> Meeseeks.text()
-    |> Parser.convert_price_string_to_price()
+    |> ParseHelpers.convert_price_string_to_price()
   end
 
   @impl true
@@ -86,12 +86,12 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParser do
       time_age
       |> String.split("-")
       |> Enum.at(1)
-      |> Parser.convert_age_restriction_string_to_enum()
+      |> ParseHelpers.convert_age_restriction_string_to_enum()
     end
   end
 
   @impl true
   def ticket_url(event) do
-    Parser.ticket_url(event, ".ticketlink a")
+    ParseHelpers.ticket_url(event, ".ticketlink a")
   end
 end

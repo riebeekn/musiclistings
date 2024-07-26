@@ -2,7 +2,7 @@ defmodule MusicListings.Parsing.VenueParsers.RoyThomsonHallParser do
   @moduledoc """
   Parser for extracing events from https://masseyhall.mhrth.com/
   """
-  @behaviour MusicListings.Parsing.Parser
+  @behaviour MusicListings.Parsing.VenueParser
 
   alias MusicListings.Parsing.VenueParsers.MhRthTdmhParser
 

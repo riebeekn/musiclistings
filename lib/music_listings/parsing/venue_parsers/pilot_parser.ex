@@ -2,9 +2,9 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
   @moduledoc """
   Parser for extracing events from https://thepilot.ca/
   """
-  @behaviour MusicListings.Parsing.Parser
+  @behaviour MusicListings.Parsing.VenueParser
 
-  alias MusicListings.Parsing.Parser
+  alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
 
   @impl true
@@ -18,7 +18,10 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
 
   @impl true
   def event_selector(body) do
-    Parser.event_selector(body, "div#scvr-section-013c83e7-396f-4090-a781-83f7097a960c p.fr-tag")
+    ParseHelpers.event_selector(
+      body,
+      "div#scvr-section-013c83e7-396f-4090-a781-83f7097a960c p.fr-tag"
+    )
   end
 
   @impl true
@@ -36,7 +39,7 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
   @impl true
   def event_title(event) do
     event
-    |> Parser.event_title(".fr-tag strong, .fr-tag b")
+    |> ParseHelpers.event_title(".fr-tag strong, .fr-tag b")
     |> String.replace(".", "")
   end
 
@@ -50,7 +53,7 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
   def event_date(event) do
     [full_date_string | _rest] =
       event
-      |> Parser.event_title(".fr-tag")
+      |> ParseHelpers.event_title(".fr-tag")
       |> String.split("-")
 
     [_day_of_week, month_string, day_string] = String.split(full_date_string)
@@ -66,7 +69,7 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
       |> String.replace(",", "")
       |> String.to_integer()
 
-    month = Parser.convert_month_string_to_number(month_string)
+    month = ParseHelpers.convert_month_string_to_number(month_string)
 
     # TODO: common
     today = Date.utc_today()
@@ -96,7 +99,7 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
 
   @impl true
   def price(_event) do
-    Parser.convert_price_string_to_price(nil)
+    ParseHelpers.convert_price_string_to_price(nil)
   end
 
   @impl true

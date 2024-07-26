@@ -4,7 +4,7 @@ defmodule MusicListings.Crawler.EventParser do
   the Payload.parsed_event field
   """
   alias MusicListings.Crawler.Payload
-  alias MusicListings.Parsing.Parser
+  alias MusicListings.Parsing.VenueParser
   alias MusicListings.Repo
   alias MusicListingsSchema.CrawlError
   alias MusicListingsSchema.CrawlSummary
@@ -13,7 +13,7 @@ defmodule MusicListings.Crawler.EventParser do
 
   @spec parse_events(
           payloads :: list(Payload),
-          parser :: Parser,
+          parser :: VenueParser,
           venue :: Venue,
           crawl_summary :: CrawlSummary
         ) ::

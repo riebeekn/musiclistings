@@ -2,11 +2,11 @@ defmodule MusicListings.Parsing.VenueParsers.DakotaTavernParser do
   @moduledoc """
   Parser for extracing events from https://www.dakotatavern.ca/
   """
-  @behaviour MusicListings.Parsing.Parser
+  @behaviour MusicListings.Parsing.VenueParser
 
   import Meeseeks.CSS
 
-  alias MusicListings.Parsing.Parser
+  alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
 
   @impl true
@@ -20,7 +20,7 @@ defmodule MusicListings.Parsing.VenueParsers.DakotaTavernParser do
 
   @impl true
   def event_selector(body) do
-    Parser.event_selector(body, ".grid-item")
+    ParseHelpers.event_selector(body, ".grid-item")
   end
 
   @impl true
@@ -40,7 +40,7 @@ defmodule MusicListings.Parsing.VenueParsers.DakotaTavernParser do
   def event_title(event) do
     [_date, title] =
       event
-      |> Parser.event_title(".portfolio-title")
+      |> ParseHelpers.event_title(".portfolio-title")
       |> String.split("-")
 
     title |> String.trim()
@@ -56,7 +56,7 @@ defmodule MusicListings.Parsing.VenueParsers.DakotaTavernParser do
   def event_date(event) do
     [date, _title] =
       event
-      |> Parser.event_title(".portfolio-title")
+      |> ParseHelpers.event_title(".portfolio-title")
       |> String.split("-")
 
     [_day_of_week, month_and_day_string, year_string] = String.split(date, ",")
@@ -64,7 +64,7 @@ defmodule MusicListings.Parsing.VenueParsers.DakotaTavernParser do
     [month_string, day_string] = month_and_day_string |> String.split()
 
     year = year_string |> String.trim() |> String.to_integer()
-    month = month_string |> Parser.convert_month_string_to_number()
+    month = month_string |> ParseHelpers.convert_month_string_to_number()
     day = day_string |> String.to_integer()
 
     Date.new!(year, month, day)
@@ -77,7 +77,7 @@ defmodule MusicListings.Parsing.VenueParsers.DakotaTavernParser do
 
   @impl true
   def price(_event) do
-    Parser.convert_price_string_to_price(nil)
+    ParseHelpers.convert_price_string_to_price(nil)
   end
 
   @impl true

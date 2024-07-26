@@ -2,11 +2,11 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParser do
   @moduledoc """
   Parser for extracing events from https://www.scotiabankarena.com
   """
-  @behaviour MusicListings.Parsing.Parser
+  @behaviour MusicListings.Parsing.VenueParser
 
   import Meeseeks.CSS
 
-  alias MusicListings.Parsing.Parser
+  alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
 
   @impl true
@@ -22,7 +22,7 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParser do
 
   @impl true
   def event_selector(body) do
-    Parser.event_selector(body, ".eventItem")
+    ParseHelpers.event_selector(body, ".eventItem")
   end
 
   @impl true
@@ -42,7 +42,7 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParser do
 
   @impl true
   def event_title(event) do
-    Parser.event_title(event, ".info .title a")
+    ParseHelpers.event_title(event, ".info .title a")
   end
 
   @impl true
@@ -58,7 +58,7 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParser do
     year_string = event |> Meeseeks.one(css(".m-date__year")) |> Meeseeks.text()
 
     day = String.to_integer(day_string)
-    month = Parser.convert_month_string_to_number(month_string)
+    month = ParseHelpers.convert_month_string_to_number(month_string)
     year = year_string |> String.replace(",", "") |> String.trim() |> String.to_integer()
 
     Date.new!(year, month, day)
@@ -71,7 +71,7 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParser do
 
   @impl true
   def price(_event) do
-    Parser.convert_price_string_to_price(nil)
+    ParseHelpers.convert_price_string_to_price(nil)
   end
 
   @impl true
@@ -81,6 +81,6 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParser do
 
   @impl true
   def ticket_url(event) do
-    Parser.ticket_url(event, ".more")
+    ParseHelpers.ticket_url(event, ".more")
   end
 end

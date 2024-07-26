@@ -5,13 +5,13 @@ defmodule MusicListings.Crawler.DataSource do
   html for individual events in the form of a Meeseeks result
   """
   alias MusicListings.Crawler.Payload
-  alias MusicListings.Parsing.Parser
+  alias MusicListings.Parsing.VenueParser
   alias Req.Response
 
   require Logger
 
   @spec retrieve_events(
-          parser :: Parser,
+          parser :: VenueParser,
           url :: String.t(),
           pull_data_from_www? :: boolean(),
           events :: list(Payload)
