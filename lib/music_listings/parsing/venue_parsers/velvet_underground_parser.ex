@@ -2,11 +2,11 @@ defmodule MusicListings.Parsing.VenueParsers.VelvetUndergroundParser do
   @moduledoc """
   Parser for extracing events from https://thevelvet.ca
   """
-  @behaviour MusicListings.Parsing.Parser
+  @behaviour MusicListings.Parsing.VenueParser
 
   import Meeseeks.CSS
 
-  alias MusicListings.Parsing.Parser
+  alias MusicListings.Parsing.ParseHelpers
 
   @impl true
   def source_url, do: "https://thevelvet.ca/events"
@@ -19,27 +19,27 @@ defmodule MusicListings.Parsing.VenueParsers.VelvetUndergroundParser do
 
   @impl true
   def event_selector(body) do
-    Parser.event_selector(body, ".event-block")
+    ParseHelpers.event_selector(body, ".event-block")
   end
 
   @impl true
   def next_page_url(body) do
-    Parser.next_page_url(body, ".nav-previous a")
+    ParseHelpers.next_page_url(body, ".nav-previous a")
   end
 
   @impl true
   def event_id(event) do
-    Parser.event_id(event, ".event-block")
+    ParseHelpers.event_id(event, ".event-block")
   end
 
   @impl true
   def event_title(event) do
-    Parser.event_title(event, ".event-title")
+    ParseHelpers.event_title(event, ".event-title")
   end
 
   @impl true
   def performers(event) do
-    Parser.performers(event, ".event-artist-name")
+    ParseHelpers.performers(event, ".event-artist-name")
   end
 
   @impl true
@@ -66,7 +66,7 @@ defmodule MusicListings.Parsing.VenueParsers.VelvetUndergroundParser do
     |> Enum.at(0)
     |> String.split(" ")
     |> Enum.at(1)
-    |> Parser.convert_event_time_string_to_time()
+    |> ParseHelpers.convert_event_time_string_to_time()
   end
 
   @impl true
@@ -75,7 +75,7 @@ defmodule MusicListings.Parsing.VenueParsers.VelvetUndergroundParser do
     |> Meeseeks.all(css(".event-meta"))
     |> Enum.find(fn element -> element |> Meeseeks.text() |> String.contains?("Price:") end)
     |> Meeseeks.text()
-    |> Parser.convert_price_string_to_price()
+    |> ParseHelpers.convert_price_string_to_price()
   end
 
   @impl true
@@ -88,11 +88,11 @@ defmodule MusicListings.Parsing.VenueParsers.VelvetUndergroundParser do
     |> Enum.at(1)
     |> String.split(":")
     |> Enum.at(1)
-    |> Parser.convert_age_restriction_string_to_enum()
+    |> ParseHelpers.convert_age_restriction_string_to_enum()
   end
 
   @impl true
   def ticket_url(event) do
-    Parser.ticket_url(event, ".event-ticket-link")
+    ParseHelpers.ticket_url(event, ".event-ticket-link")
   end
 end

@@ -2,9 +2,9 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
   @moduledoc """
   Parser for extracing events from https://www.thedrake.ca/thedrakehotel/underground/
   """
-  @behaviour MusicListings.Parsing.Parser
+  @behaviour MusicListings.Parsing.VenueParser
 
-  alias MusicListings.Parsing.Parser
+  alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
 
   @impl true
@@ -64,19 +64,19 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
   def event_time(event) do
     event["fm_time"]
     |> Enum.at(0)
-    |> Parser.convert_event_time_string_to_time()
+    |> ParseHelpers.convert_event_time_string_to_time()
   end
 
   @impl true
   def price(_event) do
-    Parser.convert_price_string_to_price(nil)
+    ParseHelpers.convert_price_string_to_price(nil)
   end
 
   @impl true
   def age_restriction(event) do
     event["fm_filter_1"]
     |> Enum.at(0)
-    |> Parser.convert_age_restriction_string_to_enum()
+    |> ParseHelpers.convert_age_restriction_string_to_enum()
   end
 
   @impl true

@@ -2,11 +2,11 @@ defmodule MusicListings.Parsing.VenueParsers.LeesPalaceParser do
   @moduledoc """
   Parser for extracing events from https://www.leespalace.com/
   """
-  @behaviour MusicListings.Parsing.Parser
+  @behaviour MusicListings.Parsing.VenueParser
 
   import Meeseeks.CSS
 
-  alias MusicListings.Parsing.Parser
+  alias MusicListings.Parsing.ParseHelpers
 
   @impl true
   def source_url, do: "https://www.leespalace.com/events"
@@ -19,7 +19,7 @@ defmodule MusicListings.Parsing.VenueParsers.LeesPalaceParser do
 
   @impl true
   def event_selector(body) do
-    Parser.event_selector(body, ".schedule-event")
+    ParseHelpers.event_selector(body, ".schedule-event")
   end
 
   @impl true
@@ -39,12 +39,12 @@ defmodule MusicListings.Parsing.VenueParsers.LeesPalaceParser do
 
   @impl true
   def event_title(event) do
-    Parser.event_title(event, ".schedule-speaker-name")
+    ParseHelpers.event_title(event, ".schedule-speaker-name")
   end
 
   @impl true
   def performers(event) do
-    Parser.performers(event, ".schedule-speaker-name")
+    ParseHelpers.performers(event, ".schedule-speaker-name")
   end
 
   @impl true
@@ -57,7 +57,7 @@ defmodule MusicListings.Parsing.VenueParsers.LeesPalaceParser do
     [_day_of_week_string, month_string, day_string, year_string] = String.split(full_date_string)
 
     day = day_string |> String.replace(",", "") |> String.to_integer()
-    month = Parser.convert_month_string_to_number(month_string)
+    month = ParseHelpers.convert_month_string_to_number(month_string)
     year = String.to_integer(year_string)
 
     Date.new!(year, month, day)
@@ -74,7 +74,7 @@ defmodule MusicListings.Parsing.VenueParsers.LeesPalaceParser do
     |> Meeseeks.all(css(".schedule-event-time"))
     |> Enum.find(fn element -> element |> Meeseeks.text() |> String.contains?("$") end)
     |> Meeseeks.text()
-    |> Parser.convert_price_string_to_price()
+    |> ParseHelpers.convert_price_string_to_price()
   end
 
   @impl true
@@ -82,11 +82,11 @@ defmodule MusicListings.Parsing.VenueParsers.LeesPalaceParser do
     event
     |> Meeseeks.one(css(".non"))
     |> Meeseeks.text()
-    |> Parser.convert_age_restriction_string_to_enum()
+    |> ParseHelpers.convert_age_restriction_string_to_enum()
   end
 
   @impl true
   def ticket_url(event) do
-    Parser.ticket_url(event, ".blb")
+    ParseHelpers.ticket_url(event, ".blb")
   end
 end

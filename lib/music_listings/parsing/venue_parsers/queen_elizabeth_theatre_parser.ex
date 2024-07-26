@@ -2,9 +2,9 @@ defmodule MusicListings.Parsing.VenueParsers.QueenElizabthTheatreParser do
   @moduledoc """
   Parser for extracing events from https://www.queenelizabeththeatre.ca/
   """
-  @behaviour MusicListings.Parsing.Parser
+  @behaviour MusicListings.Parsing.VenueParser
 
-  alias MusicListings.Parsing.Parser
+  alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
 
   @impl true
@@ -56,7 +56,7 @@ defmodule MusicListings.Parsing.VenueParsers.QueenElizabthTheatreParser do
     [month_string, day_string, year_string] = String.split(event["event_date"])
 
     year = String.to_integer(year_string)
-    month = Parser.convert_month_string_to_number(month_string)
+    month = ParseHelpers.convert_month_string_to_number(month_string)
 
     # TODO: common
     day =
@@ -75,19 +75,19 @@ defmodule MusicListings.Parsing.VenueParsers.QueenElizabthTheatreParser do
   @impl true
   def event_time(event) do
     event["doors"]
-    |> Parser.convert_event_time_string_to_time()
+    |> ParseHelpers.convert_event_time_string_to_time()
   end
 
   @impl true
   def price(event) do
     event["price_range"]
-    |> Parser.convert_price_string_to_price()
+    |> ParseHelpers.convert_price_string_to_price()
   end
 
   @impl true
   def age_restriction(event) do
     event["age_limit"]
-    |> Parser.convert_age_restriction_string_to_enum()
+    |> ParseHelpers.convert_age_restriction_string_to_enum()
   end
 
   @impl true

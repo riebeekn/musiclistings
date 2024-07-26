@@ -4,7 +4,7 @@ defmodule MusicListings.Parsing.VenueParsers.MhRthTdmhParser do
   TD Music Hall, as they are on a single site
   """
 
-  alias MusicListings.Parsing.Parser
+  alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
 
   def source_url, do: "https://www.mhrth.com/api/performance-feed/12"
@@ -46,7 +46,7 @@ defmodule MusicListings.Parsing.VenueParsers.MhRthTdmhParser do
   end
 
   def price(_event) do
-    Parser.convert_price_string_to_price(nil)
+    ParseHelpers.convert_price_string_to_price(nil)
   end
 
   def age_restriction(_event) do

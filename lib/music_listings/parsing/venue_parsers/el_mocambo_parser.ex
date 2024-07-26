@@ -2,11 +2,11 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
   @moduledoc """
   Parser for extracing events from https://elmocambo.com/
   """
-  @behaviour MusicListings.Parsing.Parser
+  @behaviour MusicListings.Parsing.VenueParser
 
   import Meeseeks.CSS
 
-  alias MusicListings.Parsing.Parser
+  alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
 
   @impl true
@@ -40,7 +40,7 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
 
   @impl true
   def event_title(event) do
-    Parser.event_title(event, ".stratum-advanced-posts__post-title a")
+    ParseHelpers.event_title(event, ".stratum-advanced-posts__post-title a")
   end
 
   @impl true
@@ -58,7 +58,7 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
       |> String.split()
 
     day = day_string |> String.replace(",", "") |> String.to_integer()
-    month = Parser.convert_month_string_to_number(month_string)
+    month = ParseHelpers.convert_month_string_to_number(month_string)
     year = String.to_integer(year_string)
 
     Date.new!(year, month, day)
@@ -71,7 +71,7 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
 
   @impl true
   def price(_event) do
-    Parser.convert_price_string_to_price(nil)
+    ParseHelpers.convert_price_string_to_price(nil)
   end
 
   @impl true
@@ -81,6 +81,6 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
 
   @impl true
   def ticket_url(event) do
-    Parser.ticket_url(event, ".stratum-advanced-posts__read-more a")
+    ParseHelpers.ticket_url(event, ".stratum-advanced-posts__read-more a")
   end
 end

@@ -2,11 +2,11 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParser do
   @moduledoc """
   Parser for extracing events from https://thegreathall.ca
   """
-  @behaviour MusicListings.Parsing.Parser
+  @behaviour MusicListings.Parsing.VenueParser
 
   import Meeseeks.CSS
 
-  alias MusicListings.Parsing.Parser
+  alias MusicListings.Parsing.ParseHelpers
 
   @impl true
   def source_url, do: "https://thegreathall.ca/calendar"
@@ -19,7 +19,7 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParser do
 
   @impl true
   def event_selector(body) do
-    Parser.event_selector(body, ".tgh-event-item-container")
+    ParseHelpers.event_selector(body, ".tgh-event-item-container")
   end
 
   @impl true
@@ -39,12 +39,12 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParser do
 
   @impl true
   def event_title(event) do
-    Parser.event_title(event, ".tgh-e-title")
+    ParseHelpers.event_title(event, ".tgh-e-title")
   end
 
   @impl true
   def performers(event) do
-    Parser.performers(event, ".tgh-e-title")
+    ParseHelpers.performers(event, ".tgh-e-title")
   end
 
   @impl true
@@ -57,7 +57,7 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParser do
     [_day_of_week_string, month_string, day_string, year_string] = String.split(full_date_string)
 
     day = String.to_integer(day_string)
-    month = Parser.convert_month_string_to_number(month_string)
+    month = ParseHelpers.convert_month_string_to_number(month_string)
     year = String.to_integer(year_string)
 
     Date.new!(year, month, day)
@@ -68,12 +68,12 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParser do
     event
     |> Meeseeks.one(css(".tgh-e-time"))
     |> Meeseeks.text()
-    |> Parser.convert_event_time_string_to_time()
+    |> ParseHelpers.convert_event_time_string_to_time()
   end
 
   @impl true
   def price(_event) do
-    Parser.convert_price_string_to_price(nil)
+    ParseHelpers.convert_price_string_to_price(nil)
   end
 
   @impl true

@@ -2,11 +2,11 @@ defmodule MusicListings.Parsing.VenueParsers.GarrisonParser do
   @moduledoc """
   Parser for extracing events from http://www.garrisontoronto.com
   """
-  @behaviour MusicListings.Parsing.Parser
+  @behaviour MusicListings.Parsing.VenueParser
 
   import Meeseeks.CSS
 
-  alias MusicListings.Parsing.Parser
+  alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
 
   @impl true
@@ -20,7 +20,7 @@ defmodule MusicListings.Parsing.VenueParsers.GarrisonParser do
 
   @impl true
   def event_selector(body) do
-    Parser.event_selector(body, "#calendar_wrap")
+    ParseHelpers.event_selector(body, "#calendar_wrap")
   end
 
   @impl true
@@ -40,7 +40,7 @@ defmodule MusicListings.Parsing.VenueParsers.GarrisonParser do
 
   @impl true
   def event_title(event) do
-    Parser.event_title(event, "#calendar_info_headliner")
+    ParseHelpers.event_title(event, "#calendar_info_headliner")
   end
 
   @impl true
@@ -85,7 +85,7 @@ defmodule MusicListings.Parsing.VenueParsers.GarrisonParser do
       |> Enum.map(&String.downcase/1)
 
     day = day_string |> String.replace("o", "0") |> String.to_integer()
-    month = Parser.convert_month_string_to_number(month_string)
+    month = ParseHelpers.convert_month_string_to_number(month_string)
 
     Date.new!(year, month, day)
   end
@@ -121,9 +121,9 @@ defmodule MusicListings.Parsing.VenueParsers.GarrisonParser do
       |> Enum.at(1)
 
     if String.contains?(maybe_price_string, "$") do
-      Parser.convert_price_string_to_price(maybe_price_string)
+      ParseHelpers.convert_price_string_to_price(maybe_price_string)
     else
-      Parser.convert_price_string_to_price(nil)
+      ParseHelpers.convert_price_string_to_price(nil)
     end
   end
 

@@ -2,11 +2,11 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParser do
   @moduledoc """
   Parser for extracing events from https://www.codatoronto.com/
   """
-  @behaviour MusicListings.Parsing.Parser
+  @behaviour MusicListings.Parsing.VenueParser
 
   import Meeseeks.CSS
 
-  alias MusicListings.Parsing.Parser
+  alias MusicListings.Parsing.ParseHelpers
 
   @impl true
   def source_url, do: "https://www.codatoronto.com/events"
@@ -19,7 +19,7 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParser do
 
   @impl true
   def event_selector(body) do
-    Parser.event_selector(body, ".schedule-event")
+    ParseHelpers.event_selector(body, ".schedule-event")
   end
 
   @impl true
@@ -39,12 +39,12 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParser do
 
   @impl true
   def event_title(event) do
-    Parser.event_title(event, ".event-name")
+    ParseHelpers.event_title(event, ".event-name")
   end
 
   @impl true
   def performers(event) do
-    Parser.performers(event, ".event-name")
+    ParseHelpers.performers(event, ".event-name")
   end
 
   @impl true
@@ -57,7 +57,7 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParser do
     [month_string, day_string, year_string] = String.split(full_date_string)
 
     day = day_string |> String.replace(",", "") |> String.to_integer()
-    month = Parser.convert_month_string_to_number(month_string)
+    month = ParseHelpers.convert_month_string_to_number(month_string)
     year = String.to_integer(year_string)
 
     Date.new!(year, month, day)
@@ -70,7 +70,7 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParser do
 
   @impl true
   def price(_event) do
-    Parser.convert_price_string_to_price(nil)
+    ParseHelpers.convert_price_string_to_price(nil)
   end
 
   @impl true

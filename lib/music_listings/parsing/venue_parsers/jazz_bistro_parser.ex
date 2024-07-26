@@ -2,11 +2,11 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParser do
   @moduledoc """
   Parser for extracing events from https://jazzbistro.ca/
   """
-  @behaviour MusicListings.Parsing.Parser
+  @behaviour MusicListings.Parsing.VenueParser
 
   import Meeseeks.CSS
 
-  alias MusicListings.Parsing.Parser
+  alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
 
   @impl true
@@ -73,7 +73,7 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParser do
 
   @impl true
   def price(_event) do
-    Parser.convert_price_string_to_price(nil)
+    ParseHelpers.convert_price_string_to_price(nil)
   end
 
   @impl true

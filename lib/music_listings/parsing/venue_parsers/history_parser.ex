@@ -2,11 +2,11 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParser do
   @moduledoc """
   Parser for extracing events from https://www.historytoronto.com
   """
-  @behaviour MusicListings.Parsing.Parser
+  @behaviour MusicListings.Parsing.VenueParser
 
   import Meeseeks.CSS
 
-  alias MusicListings.Parsing.Parser
+  alias MusicListings.Parsing.ParseHelpers
 
   @impl true
   def source_url, do: "https://www.historytoronto.com/events/events_ajax/0?per_page=60"
@@ -19,7 +19,7 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParser do
 
   @impl true
   def event_selector(body) do
-    Parser.event_selector(body, ".eventItem")
+    ParseHelpers.event_selector(body, ".eventItem")
   end
 
   @impl true
@@ -32,22 +32,22 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParser do
   def event_id(event) do
     event
     |> ticket_url()
-    |> Parser.extract_event_id_from_ticketmaster_url()
+    |> ParseHelpers.extract_event_id_from_ticketmaster_url()
   end
 
   @impl true
   def event_title(event) do
-    Parser.event_title(event, ".title")
+    ParseHelpers.event_title(event, ".title")
   end
 
   @impl true
   def performers(event) do
-    Parser.performers(event, ".title")
+    ParseHelpers.performers(event, ".title")
   end
 
   @impl true
   def event_date(event) do
-    Parser.extract_date_from_m__xx_format(event)
+    ParseHelpers.extract_date_from_m__xx_format(event)
   end
 
   @impl true
@@ -55,12 +55,12 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParser do
     event
     |> Meeseeks.one(css(".start"))
     |> Meeseeks.text()
-    |> Parser.convert_event_time_string_to_time()
+    |> ParseHelpers.convert_event_time_string_to_time()
   end
 
   @impl true
   def price(_event) do
-    Parser.convert_price_string_to_price(nil)
+    ParseHelpers.convert_price_string_to_price(nil)
   end
 
   @impl true
@@ -70,6 +70,6 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParser do
 
   @impl true
   def ticket_url(event) do
-    Parser.ticket_url(event, ".tickets")
+    ParseHelpers.ticket_url(event, ".tickets")
   end
 end

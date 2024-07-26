@@ -2,11 +2,11 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParser do
   @moduledoc """
   Parser for extracing events from https://thephoenixconcerttheatre.com/
   """
-  @behaviour MusicListings.Parsing.Parser
+  @behaviour MusicListings.Parsing.VenueParser
 
   import Meeseeks.CSS
 
-  alias MusicListings.Parsing.Parser
+  alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
 
   @impl true
@@ -20,7 +20,7 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParser do
 
   @impl true
   def event_selector(body) do
-    Parser.event_selector(body, ".event-item")
+    ParseHelpers.event_selector(body, ".event-item")
   end
 
   @impl true
@@ -60,7 +60,7 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParser do
     [month_string, day_string] = String.split(month_day_string)
 
     day = String.to_integer(day_string)
-    month = Parser.convert_month_string_to_number(month_string)
+    month = ParseHelpers.convert_month_string_to_number(month_string)
 
     today = Date.utc_today()
     Date.new!(today.year, month, day)
@@ -76,12 +76,12 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParser do
 
     doors_string
     |> String.replace("Doors: ", "")
-    |> Parser.convert_event_time_string_to_time()
+    |> ParseHelpers.convert_event_time_string_to_time()
   end
 
   @impl true
   def price(_event) do
-    Parser.convert_price_string_to_price(nil)
+    ParseHelpers.convert_price_string_to_price(nil)
   end
 
   @impl true
@@ -89,11 +89,11 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParser do
     event
     |> Meeseeks.one(css(".event-ages"))
     |> Meeseeks.text()
-    |> Parser.convert_age_restriction_string_to_enum()
+    |> ParseHelpers.convert_age_restriction_string_to_enum()
   end
 
   @impl true
   def ticket_url(event) do
-    Parser.ticket_url(event, ".event-title a")
+    ParseHelpers.ticket_url(event, ".event-title a")
   end
 end
