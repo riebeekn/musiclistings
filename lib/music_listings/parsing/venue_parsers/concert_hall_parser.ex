@@ -16,7 +16,7 @@ defmodule MusicListings.Parsing.VenueParsers.ConcertHallParser do
   def example_data_file_location, do: "test/data/concert_hall/index.html"
 
   @impl true
-  def event(body) do
+  def events(body) do
     body
     |> Meeseeks.parse()
     |> Meeseeks.all(css("script[type=\"application/ld+json\"]"))

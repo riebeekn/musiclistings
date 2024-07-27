@@ -16,7 +16,7 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParserTest do
     event =
       single_event_file_path
       |> File.read!()
-      |> DanforthMusicHallParser.event()
+      |> DanforthMusicHallParser.events()
       |> List.first()
 
     %{index_html: index_html, event: event}
@@ -28,9 +28,9 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParserTest do
     end
   end
 
-  describe "event/1" do
+  describe "events/1" do
     test "returns expected events", %{index_html: index_html} do
-      events = DanforthMusicHallParser.event(index_html)
+      events = DanforthMusicHallParser.events(index_html)
 
       assert 68 = Enum.count(events)
     end

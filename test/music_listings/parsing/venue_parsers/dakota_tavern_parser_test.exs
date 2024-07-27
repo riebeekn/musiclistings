@@ -16,7 +16,7 @@ defmodule MusicListings.Parsing.VenueParsers.DakotaTavernParserTest do
     event =
       single_event_file_path
       |> File.read!()
-      |> DakotaTavernParser.event()
+      |> DakotaTavernParser.events()
       |> List.first()
 
     %{index_html: index_html, event: event}
@@ -28,9 +28,9 @@ defmodule MusicListings.Parsing.VenueParsers.DakotaTavernParserTest do
     end
   end
 
-  describe "event/1" do
+  describe "events/1" do
     test "returns expected events", %{index_html: index_html} do
-      events = DakotaTavernParser.event(index_html)
+      events = DakotaTavernParser.events(index_html)
 
       assert 25 = Enum.count(events)
     end

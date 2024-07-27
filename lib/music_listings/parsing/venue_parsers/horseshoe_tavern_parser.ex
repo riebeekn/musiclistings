@@ -15,7 +15,7 @@ defmodule MusicListings.Parsing.VenueParsers.HorseshoeTavernParser do
   def example_data_file_location, do: "test/data/horseshoe_tavern/index.html"
 
   @impl true
-  def event(body) do
+  def events(body) do
     ParseHelpers.event_selector(body, ".schedule-event")
   end
 

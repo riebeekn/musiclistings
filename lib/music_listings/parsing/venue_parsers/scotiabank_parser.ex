@@ -18,7 +18,7 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParser do
   def example_data_file_location, do: "test/data/scotiabank/index.html"
 
   @impl true
-  def event(body) do
+  def events(body) do
     ParseHelpers.event_selector(body, ".eventItem")
   end
 

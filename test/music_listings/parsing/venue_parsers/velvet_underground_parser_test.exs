@@ -16,7 +16,7 @@ defmodule MusicListings.Parsing.VenueParsers.VelvetUndergroundParserTest do
     event =
       single_event_file_path
       |> File.read!()
-      |> VelvetUndergroundParser.event()
+      |> VelvetUndergroundParser.events()
       |> List.first()
 
     %{index_html: index_html, event: event}
@@ -28,9 +28,9 @@ defmodule MusicListings.Parsing.VenueParsers.VelvetUndergroundParserTest do
     end
   end
 
-  describe "event/1" do
+  describe "events/1" do
     test "returns expected events", %{index_html: index_html} do
-      events = VelvetUndergroundParser.event(index_html)
+      events = VelvetUndergroundParser.events(index_html)
 
       assert 56 = Enum.count(events)
     end

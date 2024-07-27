@@ -16,7 +16,7 @@ defmodule MusicListings.Parsing.VenueParsers.RebelParser do
   def example_data_file_location, do: "test/data/rebel/index.json"
 
   @impl true
-  def event(body) do
+  def events(body) do
     # bit of a hack to facilitate pulling data locally... Req converts it
     # to a map when pulling from www, where-as locally we just have a file
     # so when pulling local we get a string and need to decode! it

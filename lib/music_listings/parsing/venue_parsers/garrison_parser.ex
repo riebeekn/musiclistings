@@ -16,7 +16,7 @@ defmodule MusicListings.Parsing.VenueParsers.GarrisonParser do
   def example_data_file_location, do: "test/data/garrison/index.html"
 
   @impl true
-  def event(body) do
+  def events(body) do
     ParseHelpers.event_selector(body, "#calendar_wrap")
   end
 

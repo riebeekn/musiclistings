@@ -15,7 +15,7 @@ defmodule MusicListings.Parsing.VenueParsers.RoyThomsonHallParser do
   def example_data_file_location, do: "test/data/roy_thomson_hall/index.json"
 
   @impl true
-  def event(body) do
+  def events(body) do
     MhRthTdmhParser.event(body, @roy_thomson_hall_facility_no)
   end
 

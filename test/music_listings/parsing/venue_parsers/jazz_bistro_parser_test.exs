@@ -16,7 +16,7 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParserTest do
     event =
       single_event_file_path
       |> File.read!()
-      |> JazzBistroParser.event()
+      |> JazzBistroParser.events()
       |> List.first()
 
     %{index_html: index_html, event: event}
@@ -28,9 +28,9 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParserTest do
     end
   end
 
-  describe "event/1" do
+  describe "events/1" do
     test "returns expected events", %{index_html: index_html} do
-      events = JazzBistroParser.event(index_html)
+      events = JazzBistroParser.events(index_html)
 
       assert 53 = Enum.count(events)
     end
