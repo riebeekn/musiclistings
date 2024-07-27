@@ -12,7 +12,7 @@ defmodule MusicListings.Crawler do
 
   require Logger
 
-  @type crawler_opts :: {:pull_data_from_www, boolean()}
+  @type crawler_opts :: {:pull_data_from_www?, boolean()}
 
   @doc """
   The crawl function is called to retrieve and store events.  Events will
@@ -37,7 +37,7 @@ defmodule MusicListings.Crawler do
   """
   @spec crawl(venues :: list(Venue), opts :: list(crawler_opts)) :: any()
   def crawl(venues, opts \\ []) do
-    pull_data_from_www? = Keyword.get(opts, :pull_data_from_www, false)
+    pull_data_from_www? = Keyword.get(opts, :pull_data_from_www?, false)
 
     crawl_summary = init_crawl_summary()
 
