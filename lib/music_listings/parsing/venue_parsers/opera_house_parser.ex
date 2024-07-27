@@ -16,7 +16,7 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParser do
   def example_data_file_location, do: "test/data/opera_house/index.html"
 
   @impl true
-  def event(body) do
+  def events(body) do
     ParseHelpers.event_selector(body, ".item_landing")
   end
 

@@ -16,7 +16,7 @@ defmodule MusicListings.Parsing.VenueParsers.CameronHouseParserTest do
     event =
       single_event_file_path
       |> File.read!()
-      |> CameronHouseParser.event()
+      |> CameronHouseParser.events()
       |> List.first()
 
     %{index_html: index_html, event: event}
@@ -28,9 +28,9 @@ defmodule MusicListings.Parsing.VenueParsers.CameronHouseParserTest do
     end
   end
 
-  describe "event/1" do
+  describe "events/1" do
     test "returns expected events", %{index_html: index_html} do
-      events = CameronHouseParser.event(index_html)
+      events = CameronHouseParser.events(index_html)
 
       assert 176 = Enum.count(events)
     end

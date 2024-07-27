@@ -15,7 +15,7 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParser do
   def example_data_file_location, do: "test/data/great_hall/index.html"
 
   @impl true
-  def event(body) do
+  def events(body) do
     ParseHelpers.event_selector(body, ".tgh-event-item-container")
   end
 

@@ -14,9 +14,9 @@ defmodule MusicListings.Parsing.VenueParser do
   """
   @callback example_data_file_location() :: String.t()
   @doc """
-  The event HTML/JSON
+  A list of all the events
   """
-  @callback event(String.t()) :: [Meeseeks.Result.t()] | {:error, Meeseeks.Error.t()}
+  @callback events(String.t()) :: [Meeseeks.Result.t()] | {:error, Meeseeks.Error.t()}
   @doc """
   The URL for the next page of results
   """

@@ -28,9 +28,9 @@ defmodule MusicListings.Parsing.VenueParsers.QueenElizabthTheatreParserTest do
     end
   end
 
-  describe "event/1" do
+  describe "events/1" do
     test "returns expected events", %{index_html: index_html} do
-      events = QueenElizabthTheatreParser.event(index_html)
+      events = QueenElizabthTheatreParser.events(index_html)
 
       assert 31 = Enum.count(events)
     end

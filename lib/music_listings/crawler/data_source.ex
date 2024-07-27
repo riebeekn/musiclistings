@@ -26,7 +26,7 @@ defmodule MusicListings.Crawler.DataSource do
       {:ok, %Response{status: 200, body: body}} ->
         events_from_current_body =
           body
-          |> parser.event_selector()
+          |> parser.events()
           |> Enum.map(&Payload.new/1)
 
         next_page_url = parser.next_page_url(body)
@@ -52,7 +52,7 @@ defmodule MusicListings.Crawler.DataSource do
     local_data_file
     |> Path.expand()
     |> File.read!()
-    |> parser.event()
+    |> parser.events()
     |> Enum.map(&Payload.new/1)
   end
 end

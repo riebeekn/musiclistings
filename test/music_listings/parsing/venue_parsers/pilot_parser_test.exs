@@ -16,7 +16,7 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParserTest do
     event =
       single_event_file_path
       |> File.read!()
-      |> PilotParser.event()
+      |> PilotParser.events()
       |> List.first()
 
     %{index_html: index_html, event: event}
@@ -28,9 +28,9 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParserTest do
     end
   end
 
-  describe "event/1" do
+  describe "events/1" do
     test "returns expected events", %{index_html: index_html} do
-      events = PilotParser.event(index_html)
+      events = PilotParser.events(index_html)
 
       assert 9 == Enum.count(events)
     end

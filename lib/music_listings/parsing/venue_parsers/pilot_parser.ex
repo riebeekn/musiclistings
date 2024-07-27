@@ -14,7 +14,7 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
   def example_data_file_location, do: "test/data/pilot/index.html"
 
   @impl true
-  def event(body) do
+  def events(body) do
     ParseHelpers.event_selector(
       body,
       "div#scvr-section-013c83e7-396f-4090-a781-83f7097a960c p.fr-tag"
