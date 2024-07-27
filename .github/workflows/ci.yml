@@ -12,6 +12,7 @@ on:
 env:
   MIX_ENV: test
   ADMIN_EMAIL: "some_email@example.com"
+  PULL_DATA_FROM_WWW: false
 
 permissions:
   contents: read

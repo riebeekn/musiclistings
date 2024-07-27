@@ -29,6 +29,15 @@ admin_email =
 
 config :music_listings, :admin_email, admin_email
 
+pull_data_from_www? =
+  System.get_env("PULL_DATA_FROM_WWW") ||
+    raise """
+    environment variable PULL_DATA_FROM_WWW is missing.
+    For example: true
+    """
+
+config :music_listings, :pull_data_from_www?, String.to_existing_atom(pull_data_from_www?)
+
 if config_env() == :prod do
   database_url =
     System.get_env("DATABASE_URL") ||
