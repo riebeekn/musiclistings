@@ -122,7 +122,7 @@ defmodule MusicListings.Parsing.VenueParsers.GarrisonParser do
     if String.contains?(maybe_price_string, "$") do
       Price.new(maybe_price_string)
     else
-      Price.new(nil)
+      Price.unknown()
     end
   end
 

@@ -77,7 +77,7 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParserTest do
 
   describe "price/1" do
     test "returns the event price", %{event: event} do
-      assert %Price{format: :tbd, lo: Decimal.new("0"), hi: Decimal.new("0")} ==
+      assert %Price{format: :unknown, lo: nil, hi: nil} ==
                OperaHouseParser.price(event)
     end
   end

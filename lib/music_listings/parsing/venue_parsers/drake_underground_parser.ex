@@ -67,7 +67,7 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
 
   @impl true
   def price(_event) do
-    Price.new(nil)
+    Price.unknown()
   end
 
   @impl true

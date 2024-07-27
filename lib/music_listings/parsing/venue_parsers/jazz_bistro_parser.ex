@@ -70,7 +70,7 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParser do
 
   @impl true
   def price(_event) do
-    Price.new(nil)
+    Price.unknown()
   end
 
   @impl true
