@@ -68,7 +68,7 @@ defmodule MusicListings.Parsing.VenueParsers.RogersParser do
 
   @impl true
   def price(_event) do
-    Price.new(nil)
+    Price.unknown()
   end
 
   @impl true

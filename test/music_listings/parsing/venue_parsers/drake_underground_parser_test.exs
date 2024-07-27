@@ -77,7 +77,7 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParserTest do
 
   describe "price/1" do
     test "returns the event price", %{event: event} do
-      assert %Price{format: :tbd, hi: Decimal.new("0"), lo: Decimal.new("0")} ==
+      assert %Price{format: :unknown, hi: nil, lo: nil} ==
                DrakeUndergroundParser.price(event)
     end
   end

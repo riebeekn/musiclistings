@@ -46,7 +46,7 @@ defmodule MusicListings.Parsing.VenueParsers.MhRthTdmhParser do
   end
 
   def price(_event) do
-    Price.new(nil)
+    Price.unknown()
   end
 
   def age_restriction(_event) do

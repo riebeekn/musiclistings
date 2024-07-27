@@ -60,7 +60,7 @@ defmodule MusicListings.Parsing.VenueParsers.RexParser do
 
   @impl true
   def price(_event) do
-    Price.new(nil)
+    Price.unknown()
   end
 
   @impl true

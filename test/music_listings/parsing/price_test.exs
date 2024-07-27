@@ -3,9 +3,15 @@ defmodule MusicListings.Parsing.PriceTest do
 
   alias MusicListings.Parsing.Price
 
+  describe "unknown/0" do
+    test "returns default when unknown" do
+      assert %Price{lo: nil, hi: nil, format: :unknown} == Price.unknown()
+    end
+  end
+
   describe "new/1" do
     test "handles missing price" do
-      assert %Price{lo: Decimal.new("0"), hi: Decimal.new("0"), format: :tbd} == Price.new(nil)
+      assert %Price{lo: nil, hi: nil, format: :unknown} == Price.new(nil)
     end
 
     test "cleans and parses price strings" do

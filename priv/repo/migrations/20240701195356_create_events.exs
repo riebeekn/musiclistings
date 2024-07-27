@@ -10,8 +10,8 @@ defmodule MusicListings.Repo.Migrations.CreateEvents do
       add :date, :date
       add :time, :time
       add :price_format, :string, null: false
-      add :price_lo, :decimal, null: false
-      add :price_hi, :decimal, null: false
+      add :price_lo, :decimal
+      add :price_hi, :decimal
       add :age_restriction, :string, null: false
       add :ticket_url, :string, size: 2048
 

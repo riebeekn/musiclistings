@@ -3,13 +3,15 @@ defmodule MusicListings.Parsing.Price do
   Struct and functions to represent / parse an event prices
   """
   @type t :: %__MODULE__{
-          format: :fixed | :range | :tbd | :variable,
-          lo: Decimal.t(),
-          hi: Decimal.t()
+          format: :fixed | :range | :unknown | :variable,
+          lo: Decimal.t() | nil,
+          hi: Decimal.t() | nil
         }
   defstruct [:format, :lo, :hi]
 
-  def new(nil), do: %__MODULE__{lo: Decimal.new("0"), hi: Decimal.new("0"), format: :tbd}
+  def unknown, do: %__MODULE__{format: :unknown, lo: nil, hi: nil}
+
+  def new(nil), do: unknown()
 
   def new(price_string) do
     price_string = clean_price_string(price_string)
