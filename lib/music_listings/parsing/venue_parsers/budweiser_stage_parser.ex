@@ -8,6 +8,7 @@ defmodule MusicListings.Parsing.VenueParsers.BudweiserStageParser do
 
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Selectors
 
   @impl true
   def source_url, do: "https://www.livenation.com/venue/KovZpZAEkkIA/budweiser-stage-events"
@@ -18,9 +19,9 @@ defmodule MusicListings.Parsing.VenueParsers.BudweiserStageParser do
   @impl true
   def events(body) do
     body
-    |> Meeseeks.parse()
-    |> Meeseeks.all(css("script[type=\"application/ld+json\"]"))
-    |> Enum.map(&(&1 |> Meeseeks.data() |> Jason.decode!()))
+    |> Selectors.all_matches(css("script[type=\"application/ld+json\"]"))
+    |> Selectors.data()
+    |> Enum.map(&Jason.decode!/1)
     |> Enum.filter(&(&1["@type"] == "MusicEvent"))
   end
 
