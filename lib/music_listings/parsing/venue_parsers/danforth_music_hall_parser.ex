@@ -9,6 +9,7 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParser do
 
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.Selectors
 
   @impl true
@@ -69,7 +70,7 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParser do
   def price(event) do
     event
     |> Selectors.text(xpath("//div[@class='tickets']/following-sibling::div[1]"))
-    |> ParseHelpers.convert_price_string_to_price()
+    |> Price.new()
   end
 
   @impl true

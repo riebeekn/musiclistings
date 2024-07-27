@@ -3,7 +3,6 @@ defmodule MusicListings.Parsing.ParseHelpers do
   Module that contains helper / common functions around parsing
   """
   import Meeseeks.CSS
-  alias MusicListings.Parsing.Price
 
   def convert_event_time_string_to_time(time_string) do
     (time_string || "")
@@ -58,8 +57,6 @@ defmodule MusicListings.Parsing.ParseHelpers do
       hour
     end
   end
-
-  defdelegate convert_price_string_to_price(price_string), to: Price, as: :new
 
   def convert_age_restriction_string_to_enum(age_restriction_string) do
     age_restriction_string

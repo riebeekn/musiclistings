@@ -8,6 +8,7 @@ defmodule MusicListings.Parsing.VenueParsers.VelvetUndergroundParser do
 
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.Selectors
 
   @impl true
@@ -77,7 +78,7 @@ defmodule MusicListings.Parsing.VenueParsers.VelvetUndergroundParser do
     |> Meeseeks.all(css(".event-meta"))
     |> Enum.find(fn element -> element |> Meeseeks.text() |> String.contains?("Price:") end)
     |> Meeseeks.text()
-    |> ParseHelpers.convert_price_string_to_price()
+    |> Price.new()
   end
 
   @impl true

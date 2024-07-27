@@ -8,6 +8,7 @@ defmodule MusicListings.Parsing.VenueParsers.GarrisonParser do
 
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.Selectors
 
   @impl true
@@ -119,9 +120,9 @@ defmodule MusicListings.Parsing.VenueParsers.GarrisonParser do
       |> Enum.at(1)
 
     if String.contains?(maybe_price_string, "$") do
-      ParseHelpers.convert_price_string_to_price(maybe_price_string)
+      Price.new(maybe_price_string)
     else
-      ParseHelpers.convert_price_string_to_price(nil)
+      Price.new(nil)
     end
   end
 

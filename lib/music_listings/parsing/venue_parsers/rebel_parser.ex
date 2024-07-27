@@ -4,8 +4,8 @@ defmodule MusicListings.Parsing.VenueParsers.RebelParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
-  alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Price
 
   @impl true
   def source_url,
@@ -78,7 +78,7 @@ defmodule MusicListings.Parsing.VenueParsers.RebelParser do
 
   @impl true
   def price(_event) do
-    ParseHelpers.convert_price_string_to_price(nil)
+    Price.new(nil)
   end
 
   @impl true

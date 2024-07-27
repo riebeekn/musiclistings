@@ -8,6 +8,7 @@ defmodule MusicListings.Parsing.VenueParsers.HorseshoeTavernParser do
 
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.Selectors
 
   @impl true
@@ -79,7 +80,7 @@ defmodule MusicListings.Parsing.VenueParsers.HorseshoeTavernParser do
     |> Meeseeks.all(css(".schedule-event-time"))
     |> Enum.find(fn element -> element |> Meeseeks.text() |> String.contains?("$") end)
     |> Meeseeks.text()
-    |> ParseHelpers.convert_price_string_to_price()
+    |> Price.new()
   end
 
   @impl true

@@ -6,8 +6,8 @@ defmodule MusicListings.Parsing.VenueParsers.RogersParser do
 
   import Meeseeks.CSS
 
-  alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Price
 
   # TODO: the same as BudweiserStageParser... should do same we did
   # with mh_rth_tdmh parser
@@ -68,7 +68,7 @@ defmodule MusicListings.Parsing.VenueParsers.RogersParser do
 
   @impl true
   def price(_event) do
-    ParseHelpers.convert_price_string_to_price(nil)
+    Price.new(nil)
   end
 
   @impl true
