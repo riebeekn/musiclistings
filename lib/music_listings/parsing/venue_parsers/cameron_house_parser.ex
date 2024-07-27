@@ -6,8 +6,8 @@ defmodule MusicListings.Parsing.VenueParsers.CameronHouseParser do
 
   import Meeseeks.CSS
 
-  alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Price
 
   @impl true
   def source_url, do: "https://www.thecameron.com/shows"
@@ -76,7 +76,7 @@ defmodule MusicListings.Parsing.VenueParsers.CameronHouseParser do
 
   @impl true
   def price(_event) do
-    ParseHelpers.convert_price_string_to_price(nil)
+    Price.new(nil)
   end
 
   @impl true

@@ -8,6 +8,7 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParser do
 
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.Selectors
 
   @impl true
@@ -103,7 +104,7 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParser do
 
   @impl true
   def price(_event) do
-    ParseHelpers.convert_price_string_to_price(nil)
+    Price.new(nil)
   end
 
   @impl true

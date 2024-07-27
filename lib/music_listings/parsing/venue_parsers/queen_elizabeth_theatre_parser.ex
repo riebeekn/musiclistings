@@ -6,6 +6,7 @@ defmodule MusicListings.Parsing.VenueParsers.QueenElizabthTheatreParser do
 
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Price
 
   @impl true
   def source_url,
@@ -78,7 +79,7 @@ defmodule MusicListings.Parsing.VenueParsers.QueenElizabthTheatreParser do
   @impl true
   def price(event) do
     event["price_range"]
-    |> ParseHelpers.convert_price_string_to_price()
+    |> Price.new()
   end
 
   @impl true

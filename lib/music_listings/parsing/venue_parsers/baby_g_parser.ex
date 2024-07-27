@@ -6,8 +6,8 @@ defmodule MusicListings.Parsing.VenueParsers.BabyGParser do
 
   import Meeseeks.CSS
 
-  alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.Selectors
 
   @impl true
@@ -101,7 +101,7 @@ defmodule MusicListings.Parsing.VenueParsers.BabyGParser do
     [_original_string, _openers, _time, price] =
       Regex.run(@openers_time_price_regex, openers_time_price_string)
 
-    ParseHelpers.convert_price_string_to_price(price)
+    Price.new(price)
   end
 
   @impl true
