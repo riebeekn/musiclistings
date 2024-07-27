@@ -7,6 +7,8 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParser do
   import Meeseeks.CSS
 
   alias MusicListings.Parsing.ParseHelpers
+  alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Selectors
 
   @impl true
   def source_url, do: "https://thegreathall.ca/calendar"
@@ -16,7 +18,7 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParser do
 
   @impl true
   def events(body) do
-    ParseHelpers.event_selector(body, ".tgh-event-item-container")
+    Selectors.all_matches(body, css(".tgh-event-item-container"))
   end
 
   @impl true
@@ -36,12 +38,15 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParser do
 
   @impl true
   def event_title(event) do
-    ParseHelpers.event_title(event, ".tgh-e-title")
+    Selectors.text(event, css(".tgh-e-title"))
   end
 
   @impl true
   def performers(event) do
-    ParseHelpers.performers(event, ".tgh-e-title")
+    event
+    |> Selectors.all_matches(css(".tgh-e-title"))
+    |> Selectors.text()
+    |> Performers.new()
   end
 
   @impl true

@@ -3,46 +3,7 @@ defmodule MusicListings.Parsing.ParseHelpers do
   Module that contains helper / common functions around parsing
   """
   import Meeseeks.CSS
-  alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
-
-  def event_selector(body, event_selector) do
-    Meeseeks.all(body, css(event_selector))
-  end
-
-  def next_page_url(body, next_page_selector) do
-    body
-    |> Meeseeks.one(css(next_page_selector))
-    |> case do
-      nil -> nil
-      result -> Meeseeks.Result.attr(result, "href")
-    end
-  end
-
-  def event_id(%Meeseeks.Result{} = event, event_id_selector) do
-    event
-    |> Meeseeks.one(css(event_id_selector))
-    |> Meeseeks.Result.attr("id")
-  end
-
-  def event_title(%Meeseeks.Result{} = event, event_title_selector) do
-    event
-    |> Meeseeks.one(css(event_title_selector))
-    |> Meeseeks.text()
-  end
-
-  def performers(%Meeseeks.Result{} = event, performers_selector) do
-    event
-    |> Meeseeks.all(css(performers_selector))
-    |> Enum.map(&Meeseeks.Result.text/1)
-    |> Performers.new()
-  end
-
-  def ticket_url(%Meeseeks.Result{} = event, ticket_url_selector) do
-    event
-    |> Meeseeks.one(css(ticket_url_selector))
-    |> Meeseeks.Result.attr("href")
-  end
 
   def convert_event_time_string_to_time(time_string) do
     (time_string || "")

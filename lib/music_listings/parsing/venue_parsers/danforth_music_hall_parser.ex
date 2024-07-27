@@ -8,6 +8,8 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParser do
   import Meeseeks.XPath
 
   alias MusicListings.Parsing.ParseHelpers
+  alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Selectors
 
   @impl true
   def source_url, do: "https://thedanforth.com"
@@ -17,34 +19,36 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParser do
 
   @impl true
   def events(body) do
-    ParseHelpers.event_selector(body, ".event-block")
+    Selectors.all_matches(body, css(".event-block"))
   end
 
   @impl true
   def next_page_url(body) do
-    ParseHelpers.next_page_url(body, ".nav-next a")
+    Selectors.url(body, css(".nav-next a"))
   end
 
   @impl true
   def event_id(event) do
-    ParseHelpers.event_id(event, ".event-block")
+    Selectors.id(event, css(".event-block"))
   end
 
   @impl true
   def event_title(event) do
-    ParseHelpers.event_title(event, ".entry-title")
+    Selectors.text(event, css(".entry-title"))
   end
 
   @impl true
   def performers(event) do
-    ParseHelpers.performers(event, ".artistname")
+    event
+    |> Selectors.all_matches(css(".artistname"))
+    |> Selectors.text()
+    |> Performers.new()
   end
 
   @impl true
   def event_date(event) do
     event
-    |> Meeseeks.one(css(".listingdate"))
-    |> Meeseeks.Result.attr("class")
+    |> Selectors.class(css(".listingdate"))
     |> String.split()
     |> Enum.at(1)
     |> String.to_integer()
@@ -55,8 +59,7 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParser do
   @impl true
   def event_time(event) do
     event
-    |> Meeseeks.one(xpath("//div[@class='doors']/following-sibling::div[1]"))
-    |> Meeseeks.text()
+    |> Selectors.text(xpath("//div[@class='doors']/following-sibling::div[1]"))
     |> String.split("-")
     |> Enum.at(0)
     |> ParseHelpers.convert_event_time_string_to_time()
@@ -65,17 +68,13 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParser do
   @impl true
   def price(event) do
     event
-    |> Meeseeks.one(xpath("//div[@class='tickets']/following-sibling::div[1]"))
-    |> Meeseeks.text()
+    |> Selectors.text(xpath("//div[@class='tickets']/following-sibling::div[1]"))
     |> ParseHelpers.convert_price_string_to_price()
   end
 
   @impl true
   def age_restriction(event) do
-    time_age =
-      event
-      |> Meeseeks.one(xpath("//div[@class='doors']/following-sibling::div[1]"))
-      |> Meeseeks.text()
+    time_age = Selectors.text(event, xpath("//div[@class='doors']/following-sibling::div[1]"))
 
     if time_age == "TBD" do
       :tbd
@@ -89,6 +88,6 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParser do
 
   @impl true
   def ticket_url(event) do
-    ParseHelpers.ticket_url(event, ".ticketlink a")
+    Selectors.url(event, css(".ticketlink a"))
   end
 end

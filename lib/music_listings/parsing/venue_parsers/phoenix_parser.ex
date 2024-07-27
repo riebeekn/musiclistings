@@ -8,6 +8,7 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParser do
 
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Selectors
 
   @impl true
   def source_url, do: "https://thephoenixconcerttheatre.com/events"
@@ -17,7 +18,7 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParser do
 
   @impl true
   def events(body) do
-    ParseHelpers.event_selector(body, ".event-item")
+    Selectors.all_matches(body, css(".event-item"))
   end
 
   @impl true
@@ -91,6 +92,6 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParser do
 
   @impl true
   def ticket_url(event) do
-    ParseHelpers.ticket_url(event, ".event-title a")
+    Selectors.url(event, css(".event-title a"))
   end
 end

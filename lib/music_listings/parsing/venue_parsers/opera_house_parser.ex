@@ -8,6 +8,7 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParser do
 
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Selectors
 
   @impl true
   def source_url, do: "https://theoperahousetoronto.com/calendar"
@@ -17,7 +18,7 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParser do
 
   @impl true
   def events(body) do
-    ParseHelpers.event_selector(body, ".item_landing")
+    Selectors.all_matches(body, css(".item_landing"))
   end
 
   @impl true
@@ -115,6 +116,6 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParser do
 
   @impl true
   def ticket_url(event) do
-    ParseHelpers.ticket_url(event, ".ticket_landing a")
+    Selectors.url(event, css(".ticket_landing a"))
   end
 end

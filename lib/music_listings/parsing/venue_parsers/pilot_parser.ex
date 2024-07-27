@@ -4,8 +4,11 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
+  import Meeseeks.CSS
+
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Selectors
 
   @impl true
   def source_url, do: "https://www.thepilot.ca/happening-at-the-pilot"
@@ -15,9 +18,9 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
 
   @impl true
   def events(body) do
-    ParseHelpers.event_selector(
+    Selectors.all_matches(
       body,
-      "div#scvr-section-013c83e7-396f-4090-a781-83f7097a960c p.fr-tag"
+      css("div#scvr-section-013c83e7-396f-4090-a781-83f7097a960c p.fr-tag")
     )
   end
 
@@ -36,7 +39,7 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
   @impl true
   def event_title(event) do
     event
-    |> ParseHelpers.event_title(".fr-tag strong, .fr-tag b")
+    |> Selectors.text(css(".fr-tag strong, .fr-tag b"))
     |> String.replace(".", "")
   end
 
@@ -50,7 +53,7 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
   def event_date(event) do
     [full_date_string | _rest] =
       event
-      |> ParseHelpers.event_title(".fr-tag")
+      |> Selectors.text(css(".fr-tag"))
       |> String.split("-")
 
     [_day_of_week, month_string, day_string] = String.split(full_date_string)

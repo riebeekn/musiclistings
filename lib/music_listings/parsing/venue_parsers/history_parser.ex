@@ -7,6 +7,8 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParser do
   import Meeseeks.CSS
 
   alias MusicListings.Parsing.ParseHelpers
+  alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Selectors
 
   @impl true
   def source_url, do: "https://www.historytoronto.com/events/events_ajax/0?per_page=60"
@@ -16,7 +18,7 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParser do
 
   @impl true
   def events(body) do
-    ParseHelpers.event_selector(body, ".eventItem")
+    Selectors.all_matches(body, css(".eventItem"))
   end
 
   @impl true
@@ -34,12 +36,15 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParser do
 
   @impl true
   def event_title(event) do
-    ParseHelpers.event_title(event, ".title")
+    Selectors.text(event, css(".title"))
   end
 
   @impl true
   def performers(event) do
-    ParseHelpers.performers(event, ".title")
+    event
+    |> Selectors.all_matches(css(".title"))
+    |> Selectors.text()
+    |> Performers.new()
   end
 
   @impl true
@@ -67,6 +72,6 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParser do
 
   @impl true
   def ticket_url(event) do
-    ParseHelpers.ticket_url(event, ".tickets")
+    Selectors.url(event, css(".tickets"))
   end
 end

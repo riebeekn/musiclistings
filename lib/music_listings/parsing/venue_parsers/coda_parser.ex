@@ -7,6 +7,8 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParser do
   import Meeseeks.CSS
 
   alias MusicListings.Parsing.ParseHelpers
+  alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Selectors
 
   @impl true
   def source_url, do: "https://www.codatoronto.com/events"
@@ -16,7 +18,7 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParser do
 
   @impl true
   def events(body) do
-    ParseHelpers.event_selector(body, ".schedule-event")
+    Selectors.all_matches(body, css(".schedule-event"))
   end
 
   @impl true
@@ -36,12 +38,15 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParser do
 
   @impl true
   def event_title(event) do
-    ParseHelpers.event_title(event, ".event-name")
+    Selectors.text(event, css(".event-name"))
   end
 
   @impl true
   def performers(event) do
-    ParseHelpers.performers(event, ".event-name")
+    event
+    |> Selectors.all_matches(css(".event-name"))
+    |> Selectors.text()
+    |> Performers.new()
   end
 
   @impl true

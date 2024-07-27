@@ -7,6 +7,8 @@ defmodule MusicListings.Parsing.VenueParsers.HorseshoeTavernParser do
   import Meeseeks.CSS
 
   alias MusicListings.Parsing.ParseHelpers
+  alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Selectors
 
   @impl true
   def source_url, do: "https://www.horseshoetavern.com/events"
@@ -16,7 +18,7 @@ defmodule MusicListings.Parsing.VenueParsers.HorseshoeTavernParser do
 
   @impl true
   def events(body) do
-    ParseHelpers.event_selector(body, ".schedule-event")
+    Selectors.all_matches(body, css(".schedule-event"))
   end
 
   @impl true
@@ -27,19 +29,22 @@ defmodule MusicListings.Parsing.VenueParsers.HorseshoeTavernParser do
 
   @impl true
   def event_id(event) do
-    event_title = ParseHelpers.event_title(event, ".schedule-speaker-name")
+    event_title = Selectors.text(event, css(".schedule-speaker-name"))
     event_date = event_date(event)
     "#{event_title |> String.replace(" ", "") |> String.downcase()}-#{event_date}"
   end
 
   @impl true
   def event_title(event) do
-    ParseHelpers.event_title(event, ".schedule-speaker-name")
+    Selectors.text(event, css(".schedule-speaker-name"))
   end
 
   @impl true
   def performers(event) do
-    ParseHelpers.performers(event, ".schedule-speaker-name")
+    event
+    |> Selectors.all_matches(css(".schedule-speaker-name"))
+    |> Selectors.text()
+    |> Performers.new()
   end
 
   @impl true
@@ -87,6 +92,6 @@ defmodule MusicListings.Parsing.VenueParsers.HorseshoeTavernParser do
 
   @impl true
   def ticket_url(event) do
-    ParseHelpers.ticket_url(event, ".blb")
+    Selectors.url(event, css(".blb"))
   end
 end

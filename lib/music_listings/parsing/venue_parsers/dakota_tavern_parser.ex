@@ -8,6 +8,7 @@ defmodule MusicListings.Parsing.VenueParsers.DakotaTavernParser do
 
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Selectors
 
   @impl true
   def source_url, do: "https://www.dakotatavern.ca"
@@ -17,7 +18,7 @@ defmodule MusicListings.Parsing.VenueParsers.DakotaTavernParser do
 
   @impl true
   def events(body) do
-    ParseHelpers.event_selector(body, ".grid-item")
+    Selectors.all_matches(body, css(".grid-item"))
   end
 
   @impl true
@@ -37,7 +38,7 @@ defmodule MusicListings.Parsing.VenueParsers.DakotaTavernParser do
   def event_title(event) do
     [_date, title] =
       event
-      |> ParseHelpers.event_title(".portfolio-title")
+      |> Selectors.text(css(".portfolio-title"))
       |> String.split("-")
 
     title |> String.trim()
@@ -53,7 +54,7 @@ defmodule MusicListings.Parsing.VenueParsers.DakotaTavernParser do
   def event_date(event) do
     [date, _title] =
       event
-      |> ParseHelpers.event_title(".portfolio-title")
+      |> Selectors.text(css(".portfolio-title"))
       |> String.split("-")
 
     [_day_of_week, month_and_day_string, year_string] = String.split(date, ",")

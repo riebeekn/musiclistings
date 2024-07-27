@@ -8,6 +8,7 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
 
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Selectors
 
   @impl true
   def source_url, do: "https://elmocambo.com/events-new"
@@ -37,7 +38,7 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
 
   @impl true
   def event_title(event) do
-    ParseHelpers.event_title(event, ".stratum-advanced-posts__post-title a")
+    Selectors.text(event, css(".stratum-advanced-posts__post-title a"))
   end
 
   @impl true
@@ -78,6 +79,6 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
 
   @impl true
   def ticket_url(event) do
-    ParseHelpers.ticket_url(event, ".stratum-advanced-posts__read-more a")
+    Selectors.url(event, css(".stratum-advanced-posts__read-more a"))
   end
 end
