@@ -8,6 +8,7 @@ defmodule MusicListings.Parsing.VenueParsers.GarrisonParser do
 
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Selectors
 
   @impl true
   def source_url, do: "http://www.garrisontoronto.com/listings.html"
@@ -17,7 +18,7 @@ defmodule MusicListings.Parsing.VenueParsers.GarrisonParser do
 
   @impl true
   def events(body) do
-    ParseHelpers.event_selector(body, "#calendar_wrap")
+    Selectors.all_matches(body, css("#calendar_wrap"))
   end
 
   @impl true
@@ -37,7 +38,7 @@ defmodule MusicListings.Parsing.VenueParsers.GarrisonParser do
 
   @impl true
   def event_title(event) do
-    ParseHelpers.event_title(event, "#calendar_info_headliner")
+    Selectors.text(event, css("#calendar_info_headliner"))
   end
 
   @impl true

@@ -7,6 +7,8 @@ defmodule MusicListings.Parsing.VenueParsers.CocaColaColiseumParser do
   import Meeseeks.CSS
 
   alias MusicListings.Parsing.ParseHelpers
+  alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Selectors
 
   @impl true
   def source_url, do: "https://www.coca-colacoliseum.com/events"
@@ -16,7 +18,7 @@ defmodule MusicListings.Parsing.VenueParsers.CocaColaColiseumParser do
 
   @impl true
   def events(body) do
-    ParseHelpers.event_selector(body, ".m-venueframework-eventslist__item")
+    Selectors.all_matches(body, css(".m-venueframework-eventslist__item"))
   end
 
   @impl true
@@ -34,12 +36,15 @@ defmodule MusicListings.Parsing.VenueParsers.CocaColaColiseumParser do
 
   @impl true
   def event_title(event) do
-    ParseHelpers.event_title(event, ".m-eventItem__title")
+    Selectors.text(event, css(".m-eventItem__title"))
   end
 
   @impl true
   def performers(event) do
-    ParseHelpers.performers(event, ".m-eventItem__title")
+    event
+    |> Selectors.all_matches(css(".m-eventItem__title"))
+    |> Selectors.text()
+    |> Performers.new()
   end
 
   @impl true
@@ -67,6 +72,6 @@ defmodule MusicListings.Parsing.VenueParsers.CocaColaColiseumParser do
 
   @impl true
   def ticket_url(event) do
-    ParseHelpers.ticket_url(event, ".tickets")
+    Selectors.url(event, css(".tickets"))
   end
 end

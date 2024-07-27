@@ -7,6 +7,8 @@ defmodule MusicListings.Parsing.VenueParsers.VelvetUndergroundParser do
   import Meeseeks.CSS
 
   alias MusicListings.Parsing.ParseHelpers
+  alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Selectors
 
   @impl true
   def source_url, do: "https://thevelvet.ca/events"
@@ -16,27 +18,30 @@ defmodule MusicListings.Parsing.VenueParsers.VelvetUndergroundParser do
 
   @impl true
   def events(body) do
-    ParseHelpers.event_selector(body, ".event-block")
+    Selectors.all_matches(body, css(".event-block"))
   end
 
   @impl true
   def next_page_url(body) do
-    ParseHelpers.next_page_url(body, ".nav-previous a")
+    Selectors.url(body, css(".nav-previous a"))
   end
 
   @impl true
   def event_id(event) do
-    ParseHelpers.event_id(event, ".event-block")
+    Selectors.id(event, css(".event-block"))
   end
 
   @impl true
   def event_title(event) do
-    ParseHelpers.event_title(event, ".event-title")
+    Selectors.text(event, css(".event-title"))
   end
 
   @impl true
   def performers(event) do
-    ParseHelpers.performers(event, ".event-artist-name")
+    event
+    |> Selectors.all_matches(css(".event-artist-name"))
+    |> Selectors.text()
+    |> Performers.new()
   end
 
   @impl true
@@ -90,6 +95,6 @@ defmodule MusicListings.Parsing.VenueParsers.VelvetUndergroundParser do
 
   @impl true
   def ticket_url(event) do
-    ParseHelpers.ticket_url(event, ".event-ticket-link")
+    Selectors.url(event, css(".event-ticket-link"))
   end
 end

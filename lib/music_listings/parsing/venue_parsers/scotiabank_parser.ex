@@ -8,6 +8,7 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParser do
 
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Selectors
 
   @impl true
   def source_url,
@@ -19,7 +20,7 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParser do
 
   @impl true
   def events(body) do
-    ParseHelpers.event_selector(body, ".eventItem")
+    Selectors.all_matches(body, css(".eventItem"))
   end
 
   @impl true
@@ -39,7 +40,7 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParser do
 
   @impl true
   def event_title(event) do
-    ParseHelpers.event_title(event, ".info .title a")
+    Selectors.text(event, css(".info .title a"))
   end
 
   @impl true
@@ -78,6 +79,6 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParser do
 
   @impl true
   def ticket_url(event) do
-    ParseHelpers.ticket_url(event, ".more")
+    Selectors.url(event, css(".more"))
   end
 end
