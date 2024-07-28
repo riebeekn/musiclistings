@@ -4,6 +4,19 @@ defmodule MusicListings.Parsing.ParseHelpers do
   """
   import Meeseeks.CSS
 
+  # ===========================================================================
+  # Id helpers
+  # ===========================================================================
+  @spec build_id_from_title_and_date(title :: String.t(), date :: Date.t()) :: String.t()
+  def build_id_from_title_and_date(title, date) do
+    space_and_punct_regex = ~r/[[:punct:]\s]+/
+    slug = "#{title}_#{date}"
+
+    space_and_punct_regex
+    |> Regex.replace(slug, "_")
+    |> String.downcase()
+  end
+
   def convert_event_time_string_to_time(time_string) do
     (time_string || "")
     |> String.trim()

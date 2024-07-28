@@ -6,6 +6,7 @@ defmodule MusicListings.Parsing.VenueParsers.BudweiserStageParser do
 
   import Meeseeks.CSS
 
+  alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.Selectors
@@ -33,9 +34,10 @@ defmodule MusicListings.Parsing.VenueParsers.BudweiserStageParser do
 
   @impl true
   def event_id(event) do
-    event["url"]
-    |> String.replace("https://www.livenation.com/event", "")
-    |> String.replace("/", "")
+    title = event_title(event)
+    date = event_date(event)
+
+    ParseHelpers.build_id_from_title_and_date(title, date)
   end
 
   @impl true
