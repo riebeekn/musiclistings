@@ -45,7 +45,7 @@ defmodule MusicListings.Parsing.VenueParsers.BudweiserStageParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "G5vZZ9UBGCvW_alanis-morissette-the-triple-moon-tour" ==
+      assert "alanis_morissette_the_triple_moon_tour_2024_07_14" ==
                BudweiserStageParser.event_id(event)
     end
   end
