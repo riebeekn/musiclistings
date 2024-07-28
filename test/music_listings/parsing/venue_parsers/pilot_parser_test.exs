@@ -84,7 +84,7 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParserTest do
 
   describe "age_restriction/1" do
     test "returns the event age restriction", %{event: event} do
-      assert :tbd == PilotParser.age_restriction(event)
+      assert :unknown == PilotParser.age_restriction(event)
     end
   end
 

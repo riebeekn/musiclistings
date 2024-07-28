@@ -50,7 +50,7 @@ defmodule MusicListings.Parsing.VenueParsers.MhRthTdmhParser do
   end
 
   def age_restriction(_event) do
-    :tbd
+    :unknown
   end
 
   def ticket_url(event) do

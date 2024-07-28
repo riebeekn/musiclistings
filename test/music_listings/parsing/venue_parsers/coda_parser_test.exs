@@ -84,7 +84,7 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParserTest do
 
   describe "age_restriction/1" do
     test "returns the event age restriction", %{event: event} do
-      assert :tbd == CodaParser.age_restriction(event)
+      assert :unknown == CodaParser.age_restriction(event)
     end
   end
 

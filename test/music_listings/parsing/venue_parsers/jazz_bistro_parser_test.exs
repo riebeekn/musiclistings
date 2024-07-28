@@ -86,7 +86,7 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParserTest do
 
   describe "age_restriction/1" do
     test "returns the event age restriction", %{event: event} do
-      assert :tbd == JazzBistroParser.age_restriction(event)
+      assert :unknown == JazzBistroParser.age_restriction(event)
     end
   end
 

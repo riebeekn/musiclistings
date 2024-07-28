@@ -85,7 +85,7 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParserTest do
 
   describe "age_restriction/1" do
     test "returns the event age restriction", %{event: event} do
-      assert :tbd == ScotiabankParser.age_restriction(event)
+      assert :unknown == ScotiabankParser.age_restriction(event)
     end
   end
 
