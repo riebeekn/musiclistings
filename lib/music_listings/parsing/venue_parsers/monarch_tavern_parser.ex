@@ -76,4 +76,9 @@ defmodule MusicListings.Parsing.VenueParsers.MonarchTavernParser do
   def ticket_url(event) do
     event["content"]["customButtonLink"]
   end
+
+  @impl true
+  def details_url(_event) do
+    nil
+  end
 end

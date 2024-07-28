@@ -75,7 +75,7 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParser do
 
     doors_string
     |> String.replace("Doors: ", "")
-    |> ParseHelpers.convert_event_time_string_to_time()
+    |> ParseHelpers.time_string_to_time()
   end
 
   @impl true
@@ -94,5 +94,10 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParser do
   @impl true
   def ticket_url(event) do
     Selectors.url(event, css(".event-title a"))
+  end
+
+  @impl true
+  def details_url(_event) do
+    nil
   end
 end

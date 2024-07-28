@@ -80,4 +80,9 @@ defmodule MusicListings.Parsing.VenueParsers.RogersParser do
   def ticket_url(event) do
     event["url"]
   end
+
+  @impl true
+  def details_url(_event) do
+    nil
+  end
 end

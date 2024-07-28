@@ -62,7 +62,7 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
   def event_time(event) do
     event["fm_time"]
     |> Enum.at(0)
-    |> ParseHelpers.convert_event_time_string_to_time()
+    |> ParseHelpers.time_string_to_time()
   end
 
   @impl true
@@ -80,5 +80,10 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
   @impl true
   def ticket_url(event) do
     event["link"]
+  end
+
+  @impl true
+  def details_url(_event) do
+    nil
   end
 end

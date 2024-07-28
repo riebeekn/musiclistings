@@ -93,4 +93,9 @@ defmodule MusicListings.Parsing.VenueParsers.ConcertHallParser do
   def ticket_url(event) do
     event["offers"]["url"]
   end
+
+  @impl true
+  def details_url(_event) do
+    nil
+  end
 end

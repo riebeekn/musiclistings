@@ -82,4 +82,9 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
   def ticket_url(event) do
     Selectors.url(event, css(".stratum-advanced-posts__read-more a"))
   end
+
+  @impl true
+  def details_url(_event) do
+    nil
+  end
 end

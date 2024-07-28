@@ -45,4 +45,7 @@ defmodule MusicListings.Parsing.VenueParsers.MasseyHallParser do
 
   @impl true
   defdelegate ticket_url(event), to: MhRthTdmhParser
+
+  @impl true
+  defdelegate details_url(event), to: MhRthTdmhParser
 end

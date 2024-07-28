@@ -69,7 +69,7 @@ defmodule MusicListings.Parsing.VenueParsers.VelvetUndergroundParser do
     |> Enum.at(0)
     |> String.split(" ")
     |> Enum.at(1)
-    |> ParseHelpers.convert_event_time_string_to_time()
+    |> ParseHelpers.time_string_to_time()
   end
 
   @impl true
@@ -97,5 +97,10 @@ defmodule MusicListings.Parsing.VenueParsers.VelvetUndergroundParser do
   @impl true
   def ticket_url(event) do
     Selectors.url(event, css(".event-ticket-link"))
+  end
+
+  @impl true
+  def details_url(_event) do
+    nil
   end
 end

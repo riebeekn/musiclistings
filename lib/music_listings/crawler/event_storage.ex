@@ -14,6 +14,8 @@ defmodule MusicListings.Crawler.EventStorage do
 
   defp save_event(payload) do
     if payload.status == :ok do
+      payload.parsed_event.external_id
+
       existing_event =
         Repo.get_by(Event,
           external_id: payload.parsed_event.external_id,
@@ -46,7 +48,8 @@ defmodule MusicListings.Crawler.EventStorage do
         price_lo: payload.parsed_event.price_lo,
         price_hi: payload.parsed_event.price_hi,
         age_restriction: payload.parsed_event.age_restriction,
-        ticket_url: payload.parsed_event.ticket_url
+        ticket_url: payload.parsed_event.ticket_url,
+        details_url: payload.parsed_event.details_url
       }
       |> Event.changeset()
       |> Repo.insert!()

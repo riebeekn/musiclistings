@@ -94,4 +94,10 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParserTest do
                DrakeUndergroundParser.ticket_url(event)
     end
   end
+
+  describe "details_url/1" do
+    test "returns the event details url", %{event: event} do
+      assert nil == DrakeUndergroundParser.details_url(event)
+    end
+  end
 end

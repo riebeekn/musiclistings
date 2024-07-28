@@ -99,7 +99,7 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParser do
     |> Meeseeks.one(css(".info_landing h5:nth-of-type(2)"))
     |> Meeseeks.text()
     |> String.replace("Show: ", "")
-    |> ParseHelpers.convert_event_time_string_to_time()
+    |> ParseHelpers.time_string_to_time()
   end
 
   @impl true
@@ -118,5 +118,10 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParser do
   @impl true
   def ticket_url(event) do
     Selectors.url(event, css(".ticket_landing a"))
+  end
+
+  @impl true
+  def details_url(_event) do
+    nil
   end
 end

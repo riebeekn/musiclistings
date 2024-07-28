@@ -22,6 +22,7 @@ defmodule MusicListingsSchema.Event do
       values: [:all_ages, :eighteen_plus, :nineteen_plus, :unknown]
 
     field :ticket_url, :string
+    field :details_url, :string
 
     belongs_to :venue, MusicListingsSchema.Venue
 
@@ -42,7 +43,8 @@ defmodule MusicListingsSchema.Event do
       :price_lo,
       :price_hi,
       :age_restriction,
-      :ticket_url
+      :ticket_url,
+      :details_url
     ])
   end
 end

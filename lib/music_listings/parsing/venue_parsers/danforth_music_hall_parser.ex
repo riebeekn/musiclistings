@@ -63,7 +63,7 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParser do
     |> Selectors.text(xpath("//div[@class='doors']/following-sibling::div[1]"))
     |> String.split("-")
     |> Enum.at(0)
-    |> ParseHelpers.convert_event_time_string_to_time()
+    |> ParseHelpers.time_string_to_time()
   end
 
   @impl true
@@ -90,5 +90,10 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParser do
   @impl true
   def ticket_url(event) do
     Selectors.url(event, css(".ticketlink a"))
+  end
+
+  @impl true
+  def details_url(_event) do
+    nil
   end
 end

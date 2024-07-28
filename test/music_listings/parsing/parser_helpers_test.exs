@@ -3,14 +3,14 @@ defmodule MusicListings.Parsing.ParserHelpersTest do
 
   alias MusicListings.Parsing.ParseHelpers
 
-  describe "convert_event_time_string_to_time/1" do
+  describe "time_string_to_time/1" do
     test "return nil with invalid time string" do
-      assert nil == ParseHelpers.convert_event_time_string_to_time("bob")
+      assert nil == ParseHelpers.time_string_to_time("bob")
     end
 
     test "converts valid time strings" do
-      assert ~T[07:30:00] == ParseHelpers.convert_event_time_string_to_time("07:30")
-      assert ~T[19:30:00] == ParseHelpers.convert_event_time_string_to_time("7:30pm")
+      assert ~T[07:30:00] == ParseHelpers.time_string_to_time("07:30")
+      assert ~T[19:30:00] == ParseHelpers.time_string_to_time("7:30pm")
     end
   end
 

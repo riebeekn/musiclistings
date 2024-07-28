@@ -93,4 +93,9 @@ defmodule MusicListings.Parsing.VenueParsers.DakotaTavernParser do
 
     "#{source_url()}#{event_url}"
   end
+
+  @impl true
+  def details_url(_event) do
+    nil
+  end
 end

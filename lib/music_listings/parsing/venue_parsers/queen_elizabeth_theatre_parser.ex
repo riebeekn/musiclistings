@@ -73,7 +73,7 @@ defmodule MusicListings.Parsing.VenueParsers.QueenElizabthTheatreParser do
   @impl true
   def event_time(event) do
     event["doors"]
-    |> ParseHelpers.convert_event_time_string_to_time()
+    |> ParseHelpers.time_string_to_time()
   end
 
   @impl true
@@ -91,5 +91,10 @@ defmodule MusicListings.Parsing.VenueParsers.QueenElizabthTheatreParser do
   @impl true
   def ticket_url(event) do
     event["url"]
+  end
+
+  @impl true
+  def details_url(_event) do
+    nil
   end
 end

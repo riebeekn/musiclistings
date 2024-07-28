@@ -92,4 +92,10 @@ defmodule MusicListings.Parsing.VenueParsers.AxisClubParserTest do
       assert "https:\/\/theaxisclub.com\/event\/banners\/" == AxisClubParser.ticket_url(event)
     end
   end
+
+  describe "details_url/1" do
+    test "returns the event details url", %{event: event} do
+      assert nil == AxisClubParser.details_url(event)
+    end
+  end
 end

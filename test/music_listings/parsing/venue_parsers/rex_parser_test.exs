@@ -96,4 +96,10 @@ defmodule MusicListings.Parsing.VenueParsers.RexParserTest do
       assert nil == RexParser.ticket_url(event)
     end
   end
+
+  describe "details_url/1" do
+    test "returns the event details url", %{event: event} do
+      assert nil == RexParser.details_url(event)
+    end
+  end
 end

@@ -58,7 +58,7 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParser do
     event
     |> Meeseeks.one(css(".start"))
     |> Meeseeks.text()
-    |> ParseHelpers.convert_event_time_string_to_time()
+    |> ParseHelpers.time_string_to_time()
   end
 
   @impl true
@@ -74,5 +74,10 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParser do
   @impl true
   def ticket_url(event) do
     Selectors.url(event, css(".tickets"))
+  end
+
+  @impl true
+  def details_url(_event) do
+    nil
   end
 end

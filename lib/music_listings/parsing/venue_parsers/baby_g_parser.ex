@@ -115,4 +115,9 @@ defmodule MusicListings.Parsing.VenueParsers.BabyGParser do
     |> Meeseeks.one(css("#calendar_info_support span.calendar_info_doors_cover a:last-of-type"))
     |> Meeseeks.attr("href")
   end
+
+  @impl true
+  def details_url(_event) do
+    nil
+  end
 end
