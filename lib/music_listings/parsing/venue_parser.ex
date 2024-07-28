@@ -48,7 +48,7 @@ defmodule MusicListings.Parsing.VenueParser do
   @doc """
   Age restrictions for the event
   """
-  @callback age_restriction(Meeseeks.Result.t()) :: :all_ages | :nineteen_plus | :tbd
+  @callback age_restriction(Meeseeks.Result.t()) :: :all_ages | :nineteen_plus | :unknown
   @doc """
   The ticket URL for the event
   """

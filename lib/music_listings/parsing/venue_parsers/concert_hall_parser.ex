@@ -86,7 +86,7 @@ defmodule MusicListings.Parsing.VenueParsers.ConcertHallParser do
 
   @impl true
   def age_restriction(_event) do
-    :tbd
+    :unknown
   end
 
   @impl true

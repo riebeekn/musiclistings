@@ -87,7 +87,7 @@ defmodule MusicListings.Parsing.VenueParsers.RogersParserTest do
 
   describe "age_restriction/1" do
     test "returns the event age restriction", %{event: event} do
-      assert :tbd == RogersParser.age_restriction(event)
+      assert :unknown == RogersParser.age_restriction(event)
     end
   end
 

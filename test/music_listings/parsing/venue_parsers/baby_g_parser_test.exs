@@ -84,7 +84,7 @@ defmodule MusicListings.Parsing.VenueParsers.BabyGParserTest do
 
   describe "age_restriction/1" do
     test "returns the event age restriction", %{event: event} do
-      assert :tbd == BabyGParser.age_restriction(event)
+      assert :unknown == BabyGParser.age_restriction(event)
     end
   end
 

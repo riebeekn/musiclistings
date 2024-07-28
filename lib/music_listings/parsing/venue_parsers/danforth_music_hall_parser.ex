@@ -78,7 +78,7 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParser do
     time_age = Selectors.text(event, xpath("//div[@class='doors']/following-sibling::div[1]"))
 
     if time_age == "TBD" do
-      :tbd
+      :unknown
     else
       time_age
       |> String.split("-")

@@ -84,7 +84,7 @@ defmodule MusicListings.Parsing.VenueParsers.GarrisonParserTest do
 
   describe "age_restriction/1" do
     test "returns the event age restriction", %{event: event} do
-      assert :tbd == GarrisonParser.age_restriction(event)
+      assert :unknown == GarrisonParser.age_restriction(event)
     end
   end
 

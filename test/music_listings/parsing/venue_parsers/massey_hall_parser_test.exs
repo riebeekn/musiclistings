@@ -83,7 +83,7 @@ defmodule MusicListings.Parsing.VenueParsers.MasseyHallParserTest do
 
   describe "age_restriction/1" do
     test "returns the event age restriction", %{event: event} do
-      assert :tbd == MasseyHallParser.age_restriction(event)
+      assert :unknown == MasseyHallParser.age_restriction(event)
     end
   end
 

@@ -81,7 +81,7 @@ defmodule MusicListings.Parsing.VenueParsers.CameronHouseParser do
 
   @impl true
   def age_restriction(_event) do
-    :tbd
+    :unknown
   end
 
   @impl true

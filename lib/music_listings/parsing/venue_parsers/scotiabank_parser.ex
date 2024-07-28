@@ -75,7 +75,7 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParser do
 
   @impl true
   def age_restriction(_event) do
-    :tbd
+    :unknown
   end
 
   @impl true

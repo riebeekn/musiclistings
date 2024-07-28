@@ -85,7 +85,7 @@ defmodule MusicListings.Parsing.VenueParsers.DakotaTavernParserTest do
 
   describe "age_restriction/1" do
     test "returns the event age restriction", %{event: event} do
-      assert :tbd == DakotaTavernParser.age_restriction(event)
+      assert :unknown == DakotaTavernParser.age_restriction(event)
     end
   end
 
