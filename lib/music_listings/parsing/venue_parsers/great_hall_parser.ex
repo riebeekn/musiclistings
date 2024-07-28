@@ -71,7 +71,7 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParser do
     event
     |> Meeseeks.one(css(".tgh-e-time"))
     |> Meeseeks.text()
-    |> ParseHelpers.convert_event_time_string_to_time()
+    |> ParseHelpers.time_string_to_time()
   end
 
   @impl true
@@ -86,6 +86,11 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParser do
 
   @impl true
   def ticket_url(_event) do
+    nil
+  end
+
+  @impl true
+  def details_url(_event) do
     nil
   end
 end

@@ -90,4 +90,9 @@ defmodule MusicListings.Parsing.VenueParsers.RebelParser do
   def ticket_url(event) do
     event["buttonLink"]["rawValue"]
   end
+
+  @impl true
+  def details_url(_event) do
+    nil
+  end
 end

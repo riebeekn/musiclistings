@@ -44,13 +44,14 @@ defmodule MusicListings.Parsing.VenueParsers.CocaColaColiseumParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "1000605AC088153E" == CocaColaColiseumParser.event_id(event)
+      assert "two_door_cinema_club_with_flipturn_2024_07_31" ==
+               CocaColaColiseumParser.event_id(event)
     end
   end
 
   describe "event_title/1" do
     test "returns event title", %{event: event} do
-      assert "Two Door Cinema Club" == CocaColaColiseumParser.event_title(event)
+      assert "Two Door Cinema Club with flipturn" == CocaColaColiseumParser.event_title(event)
     end
   end
 
@@ -90,8 +91,15 @@ defmodule MusicListings.Parsing.VenueParsers.CocaColaColiseumParserTest do
 
   describe "ticket_url/1" do
     test "returns the event ticket url", %{event: event} do
-      assert "https:\/\/www.ticketmaster.ca\/event\/1000605AC088153E?brand=CCC&camefrom=CFC_CCC_WEB_SCHEDULEPAGE_LINK_TWODOORCINEMACLUB-07\/31_312024" ==
+      assert "https://www.ticketmaster.ca/event/1000605AC088153E?brand=CCC&camefrom=CFC_CCC_WEB_SCHEDULEPAGE_LINK_TWODOORCINEMACLUB-07/31_312024" ==
                CocaColaColiseumParser.ticket_url(event)
+    end
+  end
+
+  describe "details_url/1" do
+    test "returns the event details url", %{event: event} do
+      assert "https://www.coca-colacoliseum.com/events/detail/two-door-cinema-club" ==
+               CocaColaColiseumParser.details_url(event)
     end
   end
 end

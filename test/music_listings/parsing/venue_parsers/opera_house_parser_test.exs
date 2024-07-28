@@ -94,4 +94,10 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParserTest do
                OperaHouseParser.ticket_url(event)
     end
   end
+
+  describe "details_url/1" do
+    test "returns the event details url", %{event: event} do
+      assert nil == OperaHouseParser.details_url(event)
+    end
+  end
 end

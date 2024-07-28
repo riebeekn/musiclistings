@@ -97,4 +97,10 @@ defmodule MusicListings.Parsing.VenueParsers.RogersParserTest do
                RogersParser.ticket_url(event)
     end
   end
+
+  describe "details_url/1" do
+    test "returns the event details url", %{event: event} do
+      assert nil == RogersParser.details_url(event)
+    end
+  end
 end

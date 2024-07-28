@@ -92,4 +92,9 @@ defmodule MusicListings.Parsing.VenueParsers.LeesPalaceParser do
   def ticket_url(event) do
     Selectors.url(event, css(".blb"))
   end
+
+  @impl true
+  def details_url(_event) do
+    nil
+  end
 end

@@ -56,4 +56,8 @@ defmodule MusicListings.Parsing.VenueParsers.MhRthTdmhParser do
   def ticket_url(event) do
     "https://tickets.mhrth.com/#{event["prod_season_no"]}/#{event["perf_no"]}"
   end
+
+  def details_url(_event) do
+    nil
+  end
 end

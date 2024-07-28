@@ -71,7 +71,7 @@ defmodule MusicListings.Parsing.VenueParsers.HorseshoeTavernParser do
     |> Meeseeks.all(css(".schedule-event-time"))
     |> Enum.find(fn element -> element |> Meeseeks.text() |> String.contains?("pm") end)
     |> Meeseeks.text()
-    |> ParseHelpers.convert_event_time_string_to_time()
+    |> ParseHelpers.time_string_to_time()
   end
 
   @impl true
@@ -94,5 +94,10 @@ defmodule MusicListings.Parsing.VenueParsers.HorseshoeTavernParser do
   @impl true
   def ticket_url(event) do
     Selectors.url(event, css(".blb"))
+  end
+
+  @impl true
+  def details_url(_event) do
+    nil
   end
 end

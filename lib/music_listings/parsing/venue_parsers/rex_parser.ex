@@ -72,4 +72,9 @@ defmodule MusicListings.Parsing.VenueParsers.RexParser do
   def ticket_url(_event) do
     nil
   end
+
+  @impl true
+  def details_url(_event) do
+    nil
+  end
 end

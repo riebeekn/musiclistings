@@ -53,4 +53,8 @@ defmodule MusicListings.Parsing.VenueParser do
   The ticket URL for the event
   """
   @callback ticket_url(Meeseeks.Result.t()) :: String.t() | nil
+  @doc """
+  The details URL for the event
+  """
+  @callback details_url(Meeseeks.Result.t()) :: String.t() | nil
 end

@@ -93,4 +93,10 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParserTest do
       assert nil == GreatHallParser.ticket_url(event)
     end
   end
+
+  describe "details_url/1" do
+    test "returns the event details url", %{event: event} do
+      assert nil == GreatHallParser.details_url(event)
+    end
+  end
 end

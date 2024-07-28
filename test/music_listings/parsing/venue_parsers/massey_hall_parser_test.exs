@@ -92,4 +92,10 @@ defmodule MusicListings.Parsing.VenueParsers.MasseyHallParserTest do
       assert "https://tickets.mhrth.com/6050/6083" == MasseyHallParser.ticket_url(event)
     end
   end
+
+  describe "details_url/1" do
+    test "returns the event details url", %{event: event} do
+      assert nil == MasseyHallParser.details_url(event)
+    end
+  end
 end
