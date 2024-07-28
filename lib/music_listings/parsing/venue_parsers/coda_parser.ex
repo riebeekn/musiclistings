@@ -30,11 +30,10 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParser do
 
   @impl true
   def event_id(event) do
-    # combine date and title
-    event_title = event |> event_title() |> String.downcase() |> String.replace(" ", "")
-    event_date = event |> event_date()
+    title = event_title(event)
+    date = event_date(event)
 
-    "#{event_title}_#{event_date}"
+    ParseHelpers.build_id_from_title_and_date(title, date)
   end
 
   @impl true
@@ -52,18 +51,10 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParser do
 
   @impl true
   def event_date(event) do
-    full_date_string =
-      event
-      |> Meeseeks.one(css(".event-date"))
-      |> Meeseeks.text()
-
+    full_date_string = Selectors.text(event, css(".event-date"))
     [month_string, day_string, year_string] = String.split(full_date_string)
 
-    day = day_string |> String.replace(",", "") |> String.to_integer()
-    month = ParseHelpers.convert_month_string_to_number(month_string)
-    year = String.to_integer(year_string)
-
-    Date.new!(year, month, day)
+    ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
   end
 
   @impl true

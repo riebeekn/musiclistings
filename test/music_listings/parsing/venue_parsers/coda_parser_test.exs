@@ -44,7 +44,7 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "leefoss_2024-07-13" == CodaParser.event_id(event)
+      assert "lee_foss_2024_07_13" == CodaParser.event_id(event)
     end
   end
 
