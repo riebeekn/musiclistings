@@ -88,7 +88,7 @@ defmodule MusicListings.Parsing.VenueParsers.HorseshoeTavernParser do
     event
     |> Meeseeks.one(css(".non"))
     |> Meeseeks.text()
-    |> ParseHelpers.convert_age_restriction_string_to_enum()
+    |> ParseHelpers.age_restriction_string_to_enum()
   end
 
   @impl true

@@ -91,7 +91,7 @@ defmodule MusicListings.Parsing.VenueParsers.VelvetUndergroundParser do
     |> Enum.at(1)
     |> String.split(":")
     |> Enum.at(1)
-    |> ParseHelpers.convert_age_restriction_string_to_enum()
+    |> ParseHelpers.age_restriction_string_to_enum()
   end
 
   @impl true
