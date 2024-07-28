@@ -83,7 +83,7 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParser do
       time_age
       |> String.split("-")
       |> Enum.at(1)
-      |> ParseHelpers.convert_age_restriction_string_to_enum()
+      |> ParseHelpers.age_restriction_string_to_enum()
     end
   end
 

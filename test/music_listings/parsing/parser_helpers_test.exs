@@ -14,16 +14,16 @@ defmodule MusicListings.Parsing.ParserHelpersTest do
     end
   end
 
-  describe "convert_age_restriction_string_to_enum/1" do
+  describe "age_restriction_string_to_enum/1" do
     test "converts valid all ages strings" do
-      assert :all_ages == ParseHelpers.convert_age_restriction_string_to_enum("All")
-      assert :all_ages == ParseHelpers.convert_age_restriction_string_to_enum("All ages event")
-      assert :all_ages == ParseHelpers.convert_age_restriction_string_to_enum("All Ages")
+      assert :all_ages == ParseHelpers.age_restriction_string_to_enum("All")
+      assert :all_ages == ParseHelpers.age_restriction_string_to_enum("All ages event")
+      assert :all_ages == ParseHelpers.age_restriction_string_to_enum("All Ages")
     end
 
     test "converts valid 19+ strings" do
-      assert :nineteen_plus == ParseHelpers.convert_age_restriction_string_to_enum("19+")
-      assert :nineteen_plus == ParseHelpers.convert_age_restriction_string_to_enum("19+ event")
+      assert :nineteen_plus == ParseHelpers.age_restriction_string_to_enum("19+")
+      assert :nineteen_plus == ParseHelpers.age_restriction_string_to_enum("19+ event")
     end
   end
 end

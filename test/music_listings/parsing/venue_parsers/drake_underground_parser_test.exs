@@ -90,14 +90,15 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParserTest do
 
   describe "ticket_url/1" do
     test "returns the event ticket url", %{event: event} do
-      assert "https://www.thedrake.ca/events/dead-tongues" ==
+      assert "https://dice.fm/partner/drake-underground/event/lp6xl?dice_id=2918119&dice_channel=web&dice_tags=organic&dice_campaign=Drake%20Underground&dice_feature=mio_marketing&_branch_match_id=1262570201459111774&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXz8nMy9ZLyUxO1UvL1fdNSjK0tEhKSjI2TgQA8N9m3yEAAAA%3D" ==
                DrakeUndergroundParser.ticket_url(event)
     end
   end
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert nil == DrakeUndergroundParser.details_url(event)
+      assert "https://www.thedrake.ca/events/dead-tongues" ==
+               DrakeUndergroundParser.details_url(event)
     end
   end
 end

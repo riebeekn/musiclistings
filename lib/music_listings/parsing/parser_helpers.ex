@@ -5,6 +5,20 @@ defmodule MusicListings.Parsing.ParseHelpers do
   import Meeseeks.CSS
 
   # ===========================================================================
+  # General helpers
+  # ===========================================================================
+  def maybe_decode!(content) do
+    # bit of a hack to facilitate pulling data locally... Req converts it
+    # to a map when pulling from www, where-as locally we just have a file
+    # so when pulling local we get a string and need to decode it
+    if is_binary(content) do
+      Jason.decode!(content)
+    else
+      content
+    end
+  end
+
+  # ===========================================================================
   # Id helpers
   # ===========================================================================
   @spec build_id_from_title_and_date(title :: String.t(), date :: Date.t()) :: String.t()
@@ -26,7 +40,7 @@ defmodule MusicListings.Parsing.ParseHelpers do
   # ===========================================================================
   # Age restriction helpers
   # ===========================================================================
-  def convert_age_restriction_string_to_enum(age_restriction_string) do
+  def age_restriction_string_to_enum(age_restriction_string) do
     age_restriction_string
     |> String.trim()
     |> String.downcase()
@@ -53,27 +67,39 @@ defmodule MusicListings.Parsing.ParseHelpers do
 
   defp month_string_to_number("january"), do: 1
   defp month_string_to_number("jan"), do: 1
+  defp month_string_to_number("01"), do: 1
   defp month_string_to_number("february"), do: 2
   defp month_string_to_number("feb"), do: 2
+  defp month_string_to_number("02"), do: 2
   defp month_string_to_number("march"), do: 3
   defp month_string_to_number("mar"), do: 3
+  defp month_string_to_number("03"), do: 3
   defp month_string_to_number("april"), do: 4
   defp month_string_to_number("apr"), do: 4
+  defp month_string_to_number("04"), do: 4
   defp month_string_to_number("may"), do: 5
+  defp month_string_to_number("05"), do: 5
   defp month_string_to_number("june"), do: 6
   defp month_string_to_number("jun"), do: 6
+  defp month_string_to_number("06"), do: 6
   defp month_string_to_number("july"), do: 7
   defp month_string_to_number("jul"), do: 7
+  defp month_string_to_number("07"), do: 7
   defp month_string_to_number("august"), do: 8
   defp month_string_to_number("aug"), do: 8
+  defp month_string_to_number("08"), do: 8
   defp month_string_to_number("september"), do: 9
   defp month_string_to_number("sep"), do: 9
+  defp month_string_to_number("09"), do: 9
   defp month_string_to_number("october"), do: 10
   defp month_string_to_number("oct"), do: 10
+  defp month_string_to_number("10"), do: 10
   defp month_string_to_number("november"), do: 11
   defp month_string_to_number("nov"), do: 11
+  defp month_string_to_number("11"), do: 11
   defp month_string_to_number("december"), do: 12
   defp month_string_to_number("dec"), do: 12
+  defp month_string_to_number("12"), do: 12
 
   @doc """
   A couple of sites use the following format for the date:

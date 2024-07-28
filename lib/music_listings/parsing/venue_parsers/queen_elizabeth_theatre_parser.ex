@@ -85,7 +85,7 @@ defmodule MusicListings.Parsing.VenueParsers.QueenElizabthTheatreParser do
   @impl true
   def age_restriction(event) do
     event["age_limit"]
-    |> ParseHelpers.convert_age_restriction_string_to_enum()
+    |> ParseHelpers.age_restriction_string_to_enum()
   end
 
   @impl true

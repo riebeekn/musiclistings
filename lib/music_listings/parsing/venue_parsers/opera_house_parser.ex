@@ -112,7 +112,7 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParser do
     event
     |> Meeseeks.one(css(".info_landing h5:last-of-type"))
     |> Meeseeks.text()
-    |> ParseHelpers.convert_age_restriction_string_to_enum()
+    |> ParseHelpers.age_restriction_string_to_enum()
   end
 
   @impl true

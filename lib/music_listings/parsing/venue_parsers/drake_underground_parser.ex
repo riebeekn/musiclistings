@@ -17,10 +17,7 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
 
   @impl true
   def events(body) do
-    # bit of a hack to facilitate pulling data locally... Req converts it
-    # to a map when pulling from www, where-as locally we just have a file
-    # so when pulling local we get a string and need to decode! it
-    if is_binary(body), do: Jason.decode!(body), else: body
+    ParseHelpers.maybe_decode!(body)
   end
 
   @impl true
@@ -51,11 +48,7 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
   def event_date(event) do
     [year_string, month_string, day_string] = event["fm_date"] |> Enum.at(0) |> String.split("-")
 
-    year = String.to_integer(year_string)
-    month = String.to_integer(month_string)
-    day = String.to_integer(day_string)
-
-    Date.new!(year, month, day)
+    ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
   end
 
   @impl true
@@ -74,16 +67,16 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
   def age_restriction(event) do
     event["fm_filter_1"]
     |> Enum.at(0)
-    |> ParseHelpers.convert_age_restriction_string_to_enum()
+    |> ParseHelpers.age_restriction_string_to_enum()
   end
 
   @impl true
   def ticket_url(event) do
-    event["link"]
+    event["fm_cta_url"]
   end
 
   @impl true
-  def details_url(_event) do
-    nil
+  def details_url(event) do
+    event["link"]
   end
 end
