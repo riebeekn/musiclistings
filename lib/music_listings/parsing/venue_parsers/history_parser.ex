@@ -30,9 +30,10 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParser do
 
   @impl true
   def event_id(event) do
-    event
-    |> ticket_url()
-    |> ParseHelpers.extract_event_id_from_ticketmaster_url()
+    title = event_title(event)
+    date = event_date(event)
+
+    ParseHelpers.build_id_from_title_and_date(title, date)
   end
 
   @impl true
@@ -50,14 +51,17 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParser do
 
   @impl true
   def event_date(event) do
-    ParseHelpers.extract_date_from_m__xx_format(event)
+    day_string = Selectors.text(event, css(".m-date__day"))
+    month_string = Selectors.text(event, css(".m-date__month"))
+    year_string = Selectors.text(event, css(".m-date__year"))
+
+    ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
   end
 
   @impl true
   def event_time(event) do
     event
-    |> Meeseeks.one(css(".start"))
-    |> Meeseeks.text()
+    |> Selectors.text(css(".start"))
     |> ParseHelpers.time_string_to_time()
   end
 
@@ -77,7 +81,7 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParser do
   end
 
   @impl true
-  def details_url(_event) do
-    nil
+  def details_url(event) do
+    Selectors.url(event, css(".more"))
   end
 end

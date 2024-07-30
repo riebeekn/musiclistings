@@ -45,7 +45,7 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "10006099F25B4189" == HistoryParser.event_id(event)
+      assert "lucky_daye_2024_07_31" == HistoryParser.event_id(event)
     end
   end
 
@@ -98,7 +98,8 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParserTest do
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert nil == HistoryParser.details_url(event)
+      assert "https://www.historytoronto.com/events/detail/lucky-daye" ==
+               HistoryParser.details_url(event)
     end
   end
 end
