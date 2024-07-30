@@ -20,9 +20,9 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
   @impl true
   def events(body) do
     body
-    |> Meeseeks.all(css(".stratum-advanced-posts__post"))
+    |> Selectors.all_matches(css(".stratum-advanced-posts__post"))
     |> Enum.filter(fn article ->
-      Meeseeks.one(article, css("span.stratum-advanced-posts__post-date")) != nil
+      Selectors.match_one(article, css("span.stratum-advanced-posts__post-date")) != nil
     end)
   end
 
@@ -33,8 +33,10 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
 
   @impl true
   def event_id(event) do
-    title_slug = event |> event_title() |> String.replace(" ", "")
-    "#{title_slug}-#{event_date(event)}"
+    title = event_title(event)
+    date = event_date(event)
+
+    ParseHelpers.build_id_from_title_and_date(title, date)
   end
 
   @impl true
@@ -52,15 +54,10 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
   def event_date(event) do
     [month_string, day_string, year_string] =
       event
-      |> Meeseeks.one(css(".stratum-advanced-posts__post-date"))
-      |> Meeseeks.text()
+      |> Selectors.text(css(".stratum-advanced-posts__post-date"))
       |> String.split()
 
-    day = day_string |> String.replace(",", "") |> String.to_integer()
-    month = ParseHelpers.convert_month_string_to_number(month_string)
-    year = String.to_integer(year_string)
-
-    Date.new!(year, month, day)
+    ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
   end
 
   @impl true
@@ -84,7 +81,7 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
   end
 
   @impl true
-  def details_url(_event) do
-    nil
+  def details_url(event) do
+    Selectors.url(event, css(".stratum-advanced-posts__post-link"))
   end
 end
