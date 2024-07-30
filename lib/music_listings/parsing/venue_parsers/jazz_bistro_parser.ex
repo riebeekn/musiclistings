@@ -6,8 +6,10 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParser do
 
   import Meeseeks.CSS
 
+  alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
+  alias MusicListings.Parsing.Selectors
 
   @impl true
   def source_url, do: "https://jazzbistro.ca/event-calendar"
@@ -18,9 +20,8 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParser do
   @impl true
   def events(body) do
     body
-    |> Meeseeks.parse()
-    |> Meeseeks.one(css("script[type=\"application/ld+json\"]"))
-    |> Meeseeks.data()
+    |> Selectors.match_one(css("script[type=\"application/ld+json\"]"))
+    |> Selectors.data()
     |> Jason.decode!()
     |> Enum.filter(&(&1["@type"] == "Event"))
   end
@@ -39,9 +40,10 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParser do
 
   @impl true
   def event_id(event) do
-    # TODO: common
-    slug = "#{event_title(event)}-#{event_date(event)}"
-    Regex.replace(~r/[[:punct:]\s]+/, slug, "_")
+    title = event_title(event)
+    date = event_date(event)
+
+    ParseHelpers.build_id_from_title_and_date(title, date)
   end
 
   @impl true
@@ -79,12 +81,12 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParser do
   end
 
   @impl true
-  def ticket_url(event) do
-    event["url"]
+  def ticket_url(_event) do
+    nil
   end
 
   @impl true
-  def details_url(_event) do
-    nil
+  def details_url(event) do
+    event["url"]
   end
 end
