@@ -44,7 +44,7 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "HighFlyerReleaseShow-2024-08-23" == ElMocamboParser.event_id(event)
+      assert "high_flyer_release_show_2024_08_23" == ElMocamboParser.event_id(event)
     end
   end
 
@@ -97,7 +97,8 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParserTest do
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert nil == ElMocamboParser.details_url(event)
+      assert "https://elmocambo.com/event/high-flyer-release-show/" ==
+               ElMocamboParser.details_url(event)
     end
   end
 end

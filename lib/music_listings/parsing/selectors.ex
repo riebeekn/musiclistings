@@ -6,6 +6,10 @@ defmodule MusicListings.Parsing.Selectors do
     Meeseeks.all(content, selector)
   end
 
+  def match_one(content, selector) do
+    Meeseeks.one(content, selector)
+  end
+
   def url(content, url_selector) do
     content
     |> Meeseeks.one(url_selector)
