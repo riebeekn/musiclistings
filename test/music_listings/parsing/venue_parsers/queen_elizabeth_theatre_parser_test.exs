@@ -44,7 +44,7 @@ defmodule MusicListings.Parsing.VenueParsers.QueenElizabthTheatreParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "KK'sPriest/Accept-2024-09-10" == QueenElizabthTheatreParser.event_id(event)
+      assert "kk_s_priest_accept_2024_09_10" == QueenElizabthTheatreParser.event_id(event)
     end
   end
 

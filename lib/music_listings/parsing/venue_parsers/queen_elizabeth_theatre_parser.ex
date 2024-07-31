@@ -18,10 +18,7 @@ defmodule MusicListings.Parsing.VenueParsers.QueenElizabthTheatreParser do
 
   @impl true
   def events(body) do
-    # bit of a hack to facilitate pulling data locally... Req converts it
-    # to a map when pulling from www, where-as locally we just have a file
-    # so when pulling local we get a string and need to decode! it
-    body = if is_binary(body), do: Jason.decode!(body), else: body
+    body = ParseHelpers.maybe_decode!(body)
 
     body["events"]
   end
@@ -34,8 +31,10 @@ defmodule MusicListings.Parsing.VenueParsers.QueenElizabthTheatreParser do
 
   @impl true
   def event_id(event) do
-    title_slug = event |> event_title() |> String.replace(" ", "")
-    "#{title_slug}-#{event_date(event)}"
+    title = event_title(event)
+    date = event_date(event)
+
+    ParseHelpers.build_id_from_title_and_date(title, date)
   end
 
   @impl true
@@ -53,21 +52,7 @@ defmodule MusicListings.Parsing.VenueParsers.QueenElizabthTheatreParser do
   def event_date(event) do
     [month_string, day_string, year_string] = String.split(event["event_date"])
 
-    year = String.to_integer(year_string)
-    month = ParseHelpers.convert_month_string_to_number(month_string)
-
-    # TODO: common
-    day =
-      day_string
-      |> String.trim()
-      |> String.replace("st", "")
-      |> String.replace("nd", "")
-      |> String.replace("rd", "")
-      |> String.replace("th", "")
-      |> String.replace(",", "")
-      |> String.to_integer()
-
-    Date.new!(year, month, day)
+    ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
   end
 
   @impl true
