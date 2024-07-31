@@ -4,6 +4,7 @@ defmodule MusicListings.Parsing.VenueParsers.RebelParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
+  alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
 
@@ -17,10 +18,7 @@ defmodule MusicListings.Parsing.VenueParsers.RebelParser do
 
   @impl true
   def events(body) do
-    # bit of a hack to facilitate pulling data locally... Req converts it
-    # to a map when pulling from www, where-as locally we just have a file
-    # so when pulling local we get a string and need to decode! it
-    body = if is_binary(body), do: Jason.decode!(body), else: body
+    body = ParseHelpers.maybe_decode!(body)
 
     body["data"]["widgets"]["737e2434-3a70-460f-aa98-a1ec67d0b60b"]["data"]["settings"]["events"]
   end
@@ -52,11 +50,7 @@ defmodule MusicListings.Parsing.VenueParsers.RebelParser do
     if is_map(event["start"]) do
       [year_string, month_string, day_string] = event["start"]["date"] |> String.split("-")
 
-      year = String.to_integer(year_string)
-      month = String.to_integer(month_string)
-      day = String.to_integer(day_string)
-
-      Date.new!(year, month, day)
+      ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
     else
       nil
     end
@@ -65,12 +59,7 @@ defmodule MusicListings.Parsing.VenueParsers.RebelParser do
   @impl true
   def event_time(event) do
     if is_map(event["start"]) do
-      [hour_string, minute_string] = event["start"]["time"] |> String.split(":")
-
-      hour = String.to_integer(hour_string)
-      minute = String.to_integer(minute_string)
-
-      Time.new!(hour, minute, 0)
+      ParseHelpers.time_string_to_time(event["start"]["time"])
     else
       nil
     end
@@ -87,12 +76,12 @@ defmodule MusicListings.Parsing.VenueParsers.RebelParser do
   end
 
   @impl true
-  def ticket_url(event) do
-    event["buttonLink"]["rawValue"]
+  def ticket_url(_event) do
+    nil
   end
 
   @impl true
-  def details_url(_event) do
-    nil
+  def details_url(event) do
+    event["buttonLink"]["rawValue"]
   end
 end

@@ -90,14 +90,14 @@ defmodule MusicListings.Parsing.VenueParsers.RebelParserTest do
 
   describe "ticket_url/1" do
     test "returns the event ticket url", %{event: event} do
-      assert "https://rebeltoronto.com/2024/05/15/french-montana-gotta-see-it-to-believe-it-tour/" ==
-               RebelParser.ticket_url(event)
+      assert nil == RebelParser.ticket_url(event)
     end
   end
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert nil == RebelParser.details_url(event)
+      assert "https://rebeltoronto.com/2024/05/15/french-montana-gotta-see-it-to-believe-it-tour/" ==
+               RebelParser.details_url(event)
     end
   end
 end
