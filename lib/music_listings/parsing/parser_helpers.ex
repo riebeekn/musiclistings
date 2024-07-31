@@ -141,20 +141,49 @@ defmodule MusicListings.Parsing.ParseHelpers do
           day_string :: String.t()
         ) :: Date.t()
   def build_date_from_year_month_day_strings(year_string, month_string, day_string) do
-    day =
-      day_string
-      |> String.replace(",", "")
-      |> String.trim()
-      |> String.replace("st", "")
-      |> String.replace("nd", "")
-      |> String.replace("rd", "")
-      |> String.replace("th", "")
-      |> String.to_integer()
-
+    day = day_string_to_integer(day_string)
+    # TODO: rename convert_month_string_to_number to month_string_to_integer
     month = convert_month_string_to_number(month_string)
     year = year_string |> String.replace(",", "") |> String.trim() |> String.to_integer()
 
     Date.new!(year, month, day)
+  end
+
+  @spec build_date_from_month_day_strings(month_string :: String.t(), day_string :: String.t()) ::
+          Date.t()
+  def build_date_from_month_day_strings(month_string, day_string) do
+    day = day_string_to_integer(day_string)
+    month = convert_month_string_to_number(month_string)
+
+    today = Date.utc_today()
+    candidate_date = Date.new!(today.year, month, day)
+    maybe_increment_year(candidate_date, today)
+  end
+
+  defp maybe_increment_year(candidate_date, today) do
+    # There is no year provided... so subtract a few days from today
+    # then compare the dates if candidate show date < today increment
+    # the year...
+    # TODO: revisit this, is there some better way of trying to determine
+    # the year of the event?
+    fifteen_days_ago = Date.add(today, -15)
+
+    if Date.before?(candidate_date, fifteen_days_ago) do
+      Date.new!(candidate_date.year + 1, candidate_date.month, candidate_date.day)
+    else
+      candidate_date
+    end
+  end
+
+  defp day_string_to_integer(day_string) do
+    day_string
+    |> String.replace(",", "")
+    |> String.trim()
+    |> String.replace("st", "")
+    |> String.replace("nd", "")
+    |> String.replace("rd", "")
+    |> String.replace("th", "")
+    |> String.to_integer()
   end
 
   # ===========================================================================

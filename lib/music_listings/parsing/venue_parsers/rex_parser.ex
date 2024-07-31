@@ -4,9 +4,9 @@ defmodule MusicListings.Parsing.VenueParsers.RexParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
+  alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
-  alias MusicListings.Parsing.ParseHelpers
 
   @impl true
   def source_url do
