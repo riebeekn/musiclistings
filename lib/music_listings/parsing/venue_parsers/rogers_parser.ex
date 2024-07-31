@@ -4,13 +4,7 @@ defmodule MusicListings.Parsing.VenueParsers.RogersParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
-  import Meeseeks.CSS
-
-  alias MusicListings.Parsing.Performers
-  alias MusicListings.Parsing.Price
-
-  # TODO: the same as BudweiserStageParser... should do same we did
-  # with mh_rth_tdmh parser
+  alias MusicListings.Parsing.VenueParsers.LiveNationParser
 
   @impl true
   def source_url, do: "https://www.livenation.com/venue/KovZpa3Bbe/rogers-centre-events"
@@ -19,70 +13,35 @@ defmodule MusicListings.Parsing.VenueParsers.RogersParser do
   def example_data_file_location, do: "test/data/rogers/index.html"
 
   @impl true
-  def events(body) do
-    body
-    |> Meeseeks.parse()
-    |> Meeseeks.all(css("script[type=\"application/ld+json\"]"))
-    |> Enum.map(&(&1 |> Meeseeks.data() |> Jason.decode!()))
-    |> Enum.filter(&(&1["@type"] == "MusicEvent"))
-  end
+  defdelegate events(body), to: LiveNationParser
 
   @impl true
-  def next_page_url(_body) do
-    # no next page
-    nil
-  end
+  defdelegate next_page_url(body), to: LiveNationParser
 
   @impl true
-  def event_id(event) do
-    event["url"]
-    |> String.replace("https://www.livenation.com/event", "")
-    |> String.replace("/", "")
-  end
+  defdelegate event_id(event), to: LiveNationParser
 
   @impl true
-  def event_title(event) do
-    event["name"]
-  end
+  defdelegate event_title(event), to: LiveNationParser
 
   @impl true
-  def performers(event) do
-    event["performers"]
-    |> Enum.map(& &1["name"])
-    |> Performers.new()
-  end
+  defdelegate performers(event), to: LiveNationParser
 
   @impl true
-  def event_date(event) do
-    event["startDate"]
-    |> NaiveDateTime.from_iso8601!()
-    |> NaiveDateTime.to_date()
-  end
+  defdelegate event_date(event), to: LiveNationParser
 
   @impl true
-  def event_time(event) do
-    event["startDate"]
-    |> NaiveDateTime.from_iso8601!()
-    |> NaiveDateTime.to_time()
-  end
+  defdelegate event_time(event), to: LiveNationParser
 
   @impl true
-  def price(_event) do
-    Price.unknown()
-  end
+  defdelegate price(event), to: LiveNationParser
 
   @impl true
-  def age_restriction(_event) do
-    :unknown
-  end
+  defdelegate age_restriction(event), to: LiveNationParser
 
   @impl true
-  def ticket_url(event) do
-    event["url"]
-  end
+  defdelegate ticket_url(event), to: LiveNationParser
 
   @impl true
-  def details_url(_event) do
-    nil
-  end
+  defdelegate details_url(event), to: LiveNationParser
 end
