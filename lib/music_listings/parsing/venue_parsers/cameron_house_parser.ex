@@ -8,6 +8,7 @@ defmodule MusicListings.Parsing.VenueParsers.CameronHouseParser do
 
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
+  alias MusicListings.Parsing.Selectors
 
   @impl true
   def source_url, do: "https://www.thecameron.com/shows"
@@ -19,9 +20,8 @@ defmodule MusicListings.Parsing.VenueParsers.CameronHouseParser do
   def events(body) do
     json =
       body
-      |> Meeseeks.parse()
-      |> Meeseeks.one(css("script[type=\"application/json\"]#wix-warmup-data"))
-      |> Meeseeks.data()
+      |> Selectors.match_one(css("script[type=\"application/json\"]#wix-warmup-data"))
+      |> Selectors.data()
       |> Jason.decode!()
 
     json["appsWarmupData"]["140603ad-af8d-84a5-2c80-a0f60cb47351"]["widgetcomp-j9ny0yyr"][
@@ -85,8 +85,8 @@ defmodule MusicListings.Parsing.VenueParsers.CameronHouseParser do
   end
 
   @impl true
-  def ticket_url(event) do
-    event["url"]
+  def ticket_url(_event) do
+    nil
   end
 
   @impl true
