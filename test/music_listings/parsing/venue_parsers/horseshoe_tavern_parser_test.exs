@@ -44,7 +44,7 @@ defmodule MusicListings.Parsing.VenueParsers.HorseshoeTavernParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "philipsayce-2024-09-06" == HorseshoeTavernParser.event_id(event)
+      assert "philip_sayce_2024_09_06" == HorseshoeTavernParser.event_id(event)
     end
   end
 
