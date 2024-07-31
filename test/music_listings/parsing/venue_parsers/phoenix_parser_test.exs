@@ -45,7 +45,7 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "LADYTRON-2024-08-30" == PhoenixParser.event_id(event)
+      assert "ladytron_2024_08_30" == PhoenixParser.event_id(event)
     end
   end
 
@@ -91,14 +91,14 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParserTest do
 
   describe "ticket_url/1" do
     test "returns the event ticket url", %{event: event} do
-      assert "https://thephoenixconcerttheatre.com/events/event/ladytron/" ==
-               PhoenixParser.ticket_url(event)
+      assert nil == PhoenixParser.ticket_url(event)
     end
   end
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert nil == PhoenixParser.details_url(event)
+      assert "https://thephoenixconcerttheatre.com/events/event/ladytron/" ==
+               PhoenixParser.details_url(event)
     end
   end
 end
