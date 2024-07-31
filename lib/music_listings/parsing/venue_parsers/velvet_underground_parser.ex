@@ -47,24 +47,21 @@ defmodule MusicListings.Parsing.VenueParsers.VelvetUndergroundParser do
 
   @impl true
   def event_date(event) do
-    date_string =
-      event
-      |> Meeseeks.one(css(".event-block"))
-      |> Meeseeks.Result.attr("data-event-date")
+    date_string = Selectors.attr(event, "data-event-date")
 
-    year = date_string |> String.slice(0..3) |> String.to_integer()
-    month = date_string |> String.slice(4..5) |> String.to_integer()
-    day = date_string |> String.slice(6..7) |> String.to_integer()
+    year_string = String.slice(date_string, 0..3)
+    month_string = String.slice(date_string, 4..5)
+    day_string = String.slice(date_string, 6..7)
 
-    Date.new!(year, month, day)
+    ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
   end
 
   @impl true
   def event_time(event) do
     event
-    |> Meeseeks.all(css(".event-meta"))
-    |> Enum.find(fn element -> element |> Meeseeks.text() |> String.contains?("Ages:") end)
-    |> Meeseeks.text()
+    |> Selectors.all_matches(css(".event-meta"))
+    |> Selectors.text()
+    |> Enum.find(fn element -> element |> String.contains?("Ages:") end)
     |> String.split("|")
     |> Enum.at(0)
     |> String.split(" ")
@@ -75,18 +72,18 @@ defmodule MusicListings.Parsing.VenueParsers.VelvetUndergroundParser do
   @impl true
   def price(event) do
     event
-    |> Meeseeks.all(css(".event-meta"))
-    |> Enum.find(fn element -> element |> Meeseeks.text() |> String.contains?("Price:") end)
-    |> Meeseeks.text()
+    |> Selectors.all_matches(css(".event-meta"))
+    |> Selectors.text()
+    |> Enum.find(fn element -> element |> String.contains?("Price:") end)
     |> Price.new()
   end
 
   @impl true
   def age_restriction(event) do
     event
-    |> Meeseeks.all(css(".event-meta"))
-    |> Enum.find(fn element -> element |> Meeseeks.text() |> String.contains?("Ages:") end)
-    |> Meeseeks.text()
+    |> Selectors.all_matches(css(".event-meta"))
+    |> Selectors.text()
+    |> Enum.find(fn element -> element |> String.contains?("Ages:") end)
     |> String.split("|")
     |> Enum.at(1)
     |> String.split(":")
