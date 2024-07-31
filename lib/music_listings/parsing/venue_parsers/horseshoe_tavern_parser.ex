@@ -30,9 +30,10 @@ defmodule MusicListings.Parsing.VenueParsers.HorseshoeTavernParser do
 
   @impl true
   def event_id(event) do
-    event_title = Selectors.text(event, css(".schedule-speaker-name"))
-    event_date = event_date(event)
-    "#{event_title |> String.replace(" ", "") |> String.downcase()}-#{event_date}"
+    title = event_title(event)
+    date = event_date(event)
+
+    ParseHelpers.build_id_from_title_and_date(title, date)
   end
 
   @impl true
@@ -50,44 +51,36 @@ defmodule MusicListings.Parsing.VenueParsers.HorseshoeTavernParser do
 
   @impl true
   def event_date(event) do
-    full_date_string =
-      event
-      |> Meeseeks.one(css(".schedule-event-time"))
-      |> Meeseeks.text()
+    full_date_string = Selectors.text(event, css(".schedule-event-time"))
 
     [_day_of_week, day_month_string, year_string] = String.split(full_date_string, ", ")
     [month_string, day_string] = String.split(day_month_string)
 
-    day = String.to_integer(day_string)
-    month = ParseHelpers.convert_month_string_to_number(month_string)
-    year = String.to_integer(year_string)
-
-    Date.new!(year, month, day)
+    ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
   end
 
   @impl true
   def event_time(event) do
     event
-    |> Meeseeks.all(css(".schedule-event-time"))
-    |> Enum.find(fn element -> element |> Meeseeks.text() |> String.contains?("pm") end)
-    |> Meeseeks.text()
+    |> Selectors.all_matches(css(".schedule-event-time"))
+    |> Selectors.text()
+    |> Enum.find(fn element -> element |> String.contains?("pm") end)
     |> ParseHelpers.time_string_to_time()
   end
 
   @impl true
   def price(event) do
     event
-    |> Meeseeks.all(css(".schedule-event-time"))
-    |> Enum.find(fn element -> element |> Meeseeks.text() |> String.contains?("$") end)
-    |> Meeseeks.text()
+    |> Selectors.all_matches(css(".schedule-event-time"))
+    |> Selectors.text()
+    |> Enum.find(fn element -> element |> String.contains?("$") end)
     |> Price.new()
   end
 
   @impl true
   def age_restriction(event) do
     event
-    |> Meeseeks.one(css(".non"))
-    |> Meeseeks.text()
+    |> Selectors.text(css(".non"))
     |> ParseHelpers.age_restriction_string_to_enum()
   end
 
