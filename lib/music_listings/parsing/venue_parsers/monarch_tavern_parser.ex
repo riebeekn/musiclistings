@@ -4,6 +4,7 @@ defmodule MusicListings.Parsing.VenueParsers.MonarchTavernParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
+  alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
 
@@ -20,10 +21,7 @@ defmodule MusicListings.Parsing.VenueParsers.MonarchTavernParser do
 
   @impl true
   def events(body) do
-    # bit of a hack to facilitate pulling data locally... Req converts it
-    # to a map when pulling from www, where-as locally we just have a file
-    # so when pulling local we get a string and need to decode! it
-    body = if is_binary(body), do: Jason.decode!(body), else: body
+    body = ParseHelpers.maybe_decode!(body)
 
     body["events"]
   end
