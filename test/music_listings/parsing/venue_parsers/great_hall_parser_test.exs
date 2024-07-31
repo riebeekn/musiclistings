@@ -44,7 +44,8 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "7229" == GreatHallParser.event_id(event)
+      assert "brass_camel_featuring_a_short_walk_to_pluto_2024_09_28" ==
+               GreatHallParser.event_id(event)
     end
   end
 
@@ -96,7 +97,8 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParserTest do
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert nil == GreatHallParser.details_url(event)
+      assert "https://thegreathall.ca/event/brass-camel-featuring-a-short-walk-to-pluto/" ==
+               GreatHallParser.details_url(event)
     end
   end
 end
