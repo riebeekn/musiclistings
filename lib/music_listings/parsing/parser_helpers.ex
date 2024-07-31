@@ -141,7 +141,16 @@ defmodule MusicListings.Parsing.ParseHelpers do
           day_string :: String.t()
         ) :: Date.t()
   def build_date_from_year_month_day_strings(year_string, month_string, day_string) do
-    day = day_string |> String.replace(",", "") |> String.trim() |> String.to_integer()
+    day =
+      day_string
+      |> String.replace(",", "")
+      |> String.trim()
+      |> String.replace("st", "")
+      |> String.replace("nd", "")
+      |> String.replace("rd", "")
+      |> String.replace("th", "")
+      |> String.to_integer()
+
     month = convert_month_string_to_number(month_string)
     year = year_string |> String.replace(",", "") |> String.trim() |> String.to_integer()
 
