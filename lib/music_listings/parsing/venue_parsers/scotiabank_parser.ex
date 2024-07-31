@@ -31,12 +31,10 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParser do
 
   @impl true
   def event_id(event) do
-    # TODO: common
-    slug = "#{event_title(event)}-#{event_date(event)}"
+    title = event_title(event)
+    date = event_date(event)
 
-    ~r/[[:punct:]\s]+/
-    |> Regex.replace(slug, "_")
-    |> String.downcase()
+    ParseHelpers.build_id_from_title_and_date(title, date)
   end
 
   @impl true
@@ -52,15 +50,11 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParser do
 
   @impl true
   def event_date(event) do
-    day_string = event |> Meeseeks.one(css(".m-date__day")) |> Meeseeks.text()
-    month_string = event |> Meeseeks.one(css(".m-date__month")) |> Meeseeks.text()
-    year_string = event |> Meeseeks.one(css(".m-date__year")) |> Meeseeks.text()
+    day_string = Selectors.text(event, css(".m-date__day"))
+    month_string = Selectors.text(event, css(".m-date__month"))
+    year_string = Selectors.text(event, css(".m-date__year"))
 
-    day = String.to_integer(day_string)
-    month = ParseHelpers.convert_month_string_to_number(month_string)
-    year = year_string |> String.replace(",", "") |> String.trim() |> String.to_integer()
-
-    Date.new!(year, month, day)
+    ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
   end
 
   @impl true
@@ -80,11 +74,11 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParser do
 
   @impl true
   def ticket_url(event) do
-    Selectors.url(event, css(".more"))
+    Selectors.url(event, css(".tickets"))
   end
 
   @impl true
-  def details_url(_event) do
-    nil
+  def details_url(event) do
+    Selectors.url(event, css(".more"))
   end
 end
