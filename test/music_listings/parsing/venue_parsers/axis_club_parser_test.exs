@@ -43,7 +43,7 @@ defmodule MusicListings.Parsing.VenueParsers.AxisClubParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "BANNERS-2024-08-08" == AxisClubParser.event_id(event)
+      assert "banners_2024_08_08" == AxisClubParser.event_id(event)
     end
   end
 
@@ -89,13 +89,13 @@ defmodule MusicListings.Parsing.VenueParsers.AxisClubParserTest do
 
   describe "ticket_url/1" do
     test "returns the event ticket url", %{event: event} do
-      assert "https:\/\/theaxisclub.com\/event\/banners\/" == AxisClubParser.ticket_url(event)
+      assert nil == AxisClubParser.ticket_url(event)
     end
   end
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert nil == AxisClubParser.details_url(event)
+      assert "https://theaxisclub.com/event/banners/" == AxisClubParser.details_url(event)
     end
   end
 end
