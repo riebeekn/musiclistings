@@ -30,11 +30,10 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParser do
 
   @impl true
   def event_id(event) do
-    class_attr = Meeseeks.attr(event, "class")
-    regex = ~r/event-(?<event_id>\d+)/
+    title = event_title(event)
+    date = event_date(event)
 
-    %{"event_id" => event_id} = Regex.named_captures(regex, class_attr)
-    event_id
+    ParseHelpers.build_id_from_title_and_date(title, date)
   end
 
   @impl true
@@ -52,25 +51,18 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParser do
 
   @impl true
   def event_date(event) do
-    full_date_string =
+    [_day_of_week_string, month_string, day_string, year_string] =
       event
-      |> Meeseeks.one(css(".tgh-e-date"))
-      |> Meeseeks.text()
+      |> Selectors.text(css(".tgh-e-date"))
+      |> String.split()
 
-    [_day_of_week_string, month_string, day_string, year_string] = String.split(full_date_string)
-
-    day = String.to_integer(day_string)
-    month = ParseHelpers.convert_month_string_to_number(month_string)
-    year = String.to_integer(year_string)
-
-    Date.new!(year, month, day)
+    ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
   end
 
   @impl true
   def event_time(event) do
     event
-    |> Meeseeks.one(css(".tgh-e-time"))
-    |> Meeseeks.text()
+    |> Selectors.text(css(".tgh-e-time"))
     |> ParseHelpers.time_string_to_time()
   end
 
@@ -90,7 +82,7 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParser do
   end
 
   @impl true
-  def details_url(_event) do
-    nil
+  def details_url(event) do
+    Selectors.url(event, css(".tgh-event-button a"))
   end
 end
