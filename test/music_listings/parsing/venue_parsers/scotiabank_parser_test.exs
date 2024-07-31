@@ -91,14 +91,15 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParserTest do
 
   describe "ticket_url/1" do
     test "returns the event ticket url", %{event: event} do
-      assert "https://www.scotiabankarena.com/events/detail/billy-idol-rebel-yell" ==
+      assert "https://www.ticketmaster.ca/event/1000608404DB45F2?brand=SBA&camefrom=CFC_SBA_WEB_SCHEDULEPAGE_LINK_BILLYIDOL-08/09_482024" ==
                ScotiabankParser.ticket_url(event)
     end
   end
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert nil == ScotiabankParser.details_url(event)
+      assert "https://www.scotiabankarena.com/events/detail/billy-idol-rebel-yell" ==
+               ScotiabankParser.details_url(event)
     end
   end
 end
