@@ -44,7 +44,7 @@ defmodule MusicListings.Parsing.VenueParsers.LeesPalaceParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "whitehallw/thehighteens&wedding_2024-07-27" == LeesPalaceParser.event_id(event)
+      assert "whitehall_w_the_high_teens_wedding_2024_07_27" == LeesPalaceParser.event_id(event)
     end
   end
 
@@ -97,7 +97,8 @@ defmodule MusicListings.Parsing.VenueParsers.LeesPalaceParserTest do
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert nil == LeesPalaceParser.details_url(event)
+      assert "https://www.leespalace.com/event/whitehall-the-dance-cave" ==
+               LeesPalaceParser.details_url(event)
     end
   end
 end

@@ -11,8 +11,10 @@ defmodule MusicListings.Parsing.VenueParsers.LeesPalaceParser do
   alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.Selectors
 
+  @base_url "https://www.leespalace.com"
+
   @impl true
-  def source_url, do: "https://www.leespalace.com/events"
+  def source_url, do: "#{@base_url}/events"
 
   @impl true
   def example_data_file_location, do: "test/data/lees_palace/index.html"
@@ -30,11 +32,10 @@ defmodule MusicListings.Parsing.VenueParsers.LeesPalaceParser do
 
   @impl true
   def event_id(event) do
-    # combine date and title
-    event_title = event |> event_title() |> String.downcase() |> String.replace(" ", "")
-    event_date = event |> event_date()
+    title = event_title(event)
+    date = event_date(event)
 
-    "#{event_title}_#{event_date}"
+    ParseHelpers.build_id_from_title_and_date(title, date)
   end
 
   @impl true
@@ -52,18 +53,12 @@ defmodule MusicListings.Parsing.VenueParsers.LeesPalaceParser do
 
   @impl true
   def event_date(event) do
-    full_date_string =
+    [_day_of_week_string, month_string, day_string, year_string] =
       event
-      |> Meeseeks.one(css(".schedule-event-time"))
-      |> Meeseeks.text()
+      |> Selectors.text(css(".schedule-event-time"))
+      |> String.split()
 
-    [_day_of_week_string, month_string, day_string, year_string] = String.split(full_date_string)
-
-    day = day_string |> String.replace(",", "") |> String.to_integer()
-    month = ParseHelpers.convert_month_string_to_number(month_string)
-    year = String.to_integer(year_string)
-
-    Date.new!(year, month, day)
+    ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
   end
 
   @impl true
@@ -74,17 +69,16 @@ defmodule MusicListings.Parsing.VenueParsers.LeesPalaceParser do
   @impl true
   def price(event) do
     event
-    |> Meeseeks.all(css(".schedule-event-time"))
-    |> Enum.find(fn element -> element |> Meeseeks.text() |> String.contains?("$") end)
-    |> Meeseeks.text()
+    |> Selectors.all_matches(css(".schedule-event-time"))
+    |> Selectors.text()
+    |> Enum.find(fn element -> element |> String.contains?("$") end)
     |> Price.new()
   end
 
   @impl true
   def age_restriction(event) do
     event
-    |> Meeseeks.one(css(".non"))
-    |> Meeseeks.text()
+    |> Selectors.text(css(".non"))
     |> ParseHelpers.age_restriction_string_to_enum()
   end
 
@@ -94,7 +88,8 @@ defmodule MusicListings.Parsing.VenueParsers.LeesPalaceParser do
   end
 
   @impl true
-  def details_url(_event) do
-    nil
+  def details_url(event) do
+    event_url = Selectors.url(event, css(".schedule-speaker"))
+    "#{@base_url}#{event_url}"
   end
 end
