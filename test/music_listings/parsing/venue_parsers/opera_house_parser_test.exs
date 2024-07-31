@@ -44,7 +44,7 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "ZEAL&ARDORw/Gaerea,Zetra-2024-11-28" == OperaHouseParser.event_id(event)
+      assert "zeal_ardor_w_gaerea_zetra_2024_11_28" == OperaHouseParser.event_id(event)
     end
   end
 
@@ -97,7 +97,8 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParserTest do
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert nil == OperaHouseParser.details_url(event)
+      assert "https://theoperahousetoronto.com/event/zeal-ardor/" ==
+               OperaHouseParser.details_url(event)
     end
   end
 end

@@ -30,21 +30,20 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParser do
 
   @impl true
   def event_id(event) do
-    title_slug = event |> event_title() |> String.replace(" ", "")
-    "#{title_slug}-#{event_date(event)}"
+    title = event_title(event)
+    date = event_date(event)
+
+    ParseHelpers.build_id_from_title_and_date(title, date)
   end
 
   @impl true
   def event_title(event) do
-    main_title =
-      event
-      |> Meeseeks.one(css(".info_landing h2"))
-      |> Meeseeks.text()
+    main_title = Selectors.text(event, css(".info_landing h2"))
 
     supplementary_title =
       event
-      |> Meeseeks.all(css(".info_landing h3"))
-      |> Enum.map(&Meeseeks.text/1)
+      |> Selectors.all_matches(css(".info_landing h3"))
+      |> Selectors.text()
 
     "#{main_title} #{supplementary_title}"
   end
@@ -57,47 +56,16 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParser do
 
   @impl true
   def event_date(event) do
-    day_string =
-      event
-      |> Meeseeks.one(css(".date_number_listing"))
-      |> Meeseeks.text()
-      |> String.trim()
+    day_string = Selectors.text(event, css(".date_number_listing"))
+    month_string = Selectors.text(event, css(".date_landing h6:last-of-type"))
 
-    month_string =
-      event
-      |> Meeseeks.one(css(".date_landing h6:last-of-type"))
-      |> Meeseeks.text()
-      |> String.trim()
-
-    day = String.to_integer(day_string)
-    month = ParseHelpers.convert_month_string_to_number(month_string)
-
-    # TODO: common
-    today = Date.utc_today()
-    candidate_date = Date.new!(today.year, month, day)
-    maybe_increment_year(candidate_date, today)
-  end
-
-  defp maybe_increment_year(candidate_date, today) do
-    # There is no year provided... so subtract a few days from today
-    # then compare the dates if candidate show date < today increment
-    # the year...
-    # TODO: revisit this, is there some better way of trying to determine
-    # the year of the event?
-    fifteen_days_ago = Date.add(today, -15)
-
-    if Date.before?(candidate_date, fifteen_days_ago) do
-      Date.new!(candidate_date.year + 1, candidate_date.month, candidate_date.day)
-    else
-      candidate_date
-    end
+    ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
   end
 
   @impl true
   def event_time(event) do
     event
-    |> Meeseeks.one(css(".info_landing h5:nth-of-type(2)"))
-    |> Meeseeks.text()
+    |> Selectors.text(css(".info_landing h5:nth-of-type(2)"))
     |> String.replace("Show: ", "")
     |> ParseHelpers.time_string_to_time()
   end
@@ -110,8 +78,7 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParser do
   @impl true
   def age_restriction(event) do
     event
-    |> Meeseeks.one(css(".info_landing h5:last-of-type"))
-    |> Meeseeks.text()
+    |> Selectors.text(css(".info_landing h5:last-of-type"))
     |> ParseHelpers.age_restriction_string_to_enum()
   end
 
@@ -121,7 +88,7 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParser do
   end
 
   @impl true
-  def details_url(_event) do
-    nil
+  def details_url(event) do
+    Selectors.url(event, css(".no_deco"))
   end
 end
