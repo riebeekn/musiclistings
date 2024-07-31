@@ -31,6 +31,10 @@ defmodule MusicListings.Parsing.Selectors do
     |> Meeseeks.Result.attr("class")
   end
 
+  def attr(%Meeseeks.Result{} = content, attr) do
+    Meeseeks.Result.attr(content, attr)
+  end
+
   def text(%Meeseeks.Result{} = event, text_selector) do
     event
     |> Meeseeks.one(text_selector)
