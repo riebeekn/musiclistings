@@ -4,16 +4,14 @@ defmodule MusicListings.Parsing.VenueParsers.MhRthTdmhParser do
   TD Music Hall, as they are on a single site
   """
 
+  alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
 
   def source_url, do: "https://www.mhrth.com/api/performance-feed/12"
 
   def event(body, facility_no) do
-    # bit of a hack to facilitate pulling data locally... Req converts it
-    # to a map when pulling from www, where-as locally we just have a file
-    # so when pulling local we get a string and need to decode! it
-    body = if is_binary(body), do: Jason.decode!(body), else: body
+    body = ParseHelpers.maybe_decode!(body)
 
     body["result"]["GetPerformancesEx4Result"]["Performance"]
     |> Enum.filter(&(&1["facility_no"] == facility_no))
