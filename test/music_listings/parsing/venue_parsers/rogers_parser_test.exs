@@ -45,7 +45,7 @@ defmodule MusicListings.Parsing.VenueParsers.RogersParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "G5vZZ9z6yjKEUdef-leppard-journey-the-summer-stadium-tour-with-cheap-trick" ==
+      assert "def_leppard_journey_the_summer_stadium_tour_with_cheap_trick_2024_08_02" ==
                RogersParser.event_id(event)
     end
   end
