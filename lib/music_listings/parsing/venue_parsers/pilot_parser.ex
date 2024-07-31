@@ -32,9 +32,10 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
 
   @impl true
   def event_id(event) do
-    # TODO: common
-    title_slug = event |> event_title() |> String.replace(" ", "")
-    "#{title_slug}-#{event_date(event)}"
+    title = event_title(event)
+    date = event_date(event)
+
+    ParseHelpers.build_id_from_title_and_date(title, date)
   end
 
   @impl true
@@ -59,38 +60,7 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
 
     [_day_of_week, month_string, day_string] = String.split(full_date_string)
 
-    # TODO: common
-    day =
-      day_string
-      |> String.trim()
-      |> String.replace("st", "")
-      |> String.replace("nd", "")
-      |> String.replace("rd", "")
-      |> String.replace("th", "")
-      |> String.replace(",", "")
-      |> String.to_integer()
-
-    month = ParseHelpers.convert_month_string_to_number(month_string)
-
-    # TODO: common
-    today = Date.utc_today()
-    candidate_date = Date.new!(today.year, month, day)
-    maybe_increment_year(candidate_date, today)
-  end
-
-  defp maybe_increment_year(candidate_date, today) do
-    # There is no year provided... so subtract a few days from today
-    # then compare the dates if candidate show date < today increment
-    # the year...
-    # TODO: revisit this, is there some better way of trying to determine
-    # the year of the event?
-    fifteen_days_ago = Date.add(today, -15)
-
-    if Date.before?(candidate_date, fifteen_days_ago) do
-      Date.new!(candidate_date.year + 1, candidate_date.month, candidate_date.day)
-    else
-      candidate_date
-    end
+    ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
   end
 
   @impl true
