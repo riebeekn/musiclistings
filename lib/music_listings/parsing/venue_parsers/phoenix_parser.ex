@@ -24,22 +24,20 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParser do
 
   @impl true
   def next_page_url(body) do
-    body
-    |> Meeseeks.one(css(".pagination .older a"))
-    |> Meeseeks.attr("href")
+    Selectors.url(body, css(".pagination .older a"))
   end
 
   @impl true
   def event_id(event) do
-    title_slug = event |> event_title() |> String.replace(" ", "")
-    "#{title_slug}-#{event_date(event)}"
+    title = event_title(event)
+    date = event_date(event)
+
+    ParseHelpers.build_id_from_title_and_date(title, date)
   end
 
   @impl true
   def event_title(event) do
-    event
-    |> Meeseeks.one(css(".event-title a"))
-    |> Meeseeks.text()
+    Selectors.text(event, css(".event-title a"))
   end
 
   @impl true
@@ -52,25 +50,19 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParser do
   def event_date(event) do
     [_day_of_week_string, month_day_string, _doors_string] =
       event
-      |> Meeseeks.one(css(".event-date"))
-      |> Meeseeks.text()
+      |> Selectors.text(css(".event-date"))
       |> String.split(", ")
 
     [month_string, day_string] = String.split(month_day_string)
 
-    day = String.to_integer(day_string)
-    month = ParseHelpers.convert_month_string_to_number(month_string)
-
-    today = Date.utc_today()
-    Date.new!(today.year, month, day)
+    ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
   end
 
   @impl true
   def event_time(event) do
     [_day_of_week_string, _month_day_string, doors_string] =
       event
-      |> Meeseeks.one(css(".event-date"))
-      |> Meeseeks.text()
+      |> Selectors.text(css(".event-date"))
       |> String.split(", ")
 
     doors_string
@@ -86,18 +78,17 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParser do
   @impl true
   def age_restriction(event) do
     event
-    |> Meeseeks.one(css(".event-ages"))
-    |> Meeseeks.text()
+    |> Selectors.text(css(".event-ages"))
     |> ParseHelpers.age_restriction_string_to_enum()
   end
 
   @impl true
-  def ticket_url(event) do
-    Selectors.url(event, css(".event-title a"))
+  def ticket_url(_event) do
+    nil
   end
 
   @impl true
-  def details_url(_event) do
-    nil
+  def details_url(event) do
+    Selectors.url(event, css(".event-title a"))
   end
 end
