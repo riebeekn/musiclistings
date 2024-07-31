@@ -6,6 +6,7 @@ defmodule MusicListings.Parsing.VenueParsers.RexParser do
 
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
+  alias MusicListings.Parsing.ParseHelpers
 
   @impl true
   def source_url do
@@ -19,10 +20,7 @@ defmodule MusicListings.Parsing.VenueParsers.RexParser do
 
   @impl true
   def events(body) do
-    # bit of a hack to facilitate pulling data locally... Req converts it
-    # to a map when pulling from www, where-as locally we just have a file
-    # so when pulling local we get a string and need to decode! it
-    if is_binary(body), do: Jason.decode!(body), else: body
+    ParseHelpers.maybe_decode!(body)
   end
 
   @impl true
