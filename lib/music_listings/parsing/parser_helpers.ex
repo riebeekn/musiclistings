@@ -7,6 +7,7 @@ defmodule MusicListings.Parsing.ParseHelpers do
   # ===========================================================================
   # General helpers
   # ===========================================================================
+  # TODO: add spec
   def maybe_decode!(content) do
     # bit of a hack to facilitate pulling data locally... Req converts it
     # to a map when pulling from www, where-as locally we just have a file
@@ -17,6 +18,27 @@ defmodule MusicListings.Parsing.ParseHelpers do
       content
     end
   end
+
+  @spec strip_extra_quotes(String.t()) :: String.t()
+  def strip_extra_quotes(json_string) do
+    # Regular expression to find extraneous quotes
+    regex = ~r/":\s*"[^"]*",\s*"/
+
+    cleaned_json =
+      Regex.replace(regex, json_string, fn match ->
+        String.replace(match, ",\"", ",")
+      end)
+
+    cleaned_json
+  end
+
+  @doc """
+  For handling datetime strings missing seconds
+  i.e convert a dt string of the format 2024-08-31T19:00
+  to 2024-08-31T19:00:00-04:00
+  """
+  @spec add_seconds_and_offset_to_datetime_string(String.t()) :: String.t()
+  def add_seconds_and_offset_to_datetime_string(dt_string), do: "#{dt_string}:00-04:00"
 
   # ===========================================================================
   # Id helpers

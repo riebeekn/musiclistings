@@ -44,7 +44,7 @@ defmodule MusicListings.Parsing.VenueParsers.ConcertHallParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "Crumb-2024-08-31" == ConcertHallParser.event_id(event)
+      assert "crumb_2024_08_31" == ConcertHallParser.event_id(event)
     end
   end
 

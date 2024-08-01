@@ -6,8 +6,10 @@ defmodule MusicListings.Parsing.VenueParsers.ConcertHallParser do
 
   import Meeseeks.CSS
 
+  alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
+  alias MusicListings.Parsing.Selectors
 
   @impl true
   def source_url, do: "https://888yonge.com"
@@ -18,21 +20,9 @@ defmodule MusicListings.Parsing.VenueParsers.ConcertHallParser do
   @impl true
   def events(body) do
     body
-    |> Meeseeks.parse()
-    |> Meeseeks.all(css("script[type=\"application/ld+json\"]"))
-    |> Enum.map(&(&1 |> Meeseeks.data() |> clean_extra_quotes() |> Jason.decode!()))
-  end
-
-  defp clean_extra_quotes(json_string) do
-    # Regular expression to find extraneous quotes
-    regex = ~r/":\s*"[^"]*",\s*"/
-
-    cleaned_json =
-      Regex.replace(regex, json_string, fn match ->
-        String.replace(match, ",\"", ",")
-      end)
-
-    cleaned_json
+    |> Selectors.all_matches(css("script[type=\"application/ld+json\"]"))
+    |> Selectors.data()
+    |> Enum.map(&(&1 |> ParseHelpers.strip_extra_quotes() |> Jason.decode!()))
   end
 
   @impl true
@@ -43,7 +33,10 @@ defmodule MusicListings.Parsing.VenueParsers.ConcertHallParser do
 
   @impl true
   def event_id(event) do
-    "#{event_title(event)}-#{event_date(event)}"
+    title = event_title(event)
+    date = event_date(event)
+
+    ParseHelpers.build_id_from_title_and_date(title, date)
   end
 
   @impl true
@@ -57,24 +50,18 @@ defmodule MusicListings.Parsing.VenueParsers.ConcertHallParser do
     |> Performers.new()
   end
 
-  defp fix_event_datetime_string(dt_string) do
-    # dt string is of format 2024-08-31T19:00
-    # but we need 2024-08-31T19:00:00-04:00
-    "#{dt_string}:00-04:00"
-  end
-
   @impl true
   def event_date(event) do
     event["startDate"]
-    |> fix_event_datetime_string()
+    |> ParseHelpers.add_seconds_and_offset_to_datetime_string()
     |> NaiveDateTime.from_iso8601!()
     |> NaiveDateTime.to_date()
   end
 
   @impl true
   def event_time(event) do
-    "#{event["startDate"]}"
-    |> fix_event_datetime_string()
+    event["startDate"]
+    |> ParseHelpers.add_seconds_and_offset_to_datetime_string()
     |> NaiveDateTime.from_iso8601!()
     |> NaiveDateTime.to_time()
   end
