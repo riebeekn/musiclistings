@@ -29,10 +29,10 @@ defmodule MusicListings.Parsing.VenueParsers.DakotaTavernParser do
 
   @impl true
   def event_id(event) do
-    # TODO: common
-    slug = "#{event_title(event)}-#{event_date(event)}"
-    # TODO: should also probably downcase this
-    Regex.replace(~r/[[:punct:]\s]+/, slug, "_")
+    title = event_title(event)
+    date = event_date(event)
+
+    ParseHelpers.build_id_from_title_and_date(title, date)
   end
 
   @impl true
@@ -62,11 +62,7 @@ defmodule MusicListings.Parsing.VenueParsers.DakotaTavernParser do
 
     [month_string, day_string] = month_and_day_string |> String.split()
 
-    year = year_string |> String.trim() |> String.to_integer()
-    month = month_string |> ParseHelpers.convert_month_string_to_number()
-    day = day_string |> String.to_integer()
-
-    Date.new!(year, month, day)
+    ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
   end
 
   @impl true
@@ -85,17 +81,14 @@ defmodule MusicListings.Parsing.VenueParsers.DakotaTavernParser do
   end
 
   @impl true
-  def ticket_url(event) do
-    event_url =
-      event
-      |> Meeseeks.one(css(".grid-item"))
-      |> Meeseeks.attr("href")
-
-    "#{source_url()}#{event_url}"
+  def ticket_url(_event) do
+    nil
   end
 
   @impl true
-  def details_url(_event) do
-    nil
+  def details_url(event) do
+    event_url = Selectors.url(event, css(".grid-item"))
+
+    "#{source_url()}#{event_url}"
   end
 end

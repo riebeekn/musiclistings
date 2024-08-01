@@ -44,7 +44,7 @@ defmodule MusicListings.Parsing.VenueParsers.DakotaTavernParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "OAKRIDGE_AVE_w_HIGH_FLYER_LAUREN_CARSON_2024_07_25" ==
+      assert "oakridge_ave_w_high_flyer_lauren_carson_2024_07_25" ==
                DakotaTavernParser.event_id(event)
     end
   end
@@ -91,14 +91,14 @@ defmodule MusicListings.Parsing.VenueParsers.DakotaTavernParserTest do
 
   describe "ticket_url/1" do
     test "returns the event ticket url", %{event: event} do
-      assert "https://www.dakotatavern.ca/shows/20240725-oakridgeave" ==
-               DakotaTavernParser.ticket_url(event)
+      assert nil == DakotaTavernParser.ticket_url(event)
     end
   end
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert nil == DakotaTavernParser.details_url(event)
+      assert "https://www.dakotatavern.ca/shows/20240725-oakridgeave" ==
+               DakotaTavernParser.details_url(event)
     end
   end
 end
