@@ -28,13 +28,16 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParser do
 
   @impl true
   def next_page_url(_body) do
-    # TODO: think if there is a way to handle specific next pages
-    # as https://jazzbistro.ca/event-calendar/month/2024-08/?mmyy=August%202024
-    # works with this site... the way we currently have it set up it will
-    # only grab the current month
-    # maybe this function takes in an optional current page url?
+    # TODO: down the road look into handling next pages with a specific format
+    # i.e. this site has next pages such as https://jazzbistro.ca/event-calendar/month/2024-08/?mmyy=August%202024
+    # currently we only grab the current month as there is no next page url to grab
+    # maybe we could alter the next page function to take in an optional current page url?
+    # then we could check the current url and increment it if is within 3 months of
+    # the current month or something
 
-    # no next page
+    # one thing to be careful of is to not get into an infinite redirect if the
+    # logic is wrong, maybe we would also pass in an incrementer to limit
+    # things
     nil
   end
 
