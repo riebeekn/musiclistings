@@ -31,7 +31,7 @@ defmodule MusicListings.Crawler.EventParser do
               venue_id: venue.id,
               type: :parse_error,
               error: Exception.format(:error, error, __STACKTRACE__),
-              raw_event: inspect(&1.raw_event)
+              raw_event: inspect(&1.raw_event, limit: :infinity)
             }
             |> Repo.insert!()
 
