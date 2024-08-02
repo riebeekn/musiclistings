@@ -2,16 +2,17 @@ defmodule MusicListings.Parsing.ParseHelpers do
   @moduledoc """
   Module that contains helper / common functions around parsing
   """
-  import Meeseeks.CSS
 
   # ===========================================================================
   # General helpers
   # ===========================================================================
-  # TODO: add spec
+  @doc """
+  Bit of a hack to facilitate pulling data locally... Req converts it
+  to a map when pulling from www, where-as locally we just have a file
+  so when pulling local we get a string and need to decode it
+  """
+  @spec maybe_decode!(String.t() | map()) :: term()
   def maybe_decode!(content) do
-    # bit of a hack to facilitate pulling data locally... Req converts it
-    # to a map when pulling from www, where-as locally we just have a file
-    # so when pulling local we get a string and need to decode it
     if is_binary(content) do
       Jason.decode!(content)
     else
@@ -32,14 +33,6 @@ defmodule MusicListings.Parsing.ParseHelpers do
     cleaned_json
   end
 
-  @doc """
-  For handling datetime strings missing seconds
-  i.e convert a dt string of the format 2024-08-31T19:00
-  to 2024-08-31T19:00:00-04:00
-  """
-  @spec add_seconds_and_offset_to_datetime_string(String.t()) :: String.t()
-  def add_seconds_and_offset_to_datetime_string(dt_string), do: "#{dt_string}:00-04:00"
-
   # ===========================================================================
   # Id helpers
   # ===========================================================================
@@ -51,12 +44,6 @@ defmodule MusicListings.Parsing.ParseHelpers do
     space_and_punct_regex
     |> Regex.replace(slug, "_")
     |> String.downcase()
-  end
-
-  # TODO: get rid of this
-  def extract_event_id_from_ticketmaster_url(ticket_url) do
-    regex = ~r/event\/(?<event_id>[^?\/]+)(?:\?|$)/
-    Regex.named_captures(regex, ticket_url)["event_id"]
   end
 
   # ===========================================================================
@@ -79,84 +66,6 @@ defmodule MusicListings.Parsing.ParseHelpers do
   # ===========================================================================
   # Date helpers
   # ===========================================================================
-  # TODO: might be able to dump this? as we might be able to just call into
-  # build_date_from_year_month_day_strings everywhere?
-  def convert_month_string_to_number(month_string) do
-    month_string
-    |> String.downcase()
-    |> month_string_to_number()
-  end
-
-  defp month_string_to_number("january"), do: 1
-  defp month_string_to_number("jan"), do: 1
-  defp month_string_to_number("01"), do: 1
-  defp month_string_to_number("february"), do: 2
-  defp month_string_to_number("feb"), do: 2
-  defp month_string_to_number("02"), do: 2
-  defp month_string_to_number("march"), do: 3
-  defp month_string_to_number("mar"), do: 3
-  defp month_string_to_number("03"), do: 3
-  defp month_string_to_number("april"), do: 4
-  defp month_string_to_number("apr"), do: 4
-  defp month_string_to_number("04"), do: 4
-  defp month_string_to_number("may"), do: 5
-  defp month_string_to_number("05"), do: 5
-  defp month_string_to_number("june"), do: 6
-  defp month_string_to_number("jun"), do: 6
-  defp month_string_to_number("06"), do: 6
-  defp month_string_to_number("july"), do: 7
-  defp month_string_to_number("jul"), do: 7
-  defp month_string_to_number("07"), do: 7
-  defp month_string_to_number("august"), do: 8
-  defp month_string_to_number("aug"), do: 8
-  defp month_string_to_number("08"), do: 8
-  defp month_string_to_number("september"), do: 9
-  defp month_string_to_number("sep"), do: 9
-  defp month_string_to_number("09"), do: 9
-  defp month_string_to_number("october"), do: 10
-  defp month_string_to_number("oct"), do: 10
-  defp month_string_to_number("10"), do: 10
-  defp month_string_to_number("november"), do: 11
-  defp month_string_to_number("nov"), do: 11
-  defp month_string_to_number("11"), do: 11
-  defp month_string_to_number("december"), do: 12
-  defp month_string_to_number("dec"), do: 12
-  defp month_string_to_number("12"), do: 12
-
-  @doc """
-  A couple of sites use the following format for the date:
-  <span class="m-date__day">31</span>
-  <span class="m-date__month"> July </span>
-  <span class="m-date__year"> 2024 </span>
-  """
-  # TODO: dump this
-  def extract_date_from_m__xx_format(event) do
-    day_string =
-      event
-      |> Meeseeks.one(css(".m-date__day"))
-      |> Meeseeks.text()
-      |> String.trim()
-
-    month_string =
-      event
-      |> Meeseeks.one(css(".m-date__month"))
-      |> Meeseeks.text()
-      |> String.trim()
-
-    year_string =
-      event
-      |> Meeseeks.one(css(".m-date__year"))
-      |> Meeseeks.text()
-      |> String.replace(",", "")
-      |> String.trim()
-
-    day = String.to_integer(day_string)
-    month = convert_month_string_to_number(month_string)
-    year = String.to_integer(year_string)
-
-    Date.new!(year, month, day)
-  end
-
   @spec build_date_from_year_month_day_strings(
           year_string :: String.t(),
           month_string :: String.t(),
@@ -164,8 +73,7 @@ defmodule MusicListings.Parsing.ParseHelpers do
         ) :: Date.t()
   def build_date_from_year_month_day_strings(year_string, month_string, day_string) do
     day = day_string_to_integer(day_string)
-    # TODO: rename convert_month_string_to_number to month_string_to_integer
-    month = convert_month_string_to_number(month_string)
+    month = month_string |> String.downcase() |> month_string_to_integer()
     year = year_string |> String.replace(",", "") |> String.trim() |> String.to_integer()
 
     Date.new!(year, month, day)
@@ -175,7 +83,7 @@ defmodule MusicListings.Parsing.ParseHelpers do
           Date.t()
   def build_date_from_month_day_strings(month_string, day_string) do
     day = day_string_to_integer(day_string)
-    month = convert_month_string_to_number(month_string)
+    month = month_string |> String.downcase() |> month_string_to_integer()
 
     today = Date.utc_today()
     candidate_date = Date.new!(today.year, month, day)
@@ -186,8 +94,6 @@ defmodule MusicListings.Parsing.ParseHelpers do
     # There is no year provided... so subtract a few days from today
     # then compare the dates if candidate show date < today increment
     # the year...
-    # TODO: revisit this, is there some better way of trying to determine
-    # the year of the event?
     fifteen_days_ago = Date.add(today, -15)
 
     if Date.before?(candidate_date, fifteen_days_ago) do
@@ -196,6 +102,42 @@ defmodule MusicListings.Parsing.ParseHelpers do
       candidate_date
     end
   end
+
+  defp month_string_to_integer("january"), do: 1
+  defp month_string_to_integer("jan"), do: 1
+  defp month_string_to_integer("01"), do: 1
+  defp month_string_to_integer("february"), do: 2
+  defp month_string_to_integer("feb"), do: 2
+  defp month_string_to_integer("02"), do: 2
+  defp month_string_to_integer("march"), do: 3
+  defp month_string_to_integer("mar"), do: 3
+  defp month_string_to_integer("03"), do: 3
+  defp month_string_to_integer("april"), do: 4
+  defp month_string_to_integer("apr"), do: 4
+  defp month_string_to_integer("04"), do: 4
+  defp month_string_to_integer("may"), do: 5
+  defp month_string_to_integer("05"), do: 5
+  defp month_string_to_integer("june"), do: 6
+  defp month_string_to_integer("jun"), do: 6
+  defp month_string_to_integer("06"), do: 6
+  defp month_string_to_integer("july"), do: 7
+  defp month_string_to_integer("jul"), do: 7
+  defp month_string_to_integer("07"), do: 7
+  defp month_string_to_integer("august"), do: 8
+  defp month_string_to_integer("aug"), do: 8
+  defp month_string_to_integer("08"), do: 8
+  defp month_string_to_integer("september"), do: 9
+  defp month_string_to_integer("sep"), do: 9
+  defp month_string_to_integer("09"), do: 9
+  defp month_string_to_integer("october"), do: 10
+  defp month_string_to_integer("oct"), do: 10
+  defp month_string_to_integer("10"), do: 10
+  defp month_string_to_integer("november"), do: 11
+  defp month_string_to_integer("nov"), do: 11
+  defp month_string_to_integer("11"), do: 11
+  defp month_string_to_integer("december"), do: 12
+  defp month_string_to_integer("dec"), do: 12
+  defp month_string_to_integer("12"), do: 12
 
   defp day_string_to_integer(day_string) do
     day_string
@@ -255,6 +197,14 @@ defmodule MusicListings.Parsing.ParseHelpers do
         nil
     end
   end
+
+  @doc """
+  For handling datetime strings missing seconds
+  i.e convert a dt string of the format 2024-08-31T19:00
+  to 2024-08-31T19:00:00-04:00
+  """
+  @spec add_seconds_and_offset_to_datetime_string(String.t()) :: String.t()
+  def add_seconds_and_offset_to_datetime_string(dt_string), do: "#{dt_string}:00-04:00"
 
   defp maybe_adjust_for_pm(hour, minute_string) do
     if String.contains?(minute_string, "pm") do
