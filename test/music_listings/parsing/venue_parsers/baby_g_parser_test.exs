@@ -44,7 +44,7 @@ defmodule MusicListings.Parsing.VenueParsers.BabyGParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "urbanheat_2024-10-02" == BabyGParser.event_id(event)
+      assert "urban_heat_2024_10_02" == BabyGParser.event_id(event)
     end
   end
 

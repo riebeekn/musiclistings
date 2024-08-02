@@ -205,6 +205,7 @@ defmodule MusicListings.Parsing.ParseHelpers do
     |> String.replace("nd", "")
     |> String.replace("rd", "")
     |> String.replace("th", "")
+    |> String.replace("o", "")
     |> String.to_integer()
   end
 
@@ -214,6 +215,7 @@ defmodule MusicListings.Parsing.ParseHelpers do
   @spec time_string_to_time(String.t()) :: Time.t()
   def time_string_to_time(time_string) do
     (time_string || "")
+    |> String.replace(":PM", " pm")
     |> String.trim()
     |> String.downcase()
     |> String.split(":")

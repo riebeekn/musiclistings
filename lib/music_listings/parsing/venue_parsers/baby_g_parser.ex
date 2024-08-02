@@ -6,6 +6,7 @@ defmodule MusicListings.Parsing.VenueParsers.BabyGParser do
 
   import Meeseeks.CSS
 
+  alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.Selectors
@@ -29,11 +30,10 @@ defmodule MusicListings.Parsing.VenueParsers.BabyGParser do
 
   @impl true
   def event_id(event) do
-    # combine date and title
-    event_title = event |> event_title() |> String.downcase() |> String.replace(" ", "")
-    event_date = event |> event_date()
+    title = event_title(event)
+    date = event_date(event)
 
-    "#{event_title}_#{event_date}"
+    ParseHelpers.build_id_from_title_and_date(title, date)
   end
 
   @impl true
@@ -41,67 +41,43 @@ defmodule MusicListings.Parsing.VenueParsers.BabyGParser do
     Selectors.text(event, css("#calendar_info_headliner"))
   end
 
-  @openers_time_price_regex ~r/^(.*)\s+(\d{1,2}:[APM]{2})\s+\$([\d.]+)(?:\s+\w+)?$/
-
   @impl true
   def performers(event) do
-    openers_time_price_string =
+    openers =
       event
-      |> Meeseeks.one(css("#calendar_info_support"))
-      |> Meeseeks.text()
+      |> Selectors.text(css("#calendar_info_support a"))
 
-    [_original_string, openers, _time, _price] =
-      Regex.run(@openers_time_price_regex, openers_time_price_string)
+    headliner = event_title(event)
 
-    ([event_title(event)] ++ [openers])
+    ([headliner] ++ [openers])
     |> Performers.new()
   end
 
   @impl true
   def event_date(event) do
-    calendar_img_src =
+    [_day_of_week, month_string, day_string] =
       event
-      |> Meeseeks.one(css("#calendar_image img"))
-      |> Meeseeks.Result.attr("src")
+      |> Selectors.text(css("#calendar_date"))
+      |> String.split()
 
-    regex = ~r/images\/\d{4}\/(?<year>\d{4})(?<month>\d{2})(?<day>\d{2})-/
-
-    %{"year" => year_string, "month" => month_string, "day" => day_string} =
-      Regex.named_captures(regex, calendar_img_src)
-
-    day = String.to_integer(day_string)
-    month = String.to_integer(month_string)
-    year = String.to_integer(year_string)
-
-    Date.new!(year, month, day)
+    ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
   end
 
   @impl true
   def event_time(event) do
-    openers_time_price_string =
+    [time_string | _rest] =
       event
-      |> Meeseeks.one(css("#calendar_info_support"))
-      |> Meeseeks.text()
+      |> Selectors.text(css(".calendar_info_doors_cover"))
+      |> String.split()
 
-    [_original_string, _openers, time, _price] =
-      Regex.run(@openers_time_price_regex, openers_time_price_string)
-
-    hour = time |> String.replace(":PM", "") |> String.to_integer()
-
-    Time.new!(hour + 12, 0, 0)
+    ParseHelpers.time_string_to_time(time_string)
   end
 
   @impl true
   def price(event) do
-    openers_time_price_string =
-      event
-      |> Meeseeks.one(css("#calendar_info_support"))
-      |> Meeseeks.text()
-
-    [_original_string, _openers, _time, price] =
-      Regex.run(@openers_time_price_regex, openers_time_price_string)
-
-    Price.new(price)
+    event
+    |> Selectors.text(css(".calendar_info_doors_cover a"))
+    |> Price.new()
   end
 
   @impl true
@@ -112,8 +88,8 @@ defmodule MusicListings.Parsing.VenueParsers.BabyGParser do
   @impl true
   def ticket_url(event) do
     event
-    |> Meeseeks.one(css("#calendar_info_support span.calendar_info_doors_cover a:last-of-type"))
-    |> Meeseeks.attr("href")
+    |> Selectors.match_one(css(".calendar_info_doors_cover a"))
+    |> Selectors.attr("href")
   end
 
   @impl true
