@@ -60,7 +60,7 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
 
     [_day_of_week, month_string, day_string] = String.split(full_date_string)
 
-    ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
+    ParseHelpers.build_date_from_month_day_strings(month_string, day_string, Date.utc_today())
   end
 
   @impl true

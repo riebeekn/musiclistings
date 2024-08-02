@@ -46,7 +46,7 @@ defmodule MusicListings.Parsing.VenueParsers.BgGarrisonParser do
       |> Selectors.text(css("#calendar_date"))
       |> String.split()
 
-    ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
+    ParseHelpers.build_date_from_month_day_strings(month_string, day_string, Date.utc_today())
   end
 
   def event_time(event) do

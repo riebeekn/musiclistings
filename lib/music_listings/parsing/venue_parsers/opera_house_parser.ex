@@ -59,7 +59,7 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParser do
     day_string = Selectors.text(event, css(".date_number_listing"))
     month_string = Selectors.text(event, css(".date_landing h6:last-of-type"))
 
-    ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
+    ParseHelpers.build_date_from_month_day_strings(month_string, day_string, Date.utc_today())
   end
 
   @impl true
