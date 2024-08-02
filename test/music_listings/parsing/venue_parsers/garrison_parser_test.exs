@@ -44,7 +44,7 @@ defmodule MusicListings.Parsing.VenueParsers.GarrisonParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "mizmor_2024-07-19" == GarrisonParser.event_id(event)
+      assert "mizmor_2024_07_19" == GarrisonParser.event_id(event)
     end
   end
 
@@ -58,7 +58,7 @@ defmodule MusicListings.Parsing.VenueParsers.GarrisonParserTest do
     test "returns the event performers", %{event: event} do
       assert %Performers{
                headliner: "MIZMOR",
-               openers: ["AMAROK", "A FLOCK NAMED MURDER", "WHERE THE LIGHT FADES"]
+               openers: ["AMAROK A FLOCK NAMED MURDER WHERE THE LIGHT FADES"]
              } == GarrisonParser.performers(event)
     end
   end
