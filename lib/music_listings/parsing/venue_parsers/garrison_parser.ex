@@ -4,12 +4,7 @@ defmodule MusicListings.Parsing.VenueParsers.GarrisonParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
-  import Meeseeks.CSS
-
-  alias MusicListings.Parsing.ParseHelpers
-  alias MusicListings.Parsing.Performers
-  alias MusicListings.Parsing.Price
-  alias MusicListings.Parsing.Selectors
+  alias MusicListings.Parsing.VenueParsers.BgGarrisonParser
 
   @impl true
   def source_url, do: "http://www.garrisontoronto.com/listings.html"
@@ -18,128 +13,35 @@ defmodule MusicListings.Parsing.VenueParsers.GarrisonParser do
   def example_data_file_location, do: "test/data/garrison/index.html"
 
   @impl true
-  def events(body) do
-    Selectors.all_matches(body, css("#calendar_wrap"))
-  end
+  defdelegate events(body), to: BgGarrisonParser
 
   @impl true
-  def next_page_url(_body) do
-    # no next page
-    nil
-  end
+  defdelegate next_page_url(body), to: BgGarrisonParser
 
   @impl true
-  def event_id(event) do
-    # combine date and title
-    event_title = event |> event_title() |> String.downcase() |> String.replace(" ", "")
-    event_date = event |> event_date()
-
-    "#{event_title}_#{event_date}"
-  end
+  defdelegate event_id(event), to: BgGarrisonParser
 
   @impl true
-  def event_title(event) do
-    Selectors.text(event, css("#calendar_info_headliner"))
-  end
+  defdelegate event_title(event), to: BgGarrisonParser
 
   @impl true
-  def performers(event) do
-    openers =
-      event
-      |> Meeseeks.one(css("#calendar_info_support"))
-      |> Meeseeks.one(css("a"))
-      |> Meeseeks.html()
-      |> String.replace(~r/<\/?a[^>]*>/, "")
-      |> String.split("<br />")
-      |> Enum.map(&String.trim/1)
-      |> Enum.reject(&(&1 == ""))
-
-    ([event_title(event)] ++ openers)
-    |> Performers.new()
-  end
+  defdelegate performers(event), to: BgGarrisonParser
 
   @impl true
-  def event_date(event) do
-    # get the year from the image
-    calendar_img_src =
-      event
-      |> Meeseeks.one(css("#calendar_image img"))
-      |> Meeseeks.Result.attr("src")
-
-    regex = ~r/\/(?<year>\d{4})(?:\s|-)/
-
-    %{"year" => year_string} =
-      Regex.named_captures(regex, calendar_img_src)
-
-    year = String.to_integer(year_string)
-
-    # get the day and month from the calendar date div
-    [_week_day_string, month_string, day_string] =
-      event
-      |> Meeseeks.one(css("#calendar_date"))
-      |> Meeseeks.html()
-      |> String.split("<br />")
-      |> Enum.map(&String.replace(&1, ~r/<.*?>/, ""))
-      |> Enum.map(&String.replace(&1, ~r/\s+/, ""))
-      |> Enum.map(&String.downcase/1)
-
-    day = day_string |> String.replace("o", "0") |> String.to_integer()
-    month = ParseHelpers.convert_month_string_to_number(month_string)
-
-    Date.new!(year, month, day)
-  end
+  defdelegate event_date(event), to: BgGarrisonParser
 
   @impl true
-  def event_time(event) do
-    time_string =
-      event
-      |> Meeseeks.one(css("#calendar_info_support"))
-      |> Meeseeks.one(css("span.calendar_info_doors_cover"))
-      |> Meeseeks.text()
-
-    regex = ~r/(?:(\d{1,2}):?(\d{2})?:?([APM]{2})?)/
-    [_full, hour_string, minute_string, ampm] = Regex.run(regex, time_string)
-
-    hour = String.to_integer(hour_string)
-    twenty_four_hour = if ampm == "PM", do: hour + 12, else: hour
-    minute = minute_from_string(minute_string)
-    Time.new!(twenty_four_hour, minute, 0)
-  end
-
-  defp minute_from_string(""), do: 0
-  defp minute_from_string(minute_string), do: String.to_integer(minute_string)
+  defdelegate event_time(event), to: BgGarrisonParser
 
   @impl true
-  def price(event) do
-    maybe_price_string =
-      event
-      |> Meeseeks.one(css("#calendar_info_support"))
-      |> Meeseeks.one(css("span.calendar_info_doors_cover"))
-      |> Meeseeks.text()
-      |> String.split()
-      |> Enum.at(1)
-
-    if String.contains?(maybe_price_string, "$") do
-      Price.new(maybe_price_string)
-    else
-      Price.unknown()
-    end
-  end
+  defdelegate price(event), to: BgGarrisonParser
 
   @impl true
-  def age_restriction(_event) do
-    :unknown
-  end
+  defdelegate age_restriction(event), to: BgGarrisonParser
 
   @impl true
-  def ticket_url(event) do
-    event
-    |> Meeseeks.one(css("#calendar_info_support span.calendar_info_doors_cover a:last-of-type"))
-    |> Meeseeks.attr("href")
-  end
+  defdelegate ticket_url(event), to: BgGarrisonParser
 
   @impl true
-  def details_url(_event) do
-    nil
-  end
+  defdelegate details_url(event), to: BgGarrisonParser
 end
