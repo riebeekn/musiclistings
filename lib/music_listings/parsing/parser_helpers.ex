@@ -49,6 +49,7 @@ defmodule MusicListings.Parsing.ParseHelpers do
   # ===========================================================================
   # Age restriction helpers
   # ===========================================================================
+  @spec age_restriction_string_to_enum(String.t()) :: :all_ages | :eighteen_plus | :nineteen_plus
   def age_restriction_string_to_enum(age_restriction_string) do
     age_restriction_string
     |> String.trim()
@@ -79,13 +80,20 @@ defmodule MusicListings.Parsing.ParseHelpers do
     Date.new!(year, month, day)
   end
 
-  @spec build_date_from_month_day_strings(month_string :: String.t(), day_string :: String.t()) ::
+  @doc """
+  Not all sites include the year in the event date, in those cases use this
+  function which pseudo intelligently determines the year
+  """
+  @spec build_date_from_month_day_strings(
+          month_string :: String.t(),
+          day_string :: String.t(),
+          today :: Date.t()
+        ) ::
           Date.t()
-  def build_date_from_month_day_strings(month_string, day_string) do
+  def build_date_from_month_day_strings(month_string, day_string, today) do
     day = day_string_to_integer(day_string)
     month = month_string |> String.downcase() |> month_string_to_integer()
 
-    today = Date.utc_today()
     candidate_date = Date.new!(today.year, month, day)
     maybe_increment_year(candidate_date, today)
   end

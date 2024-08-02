@@ -55,7 +55,7 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParser do
 
     [month_string, day_string] = String.split(month_day_string)
 
-    ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
+    ParseHelpers.build_date_from_month_day_strings(month_string, day_string, Date.utc_today())
   end
 
   @impl true
