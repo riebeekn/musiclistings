@@ -49,9 +49,10 @@ defmodule MusicListings.Parsing.ParseHelpers do
   # ===========================================================================
   # Age restriction helpers
   # ===========================================================================
-  @spec age_restriction_string_to_enum(String.t()) :: :all_ages | :eighteen_plus | :nineteen_plus
+  @spec age_restriction_string_to_enum(nil | String.t()) ::
+          :all_ages | :eighteen_plus | :nineteen_plus
   def age_restriction_string_to_enum(age_restriction_string) do
-    age_restriction_string
+    (age_restriction_string || "")
     |> String.trim()
     |> String.downcase()
     |> case do
@@ -61,6 +62,7 @@ defmodule MusicListings.Parsing.ParseHelpers do
       "18+" -> :eighteen_plus
       "19+" -> :nineteen_plus
       "19+ event" -> :nineteen_plus
+      _fall_thru -> :unknown
     end
   end
 

@@ -32,7 +32,7 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParserTest do
     test "returns expected events", %{index_html: index_html} do
       events = DrakeUndergroundParser.events(index_html)
 
-      assert 67 = Enum.count(events)
+      assert 35 = Enum.count(events)
     end
   end
 

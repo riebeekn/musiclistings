@@ -17,7 +17,9 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
 
   @impl true
   def events(body) do
-    ParseHelpers.maybe_decode!(body)
+    body
+    |> ParseHelpers.maybe_decode!()
+    |> Enum.filter(&(&1["fm_venue"] == ["Drake Underground"]))
   end
 
   @impl true
