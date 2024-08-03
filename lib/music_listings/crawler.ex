@@ -67,6 +67,7 @@ defmodule MusicListings.Crawler do
       new: venue_stats.new,
       updated: venue_stats.updated,
       duplicate: venue_stats.duplicate,
+      ignored: venue_stats.ignored,
       parse_errors: venue_stats.parse_errors
     }
     |> Repo.insert!()
@@ -85,6 +86,7 @@ defmodule MusicListings.Crawler do
       new: stats.new,
       updated: stats.updated,
       duplicate: stats.duplicate,
+      ignored: stats.ignored,
       parse_errors: stats.parse_errors
     })
     |> Repo.update()

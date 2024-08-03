@@ -9,7 +9,10 @@ defmodule MusicListings.Crawler.EventParser do
   alias MusicListingsSchema.CrawlError
   alias MusicListingsSchema.CrawlSummary
   alias MusicListingsSchema.Event
+  alias MusicListingsSchema.IgnoredEvent
   alias MusicListingsSchema.Venue
+
+  require Logger
 
   @spec parse_events(
           payloads :: list(Payload),
@@ -26,20 +29,38 @@ defmodule MusicListings.Crawler.EventParser do
           {:ok, parse_event(&1, parser, venue), &1}
         rescue
           error ->
-            %CrawlError{
-              crawl_summary_id: crawl_summary.id,
-              venue_id: venue.id,
-              type: :parse_error,
-              error: Exception.format(:error, error, __STACKTRACE__),
-              raw_event: inspect(&1.raw_event, limit: :infinity)
-            }
-            |> Repo.insert!()
+            if ignored_event?(&1, parser, venue) do
+              {:ignore, &1}
+            else
+              %CrawlError{
+                crawl_summary_id: crawl_summary.id,
+                venue_id: venue.id,
+                type: :parse_error,
+                error: Exception.format(:error, error, __STACKTRACE__),
+                raw_event: inspect(&1.raw_event, limit: :infinity)
+              }
+              |> Repo.insert!()
 
-            {:error, Exception.format(:error, error, __STACKTRACE__), &1}
+              {:error, Exception.format(:error, error, __STACKTRACE__), &1}
+            end
         end
       end)
     )
     |> collect_results()
+  end
+
+  defp ignored_event?(payload, parser, venue) do
+    ignored_event_id = parser.ignored_event_id(payload.raw_event)
+    Repo.get_by(IgnoredEvent, ignored_event_id: ignored_event_id, venue_id: venue.id) != nil
+  rescue
+    # a parse error can occur when building the ignored_event_id in which case
+    # we just want to log and continue
+    _error ->
+      Logger.warning(
+        "Error when checking for ignored event, likely ignored_event_id parser error!"
+      )
+
+      nil
   end
 
   defp parse_event(payload, parser, venue) do
@@ -72,6 +93,9 @@ defmodule MusicListings.Crawler.EventParser do
       {ref, result} ->
         acc =
           case result do
+            {:ignore, payload} ->
+              [Payload.set_ignored(payload) | acc]
+
             {:error, error, payload} ->
               [Payload.set_parse_error(payload, error) | acc]
 
