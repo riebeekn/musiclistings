@@ -33,17 +33,22 @@ defmodule MusicListings.Parsing.ParseHelpers do
     cleaned_json
   end
 
+  @spec replace_punctuation_and_spaces(String.t()) :: String.t()
+  def replace_punctuation_and_spaces(string) do
+    space_and_punct_regex = ~r/[\p{P}\p{Z}]+/u
+
+    space_and_punct_regex
+    |> Regex.replace(string, "_")
+    |> String.downcase()
+  end
+
   # ===========================================================================
   # Id helpers
   # ===========================================================================
   @spec build_id_from_title_and_date(title :: String.t(), date :: Date.t()) :: String.t()
   def build_id_from_title_and_date(title, date) do
-    space_and_punct_regex = ~r/[\p{P}\p{Z}]+/u
     slug = "#{title}_#{date}"
-
-    space_and_punct_regex
-    |> Regex.replace(slug, "_")
-    |> String.downcase()
+    replace_punctuation_and_spaces(slug)
   end
 
   # ===========================================================================
