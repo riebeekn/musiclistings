@@ -73,16 +73,26 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParser do
 
   @impl true
   def price(event) do
-    event
-    |> Selectors.text(xpath("//div[@class='tickets']/following-sibling::div[1]"))
-    |> Price.new()
+    price_string =
+      event
+      |> Selectors.text(xpath("//div[@class='tickets']/following-sibling::div[1]"))
+      |> String.downcase()
+
+    if price_string == "tbd" do
+      Price.unknown()
+    else
+      Price.new(price_string)
+    end
   end
 
   @impl true
   def age_restriction(event) do
-    time_age = Selectors.text(event, xpath("//div[@class='doors']/following-sibling::div[1]"))
+    time_age =
+      event
+      |> Selectors.text(xpath("//div[@class='doors']/following-sibling::div[1]"))
+      |> String.downcase()
 
-    if time_age == "TBD" do
+    if time_age == "tbd" do
       :unknown
     else
       time_age
