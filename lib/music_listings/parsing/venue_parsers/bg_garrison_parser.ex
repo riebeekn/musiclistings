@@ -63,7 +63,7 @@ defmodule MusicListings.Parsing.VenueParsers.BgGarrisonParser do
   end
 
   def price(_event) do
-    Price.new(nil)
+    Price.unknown()
   end
 
   def age_restriction(_event) do
@@ -73,7 +73,10 @@ defmodule MusicListings.Parsing.VenueParsers.BgGarrisonParser do
   def ticket_url(event) do
     event
     |> Selectors.match_one(css(".calendar_info_doors_cover a"))
-    |> Selectors.attr("href")
+    |> case do
+      nil -> nil
+      url_result -> Selectors.attr(url_result, "href")
+    end
   end
 
   def details_url(_event) do
