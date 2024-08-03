@@ -37,7 +37,9 @@ defmodule MusicListings.Parsing.VenueParsers.DakotaTavernParser do
 
   @impl true
   def ignored_event_id(event) do
-    event_id(event)
+    event
+    |> event_title()
+    |> ParseHelpers.replace_punctuation_and_spaces()
   end
 
   @impl true
