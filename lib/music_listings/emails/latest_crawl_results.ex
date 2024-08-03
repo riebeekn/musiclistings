@@ -43,6 +43,9 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       <:col :let={venue_crawl_summary} label="Duplicates">
         <%= venue_crawl_summary.duplicate %>
       </:col>
+      <:col :let={venue_crawl_summary} label="Ignored">
+        <%= venue_crawl_summary.ignored %>
+      </:col>
       <:col :let={venue_crawl_summary} label="Parse Errors">
         <%= venue_crawl_summary.parse_errors %>
       </:col>
@@ -57,6 +60,9 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       </:footer_col>
       <:footer_col>
         <%= @crawl_summary.duplicate %>
+      </:footer_col>
+      <:footer_col>
+        <%= @crawl_summary.ignored %>
       </:footer_col>
       <:footer_col>
         <%= @crawl_summary.parse_errors %>
@@ -83,6 +89,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     vcs1 =
       build_venue_crawl_summary(v1, %{
         duplicate: 2,
+        ignored: 4,
         new: 2,
         updated: 16,
         parse_errors: 1
@@ -91,6 +98,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     vcs2 =
       build_venue_crawl_summary(v2, %{
         duplicate: 6,
+        ignored: 2,
         new: 10,
         updated: 8,
         parse_errors: 2
@@ -125,6 +133,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
   defp build_crawl_summary do
     %CrawlSummary{
       duplicate: 8,
+      ignored: 6,
       new: 12,
       updated: 24,
       parse_errors: 3,
@@ -134,6 +143,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
 
   defp build_venue_crawl_summary(venue, %{
          duplicate: duplicate,
+         ignored: ignored,
          new: new,
          updated: updated,
          parse_errors: parse_errors
@@ -141,6 +151,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     %VenueCrawlSummary{
       venue: venue,
       duplicate: duplicate,
+      ignored: ignored,
       new: new,
       updated: updated,
       parse_errors: parse_errors

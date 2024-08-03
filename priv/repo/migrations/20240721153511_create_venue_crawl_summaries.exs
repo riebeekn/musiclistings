@@ -8,6 +8,7 @@ defmodule MusicListings.Repo.Migrations.CreateVenueCrawlSummaries do
       add :new, :integer
       add :updated, :integer
       add :duplicate, :integer
+      add :ignored, :integer
       add :parse_errors, :integer
 
       timestamps(updated_at: false)

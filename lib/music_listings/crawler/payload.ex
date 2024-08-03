@@ -5,7 +5,7 @@ defmodule MusicListings.Crawler.Payload do
   """
 
   @type t :: %__MODULE__{
-          status: :ok | :parse_error | :storage_error,
+          status: :ok | :parse_error | :ignore,
           operation: :created | :updated | :noop,
           raw_event: Meeseeks.Result,
           parsed_event: MusicListingsSchema.Event,
@@ -20,6 +20,10 @@ defmodule MusicListings.Crawler.Payload do
 
   def set_parse_error(%__MODULE__{} = payload, error) do
     %{payload | status: :parse_error, error: error}
+  end
+
+  def set_ignored(%__MODULE__{} = payload) do
+    %{payload | status: :ignore}
   end
 
   def set_parsed_event(%__MODULE__{} = payload, parsed_event) do

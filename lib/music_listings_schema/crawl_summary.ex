@@ -14,6 +14,7 @@ defmodule MusicListingsSchema.CrawlSummary do
     field :new, :integer
     field :updated, :integer
     field :duplicate, :integer
+    field :ignored, :integer
     field :parse_errors, :integer
 
     has_many :venue_crawl_summaries, VenueCrawlSummary
