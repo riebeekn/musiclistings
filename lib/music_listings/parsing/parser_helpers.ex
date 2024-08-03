@@ -76,7 +76,7 @@ defmodule MusicListings.Parsing.ParseHelpers do
         ) :: Date.t()
   def build_date_from_year_month_day_strings(year_string, month_string, day_string) do
     day = day_string_to_integer(day_string)
-    month = month_string |> String.downcase() |> month_string_to_integer()
+    month = month_string |> clean_month_string() |> month_string_to_integer()
     year = year_string |> String.replace(",", "") |> String.trim() |> String.to_integer()
 
     Date.new!(year, month, day)
@@ -94,7 +94,7 @@ defmodule MusicListings.Parsing.ParseHelpers do
           Date.t()
   def build_date_from_month_day_strings(month_string, day_string, today) do
     day = day_string_to_integer(day_string)
-    month = month_string |> String.downcase() |> month_string_to_integer()
+    month = month_string |> clean_month_string() |> month_string_to_integer()
 
     candidate_date = Date.new!(today.year, month, day)
     maybe_increment_year(candidate_date, today)
@@ -111,6 +111,12 @@ defmodule MusicListings.Parsing.ParseHelpers do
     else
       candidate_date
     end
+  end
+
+  defp clean_month_string(month_string) do
+    month_string
+    |> String.downcase()
+    |> String.trim()
   end
 
   defp month_string_to_integer("january"), do: 1
@@ -152,12 +158,13 @@ defmodule MusicListings.Parsing.ParseHelpers do
   defp day_string_to_integer(day_string) do
     day_string
     |> String.replace(",", "")
-    |> String.trim()
+    |> String.replace(".", "")
     |> String.replace("st", "")
     |> String.replace("nd", "")
     |> String.replace("rd", "")
     |> String.replace("th", "")
     |> String.replace("o", "")
+    |> String.trim()
     |> String.to_integer()
   end
 
