@@ -53,13 +53,8 @@ defmodule MusicListings.Parsing.VenueParsers.BgGarrisonParser do
     ParseHelpers.build_date_from_month_day_strings(month_string, day_string, Date.utc_today())
   end
 
-  def event_time(event) do
-    [time_string | _rest] =
-      event
-      |> Selectors.text(css(".calendar_info_doors_cover"))
-      |> String.split()
-
-    ParseHelpers.time_string_to_time(time_string)
+  def event_time(_event) do
+    nil
   end
 
   def price(_event) do

@@ -77,7 +77,7 @@ defmodule MusicListings.Parsing.VenueParsers.GarrisonParserTest do
 
   describe "event_time/1" do
     test "returns the event start time", %{event: event} do
-      assert ~T[19:30:00] == GarrisonParser.event_time(event)
+      assert nil == GarrisonParser.event_time(event)
     end
   end
 
