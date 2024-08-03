@@ -71,6 +71,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     <%= if Enum.count(@crawl_summary.crawl_errors) > 0 do %>
       <.h2>Errors</.h2>
       <%= for crawl_error <- @crawl_summary.crawl_errors |> Enum.sort_by(& &1.venue.name) do %>
+        <.text><b>Crawl Error Id: </b><%= crawl_error.id %></.text>
         <.text><b>Venue: </b><%= crawl_error.venue.name %></.text>
         <.text><b>Error: </b><%= crawl_error.error %></.text>
         <.text><b>Raw Event: </b><%= crawl_error.raw_event %></.text>
@@ -105,9 +106,9 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       })
 
     # errors
-    ce1 = build_crawl_error(v1)
-    ce2 = build_crawl_error(v2)
-    ce3 = build_crawl_error(v2)
+    ce1 = build_crawl_error(1, v1)
+    ce2 = build_crawl_error(2, v2)
+    ce3 = build_crawl_error(3, v2)
 
     build_crawl_summary()
     |> Map.put(:crawl_errors, [ce1, ce2, ce3])
@@ -158,8 +159,9 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     }
   end
 
-  defp build_crawl_error(venue) do
+  defp build_crawl_error(id, venue) do
     %CrawlError{
+      id: id,
       venue: venue,
       type: :parse_error,
       error: example_error(),
