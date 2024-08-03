@@ -77,7 +77,7 @@ defmodule MusicListings.Parsing.VenueParsers.BabyGParserTest do
 
   describe "price/1" do
     test "returns the event price", %{event: event} do
-      assert %Price{format: :fixed, hi: Decimal.new("31.42"), lo: Decimal.new("31.42")} ==
+      assert %Price{format: :unknown, hi: nil, lo: nil} ==
                BabyGParser.price(event)
     end
   end

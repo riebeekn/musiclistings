@@ -83,7 +83,7 @@ defmodule MusicListings.Parsing.VenueParsers.GarrisonParserTest do
 
   describe "price/1" do
     test "returns the event price", %{event: event} do
-      assert %Price{format: :fixed, hi: Decimal.new("34.88"), lo: Decimal.new("34.88")} ==
+      assert %Price{format: :unknown, hi: nil, lo: nil} ==
                GarrisonParser.price(event)
     end
   end

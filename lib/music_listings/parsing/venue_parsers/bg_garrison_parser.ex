@@ -62,12 +62,8 @@ defmodule MusicListings.Parsing.VenueParsers.BgGarrisonParser do
     ParseHelpers.time_string_to_time(time_string)
   end
 
-  def price(event) do
-    event
-    |> Selectors.text(css(".calendar_info_doors_cover a"))
-    |> String.split("|")
-    |> List.last()
-    |> Price.new()
+  def price(_event) do
+    Price.new(nil)
   end
 
   def age_restriction(_event) do
