@@ -48,6 +48,12 @@ defmodule MusicListings.Parsing.VenueParsers.GarrisonParserTest do
     end
   end
 
+  describe "ignored_event_id/1" do
+    test "returns ignored event id", %{event: event} do
+      assert "mizmor_2024_07_19" == GarrisonParser.ignored_event_id(event)
+    end
+  end
+
   describe "event_title/1" do
     test "returns event title", %{event: event} do
       assert "MIZMOR" == GarrisonParser.event_title(event)

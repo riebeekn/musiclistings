@@ -34,6 +34,11 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
   end
 
   @impl true
+  def ignored_event_id(event) do
+    event_id(event)
+  end
+
+  @impl true
   def event_title(event) do
     primary_title = event["title"]["rendered"] |> String.trim()
     backup_title = event["fm_title_short"] |> Enum.at(0)

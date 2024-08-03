@@ -37,6 +37,11 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParser do
   end
 
   @impl true
+  def ignored_event_id(event) do
+    event_id(event)
+  end
+
+  @impl true
   def event_title(event) do
     Selectors.text(event, css(".event-name"))
   end

@@ -48,6 +48,13 @@ defmodule MusicListings.Parsing.VenueParsers.LeesPalaceParserTest do
     end
   end
 
+  describe "ignored_event_id/1" do
+    test "returns ignored event id", %{event: event} do
+      assert "whitehall_w_the_high_teens_wedding_2024_07_27" ==
+               LeesPalaceParser.ignored_event_id(event)
+    end
+  end
+
   describe "event_title/1" do
     test "returns event title", %{event: event} do
       assert "Whitehall w/ The High Teens & Wedding" == LeesPalaceParser.event_title(event)

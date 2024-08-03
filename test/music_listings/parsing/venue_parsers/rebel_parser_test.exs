@@ -48,6 +48,12 @@ defmodule MusicListings.Parsing.VenueParsers.RebelParserTest do
     end
   end
 
+  describe "ignored_event_id/1" do
+    test "returns ignored event id", %{event: event} do
+      assert "lw7xanxp" == RebelParser.ignored_event_id(event)
+    end
+  end
+
   describe "event_title/1" do
     test "returns event title", %{event: event} do
       assert "FRENCH MONTANA - GOTTA SEE IT TO BELIEVE IT TOUR" == RebelParser.event_title(event)

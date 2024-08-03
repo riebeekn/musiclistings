@@ -22,6 +22,9 @@ defmodule MusicListings.Parsing.VenueParsers.RogersParser do
   defdelegate event_id(event), to: LiveNationParser
 
   @impl true
+  defdelegate ignored_event_id(event), to: LiveNationParser
+
+  @impl true
   defdelegate event_title(event), to: LiveNationParser
 
   @impl true

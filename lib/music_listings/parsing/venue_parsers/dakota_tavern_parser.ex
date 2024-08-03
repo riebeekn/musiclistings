@@ -36,6 +36,11 @@ defmodule MusicListings.Parsing.VenueParsers.DakotaTavernParser do
   end
 
   @impl true
+  def ignored_event_id(event) do
+    event_id(event)
+  end
+
+  @impl true
   def event_title(event) do
     [_date, title] =
       event

@@ -47,6 +47,12 @@ defmodule MusicListings.Parsing.VenueParsers.RoyThomsonHallParserTest do
     end
   end
 
+  describe "ignored_event_id/1" do
+    test "returns ignored event id", %{event: event} do
+      assert "5958" == RoyThomsonHallParser.ignored_event_id(event)
+    end
+  end
+
   describe "event_title/1" do
     test "returns event title", %{event: event} do
       assert "FINAL FANTASY VII REBIRTH Orchestra World Tour" ==

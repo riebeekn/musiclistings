@@ -49,6 +49,12 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParserTest do
     end
   end
 
+  describe "ignored_event_id/1" do
+    test "returns ignored event id", %{event: event} do
+      assert "ladytron_2024_08_30" == PhoenixParser.ignored_event_id(event)
+    end
+  end
+
   describe "event_title/1" do
     test "returns event title", %{event: event} do
       assert "LADYTRON" == PhoenixParser.event_title(event)

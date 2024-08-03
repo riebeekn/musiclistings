@@ -40,6 +40,11 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
   end
 
   @impl true
+  def ignored_event_id(event) do
+    Selectors.attr(event, "id")
+  end
+
+  @impl true
   def event_title(event) do
     Selectors.text(event, css(".stratum-advanced-posts__post-title a"))
   end
