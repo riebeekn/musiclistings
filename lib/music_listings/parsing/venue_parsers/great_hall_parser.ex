@@ -37,6 +37,11 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParser do
   end
 
   @impl true
+  def ignored_event_id(event) do
+    event_id(event)
+  end
+
+  @impl true
   def event_title(event) do
     Selectors.text(event, css(".tgh-e-title"))
   end

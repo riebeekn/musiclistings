@@ -49,6 +49,13 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParserTest do
     end
   end
 
+  describe "ignored_event_id/1" do
+    test "returns ignored event id", %{event: event} do
+      assert "jb_piano_bar_jim_clayton_s_jazz_jukebox_2024_07_02" ==
+               JazzBistroParser.ignored_event_id(event)
+    end
+  end
+
   describe "event_title/1" do
     test "returns event title", %{event: event} do
       assert "JB Piano Bar: Jim Clayton's Jazz Jukebox" ==

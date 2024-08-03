@@ -26,6 +26,12 @@ defmodule MusicListings.Parsing.VenueParser do
   """
   @callback event_id(Meeseeks.Result.t()) :: String.t()
   @doc """
+  The id to use when indicating this event is ignored.
+  We don't re-use the event id for this as it's possible
+  the event is failing parsing the id
+  """
+  @callback ignored_event_id(Meeseeks.Result.t()) :: String.t()
+  @doc """
   The event title
   """
   @callback event_title(Meeseeks.Result.t()) :: String.t()

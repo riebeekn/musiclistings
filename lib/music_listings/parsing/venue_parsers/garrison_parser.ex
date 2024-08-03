@@ -22,6 +22,9 @@ defmodule MusicListings.Parsing.VenueParsers.GarrisonParser do
   defdelegate event_id(event), to: BgGarrisonParser
 
   @impl true
+  defdelegate ignored_event_id(event), to: BgGarrisonParser
+
+  @impl true
   defdelegate event_title(event), to: BgGarrisonParser
 
   @impl true

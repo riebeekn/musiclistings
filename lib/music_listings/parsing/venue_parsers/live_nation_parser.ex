@@ -29,6 +29,10 @@ defmodule MusicListings.Parsing.VenueParsers.LiveNationParser do
     ParseHelpers.build_id_from_title_and_date(title, date)
   end
 
+  def ignored_event_id(event) do
+    event_id(event)
+  end
+
   def event_title(event) do
     event["name"]
   end

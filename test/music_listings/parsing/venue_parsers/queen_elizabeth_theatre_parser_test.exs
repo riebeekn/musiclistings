@@ -48,6 +48,12 @@ defmodule MusicListings.Parsing.VenueParsers.QueenElizabthTheatreParserTest do
     end
   end
 
+  describe "ignored_event_id/1" do
+    test "returns ignored event id", %{event: event} do
+      assert "kk_s_priest_accept_2024_09_10" == QueenElizabthTheatreParser.ignored_event_id(event)
+    end
+  end
+
   describe "event_title/1" do
     test "returns event title", %{event: event} do
       assert "KK's Priest / Accept" == QueenElizabthTheatreParser.event_title(event)

@@ -49,6 +49,13 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParserTest do
     end
   end
 
+  describe "ignored_event_id/1" do
+    test "returns ignored event id", %{event: event} do
+      assert "brass_camel_featuring_a_short_walk_to_pluto_2024_09_28" ==
+               GreatHallParser.ignored_event_id(event)
+    end
+  end
+
   describe "event_title/1" do
     test "returns event title", %{event: event} do
       assert "Brass Camel featuring A Short Walk to Pluto" == GreatHallParser.event_title(event)

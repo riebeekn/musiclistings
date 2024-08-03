@@ -48,6 +48,12 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParserTest do
     end
   end
 
+  describe "ignored_event_id/1" do
+    test "returns ignored event id", %{event: event} do
+      assert "zeal_ardor_w_gaerea_zetra_2024_11_28" == OperaHouseParser.ignored_event_id(event)
+    end
+  end
+
   describe "event_title/1" do
     test "returns event title", %{event: event} do
       assert "ZEAL & ARDOR w/ Gaerea, Zetra" == OperaHouseParser.event_title(event)

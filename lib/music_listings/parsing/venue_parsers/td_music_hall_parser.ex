@@ -26,6 +26,9 @@ defmodule MusicListings.Parsing.VenueParsers.TDMusicHallParser do
   defdelegate event_id(event), to: MhRthTdmhParser
 
   @impl true
+  defdelegate ignored_event_id(event), to: MhRthTdmhParser
+
+  @impl true
   defdelegate event_title(event), to: MhRthTdmhParser
 
   @impl true

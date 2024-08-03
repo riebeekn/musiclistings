@@ -47,6 +47,12 @@ defmodule MusicListings.Parsing.VenueParsers.MasseyHallParserTest do
     end
   end
 
+  describe "ignored_event_id/1" do
+    test "returns ignored event id", %{event: event} do
+      assert "6083" == MasseyHallParser.ignored_event_id(event)
+    end
+  end
+
   describe "event_title/1" do
     test "returns event title", %{event: event} do
       assert "Classic Albums Live: The Rolling Stones" == MasseyHallParser.event_title(event)

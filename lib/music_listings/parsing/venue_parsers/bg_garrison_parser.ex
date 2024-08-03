@@ -25,6 +25,10 @@ defmodule MusicListings.Parsing.VenueParsers.BgGarrisonParser do
     ParseHelpers.build_id_from_title_and_date(title, date)
   end
 
+  def ignored_event_id(event) do
+    event_id(event)
+  end
+
   def event_title(event) do
     Selectors.text(event, css("#calendar_info_headliner"))
   end

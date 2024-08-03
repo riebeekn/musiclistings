@@ -50,6 +50,12 @@ defmodule MusicListings.Parsing.VenueParsers.MonarchTavernParserTest do
     end
   end
 
+  describe "ignored_event_id/1" do
+    test "returns ignored event id", %{event: event} do
+      assert "59f4fea1df82fe17e4e1c2cf" == MonarchTavernParser.ignored_event_id(event)
+    end
+  end
+
   describe "event_title/1" do
     test "returns event title", %{event: event} do
       assert "Velvet Beach w/ Kicksie, Nutrients" ==

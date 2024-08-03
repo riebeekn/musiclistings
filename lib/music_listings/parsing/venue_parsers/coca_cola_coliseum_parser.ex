@@ -37,6 +37,11 @@ defmodule MusicListings.Parsing.VenueParsers.CocaColaColiseumParser do
   end
 
   @impl true
+  def ignored_event_id(event) do
+    event_id(event)
+  end
+
+  @impl true
   def event_title(event) do
     main_title = Selectors.text(event, css(".m-eventItem__title"))
     secondary_title = Selectors.text(event, css(".m-eventItem__tagline"))

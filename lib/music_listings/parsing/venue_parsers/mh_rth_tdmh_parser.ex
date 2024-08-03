@@ -21,6 +21,8 @@ defmodule MusicListings.Parsing.VenueParsers.MhRthTdmhParser do
 
   def event_id(event), do: event["perf_no"]
 
+  def ignored_event_id(event), do: event_id(event)
+
   def event_title(event) do
     event["cmsData"]["Title"]
     |> String.trim()
