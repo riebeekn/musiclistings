@@ -65,6 +65,8 @@ defmodule MusicListings.Parsing.VenueParsers.BgGarrisonParser do
   def price(event) do
     event
     |> Selectors.text(css(".calendar_info_doors_cover a"))
+    |> String.split("|")
+    |> List.last()
     |> Price.new()
   end
 
