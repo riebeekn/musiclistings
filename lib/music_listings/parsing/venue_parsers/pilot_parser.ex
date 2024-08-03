@@ -63,7 +63,8 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
       |> Selectors.text(css(".fr-tag"))
       |> String.split("-")
 
-    [_day_of_week, month_string, day_string] = String.split(full_date_string)
+    [_day_of_week, month_string, day_string] =
+      full_date_string |> String.replace(",", " ") |> String.split()
 
     ParseHelpers.build_date_from_month_day_strings(month_string, day_string, Date.utc_today())
   end
