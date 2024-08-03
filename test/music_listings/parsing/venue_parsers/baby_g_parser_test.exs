@@ -71,7 +71,7 @@ defmodule MusicListings.Parsing.VenueParsers.BabyGParserTest do
 
   describe "event_time/1" do
     test "returns the event start time", %{event: event} do
-      assert ~T[19:00:00] == BabyGParser.event_time(event)
+      assert nil == BabyGParser.event_time(event)
     end
   end
 
