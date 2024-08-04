@@ -74,6 +74,7 @@ defmodule MusicListings.MixProject do
       {:mjml, "~> 1.5.0"},
       {:floki, ">= 0.30.0"},
       {:tzdata, "~> 1.1"},
+      {:scrivener_ecto, "~> 2.0"},
       # build / dev / test related deps
       {:swoosh_gallery, "~> 0.2.0"},
       {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
