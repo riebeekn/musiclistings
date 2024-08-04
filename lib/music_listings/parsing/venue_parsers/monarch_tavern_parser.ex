@@ -7,11 +7,12 @@ defmodule MusicListings.Parsing.VenueParsers.MonarchTavernParser do
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
+  alias MusicListingsUtilities.DateHelpers
 
   @impl true
   def source_url do
     unix_today_in_milliseconds =
-      (Date.utc_today() |> DateTime.new!(~T[00:00:00]) |> DateTime.to_unix()) * 1_000
+      (DateHelpers.today() |> DateTime.new!(~T[00:00:00]) |> DateTime.to_unix()) * 1_000
 
     "https://tockify.com/api/ngevent?max=48&view=agenda&calname=monarchtavern&start-inclusive=true&longForm=false&showAll=false&startms=#{unix_today_in_milliseconds}"
   end

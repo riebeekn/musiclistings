@@ -9,6 +9,7 @@ defmodule MusicListings.Parsing.VenueParsers.CameronHouseParser do
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.Selectors
+  alias MusicListingsUtilities.DateHelpers
 
   @impl true
   def source_url, do: "https://www.thecameron.com/shows"
@@ -62,9 +63,7 @@ defmodule MusicListings.Parsing.VenueParsers.CameronHouseParser do
       event["scheduling"]["config"]["startDate"]
       |> DateTime.from_iso8601()
 
-    utc_datetime
-    |> DateTime.shift_zone!("America/Toronto")
-    |> DateTime.to_date()
+    DateHelpers.utc_to_eastern_date(utc_datetime)
   end
 
   @impl true
@@ -73,10 +72,7 @@ defmodule MusicListings.Parsing.VenueParsers.CameronHouseParser do
       event["scheduling"]["config"]["startDate"]
       |> DateTime.from_iso8601()
 
-    utc_datetime
-    |> DateTime.shift_zone!("America/Toronto")
-    |> DateTime.truncate(:second)
-    |> DateTime.to_time()
+    DateHelpers.utc_to_eastern_time(utc_datetime)
   end
 
   @impl true

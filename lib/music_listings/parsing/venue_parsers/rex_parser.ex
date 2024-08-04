@@ -7,10 +7,11 @@ defmodule MusicListings.Parsing.VenueParsers.RexParser do
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
+  alias MusicListingsUtilities.DateHelpers
 
   @impl true
   def source_url do
-    today = Date.utc_today()
+    today = DateHelpers.today()
 
     "https://www.therex.ca/api/open/GetItemsByMonth?month=#{today.month}-#{today.year}&collectionId=62099f5a37eb917826df65cc&crumb=BZxZJlGW0oALYzcxZDM5MjgzOGE1NmQ0ZTcyOWY3NjdhZWFmMDVi"
   end

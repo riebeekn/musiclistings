@@ -107,8 +107,8 @@ defmodule MusicListings.Parsing.ParseHelpers do
 
   defp maybe_increment_year(candidate_date, today) do
     # There is no year provided... so subtract a few days from today
-    # then compare the dates if candidate show date < today increment
-    # the year...
+    # then compare the dates if candidate event date < today increment
+    # the year... this is pretty hacky, TODO: revisit in the future
     fifteen_days_ago = Date.add(today, -15)
 
     if Date.before?(candidate_date, fifteen_days_ago) do

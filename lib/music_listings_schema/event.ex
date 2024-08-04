@@ -2,11 +2,8 @@ defmodule MusicListingsSchema.Event do
   @moduledoc """
   Schema to represent an event
   """
-  use Ecto.Schema
+  use MusicListingsSchema.Schema
 
-  @timestamps_opts [
-    type: :utc_datetime_usec
-  ]
   schema "events" do
     field :external_id, :string
     field :title, :string

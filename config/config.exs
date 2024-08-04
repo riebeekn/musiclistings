@@ -77,6 +77,9 @@ config :music_listings, Oban,
 # TZ config
 config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase
 
+# Set env
+config :music_listings, env: Mix.env()
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"

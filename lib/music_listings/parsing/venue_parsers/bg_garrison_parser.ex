@@ -8,6 +8,7 @@ defmodule MusicListings.Parsing.VenueParsers.BgGarrisonParser do
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.Selectors
+  alias MusicListingsUtilities.DateHelpers
 
   def events(body) do
     Selectors.all_matches(body, css("#calendar_wrap"))
@@ -50,7 +51,7 @@ defmodule MusicListings.Parsing.VenueParsers.BgGarrisonParser do
       |> Selectors.text(css("#calendar_date"))
       |> String.split()
 
-    ParseHelpers.build_date_from_month_day_strings(month_string, day_string, Date.utc_today())
+    ParseHelpers.build_date_from_month_day_strings(month_string, day_string, DateHelpers.today())
   end
 
   def event_time(_event) do

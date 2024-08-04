@@ -2,11 +2,8 @@ defmodule MusicListingsSchema.CrawlError do
   @moduledoc """
   Schema to represent a crawl error
   """
-  use Ecto.Schema
+  use MusicListingsSchema.Schema
 
-  @timestamps_opts [
-    type: :utc_datetime_usec
-  ]
   schema "crawl_errors" do
     belongs_to :crawl_summary, MusicListingsSchema.CrawlSummary
     belongs_to :venue, MusicListingsSchema.Venue
