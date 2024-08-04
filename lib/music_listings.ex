@@ -8,6 +8,7 @@ defmodule MusicListings do
   alias MusicListingsSchema.CrawlError
   alias MusicListingsSchema.Event
   alias MusicListingsSchema.IgnoredEvent
+  alias MusicListingsUtilities.DateHelpers
 
   require Logger
 
@@ -40,13 +41,15 @@ defmodule MusicListings do
       Logger.error(error)
   end
 
+  @type list_events_opts ::
+          {:page, pos_integer()}
+          | {:page_size, pos_integer()}
+          | []
+  @spec list_events(list_events_opts()) :: map()
   def list_events(opts \\ []) do
     pagination_values = page_and_page_size_from_opts(opts)
 
-    today =
-      DateTime.utc_now()
-      |> DateTime.shift_zone!("America/Toronto")
-      |> DateTime.to_date()
+    today = DateHelpers.today()
 
     Event
     |> where([event], event.date >= ^today)
