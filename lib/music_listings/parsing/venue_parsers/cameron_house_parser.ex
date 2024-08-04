@@ -63,7 +63,7 @@ defmodule MusicListings.Parsing.VenueParsers.CameronHouseParser do
       event["scheduling"]["config"]["startDate"]
       |> DateTime.from_iso8601()
 
-    DateHelpers.utc_to_eastern_date(utc_datetime)
+    DateHelpers.to_eastern_date(utc_datetime)
   end
 
   @impl true
@@ -72,7 +72,7 @@ defmodule MusicListings.Parsing.VenueParsers.CameronHouseParser do
       event["scheduling"]["config"]["startDate"]
       |> DateTime.from_iso8601()
 
-    DateHelpers.utc_to_eastern_time(utc_datetime)
+    DateHelpers.to_eastern_time(utc_datetime)
   end
 
   @impl true
