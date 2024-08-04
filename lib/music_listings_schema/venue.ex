@@ -2,7 +2,7 @@ defmodule MusicListingsSchema.Venue do
   @moduledoc """
   Schema to represent a venue
   """
-  use Ecto.Schema
+  use MusicListingsSchema.Schema
 
   schema "venues" do
     field :name, :string

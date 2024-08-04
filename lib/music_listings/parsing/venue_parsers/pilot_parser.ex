@@ -10,6 +10,7 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.Selectors
+  alias MusicListingsUtilities.DateHelpers
 
   @impl true
   def source_url, do: "https://www.thepilot.ca/happening-at-the-pilot"
@@ -66,7 +67,7 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
     [_day_of_week, month_string, day_string] =
       full_date_string |> String.replace(",", " ") |> String.split()
 
-    ParseHelpers.build_date_from_month_day_strings(month_string, day_string, Date.utc_today())
+    ParseHelpers.build_date_from_month_day_strings(month_string, day_string, DateHelpers.today())
   end
 
   @impl true

@@ -2,11 +2,8 @@ defmodule MusicListingsSchema.VenueCrawlSummary do
   @moduledoc """
   Schema to represent a venue summary of a crawl
   """
-  use Ecto.Schema
+  use MusicListingsSchema.Schema
 
-  @timestamps_opts [
-    type: :utc_datetime_usec
-  ]
   schema "venue_crawl_summaries" do
     belongs_to :venue, MusicListingsSchema.Venue
     belongs_to :crawl_summary, MusicListingsSchema.CrawlSummary
