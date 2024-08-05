@@ -46,7 +46,7 @@ defmodule MusicListings do
           {:page, pos_integer()}
           | {:page_size, pos_integer()}
           | []
-  @spec list_events(list_events_opts()) :: map()
+  @spec list_events(list_events_opts()) :: any()
   def list_events(opts \\ []) do
     pagination_values = page_and_page_size_from_opts(opts)
 
@@ -58,14 +58,21 @@ defmodule MusicListings do
     |> preload(:venue)
     |> Repo.paginate(page: pagination_values.page, page_size: pagination_values.page_size)
     |> Enum.group_by(& &1.date)
+    |> Enum.map(fn {date, events} ->
+      sorted_events = Enum.sort_by(events, & &1.title)
+      {date, sorted_events}
+    end)
+    |> Enum.sort(fn {date1, _}, {date2, _} ->
+      Date.compare(date1, date2) != :gt
+    end)
   end
 
   @default_page 1
-  @default_page_size 30
+  @default_page_size 100
 
   defp page_and_page_size_from_opts(opts) do
     page = opts |> Keyword.get(:page, @default_page) |> max(1)
-    page_size = opts |> Keyword.get(:page_size, @default_page_size) |> min(30)
+    page_size = opts |> Keyword.get(:page_size, @default_page_size) |> min(@default_page_size)
 
     %{
       page: page,
