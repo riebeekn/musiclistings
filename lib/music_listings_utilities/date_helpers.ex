@@ -32,6 +32,15 @@ defmodule MusicListingsUtilities.DateHelpers do
   end
 
   @doc """
+  Converts a UTC datetime to the corresponding EST datetime
+  """
+  @spec to_eastern_datetime(DateTime.t()) :: DateTime.t()
+  def to_eastern_datetime(%DateTime{} = utc_datetime) do
+    utc_datetime
+    |> DateTime.shift_zone!("America/Toronto")
+  end
+
+  @doc """
   Converts a UTC datetime to the corresponding EST date
   """
   @spec to_eastern_time(DateTime.t()) :: Date.t()
@@ -50,5 +59,13 @@ defmodule MusicListingsUtilities.DateHelpers do
     |> DateTime.shift_zone!("America/Toronto")
     |> DateTime.truncate(:second)
     |> DateTime.to_time()
+  end
+
+  def format_datetime(%DateTime{} = datetime) do
+    Calendar.strftime(datetime, "%a, %B %d %Y %I:%M:%S %p")
+  end
+
+  def format_date(%Date{} = date) do
+    Calendar.strftime(date, "%a, %B %d %Y")
   end
 end
