@@ -1,6 +1,68 @@
-<main class="px-4 py-20 sm:px-6 lg:px-8">
-  <div class="mx-auto max-w-2xl">
-    <.flash_group flash={@flash} />
-    <%= @inner_content %>
+<header class="relative z-50 flex-none lg:pt-11">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-center lg:flex-nowrap">
+    <div class="mt-10 lg:mt-0 lg:grow lg:basis-0 flex">
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 183 48"
+        class="h-12 w-auto text-slate-900 hidden lg:flex"
+      >
+        <path
+          fill="#3B82F6"
+          fill-rule="evenodd"
+          d="M1.172 21.172a4 4 0 000 5.656l20 20a4 4 0 105.656-5.656l-20-20a4 4 0 00-5.656 0z"
+          clip-rule="evenodd"
+        >
+        </path>
+        <path
+          fill="#93C5FD"
+          fill-rule="evenodd"
+          d="M26.828 6.828a4 4 0 10-5.656-5.656l-19 19A3.987 3.987 0 015 19a3.98 3.98 0 012.827 1.172L10.657 23 26.828 6.828z"
+          clip-rule="evenodd"
+        >
+        </path>
+      </svg>
+      <span class="lg:text-3xl text-4xl font-bold">Toronto Music Listings</span>
+    </div>
+    <div class="order-first -mx-4 flex flex-auto basis-full overflow-x-auto whitespace-nowrap border-b border-blue-600/10 py-4 font-mono text-sm text-blue-600 sm:-mx-6 lg:order-none lg:mx-0 lg:basis-auto lg:border-0 lg:py-0">
+      <div class="mx-auto flex items-center gap-4 px-4">
+        <p>
+          Last updated
+        </p>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 6 6"
+          class="h-1.5 w-1.5 overflow-visible fill-current stroke-current"
+        >
+          <path d="M3 0L6 3L3 6L0 3Z" stroke-width="2" stroke-linejoin="round"></path>
+        </svg>
+        <p><%= MusicListings.data_last_updated_on() %></p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="flex-auto">
+  <div class="relative py-20 sm:pb-24 sm:pt-36">
+    <div class="absolute inset-0 overflow-hidden bg-indigo-50 -bottom-14 -top-36">
+      <img
+        alt=""
+        fetchpriority="high"
+        width="918"
+        height="1495"
+        decoding="async"
+        data-nimg="1"
+        class="absolute top-0 left-0 translate-x-[-55%] translate-y-[-10%] -scale-x-100 sm:left-1/2 sm:translate-x-[-98%] sm:translate-y-[-6%] lg:translate-x-[-106%] xl:translate-x-[-122%]"
+        style="color:transparent"
+        src={~p"/images/background.jpg"}
+      />
+      <div class="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-white"></div>
+      <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-white"></div>
+    </div>
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
+      <div class="mx-auto max-w-2xl lg:max-w-4xl lg:px-12">
+        <.flash_group flash={@flash} />
+        <%= @inner_content %>
+      </div>
+    </div>
   </div>
 </main>

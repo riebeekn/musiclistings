@@ -11,7 +11,9 @@ defmodule MusicListingsWeb.EventLive.Index do
     ~H"""
     <%= for {date, events} <- @events do %>
       <div>
-        <%= date %>
+        <h2 class="text-3xl text-blue-600 font-bold">
+          <%= MusicListingsUtilities.DateHelpers.format_date(date) %>
+        </h2>
         <%= for event <- events do %>
           <div>
             <%= event.title %>
