@@ -1,6 +1,8 @@
 defmodule MusicListingsWeb.Router do
   use MusicListingsWeb, :router
 
+  import Redirect
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -14,10 +16,11 @@ defmodule MusicListingsWeb.Router do
     plug :accepts, ["json"]
   end
 
+  redirect("/", "/events", :temporary)
+
   scope "/", MusicListingsWeb do
     pipe_through :browser
 
-    live "/", EventLive.Index, :index
     live "/events", EventLive.Index, :index
   end
 
