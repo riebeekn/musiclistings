@@ -6,6 +6,7 @@ defmodule MusicListings do
 
   alias MusicListings.Repo
   alias MusicListingsSchema.CrawlError
+  alias MusicListingsSchema.CrawlSummary
   alias MusicListingsSchema.Event
   alias MusicListingsSchema.IgnoredEvent
   alias MusicListingsUtilities.DateHelpers
@@ -70,5 +71,22 @@ defmodule MusicListings do
       page: page,
       page_size: page_size
     }
+  end
+
+  @spec data_last_updated_on :: String.t()
+  def data_last_updated_on do
+    CrawlSummary
+    |> order_by([crawl_summary], desc: crawl_summary.updated_at)
+    |> limit(1)
+    |> Repo.one()
+    |> case do
+      nil ->
+        "No data"
+
+      last_summary ->
+        last_summary.updated_at
+        |> DateHelpers.to_eastern_datetime()
+        |> DateHelpers.format_datetime()
+    end
   end
 end
