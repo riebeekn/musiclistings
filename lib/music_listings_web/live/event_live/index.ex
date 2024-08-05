@@ -10,15 +10,13 @@ defmodule MusicListingsWeb.EventLive.Index do
   def render(assigns) do
     ~H"""
     <%= for {date, events} <- @events do %>
-      <div>
-        <h2 class="text-3xl text-blue-600 font-bold">
-          <%= MusicListingsUtilities.DateHelpers.format_date(date) %>
-        </h2>
-        <%= for event <- events do %>
-          <div>
-            <%= event.title %>
-          </div>
-        <% end %>
+      <div class="mb-8 divide-y divide-solid divide-blue-600">
+        <.events_date_header date={date} />
+        <ul role="list" class="mt-2 mb-4">
+          <%= for event <- events do %>
+            <.event_card event={event} />
+          <% end %>
+        </ul>
       </div>
     <% end %>
     """
