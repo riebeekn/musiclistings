@@ -83,6 +83,8 @@ defmodule MusicListingsWeb do
     quote do
       # Core UI components and translation
       import MusicListingsWeb.CoreComponents
+      # Custom UI components
+      import MusicListingsWeb.CustomComponents
       import MusicListingsWeb.Gettext
       # HTML escaping functionality
       import Phoenix.HTML
