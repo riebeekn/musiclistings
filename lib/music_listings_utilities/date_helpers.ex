@@ -43,7 +43,7 @@ defmodule MusicListingsUtilities.DateHelpers do
   @doc """
   Converts a UTC datetime to the corresponding EST date
   """
-  @spec to_eastern_time(DateTime.t()) :: Date.t()
+  @spec to_eastern_date(DateTime.t()) :: Date.t()
   def to_eastern_date(%DateTime{} = utc_datetime) do
     utc_datetime
     |> DateTime.shift_zone!("America/Toronto")
