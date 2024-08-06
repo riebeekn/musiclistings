@@ -54,17 +54,10 @@ defmodule MusicListings do
 
     Event
     |> where([event], event.date >= ^today)
-    |> order_by(:date)
+    |> order_by([:date, :title])
     |> preload(:venue)
     |> Repo.paginate(page: pagination_values.page, page_size: pagination_values.page_size)
     |> Enum.group_by(& &1.date)
-    |> Enum.map(fn {date, events} ->
-      sorted_events = Enum.sort_by(events, & &1.title)
-      {date, sorted_events}
-    end)
-    |> Enum.sort(fn {date1, _}, {date2, _} ->
-      Date.compare(date1, date2) != :gt
-    end)
   end
 
   @default_page 1
