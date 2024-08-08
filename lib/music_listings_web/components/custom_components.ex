@@ -7,6 +7,21 @@ defmodule MusicListingsWeb.CustomComponents do
 
   alias MusicListingsUtilities.DateHelpers
 
+  attr :label, :string, required: true
+  attr :url, :string, required: true
+
+  def button_patch_link(assigns) do
+    ~H"""
+    <.link
+      patch={@url}
+      data-scroll="top"
+      class="inline-flex justify-center rounded-2xl bg-blue-600 p-4 text-base font-semibold text-white hover:bg-blue-500 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:text-white/70"
+    >
+      <%= @label %>
+    </.link>
+    """
+  end
+
   attr :date, Date, required: true
 
   def events_date_header(assigns) do
@@ -71,6 +86,9 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_price(%{price_format: :fixed} = assigns) do
     ~H"""
+    <p>
+      |
+    </p>
     <p>
       $<%= @price_lo %>
     </p>
