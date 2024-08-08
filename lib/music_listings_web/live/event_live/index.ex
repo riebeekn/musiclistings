@@ -1,5 +1,6 @@
 defmodule MusicListingsWeb.EventLive.Index do
   use MusicListingsWeb, :live_view
+  use Goal
 
   @impl true
   def mount(_params, _session, socket) do
@@ -8,27 +9,25 @@ defmodule MusicListingsWeb.EventLive.Index do
 
   @impl true
   def handle_params(params, _uri, socket) do
-    page = parse_page_param(params)
-    paged_events = MusicListings.list_events(page: page)
+    case validate(:index, params) do
+      {:ok, normalized_params} ->
+        paged_events = MusicListings.list_events(page: normalized_params["page"])
 
-    socket =
-      socket
-      |> assign(:events, paged_events.events)
-      |> assign(:current_page, paged_events.current_page)
-      |> assign(:total_pages, paged_events.total_pages)
+        socket =
+          socket
+          |> assign(:events, paged_events.events)
+          |> assign(:current_page, paged_events.current_page)
+          |> assign(:total_pages, paged_events.total_pages)
 
-    {:noreply, socket}
+        {:noreply, socket}
+
+      _error ->
+        {:noreply, push_navigate(socket, to: ~p"/events")}
+    end
   end
 
-  @default_page "1"
-  defp parse_page_param(params) do
-    params
-    |> Map.get("page", @default_page)
-    |> Integer.parse()
-    |> case do
-      :error -> String.to_integer(@default_page)
-      {page, _remainder} -> max(page, 1)
-    end
+  defparams :index do
+    optional(:page, :integer, min: 1, default: 1)
   end
 
   @impl true
