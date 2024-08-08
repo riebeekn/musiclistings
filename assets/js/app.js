@@ -33,6 +33,12 @@ topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"})
 window.addEventListener("phx:page-loading-start", _info => topbar.show(300))
 window.addEventListener("phx:page-loading-stop", _info => topbar.hide())
 
+// js function to scroll to top on paging
+window.addEventListener("phoenix.link.click", function (event) {
+  var scroll = event.target.getAttribute("data-scroll")
+  if (scroll == "top") { window.scrollTo(0, 0) }
+}, false);
+
 // connect if there are any LiveViews on the page
 liveSocket.connect()
 
@@ -41,4 +47,3 @@ liveSocket.connect()
 // >> liveSocket.enableLatencySim(1000)  // enabled for duration of browser session
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
-
