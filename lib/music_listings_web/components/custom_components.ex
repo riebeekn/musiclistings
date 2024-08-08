@@ -5,6 +5,11 @@ defmodule MusicListingsWeb.CustomComponents do
 
   use Phoenix.Component
 
+  use Phoenix.VerifiedRoutes,
+    endpoint: MusicListingsWeb.Endpoint,
+    router: MusicListingsWeb.Router,
+    statics: MusicListingsWeb.static_paths()
+
   alias MusicListingsUtilities.DateHelpers
 
   attr :label, :string, required: true
@@ -42,7 +47,7 @@ defmodule MusicListingsWeb.CustomComponents do
           <%= @event.title %>
         </p>
         <div class="mt-1 flex items-center gap-x-2 text-sm leading-5 text-blue-600 font-mono">
-          <p><%= @event.venue.name %></p>
+          <.event_venue venue={@event.venue} />
           <.event_price
             price_format={@event.price_format}
             price_lo={@event.price_lo}
@@ -54,6 +59,14 @@ defmodule MusicListingsWeb.CustomComponents do
         </div>
       </div>
     </li>
+    """
+  end
+
+  defp event_venue(assigns) do
+    ~H"""
+    <a href={~p"/events/venue/#{@venue.id}"}>
+      <%= @venue.name %>
+    </a>
     """
   end
 
