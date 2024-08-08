@@ -10,7 +10,7 @@ defmodule MusicListings.Events do
   alias MusicListingsUtilities.DateHelpers
 
   @default_page 1
-  @default_page_size 10
+  @default_page_size 100
 
   @spec list_events(list()) :: any()
   def list_events(opts \\ []) do
