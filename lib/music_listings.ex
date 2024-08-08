@@ -14,7 +14,6 @@ defmodule MusicListings do
   @spec ignore_crawl_error(pos_integer()) :: IgnoredEvent
   defdelegate ignore_crawl_error(crawl_error_id), to: Crawler
 
-  @type list_events_opts :: {:page, pos_integer()}
-  @spec list_events(list(list_events_opts)) :: any()
+  @spec list_events(list()) :: any()
   defdelegate list_events(opts \\ []), to: Events
 end
