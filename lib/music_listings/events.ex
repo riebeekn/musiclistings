@@ -10,12 +10,12 @@ defmodule MusicListings.Events do
   alias MusicListingsUtilities.DateHelpers
 
   @default_page 1
-  @page_size 10
+  @default_page_size 10
 
-  @type list_events_opts :: {:page, pos_integer()}
-  @spec list_events(list(list_events_opts)) :: any()
+  @spec list_events(list()) :: any()
   def list_events(opts \\ []) do
-    page = opts |> Keyword.get(:page, @default_page) |> max(1)
+    page = opts |> Keyword.get(:page, @default_page)
+    page_size = opts |> Keyword.get(:page_size, @default_page_size)
 
     today = DateHelpers.now() |> DateHelpers.to_eastern_date()
 
@@ -24,7 +24,7 @@ defmodule MusicListings.Events do
       |> where([event], event.date >= ^today)
       |> order_by([:date, :title])
       |> preload(:venue)
-      |> Repo.paginate(page: page, page_size: @page_size)
+      |> Repo.paginate(page: page, page_size: page_size)
 
     grouped_events =
       pagination_result

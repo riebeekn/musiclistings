@@ -9,6 +9,7 @@ defmodule MusicListings.Crawler do
   alias MusicListings.Crawler.EventParser
   alias MusicListings.Crawler.EventStorage
   alias MusicListings.Repo
+  alias MusicListingsSchema.CrawlError
   alias MusicListingsSchema.CrawlSummary
   alias MusicListingsSchema.IgnoredEvent
   alias MusicListingsSchema.Venue
@@ -81,7 +82,7 @@ defmodule MusicListings.Crawler do
   end
 
   defp init_crawl_summary do
-    %MusicListingsSchema.CrawlSummary{}
+    %CrawlSummary{}
     |> Repo.insert!()
   end
 
