@@ -36,7 +36,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   def event_card(assigns) do
     ~H"""
-    <li class="py-1">
+    <li id={"event-#{@event.id}"} class="py-1">
       <div class="min-w-0">
         <p class="text-lg leading-6 text-blue-900 font-semibold">
           <%= @event.title %>

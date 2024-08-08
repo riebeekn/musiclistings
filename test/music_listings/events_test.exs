@@ -3,10 +3,9 @@ defmodule MusicListings.EventsTest do
 
   alias MusicListings.Events
   alias MusicListings.Events.PagedEvents
+  alias MusicListings.EventsFixtures
   alias MusicListings.VenuesFixtures
   alias MusicListingsSchema.Event
-
-  alias MusicListings.EventsFixtures
 
   describe "list_events/1" do
     setup do
