@@ -48,11 +48,23 @@ defmodule MusicListingsWeb.CustomComponents do
             price_lo={@event.price_lo}
             price_hi={@event.price_hi}
           />
-          <.event_ticket_url ticket_url={@event.ticket_url} />
+          <.event_time time={@event.time} />
           <.event_details_url details_url={@event.details_url} />
+          <.event_ticket_url ticket_url={@event.ticket_url} />
         </div>
       </div>
     </li>
+    """
+  end
+
+  defp event_time(%{time: nil} = assigns), do: ~H""
+
+  defp event_time(assigns) do
+    ~H"""
+    <p>
+      |
+    </p>
+    <%= DateHelpers.format_time(@time) %>
     """
   end
 
@@ -60,6 +72,9 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_details_url(assigns) do
     ~H"""
+    <p>
+      |
+    </p>
     <p>
       <a href={@details_url} target="_blank" class="flex items-center">
         <MusicListingsWeb.CoreComponents.icon name="hero-information-circle-solid" class="h-5 w-5" />
@@ -73,6 +88,9 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_ticket_url(assigns) do
     ~H"""
+    <p>
+      |
+    </p>
     <p>
       <a href={@ticket_url} target="_blank" class="flex items-center">
         <MusicListingsWeb.CoreComponents.icon name="hero-ticket-solid" class="h-5 w-5" />
@@ -98,6 +116,9 @@ defmodule MusicListingsWeb.CustomComponents do
   defp event_price(%{price_format: :range} = assigns) do
     ~H"""
     <p>
+      |
+    </p>
+    <p>
       $<%= @price_lo %> - $<%= @price_hi %>
     </p>
     """
@@ -105,6 +126,9 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_price(%{price_format: :variable} = assigns) do
     ~H"""
+    <p>
+      |
+    </p>
     $<%= @price_lo %>+
     """
   end
