@@ -14,14 +14,16 @@ defmodule MusicListings.Events do
 
   @spec list_events(list()) :: any()
   def list_events(opts \\ []) do
-    page = opts |> Keyword.get(:page, @default_page)
-    page_size = opts |> Keyword.get(:page_size, @default_page_size)
+    page = Keyword.get(opts, :page, @default_page)
+    page_size = Keyword.get(opts, :page_size, @default_page_size)
+    venue_id = Keyword.get(opts, :venue_id, nil)
 
     today = DateHelpers.now() |> DateHelpers.to_eastern_date()
 
     pagination_result =
       Event
       |> where([event], event.date >= ^today)
+      |> maybe_filter_by_venue(venue_id)
       |> order_by([:date, :title])
       |> preload(:venue)
       |> Repo.paginate(page: page, page_size: page_size)
@@ -35,5 +37,12 @@ defmodule MusicListings.Events do
       current_page: pagination_result.page_number,
       total_pages: pagination_result.total_pages
     }
+  end
+
+  defp maybe_filter_by_venue(query, nil), do: query
+
+  defp maybe_filter_by_venue(query, venue_id) when is_integer(venue_id) do
+    query
+    |> where([event], event.venue_id == ^venue_id)
   end
 end
