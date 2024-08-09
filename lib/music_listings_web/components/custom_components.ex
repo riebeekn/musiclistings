@@ -65,9 +65,9 @@ defmodule MusicListingsWeb.CustomComponents do
   def venue_event_card(assigns) do
     ~H"""
     <li id={"event-#{@event.id}"} class="py-1">
-      <div class="min-w-0 text-sm leading-5 text-blue-600 font-mono">
+      <div class="min-w-0 text-sm leading-5 font-mono">
         <.event_title_small title={@event.title} />
-        <div class="mt-0 flex items-center gap-x-2 ">
+        <div class="mt-0 flex items-center gap-x-2 text-blue-600">
           <.event_date date={@event.date} />
           <.event_price
             price_format={@event.price_format}
@@ -85,7 +85,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_title_small(assigns) do
     ~H"""
-    <span class="font-semibold italic"><%= @title %></span>
+    <p class="font-semibold italic text-blue-900"><%= @title %></p>
     """
   end
 
@@ -117,10 +117,12 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_time(assigns) do
     ~H"""
-    <p>
+    <p class="hidden sm:block">
       |
     </p>
-    <%= DateHelpers.format_time(@time) %>
+    <p>
+      <%= DateHelpers.format_time(@time) %>
+    </p>
     """
   end
 
@@ -128,7 +130,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_details_url(assigns) do
     ~H"""
-    <p>
+    <p class="hidden sm:block">
       |
     </p>
     <p>
@@ -144,7 +146,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_ticket_url(assigns) do
     ~H"""
-    <p>
+    <p class="hidden sm:block">
       |
     </p>
     <p>
@@ -160,10 +162,10 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_price(%{price_format: :fixed} = assigns) do
     ~H"""
-    <p>
+    <p class="hidden sm:block">
       |
     </p>
-    <p>
+    <p class="hidden sm:block">
       $<%= @price_lo %>
     </p>
     """
@@ -171,10 +173,10 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_price(%{price_format: :range} = assigns) do
     ~H"""
-    <p>
+    <p class="hidden sm:block">
       |
     </p>
-    <p>
+    <p class="hidden sm:block">
       $<%= @price_lo %> - $<%= @price_hi %>
     </p>
     """
@@ -182,10 +184,12 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_price(%{price_format: :variable} = assigns) do
     ~H"""
-    <p>
+    <p class="hidden sm:block">
       |
     </p>
-    $<%= @price_lo %>+
+    <p class="hidden sm:block">
+      $<%= @price_lo %>+
+    </p>
     """
   end
 
