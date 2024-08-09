@@ -133,6 +133,7 @@ defmodule MusicListings.Parsing.ParseHelpers do
   defp clean_month_string(month_string) do
     month_string
     |> String.downcase()
+    |> String.replace(".", "")
     |> String.trim()
   end
 
