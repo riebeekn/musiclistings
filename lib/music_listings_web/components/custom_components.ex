@@ -43,9 +43,7 @@ defmodule MusicListingsWeb.CustomComponents do
     ~H"""
     <li id={"event-#{@event.id}"} class="py-1">
       <div class="min-w-0">
-        <p class="text-lg leading-6 text-blue-900 font-semibold">
-          <%= @event.title %>
-        </p>
+        <.event_title title={@event.title} />
         <div class="mt-1 flex items-center gap-x-2 text-sm leading-5 text-blue-600 font-mono">
           <.event_venue venue={@event.venue} />
           <.event_price
@@ -59,6 +57,51 @@ defmodule MusicListingsWeb.CustomComponents do
         </div>
       </div>
     </li>
+    """
+  end
+
+  attr :event, MusicListingsSchema.Event, required: true
+
+  def venue_event_card(assigns) do
+    ~H"""
+    <li id={"event-#{@event.id}"} class="py-1">
+      <div class="min-w-0 text-sm leading-5 text-blue-600 font-mono">
+        <.event_title_small title={@event.title} />
+        <div class="mt-0 flex items-center gap-x-2 ">
+          <.event_date date={@event.date} />
+          <.event_price
+            price_format={@event.price_format}
+            price_lo={@event.price_lo}
+            price_hi={@event.price_hi}
+          />
+          <.event_time time={@event.time} />
+          <.event_details_url details_url={@event.details_url} />
+          <.event_ticket_url ticket_url={@event.ticket_url} />
+        </div>
+      </div>
+    </li>
+    """
+  end
+
+  defp event_title_small(assigns) do
+    ~H"""
+    <span class="font-semibold italic"><%= @title %></span>
+    """
+  end
+
+  defp event_date(assigns) do
+    ~H"""
+    <p>
+      <span class="font-semibold"><%= DateHelpers.format_date(@date) %></span>
+    </p>
+    """
+  end
+
+  defp event_title(assigns) do
+    ~H"""
+    <p class="text-lg leading-6 text-blue-900 font-semibold">
+      <%= @title %>
+    </p>
     """
   end
 
@@ -143,6 +186,38 @@ defmodule MusicListingsWeb.CustomComponents do
       |
     </p>
     $<%= @price_lo %>+
+    """
+  end
+
+  def venue_card(assigns) do
+    ~H"""
+    <div class="flex">
+      <div class="w-full">
+        <h2 class="text-3xl text-blue-600 font-bold">
+          <%= @venue.name %>
+        </h2>
+        <div class="ml-1 text-sm leading-5 text-blue-600 font-mono">
+          <span class="block"><%= @venue.street %></span>
+          <span class="block"><%= "#{@venue.city} #{@venue.province}" %></span>
+          <span class="block"><%= "#{@venue.country} #{@venue.postal_code}" %></span>
+        </div>
+      </div>
+
+      <div class="hidden sm:block relative w-full h-36">
+        <iframe
+          class="absolute top-0 left-0 w-full h-full"
+          src={@venue.google_map_url}
+          frameborder="0"
+          style="border:0;"
+          allowfullscreen=""
+          aria-hidden="false"
+          tabindex="0"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        >
+        </iframe>
+      </div>
+    </div>
     """
   end
 end

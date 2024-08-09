@@ -26,43 +26,46 @@ defmodule MusicListings.EventsTest do
       assert %PagedEvents{
                current_page: 1,
                total_pages: 1,
-               events: %{
-                 ~D[2024-08-01] => [
-                   %Event{
-                     venue_id: ^venue_1_id,
-                     title: "ev1",
-                     date: ~D[2024-08-01]
-                   },
-                   %Event{
-                     venue_id: ^venue_2_id,
-                     title: "ev2",
-                     date: ~D[2024-08-01]
-                   }
-                 ],
-                 ~D[2024-08-02] => [
-                   %Event{
-                     venue_id: ^venue_2_id,
-                     title: "ev3",
-                     date: ~D[2024-08-02]
-                   }
-                 ]
-               }
+               events: [
+                 {~D[2024-08-01],
+                  [
+                    %Event{
+                      title: "ev1",
+                      date: ~D[2024-08-01],
+                      venue_id: ^venue_1_id
+                    },
+                    %Event{
+                      title: "ev2",
+                      date: ~D[2024-08-01],
+                      venue_id: ^venue_2_id
+                    }
+                  ]},
+                 {~D[2024-08-02],
+                  [
+                    %Event{
+                      title: "ev3",
+                      date: ~D[2024-08-02],
+                      venue_id: ^venue_2_id
+                    }
+                  ]}
+               ]
              } = Events.list_events()
     end
 
     test "can filter by venue", %{venue_1_id: venue_1_id} do
-      assert %PagedEvents{
+      assert %MusicListings.Events.PagedEvents{
                current_page: 1,
                total_pages: 1,
-               events: %{
-                 ~D[2024-08-01] => [
-                   %Event{
-                     venue_id: ^venue_1_id,
-                     title: "ev1",
-                     date: ~D[2024-08-01]
-                   }
-                 ]
-               }
+               events: [
+                 {~D[2024-08-01],
+                  [
+                    %MusicListingsSchema.Event{
+                      title: "ev1",
+                      date: ~D[2024-08-01],
+                      venue_id: ^venue_1_id
+                    }
+                  ]}
+               ]
              } = Events.list_events(venue_id: venue_1_id)
     end
   end

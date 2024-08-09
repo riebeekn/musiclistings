@@ -11,6 +11,8 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
   def handle_params(params, _uri, socket) do
     case validate(:index, params) do
       {:ok, normalized_params} ->
+        venue = MusicListings.get_venue!(normalized_params.venue_id)
+
         paged_events =
           MusicListings.list_events(
             page: normalized_params["page"],
@@ -20,6 +22,7 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
         socket =
           socket
           |> assign(:events, paged_events.events)
+          |> assign(:venue, venue)
           |> assign(:current_page, paged_events.current_page)
           |> assign(:total_pages, paged_events.total_pages)
 
@@ -38,11 +41,14 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
   @impl true
   def render(assigns) do
     ~H"""
-    <div :for={{date, events} <- @events} class="mb-8 divide-y divide-solid divide-blue-600">
-      <.events_date_header date={date} />
-      <ul role="list" class="mt-2 mb-4">
+    <div class="mb-12">
+      <.venue_card venue={@venue} />
+    </div>
+
+    <div :for={{_date, events} <- @events} class="mb-0 divide-y divide-solid divide-blue-600">
+      <ul role="list">
         <%= for event <- events do %>
-          <.event_card event={event} />
+          <.venue_event_card event={event} />
         <% end %>
       </ul>
     </div>
