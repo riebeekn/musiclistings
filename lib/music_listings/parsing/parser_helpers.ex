@@ -42,6 +42,18 @@ defmodule MusicListings.Parsing.ParseHelpers do
     |> String.downcase()
   end
 
+  @spec clean_html(String.t()) :: String.t()
+  def clean_html(content) do
+    content
+    |> String.trim_leading("\"")
+    |> String.trim_trailing("\"")
+    |> String.replace("\\\\", "\\")
+    |> String.replace("\\\"", "\"")
+    |> String.replace("\\n", "\n")
+    |> String.replace("\\t", "\t")
+    |> String.replace("\\/", "/")
+  end
+
   # ===========================================================================
   # Id helpers
   # ===========================================================================

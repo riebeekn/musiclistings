@@ -21,7 +21,9 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParser do
 
   @impl true
   def events(body) do
-    Selectors.all_matches(body, css(".eventItem"))
+    body
+    |> ParseHelpers.clean_html()
+    |> Selectors.all_matches(css(".eventItem"))
   end
 
   @impl true
