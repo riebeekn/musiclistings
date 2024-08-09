@@ -11,7 +11,7 @@ defmodule MusicListings.Parsing.VenueParsers.QueenElizabthTheatreParser do
   @impl true
   def source_url,
     do:
-      "https://gateway.admitone.com/embed/live-events?venueId=5f2c38d9b49c22464830180a&order=asc"
+      "https://gateway.admitone.com/embed/live-events?venueId=60ad698c2a3c42001744a78f&order=asc"
 
   @impl true
   def example_data_file_location, do: "test/data/queen_elizabeth_theatre/index.json"
