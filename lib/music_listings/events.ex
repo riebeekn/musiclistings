@@ -29,8 +29,9 @@ defmodule MusicListings.Events do
       |> Repo.paginate(page: page, page_size: page_size)
 
     grouped_events =
-      pagination_result
+      pagination_result.entries
       |> Enum.group_by(& &1.date)
+      |> Enum.sort_by(fn {date, _events} -> date end, Date)
 
     %PagedEvents{
       events: grouped_events,
