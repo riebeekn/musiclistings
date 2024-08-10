@@ -32,7 +32,7 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParserTest do
     test "returns expected events", %{index_html: index_html} do
       events = ElMocamboParser.events(index_html)
 
-      assert 15 == Enum.count(events)
+      assert 10 == Enum.count(events)
     end
   end
 
@@ -50,7 +50,7 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParserTest do
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "post-8055" == ElMocamboParser.ignored_event_id(event)
+      assert "high_flyer_release_show_2024_08_23" == ElMocamboParser.ignored_event_id(event)
     end
   end
 
@@ -77,7 +77,7 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParserTest do
 
   describe "event_time/1" do
     test "returns the event start time", %{event: event} do
-      assert nil == ElMocamboParser.event_time(event)
+      assert ~T[20:00:00] == ElMocamboParser.event_time(event)
     end
   end
 
@@ -96,8 +96,7 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParserTest do
 
   describe "ticket_url/1" do
     test "returns the event ticket url", %{event: event} do
-      assert "https://www.ticketweb.ca/event/high-flyer-release-show-the-starlight-room-at-the-tickets/13766233?pl=elmocambo" ==
-               ElMocamboParser.ticket_url(event)
+      assert nil == ElMocamboParser.ticket_url(event)
     end
   end
 
