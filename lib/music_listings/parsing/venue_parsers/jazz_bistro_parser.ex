@@ -74,8 +74,10 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParser do
   end
 
   @impl true
-  def event_time(_event) do
-    nil
+  def event_time(event) do
+    event["startDate"]
+    |> NaiveDateTime.from_iso8601!()
+    |> NaiveDateTime.to_time()
   end
 
   @impl true

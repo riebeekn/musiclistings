@@ -80,7 +80,7 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParserTest do
 
   describe "event_time/1" do
     test "returns the event start time", %{event: event} do
-      assert nil == JazzBistroParser.event_time(event)
+      assert ~T[17:00:00] == JazzBistroParser.event_time(event)
     end
   end
 
