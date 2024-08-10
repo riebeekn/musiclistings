@@ -11,7 +11,7 @@ defmodule MusicListings.Repo.Migrations.CreateVenues do
       add :province, :string, null: false
       add :country, :string, null: false
       add :postal_code, :string, null: false
-      add :google_map_url, :text, null: false
+      add :google_map_url, :text
     end
   end
 end

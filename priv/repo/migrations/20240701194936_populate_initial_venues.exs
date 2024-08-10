@@ -43,8 +43,8 @@ defmodule MusicListings.Repo.Migrations.PopulateInitialVenues do
     """
 
     execute """
-      INSERT INTO venues(name, parser_module_name, pull_events, street, city, province, country, postal_code, google_map_url)
-      VALUES('Lee''s Palace', 'LeesPalaceParser', true, '529 Bloor St W', 'Toronto', 'Ontario', 'Cananda', 'M5S 1Y5', 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2886.050511112976!2d-79.41565578748016!3d43.66791930589722!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b3493e5c2a6cb%3A0x9da808d57162072!2sLee&#39;s%20Palace!5e0!3m2!1sen!2sca!4v1723164374263!5m2!1sen!2sca')
+      INSERT INTO venues(name, parser_module_name, pull_events, street, city, province, country, postal_code)
+      VALUES('Lee''s Palace', 'LeesPalaceParser', true, '529 Bloor St W', 'Toronto', 'Ontario', 'Cananda', 'M5S 1Y5')
     """
 
     execute """
