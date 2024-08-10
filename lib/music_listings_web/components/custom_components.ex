@@ -160,6 +160,17 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_price(%{price_format: :unknown} = assigns), do: ~H""
 
+  defp event_price(%{price_format: :free} = assigns) do
+    ~H"""
+    <p class="hidden sm:block">
+      |
+    </p>
+    <p class="hidden sm:block">
+      $FREE
+    </p>
+    """
+  end
+
   defp event_price(%{price_format: :fixed} = assigns) do
     ~H"""
     <p class="hidden sm:block">
