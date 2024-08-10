@@ -54,8 +54,7 @@ defmodule MusicListings.Parsing.VenueParsers.RexParser do
   def event_date(event) do
     event["startDate"]
     |> DateTime.from_unix!(:millisecond)
-    |> DateHelpers.to_eastern_datetime()
-    |> DateTime.to_date()
+    |> DateHelpers.to_eastern_date()
   end
 
   @impl true

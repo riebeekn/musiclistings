@@ -46,13 +46,13 @@ defmodule MusicListings.Parsing.VenueParsers.MonarchTavernParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "velvet_beach_w_kicksie_nutrients_2024_08_09" == MonarchTavernParser.event_id(event)
+      assert "velvet_beach_w_kicksie_nutrients_2024_08_08" == MonarchTavernParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "velvet_beach_w_kicksie_nutrients_2024_08_09" ==
+      assert "velvet_beach_w_kicksie_nutrients_2024_08_08" ==
                MonarchTavernParser.ignored_event_id(event)
     end
   end
@@ -75,13 +75,13 @@ defmodule MusicListings.Parsing.VenueParsers.MonarchTavernParserTest do
 
   describe "event_date/1" do
     test "returns the event date", %{event: event} do
-      assert ~D[2024-08-09] == MonarchTavernParser.event_date(event)
+      assert ~D[2024-08-08] == MonarchTavernParser.event_date(event)
     end
   end
 
   describe "event_time/1" do
     test "returns the event start time", %{event: event} do
-      assert nil == MonarchTavernParser.event_time(event)
+      assert ~T[20:00:00.000] == MonarchTavernParser.event_time(event)
     end
   end
 

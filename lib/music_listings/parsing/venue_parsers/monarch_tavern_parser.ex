@@ -61,12 +61,15 @@ defmodule MusicListings.Parsing.VenueParsers.MonarchTavernParser do
   def event_date(event) do
     event["when"]["start"]["millis"]
     |> DateTime.from_unix!(:millisecond)
-    |> DateTime.to_date()
+    |> DateHelpers.to_eastern_date()
   end
 
   @impl true
-  def event_time(_event) do
-    nil
+  def event_time(event) do
+    event["when"]["start"]["millis"]
+    |> DateTime.from_unix!(:millisecond)
+    |> DateHelpers.to_eastern_datetime()
+    |> DateTime.to_time()
   end
 
   @impl true
