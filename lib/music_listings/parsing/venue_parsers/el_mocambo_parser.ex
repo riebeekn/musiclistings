@@ -10,6 +10,7 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.Selectors
+  alias MusicListingsUtilities.DateHelpers
 
   @impl true
   def source_url, do: "https://elmocambo.com/events-new"
@@ -20,10 +21,7 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
   @impl true
   def events(body) do
     body
-    |> Selectors.all_matches(css(".stratum-advanced-posts__post"))
-    |> Enum.filter(fn article ->
-      Selectors.match_one(article, css("span.stratum-advanced-posts__post-date")) != nil
-    end)
+    |> Selectors.all_matches(css(".bdt-event-item"))
   end
 
   @impl true
@@ -41,12 +39,12 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
 
   @impl true
   def ignored_event_id(event) do
-    Selectors.attr(event, "id")
+    event_id(event)
   end
 
   @impl true
   def event_title(event) do
-    Selectors.text(event, css(".stratum-advanced-posts__post-title a"))
+    Selectors.text(event, css(".bdt-event-title-wrap a"))
   end
 
   @impl true
@@ -57,17 +55,29 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
 
   @impl true
   def event_date(event) do
-    [month_string, day_string, year_string] =
-      event
-      |> Selectors.text(css(".stratum-advanced-posts__post-date"))
-      |> String.split()
+    %{"month" => month_string, "day" => day_string, "time" => _time_string} =
+      parse_out_full_date_time_string(event)
 
-    ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
+    ParseHelpers.build_date_from_month_day_strings(month_string, day_string, DateHelpers.today())
+  end
+
+  defp parse_out_full_date_time_string(event) do
+    full_date_and_time_string =
+      event
+      |> Selectors.match_one(css(".bdt-event-date a"))
+      |> Selectors.attr("title")
+
+    regex = ~r/Start Date:(?<month>\w+)\s(?<day>\d{1,2})\s@\s(?<time>[\d:]+\s[ap]m)/
+
+    Regex.named_captures(regex, full_date_and_time_string)
   end
 
   @impl true
-  def event_time(_event) do
-    nil
+  def event_time(event) do
+    %{"month" => _month_string, "day" => _day_string, "time" => time_string} =
+      parse_out_full_date_time_string(event)
+
+    ParseHelpers.time_string_to_time(time_string)
   end
 
   @impl true
@@ -81,12 +91,12 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
   end
 
   @impl true
-  def ticket_url(event) do
-    Selectors.url(event, css(".stratum-advanced-posts__read-more a"))
+  def ticket_url(_event) do
+    nil
   end
 
   @impl true
   def details_url(event) do
-    Selectors.url(event, css(".stratum-advanced-posts__post-link"))
+    Selectors.url(event, css(".bdt-event-title-wrap a"))
   end
 end
