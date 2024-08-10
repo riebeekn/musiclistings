@@ -74,13 +74,13 @@ defmodule MusicListings.Parsing.VenueParsers.RexParserTest do
 
   describe "event_date/1" do
     test "returns the event date", %{event: event} do
-      assert ~D[2024-08-01] == RexParser.event_date(event)
+      assert ~D[2024-07-31] == RexParser.event_date(event)
     end
   end
 
   describe "event_time/1" do
     test "returns the event start time", %{event: event} do
-      assert nil == RexParser.event_time(event)
+      assert ~T[20:30:00.543] == RexParser.event_time(event)
     end
   end
 
