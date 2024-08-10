@@ -58,6 +58,8 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParser do
   def event_title(event) do
     event["name"]
     |> String.replace("&#8217;", "'")
+    |> String.replace("&#8220;", "\"")
+    |> String.replace("&#8221;", "\"")
   end
 
   @impl true
