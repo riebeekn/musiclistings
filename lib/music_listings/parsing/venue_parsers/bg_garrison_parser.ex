@@ -11,7 +11,9 @@ defmodule MusicListings.Parsing.VenueParsers.BgGarrisonParser do
   alias MusicListingsUtilities.DateHelpers
 
   def events(body) do
-    Selectors.all_matches(body, css("#calendar_wrap"))
+    body
+    |> Selectors.all_matches(css("#calendar_wrap"))
+    |> Enum.reject(&(event_title(&1) == "4am LAST CALL"))
   end
 
   def next_page_url(_body) do
