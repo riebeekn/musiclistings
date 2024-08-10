@@ -24,7 +24,7 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParserTest do
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://www.scotiabankarena.com/events/events_ajax/9?category=1&venue=0&team=0&exclude=&per_page=63&came_from_page=event-list-page" ==
+      assert "https://www.scotiabankarena.com/events/events_ajax/0?category=1&venue=0&team=0&exclude=&per_page=63&came_from_page=event-list-page" ==
                ScotiabankParser.source_url()
     end
   end
