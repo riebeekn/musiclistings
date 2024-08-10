@@ -3,7 +3,7 @@ defmodule MusicListings.Parsing.Price do
   Struct and functions to represent / parse an event prices
   """
   @type t :: %__MODULE__{
-          format: :fixed | :range | :unknown | :variable,
+          format: :fixed | :free | :range | :unknown | :variable,
           lo: Decimal.t() | nil,
           hi: Decimal.t() | nil
         }
@@ -13,25 +13,33 @@ defmodule MusicListings.Parsing.Price do
 
   def new(nil), do: unknown()
 
+  def new(""), do: unknown()
+
   def new(price_string) do
     price_string = clean_price_string(price_string)
 
     variable_price? = String.contains?(price_string, "+")
 
-    [lo_string, hi_string] =
-      price_string
-      |> String.replace("+", "")
-      |> String.split("-")
-      |> case do
-        [lo, hi] -> [lo, hi]
-        [single_price] -> [single_price, single_price]
-      end
+    free? = String.contains?(price_string, "free")
 
-    %__MODULE__{
-      lo: lo_string |> String.trim() |> String.replace("$", "") |> Decimal.new(),
-      hi: hi_string |> String.trim() |> String.replace("$", "") |> Decimal.new(),
-      format: price_format(lo_string, hi_string, variable_price?)
-    }
+    if free? do
+      %__MODULE__{format: :free, lo: nil, hi: nil}
+    else
+      [lo_string, hi_string] =
+        price_string
+        |> String.replace("+", "")
+        |> String.split("-")
+        |> case do
+          [lo, hi] -> [lo, hi]
+          [single_price] -> [single_price, single_price]
+        end
+
+      %__MODULE__{
+        lo: lo_string |> String.trim() |> String.replace("$", "") |> Decimal.new(),
+        hi: hi_string |> String.trim() |> String.replace("$", "") |> Decimal.new(),
+        format: price_format(lo_string, hi_string, variable_price?)
+      }
+    end
   end
 
   defp clean_price_string(price_string) do
