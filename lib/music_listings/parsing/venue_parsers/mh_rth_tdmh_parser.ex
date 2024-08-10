@@ -14,7 +14,7 @@ defmodule MusicListings.Parsing.VenueParsers.MhRthTdmhParser do
     body = ParseHelpers.maybe_decode!(body)
 
     body["result"]["GetPerformancesEx4Result"]["Performance"]
-    |> Enum.filter(&(&1["facility_no"] == facility_no))
+    |> Enum.filter(&(&1["cmsFacilityData"]["FacilityID"] == facility_no))
   end
 
   def next_page_url(_body), do: nil

@@ -31,7 +31,7 @@ defmodule MusicListings.Parsing.VenueParsers.MasseyHallParserTest do
     test "returns expected events", %{index_html: index_html} do
       events = MasseyHallParser.events(index_html)
 
-      assert 31 = Enum.count(events)
+      assert 63 = Enum.count(events)
     end
   end
 

@@ -6,7 +6,7 @@ defmodule MusicListings.Parsing.VenueParsers.MasseyHallParser do
 
   alias MusicListings.Parsing.VenueParsers.MhRthTdmhParser
 
-  @massey_hall_facility_no "314"
+  @massey_hall_facility_no 12
 
   @impl true
   defdelegate source_url, to: MhRthTdmhParser
