@@ -16,7 +16,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
 
     new()
     |> to(Application.get_env(:music_listings, :admin_email))
-    |> from({"Toronto Music Listings", "no-reply@example.com"})
+    |> from({"Toronto Music Listings", "no-reply@tml.com"})
     |> subject("Latest Crawl Results")
     |> body(mjml(%{crawl_summary: crawl_summary}))
   end
