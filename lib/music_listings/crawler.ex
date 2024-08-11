@@ -48,7 +48,9 @@ defmodule MusicListings.Crawler do
     crawl_summary = init_crawl_summary()
 
     venues
-    |> Enum.flat_map(fn venue ->
+    |> Stream.flat_map(fn venue ->
+      Logger.info("Processing events for #{venue.name}")
+
       parser =
         String.to_existing_atom(
           "Elixir.MusicListings.Parsing.VenueParsers.#{venue.parser_module_name}"
