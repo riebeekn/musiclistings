@@ -19,7 +19,7 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParser do
 
   @impl true
   def events(body) do
-    Selectors.all_matches(body, css(".tgh-event-item-container"))
+    Selectors.all_matches(body, css(".tgh-future"))
   end
 
   @impl true

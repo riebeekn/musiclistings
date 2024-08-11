@@ -32,7 +32,7 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParserTest do
     test "returns expected events", %{index_html: index_html} do
       events = GreatHallParser.events(index_html)
 
-      assert 735 = Enum.count(events)
+      assert 31 = Enum.count(events)
     end
   end
 
