@@ -7,7 +7,7 @@ defmodule MusicListings.Crawler.CrawlStats do
 
   defstruct [:new, :updated, :duplicate, :ignored, :parse_errors]
 
-  @spec new(list(Payload)) :: __MODULE__
+  @spec new(list(Payload) | any()) :: __MODULE__
   def new(payloads) do
     Enum.reduce(
       payloads,
