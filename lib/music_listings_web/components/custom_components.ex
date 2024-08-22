@@ -158,11 +158,11 @@ defmodule MusicListingsWeb.CustomComponents do
   def venue_card(assigns) do
     ~H"""
     <div class="flex text-zinc-200">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold">
+      <div class="pr-12">
+        <h2 class="text-4xl font-bold">
           <%= @venue.name %>
         </h2>
-        <div class="ml-1 text-sm leading-5">
+        <div class="ml-1 mt-2 text-md leading-5">
           <span class="block"><%= @venue.street %></span>
           <span class="block"><%= "#{@venue.city} #{@venue.province}" %></span>
           <span class="block"><%= "#{@venue.country} #{@venue.postal_code}" %></span>
@@ -240,18 +240,18 @@ defmodule MusicListingsWeb.CustomComponents do
 
   def venue_events_table(assigns) do
     ~H"""
-    <table class="text-left table-fixed">
+    <table class="table-fixed min-w-full">
       <tbody class="divide-y divide-zinc-800">
         <%= for event <- @events do %>
           <tr id={"event-#{event.id}"}>
-            <td class="align-top py-2 w-1/5 text-white">
+            <td class="align-top py-2 w-2/8">
               <.event_date date={event.date} />
               <.event_time time={event.time} />
             </td>
-            <td class="py-2 pl-4 w-3/5">
+            <td class="align-top py-2 pl-4 w-5/8">
               <.event_title title={event.title} />
 
-              <div class="mt-1 text-xs leading-5 text-gray-500 flex gap-x-2">
+              <div class="mt-1 text-xs leading-5 flex gap-x-2">
                 <.event_ticket_url
                   ticket_url={event.ticket_url}
                   price_format={event.price_format}
@@ -261,7 +261,7 @@ defmodule MusicListingsWeb.CustomComponents do
                 <.event_details_url details_url={event.details_url} />
               </div>
             </td>
-            <td class="w-1/5">
+            <td class="align-top py-2 w-1/8 text-right">
               <.event_age_restriction age_restriction={event.age_restriction} />
             </td>
           </tr>
@@ -273,7 +273,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_date(assigns) do
     ~H"""
-    <div class="text-sm font-medium leading-6">
+    <div class="text-sm font-medium leading-6 text-white">
       <span><%= DateHelpers.format_date(@date) %></span>
     </div>
     """
