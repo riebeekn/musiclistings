@@ -25,7 +25,7 @@ defmodule MusicListingsWeb.CustomComponents do
   def page_header(assigns) do
     ~H"""
     <div class="min-w-0 flex-1">
-      <h1 class="text-3xl font-bold leading-7 text-zinc-200 sm:truncate sm:text-4xl sm:tracking-tight">
+      <h1 class="text-3xl font-bold leading-7 text-zinc-400 sm:truncate sm:text-4xl sm:tracking-tight">
         <%= @header %>
       </h1>
     </div>
@@ -104,7 +104,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   def events_date_header(assigns) do
     ~H"""
-    <h2 class="text-2xl font-semibold leading-5 text-zinc-400 sm:truncate sm:text-3xl sm:tracking-tight">
+    <h2 class="text-left text-3xl font-semibold leading-5 text-zinc-400 sm:text-4xl sm:tracking-tight">
       <time datetime={@date}><%= DateHelpers.format_date(@date) %></time>
     </h2>
     """
@@ -198,31 +198,38 @@ defmodule MusicListingsWeb.CustomComponents do
 
   def events_table(assigns) do
     ~H"""
-    <table class="text-left table-fixed">
-      <tbody class="divide-y divide-zinc-800">
-        <%= for event <- @events do %>
-          <tr id={"event-#{event.id}"}>
-            <td class="relative py-4 pr-4 w-4/6">
-              <.event_title title={event.title} />
-              <div class="mt-1 font-medium text-sm text-white flex gap-x-2">
-                <.event_ticket_url
-                  ticket_url={event.ticket_url}
-                  price_format={event.price_format}
-                  price_lo={event.price_lo}
-                  price_hi={event.price_hi}
-                />
-                <.event_details_url details_url={event.details_url} />
-              </div>
-            </td>
-
-            <td class="py-4 align-top w-3/6">
-              <.event_venue venue={event.venue} />
-              <.event_time time={event.time} />
-            </td>
-            <td class="py-3 align-top w-1/8 text-right md:text-left">
-              <.event_age_restriction age_restriction={event.age_restriction} />
-            </td>
+    <table class="table-fixed min-w-full">
+      <tbody class="divide-y divide-zinc-600">
+        <%= for {date, events} <- @events do %>
+          <tr>
+            <th scope="colgroup" colspan="3" class="py-8 sm:py-6">
+              <.events_date_header date={date} />
+            </th>
           </tr>
+          <%= for event <- events do %>
+            <tr id={"event-#{event.id}"}>
+              <td class="py-4 align-top w-4/8">
+                <.event_title title={event.title} />
+                <div class="mt-1 text-sm flex gap-x-2">
+                  <.event_ticket_url
+                    ticket_url={event.ticket_url}
+                    price_format={event.price_format}
+                    price_lo={event.price_lo}
+                    price_hi={event.price_hi}
+                  />
+                  <.event_details_url details_url={event.details_url} />
+                </div>
+              </td>
+
+              <td class="py-4 align-top w-3/8 pl-1">
+                <.event_venue venue={event.venue} />
+                <.event_time time={event.time} />
+              </td>
+              <td class="py-3 align-top w-1/8 text-right">
+                <.event_age_restriction age_restriction={event.age_restriction} />
+              </td>
+            </tr>
+          <% end %>
         <% end %>
       </tbody>
     </table>
@@ -241,7 +248,7 @@ defmodule MusicListingsWeb.CustomComponents do
   def venue_events_table(assigns) do
     ~H"""
     <table class="table-fixed min-w-full">
-      <tbody class="divide-y divide-zinc-800">
+      <tbody class="divide-y divide-zinc-600">
         <%= for event <- @events do %>
           <tr id={"event-#{event.id}"}>
             <td class="align-top py-2 w-2/8">
@@ -336,14 +343,12 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_venue(assigns) do
     ~H"""
-    <div class="flex">
-      <a
-        href={~p"/events/venue/#{@venue.id}"}
-        class="text-md font-medium leading-4 text-emerald-400 hover:text-emerald-500"
-      >
-        <%= @venue.name %>
-      </a>
-    </div>
+    <a
+      href={~p"/events/venue/#{@venue.id}"}
+      class="text-md font-medium leading-4 text-emerald-400 hover:text-emerald-500"
+    >
+      <%= @venue.name %>
+    </a>
     """
   end
 

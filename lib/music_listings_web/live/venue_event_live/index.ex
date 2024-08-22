@@ -48,9 +48,9 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
       <.venue_card venue={@venue} />
     </div>
 
-    <div class="my-4 border-b border-zinc-700" />
-    <.page_header header="Upcoming Events" />
-    <div class="mt-4 mb-2 border-b border-zinc-700" />
+    <div class="mb-6">
+      <.page_header header="Upcoming Events" />
+    </div>
 
     <.venue_events_table events={@events} />
 

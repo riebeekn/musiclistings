@@ -33,14 +33,11 @@ defmodule MusicListingsWeb.EventLive.Index do
   @impl true
   def render(assigns) do
     ~H"""
-    <div :for={{date, events} <- @events} class="mb-8">
-      <.events_date_header date={date} />
-      <div class="mt-2">
-        <.events_table events={events} />
-      </div>
-    </div>
+    <.events_table events={@events} />
 
-    <.pager current_page={@current_page} total_pages={@total_pages} path={~p"/events"} />
+    <div class="mt-6 pt-6 border-t border-zinc-700">
+      <.pager current_page={@current_page} total_pages={@total_pages} path={~p"/events"} />
+    </div>
     """
   end
 end

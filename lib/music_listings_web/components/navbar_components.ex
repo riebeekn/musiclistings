@@ -161,7 +161,7 @@ defmodule MusicListingsWeb.NavbarComponents do
 
   defp main_menu_link(assigns) do
     ~H"""
-    <a href={@href} class="text-zinc-400 px-3 py-2 rounded-md text-md font-medium hover:text-white">
+    <a href={@href} class="text-zinc-400 px-3 py-2 rounded-md text-xl font-semibold hover:text-white">
       <%= @link_text %>
     </a>
     """
