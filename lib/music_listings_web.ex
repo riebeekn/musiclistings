@@ -42,7 +42,8 @@ defmodule MusicListingsWeb do
         formats: [:html, :json],
         layouts: [html: MusicListingsWeb.Layouts]
 
-      import MusicListingsWeb.Gettext
+      use Gettext, backend: MusicListingsWeb.Gettext
+
       import Plug.Conn
 
       unquote(verified_routes())
@@ -81,11 +82,11 @@ defmodule MusicListingsWeb do
 
   defp html_helpers do
     quote do
+      use Gettext, backend: MusicListingsWeb.Gettext
       # Core UI components and translation
       import MusicListingsWeb.CoreComponents
       # Custom UI components
       import MusicListingsWeb.CustomComponents
-      import MusicListingsWeb.Gettext
       # HTML escaping functionality
       import Phoenix.HTML
 
