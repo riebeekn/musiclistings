@@ -11,7 +11,7 @@ defmodule MusicListingsWeb.EventLive.Index do
   def handle_params(params, _uri, socket) do
     case validate(:index, params) do
       {:ok, normalized_params} ->
-        paged_events = MusicListings.list_events(page: normalized_params["page"])
+        paged_events = MusicListings.list_events(page: normalized_params[:page])
 
         socket =
           socket
@@ -33,21 +33,14 @@ defmodule MusicListingsWeb.EventLive.Index do
   @impl true
   def render(assigns) do
     ~H"""
-    <div :for={{date, events} <- @events} class="mb-8 divide-y divide-solid divide-blue-600">
+    <div :for={{date, events} <- @events} class="mb-8">
       <.events_date_header date={date} />
-      <ul role="list" class="mt-2 mb-4">
-        <%= for event <- events do %>
-          <.event_card event={event} />
-        <% end %>
-      </ul>
+      <div class="mt-2">
+        <.events_table events={events} />
+      </div>
     </div>
 
-    <%= if @current_page > 1 do %>
-      <.button_patch_link label="Prev page" url={~p"/events?#{[page: @current_page - 1]}"} />
-    <% end %>
-    <%= if @current_page < @total_pages do %>
-      <.button_patch_link label="Next page" url={~p"/events?#{[page: @current_page + 1]}"} />
-    <% end %>
+    <.pager current_page={@current_page} total_pages={@total_pages} path={~p"/events"} />
     """
   end
 end
