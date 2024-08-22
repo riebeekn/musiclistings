@@ -16,7 +16,7 @@ defmodule MusicListingsWeb.CoreComponents do
   """
   use Phoenix.Component
 
-  import MusicListingsWeb.Gettext
+  use Gettext, backend: MusicListingsWeb.Gettext
 
   alias Phoenix.LiveView.JS
 
