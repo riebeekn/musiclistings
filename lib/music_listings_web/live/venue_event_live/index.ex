@@ -15,13 +15,16 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
 
         paged_events =
           MusicListings.list_events(
-            page: normalized_params["page"],
+            page: normalized_params[:page],
             venue_id: normalized_params.venue_id
           )
 
         socket =
           socket
-          |> assign(:events, paged_events.events)
+          |> assign(
+            :events,
+            paged_events.events |> Enum.flat_map(fn {_date, events} -> events end)
+          )
           |> assign(:venue, venue)
           |> assign(:current_page, paged_events.current_page)
           |> assign(:total_pages, paged_events.total_pages)
@@ -45,20 +48,23 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
       <.venue_card venue={@venue} />
     </div>
 
-    <div :for={{_date, events} <- @events} class="mb-0 divide-y divide-solid divide-blue-600">
-      <ul role="list">
-        <%= for event <- events do %>
-          <.venue_event_card event={event} />
-        <% end %>
-      </ul>
+    <.page_header header="Upcoming Events" />
+
+    <div class="mt-6 overflow-hidden border-t border-zinc-700">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
+          <.venue_events_table events={@events} />
+        </div>
+      </div>
     </div>
 
-    <%= if @current_page > 1 do %>
-      <.button_patch_link label="Prev page" url={~p"/events?#{[page: @current_page - 1]}"} />
-    <% end %>
-    <%= if @current_page < @total_pages do %>
-      <.button_patch_link label="Next page" url={~p"/events?#{[page: @current_page + 1]}"} />
-    <% end %>
+    <div class="my-8 ml-8">
+      <.pager
+        current_page={@current_page}
+        total_pages={@total_pages}
+        path={~p"/events/venue/#{@venue.id}"}
+      />
+    </div>
     """
   end
 end
