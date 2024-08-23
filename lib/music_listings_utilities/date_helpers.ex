@@ -62,7 +62,7 @@ defmodule MusicListingsUtilities.DateHelpers do
   end
 
   def format_datetime(%DateTime{} = datetime) do
-    Calendar.strftime(datetime, "%a, %b %d %Y %I:%M %p")
+    Calendar.strftime(datetime, "%b %d %Y")
   end
 
   def format_date(%Date{} = date) do

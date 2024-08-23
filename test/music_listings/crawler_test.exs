@@ -71,7 +71,7 @@ defmodule MusicListings.CrawlerTest do
         |> Ecto.Changeset.change(%{updated_at: ~U[2021-08-07 19:11:40.000000Z]})
         |> Repo.update!()
 
-      assert "Sun, Aug 07 2022 03:11 PM" == Crawler.data_last_updated_on()
+      assert "Aug 07 2022" == Crawler.data_last_updated_on()
     end
   end
 end

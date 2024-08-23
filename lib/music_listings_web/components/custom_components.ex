@@ -210,7 +210,7 @@ defmodule MusicListingsWeb.CustomComponents do
             <tr id={"event-#{event.id}"}>
               <td class="py-4 align-top w-4/8">
                 <.event_title title={event.title} />
-                <div class="mt-1 text-sm flex gap-x-2">
+                <div class="mt-1 text-sm sm:flex sm:gap-x-2">
                   <.event_ticket_url
                     ticket_url={event.ticket_url}
                     price_format={event.price_format}
@@ -280,7 +280,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_date(assigns) do
     ~H"""
-    <div class="text-sm font-medium leading-6 text-white">
+    <div class="text-sm font-medium leading-6 text-emerald-400">
       <span><%= DateHelpers.format_date(@date) %></span>
     </div>
     """
@@ -298,12 +298,19 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_ticket_url(assigns) do
     ~H"""
-    <a href={@ticket_url} class="flex items-center text-emerald-400 hover:text-emerald-500">
-      <MusicListingsWeb.CoreComponents.icon name="hero-ticket-solid" class="size-4" />
-      <span class="ml-1">
-        Tickets
+    <a href={@ticket_url} class="sm:flex sm:items-center text-emerald-400 hover:text-emerald-500">
+      <div class="block sm:hidden sm:ml-1">
         <.event_price price_format={@price_format} price_lo={@price_lo} price_hi={@price_hi} />
-      </span>
+      </div>
+      <div class="flex items-center">
+        <MusicListingsWeb.CoreComponents.icon name="hero-ticket-solid" class="size-4" />
+        <div class="ml-1">
+          Tickets
+        </div>
+      </div>
+      <div class="hidden sm:block sm:ml-1">
+        <.event_price price_format={@price_format} price_lo={@price_lo} price_hi={@price_hi} />
+      </div>
     </a>
     """
   end
