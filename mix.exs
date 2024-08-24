@@ -77,6 +77,7 @@ defmodule MusicListings.MixProject do
       {:scrivener_ecto, "~> 2.0"},
       {:redirect, "~> 0.4.0"},
       {:goal, "~> 1.0"},
+      {:error_tracker, "~> 0.2"},
       # build / dev / test related deps
       {:swoosh_gallery, "~> 0.2.0"},
       {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
