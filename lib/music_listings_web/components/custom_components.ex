@@ -298,7 +298,11 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_ticket_url(assigns) do
     ~H"""
-    <a href={@ticket_url} class="sm:flex sm:items-center text-emerald-400 hover:text-emerald-500">
+    <a
+      href={@ticket_url}
+      class="sm:flex sm:items-center text-emerald-400 hover:text-emerald-500"
+      target="_blank"
+    >
       <div class="block sm:hidden sm:ml-1">
         <.event_price price_format={@price_format} price_lo={@price_lo} price_hi={@price_hi} />
       </div>
@@ -319,7 +323,11 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_details_url(assigns) do
     ~H"""
-    <a href={@details_url} class="flex items-center text-emerald-400 hover:text-emerald-500">
+    <a
+      href={@details_url}
+      class="flex items-center text-emerald-400 hover:text-emerald-500"
+      target="_blank"
+    >
       <MusicListingsWeb.CoreComponents.icon name="hero-information-circle-solid" class="size-4" />
       <span class="ml-1">Details</span>
     </a>
