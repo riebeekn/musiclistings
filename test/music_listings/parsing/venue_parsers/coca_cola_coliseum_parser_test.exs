@@ -32,7 +32,7 @@ defmodule MusicListings.Parsing.VenueParsers.CocaColaColiseumParserTest do
     test "returns expected events", %{index_html: index_html} do
       events = CocaColaColiseumParser.events(index_html)
 
-      assert 12 = Enum.count(events)
+      assert 9 = Enum.count(events)
     end
   end
 
@@ -44,14 +44,14 @@ defmodule MusicListings.Parsing.VenueParsers.CocaColaColiseumParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "two_door_cinema_club_with_flipturn_2024_07_31" ==
+      assert "two_door_cinema_club_2024_07_31" ==
                CocaColaColiseumParser.event_id(event)
     end
   end
 
   describe "event_title/1" do
     test "returns event title", %{event: event} do
-      assert "Two Door Cinema Club with flipturn" == CocaColaColiseumParser.event_title(event)
+      assert "Two Door Cinema Club" == CocaColaColiseumParser.event_title(event)
     end
   end
 

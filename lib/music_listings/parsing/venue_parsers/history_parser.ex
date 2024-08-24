@@ -4,12 +4,7 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
-  import Meeseeks.CSS
-
-  alias MusicListings.Parsing.ParseHelpers
-  alias MusicListings.Parsing.Performers
-  alias MusicListings.Parsing.Price
-  alias MusicListings.Parsing.Selectors
+  alias MusicListings.Parsing.VenueParsers.CarbonhouseParser
 
   @impl true
   def source_url, do: "https://www.historytoronto.com/events/events_ajax/0?per_page=60"
@@ -18,77 +13,38 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParser do
   def example_data_file_location, do: "test/data/history/index.html"
 
   @impl true
-  def events(body) do
-    body
-    |> ParseHelpers.clean_html()
-    |> Selectors.all_matches(css(".eventItem"))
-  end
+  defdelegate events(body), to: CarbonhouseParser
 
   @impl true
-  def next_page_url(_body) do
-    # no next page
-    nil
-  end
+  defdelegate next_page_url(body), to: CarbonhouseParser
 
   @impl true
-  def event_id(event) do
-    title = event_title(event)
-    date = event_date(event)
-
-    ParseHelpers.build_id_from_title_and_date(title, date)
-  end
+  defdelegate event_id(event), to: CarbonhouseParser
 
   @impl true
-  def ignored_event_id(event) do
-    event_id(event)
-  end
+  defdelegate ignored_event_id(event), to: CarbonhouseParser
 
   @impl true
-  def event_title(event) do
-    Selectors.text(event, css(".title"))
-  end
+  defdelegate event_title(event), to: CarbonhouseParser
 
   @impl true
-  def performers(event) do
-    event
-    |> Selectors.all_matches(css(".title"))
-    |> Selectors.text()
-    |> Performers.new()
-  end
+  defdelegate performers(event), to: CarbonhouseParser
 
   @impl true
-  def event_date(event) do
-    day_string = Selectors.text(event, css(".m-date__day"))
-    month_string = Selectors.text(event, css(".m-date__month"))
-    year_string = Selectors.text(event, css(".m-date__year"))
-
-    ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
-  end
+  defdelegate event_date(event), to: CarbonhouseParser
 
   @impl true
-  def event_time(event) do
-    event
-    |> Selectors.text(css(".start"))
-    |> ParseHelpers.time_string_to_time()
-  end
+  defdelegate event_time(event), to: CarbonhouseParser
 
   @impl true
-  def price(_event) do
-    Price.unknown()
-  end
+  defdelegate price(event), to: CarbonhouseParser
 
   @impl true
-  def age_restriction(_event) do
-    :unknown
-  end
+  defdelegate age_restriction(event), to: CarbonhouseParser
 
   @impl true
-  def ticket_url(event) do
-    Selectors.url(event, css(".tickets"))
-  end
+  defdelegate ticket_url(event), to: CarbonhouseParser
 
   @impl true
-  def details_url(event) do
-    Selectors.url(event, css(".more"))
-  end
+  defdelegate details_url(event), to: CarbonhouseParser
 end
