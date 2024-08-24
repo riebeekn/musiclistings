@@ -34,6 +34,9 @@ defmodule MusicListings.Parsing.VenueParsers.CocaColaColiseumParser do
   defdelegate event_date(event), to: CarbonhouseParser
 
   @impl true
+  defdelegate event_end_date(event), to: CarbonhouseParser
+
+  @impl true
   defdelegate event_time(event), to: CarbonhouseParser
 
   @impl true

@@ -34,6 +34,9 @@ defmodule MusicListings.Parsing.VenueParsers.GarrisonParser do
   defdelegate event_date(event), to: BgGarrisonParser
 
   @impl true
+  defdelegate event_end_date(event), to: BgGarrisonParser
+
+  @impl true
   defdelegate event_time(event), to: BgGarrisonParser
 
   @impl true

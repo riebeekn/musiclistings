@@ -77,6 +77,12 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParserTest do
     end
   end
 
+  describe "event_end_date/1" do
+    test "returns the final date of the event if a date range", %{event: event} do
+      assert nil == GreatHallParser.event_end_date(event)
+    end
+  end
+
   describe "event_time/1" do
     test "returns the event start time", %{event: event} do
       assert ~T[19:00:00] == GreatHallParser.event_time(event)

@@ -64,6 +64,11 @@ defmodule MusicListings.Parsing.VenueParsers.ConcertHallParser do
   end
 
   @impl true
+  def event_end_date(_event) do
+    nil
+  end
+
+  @impl true
   def event_time(event) do
     event["startDate"]
     |> ParseHelpers.add_seconds_and_offset_to_datetime_string()

@@ -65,6 +65,11 @@ defmodule MusicListings.Parsing.VenueParsers.MonarchTavernParser do
   end
 
   @impl true
+  def event_end_date(_event) do
+    nil
+  end
+
+  @impl true
   def event_time(event) do
     event["when"]["start"]["millis"]
     |> DateTime.from_unix!(:millisecond)

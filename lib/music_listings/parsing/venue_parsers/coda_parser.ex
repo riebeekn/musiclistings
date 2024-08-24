@@ -63,6 +63,11 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParser do
   end
 
   @impl true
+  def event_end_date(_event) do
+    nil
+  end
+
+  @impl true
   def event_time(_event) do
     nil
   end

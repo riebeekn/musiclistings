@@ -58,6 +58,11 @@ defmodule MusicListings.Parsing.VenueParsers.RexParser do
   end
 
   @impl true
+  def event_end_date(_event) do
+    nil
+  end
+
+  @impl true
   def event_time(event) do
     event["startDate"]
     |> DateTime.from_unix!(:millisecond)

@@ -60,6 +60,7 @@ defmodule MusicListings.Crawler do
       |> DataSource.retrieve_events(parser.source_url(), pull_data_from_www?)
       |> EventParser.parse_events(parser, venue, crawl_summary)
       |> EventStorage.save_events()
+      |> List.flatten()
       |> insert_venue_summary(venue, crawl_summary)
     end)
     |> CrawlStats.new()

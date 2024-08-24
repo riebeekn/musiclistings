@@ -65,6 +65,11 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParser do
   end
 
   @impl true
+  def event_end_date(_event) do
+    nil
+  end
+
+  @impl true
   def event_time(event) do
     [_day_of_week_string, _month_day_string, doors_string] =
       event

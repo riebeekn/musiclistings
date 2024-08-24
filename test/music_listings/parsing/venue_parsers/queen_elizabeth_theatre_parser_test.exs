@@ -75,6 +75,12 @@ defmodule MusicListings.Parsing.VenueParsers.QueenElizabthTheatreParserTest do
     end
   end
 
+  describe "event_end_date/1" do
+    test "returns the final date of the event if a date range", %{event: event} do
+      assert nil == QueenElizabthTheatreParser.event_end_date(event)
+    end
+  end
+
   describe "event_time/1" do
     test "returns the event start time", %{event: event} do
       assert ~T[18:45:00] == QueenElizabthTheatreParser.event_time(event)

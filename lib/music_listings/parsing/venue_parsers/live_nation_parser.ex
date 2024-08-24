@@ -49,6 +49,10 @@ defmodule MusicListings.Parsing.VenueParsers.LiveNationParser do
     |> NaiveDateTime.to_date()
   end
 
+  def event_end_date(_event) do
+    nil
+  end
+
   def event_time(event) do
     event["startDate"]
     |> NaiveDateTime.from_iso8601!()

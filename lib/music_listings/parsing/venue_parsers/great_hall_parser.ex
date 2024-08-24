@@ -65,6 +65,11 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParser do
   end
 
   @impl true
+  def event_end_date(_event) do
+    nil
+  end
+
+  @impl true
   def event_time(event) do
     event
     |> Selectors.text(css(".tgh-e-time"))

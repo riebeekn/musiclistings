@@ -78,6 +78,12 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParserTest do
     end
   end
 
+  describe "event_end_date/1" do
+    test "returns the final date of the event if a date range", %{event: event} do
+      assert nil == JazzBistroParser.event_end_date(event)
+    end
+  end
+
   describe "event_time/1" do
     test "returns the event start time", %{event: event} do
       assert ~T[17:00:00] == JazzBistroParser.event_time(event)
