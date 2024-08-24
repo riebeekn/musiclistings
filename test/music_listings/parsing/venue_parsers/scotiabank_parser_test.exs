@@ -78,7 +78,7 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParserTest do
 
   describe "event_time/1" do
     test "returns the event start time", %{event: event} do
-      assert nil == ScotiabankParser.event_time(event)
+      assert ~T[20:00:00] == ScotiabankParser.event_time(event)
     end
   end
 
