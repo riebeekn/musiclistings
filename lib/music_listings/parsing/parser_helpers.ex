@@ -37,9 +37,7 @@ defmodule MusicListings.Parsing.ParseHelpers do
   def replace_punctuation_and_spaces(string) do
     space_and_punct_regex = ~r/[\p{P}\p{Z}]+/u
 
-    space_and_punct_regex
-    |> Regex.replace(string, "_")
-    |> String.downcase()
+    Regex.replace(space_and_punct_regex, string, "_")
   end
 
   @spec clean_html(String.t()) :: String.t()
@@ -59,8 +57,10 @@ defmodule MusicListings.Parsing.ParseHelpers do
   # ===========================================================================
   @spec build_id_from_title_and_date(title :: String.t(), date :: Date.t()) :: String.t()
   def build_id_from_title_and_date(title, date) do
-    slug = "#{title}_#{date}"
-    replace_punctuation_and_spaces(slug)
+    "#{title}_#{date}"
+    |> replace_punctuation_and_spaces()
+    |> String.downcase()
+    |> String.replace("cancelled_", "")
   end
 
   # ===========================================================================

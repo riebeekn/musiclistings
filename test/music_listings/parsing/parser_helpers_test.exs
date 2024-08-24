@@ -8,6 +8,14 @@ defmodule MusicListings.Parsing.ParserHelpersTest do
       assert "some_event_2024_12_14" ==
                ParseHelpers.build_id_from_title_and_date("some-*&'#  event", ~D[2024-12-14])
     end
+
+    test "replaces cancelled" do
+      assert "some_event_2024_12_14" ==
+               ParseHelpers.build_id_from_title_and_date(
+                 "some-*&cancelled'#  event",
+                 ~D[2024-12-14]
+               )
+    end
   end
 
   describe "age_restriction_string_to_enum/1" do

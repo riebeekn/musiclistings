@@ -40,6 +40,7 @@ defmodule MusicListings.Parsing.VenueParsers.DakotaTavernParser do
     event
     |> event_title()
     |> ParseHelpers.replace_punctuation_and_spaces()
+    |> String.downcase()
   end
 
   @impl true
