@@ -45,13 +45,13 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "billy_idol_rebel_yell_2024_08_09" == ScotiabankParser.event_id(event)
+      assert "billy_idol_rebel_yell_2024_08_29" == ScotiabankParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "billy_idol_rebel_yell_2024_08_09" == ScotiabankParser.ignored_event_id(event)
+      assert "billy_idol_rebel_yell_2024_08_29" == ScotiabankParser.ignored_event_id(event)
     end
   end
 
@@ -72,7 +72,13 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParserTest do
 
   describe "event_date/1" do
     test "returns the event date", %{event: event} do
-      assert ~D[2024-08-09] == ScotiabankParser.event_date(event)
+      assert ~D[2024-08-29] == ScotiabankParser.event_date(event)
+    end
+  end
+
+  describe "event_end_date/1" do
+    test "returns the final date of the event if a date range", %{event: event} do
+      assert ~D[2024-09-02] == ScotiabankParser.event_end_date(event)
     end
   end
 

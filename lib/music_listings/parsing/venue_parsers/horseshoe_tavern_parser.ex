@@ -65,6 +65,11 @@ defmodule MusicListings.Parsing.VenueParsers.HorseshoeTavernParser do
   end
 
   @impl true
+  def event_end_date(_event) do
+    nil
+  end
+
+  @impl true
   def event_time(event) do
     event
     |> Selectors.all_matches(css(".schedule-event-time"))

@@ -63,6 +63,11 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParser do
   end
 
   @impl true
+  def event_end_date(_event) do
+    nil
+  end
+
+  @impl true
   def event_time(event) do
     event
     |> Selectors.text(xpath("//div[@class='doors']/following-sibling::div[1]"))

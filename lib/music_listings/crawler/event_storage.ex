@@ -14,19 +14,7 @@ defmodule MusicListings.Crawler.EventStorage do
 
   defp save_event(payload) do
     if payload.status == :ok do
-      payload.parsed_event.external_id
-
-      existing_event =
-        Repo.get_by(Event,
-          external_id: payload.parsed_event.external_id,
-          venue_id: payload.parsed_event.venue_id
-        )
-
-      if existing_event do
-        maybe_update_event(payload, existing_event)
-      else
-        insert_event(payload)
-      end
+      save_parsed_event(payload, payload.parsed_event)
     else
       # just ignore the payload in cases where the status is anything
       # but :ok... indicates a parse error
@@ -34,22 +22,42 @@ defmodule MusicListings.Crawler.EventStorage do
     end
   end
 
-  defp insert_event(payload) do
+  defp save_parsed_event(payload, parsed_event) when is_list(parsed_event) do
+    Enum.map(parsed_event, &save_parsed_event(payload, &1))
+  end
+
+  defp save_parsed_event(payload, parsed_event) do
+    parsed_event.external_id
+
+    existing_event =
+      Repo.get_by(Event,
+        external_id: parsed_event.external_id,
+        venue_id: parsed_event.venue_id
+      )
+
+    if existing_event do
+      maybe_update_event(payload, parsed_event, existing_event)
+    else
+      insert_event(payload, parsed_event)
+    end
+  end
+
+  defp insert_event(payload, parsed_event) do
     persisted_event =
       %{
-        external_id: payload.parsed_event.external_id,
-        venue_id: payload.parsed_event.venue_id,
-        title: payload.parsed_event.title,
-        headliner: payload.parsed_event.headliner,
-        openers: payload.parsed_event.openers,
-        date: payload.parsed_event.date,
-        time: payload.parsed_event.time,
-        price_format: payload.parsed_event.price_format,
-        price_lo: payload.parsed_event.price_lo,
-        price_hi: payload.parsed_event.price_hi,
-        age_restriction: payload.parsed_event.age_restriction,
-        ticket_url: payload.parsed_event.ticket_url,
-        details_url: payload.parsed_event.details_url
+        external_id: parsed_event.external_id,
+        venue_id: parsed_event.venue_id,
+        title: parsed_event.title,
+        headliner: parsed_event.headliner,
+        openers: parsed_event.openers,
+        date: parsed_event.date,
+        time: parsed_event.time,
+        price_format: parsed_event.price_format,
+        price_lo: parsed_event.price_lo,
+        price_hi: parsed_event.price_hi,
+        age_restriction: parsed_event.age_restriction,
+        ticket_url: parsed_event.ticket_url,
+        details_url: parsed_event.details_url
       }
       |> Event.changeset()
       |> Repo.insert!()
@@ -59,18 +67,18 @@ defmodule MusicListings.Crawler.EventStorage do
     |> Payload.set_operation(:created)
   end
 
-  defp maybe_update_event(payload, existing_event) do
+  defp maybe_update_event(payload, parsed_event, existing_event) do
     %{
-      title: payload.parsed_event.title,
-      headliner: payload.parsed_event.headliner,
-      openers: payload.parsed_event.openers,
-      date: payload.parsed_event.date,
-      time: payload.parsed_event.time,
-      price_format: payload.parsed_event.price_format,
-      price_lo: payload.parsed_event.price_lo,
-      price_hi: payload.parsed_event.price_hi,
-      age_restriction: payload.parsed_event.age_restriction,
-      ticket_url: payload.parsed_event.ticket_url
+      title: parsed_event.title,
+      headliner: parsed_event.headliner,
+      openers: parsed_event.openers,
+      date: parsed_event.date,
+      time: parsed_event.time,
+      price_format: parsed_event.price_format,
+      price_lo: parsed_event.price_lo,
+      price_hi: parsed_event.price_hi,
+      age_restriction: parsed_event.age_restriction,
+      ticket_url: parsed_event.ticket_url
     }
     |> Event.changeset(existing_event)
     |> maybe_update(payload)

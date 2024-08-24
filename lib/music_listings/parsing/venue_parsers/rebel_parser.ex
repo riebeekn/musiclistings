@@ -62,6 +62,11 @@ defmodule MusicListings.Parsing.VenueParsers.RebelParser do
   end
 
   @impl true
+  def event_end_date(_event) do
+    nil
+  end
+
+  @impl true
   def event_time(event) do
     if is_map(event["start"]) do
       ParseHelpers.time_string_to_time(event["start"]["time"])

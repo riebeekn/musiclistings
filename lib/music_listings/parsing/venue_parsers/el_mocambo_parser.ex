@@ -73,6 +73,11 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
   end
 
   @impl true
+  def event_end_date(_event) do
+    nil
+  end
+
+  @impl true
   def event_time(event) do
     %{"month" => _month_string, "day" => _day_string, "time" => time_string} =
       parse_out_full_date_time_string(event)

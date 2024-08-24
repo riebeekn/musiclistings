@@ -38,6 +38,9 @@ defmodule MusicListings.Parsing.VenueParsers.MasseyHallParser do
   defdelegate event_date(event), to: MhRthTdmhParser
 
   @impl true
+  defdelegate event_end_date(event), to: MhRthTdmhParser
+
+  @impl true
   defdelegate event_time(event), to: MhRthTdmhParser
 
   @impl true

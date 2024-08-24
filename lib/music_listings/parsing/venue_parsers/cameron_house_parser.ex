@@ -67,6 +67,11 @@ defmodule MusicListings.Parsing.VenueParsers.CameronHouseParser do
   end
 
   @impl true
+  def event_end_date(_event) do
+    nil
+  end
+
+  @impl true
   def event_time(event) do
     {:ok, utc_datetime, _offset} =
       event["scheduling"]["config"]["startDate"]

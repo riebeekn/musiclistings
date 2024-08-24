@@ -59,6 +59,11 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
   end
 
   @impl true
+  def event_end_date(_event) do
+    nil
+  end
+
+  @impl true
   def event_time(event) do
     event["fm_time"]
     |> Enum.at(0)

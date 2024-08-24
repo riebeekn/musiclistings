@@ -44,6 +44,12 @@ defmodule MusicListings.Parsing.VenueParser do
   """
   @callback event_date(Meeseeks.Result.t()) :: Date.t()
   @doc """
+  The final date of the event for events where multiple days are
+  represented by a single entry (carbonhouse sites do this), i.e.
+  Oct 17-18 2024
+  """
+  @callback event_end_date(Meeseeks.Result.t()) :: Date.t() | nil
+  @doc """
   The time of the event
   """
   @callback event_time(Meeseeks.Result.t()) :: Time.t() | nil

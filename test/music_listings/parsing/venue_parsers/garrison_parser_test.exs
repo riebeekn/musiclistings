@@ -75,6 +75,12 @@ defmodule MusicListings.Parsing.VenueParsers.GarrisonParserTest do
     end
   end
 
+  describe "event_end_date/1" do
+    test "returns the final date of the event if a date range", %{event: event} do
+      assert nil == GarrisonParser.event_end_date(event)
+    end
+  end
+
   describe "event_time/1" do
     test "returns the event start time", %{event: event} do
       assert nil == GarrisonParser.event_time(event)

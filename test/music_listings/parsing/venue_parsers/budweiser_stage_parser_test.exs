@@ -71,6 +71,12 @@ defmodule MusicListings.Parsing.VenueParsers.BudweiserStageParserTest do
     end
   end
 
+  describe "event_end_date/1" do
+    test "returns the final date of the event if a date range", %{event: event} do
+      assert nil == BudweiserStageParser.event_end_date(event)
+    end
+  end
+
   describe "event_time/1" do
     test "returns the event start time", %{event: event} do
       assert ~T[19:00:00] == BudweiserStageParser.event_time(event)

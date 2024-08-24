@@ -68,21 +68,46 @@ defmodule MusicListings.Crawler.EventParser do
 
     price_info = parser.price(payload.raw_event)
 
-    %Event{
-      external_id: parser.event_id(payload.raw_event),
-      title: parser.event_title(payload.raw_event),
-      headliner: performers.headliner,
-      openers: performers.openers,
-      date: parser.event_date(payload.raw_event),
-      time: parser.event_time(payload.raw_event),
-      price_format: price_info.format,
-      price_lo: price_info.lo,
-      price_hi: price_info.hi,
-      age_restriction: parser.age_restriction(payload.raw_event),
-      ticket_url: parser.ticket_url(payload.raw_event),
-      details_url: parser.details_url(payload.raw_event),
-      venue_id: venue.id
-    }
+    event_start_date = parser.event_date(payload.raw_event)
+    event_end_date = parser.event_end_date(payload.raw_event)
+
+    if event_end_date do
+      event_start_date
+      |> Date.range(event_end_date)
+      |> Enum.map(fn date ->
+        %Event{
+          external_id: "#{parser.event_id(payload.raw_event)}_#{date}",
+          title: parser.event_title(payload.raw_event),
+          headliner: performers.headliner,
+          openers: performers.openers,
+          date: date,
+          time: parser.event_time(payload.raw_event),
+          price_format: price_info.format,
+          price_lo: price_info.lo,
+          price_hi: price_info.hi,
+          age_restriction: parser.age_restriction(payload.raw_event),
+          ticket_url: parser.ticket_url(payload.raw_event),
+          details_url: parser.details_url(payload.raw_event),
+          venue_id: venue.id
+        }
+      end)
+    else
+      %Event{
+        external_id: parser.event_id(payload.raw_event),
+        title: parser.event_title(payload.raw_event),
+        headliner: performers.headliner,
+        openers: performers.openers,
+        date: event_start_date,
+        time: parser.event_time(payload.raw_event),
+        price_format: price_info.format,
+        price_lo: price_info.lo,
+        price_hi: price_info.hi,
+        age_restriction: parser.age_restriction(payload.raw_event),
+        ticket_url: parser.ticket_url(payload.raw_event),
+        details_url: parser.details_url(payload.raw_event),
+        venue_id: venue.id
+      }
+    end
   end
 
   defp collect_results(tasks, acc \\ [])

@@ -34,6 +34,9 @@ defmodule MusicListings.Parsing.VenueParsers.BudweiserStageParser do
   defdelegate event_date(event), to: LiveNationParser
 
   @impl true
+  defdelegate event_end_date(event), to: LiveNationParser
+
+  @impl true
   defdelegate event_time(event), to: LiveNationParser
 
   @impl true

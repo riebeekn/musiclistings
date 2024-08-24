@@ -69,6 +69,11 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParser do
   end
 
   @impl true
+  def event_end_date(_event) do
+    nil
+  end
+
+  @impl true
   def event_time(event) do
     event
     |> Selectors.text(css(".info_landing h5:nth-of-type(2)"))

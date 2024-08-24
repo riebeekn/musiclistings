@@ -62,6 +62,30 @@ defmodule MusicListings.Parsing.VenueParsers.CarbonhouseParser do
     ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
   end
 
+  def event_end_date(event) do
+    day_strings = Selectors.all_matches(event, css(".m-date__day"))
+
+    if Enum.count(day_strings) <= 1 do
+      nil
+    else
+      day_string = day_strings |> List.last() |> Selectors.text(css(".m-date__day"))
+
+      month_string =
+        event
+        |> Selectors.all_matches(css(".m-date__month"))
+        |> List.last()
+        |> Selectors.text(css(".m-date__month"))
+
+      year_string =
+        event
+        |> Selectors.all_matches(css(".m-date__year"))
+        |> List.last()
+        |> Selectors.text(css(".m-date__year"))
+
+      ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
+    end
+  end
+
   def event_time(event) do
     event
     |> Selectors.text(css(".start"))
