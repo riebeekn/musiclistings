@@ -60,6 +60,7 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParser do
     |> String.replace("&#8217;", "'")
     |> String.replace("&#8220;", "\"")
     |> String.replace("&#8221;", "\"")
+    |> String.replace("&#038;", "&")
   end
 
   @impl true
