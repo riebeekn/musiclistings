@@ -169,7 +169,7 @@ defmodule MusicListingsWeb.CustomComponents do
         </div>
       </div>
 
-      <div class="hidden sm:block relative w-full h-36">
+      <div class="relative w-full h-36">
         <iframe
           class="absolute top-0 left-0 w-full h-full"
           src={@venue.google_map_url}
