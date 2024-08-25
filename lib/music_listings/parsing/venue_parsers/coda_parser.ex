@@ -89,6 +89,7 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParser do
 
   @impl true
   def details_url(event) do
-    Selectors.url(event, css(".link-block"))
+    slug = Selectors.url(event, css(".link-block"))
+    "https://www.codatoronto.com#{slug}"
   end
 end
