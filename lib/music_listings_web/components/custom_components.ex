@@ -158,8 +158,8 @@ defmodule MusicListingsWeb.CustomComponents do
   def venue_card(assigns) do
     ~H"""
     <div class="block sm:flex text-zinc-200">
-      <div class="pr-12">
-        <h2 class="text-4xl font-bold whitespace-nowrap">
+      <div class="pr-12 whitespace-nowrap">
+        <h2 class="text-4xl font-bold">
           <%= @venue.name %>
         </h2>
         <div class="ml-1 mt-2 text-md leading-5">
