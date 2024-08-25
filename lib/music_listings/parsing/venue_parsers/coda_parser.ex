@@ -88,7 +88,7 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParser do
   end
 
   @impl true
-  def details_url(_event) do
-    nil
+  def details_url(event) do
+    Selectors.url(event, css(".link-block"))
   end
 end

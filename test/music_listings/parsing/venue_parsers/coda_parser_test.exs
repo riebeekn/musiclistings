@@ -102,7 +102,7 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParserTest do
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert nil == CodaParser.details_url(event)
+      assert "/events/lee-foss" == CodaParser.details_url(event)
     end
   end
 end
