@@ -100,7 +100,8 @@ defmodule MusicListings.Parsing.VenueParsers.HorseshoeTavernParser do
   end
 
   @impl true
-  def details_url(_event) do
-    nil
+  def details_url(event) do
+    slug = Selectors.url(event, css(".schedule-speaker"))
+    "https://www.horseshoetavern.com#{slug}"
   end
 end
