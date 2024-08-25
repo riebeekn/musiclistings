@@ -157,9 +157,9 @@ defmodule MusicListingsWeb.CustomComponents do
   """
   def venue_card(assigns) do
     ~H"""
-    <div class="flex text-zinc-200">
+    <div class="block sm:flex text-zinc-200">
       <div class="pr-12">
-        <h2 class="text-4xl font-bold">
+        <h2 class="text-4xl font-bold whitespace-nowrap">
           <%= @venue.name %>
         </h2>
         <div class="ml-1 mt-2 text-md leading-5">
@@ -169,7 +169,7 @@ defmodule MusicListingsWeb.CustomComponents do
         </div>
       </div>
 
-      <div class="relative w-full h-36">
+      <div class="relative w-full h-36 my-8 sm:my-0">
         <iframe
           class="absolute top-0 left-0 w-full h-full"
           src={@venue.google_map_url}
@@ -336,23 +336,15 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_age_restriction(%{age_restriction: :unknown} = assigns), do: ~H""
 
-  # Note: have this specific clause as issues with &nbsp; look to clean up later
-  defp event_age_restriction(%{age_restriction: :all_ages} = assigns) do
-    ~H"""
-    <div class="mr-4 rounded-md text-xs inline-flex gap-0.5 justify-center overflow-hidden font-medium transition py-1 px-3 bg-amber-400/10 text-amber-400 ring-1 ring-inset ring-amber-400/20 hover:bg-amber-400/10 hover:text-amber-300 hover:ring-amber-300">
-      All&nbsp;Ages
-    </div>
-    """
-  end
-
   defp event_age_restriction(assigns) do
     ~H"""
-    <div class="mr-4 rounded-md text-xs inline-flex gap-0.5 justify-center overflow-hidden font-medium transition py-1 px-3 bg-amber-400/10 text-amber-400 ring-1 ring-inset ring-amber-400/20 hover:bg-amber-400/10 hover:text-amber-300 hover:ring-amber-300">
+    <div class="whitespace-nowrap mr-4 rounded-md text-xs inline-flex gap-0.5 justify-center overflow-hidden font-medium transition py-1 px-3 bg-amber-400/10 text-amber-400 ring-1 ring-inset ring-amber-400/20 hover:bg-amber-400/10 hover:text-amber-300 hover:ring-amber-300">
       <%= format_age_restriction(@age_restriction) %>
     </div>
     """
   end
 
+  defp format_age_restriction(:all_ages), do: "All Ages"
   defp format_age_restriction(:eighteen_plus), do: "18+"
   defp format_age_restriction(:nineteen_plus), do: "19+"
 
