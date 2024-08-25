@@ -24,7 +24,8 @@ defmodule MusicListings.Parsing.VenueParsers.CocaColaColiseumParserTest do
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://www.coca-colacoliseum.com/events" == CocaColaColiseumParser.source_url()
+      assert "https://www.coca-colacoliseum.com/events/events_ajax/0?category=0&venue=0&team=0&per_page=63&came_from_page=event-list-page" ==
+               CocaColaColiseumParser.source_url()
     end
   end
 

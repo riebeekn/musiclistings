@@ -7,7 +7,9 @@ defmodule MusicListings.Parsing.VenueParsers.CocaColaColiseumParser do
   alias MusicListings.Parsing.VenueParsers.CarbonhouseParser
 
   @impl true
-  def source_url, do: "https://www.coca-colacoliseum.com/events"
+  def source_url,
+    do:
+      "https://www.coca-colacoliseum.com/events/events_ajax/0?category=0&venue=0&team=0&per_page=63&came_from_page=event-list-page"
 
   @impl true
   def example_data_file_location, do: "test/data/coca_cola_coliseum/index.html"
