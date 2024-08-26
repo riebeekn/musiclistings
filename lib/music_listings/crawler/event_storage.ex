@@ -78,7 +78,8 @@ defmodule MusicListings.Crawler.EventStorage do
       price_lo: parsed_event.price_lo,
       price_hi: parsed_event.price_hi,
       age_restriction: parsed_event.age_restriction,
-      ticket_url: parsed_event.ticket_url
+      ticket_url: parsed_event.ticket_url,
+      details_url: parsed_event.details_url
     }
     |> Event.changeset(existing_event)
     |> maybe_update(payload)
