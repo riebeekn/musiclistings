@@ -57,11 +57,11 @@ defmodule MusicListings.Parsing.VenueParsers.MhRthTdmhParser do
     :unknown
   end
 
-  def ticket_url(event) do
-    "https://tickets.mhrth.com/#{event["prod_season_no"]}/#{event["perf_no"]}"
+  def ticket_url(_event) do
+    nil
   end
 
-  def details_url(_event) do
-    nil
+  def details_url(event) do
+    event["cmsData"]["URL"]
   end
 end
