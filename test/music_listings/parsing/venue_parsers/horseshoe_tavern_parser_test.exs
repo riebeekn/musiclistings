@@ -109,7 +109,8 @@ defmodule MusicListings.Parsing.VenueParsers.HorseshoeTavernParserTest do
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert "https://www.horseshoetavern.com/event/philip-sayce24" == HorseshoeTavernParser.details_url(event)
+      assert "https://www.horseshoetavern.com/event/philip-sayce24" ==
+               HorseshoeTavernParser.details_url(event)
     end
   end
 end
