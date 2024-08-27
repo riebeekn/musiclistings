@@ -52,6 +52,15 @@ defmodule MusicListings.Parsing.ParseHelpers do
     |> String.replace("\\/", "/")
   end
 
+  @spec fix_encoding(String.t()) :: String.t()
+  def fix_encoding(content) do
+    content
+    |> String.replace("&#8217;", "'")
+    |> String.replace("&#8220;", "\"")
+    |> String.replace("&#8221;", "\"")
+    |> String.replace("&#038;", "&")
+  end
+
   # ===========================================================================
   # Id helpers
   # ===========================================================================

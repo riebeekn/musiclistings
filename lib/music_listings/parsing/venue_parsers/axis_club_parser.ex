@@ -46,6 +46,7 @@ defmodule MusicListings.Parsing.VenueParsers.AxisClubParser do
   @impl true
   def event_title(event) do
     event["name"]
+    |> ParseHelpers.fix_encoding()
   end
 
   @impl true

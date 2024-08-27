@@ -57,10 +57,7 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParser do
   @impl true
   def event_title(event) do
     event["name"]
-    |> String.replace("&#8217;", "'")
-    |> String.replace("&#8220;", "\"")
-    |> String.replace("&#8221;", "\"")
-    |> String.replace("&#038;", "&")
+    |> ParseHelpers.fix_encoding()
   end
 
   @impl true
