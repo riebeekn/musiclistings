@@ -71,9 +71,9 @@ defmodule MusicListings.Parsing.VenueParsers.BudweiserStageParserTest do
     end
   end
 
-  describe "event_end_date/1" do
-    test "returns the final date of the event if a date range", %{event: event} do
-      assert nil == BudweiserStageParser.event_end_date(event)
+  describe "additional_dates/1" do
+    test "returns a list of additional dates", %{event: event} do
+      assert [] == BudweiserStageParser.additional_dates(event)
     end
   end
 

@@ -56,8 +56,8 @@ defmodule MusicListings.Parsing.VenueParsers.BgGarrisonParser do
     ParseHelpers.build_date_from_month_day_strings(month_string, day_string, DateHelpers.today())
   end
 
-  def event_end_date(_event) do
-    nil
+  def additional_dates(_event) do
+    []
   end
 
   def event_time(_event) do

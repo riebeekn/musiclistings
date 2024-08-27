@@ -38,7 +38,7 @@ defmodule MusicListings.Parsing.VenueParsers.RoyThomsonHallParser do
   defdelegate event_date(event), to: MhRthTdmhParser
 
   @impl true
-  defdelegate event_end_date(event), to: MhRthTdmhParser
+  defdelegate additional_dates(event), to: MhRthTdmhParser
 
   @impl true
   defdelegate event_time(event), to: MhRthTdmhParser

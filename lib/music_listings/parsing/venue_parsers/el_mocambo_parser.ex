@@ -73,8 +73,8 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
   end
 
   @impl true
-  def event_end_date(_event) do
-    nil
+  def additional_dates(_event) do
+    []
   end
 
   @impl true

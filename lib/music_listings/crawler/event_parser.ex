@@ -65,15 +65,28 @@ defmodule MusicListings.Crawler.EventParser do
 
   defp parse_event(payload, parser, venue) do
     performers = parser.performers(payload.raw_event)
-
     price_info = parser.price(payload.raw_event)
-
     event_start_date = parser.event_date(payload.raw_event)
-    event_end_date = parser.event_end_date(payload.raw_event)
+    additional_dates = parser.additional_dates(payload.raw_event)
 
-    if event_end_date do
-      event_start_date
-      |> Date.range(event_end_date)
+    if additional_dates == [] do
+      %Event{
+        external_id: parser.event_id(payload.raw_event),
+        title: parser.event_title(payload.raw_event),
+        headliner: performers.headliner,
+        openers: performers.openers,
+        date: event_start_date,
+        time: parser.event_time(payload.raw_event),
+        price_format: price_info.format,
+        price_lo: price_info.lo,
+        price_hi: price_info.hi,
+        age_restriction: parser.age_restriction(payload.raw_event),
+        ticket_url: parser.ticket_url(payload.raw_event),
+        details_url: parser.details_url(payload.raw_event),
+        venue_id: venue.id
+      }
+    else
+      [event_start_date | additional_dates]
       |> Enum.map(fn date ->
         %Event{
           external_id: "#{parser.event_id(payload.raw_event)}_#{date}",
@@ -91,22 +104,6 @@ defmodule MusicListings.Crawler.EventParser do
           venue_id: venue.id
         }
       end)
-    else
-      %Event{
-        external_id: parser.event_id(payload.raw_event),
-        title: parser.event_title(payload.raw_event),
-        headliner: performers.headliner,
-        openers: performers.openers,
-        date: event_start_date,
-        time: parser.event_time(payload.raw_event),
-        price_format: price_info.format,
-        price_lo: price_info.lo,
-        price_hi: price_info.hi,
-        age_restriction: parser.age_restriction(payload.raw_event),
-        ticket_url: parser.ticket_url(payload.raw_event),
-        details_url: parser.details_url(payload.raw_event),
-        venue_id: venue.id
-      }
     end
   end
 

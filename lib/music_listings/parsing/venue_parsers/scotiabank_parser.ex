@@ -36,7 +36,7 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParser do
   defdelegate event_date(event), to: CarbonhouseParser
 
   @impl true
-  defdelegate event_end_date(event), to: CarbonhouseParser
+  defdelegate additional_dates(event), to: CarbonhouseParser
 
   @impl true
   defdelegate event_time(event), to: CarbonhouseParser
