@@ -33,9 +33,11 @@ defmodule MusicListings.Parsing.VenueParsers.CarbonhouseParser do
   end
 
   def event_title(event, opts \\ []) do
-    # Selectors.text(event, css(".#{prefix}title"))
     selector_string = maybe_add_prefix("title", opts)
-    Selectors.text(event, css(selector_string))
+
+    event
+    |> Selectors.text(css(selector_string))
+    |> ParseHelpers.fix_encoding()
   end
 
   defp maybe_add_prefix(selector_string, opts) do
