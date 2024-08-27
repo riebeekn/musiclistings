@@ -97,6 +97,6 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
 
   @impl true
   def details_url(_event) do
-    nil
+    "https://www.thepilot.ca/happening-at-the-pilot"
   end
 end

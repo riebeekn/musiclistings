@@ -108,7 +108,7 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParserTest do
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert nil == PilotParser.details_url(event)
+      assert "https://www.thepilot.ca/happening-at-the-pilot" == PilotParser.details_url(event)
     end
   end
 end

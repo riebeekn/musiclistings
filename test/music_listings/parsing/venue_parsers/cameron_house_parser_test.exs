@@ -103,7 +103,7 @@ defmodule MusicListings.Parsing.VenueParsers.CameronHouseParserTest do
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert nil == CameronHouseParser.details_url(event)
+      assert "https://www.thecameron.com/" == CameronHouseParser.details_url(event)
     end
   end
 end
