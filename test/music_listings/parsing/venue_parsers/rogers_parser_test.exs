@@ -37,9 +37,9 @@ defmodule MusicListings.Parsing.VenueParsers.RogersParserTest do
     end
   end
 
-  describe "next_page_url/1" do
+  describe "next_page_url/2" do
     test "returns the next page url", %{index_html: index_html} do
-      assert nil == RogersParser.next_page_url(index_html)
+      assert nil == RogersParser.next_page_url(index_html, nil)
     end
   end
 

@@ -36,10 +36,10 @@ defmodule MusicListings.Parsing.VenueParsers.VelvetUndergroundParserTest do
     end
   end
 
-  describe "next_page_url/1" do
+  describe "next_page_url/2" do
     test "returns the next page url", %{index_html: index_html} do
       assert "https://thevelvet.ca/events/page/2/" ==
-               VelvetUndergroundParser.next_page_url(index_html)
+               VelvetUndergroundParser.next_page_url(index_html, nil)
     end
   end
 

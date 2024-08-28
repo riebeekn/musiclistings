@@ -18,7 +18,7 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParser do
   defdelegate events(body), to: CarbonhouseParser
 
   @impl true
-  defdelegate next_page_url(body), to: CarbonhouseParser
+  defdelegate next_page_url(body, current_url), to: CarbonhouseParser
 
   @impl true
   defdelegate event_id(event), to: CarbonhouseParser

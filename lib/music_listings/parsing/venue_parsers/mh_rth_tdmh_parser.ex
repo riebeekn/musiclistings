@@ -17,7 +17,7 @@ defmodule MusicListings.Parsing.VenueParsers.MhRthTdmhParser do
     |> Enum.filter(&(&1["cmsFacilityData"]["FacilityID"] == facility_no))
   end
 
-  def next_page_url(_body), do: nil
+  def next_page_url(_body, _current_url), do: nil
 
   def event_id(event), do: event["perf_no"]
 

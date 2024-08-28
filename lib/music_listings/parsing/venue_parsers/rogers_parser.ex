@@ -16,7 +16,7 @@ defmodule MusicListings.Parsing.VenueParsers.RogersParser do
   defdelegate events(body), to: LiveNationParser
 
   @impl true
-  defdelegate next_page_url(body), to: LiveNationParser
+  defdelegate next_page_url(body, current_url), to: LiveNationParser
 
   @impl true
   defdelegate event_id(event), to: LiveNationParser

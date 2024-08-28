@@ -35,9 +35,9 @@ defmodule MusicListings.Parsing.VenueParsers.MasseyHallParserTest do
     end
   end
 
-  describe "next_page_url/1" do
+  describe "next_page_url/2" do
     test "returns the next page url", %{index_html: index_html} do
-      assert nil == MasseyHallParser.next_page_url(index_html)
+      assert nil == MasseyHallParser.next_page_url(index_html, nil)
     end
   end
 

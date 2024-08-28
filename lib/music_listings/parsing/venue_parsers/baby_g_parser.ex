@@ -16,7 +16,7 @@ defmodule MusicListings.Parsing.VenueParsers.BabyGParser do
   defdelegate events(body), to: BgGarrisonParser
 
   @impl true
-  defdelegate next_page_url(body), to: BgGarrisonParser
+  defdelegate next_page_url(body, current_url), to: BgGarrisonParser
 
   @impl true
   defdelegate event_id(event), to: BgGarrisonParser

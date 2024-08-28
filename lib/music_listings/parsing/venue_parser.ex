@@ -16,57 +16,57 @@ defmodule MusicListings.Parsing.VenueParser do
   @doc """
   A list of all the events
   """
-  @callback events(String.t()) :: [Meeseeks.Result.t()] | {:error, Meeseeks.Error.t()}
+  @callback events(body :: String.t()) :: [Meeseeks.Result.t()] | {:error, Meeseeks.Error.t()}
   @doc """
   The URL for the next page of results
   """
-  @callback next_page_url(String.t()) :: String.t() | nil
+  @callback next_page_url(body :: String.t(), current_url :: String.t()) :: String.t() | nil
   @doc """
   The id of the event
   """
-  @callback event_id(Meeseeks.Result.t()) :: String.t()
+  @callback event_id(event :: Meeseeks.Result.t()) :: String.t()
   @doc """
   The id to use when indicating this event is ignored.
   We don't re-use the event id for this as it's possible
   the event is failing parsing the id
   """
-  @callback ignored_event_id(Meeseeks.Result.t()) :: String.t()
+  @callback ignored_event_id(event :: Meeseeks.Result.t()) :: String.t()
   @doc """
   The event title
   """
-  @callback event_title(Meeseeks.Result.t()) :: String.t()
+  @callback event_title(event :: Meeseeks.Result.t()) :: String.t()
   @doc """
   The event performers, split out to headliner and openers
   """
-  @callback performers(Meeseeks.Result.t()) :: Performers.t()
+  @callback performers(event :: Meeseeks.Result.t()) :: Performers.t()
   @doc """
   The date of the event
   """
-  @callback event_date(Meeseeks.Result.t()) :: Date.t()
+  @callback event_date(event :: Meeseeks.Result.t()) :: Date.t()
   @doc """
   Additional dates for events where multiple days are
   represented by a single entry (carbonhouse sites do this), i.e.
   Oct 17-18 2024
   """
-  @callback additional_dates(Meeseeks.Result.t()) :: list(Date.t()) | []
+  @callback additional_dates(event :: Meeseeks.Result.t()) :: list(Date.t()) | []
   @doc """
   The time of the event
   """
-  @callback event_time(Meeseeks.Result.t()) :: Time.t() | nil
+  @callback event_time(event :: Meeseeks.Result.t()) :: Time.t() | nil
   @doc """
   The event price
   """
-  @callback price(Meeseeks.Result.t()) :: Price.t()
+  @callback price(event :: Meeseeks.Result.t()) :: Price.t()
   @doc """
   Age restrictions for the event
   """
-  @callback age_restriction(Meeseeks.Result.t()) :: :all_ages | :nineteen_plus | :unknown
+  @callback age_restriction(event :: Meeseeks.Result.t()) :: :all_ages | :nineteen_plus | :unknown
   @doc """
   The ticket URL for the event
   """
-  @callback ticket_url(Meeseeks.Result.t()) :: String.t() | nil
+  @callback ticket_url(event :: Meeseeks.Result.t()) :: String.t() | nil
   @doc """
   The details URL for the event
   """
-  @callback details_url(Meeseeks.Result.t()) :: String.t() | nil
+  @callback details_url(event :: Meeseeks.Result.t()) :: String.t() | nil
 end

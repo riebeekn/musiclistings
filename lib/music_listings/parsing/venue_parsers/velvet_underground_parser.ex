@@ -23,7 +23,7 @@ defmodule MusicListings.Parsing.VenueParsers.VelvetUndergroundParser do
   end
 
   @impl true
-  def next_page_url(body) do
+  def next_page_url(body, _current_url) do
     Selectors.url(body, css(".nav-previous a"))
   end
 

@@ -16,7 +16,7 @@ defmodule MusicListings.Parsing.VenueParsers.CarbonhouseParser do
     |> Selectors.all_matches(css(".eventItem:not(.team)"))
   end
 
-  def next_page_url(_body) do
+  def next_page_url(_body, _current_url) do
     # no next page
     nil
   end

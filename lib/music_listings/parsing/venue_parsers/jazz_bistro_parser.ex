@@ -10,9 +10,15 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParser do
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.Selectors
+  alias MusicListingsUtilities.DateHelpers
 
   @impl true
-  def source_url, do: "https://jazzbistro.ca/event-calendar"
+  def source_url do
+    today = DateHelpers.today()
+    padded_month_string = today.month |> Integer.to_string() |> String.pad_leading(2, "0")
+
+    "https://jazzbistro.ca/event-calendar/month/#{today.year}-#{padded_month_string}/"
+  end
 
   @impl true
   def example_data_file_location, do: "test/data/jazz_bistro/index.html"
@@ -27,18 +33,18 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParser do
   end
 
   @impl true
-  def next_page_url(_body) do
-    # TODO: down the road look into handling next pages with a specific format
-    # i.e. this site has next pages such as https://jazzbistro.ca/event-calendar/month/2024-08/?mmyy=August%202024
-    # currently we only grab the current month as there is no next page url to grab
-    # maybe we could alter the next page function to take in an optional current page url?
-    # then we could check the current url and increment it if is within 3 months of
-    # the current month or something
+  def next_page_url(_body, current_url) do
+    next_month = DateHelpers.today() |> Date.shift(month: 1)
+    padded_month_string = next_month.month |> Integer.to_string() |> String.pad_leading(2, "0")
 
-    # one thing to be careful of is to not get into an infinite redirect if the
-    # logic is wrong, maybe we would also pass in an incrementer to limit
-    # things
-    nil
+    next_page_url =
+      "https://jazzbistro.ca/event-calendar/month/#{next_month.year}-#{padded_month_string}/"
+
+    if current_url == next_page_url do
+      nil
+    else
+      next_page_url
+    end
   end
 
   @impl true

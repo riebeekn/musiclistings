@@ -38,9 +38,23 @@ defmodule MusicListings.Parsing.VenueParsers.RexParserTest do
     end
   end
 
-  describe "next_page_url/1" do
-    test "returns the next page url", %{index_html: index_html} do
-      assert nil == RexParser.next_page_url(index_html)
+  describe "next_page_url/2" do
+    setup do
+      %{
+        next_page_url:
+          "https://www.therex.ca/api/open/GetItemsByMonth?month=9-2024&collectionId=62099f5a37eb917826df65cc&crumb=BZxZJlGW0oALYzcxZDM5MjgzOGE1NmQ0ZTcyOWY3NjdhZWFmMDVi"
+      }
+    end
+
+    test "returns the next page url", %{index_html: index_html, next_page_url: next_page_url} do
+      assert next_page_url == RexParser.next_page_url(index_html, nil)
+    end
+
+    test "returns nil when already processed the next page", %{
+      index_html: index_html,
+      next_page_url: next_page_url
+    } do
+      assert nil == RexParser.next_page_url(index_html, next_page_url)
     end
   end
 
