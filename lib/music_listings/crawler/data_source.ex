@@ -29,7 +29,7 @@ defmodule MusicListings.Crawler.DataSource do
           |> parser.events()
           |> Enum.map(&Payload.new/1)
 
-        next_page_url = parser.next_page_url(body)
+        next_page_url = parser.next_page_url(body, url)
 
         if next_page_url do
           retrieve_events(parser, next_page_url, true, payloads ++ events_from_current_body)

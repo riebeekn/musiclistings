@@ -25,8 +25,17 @@ defmodule MusicListings.Parsing.VenueParsers.RexParser do
   end
 
   @impl true
-  def next_page_url(_body) do
-    nil
+  def next_page_url(_body, current_url) do
+    next_month = DateHelpers.today() |> Date.shift(month: 1)
+
+    next_page_url =
+      "https://www.therex.ca/api/open/GetItemsByMonth?month=#{next_month.month}-#{next_month.year}&collectionId=62099f5a37eb917826df65cc&crumb=BZxZJlGW0oALYzcxZDM5MjgzOGE1NmQ0ZTcyOWY3NjdhZWFmMDVi"
+
+    if current_url == next_page_url do
+      nil
+    else
+      next_page_url
+    end
   end
 
   @impl true

@@ -23,7 +23,7 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParser do
   end
 
   @impl true
-  def next_page_url(_body) do
+  def next_page_url(_body, _current_url) do
     # no next page
     nil
   end

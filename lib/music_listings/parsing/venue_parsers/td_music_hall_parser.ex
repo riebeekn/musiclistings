@@ -20,7 +20,7 @@ defmodule MusicListings.Parsing.VenueParsers.TDMusicHallParser do
   end
 
   @impl true
-  defdelegate next_page_url(body), to: MhRthTdmhParser
+  defdelegate next_page_url(body, current_url), to: MhRthTdmhParser
 
   @impl true
   defdelegate event_id(event), to: MhRthTdmhParser

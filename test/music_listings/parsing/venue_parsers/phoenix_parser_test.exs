@@ -36,10 +36,10 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParserTest do
     end
   end
 
-  describe "next_page_url/1" do
+  describe "next_page_url/2" do
     test "returns the next page url", %{index_html: index_html} do
       assert "https://thephoenixconcerttheatre.com/events/page/2/" ==
-               PhoenixParser.next_page_url(index_html)
+               PhoenixParser.next_page_url(index_html, nil)
     end
   end
 
