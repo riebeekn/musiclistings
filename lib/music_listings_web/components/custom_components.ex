@@ -338,7 +338,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_age_restriction(assigns) do
     ~H"""
-    <div class="whitespace-nowrap mr-4 rounded-md text-xs inline-flex gap-0.5 justify-center overflow-hidden font-medium transition py-1 px-3 bg-amber-400/10 text-amber-400 ring-1 ring-inset ring-amber-400/20 hover:bg-amber-400/10 hover:text-amber-300 hover:ring-amber-300">
+    <div class="min-w-20 whitespace-nowrap mr-4 rounded-md text-xs inline-flex gap-0.5 justify-center overflow-hidden font-medium transition py-1 px-3 bg-amber-400/10 text-amber-400 ring-1 ring-inset ring-amber-400/20 hover:bg-amber-400/10 hover:text-amber-300 hover:ring-amber-300">
       <%= format_age_restriction(@age_restriction) %>
     </div>
     """
