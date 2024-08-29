@@ -5,6 +5,7 @@ defmodule MusicListings do
   alias MusicListings.Crawler
   alias MusicListings.Events
   alias MusicListings.Venues
+  alias MusicListings.Venues.VenueSummary
   alias MusicListingsSchema.IgnoredEvent
   alias MusicListingsSchema.Venue
 
@@ -18,6 +19,9 @@ defmodule MusicListings do
 
   @spec list_events(list()) :: any()
   defdelegate list_events(opts \\ []), to: Events
+
+  @spec list_venues :: list(VenueSummary)
+  defdelegate list_venues, to: Venues
 
   @spec get_venue!(pos_integer()) :: Venue
   defdelegate get_venue!(venue_id), to: Venues
