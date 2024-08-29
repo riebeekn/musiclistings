@@ -8,8 +8,8 @@ defmodule MusicListings.VenuesTest do
 
   describe "list_venues/0" do
     setup do
-      venue_1 = VenuesFixtures.venue_fixture(name: "venue two", street: "v2 street")
-      venue_2 = VenuesFixtures.venue_fixture(name: "venue one", street: "v1 street")
+      venue_2 = VenuesFixtures.venue_fixture(name: "venue two", street: "v2 street")
+      venue_1 = VenuesFixtures.venue_fixture(name: "venue one", street: "v1 street")
 
       # mocked date of today is 2024-08-01
       _excluded_old_event =
@@ -22,17 +22,19 @@ defmodule MusicListings.VenuesTest do
       %{venue_1_id: venue_1.id, venue_2_id: venue_2.id}
     end
 
-    test "returns the expected venue summary" do
+    test "returns the expected venue summary", %{venue_1_id: venue_1_id, venue_2_id: venue_2_id} do
       assert [
                %VenueSummary{
+                 id: venue_1_id,
                  name: "venue one",
                  street: "v1 street",
-                 upcoming_event_count: 2
+                 upcoming_event_count: 1
                },
                %VenueSummary{
+                 id: venue_2_id,
                  name: "venue two",
                  street: "v2 street",
-                 upcoming_event_count: 1
+                 upcoming_event_count: 2
                }
              ] ==
                Venues.list_venues()
