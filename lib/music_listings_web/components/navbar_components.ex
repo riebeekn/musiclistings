@@ -29,7 +29,7 @@ defmodule MusicListingsWeb.NavbarComponents do
 
   defp main_menu(assigns) do
     ~H"""
-    <div class="block sm:hidden -mx-4 flex flex-auto basis-full overflow-x-auto whitespace-nowrap border-b border-emerald-600 py-4 ">
+    <div class="block sm:hidden flex flex-auto basis-full overflow-x-auto whitespace-nowrap border-b border-emerald-600 py-4 ">
       <div class="mx-auto flex items-center gap-4 px-4">
         <.last_updated_label />
       </div>
@@ -88,8 +88,8 @@ defmodule MusicListingsWeb.NavbarComponents do
       <div class="hidden sm:ml-6 sm:block">
         <div class="flex space-x-4">
           <.main_menu_link link_text="Events" href={~p"/"} />
-          <!--
           <.main_menu_link link_text="Venues" href={~p"/venues"} />
+          <!--
           <.main_menu_link link_text="Subscribe" href={~p"/venue"} />
           <.main_menu_link link_text="About" href="#" />
           -->
@@ -104,8 +104,8 @@ defmodule MusicListingsWeb.NavbarComponents do
     <div class="hidden sm:hidden" id="mobile-menu">
       <div class="space-y-1 px-2 pt-2 pb-3">
         <.mobile_menu_link link_text="Events" href={~p"/"} />
-        <!--
         <.mobile_menu_link link_text="Venues" href={~p"/venues"} />
+        <!--
         <.mobile_menu_link link_text="Subscribe" href={~p"/venue"} />
         <.mobile_menu_link link_text="About" href="#" />
         -->
