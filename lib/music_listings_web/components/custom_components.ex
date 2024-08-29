@@ -14,20 +14,25 @@ defmodule MusicListingsWeb.CustomComponents do
 
   # TODO: get rid of this if end up not using it
   @doc """
-  Renders a page header
+  Renders a page header with an optional description
 
-  ## Example
+  ## Examples
 
   <.page_header header="Events" />
+  <.page_header header="Venues" description="Tracking events for the following venues." />
   """
   attr :header, :string, required: true
+  attr :description, :string, default: nil
 
   def page_header(assigns) do
     ~H"""
-    <div class="min-w-0 flex-1">
-      <h1 class="text-3xl font-bold leading-7 text-zinc-400 sm:truncate sm:text-4xl sm:tracking-tight">
+    <div class="min-w-0 flex-1 text-zinc-400">
+      <h1 class="text-3xl font-bold leading-7 sm:truncate sm:text-4xl sm:tracking-tight">
         <%= @header %>
       </h1>
+      <p :if={@description} class="mt-4 text-md">
+        <%= @description %>
+      </p>
     </div>
     """
   end
@@ -182,6 +187,70 @@ defmodule MusicListingsWeb.CustomComponents do
           referrerpolicy="no-referrer-when-downgrade"
         >
         </iframe>
+      </div>
+    </div>
+    """
+  end
+
+  @doc """
+  Renders a tables of venue summary information
+
+  ## Example
+
+  <.venue_summary venues={@venues} />
+  """
+  attr :venues, :list, required: true
+
+  def venue_summary(assigns) do
+    ~H"""
+    <div class="px-4 sm:px-6 lg:px-8">
+      <div class="mt-0 sm:mt-4 flow-root">
+        <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+            <table class="w-full">
+              <thead class="sr-only">
+                <tr>
+                  <th>Venue Name</th>
+                  <th>Street</th>
+                  <th>Upcoming Events</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-zinc-700">
+                <%= for venue <- @venues do %>
+                  <tr id={"venue-#{venue.id}"}>
+                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">
+                      <%= venue.name %>
+                      <dl class="sm:hidden">
+                        <dt class="sr-only">Street</dt>
+                        <dd class="text-zinc-400"><%= venue.street %></dd>
+                        <dt class="sr-only">Upcoming Events</dt>
+                        <dd class="text-zinc-400">
+                          <a
+                            href={~p"/events/venue/#{venue.id}"}
+                            class="text-emerald-400 hover:text-emerald-500"
+                          >
+                            <%= venue.upcoming_event_count %> Upcoming Events
+                          </a>
+                        </dd>
+                      </dl>
+                    </td>
+                    <td class="hidden sm:table-cell whitespace-nowrap px-3 py-4 text-sm text-zinc-400">
+                      <%= venue.street %>
+                    </td>
+                    <td class="hidden sm:table-cell whitespace-nowrap py-4 pl-3 text-right text-sm font-medium">
+                      <a
+                        href={~p"/events/venue/#{venue.id}"}
+                        class="text-emerald-400 hover:text-emerald-500"
+                      >
+                        <%= venue.upcoming_event_count %> Upcoming Events
+                      </a>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
     """
