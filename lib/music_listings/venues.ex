@@ -18,9 +18,14 @@ defmodule MusicListings.Venues do
       inner_join: event in Event,
       on: event.venue_id == venue.id,
       where: event.date >= ^today,
-      group_by: [venue.name, venue.street],
+      group_by: [venue.id, venue.name, venue.street],
       order_by: venue.name,
-      select: %{name: venue.name, street: venue.street, event_count: count(event.id)}
+      select: %{
+        id: venue.id,
+        name: venue.name,
+        street: venue.street,
+        event_count: count(event.id)
+      }
     )
     |> Repo.all()
     |> Enum.map(&VenueSummary.new/1)
