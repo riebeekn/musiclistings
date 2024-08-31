@@ -4,7 +4,7 @@ defmodule MusicListings.Parsing.VenueParsers.CocaColaColiseumParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
-  alias MusicListings.Parsing.VenueParsers.CarbonhouseParser
+  alias MusicListings.Parsing.VenueParsers.BaseParsers.CarbonhouseParser
 
   @impl true
   def source_url,

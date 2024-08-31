@@ -4,7 +4,7 @@ defmodule MusicListings.Parsing.VenueParsers.BudweiserStageParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
-  alias MusicListings.Parsing.VenueParsers.LiveNationParser
+  alias MusicListings.Parsing.VenueParsers.BaseParsers.LiveNationParser
 
   @impl true
   def source_url, do: "https://www.livenation.com/venue/KovZpZAEkkIA/budweiser-stage-events"

@@ -4,7 +4,7 @@ defmodule MusicListings.Parsing.VenueParsers.RoyThomsonHallParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
-  alias MusicListings.Parsing.VenueParsers.MhRthTdmhParser
+  alias MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser
 
   @roy_thomson_hall_facility_no 13
 

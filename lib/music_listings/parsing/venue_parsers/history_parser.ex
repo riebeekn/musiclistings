@@ -4,7 +4,7 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
-  alias MusicListings.Parsing.VenueParsers.CarbonhouseParser
+  alias MusicListings.Parsing.VenueParsers.BaseParsers.CarbonhouseParser
 
   @impl true
   def source_url, do: "https://www.historytoronto.com/events/events_ajax/0?per_page=60"

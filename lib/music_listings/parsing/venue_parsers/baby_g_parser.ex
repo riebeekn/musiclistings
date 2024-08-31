@@ -4,7 +4,7 @@ defmodule MusicListings.Parsing.VenueParsers.BabyGParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
-  alias MusicListings.Parsing.VenueParsers.BgGarrisonParser
+  alias MusicListings.Parsing.VenueParsers.BaseParsers.BgGarrisonParser
 
   @impl true
   def source_url, do: "http://thebabyg.com"

@@ -1,6 +1,6 @@
-defmodule MusicListings.Parsing.VenueParsers.BgGarrisonParser do
+defmodule MusicListings.Parsing.VenueParsers.BaseParsers.BgGarrisonParser do
   @moduledoc """
-  Common Parser for BabyG/Garrison
+  Base parser for BabyG/Garrison
   """
   import Meeseeks.CSS
 

@@ -1,6 +1,6 @@
-defmodule MusicListings.Parsing.VenueParsers.LiveNationParser do
+defmodule MusicListings.Parsing.VenueParsers.BaseParsers.LiveNationParser do
   @moduledoc """
-  Common parser functions for Live Nation sites
+  Base parser for Live Nation sites
   """
   import Meeseeks.CSS
 

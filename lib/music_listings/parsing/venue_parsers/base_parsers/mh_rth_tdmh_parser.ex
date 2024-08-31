@@ -1,6 +1,6 @@
-defmodule MusicListings.Parsing.VenueParsers.MhRthTdmhParser do
+defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   @moduledoc """
-  Common parser functions for Massey Hall, Roy Thomson Hall and
+  Base parser for Massey Hall, Roy Thomson Hall and
   TD Music Hall, as they are on a single site
   """
 
