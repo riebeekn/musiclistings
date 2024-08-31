@@ -7,7 +7,7 @@ defmodule MusicListingsSchema.Schema do
       use Ecto.Schema
 
       @timestamps_opts [
-        type: :utc_datetime_usec,
+        type: :utc_datetime,
         autogenerate: {MusicListingsUtilities.DateHelpers, :now, []}
       ]
     end
