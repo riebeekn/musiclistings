@@ -13,6 +13,7 @@ defmodule MusicListingsSchema.CrawlSummary do
     field :duplicate, :integer
     field :ignored, :integer
     field :parse_errors, :integer
+    field :completed_at, :utc_datetime
 
     has_many :venue_crawl_summaries, VenueCrawlSummary
     has_many :crawl_errors, CrawlError
