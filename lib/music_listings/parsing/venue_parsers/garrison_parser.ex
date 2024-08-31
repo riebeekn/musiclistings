@@ -4,7 +4,7 @@ defmodule MusicListings.Parsing.VenueParsers.GarrisonParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
-  alias MusicListings.Parsing.VenueParsers.BgGarrisonParser
+  alias MusicListings.Parsing.VenueParsers.BaseParsers.BgGarrisonParser
 
   @impl true
   def source_url, do: "http://www.garrisontoronto.com/listings.html"

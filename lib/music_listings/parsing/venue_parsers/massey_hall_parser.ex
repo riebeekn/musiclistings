@@ -4,7 +4,7 @@ defmodule MusicListings.Parsing.VenueParsers.MasseyHallParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
-  alias MusicListings.Parsing.VenueParsers.MhRthTdmhParser
+  alias MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser
 
   @massey_hall_facility_no 12
 

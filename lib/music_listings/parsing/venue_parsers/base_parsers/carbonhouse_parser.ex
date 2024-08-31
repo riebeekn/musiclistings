@@ -1,6 +1,6 @@
-defmodule MusicListings.Parsing.VenueParsers.CarbonhouseParser do
+defmodule MusicListings.Parsing.VenueParsers.BaseParsers.CarbonhouseParser do
   @moduledoc """
-  Common parser functions for sites using
+  Base parser for sites using
   the https://www.carbonhouse.com/ platform
   """
   import Meeseeks.CSS
