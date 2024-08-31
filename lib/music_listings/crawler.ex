@@ -96,7 +96,8 @@ defmodule MusicListings.Crawler do
       updated: stats.updated,
       duplicate: stats.duplicate,
       ignored: stats.ignored,
-      parse_errors: stats.parse_errors
+      parse_errors: stats.parse_errors,
+      completed_at: DateHelpers.now()
     })
     |> Repo.update()
   end
@@ -133,7 +134,8 @@ defmodule MusicListings.Crawler do
   @spec data_last_updated_on :: String.t()
   def data_last_updated_on do
     CrawlSummary
-    |> order_by([crawl_summary], desc: crawl_summary.updated_at)
+    |> where([crawl_summary], not is_nil(crawl_summary.completed_at))
+    |> order_by([crawl_summary], desc: crawl_summary.completed_at)
     |> limit(1)
     |> Repo.one()
     |> case do
@@ -141,7 +143,7 @@ defmodule MusicListings.Crawler do
         "No data"
 
       last_summary ->
-        last_summary.updated_at
+        last_summary.completed_at
         |> DateHelpers.to_eastern_datetime()
         |> DateHelpers.format_datetime()
     end

@@ -60,15 +60,24 @@ defmodule MusicListings.CrawlerTest do
       assert "No data" == Crawler.data_last_updated_on()
     end
 
-    test "returns the most recent updated at time when data" do
+    test "ignores nil completed_at records" do
       _cs1 =
         CrawlSummariesFixtures.crawl_summary_fixture()
-        |> Ecto.Changeset.change(%{updated_at: ~U[2022-08-07 19:11:40Z]})
+        |> Ecto.Changeset.change(%{completed_at: nil})
+        |> Repo.update!()
+
+      assert "No data" == Crawler.data_last_updated_on()
+    end
+
+    test "returns the most recent completed at time when data" do
+      _cs1 =
+        CrawlSummariesFixtures.crawl_summary_fixture()
+        |> Ecto.Changeset.change(%{completed_at: ~U[2022-08-07 19:11:40Z]})
         |> Repo.update!()
 
       _cs2 =
         CrawlSummariesFixtures.crawl_summary_fixture()
-        |> Ecto.Changeset.change(%{updated_at: ~U[2021-08-07 19:11:40Z]})
+        |> Ecto.Changeset.change(%{completed_at: ~U[2021-08-07 19:11:40Z]})
         |> Repo.update!()
 
       assert "Aug 07 2022" == Crawler.data_last_updated_on()
