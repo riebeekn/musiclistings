@@ -4,9 +4,7 @@ defmodule MusicListings.Parsing.VenueParsers.AdelaideHallParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
-  alias MusicListings.Parsing.ParseHelpers
-  alias MusicListings.Parsing.Performers
-  alias MusicListings.Parsing.Price
+  alias MusicListings.Parsing.VenueParsers.BaseParsers.AdmitOneParser
 
   @impl true
   def source_url,
@@ -17,79 +15,41 @@ defmodule MusicListings.Parsing.VenueParsers.AdelaideHallParser do
   def example_data_file_location, do: "test/data/adelaide_hall/index.json"
 
   @impl true
-  def events(body) do
-    body = ParseHelpers.maybe_decode!(body)
-
-    body["events"]
-  end
+  defdelegate events(body), to: AdmitOneParser
 
   @impl true
-  def next_page_url(_body, _current_url) do
-    # no next page
-    nil
-  end
+  defdelegate next_page_url(body, current_url), to: AdmitOneParser
 
   @impl true
-  def event_id(event) do
-    title = event_title(event)
-    date = event_date(event)
-
-    ParseHelpers.build_id_from_title_and_date(title, date)
-  end
+  defdelegate event_id(event), to: AdmitOneParser
 
   @impl true
-  def ignored_event_id(event) do
-    event_id(event)
-  end
+  defdelegate ignored_event_id(event), to: AdmitOneParser
 
   @impl true
-  def event_title(event) do
-    event["title"]
-  end
+  defdelegate event_title(event), to: AdmitOneParser
 
   @impl true
-  def performers(event) do
-    [event_title(event)]
-    |> Performers.new()
-  end
+  defdelegate performers(event), to: AdmitOneParser
 
   @impl true
-  def event_date(event) do
-    [month_string, day_string, year_string] = event["event_date"] |> String.split()
-
-    ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
-  end
+  defdelegate event_date(event), to: AdmitOneParser
 
   @impl true
-  def additional_dates(_event) do
-    []
-  end
+  defdelegate additional_dates(event), to: AdmitOneParser
 
   @impl true
-  def event_time(event) do
-    event["doors"]
-    |> ParseHelpers.time_string_to_time()
-  end
+  defdelegate event_time(event), to: AdmitOneParser
 
   @impl true
-  def price(event) do
-    event["price_range"]
-    |> Price.new()
-  end
+  defdelegate price(event), to: AdmitOneParser
 
   @impl true
-  def age_restriction(event) do
-    event["age_limit"]
-    |> ParseHelpers.age_restriction_string_to_enum()
-  end
+  defdelegate age_restriction(event), to: AdmitOneParser
 
   @impl true
-  def ticket_url(event) do
-    event["url"]
-  end
+  defdelegate ticket_url(event), to: AdmitOneParser
 
   @impl true
-  def details_url(_event) do
-    nil
-  end
+  defdelegate details_url(event), to: AdmitOneParser
 end
