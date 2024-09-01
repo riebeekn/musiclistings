@@ -24,7 +24,7 @@ defmodule MusicListings.Events do
       Event
       |> where([event], event.date >= ^today)
       |> maybe_filter_by_venue(venue_id)
-      |> order_by([:date, :time, :title])
+      |> order_by([:date, :title])
       |> preload(:venue)
       |> Repo.paginate(page: page, page_size: page_size)
 
