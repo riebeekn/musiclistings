@@ -1,0 +1,76 @@
+{
+  "id": "66b139dee8a36e6e382dbe0c",
+  "collectionId": "62c7b220c14f6e5949312039",
+  "recordType": 12,
+  "addedOn": 1722890901090,
+  "updatedOn": 1724448003504,
+  "starred": false,
+  "passthrough": false,
+  "tags": [],
+  "categories": [],
+  "workflowState": 1,
+  "publishOn": 1722890901090,
+  "authorId": "5f8516e37bdc257439e4158a",
+  "systemDataId": "d63d7a88-376d-48fa-97f1-3d180c452708",
+  "systemDataVariants": "515x288,100w,300w,500w",
+  "systemDataSourceType": "PNG",
+  "filename": "MasterMonth-01.png",
+  "mediaFocalPoint": {
+    "x": 0.5,
+    "y": 0.5,
+    "source": 3
+  },
+  "colorData": {
+    "topLeftAverage": "09100e",
+    "topRightAverage": "09100e",
+    "bottomLeftAverage": "09100e",
+    "bottomRightAverage": "080f0d",
+    "centerAverage": "4c4b46",
+    "suggestedBgColor": "20231e"
+  },
+  "urlId": "y65czs68393fz5y-h99yk-ykcj8",
+  "title": "SUNDAY ",
+  "body": null,
+  "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E2.00 - Polskatonic\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E5.30 - Don Scott Trio\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - Dimitra Kahrimanidis\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E11.00 to 4.00 - Sonic Sancocho\u003C/p\u003E",
+  "location": {
+    "mapZoom": 12,
+    "mapLat": 40.7207559,
+    "mapLng": -74.0007613,
+    "markerLat": 40.7207559,
+    "markerLng": -74.0007613
+  },
+  "customContent": null,
+  "likeCount": 0,
+  "commentCount": 0,
+  "publicCommentCount": 0,
+  "commentState": 2,
+  "unsaved": false,
+  "author": {
+    "id": "5f8516e37bdc257439e4158a",
+    "displayName": "Paula Auchterlonie",
+    "firstName": "Paula",
+    "lastName": "Auchterlonie",
+    "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+    "bio": "",
+    "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+  },
+  "fullUrl": "/events-9O8Cm/y65czs68393fz5y-h99yk-ykcj8",
+  "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/d63d7a88-376d-48fa-97f1-3d180c452708/MasterMonth-01.png",
+  "contentType": "image/png",
+  "structuredContent": {
+    "_type": "CalendarEvent",
+    "startDate": 1725231600123,
+    "endDate": 1725235200123
+  },
+  "startDate": 1725231600123,
+  "endDate": 1725235200123,
+  "items": [],
+  "pushedServices": {
+
+  },
+  "pendingPushedServices": {
+
+  },
+  "originalSize": "515x288",
+  "recordTypeLabel": "event"
+}
