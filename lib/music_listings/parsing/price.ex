@@ -51,6 +51,7 @@ defmodule MusicListings.Parsing.Price do
     |> String.replace("advance", "")
     |> String.replace("$", "")
     |> String.replace("door", "")
+    |> String.replace("cad", "")
     |> String.trim()
   end
 
