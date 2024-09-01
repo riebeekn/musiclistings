@@ -1,0 +1,39 @@
+{
+  "id": "m038i2v7",
+  "name": "PUNKS IN SPACE -Devils Punch Bowl, Kevin Murphy, Stink Box ",
+  "start": {
+    "type": "datetime",
+    "date": "2024-09-16",
+    "time": "21:00"
+  },
+  "end": {
+    "type": "datetime",
+    "date": "2024-09-17",
+    "time": "02:00"
+  },
+  "timeZone": "America/Toronto",
+  "repeatPeriod": "noRepeat",
+  "repeatFrequency": "daily",
+  "repeatInterval": 1,
+  "repeatEnds": "never",
+  "repeatEndsDate": null,
+  "repeatEndsOccurrences": 1,
+  "repeatMonthlyOnDay": "sameDay",
+  "description": "",
+  "image": null,
+  "eventType": null,
+  "location": null,
+  "host": null,
+  "tags": [],
+  "color": "transparent",
+  "buttonVisible": false,
+  "buttonLink": {
+    "rawValue": "",
+    "value": "",
+    "type": "url",
+    "target": "_blank"
+  },
+  "buttonText": "Get Tickets",
+  "buttonCaption": "",
+  "video": null
+}

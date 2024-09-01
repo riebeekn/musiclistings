@@ -1,26 +1,25 @@
-defmodule MusicListings.Parsing.VenueParsers.RebelParser do
+defmodule MusicListings.Parsing.VenueParsers.BovineParser do
   @moduledoc """
-  Parser for extracing events from https://rebeltoronto.com/
+  Parser for extracing events from https://www.bovinesexclub.com/
   """
   @behaviour MusicListings.Parsing.VenueParser
 
   alias MusicListings.Parsing.ParseHelpers
-
   alias MusicListings.Parsing.VenueParsers.BaseParsers.ElfsightParser
 
   @impl true
   def source_url,
     do:
-      "https://core.service.elfsight.com/p/boot/?page=https%3A%2F%2Frebeltoronto.com%2Fevents%2F&w=737e2434-3a70-460f-aa98-a1ec67d0b60b"
+      "https://core.service.elfsight.com/p/boot/?page=https%3A%2F%2Fwww.bovinesexclub.com%2F&w=235dbcca-3a0a-4622-a874-ce1dd5f36933"
 
   @impl true
-  def example_data_file_location, do: "test/data/rebel/index.json"
+  def example_data_file_location, do: "test/data/bovine/index.json"
 
   @impl true
   def events(body) do
     body = ParseHelpers.maybe_decode!(body)
 
-    body["data"]["widgets"]["737e2434-3a70-460f-aa98-a1ec67d0b60b"]["data"]["settings"]["events"]
+    body["data"]["widgets"]["235dbcca-3a0a-4622-a874-ce1dd5f36933"]["data"]["settings"]["events"]
   end
 
   @impl true
