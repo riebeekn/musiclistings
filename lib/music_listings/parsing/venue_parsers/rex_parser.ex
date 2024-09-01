@@ -51,6 +51,7 @@ defmodule MusicListings.Parsing.VenueParsers.RexParser do
   @impl true
   def event_title(event) do
     event["title"]
+    |> ParseHelpers.fix_encoding()
   end
 
   @impl true
