@@ -24,7 +24,7 @@ defmodule MusicListings.Repo.Migrations.SeedMoreVenues2 do
 
     execute """
       INSERT INTO venues(name, parser_module_name, pull_events, street, city, province, country, postal_code, google_map_url)
-      VALUES('Hugh''s Room', 'MusicListings.Parsing.HughsRoomParser', true, '296 Broadview Ave', 'Toronto', 'Ontario', 'Cananda', 'M4M 2G7', 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11544.980882962212!2d-79.3522165!3d43.6638696!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b343741bfe88d%3A0xbaf96a390edf4cf7!2sHugh&#39;s%20Room%20Live!5e0!3m2!1sen!2sca!4v1725219837672!5m2!1sen!2sca')
+      VALUES('Hugh''s Room', 'HughsRoomParser', true, '296 Broadview Ave', 'Toronto', 'Ontario', 'Cananda', 'M4M 2G7', 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11544.980882962212!2d-79.3522165!3d43.6638696!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b343741bfe88d%3A0xbaf96a390edf4cf7!2sHugh&#39;s%20Room%20Live!5e0!3m2!1sen!2sca!4v1725219837672!5m2!1sen!2sca')
     """
   end
 
