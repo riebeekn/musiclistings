@@ -1,0 +1,2719 @@
+{
+  "status": 1,
+  "data": {
+    "widgets": {
+      "235dbcca-3a0a-4622-a874-ce1dd5f36933": {
+        "status": 1,
+        "data": {
+          "app": "events-calendar",
+          "settings": {
+            "events": [
+              {
+                "id": "m0ed66t0",
+                "name": "Devils Punch Bowl, Kevin Murphy, Stink Box ",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-09-16",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-09-16",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "",
+                "image": null,
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "m0ed3d28",
+                "name": "Sunday Service ",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-09-15",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-09-15",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "\u003Cdiv\u003EOpen Mic \u003C/div\u003E",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/3fd0aac3-1d0b-4455-b72a-1a9868e73507/Sunday-Service.jpg",
+                  "name": "Sunday Service.jpeg",
+                  "size": 129349,
+                  "type": "image/jpeg",
+                  "extension": "jpg",
+                  "width": 580,
+                  "height": 476
+                },
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "m0ecz6ot",
+                "name": "FUZZED & BUZZED - Starbeast Album Release Show; Sun Below + Space Beast",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-09-13",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-09-13",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/35235b17-42b4-407c-a379-9590674a7e7c/STAWR.jpg",
+                  "name": "STAWR.jpeg",
+                  "size": 292428,
+                  "type": "image/jpeg",
+                  "extension": "jpg",
+                  "width": 790,
+                  "height": 971
+                },
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "m0ecw2ob",
+                "name": "Locater, Seventh Dose, Uncaught, So perfect ",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-09-10",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-09-10",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/15fca352-ea2a-4bd6-84ad-209e7272808e/IMG_3769.jpg",
+                  "name": "IMG_3769.jpeg",
+                  "size": 348290,
+                  "type": "image/jpeg",
+                  "extension": "jpg",
+                  "width": 1170,
+                  "height": 1460
+                },
+                "eventType": "lb2iubv0",
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "m0ecsrlw",
+                "name": "Bruce La Bruce vs TIFF",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-09-07",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-09-07",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/bce49694-9949-4e05-b491-21b43c971e27/BLAB-VS-TIFF-2024-FLIER-UPDATED.gif",
+                  "name": "BLAB VS TIFF 2024 FLIER UPDATED.gif",
+                  "size": 358135,
+                  "type": "image/gif",
+                  "extension": "gif",
+                  "width": 1483,
+                  "height": 1920
+                },
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "m0ecq53j",
+                "name": "Pussy Whipped Wednesday + The Cramps City Devils ",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-09-11",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-09-11",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/49c16866-0cae-43cc-a221-1a6402ad152e/Uh.jpg",
+                  "name": "Uh.jpeg",
+                  "size": 526231,
+                  "type": "image/jpeg",
+                  "extension": "jpg",
+                  "width": 1511,
+                  "height": 1895
+                },
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "m0ecp35m",
+                "name": "Art Unhoused ",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-09-03",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-09-03",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "\u003Cdiv\u003EPWYC Music &amp; Art Show \u003C/div\u003E",
+                "image": null,
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "m0ecm590",
+                "name": "Sunshine Makers, Amanda Novio + Guests ",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-09-01",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-09-01",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "\u003Cdiv\u003ETICKETS HERE: \u003Ca href=\"https://fannatickets.com/event/sunshine-makers-w-amanda-movio-and-special-guests-at-bovine-sex-club-toronto-315/register\"\u003Ehttps://fannatickets.com/event/sunshine-makers-w-amanda-movio-and-special-guests-at-bovine-sex-club-toronto-315/register\u003C/a\u003E\u003C/div\u003E",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/f9455ec7-0dde-4190-85ad-066ed4dffe61/image0.jpg",
+                  "name": "image0.jpeg",
+                  "size": 84075,
+                  "type": "image/jpeg",
+                  "extension": "jpg",
+                  "width": 318,
+                  "height": 412
+                },
+                "eventType": "lb2iveql",
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "m0ecd2qu",
+                "name": "Detest, Iron Moose, Yung $cumz, The Dominion, Mental Infliction",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-08-31",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-08-31",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "\u003Cdiv\u003E$10 Admission \u003C/div\u003E",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/17aa9690-820e-494d-b271-4efcffe78906/IMG_3768.jpg",
+                  "name": "IMG_3768.jpg",
+                  "size": 429673,
+                  "type": "image/jpeg",
+                  "extension": "jpg",
+                  "width": 1170,
+                  "height": 1163
+                },
+                "eventType": "lb2iubv0",
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "m038l1sl",
+                "name": "FUZZED & BUZZED STARBEAST ALBUM RELEASE SHOW - Sun Below, Space Pope ",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-09-14",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-09-14",
+                  "time": "22:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "",
+                "image": null,
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "m038i2v7",
+                "name": "PUNKS IN SPACE -Devils Punch Bowl, Kevin Murphy, Stink Box ",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-09-16",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-09-17",
+                  "time": "02:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "",
+                "image": null,
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "m038fn61",
+                "name": "Sunday Service Chuck Coles ",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-09-15",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-09-16",
+                  "time": "02:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "\u003Cdiv\u003EOpen Mic Night \u003C/div\u003E",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/47c63dff-2efb-4dae-9f77-35893d41d70a/IMG_1234.jpg",
+                  "name": "IMG_1234.jpeg",
+                  "size": 129349,
+                  "type": "image/jpeg",
+                  "extension": "jpg",
+                  "width": 580,
+                  "height": 476
+                },
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "m038e7d2",
+                "name": "6Pistols, Come Back Kid, Organ Thieves ",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-09-12",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-09-13",
+                  "time": "02:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "",
+                "image": null,
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "m038b3bu",
+                "name": "Iron Moose, Yung Scumz, The Dominion Detest",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-08-31",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-09-01",
+                  "time": "04:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "",
+                "image": null,
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "m0385wgs",
+                "name": "Grant Boyer, Aciidz, Flight 97, Cudbear, Bloody Monroe",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-08-30",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-08-31",
+                  "time": "04:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/148f0d3e-70af-4ae1-b677-6c0b246cf967/IMG_3322.jpg",
+                  "name": "IMG_3322.jpeg",
+                  "size": 335270,
+                  "type": "image/jpeg",
+                  "extension": "jpg",
+                  "width": 1170,
+                  "height": 1182
+                },
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "m0384kt6",
+                "name": "In Your Walls, Nu Xenith, Vice Gardens, Crimson Road ",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-08-29",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-08-30",
+                  "time": "04:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "",
+                "image": null,
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "m037rz9h",
+                "name": "Sex Cat, Thinly Veiled Double Enterdras, Caleb, Night Chill ",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-08-27",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-08-28",
+                  "time": "02:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/71f3eaee-9f13-4e37-9220-e8f92d3a108b/IMG_3320.jpg",
+                  "name": "IMG_3320.jpeg",
+                  "size": 325042,
+                  "type": "image/jpeg",
+                  "extension": "jpg",
+                  "width": 1170,
+                  "height": 1460
+                },
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "m037k1gm",
+                "name": "MUDSLIDE PRODUCTIONS - The Local Prospects, The Duvets, The Hounds of Thunder, Ted Axe ",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-08-22",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-08-23",
+                  "time": "04:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "\u003Cdiv\u003E$15 at door \u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003E\u003C/div\u003E",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/7c933106-959d-4cc6-86a2-ce5ef96b5304/ugh.jpg",
+                  "name": "ugh.jpeg",
+                  "size": 502487,
+                  "type": "image/jpeg",
+                  "extension": "jpg",
+                  "width": 1170,
+                  "height": 1176
+                },
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "m036uu9r",
+                "name": "Tiger Beat - Pussy Whipped Wednesdays ",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-08-21",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-08-21",
+                  "time": "21:42"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "\u003Cdiv\u003E$10 at door\u003C/div\u003E",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/7295f5c5-daa1-414b-aa4f-c0d733e061d7/IMG_3318.jpg",
+                  "name": "IMG_3318.jpeg",
+                  "size": 293379,
+                  "type": "image/jpeg",
+                  "extension": "jpg",
+                  "width": 739,
+                  "height": 1166
+                },
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null,
+                "isAllDay": true
+              },
+              {
+                "id": "lzdb468x",
+                "name": "Meredith Moon Music, Yes Ma'am the band, Noble Hobo, Uncle Old Thyme",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-08-06",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-08-06",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "",
+                "image": null,
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "lzdauib6",
+                "name": "LADIES NIGHT - Boom Shaka Lakas ",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-08-23",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-08-23",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "\u003Cdiv\u003E70's Disco dance party\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003ETICKETS: \u003Ca href=\"https://fannatickets.com/event/ladies-night-70s-disco-dance-party-w-the-boom-shaka-lakas-at-bovine-sex-club-toronto-313/register\"\u003Ehttps://fannatickets.com/event/ladies-night-70s-disco-dance-party-w-the-boom-shaka-lakas-at-bovine-sex-club-toronto-313/register\u003C/a\u003E\u003C/div\u003E",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/d0b2511a-e4db-4d92-a0e3-2eaa78610817/Boom.jpg",
+                  "name": "Boom.jpeg",
+                  "size": 636852,
+                  "type": "image/jpeg",
+                  "extension": "jpg",
+                  "width": 1504,
+                  "height": 1877
+                },
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "lzdas2t9",
+                "name": "SUMMER OF DESTRUCTION ",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-08-17",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-08-17",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "\u003Cdiv\u003EAfter the Horizon, Bank Heist \u003C/div\u003E",
+                "image": null,
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "lzdaqrmy",
+                "name": "Taking Back Thursday ",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-08-15",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-08-15",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "",
+                "image": null,
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "lzdakqs1",
+                "name": "Art Unhoused",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-08-13",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-08-13",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "",
+                "image": null,
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "lzdaiikc",
+                "name": "After Prom vs Eric ",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-08-08",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-08-08",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "\u003Cdiv\u003EAfterProm Records &amp; Erics Backyard \u003C/div\u003E",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/89136fd7-dca1-4011-ad23-9ec9550845cb/Prom.jpg",
+                  "name": "Prom.jpeg",
+                  "size": 323826,
+                  "type": "image/jpeg",
+                  "extension": "jpg",
+                  "width": 1169,
+                  "height": 1456
+                },
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "lzdadmjb",
+                "name": "WHAM BAM! Pussy Whipped Wednesdays ",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-08-07",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-08-07",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/2a32915f-391a-4ae9-9abf-5f0858f71cec/Wham-Bam-.jpg",
+                  "name": "Wham Bam .jpeg",
+                  "size": 128529,
+                  "type": "image/jpeg",
+                  "extension": "jpg",
+                  "width": 400,
+                  "height": 500
+                },
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "lzda1gfi",
+                "name": "Feura, Frank Dux, & Big Milk ",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-08-03",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-08-04",
+                  "time": "04:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/c750ef60-faa7-4eb9-8060-43dc56f1f8c1/Big-milk.jpg",
+                  "name": "Big milk.jpeg",
+                  "size": 333989,
+                  "type": "image/jpeg",
+                  "extension": "jpg",
+                  "width": 585,
+                  "height": 731
+                },
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "lxntpu4a",
+                "name": "Astral Witch, Verona Florist, Queen of Swords",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-06-29",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-06-29",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "",
+                "image": null,
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "lxntjb32",
+                "name": "Mgrasker, The Beach Bats, Nic & The Narcs, w/ Laura Leibow",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-06-27",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-06-27",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "\u003Cdiv\u003E15$ Admission @ door, 10$ in advanced \u003C/div\u003E",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/69d69e66-cbd9-4286-84ce-1cc83e3e2e1d/27th.jpg",
+                  "name": "27th.jpeg",
+                  "size": 412560,
+                  "type": "image/jpeg",
+                  "extension": "jpg",
+                  "width": 1169,
+                  "height": 1137
+                },
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "lxnt9x9c",
+                "name": "Tiger Party PWW",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-06-26",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-06-26",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "\u003Cdiv\u003E10$ Admission \u003C/div\u003E",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/30529f21-a18c-48f8-a821-b88996d78585/Tiger-Party.png",
+                  "name": "Tiger Party.png",
+                  "size": 695122,
+                  "type": "image/png",
+                  "extension": "png",
+                  "width": 480,
+                  "height": 738
+                },
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "lxnt5pnj",
+                "name": "Seltzers & Red Lipstick: CLOWN PARTY ",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-06-23",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-06-23",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "",
+                "image": null,
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "lxnsfr2u",
+                "name": "Montieth, Excuses Excuses, Jailbirds ",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-06-21",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-06-22",
+                  "time": "01:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "",
+                "image": null,
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "lwdu5za1",
+                "name": "CMW June 1st - 8th",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-06-01",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-06-08",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/c80deb3a-4e7f-4316-8894-45f8c7f4f1e7/Screenshot-2024-05-19-at-1-53-07-PM.png",
+                  "name": "Screenshot 2024-05-19 at 1.53.07 PM.png",
+                  "size": 300566,
+                  "width": 608,
+                  "height": 514,
+                  "type": "image/png",
+                  "extension": "png"
+                },
+                "eventType": "lo7jk0yp",
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "lwdt6qw8",
+                "name": "The Bellevues, Lucid Smog Disorder",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-05-19",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-05-19",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "\u003Cdiv\u003EThe Bellevues\u003C/div\u003E\u003Cdiv\u003ELucid Smog Disorder\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003E\u003Cstrong\u003EDoors 9pm, 19+, $10\u003C/strong\u003E\u003C/div\u003E",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/6f198471-f5fb-4818-b052-1eeab3feac4f/may19.jpg",
+                  "name": "may19.jpeg",
+                  "size": 281500,
+                  "width": 1440,
+                  "height": 1440,
+                  "type": "image/jpeg",
+                  "extension": "jpg"
+                },
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "lvy5bkgk",
+                "name": "Afterbirth Cartoons, Small Man Big Mouth, Electrokat",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-05-30",
+                  "time": "14:13"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-05-30",
+                  "time": "14:13"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "\u003Cdiv\u003EAfterbirth Cartoons\u003C/div\u003E\u003Cdiv\u003ESmall Man Big Mouth\u003C/div\u003E\u003Cdiv\u003EElectrokat\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003E\u003Cstrong\u003EDoors 9pm, 19+, $10\u003C/strong\u003E\u003C/div\u003E",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/ea8191cf-573e-4f62-a25e-4bde508ded62/IMG_2804.jpg",
+                  "name": "IMG_2804.jpeg",
+                  "size": 681468,
+                  "width": 747,
+                  "height": 729,
+                  "type": "image/jpeg",
+                  "extension": "jpg"
+                },
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "lvy51km1",
+                "name": "North By North",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-05-26",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-05-26",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "\u003Cdiv\u003ENorth By North\u003C/div\u003E\u003Cdiv\u003Emore TBA\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003E\u003Cstrong\u003EDoors 9pm, 19+, $TBA\u003C/strong\u003E\u003C/div\u003E",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/6855d430-8fe7-43ee-98a2-a64a0d83d49d/may26.png",
+                  "name": "may26.png",
+                  "size": 2593110,
+                  "width": 1036,
+                  "height": 1150,
+                  "type": "image/png",
+                  "extension": "png"
+                },
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "lvy4kjkk",
+                "name": "Nepenthe, Cogadh, Arktheos",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-05-25",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-05-25",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "\u003Cdiv\u003EBonecrusher presents\u003C/div\u003E\u003Cdiv\u003ENepenthe\u003C/div\u003E\u003Cdiv\u003ECogadh\u003C/div\u003E\u003Cdiv\u003EArktheos\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003E\u003Cstrong\u003EDoors 9pm, 19+, $15 adv\u003C/strong\u003E\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003E\u003Ca href=\"https://www.facebook.com/events/377932538425911\" rel=\"noopener noreferrer\" target=\"_blank\"\u003Ehttps://www.facebook.com/events/377932538425911\u003C/a\u003E\u003C/div\u003E",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/46d35943-8819-4300-829e-30531ca1eb62/IMG_2801.jpg",
+                  "name": "IMG_2801.jpeg",
+                  "size": 193952,
+                  "width": 1080,
+                  "height": 566,
+                  "type": "image/jpeg",
+                  "extension": "jpg"
+                },
+                "eventType": "lg9uhoxd",
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": true,
+                "buttonLink": {
+                  "rawValue": "https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.eventbrite.ca%2Fe%2F838368571967%3Ffbclid%3DIwZXh0bgNhZW0CMTAAAR0QjpmAxVxq28DpnMFz1GpcTnDpCy3-kwhHdO02nzGpiIwHcA7WXYrogto_aem_AYZqxEU6iTn7zJxp49ce7a9YoaiJRXtYJVSDwsRzEtlAqXGL2McygCHNT_ERlIwgh13EQwfxxmZAhtNWIpzGVcBk&h=AT2mkK-4euhxaql90WyJOqmjLIm9nFx46IJinc3jKV_qQQY9dxipvPGJc-eqnvgi1tjtBJxWvkeKJdGdvns69HdUd5Pr4PAB9Okb2m0qGFWd3RPNCRlXbxeu-E6ZyGRT5Wu3t4k&__tn__=q&c[0]=AT3zGNzguEfzP2p5swLZnHeBH6jph-6fLx5Rk0Lv8sZ_R7hErPTgLhqqH8H6grpevoc66-xTxmVGMnFYk9_SCnNeJ--6z5YQIedyc6_tFuGMDF22FFGtJrufW7T1ZSkkOUI1pfsLcW6iTLOl6cqzvYy7r376IaJrezDJI9byVN_t-6q06wvo",
+                  "value": "https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.eventbrite.ca%2Fe%2F838368571967%3Ffbclid%3DIwZXh0bgNhZW0CMTAAAR0QjpmAxVxq28DpnMFz1GpcTnDpCy3-kwhHdO02nzGpiIwHcA7WXYrogto_aem_AYZqxEU6iTn7zJxp49ce7a9YoaiJRXtYJVSDwsRzEtlAqXGL2McygCHNT_ERlIwgh13EQwfxxmZAhtNWIpzGVcBk&h=AT2mkK-4euhxaql90WyJOqmjLIm9nFx46IJinc3jKV_qQQY9dxipvPGJc-eqnvgi1tjtBJxWvkeKJdGdvns69HdUd5Pr4PAB9Okb2m0qGFWd3RPNCRlXbxeu-E6ZyGRT5Wu3t4k&__tn__=q&c[0]=AT3zGNzguEfzP2p5swLZnHeBH6jph-6fLx5Rk0Lv8sZ_R7hErPTgLhqqH8H6grpevoc66-xTxmVGMnFYk9_SCnNeJ--6z5YQIedyc6_tFuGMDF22FFGtJrufW7T1ZSkkOUI1pfsLcW6iTLOl6cqzvYy7r376IaJrezDJI9byVN_t-6q06wvo",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "lvo4v47a",
+                "name": "Danny Miles of July Talk",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-05-23",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-05-23",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "\u003Cdiv\u003EDanny Miles of July Talk\u003C/div\u003E\u003Cdiv\u003Ewith sets from:\u003C/div\u003E\u003Cdiv\u003ESwamp Thing\u003C/div\u003E\u003Cdiv\u003ELee Reed\u003C/div\u003E\u003Cdiv\u003EWordburglar\u003C/div\u003E\u003Cdiv\u003EMore or Les\u003C/div\u003E\u003Cdiv\u003ENilla\u003C/div\u003E\u003Cdiv\u003EAnthony Haley\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003EDoors 9pm, 19+, $12 adv $15 door\u003C/div\u003E",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/0b26bf6a-859f-4cdd-97fa-ae8a2d61e89b/IMG_2802.jpg",
+                  "name": "IMG_2802.jpeg",
+                  "size": 496265,
+                  "width": 1350,
+                  "height": 1687,
+                  "type": "image/jpeg",
+                  "extension": "jpg"
+                },
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": true,
+                "buttonLink": {
+                  "rawValue": "https://fannatickets.com/event/danny-miles-beautiful-music-w-special-guests-live-at-bovine-sex-club-toronto-206/register",
+                  "value": "https://fannatickets.com/event/danny-miles-beautiful-music-w-special-guests-live-at-bovine-sex-club-toronto-206/register",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "lveg7zry",
+                "name": "Mgrasker with The Beach Bats, Nic and the Narcs, Comedy by Laura Leibow",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-06-27",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-06-27",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "\u003Cdiv\u003EMgrasker with\u003C/div\u003E\u003Cdiv\u003EThe Beach Bats\u003C/div\u003E\u003Cdiv\u003ENic and the Narcs\u003C/div\u003E\u003Cdiv\u003EComedy by Laura Leibow\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003EProceeds going to Pride\u003C/div\u003E\u003Cdiv\u003E\u003Cstrong\u003EDoors 9pm, 19+, $10 adv $15 door\u003C/strong\u003E\u003C/div\u003E",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/928bcd3b-7c64-45ce-8e06-0de5fdd4461e/June27.jpg",
+                  "name": "June27.jpeg",
+                  "size": 407398,
+                  "width": 1024,
+                  "height": 1024,
+                  "type": "image/jpeg",
+                  "extension": "jpg"
+                },
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": true,
+                "buttonLink": {
+                  "rawValue": "https://fannatickets.com/event/mgrasker-w-the-beach-bats-and-nic-and-the-narcs-ft-comedy-by-laura-leibow-at-bovine-sex-club-toronto-225/register",
+                  "value": "https://fannatickets.com/event/mgrasker-w-the-beach-bats-and-nic-and-the-narcs-ft-comedy-by-laura-leibow-at-bovine-sex-club-toronto-225/register",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "lvefrivf",
+                "name": "The Petras, In Your Walls, Rogue Rising, Red Carpet Revival",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-06-22",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-06-22",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "\u003Cdiv\u003EThe Petras\u003C/div\u003E\u003Cdiv\u003EIn Your Walls\u003C/div\u003E\u003Cdiv\u003ERed Carpet Revival\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003E\u003Cstrong\u003EDoors 9pm, 19+, $15\u003C/strong\u003E\u003C/div\u003E",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/25bf4829-a346-47dd-98d0-90f5f8032080/june22.jpg",
+                  "name": "june22.jpg",
+                  "size": 631691,
+                  "width": 1080,
+                  "height": 1340,
+                  "type": "image/jpeg",
+                  "extension": "jpg"
+                },
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "lvefiyh6",
+                "name": "Jenny Don't and The Spurs, Gregory Childs & Heart Lung, Sleeping Jean",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-06-10",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-06-10",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "\u003Cdiv\u003EJenny Don't and The Spurs\u003C/div\u003E\u003Cdiv\u003EGregory Childs &amp; Heart Lung\u003C/div\u003E\u003Cdiv\u003ESleeping Jean\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003EDoors 9pm, 19+, $12 adv\u003C/div\u003E",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/f99a324e-1207-4219-8b02-ff2b0fb48694/june10.jpg",
+                  "name": "june10.jpg",
+                  "size": 695164,
+                  "width": 938,
+                  "height": 1552,
+                  "type": "image/jpeg",
+                  "extension": "jpg"
+                },
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "lukbjgau",
+                "name": "Mash Up/Bash Up burlesque",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-04-10",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-04-10",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "\u003Cdiv\u003ECelebrate the debauchery with your favourite cretins at MashUp/ Mash Up Bash Up! (As seen in the Toronto Star!)\u003C/div\u003E\u003Cdiv\u003EAll your favourite Mash Up Mixes played all night and stripped too!\u003C/div\u003E\u003Cdiv\u003ESpecial Guests Aza Lia and Midnight Wolverine\u003C/div\u003E\u003Cdiv\u003EMore Burlesque By\u003C/div\u003E\u003Cdiv\u003EAllysin Chaynes\u003C/div\u003E\u003Cdiv\u003EEl Toro\u003C/div\u003E\u003Cdiv\u003EDolly Berlin\u003C/div\u003E\u003Cdiv\u003ETanya Cheex\u003C/div\u003E\u003Cdiv\u003EGoGo by Paige Turner\u003C/div\u003E\u003Cdiv\u003ETunes Spun By Dj Johnny B. Goode\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003E\u003Cstrong\u003EDoors 9pm, 19+, $10\u003C/strong\u003E\u003C/div\u003E",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/780a1c44-2414-4dd9-9938-c9ee2a107950/apr10.jpg",
+                  "name": "apr10.jpeg",
+                  "size": 777373,
+                  "width": 850,
+                  "height": 1100,
+                  "type": "image/jpeg",
+                  "extension": "jpg"
+                },
+                "eventType": "lb2hq77c",
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "lubgupx8",
+                "name": "Villain, Mountain Dust, Tumble",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-05-24",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-05-24",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "\u003Cdiv\u003EVillain\u003C/div\u003E\u003Cdiv\u003EMountain Dust\u003C/div\u003E\u003Cdiv\u003ETumble\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003E\u003Cstrong\u003EDoors 9pm, 19+, $17 adv\u003C/strong\u003E\u003C/div\u003E",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/3758fb03-0ad4-4791-982f-b4f0696a86b2/may24.jpg",
+                  "name": "may24.jpeg",
+                  "size": 3003961,
+                  "width": 2048,
+                  "height": 2048,
+                  "type": "image/jpeg",
+                  "extension": "jpg"
+                },
+                "eventType": "lg9uhoxd",
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": true,
+                "buttonLink": {
+                  "rawValue": "https://www.eventbrite.ca/e/villain-mountain-dust-tumble-tickets-867072766987?fbclid=IwAR0tfnydac4H-PY5goUegC0TxMRUm0zTzjtAkFJlmyvGL1eHVbRiYqXBHlI_aem_AW6Xv0iWRj_PsCplpTjYbULhHg9fRcVqjNcw85lLBQRbH3e29a0PyG4NK5I9O-lWdym3plj1RGxyOPyhq8nwS0Pl",
+                  "value": "https://www.eventbrite.ca/e/villain-mountain-dust-tumble-tickets-867072766987?fbclid=IwAR0tfnydac4H-PY5goUegC0TxMRUm0zTzjtAkFJlmyvGL1eHVbRiYqXBHlI_aem_AW6Xv0iWRj_PsCplpTjYbULhHg9fRcVqjNcw85lLBQRbH3e29a0PyG4NK5I9O-lWdym3plj1RGxyOPyhq8nwS0Pl",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "lthiecuz",
+                "name": "Stop.Drop.Rewind, Cleveland Avenue, Northpark, Lostvoy",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-05-27",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-05-27",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "\u003Cdiv\u003EStop.Drop.Rewind\u003C/div\u003E\u003Cdiv\u003ECleveland Avenue\u003C/div\u003E\u003Cdiv\u003ENorthpark\u003C/div\u003E\u003Cdiv\u003ELostvoy\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003E\u003Cstrong\u003EDoors 9pm, 19+, $tba\u003C/strong\u003E\u003C/div\u003E",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/a45d15e3-c5e4-4500-b442-1601c2834e3e/mar27.jpg",
+                  "name": "mar27.jpg",
+                  "size": 217934,
+                  "width": 1080,
+                  "height": 1080,
+                  "type": "image/jpeg",
+                  "extension": "jpg"
+                },
+                "eventType": null,
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "ls3rxuch",
+                "name": "Mash Up/Bash Up! burlesque",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-03-13",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-03-13",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "\u003Cdiv\u003ECelebrate the debauchery with your favourite cretins at MashUp/ Mash Up Bash Up! (As seen in the Toronto Star!)\u003C/div\u003E\u003Cdiv\u003EAll your favourite Mash Up Mixes played all night and stripped too!\u003C/div\u003E\u003Cdiv\u003ESpecial Guests Fatima Noor Mahmoud, Dottie Champagne and Eda Mami (Calgary)!\u003C/div\u003E\u003Cdiv\u003EMore Burlesque By\u003C/div\u003E\u003Cdiv\u003EAllysin Chaynes\u003C/div\u003E\u003Cdiv\u003EEl Toro\u003C/div\u003E\u003Cdiv\u003EDolly Berlin\u003C/div\u003E\u003Cdiv\u003EAviva The Mirage\u003C/div\u003E\u003Cdiv\u003ETanya Cheex\u003C/div\u003E\u003Cdiv\u003EGoGo by Starlotte Satine\u003C/div\u003E\u003Cdiv\u003ETunes Spun By Dj Vivs\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003E\u003Ca href=\"https://www.facebook.com/events/776076597303112\" rel=\"noopener noreferrer\" target=\"_blank\"\u003Ehttps://www.facebook.com/events/776076597303112\u003C/a\u003E\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003E\u003Cstrong\u003EDoors 9pm, 19+, $10\u003C/strong\u003E\u003C/div\u003E",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/86ea2153-b472-4f5b-8b89-7c8491071de7/mar13.jpg",
+                  "name": "mar13.JPG",
+                  "size": 450640,
+                  "width": 1080,
+                  "height": 1351,
+                  "type": "image/jpeg",
+                  "extension": "jpg"
+                },
+                "eventType": "lb2hq77c",
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "lqzigq09",
+                "name": "Dances The Cramps Taught Us burlesque",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-05-22",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-05-22",
+                  "time": "21:00"
+                },
+                "timeZone": "America/Toronto",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "\u003Cdiv\u003EToronto's Trashiest Party is back with the return of Dances The Cramps Taught Us! Special guest Laura Desiree!\u003C/div\u003E\u003Cdiv\u003EBurlesque by\u003C/div\u003E\u003Cdiv\u003EAllysin Chaynes\u003C/div\u003E\u003Cdiv\u003EDolly Berlin\u003C/div\u003E\u003Cdiv\u003EAviva the Mirage\u003C/div\u003E\u003Cdiv\u003ETanya Cheex\u003C/div\u003E\u003Cdiv\u003EGoGo by Starlotte Satine\u003C/div\u003E\u003Cdiv\u003EDJ Vivs\u003C/div\u003E\u003Cdiv\u003EChicken Dances and good times!\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003E\u003Cstrong\u003EDoors 9pm, 19+, $10\u003C/strong\u003E\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003E\u003Ca href=\"https://www.facebook.com/events/406810525599304\" rel=\"noopener noreferrer\" target=\"_blank\"\u003Ehttps://www.facebook.com/events/406810525599304\u003C/a\u003E\u003C/div\u003E",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/d466e5b2-2d56-4e18-baf5-90f33532865a/May22.jpg",
+                  "name": "May22.jpeg",
+                  "size": 517386,
+                  "width": 1638,
+                  "height": 2048,
+                  "type": "image/jpeg",
+                  "extension": "jpg"
+                },
+                "eventType": "lb2hq77c",
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null
+              },
+              {
+                "id": "lk5y4ebv",
+                "name": "Terror Beat burlesque",
+                "start": {
+                  "type": "datetime",
+                  "date": "2023-10-31",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2023-10-31",
+                  "time": "21:00"
+                },
+                "timeZone": "US/Eastern",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "\u003Cdiv\u003EPussy Whipped Wednesdays presents\u003C/div\u003E\u003Cdiv\u003ETerror Beat burlesque\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003EPwwednesdays on a Tuesday for this special Halloween edition!\u003C/div\u003E\u003Cdiv\u003EBurlesque by\u003C/div\u003E\u003Cdiv\u003EForca\u003C/div\u003E\u003Cdiv\u003EDr.Orifice\u003C/div\u003E\u003Cdiv\u003EEl Toro\u003C/div\u003E\u003Cdiv\u003EDolly Berlin\u003C/div\u003E\u003Cdiv\u003EAllysin Chaynes\u003C/div\u003E\u003Cdiv\u003EAviva the Mirage\u003C/div\u003E\u003Cdiv\u003EGoGo by Paige Turner and Starlotte Satine\u003C/div\u003E\u003Cdiv\u003ELive music by Kilroy A.D.\u003C/div\u003E\u003Cdiv\u003ETunes spun by DJ Vivs\u003C/div\u003E\u003Cdiv\u003EDress up to win costume contest!\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003E\u003Cstrong\u003EDoors 9pm, 19+, $10\u003C/strong\u003E\u003C/div\u003E",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/7b807a9e-1e20-496b-886f-b9db9c18ef5f/oct31.jpg",
+                  "name": "oct31.jpeg",
+                  "size": 589931,
+                  "width": 1325,
+                  "height": 2048,
+                  "type": "image/jpeg",
+                  "extension": "jpg"
+                },
+                "eventType": "lb2hq77c",
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null,
+                "repeatWeeklyOnDays": [
+                  "we"
+                ],
+                "$$key": [
+                  "events",
+                  20]
+              },
+              {
+                "id": "ljj05o47",
+                "name": "WHAM BAM! Burlesque",
+                "start": {
+                  "type": "datetime",
+                  "date": "2023-11-15",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2023-11-15",
+                  "time": "21:00"
+                },
+                "timeZone": "US/Eastern",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "\u003Cdiv\u003EPussy Whipped Wednesdays presents\u003C/div\u003E\u003Cdiv\u003EWHAM BAM! Burlesque with\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003ERed Tongued Raven\u003C/div\u003E\u003Cdiv\u003EEsther Deville\u003C/div\u003E\u003Cdiv\u003EBianca Boom Boom\u003C/div\u003E\u003Cdiv\u003EEl Toro\u003C/div\u003E\u003Cdiv\u003EDolly Berlin\u003C/div\u003E\u003Cdiv\u003EAviva the Mirage\u003C/div\u003E\u003Cdiv\u003ETanya Cheex\u003C/div\u003E\u003Cdiv\u003EGoGo by Starlotte Satine\u003C/div\u003E\u003Cdiv\u003ETunes spun by DJ Vivs\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003E\u003Cstrong\u003EDoors 9pm,19+, $10\u003C/strong\u003E\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003E\u003Ca href=\"https://www.facebook.com/events/278005178566549\" rel=\"noopener noreferrer\" target=\"_blank\"\u003Ehttps://www.facebook.com/events/278005178566549\u003C/a\u003E\u003C/div\u003E",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/f62e5fc0-9336-4c26-9bcc-95f33530af14/nov15.jpg",
+                  "name": "nov15.jpeg",
+                  "size": 840131,
+                  "width": 1638,
+                  "height": 2048,
+                  "type": "image/jpeg",
+                  "extension": "jpg"
+                },
+                "eventType": "lb2hq77c",
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null,
+                "repeatWeeklyOnDays": [
+                  "we"
+                ],
+                "$$key": [
+                  "events",
+                  22]
+              },
+              {
+                "id": "lhw88dqj",
+                "name": "Dick or No Dick",
+                "start": {
+                  "type": "datetime",
+                  "date": "2024-05-09",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2024-05-09",
+                  "time": "21:00"
+                },
+                "timeZone": "US/Eastern",
+                "repeatPeriod": "noRepeat",
+                "repeatFrequency": "daily",
+                "repeatInterval": 1,
+                "repeatEnds": "never",
+                "repeatEndsDate": null,
+                "repeatEndsOccurrences": 1,
+                "repeatMonthlyOnDay": "sameDay",
+                "description": "\u003Cdiv\u003EDick or No Dick\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003EA comedy bar game where people guess whether Craigslist hookup ads will have dick pics in them\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003ETwo contestants take the stage\u003C/div\u003E\u003Cdiv\u003E- We read out the title of a Craigslist hookup ad\u003C/div\u003E\u003Cdiv\u003E- Contestants guess whether the ad will have a dick pic\u003C/div\u003E\u003Cdiv\u003E- Winner cocks, loser walks\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003E\u003Ca href=\"https://www.facebook.com/events/1549498459279467\" rel=\"noopener noreferrer\" target=\"_blank\"\u003Ehttps://www.facebook.com/events/1549498459279467\u003C/a\u003E\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003E\u003Cstrong\u003EDoors 9pm, 19+, $10\u003C/strong\u003E\u003C/div\u003E",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/7f2b4178-2974-45bd-b246-eac9b8cfac9b/may9.jpg",
+                  "name": "may9.jpeg",
+                  "size": 401103,
+                  "width": 1749,
+                  "height": 1005,
+                  "type": "image/jpeg",
+                  "extension": "jpg"
+                },
+                "eventType": "ldakp5y7",
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null,
+                "$$key": [
+                  "events",
+                  23]
+              },
+              {
+                "id": "lfo4gux0",
+                "name": "Songs The Pogues Taught Us burlesque",
+                "start": {
+                  "type": "datetime",
+                  "date": "2023-12-27",
+                  "time": "21:00"
+                },
+                "end": {
+                  "type": "datetime",
+                  "date": "2023-12-27",
+                  "time": "21:00"
+                },
+                "timeZone": "US/Eastern",
+                "repeatPeriod": "noRepeat",
+                "description": "\u003Cdiv\u003ERum, S0d0my and the Sn@tch! PWWEDNESDAYS Presents a special tribute to Shane MacGowan and The Pogues!\u003C/div\u003E\u003Cdiv\u003EFeaturing Finny McConnel of Irish Punks Legends The Mahones\u003C/div\u003E\u003Cdiv\u003EBurlesque By\u003C/div\u003E\u003Cdiv\u003ELaura Desiree\u003C/div\u003E\u003Cdiv\u003EDeVery Bess\u003C/div\u003E\u003Cdiv\u003EAllysin Chaynes\u003C/div\u003E\u003Cdiv\u003EEl Toro\u003C/div\u003E\u003Cdiv\u003EDolly Berlin\u003C/div\u003E\u003Cdiv\u003EAviva the Mirage\u003C/div\u003E\u003Cdiv\u003ETanya Cheex\u003C/div\u003E\u003Cdiv\u003EGoGo by Paige Turner and Starlotte Satine\u003C/div\u003E\u003Cdiv\u003ETunes Spun by DJ Vivs\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003E\u003Ca href=\"https://www.facebook.com/events/825348679280200\" rel=\"noopener noreferrer\" target=\"_blank\"\u003Ehttps://www.facebook.com/events/825348679280200\u003C/a\u003E\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003EDoors 9pm, 19+, $10\u003C/div\u003E",
+                "image": {
+                  "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/20d15d7d-646f-4b08-ac65-11567fd00f34/dec27.jpg",
+                  "name": "dec27.jpeg",
+                  "size": 323979,
+                  "width": 612,
+                  "height": 792,
+                  "type": "image/jpeg",
+                  "extension": "jpg"
+                },
+                "eventType": "lb2hq77c",
+                "location": null,
+                "host": null,
+                "tags": [],
+                "color": "transparent",
+                "buttonVisible": false,
+                "buttonLink": {
+                  "rawValue": "",
+                  "value": "",
+                  "type": "url",
+                  "target": "_blank"
+                },
+                "buttonText": "Get Tickets",
+                "buttonCaption": "",
+                "video": null,
+                "chosen": false,
+                "selected": false,
+                "$$key": [
+                  "events",
+                  31],
+                "repeatFrequency": "daily"
+              }
+            ],
+            "eventTypes": [
+              {
+                "id": "6368b7edc408c",
+                "name": "METAL ON METAL PRESENTS",
+                "categoryColor": "transparent",
+                "chosen": false,
+                "selected": false
+              },
+              {
+                "id": "6368b7edc4107",
+                "name": "FUZZED AND BUZZED presents ",
+                "categoryColor": "transparent",
+                "chosen": false,
+                "selected": false
+              },
+              {
+                "id": "lb2hpj2i",
+                "name": "Pop punk",
+                "categoryColor": "transparent",
+                "chosen": false,
+                "selected": false
+              },
+              {
+                "id": "lb2hq77c",
+                "name": "Pussy Whipped Wednesdays presents",
+                "categoryColor": "transparent",
+                "chosen": false,
+                "selected": false
+              },
+              {
+                "id": "lb2ie0ut",
+                "name": "Ska/Punk",
+                "categoryColor": "transparent",
+                "chosen": false,
+                "selected": false
+              },
+              {
+                "id": "lb2iiu9i",
+                "name": "Rock",
+                "categoryColor": "transparent",
+                "chosen": false,
+                "selected": false
+              },
+              {
+                "id": "lb2iubv0",
+                "name": "Punk/Hardcore",
+                "categoryColor": "transparent",
+                "chosen": false,
+                "selected": false
+              },
+              {
+                "id": "lb2iveql",
+                "name": "Indie rock",
+                "categoryColor": "transparent",
+                "chosen": false,
+                "selected": false
+              },
+              {
+                "id": "lb2jkgnm",
+                "name": "Surf Punk Party Rock Holiday Bash",
+                "categoryColor": "transparent",
+                "chosen": false,
+                "selected": false
+              },
+              {
+                "id": "lb2jzyyr",
+                "name": "Gabe's Retirement New Years Eve Party",
+                "categoryColor": "transparent",
+                "chosen": false,
+                "selected": false
+              },
+              {
+                "id": "lb2kg9m3",
+                "name": "Chuck Coles and Beyond the Pale presents",
+                "categoryColor": "transparent",
+                "chosen": false,
+                "selected": false
+              },
+              {
+                "id": "lcata29z",
+                "name": "Hosted by Branko",
+                "categoryColor": "transparent",
+                "chosen": false,
+                "selected": false
+              },
+              {
+                "id": "lcatlt17",
+                "name": "Metal",
+                "categoryColor": "transparent",
+                "chosen": false,
+                "selected": false
+              },
+              {
+                "id": "lcgwzz1i",
+                "name": "Metal/Party Rock",
+                "categoryColor": "transparent",
+                "chosen": false,
+                "selected": false
+              },
+              {
+                "id": "ld3e5z62",
+                "name": "Smoking Room Only presents",
+                "categoryColor": "transparent",
+                "chosen": false,
+                "selected": false
+              },
+              {
+                "id": "ldakp5y7",
+                "name": "Game Show",
+                "categoryColor": "transparent",
+                "chosen": false,
+                "selected": false
+              },
+              {
+                "id": "ldal3n39",
+                "name": "A-Minor Presents",
+                "categoryColor": "transparent",
+                "chosen": false,
+                "selected": false
+              },
+              {
+                "id": "ldz1a8ki",
+                "name": "Smol Audio + Feura present",
+                "categoryColor": "transparent",
+                "chosen": false,
+                "selected": false
+              },
+              {
+                "id": "ldz1kgx4",
+                "name": "90's Hip-Hop & Pinball Competition",
+                "categoryColor": "transparent",
+                "chosen": false,
+                "selected": false
+              },
+              {
+                "id": "lea6ph7l",
+                "name": "Taking Back Monday presents",
+                "categoryColor": "transparent",
+                "chosen": false,
+                "selected": false
+              },
+              {
+                "id": "leiucqgx",
+                "name": "Every Tuesday",
+                "categoryColor": "transparent",
+                "chosen": false,
+                "selected": false
+              },
+              {
+                "id": "lf2urzb6",
+                "name": "Jungle and DNB",
+                "categoryColor": "transparent",
+                "chosen": false,
+                "selected": false
+              },
+              {
+                "id": "lfe76nk6",
+                "name": "Acoustic",
+                "categoryColor": "transparent",
+                "chosen": false,
+                "selected": false
+              },
+              {
+                "id": "lfo482by",
+                "name": "Bitch Fest presents",
+                "categoryColor": "transparent",
+                "chosen": false,
+                "selected": false
+              },
+              {
+                "id": "lfvlnjm2",
+                "name": "Punk",
+                "categoryColor": "transparent",
+                "chosen": false,
+                "selected": false
+              },
+              {
+                "id": "lfvmboa6",
+                "name": "Shrimp Studio presents",
+                "categoryColor": "transparent",
+                "chosen": false,
+                "selected": false
+              },
+              {
+                "id": "lfvmptxt",
+                "name": "Music for the Masses presents",
+                "categoryColor": "transparent",
+                "chosen": false,
+                "selected": false
+              },
+              {
+                "id": "lg9ufh8a",
+                "name": "Save Toronto Music Venues promotions presents",
+                "categoryColor": "transparent"
+              },
+              {
+                "id": "lg9uhoxd",
+                "name": "Bonecrusher presents",
+                "categoryColor": "transparent"
+              },
+              {
+                "id": "lg9v32kc",
+                "name": "Little Monkey Press presents",
+                "categoryColor": "transparent"
+              },
+              {
+                "id": "lhru8w28",
+                "name": "CMW presents",
+                "categoryColor": "transparent"
+              },
+              {
+                "id": "lig903hq",
+                "name": "NXNE presents",
+                "categoryColor": "transparent"
+              },
+              {
+                "id": "liuk6eyc",
+                "name": "Punk Rock",
+                "categoryColor": "transparent"
+              },
+              {
+                "id": "lja5toez",
+                "name": "Cassette Records presents",
+                "categoryColor": "transparent"
+              },
+              {
+                "id": "ljj0g95v",
+                "name": "Pale Horse Productions & Black Throne Presents",
+                "categoryColor": "transparent"
+              },
+              {
+                "id": "ll01uhb4",
+                "name": "Inertia Entertainment presents",
+                "categoryColor": "transparent"
+              },
+              {
+                "id": "lm7wn0s1",
+                "name": "TIFF Party",
+                "categoryColor": "transparent"
+              },
+              {
+                "id": "lo7jk0yp",
+                "name": "4AM LAST CALL",
+                "categoryColor": "transparent"
+              },
+              {
+                "id": "lohgg9zf",
+                "name": "Pale Horse productions",
+                "categoryColor": "transparent"
+              },
+              {
+                "name": "Live Nation presents",
+                "categoryColor": "transparent",
+                "id": "lpa00j0v"
+              },
+              {
+                "name": "Black Throne Productions presents",
+                "categoryColor": "transparent",
+                "id": "lpa1mwap"
+              }
+            ],
+            "locations": [],
+            "hosts": [],
+            "widgetTitle": "Upcoming Events at The Bovine",
+            "layout": "list",
+            "sliderArrowsEnabled": true,
+            "sliderSwipeEnabled": true,
+            "sliderTransitionDuration": 0.6,
+            "sliderPaginationType": "bullets",
+            "sliderAutoSlideEnabled": false,
+            "sliderAutoSlideDelay": 5,
+            "sliderAutoSlidePauseOnHover": false,
+            "sliderElementsColor": "rgba(0,0,0,1)",
+            "gridGutter": 10,
+            "masonryGutter": 40,
+            "groupBy": "none",
+            "timeRange": [
+              "06:00",
+              "23:00"
+            ],
+            "numberOfEvents": 31,
+            "numberOfYears": 3,
+            "numberOfMonths": 12,
+            "numberOfDays": 7,
+            "width": {
+              "auto": true,
+              "customValue": 942
+            },
+            "filters": [],
+            "filtersSorting": "manual",
+            "eventElements": [
+              "eventType",
+              "media",
+              "tags",
+              "time",
+              "location",
+              "button"
+            ],
+            "showPastEvents": false,
+            "numberOfPastEvents": 5,
+            "eventClickAction": "popup",
+            "popupElements": [
+              "eventType",
+              "button",
+              "media",
+              "tags",
+              "description",
+              "date",
+              "location",
+              "map",
+              "host",
+              "share",
+              "dateTime"
+            ],
+            "enableEventLinking": true,
+            "displayDateFormat": "MMMM DD",
+            "displayTimeFormat": "h:mm A",
+            "widgetBackground": {
+              "type": "color",
+              "color": "rgb(109, 112, 112)",
+              "imageFile": {
+                "url": "https://files.elfsight.com/storage/a917320b-9caf-4dca-808d-c96251e5748e/d63a393e-9c46-48a7-a5b4-11b4ded61545.jpeg"
+              },
+              "borderRadius": 0
+            },
+            "widgetHorizontalPadding": 40,
+            "widgetVerticalPadding": 40,
+            "widgetImageAnimationType": "none",
+            "headingTextColor": "rgb(255, 255, 255)",
+            "headingFontSize": {
+              "fontSize": 23
+            },
+            "filtersColor": "rgb(17, 17, 17)",
+            "activeFiltersColor": "rgb(17, 17, 17)",
+            "gridEventStyle": "style1",
+            "masonryEventStyle": "style2",
+            "sliderEventStyle": "style1",
+            "eventBackgroundColor": "rgb(67, 67, 66)",
+            "eventDateBackgroundColor": "rgb(238, 236, 220)",
+            "eventDateTextColor": "rgb(199, 56, 13)",
+            "eventButtonColor": "#e9202e",
+            "eventGroupTextColor": "#000000",
+            "eventGroupFontSize": {
+              "fontSize": 18
+            },
+            "eventNameFontSize": {
+              "fontSize": 18
+            },
+            "eventTimeFontSize": {
+              "fontSize": 10
+            },
+            "eventShape": 12,
+            "calendarDateTextSize": {
+              "fontSize": 16
+            },
+            "calendarDateTextColor": "#111111",
+            "calendarTodayBgColor": "rgba(15, 76, 130, 0.08)",
+            "calendarTodayBorderColor": "rgba(15, 76, 130)",
+            "popupBackgroundColor": "rgb(255,255,255)",
+            "popupOverlayColor": "rgba(17, 17, 17, 0.7)",
+            "popupLinksColor": "rgb(28, 145, 255)",
+            "popupButtonColor": "#e9202e",
+            "inLocalTimeZone": true,
+            "customCSS": "",
+            "customJS": "",
+            "selectedEventsProvider": "manual",
+            "_repeatsAfterNow": 30,
+            "_customEventsLimit": 400,
+            "_customCollectionEventsLimit": 1000,
+            "widgetId": "235dbcca-3a0a-4622-a874-ce1dd5f36933",
+            "widgetOrigin": "apps.elfsight.com",
+            "undefined": null,
+            "name": "",
+            "start": "",
+            "end": "",
+            "repeatPeriod": "noRepeat",
+            "description": "",
+            "media": null,
+            "eventType": "",
+            "location": "",
+            "host": "",
+            "tags": [],
+            "color": null,
+            "deactivate": false,
+            "showElfsightLogo": false,
+            "freeLinkUrl": "https://elfsight.com/event-calendar-widget/?utm_source=websites&amp;utm_medium=clients&amp;utm_content=event-calendar&amp;utm_term=%website_domain%&amp;utm_campaign=free-widget",
+            "freeLinkAnchor": "Free Event Calendar widget",
+            "template": null,
+            "language": {
+              "language": "en",
+              "label": "English, US",
+              "messages": {
+                "en": {
+                  "Dates": "Dates",
+                  "Clear": "Clear",
+                  "Apply": "Apply",
+                  "Next Week": "Next Week",
+                  "Next Month": "Next Month",
+                  "Event Type": "Event Type",
+                  "Venue": "Location",
+                  "All": "All",
+                  "Today": "Today",
+                  "Tomorrow": "Tomorrow",
+                  "Show more": "Show more",
+                  "When": "When",
+                  "Add to Calendar": "Add to Calendar",
+                  "Where": "Where",
+                  "Get Directions": "Get Directions",
+                  "Other Calendar": "Other Calendar",
+                  "Host": "Host",
+                  "Share": "Share",
+                  "Copy Link": "Copy Link",
+                  "Copied": "Copied",
+                  "Invite via Email": "Invite via Email",
+                  "Event Name": "Event Name",
+                  "Event Date": "Event Date",
+                  "Load More": "Load More",
+                  "Sorry, no events right now. But really cool stuff is coming up soon.": "Sorry, no events right now. But really cool stuff is coming up soon.",
+                  "No events were found for your dates and filters. Please, try different search parameters.": "No events were found for your dates and filters. Please, try different search parameters.",
+                  "Past Events": "Past Events"
+                }
+              }
+            }
+          },
+          "user": {
+            "owner": false
+          },
+          "percentage": 0.7624,
+          "preferences": {
+            "hide_elfsight_logo": 1,
+            "disable_widget": 0,
+            "deactivated_widget_url": "https://dash.elfsight.com/apps/event-calendar/pricing?claim=removeBranding&claim=increaseViews",
+            "display_deactivation": false,
+            "deactivation_url": "https://dash.elfsight.com/apps/event-calendar/pricing?claim=removeBranding&claim=increaseViews",
+            "display_free_link": false,
+            "display_free_link_remove": false,
+            "free_link_anchor": "Free Event Calendar widget",
+            "free_link_url": "https://elfsight.com/event-calendar-widget/?utm_source=websites&utm_medium=clients&utm_content=event-calendar&utm_term=%website_domain%&utm_campaign=free-widget",
+            "free_link_remove_url": "https://dash.elfsight.com/apps/event-calendar/pricing?claim=removeBranding&claim=removeBranding"
+          },
+          "meta": {
+            "widget_name": "Bovine Events",
+            "app_name": "Event Calendar",
+            "thumbnail_url": "https://services-universe-prod.sfo3.digitaloceanspaces.com/widget-thumbnails/91d0e0f8-c9cb-4d2b-b64d-8046927f7243@2x.png"
+          },
+          "public_widget_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiUFVCTElDIiwid2lkZ2V0UGlkIjoiMjM1ZGJjY2EtM2EwYS00NjIyLWE4NzQtY2UxZGQ1ZjM2OTMzIiwid2lkZ2V0UmV2aXNpb25QaWQiOiJjMzUwZWNlMC04MzlkLTQ3ZDMtODJmZi0wNDYyMGU3OWEzNmYiLCJhY2NvdW50UGlkIjoiYjFjMzc4N2QtN2U1Yi00NTNmLTk5ZjgtMmE1ZGE4OWMzZGYyIiwic3ViIjoiMjM1ZGJjY2EtM2EwYS00NjIyLWE4NzQtY2UxZGQ1ZjM2OTMzIiwidmVyIjoiYzM1MGVjZTAtODM5ZC00N2QzLTgyZmYtMDQ2MjBlNzlhMzZmIiwiaWF0IjoxNzI1MTMzODYzLCJleHAiOjE3MjUxNDEwNjN9.LByQtnNgj_Gf52iBhpm5U-zQUxZYcBrZVJLRE1rAPNZK4EqTc5WhhUWiPh_mu-W_4j4kmUo2mClH2pXJBRrVLpczkv8OQazeKu0Qz9O2w-03ac7BjEG02BKHGM4joBS_iTYOajgIDagEtIipgTsiYVSIXzdZX8uxRF5xtSqvxJ8EcbONsVNYD3NtSoatI-rh9yMqQ7OlAkgB6hSJ5EhDyKThy0BAFjh2dyP1xgfbDePsxwSttCPSLzsiF17KYsD2ymAZBMgedsAJDNFa_lrYC7dTzCiwsOMr338O_YK2lNcucp6P1pe4u1FaXVjrX53pek1XrZmK-gzWsZCt9ZsWH-s_tUZ8T0WCc9imbNvtMYDD9fTFEnuENLZgrzfKfJRJDLWXV6sgyssuETqyHalxOKMXPgz_lpgO829PWheW45ybA-gWdPEffjhvCHVS4A4fuPJFODUlSpidcVvUCzXtb0KChXxmJQg80bIqcfO0_EYPtSTxOApjbhKKVmGhY7d__3vs7JMnnRlQYLx1nzcUxWfuNHfYvhLYvHk_jzycY36cA5EgrIbalcc3yjUxZhrnI21g6AXm7Wh3yXlLF3WOt1EeealfoGkoZD_I1I82w2XFsWVTjyht_o79HRB2__5XaTHiqYJiUUDt3o-5MSkRwaDo1838J8DPyvqt5BP3z_o"
+        }
+      }
+    },
+    "assets": [
+      "https://static.elfsight.com/apps/events-calendar/stable/7380674e1c5b90d2e9fc7827bbe0795396d3d4bc/app/eventsCalendar.js"
+    ]
+  }
+}
