@@ -40,7 +40,7 @@ defmodule MusicListings.Parsing.VenueParsers.DromTabernaParserTest do
     setup do
       %{
         next_page_url:
-          "https://www.dromtaberna.ca/api/open/GetItemsByMonth?month=9-2024&collectionId=62099f5a37eb917826df65cc&crumb=BZxZJlGW0oALYzcxZDM5MjgzOGE1NmQ0ZTcyOWY3NjdhZWFmMDVi"
+          "https://www.dromtaberna.com/api/open/GetItemsByMonth?month=9-2024&collectionId=62099f5a37eb917826df65cc&crumb=BZxZJlGW0oALYzcxZDM5MjgzOGE1NmQ0ZTcyOWY3NjdhZWFmMDVi"
       }
     end
 
