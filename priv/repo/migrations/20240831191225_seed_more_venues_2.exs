@@ -16,6 +16,11 @@ defmodule MusicListings.Repo.Migrations.SeedMoreVenues2 do
       INSERT INTO venues(name, parser_module_name, pull_events, street, city, province, country, postal_code, google_map_url)
       VALUES('Drom Taberna', 'DromTabernaParser', true, '458 Queen St W', 'Toronto', 'Ontario', 'Cananda', 'M5V 2A8', 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11547.9961244357!2d-79.3995908!3d43.6481885!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b3589a68ca8c7%3A0x3d51621ef57fce99!2sDROM%20Taberna!5e0!3m2!1sen!2sca!4v1725206639948!5m2!1sen!2sca')
     """
+
+    execute """
+      INSERT INTO venues(name, parser_module_name, pull_events, street, city, province, country, postal_code, google_map_url)
+      VALUES('The Rockpile', 'RockpileParser', true, '5555 Dundas St W, 'Etobicoke', 'Ontario', 'Cananda', 'M9B 1B8', 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11551.572985172737!2d-79.5490453!3d43.6295808!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b37ee51e5a41f%3A0x14bcb9780c13ac79!2sThe%20Rockpile!5e0!3m2!1sen!2sca!4v1725207522674!5m2!1sen!2sca')
+    """
   end
 
   def down do
@@ -29,6 +34,10 @@ defmodule MusicListings.Repo.Migrations.SeedMoreVenues2 do
 
     execute """
     DELETE FROM venues WHERE name = 'Drom Taberna'
+    """
+
+    execute """
+    DELETE FROM venues WHERE name = 'The Rockpile'
     """
   end
 end
