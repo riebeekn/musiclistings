@@ -1,0 +1,2282 @@
+[
+  {
+    "id": "66ccd1f7084ee35bcf7d8f0c",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1724699184164,
+    "updatedOn": 1724700776447,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1724699184164,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "2c381b57-05c7-4c47-82be-bb9093e81110",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-30.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "0a110f",
+      "centerAverage": "09100e",
+      "suggestedBgColor": "0d1311"
+    },
+    "urlId": "zhfw4d3s9c6ftpx-ljs62-l3rrl-nys93-3fxrm-p7hj5-5z7rb-n3zbf-j35aw-3tm2t-mggar-zdl54-pndjr-rsn62-b3tdr-f4nhj-gclkm-n282b-37nzt",
+    "title": "MONDAY ",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E5.30 - Live Music\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E— INDIE MONDAYS —\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - Live Music\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E11.00 - Live Music\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/zhfw4d3s9c6ftpx-ljs62-l3rrl-nys93-3fxrm-p7hj5-5z7rb-n3zbf-j35aw-3tm2t-mggar-zdl54-pndjr-rsn62-b3tdr-f4nhj-gclkm-n282b-37nzt",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/2c381b57-05c7-4c47-82be-bb9093e81110/MasterMonth-30.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1727731800213,
+      "endDate": 1727735400213
+    },
+    "startDate": 1727731800213,
+    "endDate": 1727735400213,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66ccce40e8e256475b3b0cdf",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1724698343572,
+    "updatedOn": 1724700608406,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1724698343572,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "73d78a94-6ae3-4261-a6ee-a3b9b7242ac4",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-29.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "111714",
+      "centerAverage": "363a38",
+      "suggestedBgColor": "1e2422"
+    },
+    "urlId": "y65czs68393fz5y-h99yk-ykcj8-z93j8-56k77-en9al-5rslp",
+    "title": "SUNDAY ",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E2.00 - Solidaridad Tango\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E5.30 - Dandelion Highway Duo\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - Django a Gogo\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/y65czs68393fz5y-h99yk-ykcj8-z93j8-56k77-en9al-5rslp",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/73d78a94-6ae3-4261-a6ee-a3b9b7242ac4/MasterMonth-29.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1727650800647,
+      "endDate": 1727654400647
+    },
+    "startDate": 1727650800647,
+    "endDate": 1727654400647,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66cccc3e8892e34c6087f66f",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1724698163740,
+    "updatedOn": 1724698169137,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1724698163740,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "5d14ec6f-3c18-4df2-bbfd-93b0a009da81",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-28.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "09100e",
+      "centerAverage": "464442",
+      "suggestedBgColor": "1c201d"
+    },
+    "urlId": "d3jdwgs5rbk8w6k-tzrjy-78ync-rbtgm-57ta6-8rk2z-mekp3-3p9rj-jwd76-82arj-w5ay2-xpmfx-5ydea-le253-lldfe-9y93g-bamxd-9znyy-5gxsb-dwc58",
+    "title": "SATURDAY ",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E1.00 - Nolan Murphy’s Big Band\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E5.30 - Tanya Wills\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - Banitsa\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E11.30 - Ruzz Guitar\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E2.30 - Nolan Murphy’s Big Band\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003Eft. DJ \u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/d3jdwgs5rbk8w6k-tzrjy-78ync-rbtgm-57ta6-8rk2z-mekp3-3p9rj-jwd76-82arj-w5ay2-xpmfx-5ydea-le253-lldfe-9y93g-bamxd-9znyy-5gxsb-dwc58",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/5d14ec6f-3c18-4df2-bbfd-93b0a009da81/MasterMonth-28.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1727559000529,
+      "endDate": 1727562600529
+    },
+    "startDate": 1727559000529,
+    "endDate": 1727562600529,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66cccb29a9d9d91a1bb96590",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1724697656560,
+    "updatedOn": 1724699562836,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1724697656560,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "477063ae-b466-4bec-b63f-706f616139ae",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-27.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "09100e",
+      "centerAverage": "252621",
+      "suggestedBgColor": "181c19"
+    },
+    "urlId": "l96e7ebfjg9w49x-cw3yx-stw8w-67j4w-2snk4-2tw3r-3stk5-tgn97-jp9z5-fefax-6xc7w-9jart-blkjl-9cwb7-ncj8n-2epgc-e2tnz",
+    "title": "FRIDAY ",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E6.00 - Ilios Steryannis\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.30 - Queen City Blues\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E11.30 - Boogat\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E2.30 - Live Music\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003Eft. DJ  Escobutt\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/l96e7ebfjg9w49x-cw3yx-stw8w-67j4w-2snk4-2tw3r-3stk5-tgn97-jp9z5-fefax-6xc7w-9jart-blkjl-9cwb7-ncj8n-2epgc-e2tnz",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/477063ae-b466-4bec-b63f-706f616139ae/MasterMonth-27.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1727472600116,
+      "endDate": 1727476200116
+    },
+    "startDate": 1727472600116,
+    "endDate": 1727476200116,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66ccca532ff2cd3d407a7911",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1724697380043,
+    "updatedOn": 1724878311875,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1724697380043,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "981f2232-6e91-430f-9c1a-72ba5cdd1a71",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-26.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "09110e",
+      "centerAverage": "100e0a",
+      "suggestedBgColor": "1d221f"
+    },
+    "urlId": "e5g6ns3s2l5ryb5-nzzg3-btnrg-azjhc",
+    "title": "THURSDAY ",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E5.30 - Sean Stanley Duo\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - The Next Quest\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E11.30 - Sextete x Huge\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E2.30 - Brad Webber\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/e5g6ns3s2l5ryb5-nzzg3-btnrg-azjhc",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/981f2232-6e91-430f-9c1a-72ba5cdd1a71/MasterMonth-26.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1727391300702,
+      "endDate": 1727394900702
+    },
+    "startDate": 1727391300702,
+    "endDate": 1727394900702,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66ccc988149104608bb36dde",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1724697055353,
+    "updatedOn": 1724697162743,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1724697055353,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "f991243d-d28f-4403-8193-5b0218c408a7",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-25.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "09100e",
+      "centerAverage": "363b38",
+      "suggestedBgColor": "161d1a"
+    },
+    "urlId": "5s94ft5gbm8ll6r-h7dhe-nk6w4-ttxf8-n8f3m-tpj3r-3llr2-4gdzx-aagbf-y4a5w-3stzb-kzmlz-fe276-74ygg-cjztb",
+    "title": "WEDNESDAY",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E7.00 - Freeman Dre 4-piece\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E11.00 - Sebastian Brown\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/5s94ft5gbm8ll6r-h7dhe-nk6w4-ttxf8-n8f3m-tpj3r-3llr2-4gdzx-aagbf-y4a5w-3stzb-kzmlz-fe276-74ygg-cjztb",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/f991243d-d28f-4403-8193-5b0218c408a7/MasterMonth-25.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1727304000170,
+      "endDate": 1727307600170
+    },
+    "startDate": 1727304000170,
+    "endDate": 1727307600170,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66ccc8b5d9331e79765a1f09",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1724696818353,
+    "updatedOn": 1724699192748,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1724696818353,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "1afec632-7fce-4077-8a5e-d46506bd2019",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-24.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "0b120f",
+      "centerAverage": "0a110f",
+      "suggestedBgColor": "1b1e19"
+    },
+    "urlId": "ntdcfsa46yhea9m-e3m5n-cl24p-2ndb6-6232r-ggssl",
+    "title": "TUESDAY",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E7.00 - Down and Out\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003ESWING NIGHT TUESDAYS!\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - Swing Dance Lesson\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E9.00 - Open Dance\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E11.30 - Open Jazz Jam \u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/ntdcfsa46yhea9m-e3m5n-cl24p-2ndb6-6232r-ggssl",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/1afec632-7fce-4077-8a5e-d46506bd2019/MasterMonth-24.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1727218500999,
+      "endDate": 1727222100999
+    },
+    "startDate": 1727218500999,
+    "endDate": 1727222100999,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66ccc8521e3f3713ad1a3adc",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1724696749558,
+    "updatedOn": 1724699127797,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1724696749558,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "864206ab-4504-46b2-a250-0f644cb8b29c",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-23.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "080f0d",
+      "centerAverage": "464c48",
+      "suggestedBgColor": "2f3129"
+    },
+    "urlId": "zhfw4d3s9c6ftpx-ljs62-l3rrl-nys93-3fxrm-p7hj5-5z7rb-n3zbf-j35aw-3tm2t-mggar-zdl54-pndjr-rsn62-b3tdr-f4nhj-gclkm-n282b",
+    "title": "MONDAY ",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E5.30 - Elisabeth Dorion\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E— INDIE MONDAYS —\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - Live Music\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E11.00 - Live Music\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/zhfw4d3s9c6ftpx-ljs62-l3rrl-nys93-3fxrm-p7hj5-5z7rb-n3zbf-j35aw-3tm2t-mggar-zdl54-pndjr-rsn62-b3tdr-f4nhj-gclkm-n282b",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/864206ab-4504-46b2-a250-0f644cb8b29c/MasterMonth-23.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1727127000336,
+      "endDate": 1727130600336
+    },
+    "startDate": 1727127000336,
+    "endDate": 1727130600336,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66ccc6f94b446571a46f10d8",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1724696654625,
+    "updatedOn": 1724880718861,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1724696654625,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "2306ee02-1e9a-4bee-939e-aadf81b0626d",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-22.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "080f0d",
+      "centerAverage": "35372c",
+      "suggestedBgColor": "171d1b"
+    },
+    "urlId": "y65czs68393fz5y-h99yk-ykcj8-z93j8-56k77-en9al",
+    "title": "SUNDAY ",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E5.30 - Marieva Dávila\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E7.00 - Anahi Mariulan\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - Flamenco\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/y65czs68393fz5y-h99yk-ykcj8-z93j8-56k77-en9al",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/2306ee02-1e9a-4bee-939e-aadf81b0626d/MasterMonth-22.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1727046000746,
+      "endDate": 1727049600746
+    },
+    "startDate": 1727046000746,
+    "endDate": 1727049600746,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66ccc5e29bff8b76768e1f8d",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1724696299793,
+    "updatedOn": 1724697662927,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1724696299793,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "58ad0f59-d787-4d6d-a17c-bd5b5590e449",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-21.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "09100e",
+      "centerAverage": "111613",
+      "suggestedBgColor": "0f1513"
+    },
+    "urlId": "d3jdwgs5rbk8w6k-tzrjy-78ync-rbtgm-57ta6-8rk2z-mekp3-3p9rj-jwd76-82arj-w5ay2-xpmfx-5ydea-le253-lldfe-9y93g-bamxd-9znyy-5gxsb",
+    "title": "SATURDAY",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E12.00 - Soul Brunch with Queen Mary\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E5.30 - Raquel Marina Trio\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - Ana Lia\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E11.30 - Mago Azul\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E2.30 - Brainfudge\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003Eft. DJ Munin\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/d3jdwgs5rbk8w6k-tzrjy-78ync-rbtgm-57ta6-8rk2z-mekp3-3p9rj-jwd76-82arj-w5ay2-xpmfx-5ydea-le253-lldfe-9y93g-bamxd-9znyy-5gxsb",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/58ad0f59-d787-4d6d-a17c-bd5b5590e449/MasterMonth-21.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1726954200531,
+      "endDate": 1726957800531
+    },
+    "startDate": 1726954200531,
+    "endDate": 1726957800531,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66ccba15ebdd406064eb6eb4",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1724696025117,
+    "updatedOn": 1724697385527,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1724696025117,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "26cc4bd7-421c-4a93-ba1f-3f31a2dc7b53",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-20.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "080f0d",
+      "centerAverage": "473d3a",
+      "suggestedBgColor": "191d1a"
+    },
+    "urlId": "l96e7ebfjg9w49x-cw3yx-stw8w-67j4w-2snk4-2tw3r-3stk5-tgn97-jp9z5-fefax-6xc7w-9jart-blkjl-9cwb7-ncj8n-2epgc",
+    "title": "FRIDAY ",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E6.00 - Stephen Guerra\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.30 - TJ and The Crew\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E11.30 - Moneka\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E2.30 - Disaster Pony\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003Eft. DJ  Vegabond\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/l96e7ebfjg9w49x-cw3yx-stw8w-67j4w-2snk4-2tw3r-3stk5-tgn97-jp9z5-fefax-6xc7w-9jart-blkjl-9cwb7-ncj8n-2epgc",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/26cc4bd7-421c-4a93-ba1f-3f31a2dc7b53/MasterMonth-20.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1726867800080,
+      "endDate": 1726871400080
+    },
+    "startDate": 1726867800080,
+    "endDate": 1726871400080,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66ccb872936c426e7bd37626",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1724692888268,
+    "updatedOn": 1724697171581,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1724692888268,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "bf5f7071-6fc4-4241-acaa-81c86416d91e",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-19.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "09100e",
+      "centerAverage": "2d3130",
+      "suggestedBgColor": "1c211e"
+    },
+    "urlId": "e5g6ns3s2l5ryb5-nzzg3-btnrg",
+    "title": "THURSDAY ",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E5.30 - Justin Duhaime and Nathan Hiltz\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - Mariana Bruekers\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E11.30 - Queer Emo Nite\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E2.30 - Stone He\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/e5g6ns3s2l5ryb5-nzzg3-btnrg",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/bf5f7071-6fc4-4241-acaa-81c86416d91e/MasterMonth-19.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1726786500053,
+      "endDate": 1726790100053
+    },
+    "startDate": 1726786500053,
+    "endDate": 1726790100053,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66ccb4dc85a96a5d4f523542",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1724691736731,
+    "updatedOn": 1724696968686,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1724691736731,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "03e2eb53-24f6-4215-b738-6313d9c43de1",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-18.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "09100e",
+      "centerAverage": "09100e",
+      "suggestedBgColor": "0d1311"
+    },
+    "urlId": "5s94ft5gbm8ll6r-h7dhe-nk6w4-ttxf8-n8f3m-tpj3r-3llr2-4gdzx-aagbf-y4a5w-3stzb-kzmlz-fe276-74ygg",
+    "title": "WEDNESDAY",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E5.30 - Live Music\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - Honey Locust\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E11.00 - Ken Yoshioka &amp; Julian Fauth\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/5s94ft5gbm8ll6r-h7dhe-nk6w4-ttxf8-n8f3m-tpj3r-3llr2-4gdzx-aagbf-y4a5w-3stzb-kzmlz-fe276-74ygg",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/03e2eb53-24f6-4215-b738-6313d9c43de1/MasterMonth-18.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1726699200233,
+      "endDate": 1726702800233
+    },
+    "startDate": 1726699200233,
+    "endDate": 1726702800233,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66ccb495d865b12d1475fcd1",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1724691669570,
+    "updatedOn": 1724696757399,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1724691669570,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "1e3467a2-a7dd-4423-98ab-3f4d4221e54f",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-17.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "0c1311",
+      "centerAverage": "585249",
+      "suggestedBgColor": "413932"
+    },
+    "urlId": "ntdcfsa46yhea9m-e3m5n-cl24p-2ndb6-6232r",
+    "title": "TUESDAY ",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E7.00 - Live Music\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003ESWING NIGHT TUESDAYS!\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - Swing Dance Lesson\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E9.00 - Open Dance\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E11.30 - Open Jazz Jam \u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/ntdcfsa46yhea9m-e3m5n-cl24p-2ndb6-6232r",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/1e3467a2-a7dd-4423-98ab-3f4d4221e54f/MasterMonth-17.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1726613700674,
+      "endDate": 1726617300674
+    },
+    "startDate": 1726613700674,
+    "endDate": 1726617300674,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66c282847871233e5f393437",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1724099448499,
+    "updatedOn": 1724696658824,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1724099448499,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "dab02126-d3c1-49bf-8984-a966a1808851",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-16.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "080f0d",
+      "centerAverage": "4c4b46",
+      "suggestedBgColor": "21241f"
+    },
+    "urlId": "zhfw4d3s9c6ftpx-ljs62-l3rrl-nys93-3fxrm-p7hj5-5z7rb-n3zbf-j35aw-3tm2t-mggar-zdl54-pndjr-rsn62-b3tdr-f4nhj-gclkm",
+    "title": "MONDAY",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E5.30 - Brian Revels\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E— INDIE MONDAYS —\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - Edisunn\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E11.00 - Live Music\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/zhfw4d3s9c6ftpx-ljs62-l3rrl-nys93-3fxrm-p7hj5-5z7rb-n3zbf-j35aw-3tm2t-mggar-zdl54-pndjr-rsn62-b3tdr-f4nhj-gclkm",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/dab02126-d3c1-49bf-8984-a966a1808851/MasterMonth-16.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1726522200031,
+      "endDate": 1726525800031
+    },
+    "startDate": 1726522200031,
+    "endDate": 1726525800031,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66c282804ab9cd6c1e13750c",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1724098040391,
+    "updatedOn": 1724696313815,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1724098040391,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "0c365e59-5cdf-41c4-8e35-ecb215b4124b",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-15.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "09100e",
+      "centerAverage": "09100e",
+      "suggestedBgColor": "0d1311"
+    },
+    "urlId": "y65czs68393fz5y-h99yk-ykcj8-z93j8-56k77",
+    "title": "SUNDAY  ",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E5.30 - Strat Andriotis\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - Dr Purgatory Chamber Jazz\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E11.00 - Petal Loop\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/y65czs68393fz5y-h99yk-ykcj8-z93j8-56k77",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/0c365e59-5cdf-41c4-8e35-ecb215b4124b/MasterMonth-15.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1726441200430,
+      "endDate": 1726444800430
+    },
+    "startDate": 1726441200430,
+    "endDate": 1726444800430,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66c2827e23087c2bdf5887eb",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1724097659444,
+    "updatedOn": 1724787796172,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1724097659444,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "4a712170-ea16-43ba-b441-69ca56bde1d6",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-14.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "101614",
+      "centerAverage": "363a38",
+      "suggestedBgColor": "1e2321"
+    },
+    "urlId": "d3jdwgs5rbk8w6k-tzrjy-78ync-rbtgm-57ta6-8rk2z-mekp3-3p9rj-jwd76-82arj-w5ay2-xpmfx-5ydea-le253-lldfe-9y93g-bamxd-9znyy",
+    "title": "SATURDAY ",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E12.00 - Soul Brunch with Queen Mary\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E5.30 - Angie Hilts Trio\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - Grooveyard\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E11.30 - Sauce Piquante (MTL)\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E2.30 - Elephant Glass\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003Eft. DJ Young Teesh\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/d3jdwgs5rbk8w6k-tzrjy-78ync-rbtgm-57ta6-8rk2z-mekp3-3p9rj-jwd76-82arj-w5ay2-xpmfx-5ydea-le253-lldfe-9y93g-bamxd-9znyy",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/4a712170-ea16-43ba-b441-69ca56bde1d6/MasterMonth-14.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1726349400553,
+      "endDate": 1726353000553
+    },
+    "startDate": 1726349400553,
+    "endDate": 1726353000553,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66c2827aa140563540289d7c",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1724095055215,
+    "updatedOn": 1724693013927,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1724095055215,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "c9354835-dbd8-4a6c-8a12-d47e7beb2bda",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-13.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "09100e",
+      "centerAverage": "464441",
+      "suggestedBgColor": "1c1f1c"
+    },
+    "urlId": "l96e7ebfjg9w49x-cw3yx-stw8w-67j4w-2snk4-2tw3r-3stk5-tgn97-jp9z5-fefax-6xc7w-9jart-blkjl-9cwb7-ncj8n",
+    "title": "FRIDAY  ",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E5.30 - Zak Martel\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - Endale Facil\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E10.30 - Kizoba\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E12.15 - Live Music\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E2.30 - Live Music\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003Eft. DJ  Clarence\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/l96e7ebfjg9w49x-cw3yx-stw8w-67j4w-2snk4-2tw3r-3stk5-tgn97-jp9z5-fefax-6xc7w-9jart-blkjl-9cwb7-ncj8n",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/c9354835-dbd8-4a6c-8a12-d47e7beb2bda/MasterMonth-13.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1726263000043,
+      "endDate": 1726266600043
+    },
+    "startDate": 1726263000043,
+    "endDate": 1726266600043,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66ccb52c06d2a16e0179eee7",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1724692433237,
+    "updatedOn": 1724882167436,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1724692433237,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "1714333486966-S6XH60N576OTH43KFJ14",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-12.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "09100e",
+      "centerAverage": "262721",
+      "suggestedBgColor": "181c19"
+    },
+    "urlId": "e5g6ns3s2l5ryb5-nzzg3",
+    "title": "THURSDAY ",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E5.30 - Live Music\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - Intergalactic Space Jam (Until 4am)\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/e5g6ns3s2l5ryb5-nzzg3",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/1714333486966-S6XH60N576OTH43KFJ14/MasterMonth-12.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1726181700720,
+      "endDate": 1726185300720
+    },
+    "startDate": 1726181700720,
+    "endDate": 1726185300720,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66c2827462736d5c92651cd8",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1724095487324,
+    "updatedOn": 1724881201498,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1724095487324,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "da01c44a-dc2a-4737-ab4e-4e1927898200",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-11.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "09100e",
+      "centerAverage": "110e0a",
+      "suggestedBgColor": "1b201d"
+    },
+    "urlId": "5s94ft5gbm8ll6r-h7dhe-nk6w4-ttxf8-n8f3m-tpj3r-3llr2-4gdzx-aagbf-y4a5w-3stzb-kzmlz-fe276",
+    "title": "WEDNESDAY  ",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E5.30 - Gisun\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - Flamencolia Dance Company\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E11.00 - Zarah Aedma\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/5s94ft5gbm8ll6r-h7dhe-nk6w4-ttxf8-n8f3m-tpj3r-3llr2-4gdzx-aagbf-y4a5w-3stzb-kzmlz-fe276",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/da01c44a-dc2a-4737-ab4e-4e1927898200/MasterMonth-11.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1726094400930,
+      "endDate": 1726098000930
+    },
+    "startDate": 1726094400930,
+    "endDate": 1726098000930,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66c2827239a45244c09e664a",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1724095316979,
+    "updatedOn": 1724691605392,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1724095316979,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "036a8c4a-eaad-4e20-8892-b937f0f18b96",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-10.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "09100e",
+      "centerAverage": "393d3b",
+      "suggestedBgColor": "161c1a"
+    },
+    "urlId": "ntdcfsa46yhea9m-e3m5n-cl24p-2ndb6",
+    "title": "TUESDAY  ",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E7.00 - Fred Spek’s Camp Combo\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003ESWING NIGHT TUESDAYS!\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - Swing Dance Lesson\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E9.00 - Open Dance\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E11.30 - Open Jazz Jam \u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/ntdcfsa46yhea9m-e3m5n-cl24p-2ndb6",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/036a8c4a-eaad-4e20-8892-b937f0f18b96/MasterMonth-10.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1726008900977,
+      "endDate": 1726012500977
+    },
+    "startDate": 1726008900977,
+    "endDate": 1726012500977,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66bbb13abe2db303d2fa1fba",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1723576719853,
+    "updatedOn": 1724885061731,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1723576719853,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "a67f8dab-5ac5-4b11-93cb-a9747b033496",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-09.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "0a120f",
+      "centerAverage": "080f0d",
+      "suggestedBgColor": "191c18"
+    },
+    "urlId": "zhfw4d3s9c6ftpx-ljs62-l3rrl-nys93-3fxrm-p7hj5-5z7rb-n3zbf-j35aw-3tm2t-mggar-zdl54-pndjr-rsn62-b3tdr-f4nhj",
+    "title": "MONDAY",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E5.30 - Paula Sofia\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E— INDIE MONDAYS —\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - Wedding\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E11.00 - Alex Forsyth\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/zhfw4d3s9c6ftpx-ljs62-l3rrl-nys93-3fxrm-p7hj5-5z7rb-n3zbf-j35aw-3tm2t-mggar-zdl54-pndjr-rsn62-b3tdr-f4nhj",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/a67f8dab-5ac5-4b11-93cb-a9747b033496/MasterMonth-09.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1725917400217,
+      "endDate": 1725921000217
+    },
+    "startDate": 1725917400217,
+    "endDate": 1725921000217,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66b947c70444bf03f6b1b22c",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1723418662033,
+    "updatedOn": 1724881053498,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1723418662033,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "9bcf0801-0bf2-4e2f-bede-968afeab8f73",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-08.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "09100e",
+      "centerAverage": "464c48",
+      "suggestedBgColor": "2e3028"
+    },
+    "urlId": "y65czs68393fz5y-h99yk-ykcj8-z93j8",
+    "title": "SUNDAY ",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E2.00 - Bondar FM Quintet\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E6.00 - Honeypaw\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - Live Music\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E11.00 - Live Music\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/y65czs68393fz5y-h99yk-ykcj8-z93j8",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/9bcf0801-0bf2-4e2f-bede-968afeab8f73/MasterMonth-08.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1725836400553,
+      "endDate": 1725840000553
+    },
+    "startDate": 1725836400553,
+    "endDate": 1725840000553,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66b942f9b2af086030e7a440",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1723418415523,
+    "updatedOn": 1724880891852,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1723418415523,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "534190e2-8e6a-4825-9165-5de1ee60480a",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-07.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "09100e",
+      "centerAverage": "1c221d",
+      "suggestedBgColor": "161c1a"
+    },
+    "urlId": "d3jdwgs5rbk8w6k-tzrjy-78ync-rbtgm-57ta6-8rk2z-mekp3-3p9rj-jwd76-82arj-w5ay2-xpmfx-5ydea-le253-lldfe-9y93g-bamxd",
+    "title": "SATURDAY ",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E12.00 - Soul Brunch with Queen Mary\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E3.00 - Anatolii Trio \u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - Forro de Mane (inside)\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - Giant Steppas (patio)\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E11.30 - Rice and Mango\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E2.30 - Big Smoke\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003Eft. DJ Escobutt\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/d3jdwgs5rbk8w6k-tzrjy-78ync-rbtgm-57ta6-8rk2z-mekp3-3p9rj-jwd76-82arj-w5ay2-xpmfx-5ydea-le253-lldfe-9y93g-bamxd",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/534190e2-8e6a-4825-9165-5de1ee60480a/MasterMonth-07.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1725744600363,
+      "endDate": 1725748200363
+    },
+    "startDate": 1725744600363,
+    "endDate": 1725748200363,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66b13c657c477c6468724718",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1722891704053,
+    "updatedOn": 1724880318846,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1722891704053,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "454e9c12-76c4-4bd8-b5ab-0802f2bd5384",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-06.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "09100e",
+      "centerAverage": "111513",
+      "suggestedBgColor": "0f1513"
+    },
+    "urlId": "l96e7ebfjg9w49x-cw3yx-stw8w-67j4w-2snk4-2tw3r-3stk5-tgn97-jp9z5-fefax-6xc7w-9jart-blkjl-9cwb7",
+    "title": "FRIDAY ",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E5.30 - McMillan's Camp Boys\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - Raha Javanfar Band Outside (Weather Permitting)\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - Samba with Carlos Cardozo (Inside)\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E11.30 - Rommel\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E2.30 - Saltwave\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003Eft. DJ  JER\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/l96e7ebfjg9w49x-cw3yx-stw8w-67j4w-2snk4-2tw3r-3stk5-tgn97-jp9z5-fefax-6xc7w-9jart-blkjl-9cwb7",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/454e9c12-76c4-4bd8-b5ab-0802f2bd5384/MasterMonth-06.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1725658200590,
+      "endDate": 1725661800590
+    },
+    "startDate": 1725658200590,
+    "endDate": 1725661800590,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66b13c0655b25a25b6bf71eb",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1722891357663,
+    "updatedOn": 1724690933526,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1722891357663,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "ae8eed96-f9ad-4076-944e-4dba652fade9",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-05.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "0c1311",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "0c1311",
+      "bottomRightAverage": "080f0d",
+      "centerAverage": "4b4542",
+      "suggestedBgColor": "181c19"
+    },
+    "urlId": "42pncyns4rhnsxb-8jb5f-zj4b8-r6f4y-bffte-gnbay-mkdly-4ds24-bcye9-ckwhr-4mzjb-lnc2m-rer2g-nfeke-2jcsp-psn2h-3587n-a8bkb-jxhsk-ammzy-gwnhx-xbxrk-5nged-f7tl9-ywlhe-w8rcb-s3glh-2ma99-afzfj-wl7lw-6znxr",
+    "title": "THURSDAY ",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E5.30 - Matias Recharte Duo\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - Josh Warren\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E11.00 - Rata Bday Bash &lt;3\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/42pncyns4rhnsxb-8jb5f-zj4b8-r6f4y-bffte-gnbay-mkdly-4ds24-bcye9-ckwhr-4mzjb-lnc2m-rer2g-nfeke-2jcsp-psn2h-3587n-a8bkb-jxhsk-ammzy-gwnhx-xbxrk-5nged-f7tl9-ywlhe-w8rcb-s3glh-2ma99-afzfj-wl7lw-6znxr",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/ae8eed96-f9ad-4076-944e-4dba652fade9/MasterMonth-05.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1725576900824,
+      "endDate": 1725580500824
+    },
+    "startDate": 1725576900824,
+    "endDate": 1725580500824,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66b13b647c477c646871eb9c",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1722891211139,
+    "updatedOn": 1724690902083,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1722891211139,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "8562a35e-05a3-42fa-90d5-51485fafbd65",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-04.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "080f0d",
+      "centerAverage": "2e3130",
+      "suggestedBgColor": "1b1f1d"
+    },
+    "urlId": "5s94ft5gbm8ll6r-h7dhe-nk6w4-ttxf8-n8f3m-tpj3r-3llr2-4gdzx-aagbf-y4a5w-3stzb-kzmlz",
+    "title": "WEDNESDAY ",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E7.00 - Robert Lee Brazilian Project\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E11.00 - Grapevine\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/5s94ft5gbm8ll6r-h7dhe-nk6w4-ttxf8-n8f3m-tpj3r-3llr2-4gdzx-aagbf-y4a5w-3stzb-kzmlz",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/8562a35e-05a3-42fa-90d5-51485fafbd65/MasterMonth-04.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1725489600496,
+      "endDate": 1725493200496
+    },
+    "startDate": 1725489600496,
+    "endDate": 1725493200496,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66b13b30eef3d35f2aea8dff",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1722891102190,
+    "updatedOn": 1724880144073,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1722891102190,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "03ca0600-58c5-455a-9d16-4c0db91af9b6",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-03.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "080f0d",
+      "centerAverage": "09100e",
+      "suggestedBgColor": "0c1310"
+    },
+    "urlId": "ntdcfsa46yhea9m-e3m5n-cl24p",
+    "title": "TUESDAY ",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E7.00 - Paula Sofia Quintet\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003ESWING NIGHT TUESDAYS!\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - Swing Dance Lesson\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E9.00 - Open Dance\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E11.30 - Open Jazz Jam \u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/ntdcfsa46yhea9m-e3m5n-cl24p",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/03ca0600-58c5-455a-9d16-4c0db91af9b6/MasterMonth-03.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1725404100947,
+      "endDate": 1725407700947
+    },
+    "startDate": 1725404100947,
+    "endDate": 1725407700947,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66b13a9e28f83510ff045179",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1722890989398,
+    "updatedOn": 1724696520507,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1722890989398,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "d6916573-84a7-4aa1-a5b3-bb4b48853661",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-02.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "0c1311",
+      "centerAverage": "585249",
+      "suggestedBgColor": "413933"
+    },
+    "urlId": "zhfw4d3s9c6ftpx-ljs62-l3rrl-nys93-3fxrm-p7hj5-5z7rb-n3zbf-j35aw-3tm2t-mggar-zdl54-pndjr-rsn62-b3tdr",
+    "title": "MONDAY",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E5.30 - Cynthia Tauro\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E— INDIE MONDAYS —\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - Rose Water Park\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E11.00 - Evan Abeele\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/zhfw4d3s9c6ftpx-ljs62-l3rrl-nys93-3fxrm-p7hj5-5z7rb-n3zbf-j35aw-3tm2t-mggar-zdl54-pndjr-rsn62-b3tdr",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/d6916573-84a7-4aa1-a5b3-bb4b48853661/MasterMonth-02.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1725312600481,
+      "endDate": 1725316200481
+    },
+    "startDate": 1725312600481,
+    "endDate": 1725316200481,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  },
+  {
+    "id": "66b139dee8a36e6e382dbe0c",
+    "collectionId": "62c7b220c14f6e5949312039",
+    "recordType": 12,
+    "addedOn": 1722890901090,
+    "updatedOn": 1724448003504,
+    "starred": false,
+    "passthrough": false,
+    "tags": [],
+    "categories": [],
+    "workflowState": 1,
+    "publishOn": 1722890901090,
+    "authorId": "5f8516e37bdc257439e4158a",
+    "systemDataId": "d63d7a88-376d-48fa-97f1-3d180c452708",
+    "systemDataVariants": "515x288,100w,300w,500w",
+    "systemDataSourceType": "PNG",
+    "filename": "MasterMonth-01.png",
+    "mediaFocalPoint": {
+      "x": 0.5,
+      "y": 0.5,
+      "source": 3
+    },
+    "colorData": {
+      "topLeftAverage": "09100e",
+      "topRightAverage": "09100e",
+      "bottomLeftAverage": "09100e",
+      "bottomRightAverage": "080f0d",
+      "centerAverage": "4c4b46",
+      "suggestedBgColor": "20231e"
+    },
+    "urlId": "y65czs68393fz5y-h99yk-ykcj8",
+    "title": "SUNDAY ",
+    "body": null,
+    "excerpt": "\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E2.00 - Polskatonic\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E5.30 - Don Scott Trio\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E8.00 - Dimitra Kahrimanidis\u003C/p\u003E\u003Cp class=\"\" style=\"white-space:pre-wrap;\"\u003E11.00 to 4.00 - Sonic Sancocho\u003C/p\u003E",
+    "location": {
+      "mapZoom": 12,
+      "mapLat": 40.7207559,
+      "mapLng": -74.0007613,
+      "markerLat": 40.7207559,
+      "markerLng": -74.0007613
+    },
+    "customContent": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "publicCommentCount": 0,
+    "commentState": 2,
+    "unsaved": false,
+    "author": {
+      "id": "5f8516e37bdc257439e4158a",
+      "displayName": "Paula Auchterlonie",
+      "firstName": "Paula",
+      "lastName": "Auchterlonie",
+      "avatarUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w",
+      "bio": "",
+      "avatarAssetUrl": "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5f8516e37bdc257439e4158a/2c3557a2-9ef7-4911-b229-02e3f807b2d4/thirdPartyMemberAvatar-5f8516e37bdc257439e4158a-78379fc7-20b5-4139-8d54-3949faa37c1e?format=300w"
+    },
+    "fullUrl": "/events-9O8Cm/y65czs68393fz5y-h99yk-ykcj8",
+    "assetUrl": "https://images.squarespace-cdn.com/content/v1/62c74c09107e832e3b3ef524/d63d7a88-376d-48fa-97f1-3d180c452708/MasterMonth-01.png",
+    "contentType": "image/png",
+    "structuredContent": {
+      "_type": "CalendarEvent",
+      "startDate": 1725231600123,
+      "endDate": 1725235200123
+    },
+    "startDate": 1725231600123,
+    "endDate": 1725235200123,
+    "items": [],
+    "pushedServices": {
+
+    },
+    "pendingPushedServices": {
+
+    },
+    "originalSize": "515x288",
+    "recordTypeLabel": "event"
+  }
+]
