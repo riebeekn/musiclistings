@@ -116,7 +116,7 @@ defmodule MusicListings.Parsing.VenueParsers.HughsRoomParser do
   @impl true
   def ticket_url(event) do
     event_id = event_id(event)
-    "https://www.showpass.com/w/tickets/events/purchase/#{event_id}"
+    "https://www.showpass.com/#{event_id}"
   end
 
   @impl true
