@@ -112,7 +112,8 @@ defmodule MusicListings.Parsing.VenueParsers.BovineParserTest do
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert "https://www.bovinesexclub.com/" == BovineParser.details_url(event)
+      assert "https://www.bovinesexclub.com/#calendar-235dbcca-3a0a-4622-a874-ce1dd5f36933-event-m038i2v7" ==
+               BovineParser.details_url(event)
     end
   end
 end
