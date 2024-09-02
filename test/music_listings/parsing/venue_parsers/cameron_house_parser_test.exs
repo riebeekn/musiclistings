@@ -49,6 +49,12 @@ defmodule MusicListings.Parsing.VenueParsers.CameronHouseParserTest do
     end
   end
 
+  describe "ignored_event_id/1" do
+    test "returns ignored event id", %{event: event} do
+      assert "81f6c22d-07a2-4fcb-8d59-5d62595ba1b2" == CameronHouseParser.ignored_event_id(event)
+    end
+  end
+
   describe "event_title/1" do
     test "returns event title", %{event: event} do
       assert "The Dunlop Brothers" == CameronHouseParser.event_title(event)
