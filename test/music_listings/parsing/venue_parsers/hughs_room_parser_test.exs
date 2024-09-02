@@ -114,7 +114,7 @@ defmodule MusicListings.Parsing.VenueParsers.HughsRoomParserTest do
 
   describe "ticket_url/1" do
     test "returns the event ticket url", %{event: event} do
-      assert "https://www.showpass.com/w/tickets/events/purchase/tom-wilson-tehahahake-trio" ==
+      assert "https://www.showpass.com/tom-wilson-tehahahake-trio" ==
                HughsRoomParser.ticket_url(event)
     end
   end
