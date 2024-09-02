@@ -50,6 +50,12 @@ defmodule MusicListings.Parsing.VenueParsers.CocaColaColiseumParserTest do
     end
   end
 
+  describe "ignored_event_id/1" do
+    test "returns ignored event id", %{event: event} do
+      assert "two_door_cinema_club_2024_07_31" == CocaColaColiseumParser.ignored_event_id(event)
+    end
+  end
+
   describe "event_title/1" do
     test "returns event title", %{event: event} do
       assert "Two Door Cinema Club" == CocaColaColiseumParser.event_title(event)
