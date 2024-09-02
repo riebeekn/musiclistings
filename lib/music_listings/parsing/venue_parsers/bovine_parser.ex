@@ -56,5 +56,7 @@ defmodule MusicListings.Parsing.VenueParsers.BovineParser do
   defdelegate ticket_url(event), to: ElfsightParser
 
   @impl true
-  defdelegate details_url(event), to: ElfsightParser
+  def details_url(_event) do
+    "https://www.bovinesexclub.com/"
+  end
 end
