@@ -96,7 +96,7 @@ defmodule MusicListings.Parsing.VenueParsers.RexParser do
   end
 
   @impl true
-  def details_url(_event) do
-    "https://www.therex.ca/"
+  def details_url(event) do
+    "https://www.therex.ca/events/#{event["urlId"]}"
   end
 end
