@@ -70,7 +70,7 @@ defmodule MusicListings.Parsing.VenueParsers.DromTabernaParserTest do
 
   describe "event_title/1" do
     test "returns event title", %{event: event} do
-      assert "2.00 - Polskatonic, 5.30 - Don Scott Trio, 8.00 - Dimitra Kahrimanidis, 11.00 to 4.00 - Sonic Sancocho" ==
+      assert "Polskatonic, Don Scott Trio, Dimitra Kahrimanidis, Sonic Sancocho" ==
                DromTabernaParser.event_title(event)
     end
   end
@@ -123,7 +123,8 @@ defmodule MusicListings.Parsing.VenueParsers.DromTabernaParserTest do
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert "https://www.dromtaberna.com/" == DromTabernaParser.details_url(event)
+      assert "https://www.dromtaberna.com/events-9O8Cm/y65czs68393fz5y-h99yk-ykcj8" ==
+               DromTabernaParser.details_url(event)
     end
   end
 end

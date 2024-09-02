@@ -24,7 +24,9 @@ defmodule MusicListings.Parsing.VenueParsers.DromTabernaParser do
 
   @impl true
   def events(body) do
-    ParseHelpers.maybe_decode!(body)
+    body
+    |> ParseHelpers.maybe_decode!()
+    |> Enum.reject(fn content -> content["systemDataId"] == "PLACEHOLDER" end)
   end
 
   @impl true
@@ -53,10 +55,17 @@ defmodule MusicListings.Parsing.VenueParsers.DromTabernaParser do
 
   @impl true
   def event_title(event) do
-    event["excerpt"]
-    |> Selectors.all_matches(css("p"))
-    |> Selectors.text()
-    |> Enum.map_join(", ", & &1)
+    full_title =
+      event["excerpt"]
+      |> Selectors.all_matches(css("p"))
+      |> Selectors.text()
+      |> Enum.map_join(", ", & &1)
+
+    # strip out times from the title
+    time_regex = ~r/\b\d{1,2}\.\d{2}(?:\s*to\s*\d{1,2}\.\d{2})?\s*-\s*/
+
+    full_title
+    |> String.replace(time_regex, "")
   end
 
   @impl true
@@ -97,7 +106,7 @@ defmodule MusicListings.Parsing.VenueParsers.DromTabernaParser do
   end
 
   @impl true
-  def details_url(_event) do
-    "https://www.dromtaberna.com/"
+  def details_url(event) do
+    "https://www.dromtaberna.com#{event["fullUrl"]}"
   end
 end
