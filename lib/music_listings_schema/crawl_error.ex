@@ -7,7 +7,7 @@ defmodule MusicListingsSchema.CrawlError do
   schema "crawl_errors" do
     belongs_to :crawl_summary, MusicListingsSchema.CrawlSummary
     belongs_to :venue, MusicListingsSchema.Venue
-    field :type, Ecto.Enum, values: [:parse_error]
+    field :type, Ecto.Enum, values: [:parse_error, :no_events_error]
     field :error, :string
     field :raw_event, :string
 

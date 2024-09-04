@@ -27,7 +27,14 @@ defmodule MusicListings.Crawler.DataSource do
         events_from_current_body =
           body
           |> parser.events()
-          |> Enum.map(&Payload.new/1)
+          |> case do
+            nil ->
+              Logger.warning("Found no events to parse")
+              []
+
+            events ->
+              Enum.map(events, &Payload.new/1)
+          end
 
         next_page_url = parser.next_page_url(body, url)
 

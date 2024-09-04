@@ -58,6 +58,7 @@ defmodule MusicListings.Crawler do
 
       parser
       |> DataSource.retrieve_events(parser.source_url(), pull_data_from_www?)
+      |> maybe_insert_no_events_error(venue, crawl_summary)
       |> EventParser.parse_events(parser, venue, crawl_summary)
       |> EventStorage.save_events()
       |> List.flatten()
@@ -65,6 +66,20 @@ defmodule MusicListings.Crawler do
     end)
     |> CrawlStats.new()
     |> update_crawl_summary_with_stats(crawl_summary)
+  end
+
+  defp maybe_insert_no_events_error(payloads, venue, crawl_summary) do
+    if payloads == [] do
+      %CrawlError{
+        crawl_summary_id: crawl_summary.id,
+        venue_id: venue.id,
+        type: :no_events_error,
+        error: "No events found for #{venue.name}"
+      }
+      |> Repo.insert!()
+    end
+
+    payloads
   end
 
   defp insert_venue_summary(payloads, venue, crawl_summary) do
