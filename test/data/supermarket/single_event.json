@@ -1,0 +1,39 @@
+{
+  "id": "78a6a821-c71d-423a-b242-a0b7ec95cdcc",
+  "name": "Big Fam Jam",
+  "start": {
+    "type": "datetime",
+    "date": "2023-05-02",
+    "time": "21:00"
+  },
+  "end": {
+    "type": "datetime",
+    "date": "2023-05-02",
+    "time": "21:00"
+  },
+  "timeZone": "US/Eastern",
+  "repeatPeriod": "weeklyOn",
+  "description": "\u003Cdiv\u003E\u003Cstrong\u003EPWYC at the door!\u003C/strong\u003E\u003C/div\u003E\u003Cbr\u003E\u003Cdiv\u003E\u003Cstrong\u003EHosted by Jackson Steinwall, The Big Fam Jam is Toronto’s hottest open mic, drawing hundreds of funk-loving souls to Supermarket every week. No egos, no lists, no bull—-t, just funky good times guaranteed! \u003C/strong\u003E\u003C/div\u003E",
+  "image": {
+    "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/1c581db0-97a6-468c-90a1-de7c7dfc2030/Screen-Shot-2023-04-29-at-1-35-46-PM.png",
+    "name": "Screen Shot 2023-04-29 at 1.35.46 PM.png",
+    "size": 6531217,
+    "width": 2816,
+    "height": 2422,
+    "type": "image/png",
+    "extension": "png"
+  },
+  "eventType": "lh8jarxs",
+  "location": null,
+  "host": "lh29nf2n",
+  "tags": [],
+  "color": "transparent",
+  "buttonVisible": false,
+  "buttonText": "Get Tickets",
+  "buttonCaption": "",
+  "video": null,
+  "$$key": [
+    "events",
+    4],
+  "repeatFrequency": "daily"
+}
