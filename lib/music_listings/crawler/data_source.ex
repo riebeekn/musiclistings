@@ -45,10 +45,12 @@ defmodule MusicListings.Crawler.DataSource do
         end
 
       {:ok, %Response{status: status}} ->
-        Logger.info("Failed to get data from #{url}, status code: #{status}")
+        Logger.warning("Failed to get data from #{url}, status code: #{status}")
+        []
 
       {:error, error} ->
         Logger.error("Error occured getting #{url}, #{inspect(error)}")
+        []
     end
   end
 
