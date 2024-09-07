@@ -62,6 +62,7 @@ defmodule MusicListings.Parsing.ParseHelpers do
     |> String.replace("\\u2018", "'")
     |> String.replace("\\u2019", "'")
     |> String.replace("&amp;", "&")
+    |> String.replace("&#8211;", "-")
   end
 
   # ===========================================================================
