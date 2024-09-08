@@ -14,7 +14,7 @@ defmodule MusicListings.Repo.Migrations.PopulateInitialVenues do
 
     execute """
       INSERT INTO venues(name, parser_module_name, pull_events, street, city, province, country, postal_code, google_map_url)
-      VALUES('Coca Cola Coliseum', 'CocaColaColiseumParser', true, '45 Manitoba Dr, Toronto', 'Toronto', 'Ontario', 'Cananda', 'M6K 3C3', 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11550.310880355533!2d-79.4152538!3d43.6361473!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b35051456dd69%3A0x2030d3806ac33542!2sCoca-Cola%20Coliseum!5e0!3m2!1sen!2sca!4v1723164079858!5m2!1sen!2sca')
+      VALUES('Coca Cola Coliseum', 'CocaColaColiseumParser', true, '45 Manitoba Dr', 'Toronto', 'Ontario', 'Cananda', 'M6K 3C3', 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11550.310880355533!2d-79.4152538!3d43.6361473!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b35051456dd69%3A0x2030d3806ac33542!2sCoca-Cola%20Coliseum!5e0!3m2!1sen!2sca!4v1723164079858!5m2!1sen!2sca')
     """
 
     execute """
@@ -59,7 +59,7 @@ defmodule MusicListings.Repo.Migrations.PopulateInitialVenues do
 
     execute """
       INSERT INTO venues(name, parser_module_name, pull_events, street, city, province, country, postal_code, google_map_url)
-      VALUES('Roy Thomson Hall', 'RoyThomsonHallParser', true, '60 Simcoe St, Toronto', 'Toronto', 'Ontario', 'Cananda', 'M5J 2H5', 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11548.300213716035!2d-79.3864069!3d43.6466068!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b34d3d618e077%3A0x33e5adb630149b89!2sRoy%20Thomson%20Hall!5e0!3m2!1sen!2sca!4v1723164510518!5m2!1sen!2sca')
+      VALUES('Roy Thomson Hall', 'RoyThomsonHallParser', true, '60 Simcoe St', 'Toronto', 'Ontario', 'Cananda', 'M5J 2H5', 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11548.300213716035!2d-79.3864069!3d43.6466068!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b34d3d618e077%3A0x33e5adb630149b89!2sRoy%20Thomson%20Hall!5e0!3m2!1sen!2sca!4v1723164510518!5m2!1sen!2sca')
     """
 
     execute """
