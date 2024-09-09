@@ -1,0 +1,36 @@
+<div class="entry-content">
+<script>
+   document.addEventListener( 'DOMContentLoaded', function() {
+       var calendarEl = document.getElementById( 'tc_calendar' ),
+           calendar = new FullCalendar.Calendar( calendarEl, {
+           locale: 'en',
+           initialView: 'dayGridMonth',
+           headerToolbar: {
+               left: 'prev,next today',
+               center: 'title',
+               right: 'dayGridMonth,timeGridWeek,timeGridDay'
+           },
+           initialDate:'2024-09-08',
+           // defaultDate: '',
+           firstDay: 0,
+           // timeFormat: "h:mm a",
+           eventTimeFormat: {
+               hour: '2-digit',
+               minute: '2-digit',
+               hour12: true                        },
+           // slotLabelFormat: "h:mm a",
+           events: [
+               {
+                 title: 'Mike Sedgewick\'s Blues Revue & Open Jam Returns to the Linsmore Tavern in August!',
+                 start: '2024-08-04 19:00',
+                 end: '2024-08-04 23:00',
+                 url: 'https://www.linsmoretavern.com/tc-events/4786/',
+                 classNames: 'tcec-event-4786',
+                 backgroundImage: ''
+                 },],
+                }
+              );
+       calendar.render();
+   } );
+</script>
+</div>
