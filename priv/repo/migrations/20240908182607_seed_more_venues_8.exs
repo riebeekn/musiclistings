@@ -26,6 +26,11 @@ defmodule MusicListings.Repo.Migrations.SeedMoreVenues8 do
       INSERT INTO venues(name, parser_module_name, pull_events, street, city, province, country, postal_code, google_map_url)
       VALUES('CNE', 'CneParser', true, '100 Princes'' Blvd', 'Toronto', 'Ontario', 'Cananda', 'M6K 3C3', 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11550.517202053074!2d-79.4123625!3d43.6350739!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b3528b87f1db3%3A0xa5da38e3b52ec273!2sExhibition%20Place!5e0!3m2!1sen!2sca!4v1725905594698!5m2!1sen!2sca')
     """
+
+    execute """
+      INSERT INTO venues(name, parser_module_name, pull_events, street, city, province, country, postal_code, google_map_url)
+      VALUES('Rivoli', 'RivoliParser', true, '334 Queen St W, Toronto', 'Toronto', 'Ontario', 'Cananda', 'M5V 2A2', 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11547.788791907098!2d-79.3948949!3d43.6492669!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b34db21f97449%3A0x8e0b1d65ec2a33b0!2sRivoli%20Toronto!5e0!3m2!1sen!2sca!4v1725914021915!5m2!1sen!2sca')
+    """
   end
 
   def down do
@@ -47,6 +52,10 @@ defmodule MusicListings.Repo.Migrations.SeedMoreVenues8 do
 
     execute """
     DELETE FROM venues WHERE name = 'CNE'
+    """
+
+    execute """
+    DELETE FROM venues WHERE name = 'Rivoli'
     """
   end
 end
