@@ -21,6 +21,11 @@ defmodule MusicListings.Repo.Migrations.SeedMoreVenues8 do
       INSERT INTO venues(name, parser_module_name, pull_events, street, city, province, country, postal_code, google_map_url)
       VALUES('Primal Note Studios', 'PrimalNoteParser', true, '1141 Roselawn Ave', 'Toronto', 'Ontario', 'Cananda', 'M6B 1C5', 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11538.142735414589!2d-79.4528966!3d43.6994155!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b336f407d7e47%3A0xe6a4329e43f056c4!2sPrimal%20Note%20Studios!5e0!3m2!1sen!2sca!4v1725843627917!5m2!1sen!2sca')
     """
+
+    execute """
+      INSERT INTO venues(name, parser_module_name, pull_events, street, city, province, country, postal_code, google_map_url)
+      VALUES('CNE', 'CneParser', true, '100 Princes'' Blvd', 'Toronto', 'Ontario', 'Cananda', 'M6K 3C3', 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11550.517202053074!2d-79.4123625!3d43.6350739!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b3528b87f1db3%3A0xa5da38e3b52ec273!2sExhibition%20Place!5e0!3m2!1sen!2sca!4v1725905594698!5m2!1sen!2sca')
+    """
   end
 
   def down do
@@ -38,6 +43,10 @@ defmodule MusicListings.Repo.Migrations.SeedMoreVenues8 do
 
     execute """
     DELETE FROM venues WHERE name = 'Primal Note Studios'
+    """
+
+    execute """
+    DELETE FROM venues WHERE name = 'CNE'
     """
   end
 end
