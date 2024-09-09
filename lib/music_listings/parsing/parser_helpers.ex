@@ -206,6 +206,7 @@ defmodule MusicListings.Parsing.ParseHelpers do
   def time_string_to_time(time_string) do
     (time_string || "")
     |> String.replace(":PM", " pm")
+    |> String.replace("p.m.", "pm")
     |> String.trim()
     |> String.downcase()
     |> String.split(":")

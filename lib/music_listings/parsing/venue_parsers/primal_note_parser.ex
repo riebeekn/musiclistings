@@ -1,18 +1,18 @@
-defmodule MusicListings.Parsing.VenueParsers.PoetryJazzCafeParser do
+defmodule MusicListings.Parsing.VenueParsers.PrimalNoteParser do
   @moduledoc """
-  Parser for extracing events from https://www.poetryjazzcafe.com
+  Parser for extracing events from https://primalnote.com
   """
   @behaviour MusicListings.Parsing.VenueParser
 
   alias MusicListings.Parsing.VenueParsers.BaseParsers.SquareSpaceParser
 
-  @base_url "https://www.poetryjazzcafe.com"
+  @base_url "https://primalnote.com"
 
   @impl true
-  def source_url, do: "#{@base_url}/livemusic"
+  def source_url, do: "#{@base_url}/events"
 
   @impl true
-  def example_data_file_location, do: "test/data/poetry_jazz_cafe/index.html"
+  def example_data_file_location, do: "test/data/primal_note/index.html"
 
   @impl true
   defdelegate events(body), to: SquareSpaceParser
