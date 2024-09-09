@@ -1,6 +1,6 @@
-defmodule MusicListings.Parsing.VenueParsers.CameronHouseParser do
+defmodule MusicListings.Parsing.VenueParsers.RivoliParser do
   @moduledoc """
-  Parser for extracing events from https://www.thecameron.com/
+  Parser for extracing events from https://www.rivolitoronto.com
   """
   @behaviour MusicListings.Parsing.VenueParser
 
@@ -10,10 +10,10 @@ defmodule MusicListings.Parsing.VenueParsers.CameronHouseParser do
   alias MusicListings.Parsing.VenueParsers.BaseParsers.WixParser
 
   @impl true
-  def source_url, do: "https://www.thecameron.com/shows"
+  def source_url, do: "https://www.rivolitoronto.com/shows"
 
   @impl true
-  def example_data_file_location, do: "test/data/cameron_house/index.html"
+  def example_data_file_location, do: "test/data/rivoli/index.html"
 
   @impl true
   def events(body) do
@@ -23,7 +23,7 @@ defmodule MusicListings.Parsing.VenueParsers.CameronHouseParser do
       |> Selectors.data()
       |> Jason.decode!()
 
-    json["appsWarmupData"]["140603ad-af8d-84a5-2c80-a0f60cb47351"]["widgetcomp-j9ny0yyr"][
+    json["appsWarmupData"]["140603ad-af8d-84a5-2c80-a0f60cb47351"]["widgetcomp-jg3gu6hl"][
       "events"
     ]["events"]
   end
@@ -62,5 +62,5 @@ defmodule MusicListings.Parsing.VenueParsers.CameronHouseParser do
   defdelegate ticket_url(event), to: WixParser
 
   @impl true
-  def details_url(_event), do: "https://www.thecameron.com/"
+  defdelegate details_url(event), to: WixParser
 end
