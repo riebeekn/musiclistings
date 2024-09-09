@@ -74,7 +74,7 @@ defmodule MusicListings.MixProject do
       {:mjml, "~> 1.5.0"},
       {:floki, ">= 0.30.0"},
       {:tzdata, "~> 1.1"},
-      {:scrivener_ecto, "~> 2.0"},
+      {:scrivener_ecto, "~> 3.0"},
       {:redirect, "~> 0.4.0"},
       {:goal, "~> 1.0"},
       {:error_tracker, "~> 0.2"},
