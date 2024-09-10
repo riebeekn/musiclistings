@@ -163,7 +163,7 @@ defmodule MusicListingsWeb.CustomComponents do
   def venue_card(assigns) do
     ~H"""
     <div class="block sm:flex text-zinc-200">
-      <div class="pr-12 whitespace-nowrap">
+      <div class="pr-12 sm:whitespace-nowrap">
         <h2 class="text-4xl font-bold">
           <%= @venue.name %>
         </h2>
@@ -315,50 +315,49 @@ defmodule MusicListingsWeb.CustomComponents do
   end
 
   @doc """
-  Renders a table of events for the passed in events, specific to a single venue
+  Renders a list of events for the passed in events, specific to a single venue
 
   ## Example
 
-  <.venue_events_table events={events} />
+  <.venue_events_list events={@events} />
   """
   attr :events, :list, required: true
 
-  def venue_events_table(assigns) do
+  def venue_events_list(assigns) do
     ~H"""
-    <table class="table-fixed min-w-full">
-      <tbody class="divide-y divide-zinc-600">
-        <%= for event <- @events do %>
-          <tr id={"event-#{event.id}"}>
-            <td class="align-top py-2 w-2/8">
+    <dl class="divide-y divide-zinc-600">
+      <%= for event <- @events do %>
+        <div class="py-2">
+          <dt class="flex items-center justify-between">
+            <div class="flex items-center gap-x-1">
               <.event_date date={event.date} />
               <.event_time time={event.time} />
-            </td>
-            <td class="align-top py-2 pl-4 w-5/8">
-              <.event_title title={event.title} />
-
-              <div class="mt-1 text-xs leading-5 flex gap-x-2">
-                <.event_ticket_url
-                  ticket_url={event.ticket_url}
-                  price_format={event.price_format}
-                  price_lo={event.price_lo}
-                  price_hi={event.price_hi}
-                />
-                <.event_details_url details_url={event.details_url} />
-              </div>
-            </td>
-            <td class="align-top py-2 w-1/8 text-right">
+            </div>
+            <div>
               <.event_age_restriction age_restriction={event.age_restriction} />
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+            </div>
+          </dt>
+          <dd class="mt-1">
+            <.event_title title={event.title} />
+          </dd>
+          <dd class="text-xs mt-1 flex items-center gap-x-2">
+            <.event_ticket_url
+              ticket_url={event.ticket_url}
+              price_format={event.price_format}
+              price_lo={event.price_lo}
+              price_hi={event.price_hi}
+            />
+            <.event_details_url details_url={event.details_url} />
+          </dd>
+        </div>
+      <% end %>
+    </dl>
     """
   end
 
   defp event_date(assigns) do
     ~H"""
-    <div class="text-sm font-medium leading-6 text-emerald-400">
+    <div class="text-sm font-medium leading-6 text-zinc-400">
       <span><%= DateHelpers.format_date(@date) %></span>
     </div>
     """
@@ -378,19 +377,16 @@ defmodule MusicListingsWeb.CustomComponents do
     ~H"""
     <a
       href={@ticket_url}
-      class="sm:flex sm:items-center text-emerald-400 hover:text-emerald-500"
+      class="flex items-center text-emerald-400 hover:text-emerald-500"
       target="_blank"
     >
-      <div class="block sm:hidden sm:ml-1">
-        <.event_price price_format={@price_format} price_lo={@price_lo} price_hi={@price_hi} />
-      </div>
       <div class="flex items-center">
         <MusicListingsWeb.CoreComponents.icon name="hero-ticket-solid" class="size-4" />
         <div class="ml-1">
           Tickets
         </div>
       </div>
-      <div class="hidden sm:block sm:ml-1">
+      <div class="ml-1">
         <.event_price price_format={@price_format} price_lo={@price_lo} price_hi={@price_hi} />
       </div>
     </a>
@@ -416,7 +412,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_age_restriction(assigns) do
     ~H"""
-    <div class="whitespace-nowrap mr-4 rounded-md text-xs inline-flex gap-0.5 justify-center overflow-hidden font-medium transition py-1 px-3 bg-amber-400/10 text-amber-400 ring-1 ring-inset ring-amber-400/20 hover:bg-amber-400/10 hover:text-amber-300 hover:ring-amber-300">
+    <div class="min-w-20 whitespace-nowrap rounded-md text-xs inline-flex gap-0.5 justify-center overflow-hidden font-medium transition py-1 px-3 bg-amber-400/10 text-amber-400 ring-1 ring-inset ring-amber-400/20 hover:bg-amber-400/10 hover:text-amber-300 hover:ring-amber-300">
       <%= format_age_restriction(@age_restriction) %>
     </div>
     """
@@ -441,7 +437,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_time(assigns) do
     ~H"""
-    <div class="mt-1 text-sm">
+    <div class="text-sm">
       <time class="text-zinc-400"><%= DateHelpers.format_time(@time) %></time>
     </div>
     """
