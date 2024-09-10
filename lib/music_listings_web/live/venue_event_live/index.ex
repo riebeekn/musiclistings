@@ -52,7 +52,7 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
       <.page_header header="Upcoming Events" />
     </div>
 
-    <.venue_events_table events={@events} />
+    <.venue_events_list events={@events} />
 
     <div class="my-8">
       <.pager
