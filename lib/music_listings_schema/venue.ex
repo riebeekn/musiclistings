@@ -14,5 +14,6 @@ defmodule MusicListingsSchema.Venue do
     field :country, :string
     field :postal_code, :string
     field :google_map_url, :string
+    field :website, :string
   end
 end

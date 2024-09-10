@@ -171,6 +171,15 @@ defmodule MusicListingsWeb.CustomComponents do
           <span class="block"><%= @venue.street %></span>
           <span class="block"><%= "#{@venue.city} #{@venue.province}" %></span>
           <span class="block"><%= "#{@venue.country} #{@venue.postal_code}" %></span>
+          <span class="block mt-1">
+            <a
+              href={@venue.website}
+              class="flex items-center gap-x-1 text-emerald-400 hover:text-emerald-500"
+              target="_blank"
+            >
+              <MusicListingsWeb.CoreComponents.icon name="hero-arrow-right" class="size-4" /> Website
+            </a>
+          </span>
         </div>
       </div>
 
