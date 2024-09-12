@@ -37,37 +37,6 @@ defmodule MusicListingsWeb.CustomComponents do
     """
   end
 
-  # TODO: get rid of this if end up not using it
-  @doc """
-  Renders a 2 column header
-
-  ## Example
-
-  <.two_column_header header="Events">
-    <:secondary_item>
-      <.button_link label="Submit a new event / venue" url="#" icon_name="hero-arrow-right" />
-    </:secondary_item>
-  </.two_column_header>
-  """
-  attr :header, :string, required: true
-  slot :secondary_item, required: true
-
-  def two_column_header(assigns) do
-    ~H"""
-    <div class="md:flex md:items-center md:justify-between">
-      <div class="min-w-0 flex-1">
-        <h1 class="text-3xl font-bold leading-7 text-zinc-200 sm:truncate sm:text-4xl sm:tracking-tight">
-          <%= @header %>
-        </h1>
-      </div>
-
-      <div class="mt-4 flex md:ml-4 md:0">
-        <%= render_slot(@secondary_item) %>
-      </div>
-    </div>
-    """
-  end
-
   @doc """
   Renders a button link
 
@@ -95,23 +64,6 @@ defmodule MusicListingsWeb.CustomComponents do
         <MusicListingsWeb.CoreComponents.icon name={@icon_name} class="size-3 mt-1 ml-1" />
       <% end %>
     </.link>
-    """
-  end
-
-  @doc """
-  Renders a date header
-
-  ## Example
-
-  <.events_date_header date={date} />
-  """
-  attr :date, Date, required: true
-
-  def events_date_header(assigns) do
-    ~H"""
-    <h2 class="text-left text-3xl font-semibold leading-5 text-zinc-400 sm:text-4xl sm:tracking-tight">
-      <time datetime={@date}><%= DateHelpers.format_date(@date) %></time>
-    </h2>
     """
   end
 
@@ -266,51 +218,46 @@ defmodule MusicListingsWeb.CustomComponents do
   end
 
   @doc """
-  Renders a table of events for the passed in events
+  Renders a list of events for the passed in events
 
   ## Example
 
-  <.events_table events={events} />
+  <.events_list events={@events} />
   """
   attr :events, :list, required: true
 
-  def events_table(assigns) do
+  def events_list(assigns) do
     ~H"""
-    <table class="table-fixed min-w-full">
-      <tbody class="divide-y divide-zinc-600">
-        <%= for {date, events} <- @events do %>
-          <tr>
-            <th scope="colgroup" colspan="3" class="py-8 sm:py-6">
-              <.events_date_header date={date} />
-            </th>
-          </tr>
+    <dl>
+      <%= for {date, events} <- @events do %>
+        <dt class="mb-2">
+          <.events_date_header date={date} />
+        </dt>
+        <dl class="divide-y divide-zinc-600 mb-12">
           <%= for event <- events do %>
-            <tr id={"event-#{event.id}"}>
-              <td class="py-4 align-top w-4/8">
-                <.event_title title={event.title} />
-                <div class="mt-1 text-sm sm:flex sm:gap-x-2">
-                  <.event_ticket_url
-                    ticket_url={event.ticket_url}
-                    price_format={event.price_format}
-                    price_lo={event.price_lo}
-                    price_hi={event.price_hi}
-                  />
-                  <.event_details_url details_url={event.details_url} />
-                </div>
-              </td>
-
-              <td class="py-4 align-top w-3/8 pl-1">
+            <div id={"event-#{event.id}"} class="py-2">
+              <dt class="flex items-center justify-between sm:justify-start sm:gap-x-2">
                 <.event_venue venue={event.venue} />
-                <.event_time time={event.time} />
-              </td>
-              <td class="py-3 align-top w-1/8 text-right">
                 <.event_age_restriction age_restriction={event.age_restriction} />
-              </td>
-            </tr>
+              </dt>
+              <dd>
+                <.event_title title={event.title} />
+              </dd>
+              <dd class="flex items-center gap-x-2">
+                <.event_time time={event.time} />
+                <.event_ticket_url
+                  ticket_url={event.ticket_url}
+                  price_format={event.price_format}
+                  price_lo={event.price_lo}
+                  price_hi={event.price_hi}
+                />
+                <.event_details_url details_url={event.details_url} />
+              </dd>
+            </div>
           <% end %>
-        <% end %>
-      </tbody>
-    </table>
+        </dl>
+      <% end %>
+    </dl>
     """
   end
 
@@ -327,8 +274,8 @@ defmodule MusicListingsWeb.CustomComponents do
     ~H"""
     <dl class="divide-y divide-zinc-600">
       <%= for event <- @events do %>
-        <div class="py-2">
-          <dt class="flex items-center justify-between">
+        <div id={"event-#{event.id}"} class="py-2">
+          <dt class="flex items-center justify-between sm:justify-start sm:gap-x-2">
             <div class="flex items-center gap-x-1">
               <.event_date date={event.date} />
               <.event_time time={event.time} />
@@ -337,10 +284,10 @@ defmodule MusicListingsWeb.CustomComponents do
               <.event_age_restriction age_restriction={event.age_restriction} />
             </div>
           </dt>
-          <dd class="mt-1">
+          <dd>
             <.event_title title={event.title} />
           </dd>
-          <dd class="text-xs mt-1 flex items-center gap-x-2">
+          <dd class="flex items-center gap-x-2">
             <.event_ticket_url
               ticket_url={event.ticket_url}
               price_format={event.price_format}
@@ -355,9 +302,17 @@ defmodule MusicListingsWeb.CustomComponents do
     """
   end
 
+  defp events_date_header(assigns) do
+    ~H"""
+    <h2 class="text-left text-3xl font-semibold leading-5 text-zinc-400 sm:text-4xl sm:tracking-tight">
+      <time datetime={@date}><%= DateHelpers.format_date(@date) %></time>
+    </h2>
+    """
+  end
+
   defp event_date(assigns) do
     ~H"""
-    <div class="text-sm font-medium leading-6 text-zinc-400">
+    <div class="text-xs font-medium leading-4 text-zinc-400">
       <span><%= DateHelpers.format_date(@date) %></span>
     </div>
     """
@@ -365,7 +320,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_title(assigns) do
     ~H"""
-    <div class="text-md font-medium leading-6 text-white uppercase">
+    <div class="text-sm font-medium leading-6 text-white uppercase">
       <%= @title %>
     </div>
     """
@@ -377,7 +332,7 @@ defmodule MusicListingsWeb.CustomComponents do
     ~H"""
     <a
       href={@ticket_url}
-      class="flex items-center text-emerald-400 hover:text-emerald-500"
+      class="flex items-center text-xs text-emerald-400 hover:text-emerald-500"
       target="_blank"
     >
       <div class="flex items-center">
@@ -399,7 +354,7 @@ defmodule MusicListingsWeb.CustomComponents do
     ~H"""
     <a
       href={@details_url}
-      class="flex items-center text-emerald-400 hover:text-emerald-500"
+      class="flex items-center text-xs text-emerald-400 hover:text-emerald-500"
       target="_blank"
     >
       <MusicListingsWeb.CoreComponents.icon name="hero-information-circle-solid" class="size-4" />
@@ -412,8 +367,8 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_age_restriction(assigns) do
     ~H"""
-    <div class="min-w-20 whitespace-nowrap rounded-md text-xs inline-flex gap-0.5 justify-center overflow-hidden font-medium transition py-1 px-3 bg-amber-400/10 text-amber-400 ring-1 ring-inset ring-amber-400/20 hover:bg-amber-400/10 hover:text-amber-300 hover:ring-amber-300">
-      <%= format_age_restriction(@age_restriction) %>
+    <div class="text-xs whitespace-nowrap text-amber-400">
+      (<%= format_age_restriction(@age_restriction) %>)
     </div>
     """
   end
@@ -426,7 +381,7 @@ defmodule MusicListingsWeb.CustomComponents do
     ~H"""
     <a
       href={~p"/events/venue/#{@venue.id}"}
-      class="text-md font-medium leading-4 text-emerald-400 hover:text-emerald-500"
+      class="text-xs font-medium leading-4 text-emerald-400 hover:text-emerald-500"
     >
       <%= @venue.name %>
     </a>
@@ -437,9 +392,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_time(assigns) do
     ~H"""
-    <div class="text-sm">
-      <time class="text-zinc-400"><%= DateHelpers.format_time(@time) %></time>
-    </div>
+    <time class="text-xs text-zinc-400"><%= DateHelpers.format_time(@time) %></time>
     """
   end
 
