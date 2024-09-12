@@ -48,7 +48,7 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
       <.venue_card venue={@venue} />
     </div>
 
-    <div class="mb-6">
+    <div class="mb-2">
       <.page_header header="Upcoming Events" />
     </div>
 
