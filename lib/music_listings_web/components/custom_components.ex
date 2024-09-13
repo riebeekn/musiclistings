@@ -240,10 +240,10 @@ defmodule MusicListingsWeb.CustomComponents do
                 <.event_venue venue={event.venue} />
                 <.event_age_restriction age_restriction={event.age_restriction} />
               </dt>
-              <dd>
+              <dd class="mt-0 sm:mt-1">
                 <.event_title title={event.title} />
               </dd>
-              <dd class="flex items-center gap-x-2">
+              <dd class="flex items-center gap-x-2 mt-0 sm:mt-1">
                 <.event_time time={event.time} />
                 <.event_ticket_url
                   ticket_url={event.ticket_url}
@@ -274,7 +274,7 @@ defmodule MusicListingsWeb.CustomComponents do
     ~H"""
     <dl class="divide-y divide-zinc-600">
       <%= for event <- @events do %>
-        <div id={"event-#{event.id}"} class="py-2">
+        <div id={"event-#{event.id}"} class="py-2 sm:py-4">
           <dt class="flex items-center justify-between sm:justify-start sm:gap-x-2">
             <div class="flex items-center gap-x-1">
               <.event_date date={event.date} />
@@ -284,10 +284,10 @@ defmodule MusicListingsWeb.CustomComponents do
               <.event_age_restriction age_restriction={event.age_restriction} />
             </div>
           </dt>
-          <dd>
+          <dd class="mt-0 sm:mt-1">
             <.event_title title={event.title} />
           </dd>
-          <dd class="flex items-center gap-x-2">
+          <dd class="flex items-center gap-x-2 mt-0 sm:mt-1">
             <.event_ticket_url
               ticket_url={event.ticket_url}
               price_format={event.price_format}
@@ -312,7 +312,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_date(assigns) do
     ~H"""
-    <div class="text-xs font-medium leading-4 text-zinc-400">
+    <div class="text-xs sm:text-sm font-medium leading-4 text-zinc-400">
       <span><%= DateHelpers.format_date(@date) %></span>
     </div>
     """
@@ -320,7 +320,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_title(assigns) do
     ~H"""
-    <div class="text-sm font-medium leading-6 text-white uppercase">
+    <div class="text-sm sm:text-lg font-medium leading-6 text-white uppercase">
       <%= @title %>
     </div>
     """
@@ -332,12 +332,12 @@ defmodule MusicListingsWeb.CustomComponents do
     ~H"""
     <a
       href={@ticket_url}
-      class="flex items-center text-xs text-emerald-400 hover:text-emerald-500"
+      class="flex items-center text-xs sm:text-sm text-emerald-400 hover:text-emerald-500"
       target="_blank"
     >
       <div class="flex items-center">
-        <MusicListingsWeb.CoreComponents.icon name="hero-ticket-solid" class="size-4" />
-        <div class="ml-1">
+        <MusicListingsWeb.CoreComponents.icon name="hero-ticket-solid" class="hidden sm:block size-4" />
+        <div class="sm:ml-1">
           Tickets
         </div>
       </div>
@@ -357,8 +357,11 @@ defmodule MusicListingsWeb.CustomComponents do
       class="flex items-center text-xs text-emerald-400 hover:text-emerald-500"
       target="_blank"
     >
-      <MusicListingsWeb.CoreComponents.icon name="hero-information-circle-solid" class="size-4" />
-      <span class="ml-1">Details</span>
+      <MusicListingsWeb.CoreComponents.icon
+        name="hero-information-circle-solid"
+        class="hidden sm:block size-4"
+      />
+      <span class="sm:ml-1">Details</span>
     </a>
     """
   end
@@ -367,7 +370,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_age_restriction(assigns) do
     ~H"""
-    <div class="text-xs whitespace-nowrap text-amber-400">
+    <div class="text-xs sm:text-sm whitespace-nowrap text-amber-400">
       (<%= format_age_restriction(@age_restriction) %>)
     </div>
     """
@@ -381,7 +384,7 @@ defmodule MusicListingsWeb.CustomComponents do
     ~H"""
     <a
       href={~p"/events/venue/#{@venue.id}"}
-      class="text-xs font-medium leading-4 text-emerald-400 hover:text-emerald-500"
+      class="text-xs sm:text-sm font-medium leading-4 text-emerald-400 hover:text-emerald-500"
     >
       <%= @venue.name %>
     </a>
@@ -392,7 +395,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_time(assigns) do
     ~H"""
-    <time class="text-xs text-zinc-400"><%= DateHelpers.format_time(@time) %></time>
+    <time class="text-xs sm:text-sm text-zinc-400"><%= DateHelpers.format_time(@time) %></time>
     """
   end
 
