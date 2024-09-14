@@ -12,6 +12,9 @@ defmodule MusicListings.Parsing.VenueParsers.PoetryJazzCafeParser do
   def source_url, do: "#{@base_url}/livemusic"
 
   @impl true
+  defdelegate retrieve_events_fun, to: SquareSpaceParser
+
+  @impl true
   def example_data_file_location, do: "test/data/poetry_jazz_cafe/index.html"
 
   @impl true

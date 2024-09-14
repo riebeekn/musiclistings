@@ -14,6 +14,11 @@ defmodule MusicListings.Parsing.VenueParsers.SupermarketParser do
       "https://core.service.elfsight.com/p/boot/?page=https%3A%2F%2Fwww.supermarketto.ca%2Fevents&w=03901524-2610-4337-ae40-0bb8e9f87389"
 
   @impl true
+  def retrieve_events_fun do
+    fn url -> Req.get(url) end
+  end
+
+  @impl true
   def example_data_file_location, do: "test/data/supermarket/index.json"
 
   @impl true

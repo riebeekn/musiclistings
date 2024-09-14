@@ -10,6 +10,9 @@ defmodule MusicListings.Parsing.VenueParsers.RogersParser do
   def source_url, do: "https://www.livenation.com/venue/KovZpa3Bbe/rogers-centre-events"
 
   @impl true
+  defdelegate retrieve_events_fun, to: LiveNationParser
+
+  @impl true
   def example_data_file_location, do: "test/data/rogers/index.html"
 
   @impl true

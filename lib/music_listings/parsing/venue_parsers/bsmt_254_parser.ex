@@ -15,6 +15,11 @@ defmodule MusicListings.Parsing.VenueParsers.Bsmt254Parser do
   def source_url, do: "https://www.bsmt254.com/events/"
 
   @impl true
+  def retrieve_events_fun do
+    fn url -> Req.get(url) end
+  end
+
+  @impl true
   def example_data_file_location, do: "test/data/bsmt_254/index.html"
 
   @impl true

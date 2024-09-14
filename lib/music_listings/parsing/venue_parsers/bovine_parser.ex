@@ -13,6 +13,9 @@ defmodule MusicListings.Parsing.VenueParsers.BovineParser do
       "https://core.service.elfsight.com/p/boot/?page=https%3A%2F%2Fwww.bovinesexclub.com%2F&w=235dbcca-3a0a-4622-a874-ce1dd5f36933"
 
   @impl true
+  defdelegate retrieve_events_fun, to: ElfsightParser
+
+  @impl true
   def example_data_file_location, do: "test/data/bovine/index.json"
 
   @impl true

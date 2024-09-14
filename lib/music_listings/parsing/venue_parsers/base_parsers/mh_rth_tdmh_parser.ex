@@ -10,6 +10,10 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
 
   def source_url, do: "https://www.mhrth.com/api/performance-feed/12"
 
+  def retrieve_events_fun do
+    fn url -> Req.get(url) end
+  end
+
   def event(body, facility_no) do
     body = ParseHelpers.maybe_decode!(body)
 

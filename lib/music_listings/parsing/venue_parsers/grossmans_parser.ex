@@ -15,6 +15,11 @@ defmodule MusicListings.Parsing.VenueParsers.GrossmansParser do
   def source_url, do: "https://grossmanstavern.com/events/list/page/1/"
 
   @impl true
+  def retrieve_events_fun do
+    fn url -> Req.get(url) end
+  end
+
+  @impl true
   def example_data_file_location, do: "test/data/grossmans/index.html"
 
   @impl true

@@ -14,6 +14,11 @@ defmodule MusicListings.Parsing.VenueParsers.CneParser do
       "https://www.theex.com/wp-json/cne/v1/performers?locations=beach-bar-stage,bell-cne-bandshell,casino-patio,country-stage,midway-stage,wine-garden"
 
   @impl true
+  def retrieve_events_fun do
+    fn url -> Req.get(url) end
+  end
+
+  @impl true
   def example_data_file_location, do: "test/data/cne/index.json"
 
   @impl true

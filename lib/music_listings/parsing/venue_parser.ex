@@ -10,6 +10,10 @@ defmodule MusicListings.Parsing.VenueParser do
   """
   @callback source_url() :: String.t()
   @doc """
+  The function used to pull events
+  """
+  @callback retrieve_events_fun() :: fun()
+  @doc """
   The location of the local data file used for local testing
   """
   @callback example_data_file_location() :: String.t()

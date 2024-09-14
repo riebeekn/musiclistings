@@ -9,6 +9,10 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.LiveNationParser do
   alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.Selectors
 
+  def retrieve_events_fun do
+    fn url -> Req.get(url) end
+  end
+
   def events(body) do
     body
     |> Selectors.all_matches(css("script[type=\"application/ld+json\"]"))

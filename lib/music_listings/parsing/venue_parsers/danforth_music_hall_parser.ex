@@ -16,6 +16,11 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParser do
   def source_url, do: "https://thedanforth.com"
 
   @impl true
+  def retrieve_events_fun do
+    fn url -> Req.get(url) end
+  end
+
+  @impl true
   def example_data_file_location, do: "test/data/danforth_music_hall/index.html"
 
   @impl true

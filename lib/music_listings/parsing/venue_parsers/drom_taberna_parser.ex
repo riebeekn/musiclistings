@@ -20,6 +20,11 @@ defmodule MusicListings.Parsing.VenueParsers.DromTabernaParser do
   end
 
   @impl true
+  def retrieve_events_fun do
+    fn url -> Req.get(url) end
+  end
+
+  @impl true
   def example_data_file_location, do: "test/data/drom_taberna/index.json"
 
   @impl true

@@ -10,6 +10,9 @@ defmodule MusicListings.Parsing.VenueParsers.BudweiserStageParser do
   def source_url, do: "https://www.livenation.com/venue/KovZpZAEkkIA/budweiser-stage-events"
 
   @impl true
+  defdelegate retrieve_events_fun, to: LiveNationParser
+
+  @impl true
   def example_data_file_location, do: "test/data/budweiser_stage/index.html"
 
   @impl true

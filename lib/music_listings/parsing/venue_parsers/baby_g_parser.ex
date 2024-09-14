@@ -10,6 +10,9 @@ defmodule MusicListings.Parsing.VenueParsers.BabyGParser do
   def source_url, do: "http://thebabyg.com"
 
   @impl true
+  defdelegate retrieve_events_fun, to: BgGarrisonParser
+
+  @impl true
   def example_data_file_location, do: "test/data/baby_g/index.html"
 
   @impl true
