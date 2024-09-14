@@ -10,7 +10,6 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.Selectors
-  alias MusicListingsUtilities.DateHelpers
 
   @impl true
   def source_url, do: "https://elmocambo.com/events-new"
@@ -58,7 +57,7 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
     %{"month" => month_string, "day" => day_string, "time" => _time_string} =
       parse_out_full_date_time_string(event)
 
-    ParseHelpers.build_date_from_month_day_strings(month_string, day_string, DateHelpers.today())
+    ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
   end
 
   defp parse_out_full_date_time_string(event) do

@@ -10,7 +10,6 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParser do
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.Selectors
-  alias MusicListingsUtilities.DateHelpers
 
   @impl true
   def source_url, do: "https://burdockbrewery.com/pages/music-hall"
@@ -57,7 +56,7 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParser do
     [_day_of_week, month, day, _separator, _time] =
       Selectors.text(event, css(".product-vendorgrid")) |> String.split()
 
-    ParseHelpers.build_date_from_month_day_strings(month, day, DateHelpers.today())
+    ParseHelpers.build_date_from_month_day_strings(month, day)
   end
 
   @impl true

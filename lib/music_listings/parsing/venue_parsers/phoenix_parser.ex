@@ -10,7 +10,6 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParser do
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.Selectors
-  alias MusicListingsUtilities.DateHelpers
 
   @impl true
   def source_url, do: "https://thephoenixconcerttheatre.com/events"
@@ -61,7 +60,7 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParser do
 
     [month_string, day_string] = String.split(month_day_string)
 
-    ParseHelpers.build_date_from_month_day_strings(month_string, day_string, DateHelpers.today())
+    ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
   end
 
   @impl true

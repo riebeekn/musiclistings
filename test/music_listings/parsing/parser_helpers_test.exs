@@ -48,8 +48,7 @@ defmodule MusicListings.Parsing.ParserHelpersTest do
 
   describe "build_date_from_month_day_strings/2" do
     test "when date in the past increments the year by 1" do
-      today = ~D[2015-02-15]
-      assert ~D[2016-01-01] == ParseHelpers.build_date_from_month_day_strings("JAN", "1st", today)
+      assert ~D[2025-01-01] == ParseHelpers.build_date_from_month_day_strings("JAN", "1st")
     end
   end
 

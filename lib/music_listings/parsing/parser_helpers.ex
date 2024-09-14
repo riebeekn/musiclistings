@@ -3,6 +3,8 @@ defmodule MusicListings.Parsing.ParseHelpers do
   Module that contains helper / common functions around parsing
   """
 
+  alias MusicListingsUtilities.DateHelpers
+
   # ===========================================================================
   # General helpers
   # ===========================================================================
@@ -118,11 +120,11 @@ defmodule MusicListings.Parsing.ParseHelpers do
   """
   @spec build_date_from_month_day_strings(
           month_string :: String.t(),
-          day_string :: String.t(),
-          today :: Date.t()
+          day_string :: String.t()
         ) ::
           Date.t()
-  def build_date_from_month_day_strings(month_string, day_string, today) do
+  def build_date_from_month_day_strings(month_string, day_string) do
+    today = DateHelpers.today()
     day = day_string_to_integer(day_string)
     month = month_string |> clean_month_string() |> month_string_to_integer()
 

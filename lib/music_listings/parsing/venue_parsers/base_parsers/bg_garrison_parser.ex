@@ -8,7 +8,6 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.BgGarrisonParser do
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.Selectors
-  alias MusicListingsUtilities.DateHelpers
 
   def events(body) do
     body
@@ -53,7 +52,7 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.BgGarrisonParser do
       |> Selectors.text(css("#calendar_date"))
       |> String.split()
 
-    ParseHelpers.build_date_from_month_day_strings(month_string, day_string, DateHelpers.today())
+    ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
   end
 
   def additional_dates(_event) do

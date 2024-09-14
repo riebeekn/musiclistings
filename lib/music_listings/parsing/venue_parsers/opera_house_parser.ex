@@ -10,7 +10,6 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParser do
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.Selectors
-  alias MusicListingsUtilities.DateHelpers
 
   @impl true
   def source_url, do: "https://theoperahousetoronto.com/calendar"
@@ -65,7 +64,7 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParser do
     day_string = Selectors.text(event, css(".date_number_listing"))
     month_string = Selectors.text(event, css(".date_landing h6:last-of-type"))
 
-    ParseHelpers.build_date_from_month_day_strings(month_string, day_string, DateHelpers.today())
+    ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
   end
 
   @impl true
