@@ -13,6 +13,9 @@ defmodule MusicListings.Parsing.VenueParsers.CameronHouseParser do
   def source_url, do: "https://www.thecameron.com/shows"
 
   @impl true
+  defdelegate retrieve_events_fun, to: WixParser
+
+  @impl true
   def example_data_file_location, do: "test/data/cameron_house/index.html"
 
   @impl true

@@ -15,6 +15,11 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParser do
   def source_url, do: "https://burdockbrewery.com/pages/music-hall"
 
   @impl true
+  def retrieve_events_fun do
+    fn url -> Req.get(url) end
+  end
+
+  @impl true
   def example_data_file_location, do: "test/data/burdock/index.html"
 
   @impl true

@@ -17,6 +17,11 @@ defmodule MusicListings.Parsing.VenueParsers.LeesPalaceParser do
   def source_url, do: "#{@base_url}/events"
 
   @impl true
+  def retrieve_events_fun do
+    fn url -> Req.get(url) end
+  end
+
+  @impl true
   def example_data_file_location, do: "test/data/lees_palace/index.html"
 
   @impl true

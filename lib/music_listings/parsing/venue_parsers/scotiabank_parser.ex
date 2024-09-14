@@ -12,6 +12,9 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParser do
       "https://www.scotiabankarena.com/events/events_ajax/0?category=1&venue=0&team=0&exclude=&per_page=63&came_from_page=event-list-page"
 
   @impl true
+  defdelegate retrieve_events_fun, to: CarbonhouseParser
+
+  @impl true
   def example_data_file_location, do: "test/data/scotiabank/index.html"
 
   @impl true

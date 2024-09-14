@@ -15,6 +15,11 @@ defmodule MusicListings.Parsing.VenueParsers.HandlebarParser do
       "https://calendar.apps.secureserver.net/v1/events/366947a0-303a-47c1-b561-5117b38b90ad/73550132-2f76-4daf-bb5b-1a9eff16e360/b0095722-7dba-4b95-8d4a-a1913fcbbe34"
 
   @impl true
+  def retrieve_events_fun do
+    fn url -> Req.get(url) end
+  end
+
+  @impl true
   def example_data_file_location, do: "test/data/handlebar/index.json"
 
   @impl true

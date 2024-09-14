@@ -17,6 +17,11 @@ defmodule MusicListings.Parsing.VenueParsers.RexParser do
   end
 
   @impl true
+  def retrieve_events_fun do
+    fn url -> Req.get(url) end
+  end
+
+  @impl true
   def example_data_file_location, do: "test/data/rex/index.json"
 
   @impl true

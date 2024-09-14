@@ -13,6 +13,9 @@ defmodule MusicListings.Parsing.VenueParsers.RivoliParser do
   def source_url, do: "https://www.rivolitoronto.com/shows"
 
   @impl true
+  defdelegate retrieve_events_fun, to: WixParser
+
+  @impl true
   def example_data_file_location, do: "test/data/rivoli/index.html"
 
   @impl true

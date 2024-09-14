@@ -15,6 +15,11 @@ defmodule MusicListings.Parsing.VenueParsers.HughsRoomParser do
   def source_url, do: "https://hughsroomlive.com/on-stage/?page_number=1"
 
   @impl true
+  def retrieve_events_fun do
+    fn url -> Req.get(url) end
+  end
+
+  @impl true
   def example_data_file_location, do: "test/data/hughs_room/index.html"
 
   @impl true

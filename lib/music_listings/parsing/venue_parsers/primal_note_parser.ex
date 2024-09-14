@@ -12,6 +12,9 @@ defmodule MusicListings.Parsing.VenueParsers.PrimalNoteParser do
   def source_url, do: "#{@base_url}/events"
 
   @impl true
+  defdelegate retrieve_events_fun, to: SquareSpaceParser
+
+  @impl true
   def example_data_file_location, do: "test/data/primal_note/index.html"
 
   @impl true

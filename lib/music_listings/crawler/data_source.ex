@@ -20,8 +20,9 @@ defmodule MusicListings.Crawler.DataSource do
 
   # Pulls events from www
   def retrieve_events(parser, url, true = _pull_data_from_www?, payloads) do
-    url
-    |> Req.get()
+    fun = parser.retrieve_events_fun
+
+    fun.(url)
     |> case do
       {:ok, %Response{status: 200, body: body}} ->
         events_from_current_body =

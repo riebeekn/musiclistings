@@ -12,6 +12,9 @@ defmodule MusicListings.Parsing.VenueParsers.AdelaideHallParser do
       "https://gateway.admitone.com/embed/live-events?venueId=6201607c4ece4990eeeb6a3c&order=asc"
 
   @impl true
+  defdelegate retrieve_events_fun, to: AdmitOneParser
+
+  @impl true
   def example_data_file_location, do: "test/data/adelaide_hall/index.json"
 
   @impl true

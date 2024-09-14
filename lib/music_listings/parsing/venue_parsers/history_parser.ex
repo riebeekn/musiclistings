@@ -10,6 +10,9 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParser do
   def source_url, do: "https://www.historytoronto.com/events/events_ajax/0?per_page=60"
 
   @impl true
+  defdelegate retrieve_events_fun, to: CarbonhouseParser
+
+  @impl true
   def example_data_file_location, do: "test/data/history/index.html"
 
   @impl true

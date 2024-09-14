@@ -16,6 +16,11 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
   def example_data_file_location, do: "test/data/drake_underground/index.json"
 
   @impl true
+  def retrieve_events_fun do
+    fn url -> Req.get(url) end
+  end
+
+  @impl true
   def events(body) do
     body
     |> ParseHelpers.maybe_decode!()

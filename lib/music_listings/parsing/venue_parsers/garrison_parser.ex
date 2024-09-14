@@ -10,6 +10,9 @@ defmodule MusicListings.Parsing.VenueParsers.GarrisonParser do
   def source_url, do: "http://www.garrisontoronto.com/listings.html"
 
   @impl true
+  defdelegate retrieve_events_fun, to: BgGarrisonParser
+
+  @impl true
   def example_data_file_location, do: "test/data/garrison/index.html"
 
   @impl true
