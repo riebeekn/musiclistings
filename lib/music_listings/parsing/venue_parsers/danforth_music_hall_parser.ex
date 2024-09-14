@@ -73,7 +73,7 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParser do
     |> Selectors.text(xpath("//div[@class='doors']/following-sibling::div[1]"))
     |> String.split("-")
     |> Enum.at(0)
-    |> ParseHelpers.time_string_to_time()
+    |> ParseHelpers.build_time_from_time_string()
   end
 
   @impl true

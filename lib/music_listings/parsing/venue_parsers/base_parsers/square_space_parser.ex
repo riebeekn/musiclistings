@@ -55,7 +55,7 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.SquareSpaceParser do
   def event_time(event) do
     event
     |> Selectors.text(css("li.eventlist-meta-item time.event-time-12hr"))
-    |> ParseHelpers.time_string_to_time()
+    |> ParseHelpers.build_time_from_time_string()
   end
 
   def price(_event) do

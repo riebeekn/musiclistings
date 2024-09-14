@@ -78,7 +78,7 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParser do
     event
     |> Selectors.text(css(".info_landing h5:nth-of-type(2)"))
     |> String.replace("Show: ", "")
-    |> ParseHelpers.time_string_to_time()
+    |> ParseHelpers.build_time_from_time_string()
   end
 
   @impl true

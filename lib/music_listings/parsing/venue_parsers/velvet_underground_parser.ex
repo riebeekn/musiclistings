@@ -76,7 +76,7 @@ defmodule MusicListings.Parsing.VenueParsers.VelvetUndergroundParser do
     |> Enum.at(0)
     |> String.split(" ")
     |> Enum.at(1)
-    |> ParseHelpers.time_string_to_time()
+    |> ParseHelpers.build_time_from_time_string()
   end
 
   @impl true

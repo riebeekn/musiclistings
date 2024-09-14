@@ -202,8 +202,8 @@ defmodule MusicListings.Parsing.ParseHelpers do
   # ===========================================================================
   # Time helpers
   # ===========================================================================
-  @spec time_string_to_time(String.t()) :: Time.t()
-  def time_string_to_time(time_string) do
+  @spec build_time_from_time_string(String.t()) :: Time.t()
+  def build_time_from_time_string(time_string) do
     (time_string || "")
     |> String.replace(":PM", " pm")
     |> String.replace("p.m.", "pm")

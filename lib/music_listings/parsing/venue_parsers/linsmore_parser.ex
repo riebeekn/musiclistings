@@ -95,7 +95,7 @@ defmodule MusicListings.Parsing.VenueParsers.LinsmoreParser do
     [_year, _month, day_and_time] = String.split(event["start"], "-")
     [_day, time] = String.split(day_and_time)
 
-    ParseHelpers.time_string_to_time(time)
+    ParseHelpers.build_time_from_time_string(time)
   end
 
   @impl true

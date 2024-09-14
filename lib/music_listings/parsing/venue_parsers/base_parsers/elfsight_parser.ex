@@ -95,7 +95,7 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.ElfsightParser do
 
   def event_time(event) do
     if is_map(event["start"]) do
-      ParseHelpers.time_string_to_time(event["start"]["time"])
+      ParseHelpers.build_time_from_time_string(event["start"]["time"])
     else
       nil
     end

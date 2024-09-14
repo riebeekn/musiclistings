@@ -70,7 +70,7 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParser do
     [_day_of_week, _month, _day, _separator, time] =
       Selectors.text(event, css(".product-vendorgrid")) |> String.split()
 
-    ParseHelpers.time_string_to_time(time)
+    ParseHelpers.build_time_from_time_string(time)
   end
 
   @impl true

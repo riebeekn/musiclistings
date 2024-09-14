@@ -50,7 +50,7 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.AdmitOneParser do
 
   def event_time(event) do
     event["doors"]
-    |> ParseHelpers.time_string_to_time()
+    |> ParseHelpers.build_time_from_time_string()
   end
 
   def price(event) do

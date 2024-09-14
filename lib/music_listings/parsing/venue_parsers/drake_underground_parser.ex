@@ -67,7 +67,7 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
   def event_time(event) do
     event["fm_time"]
     |> Enum.at(0)
-    |> ParseHelpers.time_string_to_time()
+    |> ParseHelpers.build_time_from_time_string()
   end
 
   @impl true

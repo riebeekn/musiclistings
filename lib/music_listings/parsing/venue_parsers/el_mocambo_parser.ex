@@ -82,7 +82,7 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
     %{"month" => _month_string, "day" => _day_string, "time" => time_string} =
       parse_out_full_date_time_string(event)
 
-    ParseHelpers.time_string_to_time(time_string)
+    ParseHelpers.build_time_from_time_string(time_string)
   end
 
   @impl true

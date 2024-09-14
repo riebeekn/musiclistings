@@ -78,7 +78,7 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParser do
 
     doors_string
     |> String.replace("Doors: ", "")
-    |> ParseHelpers.time_string_to_time()
+    |> ParseHelpers.build_time_from_time_string()
   end
 
   @impl true

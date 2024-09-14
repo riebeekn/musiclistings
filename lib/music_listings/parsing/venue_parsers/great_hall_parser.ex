@@ -73,7 +73,7 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParser do
   def event_time(event) do
     event
     |> Selectors.text(css(".tgh-e-time"))
-    |> ParseHelpers.time_string_to_time()
+    |> ParseHelpers.build_time_from_time_string()
   end
 
   @impl true
