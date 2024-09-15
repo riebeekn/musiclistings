@@ -6,25 +6,24 @@ defmodule MusicListings.Parsing.VenueParsers.TranzacParserTest do
   alias MusicListings.Parsing.VenueParsers.TranzacParser
 
   setup do
-    index_file_path = Path.expand("#{File.cwd!()}/test/data/tranzac/index.html")
+    index_file_path = Path.expand("#{File.cwd!()}/test/data/tranzac/index.json")
 
     single_event_file_path =
-      Path.expand("#{File.cwd!()}/test/data/tranzac/single_event.html")
+      Path.expand("#{File.cwd!()}/test/data/tranzac/single_event.json")
 
-    index_html = File.read!(index_file_path)
+    index_html = File.read!(index_file_path) |> Jason.decode!()
 
     event =
       single_event_file_path
       |> File.read!()
-      |> TranzacParser.events()
-      |> List.first()
+      |> Jason.decode!()
 
     %{index_html: index_html, event: event}
   end
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://www.tranzac.org/events/month/2024-08/" == TranzacParser.source_url()
+      assert "https://graphql.datocms.com/" == TranzacParser.source_url()
     end
   end
 
@@ -32,42 +31,33 @@ defmodule MusicListings.Parsing.VenueParsers.TranzacParserTest do
     test "returns expected events", %{index_html: index_html} do
       events = TranzacParser.events(index_html)
 
-      assert 69 = Enum.count(events)
+      assert 23 = Enum.count(events)
     end
   end
 
   describe "next_page_url/2" do
     test "returns the next page url", %{index_html: index_html} do
-      assert "https://www.tranzac.org/events/month/2024-09/" ==
-               TranzacParser.next_page_url(index_html, nil)
-    end
-
-    test "returns nil when already processed the next page", %{index_html: index_html} do
-      assert nil ==
-               TranzacParser.next_page_url(
-                 index_html,
-                 "https://www.tranzac.org/events/month/2024-09/"
-               )
+      assert nil == TranzacParser.next_page_url(index_html, nil)
     end
   end
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "brodie_west_quintet_2024_09_11" ==
+      assert "the-great-sunday-night-folk-off-with-robert-priest" ==
                TranzacParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "brodie_west_quintet_2024_09_11" ==
+      assert "the-great-sunday-night-folk-off-with-robert-priest" ==
                TranzacParser.ignored_event_id(event)
     end
   end
 
   describe "event_title/1" do
     test "returns event title", %{event: event} do
-      assert "Brodie West Quintet" ==
+      assert "The Great Sunday Night Folk Off (with Robert Priest)" ==
                TranzacParser.event_title(event)
     end
   end
@@ -75,7 +65,7 @@ defmodule MusicListings.Parsing.VenueParsers.TranzacParserTest do
   describe "performers/1" do
     test "returns the event performers", %{event: event} do
       assert %Performers{
-               headliner: "Brodie West Quintet",
+               headliner: "The Great Sunday Night Folk Off (with Robert Priest)",
                openers: []
              } == TranzacParser.performers(event)
     end
@@ -83,7 +73,7 @@ defmodule MusicListings.Parsing.VenueParsers.TranzacParserTest do
 
   describe "event_date/1" do
     test "returns the event date", %{event: event} do
-      assert ~D[2024-09-11] == TranzacParser.event_date(event)
+      assert ~D[2024-09-15] == TranzacParser.event_date(event)
     end
   end
 
@@ -95,7 +85,7 @@ defmodule MusicListings.Parsing.VenueParsers.TranzacParserTest do
 
   describe "event_time/1" do
     test "returns the event start time", %{event: event} do
-      assert ~T[19:00:00] == TranzacParser.event_time(event)
+      assert ~T[17:00:00] == TranzacParser.event_time(event)
     end
   end
 
@@ -120,8 +110,7 @@ defmodule MusicListings.Parsing.VenueParsers.TranzacParserTest do
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert "https://www.tranzac.org/event/brodie-west-quintet/" ==
-               TranzacParser.details_url(event)
+      assert "https://tranzac.org" == TranzacParser.details_url(event)
     end
   end
 end

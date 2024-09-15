@@ -4,57 +4,73 @@ defmodule MusicListings.Parsing.VenueParsers.TranzacParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
-  import Meeseeks.CSS
-
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
-  alias MusicListings.Parsing.Selectors
   alias MusicListingsUtilities.DateHelpers
 
   @impl true
-  def source_url do
-    today = DateHelpers.today()
-    padded_month_string = today.month |> Integer.to_string() |> String.pad_leading(2, "0")
-
-    "https://www.tranzac.org/events/month/#{today.year}-#{padded_month_string}/"
-  end
+  def source_url, do: "https://graphql.datocms.com/"
 
   @impl true
   def retrieve_events_fun do
-    fn url -> Req.get(url) end
-  end
+    fn url ->
+      headers = [
+        {"accept", "*/*"},
+        {"authorization", "Bearer d926a683ddc732a876f5e698ae6f70"},
+        {"content-type", "application/json"}
+      ]
 
-  @impl true
-  def example_data_file_location, do: "test/data/tranzac/index.html"
+      query = """
+      query EventsQuery($today: DateTime!) {
+        allEvents(
+          filter: {
+            cancelled: { eq: false },
+            private: { eq: false },
+            startDate: { gte: $today }
+          },
+          orderBy: startDate_ASC,
+          first: 100
+        ) {
+          id
+          title
+          startDate
+          endDate
+          slug
+        }
+      }
+      """
 
-  @impl true
-  def events(body) do
-    body
-    |> Selectors.all_matches(css("article.tribe-events-calendar-month__calendar-event"))
-  end
+      today = DateHelpers.now() |> DateTime.to_iso8601()
 
-  @impl true
-  def next_page_url(_body, current_url) do
-    next_month = DateHelpers.today() |> Date.shift(month: 1)
-    padded_month_string = next_month.month |> Integer.to_string() |> String.pad_leading(2, "0")
+      body = %{
+        query: query,
+        variables: %{
+          today: today
+        }
+      }
 
-    next_page_url =
-      "https://www.tranzac.org/events/month/#{next_month.year}-#{padded_month_string}/"
-
-    if current_url == next_page_url do
-      nil
-    else
-      next_page_url
+      Req.post(url, headers: headers, json: body)
     end
   end
 
   @impl true
-  def event_id(event) do
-    title = event_title(event)
-    date = event_date(event)
+  def example_data_file_location, do: "test/data/tranzac/index.json"
 
-    ParseHelpers.build_id_from_title_and_date(title, date)
+  @impl true
+  def events(body) do
+    body = ParseHelpers.maybe_decode!(body)
+    body["data"]["allEvents"]
+  end
+
+  @impl true
+  def next_page_url(_body, _current_url) do
+    nil
+  end
+
+  @impl true
+  def event_id(event) do
+    event["slug"]
   end
 
   @impl true
@@ -64,9 +80,7 @@ defmodule MusicListings.Parsing.VenueParsers.TranzacParser do
 
   @impl true
   def event_title(event) do
-    event
-    |> Selectors.match_one(css(".tribe-events-calendar-month__calendar-event-title a"))
-    |> Selectors.attr("title")
+    event["title"]
   end
 
   @impl true
@@ -77,12 +91,8 @@ defmodule MusicListings.Parsing.VenueParsers.TranzacParser do
 
   @impl true
   def event_date(event) do
-    event
-    |> Selectors.match_one(
-      css("div.tribe-events-calendar-month__calendar-event-tooltip-datetime time")
-    )
-    |> Selectors.attr("datetime")
-    |> Date.from_iso8601!()
+    {:ok, datetime, _offset} = DateTime.from_iso8601(event["startDate"])
+    DateHelpers.to_eastern_date(datetime)
   end
 
   @impl true
@@ -92,13 +102,8 @@ defmodule MusicListings.Parsing.VenueParsers.TranzacParser do
 
   @impl true
   def event_time(event) do
-    time_string =
-      event
-      |> Selectors.match_one(css("div.tribe-events-calendar-month__calendar-event-datetime time"))
-      |> Selectors.attr("datetime")
-
-    padded_time_string = "#{time_string}:00"
-    Time.from_iso8601!(padded_time_string)
+    {:ok, datetime, _offset} = DateTime.from_iso8601(event["startDate"])
+    DateHelpers.to_eastern_time(datetime)
   end
 
   @impl true
@@ -117,8 +122,7 @@ defmodule MusicListings.Parsing.VenueParsers.TranzacParser do
   end
 
   @impl true
-  def details_url(event) do
-    event
-    |> Selectors.url(css(".tribe-events-calendar-month__calendar-event-title a"))
+  def details_url(_event) do
+    "https://tranzac.org"
   end
 end

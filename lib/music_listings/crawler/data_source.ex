@@ -20,7 +20,7 @@ defmodule MusicListings.Crawler.DataSource do
 
   # Pulls events from www
   def retrieve_events(parser, url, true = _pull_data_from_www?, payloads) do
-    fun = parser.retrieve_events_fun
+    fun = parser.retrieve_events_fun()
 
     fun.(url)
     |> case do
