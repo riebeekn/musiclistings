@@ -1,0 +1,167 @@
+{
+  "data": {
+    "allEvents": [
+      {
+        "id": "Gjws-77jRgyl8dBSX1TOcQ",
+        "title": "Shifting Ground Collective Musical Theatre Pub Night",
+        "startDate": "2024-09-14T19:30:00-04:00",
+        "endDate": "2024-09-14T21:30:00-04:00",
+        "slug": "shifting-ground-collective-musical-theatre-pub-night"
+      },
+      {
+        "id": "Dyg0hbcPSDGtl71lFJ-JPA",
+        "title": "Michael Palumbo & Friends",
+        "startDate": "2024-09-14T22:00:00-04:00",
+        "endDate": "2024-09-14T23:30:00-04:00",
+        "slug": "michael-palumbo-friends"
+      },
+      {
+        "id": "SyQ1pr3KSLyCnvOwwLsoFQ",
+        "title": "ToqueTrad Quebecois Jam",
+        "startDate": "2024-09-15T12:00:00-04:00",
+        "endDate": "2024-09-15T14:00:00-04:00",
+        "slug": "toquetrad-quebecois-jam"
+      },
+      {
+        "id": "K31ShEIdTcWk69RKkDXuCw",
+        "title": "Beatles Singalong",
+        "startDate": "2024-09-15T14:30:00-04:00",
+        "endDate": "2024-09-15T16:30:00-04:00",
+        "slug": "beatles-singalong"
+      },
+      {
+        "id": "D4DhqLoXSCCjcXqvJnb5lw",
+        "title": "The Great Sunday Night Folk Off (with Robert Priest)",
+        "startDate": "2024-09-15T17:00:00-04:00",
+        "endDate": "2024-09-15T19:00:00-04:00",
+        "slug": "the-great-sunday-night-folk-off-with-robert-priest"
+      },
+      {
+        "id": "HfSNqmDfQKy2LjggPrVEOA",
+        "title": "Conversation Jam",
+        "startDate": "2024-09-15T19:00:00-04:00",
+        "endDate": "2024-09-15T23:00:00-04:00",
+        "slug": "conversation-jam-2"
+      },
+      {
+        "id": "IfsKFF_xSAynCR_Z6t1XGw",
+        "title": "Makeshift Island",
+        "startDate": "2024-09-15T19:30:00-04:00",
+        "endDate": "2024-09-15T21:30:00-04:00",
+        "slug": "makeshift-island-2"
+      },
+      {
+        "id": "bje5rOQ6ScuDTT1ESQy2Wg",
+        "title": "Pete Johnston's Stranger Still",
+        "startDate": "2024-09-15T22:00:00-04:00",
+        "endDate": "2024-09-15T23:30:00-04:00",
+        "slug": "pete-johnstons-stranger-still"
+      },
+      {
+        "id": "Y76WHdU7R-u58f2mhqI48A",
+        "title": "TRANZAC Open Stage Monday",
+        "startDate": "2024-09-16T18:30:00-04:00",
+        "endDate": "2024-09-16T21:00:00-04:00",
+        "slug": "tranzac-open-stage-monday"
+      },
+      {
+        "id": "U7dCMuONSQ2fYLIHtSRYqw",
+        "title": "Toronto Zine Library Open Hours",
+        "startDate": "2024-09-17T18:00:00-04:00",
+        "endDate": "2024-09-17T20:00:00-04:00",
+        "slug": "toronto-zine-library-open-hours-8"
+      },
+      {
+        "id": "FCf6rLWRQXO_-Kj60ZHrqw",
+        "title": "3RingCircus",
+        "startDate": "2024-09-17T19:00:00-04:00",
+        "endDate": "2024-09-17T21:00:00-04:00",
+        "slug": "3ringcircus"
+      },
+      {
+        "id": "JkTWYE6XTl2KtPSweoIYEQ",
+        "title": "Duo Cichorium - People Soup",
+        "startDate": "2024-09-17T21:30:00-04:00",
+        "endDate": "2024-09-17T23:30:00-04:00",
+        "slug": "duo-cichorium-people-soup-2"
+      },
+      {
+        "id": "ZimO4egURBeNC90ebsj-Pw",
+        "title": "Honeypaw - songs sealed in wax part VI",
+        "startDate": "2024-09-18T19:00:00-04:00",
+        "endDate": "2024-09-18T21:00:00-04:00",
+        "slug": "honeypaw-songs-sealed-in-wax-part-vi"
+      },
+      {
+        "id": "bLcKuNqiTeCA8eHv9-LzEg",
+        "title": "Toronto Klezmer Society: Epic Klezmer Jam",
+        "startDate": "2024-09-18T21:30:00-04:00",
+        "endDate": "2024-09-18T23:30:00-04:00",
+        "slug": "toronto-klezmer-society-epic-klezmer-jam-3"
+      },
+      {
+        "id": "dUxJu_AlQSW2EMY68lrggA",
+        "title": "Lewis / Perera / Swankey",
+        "startDate": "2024-09-20T19:00:00-04:00",
+        "endDate": "2024-09-20T21:00:00-04:00",
+        "slug": "lewis-perera-swankey"
+      },
+      {
+        "id": "asXXUZ0SRbyhtuTVKeWn1w",
+        "title": "Lewis / Perera / Swankey",
+        "startDate": "2024-09-20T19:00:00-04:00",
+        "endDate": "2024-09-20T21:00:00-04:00",
+        "slug": "lewis-perera-swankey"
+      },
+      {
+        "id": "YG78j6RCRyG1jxRu-3lMMg",
+        "title": "Celebrating Bill Westcott - Ukulele Style",
+        "startDate": "2024-09-21T13:00:00-04:00",
+        "endDate": "2024-09-21T15:00:00-04:00",
+        "slug": "celebrating-bill-westcott-ukulele-style"
+      },
+      {
+        "id": "aiETiV55RTGHiPG5ndb-_w",
+        "title": "Shab-e She'r (Poetry Night) CIV",
+        "startDate": "2024-09-24T18:30:00-04:00",
+        "endDate": "2024-09-24T22:00:00-04:00",
+        "slug": "shab-e-sher-poetry-night-civ"
+      },
+      {
+        "id": "UTd_abygQXOjOiUAy9acsA",
+        "title": "Shab-e She'r",
+        "startDate": "2024-09-24T19:00:00-04:00",
+        "endDate": "2024-09-24T19:00:00-04:00",
+        "slug": "shab-e-sher"
+      },
+      {
+        "id": "M28onCPiToSeMNqWUI6Ptw",
+        "title": "Shab-e She'r",
+        "startDate": "2024-09-24T19:00:00-04:00",
+        "endDate": "2024-09-24T19:00:00-04:00",
+        "slug": "shab-e-sher"
+      },
+      {
+        "id": "KtfTfBsxRLq4NEGYrEaxdQ",
+        "title": "Jen Schaffer and the Shiners at Tranzac",
+        "startDate": "2024-09-28T19:30:00-04:00",
+        "endDate": "2024-09-28T21:30:00-04:00",
+        "slug": "jen-schaffer-and-the-shiners-at-tranzac"
+      },
+      {
+        "id": "aKRH_BCASiilOzv9039f0w",
+        "title": "Fisher/Koller/Roblin",
+        "startDate": "2024-09-29T19:30:00-04:00",
+        "endDate": "2024-09-29T21:30:00-04:00",
+        "slug": "fisher-koller-roblin"
+      },
+      {
+        "id": "cgSibFNPQfCLGjrtJr9QMA",
+        "title": "Mike Borgia (from NYC) live in concert w/ Heather Luckhart",
+        "startDate": "2024-11-09T20:00:00-05:00",
+        "endDate": "2024-11-09T22:00:00-05:00",
+        "slug": "mike-borgia-from-nyc-live-in-concert-w-heather-luckhart"
+      }
+    ]
+  }
+}
