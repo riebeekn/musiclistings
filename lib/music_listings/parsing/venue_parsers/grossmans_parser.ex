@@ -22,7 +22,10 @@ defmodule MusicListings.Parsing.VenueParsers.GrossmansParser do
     body
     |> Selectors.match_one(css("script[type=\"application/ld+json\"]"))
     |> Selectors.data()
-    |> Jason.decode!()
+    |> case do
+      nil -> []
+      events -> Jason.decode!(events)
+    end
   end
 
   @impl true
