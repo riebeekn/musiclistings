@@ -1,0 +1,193 @@
+{
+  "metadata": {
+    "tags": [
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "cardTypeEvent"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "concertTileStack"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "eventsPageConcerts"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "genreConcerts"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "genreMusicOther"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "stLawrenceArtsCentre"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "theatreSpaceBlumaAppelTheatre"
+        }
+      }
+    ]
+  },
+  "sys": {
+    "space": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Space",
+        "id": "nmxu5kj1b6ch"
+      }
+    },
+    "id": "4WzX9LsSP5hfo849exQEzM",
+    "type": "Entry",
+    "createdAt": "2024-03-01T17:00:04.123Z",
+    "updatedAt": "2024-03-01T17:00:04.123Z",
+    "environment": {
+      "sys": {
+        "id": "master",
+        "type": "Link",
+        "linkType": "Environment"
+      }
+    },
+    "revision": 1,
+    "contentType": {
+      "sys": {
+        "type": "Link",
+        "linkType": "ContentType",
+        "id": "tileModel"
+      }
+    },
+    "locale": "en-US"
+  },
+  "fields": {
+    "id": "ABBA 2024",
+    "billingName": "ABBA Revisited: 50th Anniversary Tour",
+    "tileDescription": "*ABBA Revisited* recreates the magic of the iconic Swedish pop group!",
+    "subTitle": "st. lawrence centre for the arts, bluma appel theatre, toronto, ABBA Revisited: 50th Anniversary Tour, abba, dancing queen, concert",
+    "image": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Asset",
+        "id": "4X1oIO4jvT0JThLb4XuUBZ"
+      }
+    },
+    "squareImage": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Asset",
+        "id": "4X1oIO4jvT0JThLb4XuUBZ"
+      }
+    },
+    "rectangleImage": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Asset",
+        "id": "3yrCxyRVl56br16H73URJP"
+      }
+    },
+    "longRectangleImage": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Asset",
+        "id": "2pNPY3pula5PRUcwqx67L2"
+      }
+    },
+    "bannerRectangleImage": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Asset",
+        "id": "6R8R2TeW7RnNcMyL49WRxA"
+      }
+    },
+    "label1": "On Sale",
+    "ctaLabel": "Buy Tickets",
+    "ctaLabelUrl1": "External:https://www.ticketmaster.ca/event/10006032EDDB6A73?brand=tolive",
+    "ctaLabel1HideAfterDate": true,
+    "ctaLabel2HideAfterDate": false,
+    "dateTime": "2024-11-23T20:00-05:00",
+    "detailPageCarousel": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Entry",
+        "id": "2WsKgqDm8OE0oa2yl75tfv"
+      }
+    },
+    "tabContainer": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Entry",
+        "id": "63fqblUv0a1v8A3iF9jECy"
+      }
+    },
+    "detailPageBottomCommonContainer": [
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Entry",
+          "id": "6SvlSfBItj7FBLwghSLk9l"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Entry",
+          "id": "6JMoIVJ60VfABAKhgLG20r"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Entry",
+          "id": "5dJ1artltjYWnpHIADkVqn"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Entry",
+          "id": "5pF0bAONXVyt81b2dQP2Dd"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Entry",
+          "id": "6GDILa8ckifi1So6dkoBnR"
+        }
+      }
+    ],
+    "showComingSoon": false,
+    "eventStatus": "Active",
+    "showAfterExpired": false,
+    "accessibilityLabelBackgroundColor": "Grey",
+    "accessibilityLabelTextColor": "Black",
+    "accessibilityLabelBackgroundColor2": "Grey",
+    "accessibilityLabelTextColor2": "Black",
+    "hideFromSearch": false,
+    "hideFromFilterResults": false,
+    "hideFromTileStack": false,
+    "hideFromTileRow": false
+  }
+}
