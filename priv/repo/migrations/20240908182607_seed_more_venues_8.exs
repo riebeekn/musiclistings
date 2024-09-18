@@ -34,7 +34,7 @@ defmodule MusicListings.Repo.Migrations.SeedMoreVenues8 do
 
     execute """
       INSERT INTO venues(name, parser_module_name, pull_events, street, city, province, country, postal_code, google_map_url)
-      VALUES('Linsmore Tavern', 'LinsmoreParser', true, '1298 Danforth Ave Toronto', 'Toronto', 'Ontario', 'Cananda', 'M4J 1M6', 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11541.464416203085!2d-79.3299873!3d43.6821517!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d4cc7cabae5f21%3A0xf544c6555cbd3462!2sLinsmore%20Tavern!5e0!3m2!1sen!2sca!4v1725918178063!5m2!1sen!2sca')
+      VALUES('Linsmore Tavern', 'LinsmoreParser', true, '1298 Danforth Ave', 'Toronto', 'Ontario', 'Cananda', 'M4J 1M6', 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11541.464416203085!2d-79.3299873!3d43.6821517!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d4cc7cabae5f21%3A0xf544c6555cbd3462!2sLinsmore%20Tavern!5e0!3m2!1sen!2sca!4v1725918178063!5m2!1sen!2sca')
     """
   end
 

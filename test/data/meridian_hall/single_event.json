@@ -1,0 +1,272 @@
+{
+  "metadata": {
+    "tags": [
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "bestSellersTileStack"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "cardTypeBestSellers"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "cardTypeEvent"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "concertTileStack"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "eventsPageBestSellers"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "eventsPageConcerts"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "eventsPageToLiveFeaturedEvents"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "genreBestSellers"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "genreConcerts"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "genreFilmsExhibitions"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "genreMusicOther"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "homePageToLivePresents"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "meridianHall"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "theatreSpaceMeridianHall"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "toLivePresents"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "toLivePresentsTileRowModel"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "toLivePresentsTileStack"
+        }
+      }
+    ]
+  },
+  "sys": {
+    "space": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Space",
+        "id": "nmxu5kj1b6ch"
+      }
+    },
+    "id": "6YJPI4tHpzDCI7mhODWlSQ",
+    "type": "Entry",
+    "createdAt": "2024-07-31T14:16:42.494Z",
+    "updatedAt": "2024-08-20T19:20:20.224Z",
+    "environment": {
+      "sys": {
+        "id": "master",
+        "type": "Link",
+        "linkType": "Environment"
+      }
+    },
+    "revision": 2,
+    "contentType": {
+      "sys": {
+        "type": "Link",
+        "linkType": "ContentType",
+        "id": "tileModel"
+      }
+    },
+    "locale": "en-US"
+  },
+  "fields": {
+    "id": "Titanic Live 2025",
+    "billingName": "Titanic Live",
+    "tileDescription": "Experience the Oscar-winning film with the biggest selling orchestral soundtrack of all time presented live to picture.",
+    "subTitle": "meridian hall, toronto, Titanic Live, concert, film in concert",
+    "image": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Asset",
+        "id": "4oY6wxWuUB0gZBAWPQEFpD"
+      }
+    },
+    "squareImage": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Asset",
+        "id": "4oY6wxWuUB0gZBAWPQEFpD"
+      }
+    },
+    "rectangleImage": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Asset",
+        "id": "i4PswfPPoWY73I2lSYsQe"
+      }
+    },
+    "longRectangleImage": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Asset",
+        "id": "j1TKYz06F4uvzRg1qDZyF"
+      }
+    },
+    "bannerRectangleImage": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Asset",
+        "id": "2yjjgQF0NHQG5Y8K8xoF7L"
+      }
+    },
+    "label1": "On Sale",
+    "label2": "TO Live Presents",
+    "ctaLabel": "Buy Tickets",
+    "ctaLabelUrl1": "External:https://www.ticketmaster.ca/titanic-live-tickets/artist/2104277?venueId=131106&brand=tolive",
+    "ctaLabel1HideAfterDate": true,
+    "ctaLabel2HideAfterDate": false,
+    "dateTime": "2025-02-13T19:00-04:00",
+    "eventEndDateTime": "2025-02-15T19:00-04:00",
+    "detailPageCarousel": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Entry",
+        "id": "3VLFn2X96JZBs4IyyWrwPP"
+      }
+    },
+    "tabContainer": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Entry",
+        "id": "1IdPIU5Ws9K1OkZRW9u6mx"
+      }
+    },
+    "detailPageBottomCommonContainer": [
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Entry",
+          "id": "7xoWNUMZI5BfkEXoLx6qnM"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Entry",
+          "id": "lJWRvOOYdDtJHvIYRuQ9D"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Entry",
+          "id": "7mghBHdVyMgZCs8ec7aa4h"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Entry",
+          "id": "5pF0bAONXVyt81b2dQP2Dd"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Entry",
+          "id": "5dJ1artltjYWnpHIADkVqn"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Entry",
+          "id": "3pC2RCeOFXEY27G1Q10Zlb"
+        }
+      }
+    ],
+    "showComingSoon": false,
+    "eventStatus": "Active",
+    "showAfterExpired": false,
+    "accessibilityLabelBackgroundColor": "Grey",
+    "accessibilityLabelTextColor": "Black",
+    "accessibilityLabelBackgroundColor2": "Grey",
+    "accessibilityLabelTextColor2": "Black",
+    "hideFromSearch": false,
+    "hideFromFilterResults": false,
+    "hideFromTileStack": false,
+    "hideFromTileRow": false
+  }
+}
