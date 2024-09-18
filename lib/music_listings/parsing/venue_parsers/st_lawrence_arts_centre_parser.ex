@@ -1,6 +1,6 @@
-defmodule MusicListings.Parsing.VenueParsers.MeridianHallParser do
+defmodule MusicListings.Parsing.VenueParsers.StLawrenceArtsCentreParser do
   @moduledoc """
-  Parser for extracing events from https://www.tolive.com/Meridian-Hall-Events
+  Parser for extracing events from https://www.tolive.com/St-Lawrence-Centre-for-the-Arts-Events
   """
   @behaviour MusicListings.Parsing.VenueParser
 
@@ -9,13 +9,13 @@ defmodule MusicListings.Parsing.VenueParsers.MeridianHallParser do
   @impl true
   def source_url,
     do:
-      "https://cdn.contentful.com/spaces/nmxu5kj1b6ch/environments/master/entries?metadata.tags.sys.id%5Ball%5D=genreConcerts%2CmeridianHall&locale=en-US&include=1&limit=1000&order=-sys.createdAt"
+      "https://cdn.contentful.com/spaces/nmxu5kj1b6ch/environments/master/entries?metadata.tags.sys.id%5Ball%5D=genreConcerts%2CstLawrenceArtsCentre&locale=en-US&include=1&limit=1000&order=-sys.createdAt"
 
   @impl true
   defdelegate retrieve_events_fun, to: ToLiveParser
 
   @impl true
-  def example_data_file_location, do: "test/data/meridian_hall/index.json"
+  def example_data_file_location, do: "test/data/st_lawrence_arts_centre/index.json"
 
   @impl true
   defdelegate events(body), to: ToLiveParser
