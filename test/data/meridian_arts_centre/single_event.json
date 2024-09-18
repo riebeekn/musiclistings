@@ -1,0 +1,229 @@
+{
+  "metadata": {
+    "tags": [
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "cardTypeEvent"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "classical"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "classicalMusicTileStack"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "concertTileStack"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "contemporaryJazz"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "eventsPageClassicalMusic"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "eventsPageConcerts"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "genreChildrenFamily"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "genreConcerts"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "genreMusicOther"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "meridianArtsCentre"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "theatreSpaceGreenwinTheatre"
+        }
+      }
+    ]
+  },
+  "sys": {
+    "space": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Space",
+        "id": "nmxu5kj1b6ch"
+      }
+    },
+    "id": "kEoJyrG9ygmV8DjBOUPAd",
+    "type": "Entry",
+    "createdAt": "2024-08-12T18:49:00.473Z",
+    "updatedAt": "2024-08-12T18:49:00.473Z",
+    "environment": {
+      "sys": {
+        "id": "master",
+        "type": "Link",
+        "linkType": "Environment"
+      }
+    },
+    "revision": 1,
+    "contentType": {
+      "sys": {
+        "type": "Link",
+        "linkType": "ContentType",
+        "id": "tileModel"
+      }
+    },
+    "locale": "en-US"
+  },
+  "fields": {
+    "id": "Caspian Sea 2024",
+    "billingName": "From the Caspian Sea to the Persian Gulf",
+    "tileDescription": "Hami Canada proudly presents this fundraising performance. Immerse yourself in the rich tapestry of Iran’s musical heritage with the extraordinary Golrokh Aminian.",
+    "subTitle": "meridian arts centre, greenwin theatre, toronto, Golrokh Aminian, Hami Canada, Concert, Fundraising, Iran, Education, Folklore Music, From the Caspian Sea to the Persian Gulf",
+    "image": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Asset",
+        "id": "6qdu3zA84rCqQiwhYPlFyq"
+      }
+    },
+    "squareImage": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Asset",
+        "id": "6qdu3zA84rCqQiwhYPlFyq"
+      }
+    },
+    "rectangleImage": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Asset",
+        "id": "5NgomAZMnkemagOF0qJyd6"
+      }
+    },
+    "longRectangleImage": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Asset",
+        "id": "3rKQT1aCe46dd0XOJod92d"
+      }
+    },
+    "bannerRectangleImage": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Asset",
+        "id": "2cekNYdBmaBZbel7Q60vLa"
+      }
+    },
+    "label1": "On Sale",
+    "ctaLabel": "Buy Tickets",
+    "ctaLabelUrl1": "External:https://www.ticketmaster.ca/search?q=From%20the%20Caspian%20Sea%20to%20the%20Persian%20Gulf",
+    "ctaLabel1HideAfterDate": true,
+    "ctaLabel2HideAfterDate": false,
+    "dateTime": "2024-10-04T20:00-04:00",
+    "eventEndDateTime": "2024-10-05T20:00-04:00",
+    "detailPageCarousel": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Entry",
+        "id": "6QcFt5oTv0cP8jGmNqbnqH"
+      }
+    },
+    "tabContainer": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Entry",
+        "id": "4mWsA5xAnD41Q58vL1ACko"
+      }
+    },
+    "detailPageBottomCommonContainer": [
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Entry",
+          "id": "oBKH5GdIUk79IYTZZ3iLQ"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Entry",
+          "id": "R7modMXSo1LczqNWylfQk"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Entry",
+          "id": "5pF0bAONXVyt81b2dQP2Dd"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Entry",
+          "id": "5dJ1artltjYWnpHIADkVqn"
+        }
+      },
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Entry",
+          "id": "6Lw6iFvI7tk3unXBO0HByo"
+        }
+      }
+    ],
+    "showComingSoon": false,
+    "eventStatus": "Active",
+    "showAfterExpired": false,
+    "accessibilityLabelBackgroundColor": "Grey",
+    "accessibilityLabelTextColor": "Black",
+    "accessibilityLabelBackgroundColor2": "Grey",
+    "accessibilityLabelTextColor2": "Black",
+    "hideFromSearch": false,
+    "hideFromFilterResults": false,
+    "hideFromTileStack": false,
+    "hideFromTileRow": false
+  }
+}
