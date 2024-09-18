@@ -250,12 +250,25 @@ defmodule MusicListings.Parsing.ParseHelpers do
   end
 
   @doc """
-  For handling datetime strings missing seconds
+  For handling datetime strings missing seconds and offset
   i.e convert a dt string of the format 2024-08-31T19:00
   to 2024-08-31T19:00:00-04:00
   """
   @spec add_seconds_and_offset_to_datetime_string(String.t()) :: String.t()
   def add_seconds_and_offset_to_datetime_string(dt_string), do: "#{dt_string}:00-04:00"
+
+  @doc """
+  For handling datetime strings missing seconds
+  i.e. convert a dt string of the format 2024-08-31T19:00-04:00
+  to 2024-08-31T19:00:00-04:00
+  """
+  @spec add_seconds_to_datetime_string(String.t()) :: String.t()
+  def add_seconds_to_datetime_string(dt_string) do
+    [date, time_with_offset] = String.split(dt_string, "T")
+    [time, offset] = String.split(time_with_offset, "-")
+    time_with_seconds = "#{time}:00"
+    "#{date}T#{time_with_seconds}-#{offset}"
+  end
 
   defp maybe_adjust_for_pm(hour, minute_string) do
     if String.contains?(minute_string, "pm") do
