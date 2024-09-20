@@ -21,7 +21,9 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.ToLiveParser do
 
   def events(body) do
     body = ParseHelpers.maybe_decode!(body)
+
     body["items"]
+    |> Enum.reject(&(&1["fields"]["eventStatus"] == "Cancelled"))
   end
 
   def next_page_url(_body, _current_url) do

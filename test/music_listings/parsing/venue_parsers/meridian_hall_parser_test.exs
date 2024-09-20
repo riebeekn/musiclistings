@@ -32,7 +32,7 @@ defmodule MusicListings.Parsing.VenueParsers.MeridianHallParserTest do
     test "returns expected events", %{index_html: index_html} do
       events = MeridianHallParser.events(index_html)
 
-      assert 52 = Enum.count(events)
+      assert 48 = Enum.count(events)
     end
   end
 
