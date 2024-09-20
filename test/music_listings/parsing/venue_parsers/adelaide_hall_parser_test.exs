@@ -23,7 +23,7 @@ defmodule MusicListings.Parsing.VenueParsers.AdelaideHallParserTest do
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://gateway.admitone.com/embed/live-events?venueId=6201607c4ece4990eeeb6a3c&order=asc" ==
+      assert "https://gateway.admitone.com/embed/live-events?venueId=5f2c38d9b49c224648301825,6182ec572490d0ef56a4adbe,6201607c4ece4990eeeb6a3c&order=asc" ==
                AdelaideHallParser.source_url()
     end
   end

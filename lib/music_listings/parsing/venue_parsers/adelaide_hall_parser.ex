@@ -9,7 +9,7 @@ defmodule MusicListings.Parsing.VenueParsers.AdelaideHallParser do
   @impl true
   def source_url,
     do:
-      "https://gateway.admitone.com/embed/live-events?venueId=6201607c4ece4990eeeb6a3c&order=asc"
+      "https://gateway.admitone.com/embed/live-events?venueId=5f2c38d9b49c224648301825,6182ec572490d0ef56a4adbe,6201607c4ece4990eeeb6a3c&order=asc"
 
   @impl true
   defdelegate retrieve_events_fun, to: AdmitOneParser
