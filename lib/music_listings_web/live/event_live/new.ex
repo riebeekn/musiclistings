@@ -24,7 +24,10 @@ defmodule MusicListingsWeb.EventLive.New do
        |> push_navigate(to: ~p"/events")}
     else
       {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign(socket, form: to_form(changeset, as: :event))}
+        {:noreply,
+         socket
+         |> assign(form: to_form(changeset, as: :event))
+         |> Turnstile.refresh()}
 
       {:error, _} ->
         {:noreply,
