@@ -6,5 +6,6 @@ defmodule MusicListings.Emails.Gallery do
 
   group "/admin", title: "Admin" do
     preview("/latest_crawl_results", MusicListings.Emails.LatestCrawlResults)
+    preview("/new_submitted_event", MusicListings.Emails.NewSubmittedEvent)
   end
 end

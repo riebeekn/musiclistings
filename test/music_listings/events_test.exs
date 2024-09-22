@@ -1,6 +1,8 @@
 defmodule MusicListings.EventsTest do
   use MusicListings.DataCase, async: true
 
+  import Swoosh.TestAssertions
+
   alias MusicListings.Events
   alias MusicListings.Events.PagedEvents
   alias MusicListings.EventsFixtures
@@ -87,6 +89,8 @@ defmodule MusicListings.EventsTest do
                  venue: "The Venue",
                  date: ~D[2024-01-17]
                })
+
+      assert_email_sent(subject: "New Submitted Event")
     end
 
     test "returns a changeset with invalid attributes" do
@@ -97,6 +101,8 @@ defmodule MusicListings.EventsTest do
                title: ["can't be blank"],
                venue: ["can't be blank"]
              }
+
+      refute_email_sent()
     end
   end
 end

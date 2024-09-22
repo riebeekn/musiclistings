@@ -57,7 +57,7 @@ defmodule MusicListingsWeb.EventLive.New do
       <.input field={@form[:price]} type="text" label="Price (optional)" />
       <.input field={@form[:url]} type="text" label="URL (optional)" />
       <:actions>
-        <.button phx-click="cancel">Cancel</.button>
+        <.button phx-click="cancel" type="button">Cancel</.button>
         <.submit_button phx-disable-with="Submitting...">Submit</.submit_button>
       </:actions>
     </.simple_form>
