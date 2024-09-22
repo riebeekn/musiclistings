@@ -26,4 +26,36 @@ defmodule MusicListingsWeb.EventLiveTest do
       assert has_element?(view, "#event-#{e3_id}")
     end
   end
+
+  describe "new" do
+    test "saves submitted event with valid parameters", %{conn: conn} do
+      {:ok, view, _html} = live(conn, ~p"/events/new")
+      assert has_element?(view, "h1", "Submit Your Event")
+
+      {:ok, _view, html} =
+        view
+        |> form("#event-form", %{
+          "event" => %{
+            "title" => "the title for the event",
+            "venue" => "some venue",
+            "date" => ~D[2024-01-17]
+          }
+        })
+        |> render_submit()
+        |> follow_redirect(conn, ~p"/events")
+
+      assert html =~ "Thank you for submitting your event!"
+    end
+
+    test "displays errors with invalid attributes", %{conn: conn} do
+      {:ok, view, _html} = live(conn, ~p"/events/new")
+
+      view
+      |> form("#event-form", %{"event" => %{}})
+
+      assert view
+             |> form("#event-form", %{"event" => %{}})
+             |> render_submit() =~ "can&#39;t be blank"
+    end
+  end
 end

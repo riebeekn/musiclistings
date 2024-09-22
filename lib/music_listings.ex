@@ -4,9 +4,11 @@ defmodule MusicListings do
   """
   alias MusicListings.Crawler
   alias MusicListings.Events
+  alias MusicListings.Events.PagedEvents
   alias MusicListings.Venues
   alias MusicListings.Venues.VenueSummary
   alias MusicListingsSchema.IgnoredEvent
+  alias MusicListingsSchema.SubmittedEvent
   alias MusicListingsSchema.Venue
 
   require Logger
@@ -17,8 +19,24 @@ defmodule MusicListings do
   @spec ignore_crawl_error(pos_integer()) :: IgnoredEvent
   defdelegate ignore_crawl_error(crawl_error_id), to: Crawler
 
-  @spec list_events(list()) :: any()
+  @type list_events_opts ::
+          {:page, pos_integer()}
+          | {:page_size, pos_integer()}
+          | {:venue_id, pos_integer()}
+  @spec list_events(list(list_events_opts)) :: PagedEvents.t()
   defdelegate list_events(opts \\ []), to: Events
+
+  @spec submit_event(
+          attrs :: %{
+            title: String.t(),
+            venue: String.t(),
+            date: Date.t(),
+            time: String.t(),
+            price: String.t(),
+            url: String.t()
+          }
+        ) :: {:ok, SubmittedEvent.t()} | {:error, Ecto.Changeset.t()}
+  defdelegate submit_event(attrs), to: Events
 
   @spec list_venues :: list(VenueSummary)
   defdelegate list_venues, to: Venues

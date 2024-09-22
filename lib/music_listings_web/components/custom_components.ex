@@ -12,7 +12,6 @@ defmodule MusicListingsWeb.CustomComponents do
 
   alias MusicListingsUtilities.DateHelpers
 
-  # TODO: get rid of this if end up not using it
   @doc """
   Renders a page header with an optional description
 
@@ -54,7 +53,7 @@ defmodule MusicListingsWeb.CustomComponents do
     <.link
       patch={@url}
       data-scroll="top"
-      class="inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition rounded-full py-1 px-3 bg-emerald-400/10 text-emerald-400 ring-1 ring-inset ring-emerald-400/20 hover:bg-emerald-400/10 hover:text-emerald-300 hover:ring-emerald-300"
+      class="inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition rounded-full py-1 px-3 bg-emerald-400/10 text-emerald-400 ring-1 ring-inset ring-emerald-400/20 hover:text-emerald-300 hover:ring-emerald-300"
     >
       <%= if @icon_name && @icon_position == :left do %>
         <MusicListingsWeb.CoreComponents.icon name={@icon_name} class="size-3 mt-1 mr-1" />

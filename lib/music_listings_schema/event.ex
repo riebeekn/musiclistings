@@ -4,6 +4,23 @@ defmodule MusicListingsSchema.Event do
   """
   use MusicListingsSchema.Schema
 
+  @type t :: %__MODULE__{
+          external_id: String.t(),
+          title: String.t(),
+          headliner: String.t(),
+          openers: [String.t()],
+          date: Date.t(),
+          time: Time.t(),
+          price_format: :fixed | :free | :range | :unknown | :variable,
+          price_lo: Decimal.t(),
+          price_hi: Decimal.t(),
+          age_restriction: :all_ages | :eighteen_plus | :nineteen_plus | :unknown,
+          ticket_url: String.t(),
+          details_url: String.t(),
+          inserted_at: DateTime.t(),
+          updated_at: DateTime.t()
+        }
+
   schema "events" do
     field :external_id, :string
     field :title, :string

@@ -6,6 +6,7 @@ defmodule MusicListings.EventsTest do
   alias MusicListings.EventsFixtures
   alias MusicListings.VenuesFixtures
   alias MusicListingsSchema.Event
+  alias MusicListingsSchema.SubmittedEvent
 
   describe "list_events/1" do
     setup do
@@ -67,6 +68,35 @@ defmodule MusicListings.EventsTest do
                   ]}
                ]
              } = Events.list_events(venue_id: venue_1_id)
+    end
+  end
+
+  describe "submit_event/1" do
+    test "with valid attributes creates a submitted event" do
+      assert {:ok,
+              %SubmittedEvent{
+                title: "Event title",
+                venue: "The Venue",
+                date: ~D[2024-01-17],
+                time: nil,
+                price: nil,
+                url: nil
+              }} =
+               Events.submit_event(%{
+                 title: "Event title",
+                 venue: "The Venue",
+                 date: ~D[2024-01-17]
+               })
+    end
+
+    test "returns a changeset with invalid attributes" do
+      assert {:error, changeset} = Events.submit_event(%{})
+
+      assert errors_on(changeset) == %{
+               date: ["can't be blank"],
+               title: ["can't be blank"],
+               venue: ["can't be blank"]
+             }
     end
   end
 end

@@ -39,9 +39,11 @@ defmodule MusicListings.Crawler do
 
   ## Example
 
-  iex> Crawler.crawl([DanforthMusicHallParser, VelvetUndergroundParser])
+  iex> danforth = Repo.get!(Venue, 5)
+  iex> Crawler.crawl([danforth])
   """
-  @spec crawl(venues :: list(Venue), opts :: list(crawler_opts)) :: any()
+  @spec crawl(venues :: list(Venue), opts :: list(crawler_opts)) ::
+          {:ok, CrawlSummary.t()} | {:error, Ecto.Changeset.t()}
   def crawl(venues, opts \\ []) do
     pull_data_from_www? = Keyword.get(opts, :pull_data_from_www?, false)
 

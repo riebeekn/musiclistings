@@ -33,6 +33,10 @@ defmodule MusicListingsWeb.EventLive.Index do
   @impl true
   def render(assigns) do
     ~H"""
+    <div class="mb-8 sm:mb-0 -mt-2 text-center sm:text-right">
+      <.button_link label="Submit an event" url={~p"/events/new"} icon_name="hero-arrow-right" />
+    </div>
+
     <.events_list events={@events} />
 
     <div class="mt-6 pt-6 border-t border-zinc-700">
