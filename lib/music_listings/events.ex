@@ -4,15 +4,21 @@ defmodule MusicListings.Events do
   """
   import Ecto.Query
 
+  alias Ecto.Changeset
   alias MusicListings.Events.PagedEvents
   alias MusicListings.Repo
   alias MusicListingsSchema.Event
+  alias MusicListingsSchema.SubmittedEvent
   alias MusicListingsUtilities.DateHelpers
 
   @default_page 1
   @default_page_size 100
 
-  @spec list_events(list()) :: any()
+  @type list_events_opts ::
+          {:page, pos_integer()}
+          | {:page_size, pos_integer()}
+          | {:venue_id, pos_integer()}
+  @spec list_events(list(list_events_opts)) :: PagedEvents.t()
   def list_events(opts \\ []) do
     page = Keyword.get(opts, :page, @default_page)
     page_size = Keyword.get(opts, :page_size, @default_page_size)
@@ -45,5 +51,22 @@ defmodule MusicListings.Events do
   defp maybe_filter_by_venue(query, venue_id) when is_integer(venue_id) do
     query
     |> where([event], event.venue_id == ^venue_id)
+  end
+
+  @spec submit_event(
+          attrs :: %{
+            title: String.t(),
+            venue: String.t(),
+            date: Date.t(),
+            time: String.t(),
+            price: String.t(),
+            url: String.t()
+          }
+        ) :: {:ok, SubmittedEvent.t()} | {:error, Ecto.Changeset.t()}
+  def submit_event(attrs) do
+    %SubmittedEvent{}
+    |> Changeset.cast(attrs, [:title, :venue, :date, :time, :price, :url])
+    |> Changeset.validate_required([:title, :venue, :date])
+    |> Repo.insert()
   end
 end

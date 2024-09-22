@@ -203,10 +203,12 @@ defmodule MusicListingsWeb.CoreComponents do
   def simple_form(assigns) do
     ~H"""
     <.form :let={f} for={@for} as={@as} {@rest}>
-      <div class="mt-10 space-y-8 bg-white">
-        <%= render_slot(@inner_block, f) %>
-        <div :for={action <- @actions} class="mt-2 flex items-center justify-between gap-6">
-          <%= render_slot(action, f) %>
+      <div class="space-y-12">
+        <div class="mt-10 space-y-8">
+          <%= render_slot(@inner_block, f) %>
+          <div :for={action <- @actions} class="mt-6 flex items-center justify-end gap-x-6">
+            <%= render_slot(action, f) %>
+          </div>
         </div>
       </div>
     </.form>
@@ -232,11 +234,35 @@ defmodule MusicListingsWeb.CoreComponents do
     <button
       type={@type}
       class={[
-        "phx-submit-loading:opacity-75 rounded-lg bg-zinc-900 hover:bg-zinc-700 py-2 px-3",
+        "phx-submit-loading:opacity-75 rounded-lg py-2 px-3",
         "text-sm font-semibold leading-6 text-white active:text-white/80",
         @class
       ]}
       {@rest}
+    >
+      <%= render_slot(@inner_block) %>
+    </button>
+    """
+  end
+
+  @doc """
+  Renders a submit button.
+
+  ## Examples
+
+      <.submit_button>Send!</.submit_button>
+      <.submit_button phx-click="go" class="ml-2">Send!</.submit_button>
+  """
+  attr :type, :string, default: nil
+  attr :rest, :global, include: ~w(disabled form name value)
+
+  slot :inner_block, required: true
+
+  def submit_button(assigns) do
+    ~H"""
+    <button
+      type={@type}
+      class="phx-submit-loading:opacity-75 rounded-md bg-emerald-400/10 px-3 py-2 text-sm font-semibold text-emerald-400 ring-1 ring-inset ring-emerald-400/20 hover:text-emerald-300 hover:ring-emerald-300"
     >
       <%= render_slot(@inner_block) %>
     </button>
@@ -379,9 +405,9 @@ defmodule MusicListingsWeb.CoreComponents do
         id={@id}
         value={Phoenix.HTML.Form.normalize_value(@type, @value)}
         class={[
-          "mt-2 block w-full rounded-lg text-zinc-900 focus:ring-0 sm:text-sm sm:leading-6",
-          @errors == [] && "border-zinc-300 focus:border-zinc-400",
-          @errors != [] && "border-rose-400 focus:border-rose-400"
+          "mt-2 block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-emerald-500 sm:text-sm sm:leading-6",
+          @errors == [] && "ring-white/10 focus:ring-emerald-500",
+          @errors != [] && "ring-amber-400 focus:ring-amber-400"
         ]}
         {@rest}
       />
@@ -398,7 +424,7 @@ defmodule MusicListingsWeb.CoreComponents do
 
   def label(assigns) do
     ~H"""
-    <label for={@for} class="block text-sm font-semibold leading-6 text-zinc-800">
+    <label for={@for} class="block text-sm font-medium leading-6 text-white">
       <%= render_slot(@inner_block) %>
     </label>
     """
@@ -411,7 +437,7 @@ defmodule MusicListingsWeb.CoreComponents do
 
   def error(assigns) do
     ~H"""
-    <p class="mt-3 flex gap-3 text-sm leading-6 text-rose-600">
+    <p class="mt-3 flex gap-3 text-sm leading-6 text-amber-400">
       <.icon name="hero-exclamation-circle-mini" class="mt-0.5 h-5 w-5 flex-none" />
       <%= render_slot(@inner_block) %>
     </p>

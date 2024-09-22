@@ -22,6 +22,7 @@ defmodule MusicListingsWeb.Router do
     pipe_through :browser
 
     live "/events", EventLive.Index, :index
+    live "/events/new", EventLive.New, :new
     live "/events/venue/:venue_id", VenueEventLive.Index, :index
     live "/venues", VenueLive.Index, :index
   end
