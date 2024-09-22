@@ -11,8 +11,9 @@ defmodule MusicListingsWeb.EventLive.New do
   end
 
   @impl true
-  def handle_event("save", %{"event" => params}, socket) do
-    with {:ok, attrs} <- validate(:new, params),
+  def handle_event("save", %{"event" => event_params} = params, socket) do
+    with {:ok, _ts_return} <- turnstile_verification(params),
+         {:ok, attrs} <- validate(:new, event_params),
          {:ok, _event} <- MusicListings.submit_event(attrs) do
       {:noreply,
        socket
@@ -22,14 +23,28 @@ defmodule MusicListingsWeb.EventLive.New do
        )
        |> push_navigate(to: ~p"/events")}
     else
-      {:error, changeset} ->
+      {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, form: to_form(changeset, as: :event))}
+
+      {:error, _} ->
+        {:noreply,
+         socket
+         |> put_flash(:error, "Please try submitting again")
+         |> Turnstile.refresh()}
     end
   end
 
   @impl true
   def handle_event("cancel", _params, socket) do
     {:noreply, push_navigate(socket, to: ~p"/events")}
+  end
+
+  defp turnstile_verification(params) do
+    if Application.get_env(:music_listings, :env) == :test do
+      {:ok, :success}
+    else
+      Turnstile.verify(params)
+    end
   end
 
   defparams :new do
@@ -56,6 +71,9 @@ defmodule MusicListingsWeb.EventLive.New do
       <.input field={@form[:time]} type="text" label="Time (optional)" />
       <.input field={@form[:price]} type="text" label="Price (optional)" />
       <.input field={@form[:url]} type="text" label="URL (optional)" />
+      <div class="text-end">
+        <Turnstile.widget theme="dark" />
+      </div>
       <:actions>
         <.button phx-click="cancel" type="button">Cancel</.button>
         <.submit_button phx-disable-with="Submitting...">Submit</.submit_button>
