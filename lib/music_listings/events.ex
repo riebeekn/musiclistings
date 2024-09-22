@@ -5,7 +5,9 @@ defmodule MusicListings.Events do
   import Ecto.Query
 
   alias Ecto.Changeset
+  alias MusicListings.Emails.NewSubmittedEvent
   alias MusicListings.Events.PagedEvents
+  alias MusicListings.Mailer
   alias MusicListings.Repo
   alias MusicListingsSchema.Event
   alias MusicListingsSchema.SubmittedEvent
@@ -68,5 +70,16 @@ defmodule MusicListings.Events do
     |> Changeset.cast(attrs, [:title, :venue, :date, :time, :price, :url])
     |> Changeset.validate_required([:title, :venue, :date])
     |> Repo.insert()
+    |> case do
+      {:ok, submitted_event} ->
+        submitted_event
+        |> NewSubmittedEvent.new_email()
+        |> Mailer.deliver()
+
+        {:ok, submitted_event}
+
+      error ->
+        error
+    end
   end
 end
