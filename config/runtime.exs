@@ -142,4 +142,20 @@ if config_env() == :prod do
   config :music_listings, MusicListings.Mailer,
     adapter: Swoosh.Adapters.Brevo,
     api_key: brevo_api_key
+
+  turnstile_site_key =
+    System.get_env("TURNSTILE_SITE_KEY") ||
+      raise """
+      environment variable TURNSTILE_SITE_KEY is missing.
+      """
+
+  turnstile_secret_key =
+    System.get_env("TURNSTILE_SECRET_KEY") ||
+      raise """
+      environment variable TURNSTILE_SECRET_KEY is missing.
+      """
+
+  config :phoenix_turnstile,
+    site_key: turnstile_site_key,
+    secret_key: turnstile_secret_key
 end
