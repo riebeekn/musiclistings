@@ -34,7 +34,7 @@ defmodule MusicListingsWeb.EventLive.Index do
   def render(assigns) do
     ~H"""
     <div class="mb-8 sm:mb-0 -mt-2 text-center sm:text-right">
-      <.button_link label="Submit an event" url={~p"/events/new"} icon_name="hero-arrow-right" />
+      <!-- <.button_link label="Submit an event" url={~p"/events/new"} icon_name="hero-arrow-right" /> -->
     </div>
 
     <.events_list events={@events} />
