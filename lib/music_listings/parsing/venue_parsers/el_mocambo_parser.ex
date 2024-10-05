@@ -59,10 +59,14 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
 
   @impl true
   def event_date(event) do
-    %{"month" => month_string, "day" => day_string, "time" => _time_string} =
+    %{"year" => year_string, "month" => month_string, "day" => day_string, "time" => _time_string} =
       parse_out_full_date_time_string(event)
 
-    ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
+    if year_string == "" do
+      ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
+    else
+      ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
+    end
   end
 
   defp parse_out_full_date_time_string(event) do
@@ -71,7 +75,8 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
       |> Selectors.match_one(css(".bdt-event-date a"))
       |> Selectors.attr("title")
 
-    regex = ~r/Start Date:(?<month>\w+)\s(?<day>\d{1,2})\s@\s(?<time>[\d:]+\s[ap]m)/
+    regex =
+      ~r/Start Date:(?<month>\w+)\s(?<day>\d{1,2})(,?\s(?<year>\d{4}))?\s@\s(?<time>[\d:]+\s[ap]m)/
 
     Regex.named_captures(regex, full_date_and_time_string)
   end
@@ -83,7 +88,12 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
 
   @impl true
   def event_time(event) do
-    %{"month" => _month_string, "day" => _day_string, "time" => time_string} =
+    %{
+      "year" => _year_string,
+      "month" => _month_string,
+      "day" => _day_string,
+      "time" => time_string
+    } =
       parse_out_full_date_time_string(event)
 
     ParseHelpers.build_time_from_time_string(time_string)

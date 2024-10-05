@@ -44,26 +44,26 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "high_flyer_release_show_2024_08_23" == ElMocamboParser.event_id(event)
+      assert "strangelove_2025_01_24" == ElMocamboParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "high_flyer_release_show_2024_08_23" == ElMocamboParser.ignored_event_id(event)
+      assert "strangelove_2025_01_24" == ElMocamboParser.ignored_event_id(event)
     end
   end
 
   describe "event_title/1" do
     test "returns event title", %{event: event} do
-      assert "High Flyer Release Show" == ElMocamboParser.event_title(event)
+      assert "Strangelove" == ElMocamboParser.event_title(event)
     end
   end
 
   describe "performers/1" do
     test "returns the event performers", %{event: event} do
       assert %Performers{
-               headliner: "High Flyer Release Show",
+               headliner: "Strangelove",
                openers: []
              } == ElMocamboParser.performers(event)
     end
@@ -71,7 +71,7 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParserTest do
 
   describe "event_date/1" do
     test "returns the event date", %{event: event} do
-      assert ~D[2024-08-23] == ElMocamboParser.event_date(event)
+      assert ~D[2025-01-24] == ElMocamboParser.event_date(event)
     end
   end
 
@@ -108,7 +108,7 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParserTest do
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert "https://elmocambo.com/event/high-flyer-release-show/" ==
+      assert "https://elmocambo.com/event/strangelove/" ==
                ElMocamboParser.details_url(event)
     end
   end
