@@ -35,10 +35,9 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParser do
 
   @impl true
   def event_id(event) do
-    title = event_title(event)
     date = event_date(event)
 
-    ParseHelpers.build_id_from_title_and_date(title, date)
+    ParseHelpers.build_id_from_title_and_date("coda", date)
   end
 
   @impl true
