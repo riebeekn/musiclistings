@@ -37,7 +37,7 @@ defmodule MusicListings.Parsing.VenueParsers.LeesPalaceParser do
 
   @impl true
   def event_id(event) do
-    title = event_title(event)
+    title = event_title(event) |> String.split() |> List.first()
     date = event_date(event)
 
     ParseHelpers.build_id_from_title_and_date(title, date)

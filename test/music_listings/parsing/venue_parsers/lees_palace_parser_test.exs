@@ -44,13 +44,13 @@ defmodule MusicListings.Parsing.VenueParsers.LeesPalaceParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "whitehall_w_the_high_teens_wedding_2024_07_27" == LeesPalaceParser.event_id(event)
+      assert "whitehall_2024_07_27" == LeesPalaceParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "whitehall_w_the_high_teens_wedding_2024_07_27" ==
+      assert "whitehall_2024_07_27" ==
                LeesPalaceParser.ignored_event_id(event)
     end
   end
