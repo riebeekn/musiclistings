@@ -23,9 +23,6 @@ defmodule MusicListings.Repo.Migrations.UpdateVenueData do
     """
   end
 
-
-
   def down do
-
   end
 end
