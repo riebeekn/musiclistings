@@ -65,6 +65,7 @@ defmodule MusicListings.Parsing.ParseHelpers do
     |> String.replace("\\u2019", "'")
     |> String.replace("&amp;", "&")
     |> String.replace("&#8211;", "-")
+    |> String.replace("\\u00e9", "é")
   end
 
   # ===========================================================================
@@ -76,6 +77,8 @@ defmodule MusicListings.Parsing.ParseHelpers do
     |> replace_punctuation_and_spaces()
     |> String.downcase()
     |> String.replace("cancelled_", "")
+    |> String.replace("rescheduled_", "")
+    |> String.replace("postponed_", "")
   end
 
   # ===========================================================================
