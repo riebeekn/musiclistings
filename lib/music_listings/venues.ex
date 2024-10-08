@@ -15,9 +15,8 @@ defmodule MusicListings.Venues do
     today = DateHelpers.now() |> DateHelpers.to_eastern_date()
 
     from(venue in Venue,
-      inner_join: event in Event,
-      on: event.venue_id == venue.id,
-      where: event.date >= ^today,
+      left_join: event in Event,
+      on: event.venue_id == venue.id and event.date >= ^today,
       group_by: [venue.id, venue.name, venue.street],
       order_by: venue.name,
       select: %{

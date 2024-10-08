@@ -5,9 +5,11 @@ defmodule MusicListings.VenuesTest do
   alias MusicListings.Venues
   alias MusicListings.Venues.VenueSummary
   alias MusicListings.VenuesFixtures
+  alias MusicListingsSchema.Venue
 
   describe "list_venues/0" do
     setup do
+      Repo.delete_all(Venue)
       venue_2 = VenuesFixtures.venue_fixture(name: "venue two", street: "v2 street")
       venue_1 = VenuesFixtures.venue_fixture(name: "venue one", street: "v1 street")
 
