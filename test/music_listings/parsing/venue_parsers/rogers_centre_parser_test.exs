@@ -1,22 +1,22 @@
-defmodule MusicListings.Parsing.VenueParsers.RogersParserTest do
+defmodule MusicListings.Parsing.VenueParsers.RogersCentreParserTest do
   use ExUnit.Case, async: true
 
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
-  alias MusicListings.Parsing.VenueParsers.RogersParser
+  alias MusicListings.Parsing.VenueParsers.RogersCentreParser
 
   setup do
-    index_file_path = Path.expand("#{File.cwd!()}/test/data/rogers/index.html")
+    index_file_path = Path.expand("#{File.cwd!()}/test/data/rogers_centre/index.html")
 
     single_event_file_path =
-      Path.expand("#{File.cwd!()}/test/data/rogers/single_event.html")
+      Path.expand("#{File.cwd!()}/test/data/rogers_centre/single_event.html")
 
     index_html = File.read!(index_file_path)
 
     event =
       single_event_file_path
       |> File.read!()
-      |> RogersParser.events()
+      |> RogersCentreParser.events()
       |> List.first()
 
     %{index_html: index_html, event: event}
@@ -25,13 +25,13 @@ defmodule MusicListings.Parsing.VenueParsers.RogersParserTest do
   describe "source_url/0" do
     test "returns expected value" do
       assert "https://www.livenation.com/venue/KovZpa3Bbe/rogers-centre-events" ==
-               RogersParser.source_url()
+               RogersCentreParser.source_url()
     end
   end
 
   describe "events/1" do
     test "returns expected events", %{index_html: index_html} do
-      events = RogersParser.events(index_html)
+      events = RogersCentreParser.events(index_html)
 
       assert 10 = Enum.count(events)
     end
@@ -39,28 +39,28 @@ defmodule MusicListings.Parsing.VenueParsers.RogersParserTest do
 
   describe "next_page_url/2" do
     test "returns the next page url", %{index_html: index_html} do
-      assert nil == RogersParser.next_page_url(index_html, nil)
+      assert nil == RogersCentreParser.next_page_url(index_html, nil)
     end
   end
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
       assert "def_leppard_journey_the_summer_stadium_tour_with_cheap_trick_2024_08_02" ==
-               RogersParser.event_id(event)
+               RogersCentreParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
       assert "def_leppard_journey_the_summer_stadium_tour_with_cheap_trick_2024_08_02" ==
-               RogersParser.ignored_event_id(event)
+               RogersCentreParser.ignored_event_id(event)
     end
   end
 
   describe "event_title/1" do
     test "returns event title", %{event: event} do
       assert "Def Leppard / Journey: The Summer Stadium Tour with Cheap Trick" ==
-               RogersParser.event_title(event)
+               RogersCentreParser.event_title(event)
     end
   end
 
@@ -69,51 +69,51 @@ defmodule MusicListings.Parsing.VenueParsers.RogersParserTest do
       assert %Performers{
                headliner: "Def Leppard",
                openers: ["Journey", "Cheap Trick"]
-             } == RogersParser.performers(event)
+             } == RogersCentreParser.performers(event)
     end
   end
 
   describe "event_date/1" do
     test "returns the event date", %{event: event} do
-      assert ~D[2024-08-02] == RogersParser.event_date(event)
+      assert ~D[2024-08-02] == RogersCentreParser.event_date(event)
     end
   end
 
   describe "additional_dates/1" do
     test "returns a list of additional dates", %{event: event} do
-      assert [] == RogersParser.additional_dates(event)
+      assert [] == RogersCentreParser.additional_dates(event)
     end
   end
 
   describe "event_time/1" do
     test "returns the event start time", %{event: event} do
-      assert ~T[18:00:00] == RogersParser.event_time(event)
+      assert ~T[18:00:00] == RogersCentreParser.event_time(event)
     end
   end
 
   describe "price/1" do
     test "returns the event price", %{event: event} do
       assert %Price{format: :unknown, lo: nil, hi: nil} ==
-               RogersParser.price(event)
+               RogersCentreParser.price(event)
     end
   end
 
   describe "age_restriction/1" do
     test "returns the event age restriction", %{event: event} do
-      assert :unknown == RogersParser.age_restriction(event)
+      assert :unknown == RogersCentreParser.age_restriction(event)
     end
   end
 
   describe "ticket_url/1" do
     test "returns the event ticket url", %{event: event} do
       assert "https://www.livenation.com/event/G5vZZ9z6yjKEU/def-leppard-journey-the-summer-stadium-tour-with-cheap-trick" ==
-               RogersParser.ticket_url(event)
+               RogersCentreParser.ticket_url(event)
     end
   end
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert nil == RogersParser.details_url(event)
+      assert nil == RogersCentreParser.details_url(event)
     end
   end
 end

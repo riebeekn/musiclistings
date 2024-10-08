@@ -1,4 +1,4 @@
-defmodule MusicListings.Parsing.VenueParsers.RogersParser do
+defmodule MusicListings.Parsing.VenueParsers.RogersCentreParser do
   @moduledoc """
   Parser for extracing events from https://www.livenation.com/venue/KovZpa3Bbe/rogers-centre-events
   """
@@ -13,7 +13,7 @@ defmodule MusicListings.Parsing.VenueParsers.RogersParser do
   defdelegate retrieve_events_fun, to: LiveNationParser
 
   @impl true
-  def example_data_file_location, do: "test/data/rogers/index.html"
+  def example_data_file_location, do: "test/data/rogers_centre/index.html"
 
   @impl true
   defdelegate events(body), to: LiveNationParser
