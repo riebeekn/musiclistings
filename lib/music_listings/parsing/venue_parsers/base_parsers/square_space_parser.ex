@@ -38,6 +38,7 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.SquareSpaceParser do
     event
     |> Selectors.text(css(".eventlist-title-link"))
     |> String.replace("POETRY JAZZ CAFE PRESENTS: ", "")
+    |> String.replace("POETRY PRESENTS: ", "")
   end
 
   def performers(event) do
