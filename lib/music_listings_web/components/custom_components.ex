@@ -240,7 +240,7 @@ defmodule MusicListingsWeb.CustomComponents do
                 <.event_age_restriction age_restriction={event.age_restriction} />
               </dt>
               <dd class="mt-0 sm:mt-1">
-                <.event_title title={event.title} />
+                <.event_title event={event} />
               </dd>
               <dd class="flex items-center gap-x-2 mt-0 sm:mt-1">
                 <.event_time time={event.time} />
@@ -284,7 +284,7 @@ defmodule MusicListingsWeb.CustomComponents do
             </div>
           </dt>
           <dd class="mt-0 sm:mt-1">
-            <.event_title title={event.title} />
+            <.event_title event={event} />
           </dd>
           <dd class="flex items-center gap-x-2 mt-0 sm:mt-1">
             <.event_ticket_url
@@ -320,7 +320,11 @@ defmodule MusicListingsWeb.CustomComponents do
   defp event_title(assigns) do
     ~H"""
     <div class="text-sm sm:text-lg font-medium leading-6 text-white uppercase">
-      <%= @title %>
+      <%= @event.title %>
+      <%= if @event.openers != [] do %>
+        with
+        <%= @event.openers |> Enum.join(", ") %>
+      <% end %>
     </div>
     """
   end
