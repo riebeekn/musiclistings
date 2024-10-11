@@ -322,8 +322,7 @@ defmodule MusicListingsWeb.CustomComponents do
     <div class="text-sm sm:text-lg font-medium leading-6 text-white uppercase">
       <%= @event.title %>
       <%= if @event.openers != [] do %>
-        with
-        <%= @event.openers |> Enum.join(", ") %>
+        with <%= @event.openers |> Enum.join(", ") %>
       <% end %>
     </div>
     """
