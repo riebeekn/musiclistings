@@ -19,19 +19,19 @@ defmodule MusicListings.Events do
   @type list_events_opts ::
           {:page, pos_integer()}
           | {:page_size, pos_integer()}
-          | {:venue_id, pos_integer()}
+          | {:venue_ids, list(pos_integer())}
   @spec list_events(list(list_events_opts)) :: PagedEvents.t()
   def list_events(opts \\ []) do
     page = Keyword.get(opts, :page, @default_page)
     page_size = Keyword.get(opts, :page_size, @default_page_size)
-    venue_id = Keyword.get(opts, :venue_id, nil)
+    venue_ids = Keyword.get(opts, :venue_ids, [])
 
     today = DateHelpers.now() |> DateHelpers.to_eastern_date()
 
     pagination_result =
       Event
       |> where([event], event.date >= ^today)
-      |> maybe_filter_by_venue(venue_id)
+      |> maybe_filter_by_venues(venue_ids)
       |> order_by([:date, :title])
       |> preload(:venue)
       |> Repo.paginate(page: page, page_size: page_size)
@@ -48,11 +48,11 @@ defmodule MusicListings.Events do
     }
   end
 
-  defp maybe_filter_by_venue(query, nil), do: query
+  defp maybe_filter_by_venues(query, []), do: query
 
-  defp maybe_filter_by_venue(query, venue_id) when is_integer(venue_id) do
+  defp maybe_filter_by_venues(query, venue_ids) when is_list(venue_ids) do
     query
-    |> where([event], event.venue_id == ^venue_id)
+    |> where([event], event.venue_id in ^venue_ids)
   end
 
   @spec submit_event(

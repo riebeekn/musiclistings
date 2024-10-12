@@ -69,7 +69,7 @@ defmodule MusicListings.EventsTest do
                     }
                   ]}
                ]
-             } = Events.list_events(venue_id: venue_1_id)
+             } = Events.list_events(venue_ids: [venue_1_id])
     end
   end
 
