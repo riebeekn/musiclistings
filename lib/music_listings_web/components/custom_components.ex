@@ -11,6 +11,7 @@ defmodule MusicListingsWeb.CustomComponents do
     statics: MusicListingsWeb.static_paths()
 
   alias MusicListingsUtilities.DateHelpers
+  alias Phoenix.LiveView.JS
 
   @doc """
   Renders a page header with an optional description
@@ -101,6 +102,97 @@ defmodule MusicListingsWeb.CustomComponents do
         />
       <% end %>
     </div>
+    """
+  end
+
+  @doc """
+  Renders the venue filter
+
+  ## Example
+
+  <.venue_filter for={@form} venues={@venues} venue_ids={@venue_ids} />
+  """
+
+  attr :for, :any, required: true, doc: "the data structure for the form"
+  attr :venues, :list, required: true
+  attr :venue_ids, :list, required: true
+
+  def venue_filter(assigns) do
+    ~H"""
+    <div>
+      <a
+        href="#"
+        phx-click={toggle_venue_filtering()}
+        class="inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition rounded-full py-1 px-3 bg-emerald-400/10 text-emerald-400 ring-1 ring-inset ring-emerald-400/20 hover:text-emerald-300 hover:ring-emerald-300"
+      >
+        Filter by venue
+        <span id="venue-filter-chevron" class="inline-block transition duration-200">
+          <MusicListingsWeb.CoreComponents.icon name="hero-chevron-down" class="size-4" />
+        </span>
+      </a>
+
+      <.form for={@for} as={:for} id="venue-filters" class="hidden" phx-change="venue-filter-selected">
+        <div class="relative">
+          <ul
+            class="absolute z-10 mt-1 max-h-60 w-full min-w-80 overflow-auto rounded-md bg-zinc-900 py-1 text-base shadow-lg ring-1 ring-inset ring-white/10 hover:ring-white/20 "
+            tabindex="-1"
+          >
+            <%= for venue <- @venues do %>
+              <li
+                class="relative cursor-default select-none py-2 pl-8 pr-4 text-white ml-4 text-sm font-semibold leading-7"
+                role="option"
+              >
+                <span class="block truncate">
+                  <label for={"#{venue.id}"}><%= venue.name %></label>
+                </span>
+                <span class="absolute inset-y-0 left-0 flex items-center pl-1.5 text-indigo-600">
+                  <input
+                    id={"#{venue.id}"}
+                    name={venue.id}
+                    value="true"
+                    type="checkbox"
+                    checked={Integer.to_string(venue.id) in @venue_ids}
+                    class="focus:ring-0  border-none focus:ring-0 focus:ring-offset-0 bg-zinc-300 text-zinc-600"
+                  />
+                </span>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </.form>
+    </div>
+    """
+  end
+
+  defp toggle_venue_filtering(js \\ %JS{}) do
+    js
+    |> JS.toggle(
+      to: "#venue-filters",
+      in: {"transition ease-in-out duration-200", "opacity-0", "opacity-100"},
+      out: {"transition ease-in-out duration-200", "opacity-100", "opacity-0"}
+    )
+    |> JS.toggle_class("rotate-180", to: "#venue-filter-chevron")
+  end
+
+  @doc """
+  Renders the vender filter status
+
+  ## Example
+
+  <.venue_filter_status venue_ids={@venue_ids} />
+  """
+  attr :venue_ids, :list, required: true
+
+  def venue_filter_status(assigns) do
+    ~H"""
+    <%= if @venue_ids != [] do %>
+      <div class="text-white text-sm sm:text-base -mt-4 sm:-mt-1 mb-6 sm:mb-4">
+        Filtering by <%= Enum.count(@venue_ids) %> venue(s).
+        <a href="#" phx-click="clear-venue-filtering" class="text-emerald-400 hover:text-emerald-300">
+          Clear filter.
+        </a>
+      </div>
+    <% end %>
     """
   end
 
