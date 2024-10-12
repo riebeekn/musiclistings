@@ -229,7 +229,7 @@ defmodule MusicListings.Parsing.ParseHelpers do
           |> String.trim()
           |> String.to_integer()
 
-        Time.new!(hour, minute, 0)
+        to_time(hour, minute)
 
       [hour_string] ->
         hour_string
@@ -239,9 +239,8 @@ defmodule MusicListings.Parsing.ParseHelpers do
         |> Integer.parse()
         |> case do
           {hour, _remainder} ->
-            hour
-            |> maybe_adjust_for_pm(hour_string)
-            |> Time.new!(0, 0)
+            hour = maybe_adjust_for_pm(hour, hour_string)
+            to_time(hour, 0)
 
           :error ->
             nil
@@ -249,6 +248,15 @@ defmodule MusicListings.Parsing.ParseHelpers do
 
       _tbd ->
         nil
+    end
+  end
+
+  defp to_time(hour, minute) do
+    hour
+    |> Time.new(minute, 0)
+    |> case do
+      {:ok, time} -> time
+      _error -> nil
     end
   end
 

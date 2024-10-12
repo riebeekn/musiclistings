@@ -57,6 +57,10 @@ defmodule MusicListings.Parsing.ParserHelpersTest do
       assert nil == ParseHelpers.build_time_from_time_string("bob")
     end
 
+    test "return nil when fail to create time string" do
+      assert nil == ParseHelpers.build_time_from_time_string("630pm")
+    end
+
     test "converts valid time strings" do
       assert ~T[07:30:00] == ParseHelpers.build_time_from_time_string("07:30")
       assert ~T[19:30:00] == ParseHelpers.build_time_from_time_string("7:30pm")
