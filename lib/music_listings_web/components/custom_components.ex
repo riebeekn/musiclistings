@@ -328,25 +328,33 @@ defmodule MusicListingsWeb.CustomComponents do
     """
   end
 
-  defp event_ticket_url(%{ticket_url: nil} = assigns), do: ~H""
-
   defp event_ticket_url(assigns) do
     ~H"""
-    <a
-      href={@ticket_url}
-      class="flex items-center text-xs sm:text-sm text-emerald-400 hover:text-emerald-500"
-      target="_blank"
-    >
-      <div class="flex items-center">
-        <MusicListingsWeb.CoreComponents.icon name="hero-ticket-solid" class="hidden sm:block size-4" />
-        <div class="sm:ml-1">
-          Tickets
+    <%= if @ticket_url do %>
+      <a
+        href={@ticket_url}
+        class="flex items-center text-xs sm:text-sm text-emerald-400 hover:text-emerald-500"
+        target="_blank"
+      >
+        <div class="flex items-center">
+          <MusicListingsWeb.CoreComponents.icon
+            name="hero-ticket-solid"
+            class="hidden sm:block size-4"
+          />
+          <div class="sm:ml-1">
+            Tickets
+          </div>
         </div>
-      </div>
-      <div class="ml-1">
+        <div class="ml-1">
+          <.event_price price_format={@price_format} price_lo={@price_lo} price_hi={@price_hi} />
+        </div>
+      </a>
+    <% end %>
+    <%= if @price_format != :unknown && !@ticket_url do %>
+      <div class="text-xs sm:text-sm text-emerald-400">
         <.event_price price_format={@price_format} price_lo={@price_lo} price_hi={@price_hi} />
       </div>
-    </a>
+    <% end %>
     """
   end
 
@@ -406,6 +414,12 @@ defmodule MusicListingsWeb.CustomComponents do
   defp event_price(%{price_format: :free} = assigns) do
     ~H"""
     $FREE
+    """
+  end
+
+  defp event_price(%{price_format: :pwyc} = assigns) do
+    ~H"""
+    $PWYC
     """
   end
 
