@@ -17,6 +17,7 @@ defmodule MusicListings.Venues do
     from(venue in Venue,
       left_join: event in Event,
       on: event.venue_id == venue.id and event.date >= ^today,
+      where: venue.pull_events?,
       group_by: [venue.id, venue.name, venue.street],
       order_by: venue.name,
       select: %{
