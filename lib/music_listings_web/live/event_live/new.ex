@@ -19,7 +19,7 @@ defmodule MusicListingsWeb.EventLive.New do
        socket
        |> put_flash(
          :info,
-         "Thank you for submitting your event! We’ll review the details, and once approved (usually within 12 hours), your event will be live on the site."
+         "Thank you for submitting your event! We’ll review the details, and once approved (usually within 24 hours), your event will be live on the site."
        )
        |> push_navigate(to: ~p"/events")}
     else
@@ -64,7 +64,7 @@ defmodule MusicListingsWeb.EventLive.New do
     ~H"""
     <.page_header
       header="Submit Your Event"
-      description="Share the details of your event with us using the form below."
+      description="Share the details of your event using the form below."
     />
 
     <.simple_form for={@form} id="event-form" phx-submit="save">
