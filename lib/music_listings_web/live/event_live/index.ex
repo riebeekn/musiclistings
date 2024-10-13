@@ -4,7 +4,7 @@ defmodule MusicListingsWeb.EventLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    venues = MusicListings.list_venues()
+    venues = MusicListings.list_venues(restrict_to_pulled_venues?: false)
 
     socket =
       socket

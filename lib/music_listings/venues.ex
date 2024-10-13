@@ -11,24 +11,32 @@ defmodule MusicListings.Venues do
   alias MusicListingsUtilities.DateHelpers
 
   @spec list_venues :: list(VenueSummary)
-  def list_venues do
+  def list_venues(opts \\ []) do
+    restrict_to_pulled_venues? = Keyword.get(opts, :restrict_to_pulled_venues?, true)
     today = DateHelpers.now() |> DateHelpers.to_eastern_date()
 
-    from(venue in Venue,
-      left_join: event in Event,
-      on: event.venue_id == venue.id and event.date >= ^today,
-      where: venue.pull_events?,
-      group_by: [venue.id, venue.name, venue.street],
-      order_by: venue.name,
-      select: %{
-        id: venue.id,
-        name: venue.name,
-        street: venue.street,
-        event_count: count(event.id)
-      }
+    Venue
+    |> join(:left, [venue], event in Event,
+      on: event.venue_id == venue.id and event.date >= ^today
     )
+    |> maybe_restrict_to_pulled_venues(restrict_to_pulled_venues?)
+    |> group_by([venue], [venue.id, venue.name, venue.street])
+    |> order_by([venue], venue.name)
+    |> select([venue, event], %{
+      id: venue.id,
+      name: venue.name,
+      street: venue.street,
+      event_count: count(event.id)
+    })
     |> Repo.all()
     |> Enum.map(&VenueSummary.new/1)
+  end
+
+  defp maybe_restrict_to_pulled_venues(query, false), do: query
+
+  defp maybe_restrict_to_pulled_venues(query, true) do
+    query
+    |> where([venue], venue.pull_events?)
   end
 
   @spec get_venue!(pos_integer()) :: Venue

@@ -38,8 +38,9 @@ defmodule MusicListings do
         ) :: {:ok, SubmittedEvent.t()} | {:error, Ecto.Changeset.t()}
   defdelegate submit_event(attrs), to: Events
 
-  @spec list_venues :: list(VenueSummary)
-  defdelegate list_venues, to: Venues
+  @type list_venue_opts :: {:restrict_to_pulled_venues?, boolean()}
+  @spec list_venues(list(list_venue_opts)) :: list(VenueSummary)
+  defdelegate list_venues(opts \\ []), to: Venues
 
   @spec get_venue!(pos_integer()) :: Venue
   defdelegate get_venue!(venue_id), to: Venues
