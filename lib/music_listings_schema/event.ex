@@ -11,7 +11,7 @@ defmodule MusicListingsSchema.Event do
           openers: [String.t()],
           date: Date.t(),
           time: Time.t(),
-          price_format: :fixed | :free | :range | :unknown | :variable,
+          price_format: :fixed | :free | :pwyc | :range | :unknown | :variable,
           price_lo: Decimal.t(),
           price_hi: Decimal.t(),
           age_restriction: :all_ages | :eighteen_plus | :nineteen_plus | :unknown,
@@ -28,7 +28,7 @@ defmodule MusicListingsSchema.Event do
     field :openers, {:array, :string}
     field :date, :date
     field :time, :time
-    field :price_format, Ecto.Enum, values: [:fixed, :free, :range, :unknown, :variable]
+    field :price_format, Ecto.Enum, values: [:fixed, :free, :pwyc, :range, :unknown, :variable]
     field :price_lo, :decimal
     field :price_hi, :decimal
 
