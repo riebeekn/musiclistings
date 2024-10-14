@@ -16,7 +16,8 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
         paged_events =
           MusicListings.list_events(
             page: normalized_params[:page],
-            venue_ids: [normalized_params.venue_id]
+            venue_ids: [normalized_params.venue_id],
+            order_by: [:date, :time]
           )
 
         socket =
