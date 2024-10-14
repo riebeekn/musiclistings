@@ -16,38 +16,69 @@
 //
 
 // Include phoenix_html to handle method=PUT/DELETE in forms and buttons.
-import "phoenix_html"
+import "phoenix_html";
 // Establish Phoenix Socket and LiveView configuration.
-import {Socket} from "phoenix"
-import {LiveSocket} from "phoenix_live_view"
-import topbar from "../vendor/topbar"
-import { TurnstileHook } from "phoenix_turnstile"
+import { Socket } from "phoenix";
+import { LiveSocket } from "phoenix_live_view";
+import topbar from "../vendor/topbar";
+import { TurnstileHook } from "phoenix_turnstile";
 
-let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
+let csrfToken = document
+  .querySelector("meta[name='csrf-token']")
+  .getAttribute("content");
+
+let Hooks = {};
+Hooks.Turnstile = TurnstileHook;
+Hooks.VenueFilter = {
+  mounted() {
+    this.handleEvent("saveVenueFilterIdsToLocalStorage", ({ venue_ids }) => {
+      localStorage.setItem("venue_ids", venue_ids);
+    });
+    this.handleEvent("clearVenueFilterIdsFromLocalStorage", () => {
+      localStorage.removeItem("venue_ids");
+    });
+  },
+};
+
+let params = (node) => {
+  var restoreNode =
+    node && node.querySelector("div[data-venue-filter-restore='true']");
+  if (restoreNode) {
+    var key = restoreNode.getAttribute("data-storage-key");
+    return { _csrf_token: csrfToken, venue_ids: localStorage.getItem(key) };
+  } else {
+    return { _csrf_token: csrfToken };
+  }
+};
+
 let liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: 2500,
-  params: {_csrf_token: csrfToken},
-  hooks: {
-    Turnstile: TurnstileHook
-  }
-})
+  params: params,
+  hooks: Hooks,
+});
 
 // Show progress bar on live navigation and form submits
-topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"})
-window.addEventListener("phx:page-loading-start", _info => topbar.show(300))
-window.addEventListener("phx:page-loading-stop", _info => topbar.hide())
+topbar.config({ barColors: { 0: "#29d" }, shadowColor: "rgba(0, 0, 0, .3)" });
+window.addEventListener("phx:page-loading-start", (_info) => topbar.show(300));
+window.addEventListener("phx:page-loading-stop", (_info) => topbar.hide());
 
 // js function to scroll to top on paging
-window.addEventListener("phoenix.link.click", function (event) {
-  var scroll = event.target.getAttribute("data-scroll")
-  if (scroll == "top") { window.scrollTo(0, 0) }
-}, false);
+window.addEventListener(
+  "phoenix.link.click",
+  function (event) {
+    var scroll = event.target.getAttribute("data-scroll");
+    if (scroll == "top") {
+      window.scrollTo(0, 0);
+    }
+  },
+  false,
+);
 
 // connect if there are any LiveViews on the page
-liveSocket.connect()
+liveSocket.connect();
 
 // expose liveSocket on window for web console debug logs and latency simulation:
 // >> liveSocket.enableDebug()
 // >> liveSocket.enableLatencySim(1000)  // enabled for duration of browser session
 // >> liveSocket.disableLatencySim()
-window.liveSocket = liveSocket
+window.liveSocket = liveSocket;

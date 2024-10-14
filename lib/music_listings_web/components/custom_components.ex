@@ -68,6 +68,21 @@ defmodule MusicListingsWeb.CustomComponents do
   end
 
   @doc """
+  Renders a loading indicator
+
+  ## Example
+
+  <.loading_indicator />
+  """
+  def loading_indicator(assigns) do
+    ~H"""
+    <div class="flex justify-center mt-36 text-emerald-400">
+      <MusicListingsWeb.CoreComponents.icon name="hero-cog-6-tooth" class="animate-spin size-24" />
+    </div>
+    """
+  end
+
+  @doc """
   Renders a pager control
 
   ## Example
@@ -119,7 +134,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   def venue_filter(assigns) do
     ~H"""
-    <div>
+    <div id="venue-filter-component" phx-hook="VenueFilter">
       <a
         href="#"
         phx-click={toggle_venue_filtering()}
@@ -145,7 +160,7 @@ defmodule MusicListingsWeb.CustomComponents do
                 <span class="block truncate">
                   <label for={"#{venue.id}"}><%= venue.name %></label>
                 </span>
-                <span class="absolute inset-y-0 left-0 flex items-center pl-1.5 text-indigo-600">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-1.5">
                   <input
                     id={"#{venue.id}"}
                     name={venue.id}

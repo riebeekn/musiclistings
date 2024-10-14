@@ -4,34 +4,78 @@ defmodule MusicListingsWeb.EventLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
+    venue_ids = get_venue_ids_in_local_storage(socket)
+
     venues = MusicListings.list_venues(restrict_to_pulled_venues?: false)
 
     socket =
       socket
       |> assign(:venues, venues)
+      |> assign(:venue_ids, venue_ids)
       |> assign(:venue_filtering_form, to_form(%{}))
 
     {:ok, socket}
   end
 
+  defp get_venue_ids_in_local_storage(socket) do
+    socket
+    |> get_connect_params()
+    |> case do
+      %{"venue_ids" => venue_ids} ->
+        if is_binary(venue_ids) do
+          venue_ids
+          |> String.split(",")
+          |> filter_venue_ids()
+        else
+          []
+        end
+
+      _default ->
+        []
+    end
+  end
+
+  defp filter_venue_ids(venue_ids) do
+    Enum.filter(venue_ids, fn venue_id ->
+      case Integer.parse(venue_id) do
+        {_valid_integer, ""} -> true
+        _non_integer -> false
+      end
+    end)
+  end
+
   @impl true
   def handle_params(params, _uri, socket) do
-    venue_ids = socket.assigns[:venue_ids] || []
+    if connected?(socket) do
+      venue_ids = socket.assigns[:venue_ids] || []
 
-    case validate(:index, params) do
-      {:ok, normalized_params} ->
-        paged_events =
-          MusicListings.list_events(
-            page: normalized_params[:page],
-            venue_ids: venue_ids
-          )
+      case validate(:index, params) do
+        {:ok, normalized_params} ->
+          paged_events =
+            MusicListings.list_events(
+              page: normalized_params[:page],
+              venue_ids: venue_ids
+            )
 
-        socket = update_socket_assigns(socket, paged_events, venue_ids)
+          socket =
+            socket
+            |> update_socket_assigns(paged_events, venue_ids)
+            |> assign(:loading, false)
 
-        {:noreply, socket}
+          {:noreply, socket}
 
-      _error ->
-        {:noreply, push_navigate(socket, to: ~p"/events")}
+        _error ->
+          {:noreply, push_navigate(socket, to: ~p"/events")}
+      end
+    else
+      socket =
+        socket
+        |> assign(:events, [])
+        |> assign(:current_page, 1)
+        |> assign(:total_pages, 0)
+        |> assign(:loading, true)
+
+      {:noreply, socket}
     end
   end
 
@@ -50,7 +94,10 @@ defmodule MusicListingsWeb.EventLive.Index do
     paged_events =
       MusicListings.list_events(page: socket.assigns[:current_page], venue_ids: venue_ids)
 
-    socket = update_socket_assigns(socket, paged_events, venue_ids)
+    socket =
+      socket
+      |> update_socket_assigns(paged_events, venue_ids)
+      |> push_event("saveVenueFilterIdsToLocalStorage", %{venue_ids: venue_ids})
 
     {:noreply, socket}
   end
@@ -62,7 +109,10 @@ defmodule MusicListingsWeb.EventLive.Index do
     paged_events =
       MusicListings.list_events(page: socket.assigns[:current_page], venue_ids: venue_ids)
 
-    socket = update_socket_assigns(socket, paged_events, venue_ids)
+    socket =
+      socket
+      |> update_socket_assigns(paged_events, venue_ids)
+      |> push_event("clearVenueFilterIdsFromLocalStorage", %{})
 
     {:noreply, socket}
   end
@@ -82,12 +132,20 @@ defmodule MusicListingsWeb.EventLive.Index do
   @impl true
   def render(assigns) do
     ~H"""
-    <div class="flex justify-between mb-8 sm:mb-4 -mt-2">
+    <div
+      class="flex justify-between mb-8 sm:mb-4 -mt-2"
+      data-venue-filter-restore="true"
+      data-storage-key="venue_ids"
+    >
       <.venue_filter for={@venue_filtering_form} venues={@venues} venue_ids={@venue_ids} />
       <.button_link label="Submit an event" url={~p"/events/new"} icon_name="hero-arrow-right" />
     </div>
 
     <.venue_filter_status venue_ids={@venue_ids} />
+
+    <%= if @loading do %>
+      <.loading_indicator />
+    <% end %>
 
     <.events_list events={@events} />
 
