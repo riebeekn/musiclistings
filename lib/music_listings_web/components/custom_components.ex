@@ -147,7 +147,7 @@ defmodule MusicListingsWeb.CustomComponents do
       </a>
 
       <.form for={@for} as={:for} id="venue-filters" class="hidden" phx-change="venue-filter-selected">
-        <div class="relative">
+        <div class="relative" phx-click-away={toggle_venue_filtering()}>
           <ul
             class="absolute z-10 mt-1 max-h-60 w-full min-w-80 overflow-auto rounded-md bg-zinc-900 py-1 text-base shadow-lg ring-1 ring-inset ring-white/10 hover:ring-white/20 "
             tabindex="-1"
