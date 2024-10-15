@@ -22,35 +22,41 @@ defmodule MusicListings.Crawler.DataSource do
   def retrieve_events(parser, url, true = _pull_data_from_www?, payloads) do
     fun = parser.retrieve_events_fun()
 
-    fun.(url)
-    |> case do
-      {:ok, %Response{status: 200, body: body}} ->
-        events_from_current_body =
-          body
-          |> parser.events()
-          |> case do
-            nil ->
-              Logger.warning("Found no events to parse")
-              []
+    try do
+      fun.(url)
+      |> case do
+        {:ok, %Response{status: 200, body: body}} ->
+          events_from_current_body =
+            body
+            |> parser.events()
+            |> case do
+              nil ->
+                Logger.warning("Found no events to parse")
+                []
 
-            events ->
-              Enum.map(events, &Payload.new/1)
+              events ->
+                Enum.map(events, &Payload.new/1)
+            end
+
+          next_page_url = parser.next_page_url(body, url)
+
+          if next_page_url do
+            retrieve_events(parser, next_page_url, true, payloads ++ events_from_current_body)
+          else
+            payloads ++ events_from_current_body
           end
 
-        next_page_url = parser.next_page_url(body, url)
+        {:ok, %Response{status: status}} ->
+          Logger.warning("Failed to get data from #{url}, status code: #{status}")
+          []
 
-        if next_page_url do
-          retrieve_events(parser, next_page_url, true, payloads ++ events_from_current_body)
-        else
-          payloads ++ events_from_current_body
-        end
-
-      {:ok, %Response{status: status}} ->
-        Logger.warning("Failed to get data from #{url}, status code: #{status}")
-        []
-
-      {:error, error} ->
-        Logger.error("Error occured getting #{url}, #{inspect(error)}")
+        {:error, error} ->
+          Logger.error("Error occured getting #{url}, #{inspect(error)}")
+          []
+      end
+    rescue
+      error ->
+        Logger.error("Request failed with #{inspect(error)}")
         []
     end
   end
