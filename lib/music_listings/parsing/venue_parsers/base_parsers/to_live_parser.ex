@@ -15,7 +15,7 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.ToLiveParser do
         {"authorization", "Bearer 6-Q_VzBlEPeEgD0gyS_c9s7a6N_0597J7RukeSb2hfA"}
       ]
 
-      Req.get(url, headers: headers)
+      HTTPoison.get(url, headers)
     end
   end
 

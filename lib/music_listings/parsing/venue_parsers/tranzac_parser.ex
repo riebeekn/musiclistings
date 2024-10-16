@@ -43,14 +43,16 @@ defmodule MusicListings.Parsing.VenueParsers.TranzacParser do
 
       today = DateHelpers.now() |> DateTime.to_iso8601()
 
-      body = %{
-        query: query,
-        variables: %{
-          today: today
+      body =
+        %{
+          query: query,
+          variables: %{
+            today: today
+          }
         }
-      }
+        |> Jason.encode!()
 
-      Req.post(url, headers: headers, json: body)
+      HTTPoison.post(url, body, headers)
     end
   end
 

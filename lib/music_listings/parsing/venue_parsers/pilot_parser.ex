@@ -16,7 +16,7 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
 
   @impl true
   def retrieve_events_fun do
-    fn url -> Req.get(url) end
+    fn url -> HTTPoison.get(url) end
   end
 
   @impl true

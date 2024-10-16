@@ -12,11 +12,11 @@ defmodule MusicListings.Parsing.VenueParsers.GrossmansParser do
   alias MusicListings.Parsing.Selectors
 
   @impl true
-  def source_url, do: "https://grossmanstavern.com/events/list/page/1/"
+  def source_url, do: "https://grossmanstavern.com/events/"
 
   @impl true
   def retrieve_events_fun do
-    fn url -> Req.get(url) end
+    fn url -> HTTPoison.get(url) end
   end
 
   @impl true
@@ -37,10 +37,15 @@ defmodule MusicListings.Parsing.VenueParsers.GrossmansParser do
   def next_page_url(_body, current_url) do
     current_page = get_current_page_number(current_url)
 
-    if current_page && current_page <= 3 do
-      "https://grossmanstavern.com/events/list/page/#{current_page + 1}/"
-    else
-      nil
+    cond do
+      current_url == source_url() ->
+        "https://grossmanstavern.com/events/list/page/2/"
+
+      current_page && current_page <= 3 ->
+        "https://grossmanstavern.com/events/list/page/#{current_page + 1}/"
+
+      true ->
+        nil
     end
   end
 

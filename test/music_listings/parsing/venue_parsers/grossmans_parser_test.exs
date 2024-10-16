@@ -23,7 +23,7 @@ defmodule MusicListings.Parsing.VenueParsers.GrossmansParserTest do
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://grossmanstavern.com/events/list/page/1/" == GrossmansParser.source_url()
+      assert "https://grossmanstavern.com/events/" == GrossmansParser.source_url()
     end
   end
 

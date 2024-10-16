@@ -24,7 +24,7 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParserTest do
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://thephoenixconcerttheatre.com/events" == PhoenixParser.source_url()
+      assert "https://thephoenixconcerttheatre.com/events/" == PhoenixParser.source_url()
     end
   end
 

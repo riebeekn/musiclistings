@@ -12,11 +12,11 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParser do
   alias MusicListings.Parsing.Selectors
 
   @impl true
-  def source_url, do: "https://theoperahousetoronto.com/calendar"
+  def source_url, do: "https://theoperahousetoronto.com/calendar/"
 
   @impl true
   def retrieve_events_fun do
-    fn url -> Req.get(url) end
+    fn url -> HTTPoison.get(url) end
   end
 
   @impl true

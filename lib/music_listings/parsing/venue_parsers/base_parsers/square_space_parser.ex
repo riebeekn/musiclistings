@@ -11,7 +11,7 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.SquareSpaceParser do
   alias MusicListings.Parsing.Selectors
 
   def retrieve_events_fun do
-    fn url -> Req.get(url) end
+    fn url -> HTTPoison.get(url) end
   end
 
   def events(body) do

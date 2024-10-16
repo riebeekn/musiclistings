@@ -4,9 +4,11 @@ defmodule MusicListings.Crawler.DataSource do
   files and parses these files into a list of Payloads containing the
   html for individual events in the form of a Meeseeks result
   """
+  alias HTTPoison.Response
+  alias HTTPoison.Response
+  alias HTTPoison.Response
   alias MusicListings.Crawler.Payload
   alias MusicListings.Parsing.VenueParser
-  alias Req.Response
 
   require Logger
 
@@ -25,7 +27,7 @@ defmodule MusicListings.Crawler.DataSource do
     try do
       fun.(url)
       |> case do
-        {:ok, %Response{status: 200, body: body}} ->
+        {:ok, %Response{status_code: 200, body: body}} ->
           events_from_current_body =
             body
             |> parser.events()
@@ -46,7 +48,7 @@ defmodule MusicListings.Crawler.DataSource do
             payloads ++ events_from_current_body
           end
 
-        {:ok, %Response{status: status}} ->
+        {:ok, %Response{status_code: status}} ->
           Logger.warning("Failed to get data from #{url}, status code: #{status}")
           []
 
