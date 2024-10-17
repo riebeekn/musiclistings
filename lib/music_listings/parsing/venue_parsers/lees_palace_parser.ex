@@ -6,6 +6,7 @@ defmodule MusicListings.Parsing.VenueParsers.LeesPalaceParser do
 
   import Meeseeks.CSS
 
+  alias MusicListings.HttpClient
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
@@ -18,7 +19,7 @@ defmodule MusicListings.Parsing.VenueParsers.LeesPalaceParser do
 
   @impl true
   def retrieve_events_fun do
-    fn url -> HTTPoison.get(url) end
+    fn url -> HttpClient.get(url) end
   end
 
   @impl true

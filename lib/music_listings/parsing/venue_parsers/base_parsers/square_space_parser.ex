@@ -2,16 +2,16 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.SquareSpaceParser do
   @moduledoc """
   Base parser for square space sites
   """
-
   import Meeseeks.CSS
-
+  
+  alias MusicListings.HttpClient
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.Selectors
 
   def retrieve_events_fun do
-    fn url -> HTTPoison.get(url) end
+    fn url -> HttpClient.get(url) end
   end
 
   def events(body) do

@@ -4,6 +4,7 @@ defmodule MusicListings.Parsing.VenueParsers.TranzacParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
+  alias MusicListings.HttpClient
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
@@ -52,7 +53,7 @@ defmodule MusicListings.Parsing.VenueParsers.TranzacParser do
         }
         |> Jason.encode!()
 
-      HTTPoison.post(url, body, headers)
+      HttpClient.post(url, body, headers)
     end
   end
 

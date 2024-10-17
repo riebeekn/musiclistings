@@ -2,7 +2,7 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.ToLiveParser do
   @moduledoc """
   Parser for extracing events from https://www.tolive.com
   """
-
+  alias MusicListings.HttpClient
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
@@ -15,7 +15,7 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.ToLiveParser do
         {"authorization", "Bearer 6-Q_VzBlEPeEgD0gyS_c9s7a6N_0597J7RukeSb2hfA"}
       ]
 
-      HTTPoison.get(url, headers)
+      HttpClient.get(url, headers)
     end
   end
 

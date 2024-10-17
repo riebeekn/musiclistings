@@ -4,8 +4,8 @@ defmodule MusicListings.Parsing.VenueParsers.SupermarketParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
+  alias MusicListings.HttpClient
   alias MusicListings.Parsing.ParseHelpers
-
   alias MusicListings.Parsing.VenueParsers.BaseParsers.ElfsightParser
 
   @impl true
@@ -15,7 +15,7 @@ defmodule MusicListings.Parsing.VenueParsers.SupermarketParser do
 
   @impl true
   def retrieve_events_fun do
-    fn url -> HTTPoison.get(url) end
+    fn url -> HttpClient.get(url) end
   end
 
   @impl true

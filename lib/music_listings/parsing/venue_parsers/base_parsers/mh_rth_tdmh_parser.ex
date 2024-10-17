@@ -3,7 +3,7 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   Base parser for Massey Hall, Roy Thomson Hall and
   TD Music Hall, as they are on a single site
   """
-
+  alias MusicListings.HttpClient
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
@@ -11,7 +11,7 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   def source_url, do: "https://www.mhrth.com/api/performance-feed/12"
 
   def retrieve_events_fun do
-    fn url -> HTTPoison.get(url) end
+    fn url -> HttpClient.get(url) end
   end
 
   def event(body, facility_no) do

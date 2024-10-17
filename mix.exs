@@ -68,7 +68,7 @@ defmodule MusicListings.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
       {:req, "~> 0.5.0"},
-      # {:brotli, "~> 0.3.0"},
+      {:brotli, "~> 0.3.0"},
       {:httpoison, "~> 2.0"},
       {:meeseeks, "~> 0.17.0"},
       {:oban, "~> 2.17"},

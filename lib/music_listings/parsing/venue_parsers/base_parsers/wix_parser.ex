@@ -2,13 +2,13 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.WixParser do
   @moduledoc """
   Base parser for wix sites
   """
-
+  alias MusicListings.HttpClient
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
   alias MusicListingsUtilities.DateHelpers
 
   def retrieve_events_fun do
-    fn url -> HTTPoison.get(url) end
+    fn url -> HttpClient.get(url) end
   end
 
   def next_page_url(_body, _current_url) do
