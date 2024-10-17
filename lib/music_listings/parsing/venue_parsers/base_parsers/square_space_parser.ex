@@ -3,7 +3,7 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.SquareSpaceParser do
   Base parser for square space sites
   """
   import Meeseeks.CSS
-  
+
   alias MusicListings.HttpClient
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers

@@ -3,7 +3,7 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.LiveNationParser do
   Base parser for Live Nation sites
   """
   import Meeseeks.CSS
-  
+
   alias MusicListings.HttpClient
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers

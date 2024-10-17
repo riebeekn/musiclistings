@@ -5,7 +5,7 @@ defmodule MusicListings.Parsing.VenueParsers.Bsmt254Parser do
   @behaviour MusicListings.Parsing.VenueParser
 
   import Meeseeks.CSS
-  
+
   alias MusicListings.HttpClient
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers

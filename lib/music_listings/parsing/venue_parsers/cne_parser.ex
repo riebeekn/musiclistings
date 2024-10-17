@@ -3,7 +3,7 @@ defmodule MusicListings.Parsing.VenueParsers.CneParser do
   Parser for extracing events from https://www.theex.com/performances/music/
   """
   @behaviour MusicListings.Parsing.VenueParser
-  
+
   alias MusicListings.HttpClient
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
