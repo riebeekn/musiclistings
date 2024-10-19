@@ -1,8 +1,12 @@
 defmodule MusicListings.HttpClient do
   @moduledoc """
-  Just a wrapper to make swapping out HttpClient easier if need to do this
-  again in the future.  i.e. an issue with brotli decompression meant we
-  needed to swap Req out until the associated erl brotli lib was fixed
+  Specification for the HttpClient, currently have implementations for
+  Req and HTTPoison.  Req is preferred but needed to swap out temporarily
+  due to some :brotli decoding issues.
+
+  Configured in config.exs by:
+    config :music_listings, :http_client, MusicListings.HttpClient.HTTPoison
+    config :music_listings, :http_client, MusicListings.HttpClient.Req
   """
   defmodule Response do
     @moduledoc """
@@ -12,7 +16,12 @@ defmodule MusicListings.HttpClient do
     defstruct [:status, :body]
 
     @spec new(HTTPoison.Response.t()) :: t()
-    def new(%{status_code: status, body: body}) do
+    def new(%HTTPoison.Response{status_code: status, body: body}) do
+      %__MODULE__{status: status, body: body}
+    end
+
+    @spec new(Req.Response.t()) :: t()
+    def new(%{status: status, body: body}) do
       %__MODULE__{status: status, body: body}
     end
 
@@ -22,36 +31,33 @@ defmodule MusicListings.HttpClient do
     end
   end
 
-  @spec get(String.t(), list() | nil) :: {:ok, Response.t()} | {:error, HTTPoison.Error.t()}
+  @doc """
+  Callback invoked on a get
+  """
+  @callback get(url :: String.t(), headers :: list() | nil) ::
+              {:ok, Response.t()} | {:error, any()}
+
+  @doc """
+  Client specific get
+  """
   def get(url, headers \\ []) do
-    url
-    |> HTTPoison.get(headers)
-    |> case do
-      {:ok, response} ->
-        response.headers
-        |> Enum.find(&(&1 == {"Content-Encoding", "br"}))
-        |> case do
-          nil ->
-            {:ok, Response.new(response)}
-
-          _needs_decoding ->
-            {:ok, body} = :brotli.decode(response.body)
-            {:ok, Response.new(response.status_code, body)}
-        end
-
-      {:error, error} ->
-        {:error, error}
-    end
+    http_client().get(url, headers)
   end
 
-  @spec post(String.t(), String.t(), list() | nil) ::
-          {:ok, Response.t()} | {:error, HTTPoison.Error.t()}
+  @doc """
+  Callback invoked on a post
+  """
+  @callback post(url :: String.t(), body :: String.t(), headers :: list() | nil) ::
+              {:ok, Response.t()} | {:error, any()}
+
+  @doc """
+  Client specific post
+  """
   def post(url, body, headers) do
-    url
-    |> HTTPoison.post(body, headers)
-    |> case do
-      {:ok, response} -> {:ok, Response.new(response)}
-      {:error, error} -> {:error, error}
-    end
+    http_client().post(url, body, headers)
+  end
+
+  defp http_client do
+    Application.fetch_env!(:music_listings, :http_client)
   end
 end

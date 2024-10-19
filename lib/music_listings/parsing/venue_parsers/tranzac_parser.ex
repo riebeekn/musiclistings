@@ -51,7 +51,6 @@ defmodule MusicListings.Parsing.VenueParsers.TranzacParser do
             today: today
           }
         }
-        |> Jason.encode!()
 
       HttpClient.post(url, body, headers)
     end

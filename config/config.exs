@@ -85,6 +85,8 @@ config :error_tracker,
   repo: MusicListings.Repo,
   otp_app: :music_listings
 
+config :music_listings, :http_client, MusicListings.HttpClient.HTTPoison
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"
