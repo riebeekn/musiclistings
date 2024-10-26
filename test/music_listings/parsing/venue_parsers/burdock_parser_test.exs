@@ -32,7 +32,7 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParserTest do
     test "returns expected events", %{index_html: index_html} do
       events = BurdockParser.events(index_html)
 
-      assert 48 = Enum.count(events)
+      assert 25 = Enum.count(events)
     end
   end
 

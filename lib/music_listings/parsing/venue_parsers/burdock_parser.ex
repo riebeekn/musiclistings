@@ -26,7 +26,7 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParser do
   @impl true
   def events(body) do
     body
-    |> Selectors.all_matches(css(".product-item"))
+    |> Selectors.all_matches(css(".product-item.small--one-whole"))
     |> Enum.reject(&event_missing_date?/1)
   end
 
