@@ -32,7 +32,9 @@ defmodule MusicListings.Parsing.VenueParsers.SupermarketParser do
   defdelegate next_page_url(body, current_url), to: ElfsightParser
 
   @impl true
-  defdelegate event_id(event), to: ElfsightParser
+  def event_id(event) do
+    ElfsightParser.event_id(event, "supermarket")
+  end
 
   @impl true
   defdelegate ignored_event_id(event), to: ElfsightParser

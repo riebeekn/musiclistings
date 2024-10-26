@@ -63,13 +63,13 @@ defmodule MusicListings.Parsing.VenueParsers.GrossmansParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "grossmans_2024_09_14" == GrossmansParser.event_id(event)
+      assert "grossmans_2024_09_14_21_00_00" == GrossmansParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "grossmans_2024_09_14" == GrossmansParser.ignored_event_id(event)
+      assert "grossmans_2024_09_14_21_00_00" == GrossmansParser.ignored_event_id(event)
     end
   end
 

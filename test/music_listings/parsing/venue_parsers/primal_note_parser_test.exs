@@ -44,14 +44,14 @@ defmodule MusicListings.Parsing.VenueParsers.PrimalNoteParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "autumnal_assault_beast_of_the_north_productions_feat_vesication_apegod_deity_and_abysmal_whore_2024_10_11" ==
+      assert "primal_note_2024_10_11_20_00_00" ==
                PrimalNoteParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "autumnal_assault_beast_of_the_north_productions_feat_vesication_apegod_deity_and_abysmal_whore_2024_10_11" ==
+      assert "primal_note_2024_10_11_20_00_00" ==
                PrimalNoteParser.ignored_event_id(event)
     end
   end

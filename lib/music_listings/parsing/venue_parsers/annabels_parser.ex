@@ -24,10 +24,14 @@ defmodule MusicListings.Parsing.VenueParsers.AnnabelsParser do
   defdelegate next_page_url(body, current_url), to: AdmitOneParser
 
   @impl true
-  defdelegate event_id(event), to: AdmitOneParser
+  def event_id(event) do
+    AdmitOneParser.event_id(event, "annabels")
+  end
 
   @impl true
-  defdelegate ignored_event_id(event), to: AdmitOneParser
+  def ignored_event_id(event) do
+    event_id(event)
+  end
 
   @impl true
   defdelegate event_title(event), to: AdmitOneParser

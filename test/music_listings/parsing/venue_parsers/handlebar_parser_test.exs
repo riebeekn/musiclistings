@@ -44,13 +44,13 @@ defmodule MusicListings.Parsing.VenueParsers.HandlebarParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "kensington_shake_2024_09_28" == HandlebarParser.event_id(event)
+      assert "handlebar_2024_09_28_15_00_00" == HandlebarParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "kensington_shake_2024_09_28" == HandlebarParser.ignored_event_id(event)
+      assert "handlebar_2024_09_28_15_00_00" == HandlebarParser.ignored_event_id(event)
     end
   end
 

@@ -22,10 +22,14 @@ defmodule MusicListings.Parsing.VenueParsers.RogersStadiumParser do
   defdelegate next_page_url(body, current_url), to: LiveNationParser
 
   @impl true
-  defdelegate event_id(event), to: LiveNationParser
+  def event_id(event) do
+    LiveNationParser.event_id(event, "rogers_stadium")
+  end
 
   @impl true
-  defdelegate ignored_event_id(event), to: LiveNationParser
+  def ignored_event_id(event) do
+    event_id(event)
+  end
 
   @impl true
   defdelegate event_title(event), to: LiveNationParser

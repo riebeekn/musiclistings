@@ -44,13 +44,13 @@ defmodule MusicListings.Parsing.VenueParsers.AnnabelsParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "norma_jean_2024_11_10" == AnnabelsParser.event_id(event)
+      assert "annabels_2024_11_10_18_30_00" == AnnabelsParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "norma_jean_2024_11_10" == AnnabelsParser.ignored_event_id(event)
+      assert "annabels_2024_11_10_18_30_00" == AnnabelsParser.ignored_event_id(event)
     end
   end
 

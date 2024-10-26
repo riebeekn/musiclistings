@@ -44,14 +44,14 @@ defmodule MusicListings.Parsing.VenueParsers.RockpileParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "rockpile_2024_10_12" ==
+      assert "rockpile_2024_10_12_19_00_00" ==
                RockpileParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "rockpile_2024_10_12" ==
+      assert "rockpile_2024_10_12_19_00_00" ==
                RockpileParser.ignored_event_id(event)
     end
   end

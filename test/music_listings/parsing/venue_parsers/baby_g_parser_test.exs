@@ -44,13 +44,13 @@ defmodule MusicListings.Parsing.VenueParsers.BabyGParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "urban_heat_2024_10_02" == BabyGParser.event_id(event)
+      assert "baby_g_2024_10_02" == BabyGParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "urban_heat_2024_10_02" == BabyGParser.ignored_event_id(event)
+      assert "baby_g_2024_10_02" == BabyGParser.ignored_event_id(event)
     end
   end
 

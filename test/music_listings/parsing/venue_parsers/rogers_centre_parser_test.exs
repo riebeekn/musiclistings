@@ -45,14 +45,14 @@ defmodule MusicListings.Parsing.VenueParsers.RogersCentreParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "def_leppard_journey_the_summer_stadium_tour_with_cheap_trick_2024_08_02" ==
+      assert "rogers_centre_2024_08_02_18_00_00" ==
                RogersCentreParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "def_leppard_journey_the_summer_stadium_tour_with_cheap_trick_2024_08_02" ==
+      assert "rogers_centre_2024_08_02_18_00_00" ==
                RogersCentreParser.ignored_event_id(event)
     end
   end

@@ -45,14 +45,14 @@ defmodule MusicListings.Parsing.VenueParsers.BudweiserStageParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "alanis_morissette_the_triple_moon_tour_2024_07_14" ==
+      assert "budweiser_stage_2024_07_14_19_00_00" ==
                BudweiserStageParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "alanis_morissette_the_triple_moon_tour_2024_07_14" ==
+      assert "budweiser_stage_2024_07_14_19_00_00" ==
                BudweiserStageParser.ignored_event_id(event)
     end
   end

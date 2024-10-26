@@ -44,14 +44,14 @@ defmodule MusicListings.Parsing.VenueParsers.StLawrenceArtsCentreParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "abba_revisited_50th_anniversary_tour_2024_11_23" ==
+      assert "st_lawrence_arts_centre_2024_11_23_20_00_00" ==
                StLawrenceArtsCentreParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "abba_revisited_50th_anniversary_tour_2024_11_23" ==
+      assert "st_lawrence_arts_centre_2024_11_23_20_00_00" ==
                StLawrenceArtsCentreParser.ignored_event_id(event)
     end
   end

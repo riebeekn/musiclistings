@@ -24,10 +24,14 @@ defmodule MusicListings.Parsing.VenueParsers.PrimalNoteParser do
   defdelegate next_page_url(body, current_url), to: SquareSpaceParser
 
   @impl true
-  defdelegate event_id(event), to: SquareSpaceParser
+  def event_id(event) do
+    SquareSpaceParser.event_id(event, "primal_note")
+  end
 
   @impl true
-  defdelegate ignored_event_id(event), to: SquareSpaceParser
+  def ignored_event_id(event) do
+    event_id(event)
+  end
 
   @impl true
   defdelegate event_title(event), to: SquareSpaceParser

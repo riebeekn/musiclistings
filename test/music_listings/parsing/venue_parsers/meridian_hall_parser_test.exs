@@ -44,14 +44,14 @@ defmodule MusicListings.Parsing.VenueParsers.MeridianHallParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "titanic_live_2025_02_13" ==
+      assert "meridian_hall_2025_02_13_18_00_00" ==
                MeridianHallParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "titanic_live_2025_02_13" ==
+      assert "meridian_hall_2025_02_13_18_00_00" ==
                MeridianHallParser.ignored_event_id(event)
     end
   end

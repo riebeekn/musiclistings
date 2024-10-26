@@ -30,10 +30,14 @@ defmodule MusicListings.Parsing.VenueParsers.RebelParser do
   defdelegate next_page_url(body, current_url), to: ElfsightParser
 
   @impl true
-  defdelegate event_id(event), to: ElfsightParser
+  def event_id(event) do
+    ElfsightParser.event_id(event, "rebel")
+  end
 
   @impl true
-  defdelegate ignored_event_id(event), to: ElfsightParser
+  def ignored_event_id(event) do
+    event_id(event)
+  end
 
   @impl true
   defdelegate event_title(event), to: ElfsightParser

@@ -44,14 +44,14 @@ defmodule MusicListings.Parsing.VenueParsers.DakotaTavernParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "oakridge_ave_w_high_flyer_lauren_carson_2024_07_25" ==
+      assert "dakota_tavern_2024_07_25" ==
                DakotaTavernParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "oakridge_ave_w_high_flyer_lauren_carson" ==
+      assert "dakota_tavern_2024_07_25" ==
                DakotaTavernParser.ignored_event_id(event)
     end
   end

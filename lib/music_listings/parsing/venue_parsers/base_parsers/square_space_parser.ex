@@ -23,15 +23,11 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.SquareSpaceParser do
     nil
   end
 
-  def event_id(event) do
-    title = event_title(event)
+  def event_id(event, venue_name) do
     date = event_date(event)
+    time = event_time(event)
 
-    ParseHelpers.build_id_from_title_and_date(title, date)
-  end
-
-  def ignored_event_id(event) do
-    event_id(event)
+    ParseHelpers.build_id_from_venue_and_datetime(venue_name, date, time)
   end
 
   def event_title(event) do
