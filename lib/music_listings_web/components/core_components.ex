@@ -102,6 +102,11 @@ defmodule MusicListingsWeb.CoreComponents do
   attr :flash, :map, default: %{}, doc: "the map of flash messages to display"
   attr :title, :string, default: nil
   attr :kind, :atom, values: [:info, :error], doc: "used for styling and flash lookup"
+
+  attr :extra_classes, :string,
+    default: nil,
+    doc: "the extra CSS classes to add to the flash container"
+
   attr :rest, :global, doc: "the arbitrary HTML attributes to add to the flash container"
 
   slot :inner_block, doc: "the optional inner block that renders the flash message"
@@ -118,7 +123,8 @@ defmodule MusicListingsWeb.CoreComponents do
       class={[
         "fixed top-2 right-2 mr-2 w-80 sm:w-96 z-50 rounded-lg p-3 ring-1",
         @kind == :info && "bg-emerald-50 text-emerald-800 ring-emerald-500 fill-cyan-900",
-        @kind == :error && "bg-rose-50 text-rose-900 shadow-md ring-rose-500 fill-rose-900"
+        @kind == :error && "bg-rose-50 text-rose-900 shadow-md ring-rose-500 fill-rose-900",
+        @extra_classes
       ]}
       {@rest}
     >
@@ -154,6 +160,7 @@ defmodule MusicListingsWeb.CoreComponents do
         id="client-error"
         kind={:error}
         title={gettext("We can't find the internet")}
+        extra_classes="delay-[3s]"
         phx-disconnected={show(".phx-client-error #client-error")}
         phx-connected={hide("#client-error")}
         hidden
