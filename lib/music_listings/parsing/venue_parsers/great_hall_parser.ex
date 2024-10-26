@@ -36,10 +36,11 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParser do
 
   @impl true
   def event_id(event) do
-    date = event_date(event)
-    time = event_time(event)
+    class_text_containing_event_id = Selectors.class(event, css(".tgh-future"))
+    event_regex = ~r/event-\d+/
 
-    ParseHelpers.build_id_from_venue_and_datetime("great_hall", date, time)
+    [event_id] = Regex.run(event_regex, class_text_containing_event_id)
+    String.replace(event_id, "-", "_")
   end
 
   @impl true
