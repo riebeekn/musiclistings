@@ -18,7 +18,8 @@ defmodule MusicListings.Parsing.Price do
   def new(price_string) do
     price_string = clean_price_string(price_string)
 
-    variable_price? = String.contains?(price_string, "+")
+    variable_price? =
+      String.contains?(price_string, "+") || String.contains?(price_string, "from")
 
     free? = String.contains?(price_string, "free")
 
@@ -28,6 +29,7 @@ defmodule MusicListings.Parsing.Price do
       [lo_string, hi_string] =
         price_string
         |> String.replace("+", "")
+        |> String.replace("from", "")
         |> String.split("-")
         |> case do
           [lo, hi] -> [lo, hi]

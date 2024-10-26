@@ -33,6 +33,9 @@ defmodule MusicListings.Parsing.PriceTest do
       assert %Price{lo: Decimal.new("40.00"), hi: Decimal.new("40.00"), format: :variable} ==
                Price.new("$40.00 + (plus service fees)")
 
+      assert %Price{lo: Decimal.new("40.00"), hi: Decimal.new("40.00"), format: :variable} ==
+               Price.new("from $40.00")
+
       assert %Price{lo: Decimal.new("40.00"), hi: Decimal.new("40.00"), format: :fixed} ==
                Price.new("$40.00 CAD")
     end
