@@ -44,7 +44,7 @@ defmodule MusicListings.Parsing.VenueParsers.SupermarketParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "big_fam_jam_2024_08_06" == SupermarketParser.event_id(event)
+      assert "supermarket_2024_08_06" == SupermarketParser.event_id(event)
     end
   end
 

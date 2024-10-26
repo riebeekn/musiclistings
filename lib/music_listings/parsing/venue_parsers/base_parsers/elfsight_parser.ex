@@ -17,12 +17,11 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.ElfsightParser do
     nil
   end
 
-  def event_id(event) do
+  def event_id(event, venue_name) do
     if weekly_event?(event) do
-      title = event_title(event)
       date = event_date(event)
 
-      ParseHelpers.build_id_from_title_and_date(title, date)
+      ParseHelpers.build_id_from_venue_and_date(venue_name, date)
     else
       event["id"]
     end

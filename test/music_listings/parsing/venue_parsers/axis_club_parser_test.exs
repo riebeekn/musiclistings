@@ -43,13 +43,13 @@ defmodule MusicListings.Parsing.VenueParsers.AxisClubParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "banners_2024_08_08" == AxisClubParser.event_id(event)
+      assert "axis_club_2024_08_08" == AxisClubParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "banners_2024_08_08" == AxisClubParser.ignored_event_id(event)
+      assert "axis_club_2024_08_08" == AxisClubParser.ignored_event_id(event)
     end
   end
 

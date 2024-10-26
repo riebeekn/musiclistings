@@ -44,13 +44,13 @@ defmodule MusicListings.Parsing.VenueParsers.HorseshoeTavernParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "philip_sayce_2024_09_06" == HorseshoeTavernParser.event_id(event)
+      assert "horseshoe_tavern_2024_09_06" == HorseshoeTavernParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "philip_sayce_2024_09_06" == HorseshoeTavernParser.ignored_event_id(event)
+      assert "horseshoe_tavern_2024_09_06" == HorseshoeTavernParser.ignored_event_id(event)
     end
   end
 

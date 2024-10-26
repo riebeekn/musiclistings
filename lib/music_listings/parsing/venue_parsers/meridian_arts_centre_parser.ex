@@ -24,10 +24,14 @@ defmodule MusicListings.Parsing.VenueParsers.MeridianArtsCentreParser do
   defdelegate next_page_url(body, current_url), to: ToLiveParser
 
   @impl true
-  defdelegate event_id(event), to: ToLiveParser
+  def event_id(event) do
+    ToLiveParser.event_id(event, "meridian_arts_centre")
+  end
 
   @impl true
-  defdelegate ignored_event_id(event), to: ToLiveParser
+  def ignored_event_id(event) do
+    event_id(event)
+  end
 
   @impl true
   defdelegate event_title(event), to: ToLiveParser

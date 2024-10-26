@@ -56,14 +56,14 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "jb_piano_bar_jim_clayton_s_jazz_jukebox_2024_07_02" ==
+      assert "jazz_bistro_2024_07_02_17_00_00" ==
                JazzBistroParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "jb_piano_bar_jim_clayton_s_jazz_jukebox_2024_07_02" ==
+      assert "jazz_bistro_2024_07_02_17_00_00" ==
                JazzBistroParser.ignored_event_id(event)
     end
   end

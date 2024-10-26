@@ -43,13 +43,13 @@ defmodule MusicListings.Parsing.VenueParsers.CastrosLoungeParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "danny_marks_2024_09_28" == CastrosLoungeParser.event_id(event)
+      assert "castros_lounge_2024_09_28_17_00_00" == CastrosLoungeParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "danny_marks_2024_09_28" == CastrosLoungeParser.ignored_event_id(event)
+      assert "castros_lounge_2024_09_28_17_00_00" == CastrosLoungeParser.ignored_event_id(event)
     end
   end
 
@@ -82,7 +82,7 @@ defmodule MusicListings.Parsing.VenueParsers.CastrosLoungeParserTest do
 
   describe "event_time/1" do
     test "returns the event start time", %{event: event} do
-      assert nil == CastrosLoungeParser.event_time(event)
+      assert ~T[17:00:00] == CastrosLoungeParser.event_time(event)
     end
   end
 

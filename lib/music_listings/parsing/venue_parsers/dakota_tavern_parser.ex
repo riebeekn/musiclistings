@@ -35,18 +35,14 @@ defmodule MusicListings.Parsing.VenueParsers.DakotaTavernParser do
 
   @impl true
   def event_id(event) do
-    title = event_title(event)
     date = event_date(event)
 
-    ParseHelpers.build_id_from_title_and_date(title, date)
+    ParseHelpers.build_id_from_venue_and_date("dakota_tavern", date)
   end
 
   @impl true
   def ignored_event_id(event) do
-    event
-    |> event_title()
-    |> ParseHelpers.replace_punctuation_and_spaces()
-    |> String.downcase()
+    event_id(event)
   end
 
   @impl true

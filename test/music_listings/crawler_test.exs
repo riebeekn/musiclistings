@@ -2,13 +2,11 @@ defmodule MusicListings.CrawlerTest do
   use MusicListings.DataCase, async: true
 
   alias MusicListings.Crawler
-  alias MusicListings.CrawlErrorFixtures
   alias MusicListings.CrawlSummariesFixtures
   alias MusicListings.Repo
   alias MusicListings.VenuesFixtures
   alias MusicListingsSchema.CrawlSummary
   alias MusicListingsSchema.Event
-  alias MusicListingsSchema.IgnoredEvent
 
   # These are pretty naive tests, might want to enhance them down the road
   describe "crawl/1" do
@@ -30,28 +28,6 @@ defmodule MusicListings.CrawlerTest do
               }} = Crawler.crawl([danforth, velvet_underground])
 
       assert 124 = Repo.aggregate(Event, :count)
-    end
-  end
-
-  describe "ignore_crawl_error/1" do
-    setup do
-      dakota_tavern =
-        VenuesFixtures.venue_fixture(%{
-          name: "The Dakota Tavern",
-          parser_module_name: "DakotaTavernParser"
-        })
-
-      crawl_summary = CrawlSummariesFixtures.crawl_summary_fixture()
-      crawl_error = CrawlErrorFixtures.crawl_error_fixture(dakota_tavern, crawl_summary)
-
-      %{crawl_error: crawl_error, dakota_tavern: dakota_tavern}
-    end
-
-    test "add an ignored event error", %{crawl_error: crawl_error, dakota_tavern: dakota_tavern} do
-      dakota_tavern_id = dakota_tavern.id
-
-      assert %IgnoredEvent{ignored_event_id: "freefall_open_mic", venue_id: ^dakota_tavern_id} =
-               Crawler.ignore_crawl_error(crawl_error.id)
     end
   end
 

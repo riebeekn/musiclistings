@@ -44,14 +44,14 @@ defmodule MusicListings.Parsing.VenueParsers.MeridianArtsCentreParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "from_the_caspian_sea_to_the_persian_gulf_2024_10_04" ==
+      assert "meridian_arts_centre_2024_10_04_20_00_00" ==
                MeridianArtsCentreParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "from_the_caspian_sea_to_the_persian_gulf_2024_10_04" ==
+      assert "meridian_arts_centre_2024_10_04_20_00_00" ==
                MeridianArtsCentreParser.ignored_event_id(event)
     end
   end

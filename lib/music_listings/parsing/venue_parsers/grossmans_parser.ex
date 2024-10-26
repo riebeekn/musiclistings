@@ -62,8 +62,9 @@ defmodule MusicListings.Parsing.VenueParsers.GrossmansParser do
   @impl true
   def event_id(event) do
     date = event_date(event)
+    time = event_time(event)
 
-    ParseHelpers.build_id_from_title_and_date("grossmans", date)
+    ParseHelpers.build_id_from_venue_and_datetime("grossmans", date, time)
   end
 
   @impl true

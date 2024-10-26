@@ -81,6 +81,16 @@ defmodule MusicListings.Parsing.ParseHelpers do
     |> String.replace("postponed_", "")
   end
 
+  def build_id_from_venue_and_date(venue_name, date) do
+    "#{venue_name}_#{date}"
+    |> replace_punctuation_and_spaces()
+  end
+
+  def build_id_from_venue_and_datetime(venue_name, date, time) do
+    "#{venue_name}_#{date}_#{time}"
+    |> replace_punctuation_and_spaces()
+  end
+
   # ===========================================================================
   # Age restriction helpers
   # ===========================================================================

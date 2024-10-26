@@ -44,13 +44,13 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "norbert_botos_quartet_2024_07_20" == PilotParser.event_id(event)
+      assert "pilot_2024_07_20" == PilotParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "norbert_botos_quartet_2024_07_20" == PilotParser.ignored_event_id(event)
+      assert "pilot_2024_07_20" == PilotParser.ignored_event_id(event)
     end
   end
 

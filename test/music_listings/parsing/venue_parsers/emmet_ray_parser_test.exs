@@ -45,14 +45,14 @@ defmodule MusicListings.Parsing.VenueParsers.EmmetRayParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "whiiiiiiirrrllll_jazz_inspired_by_daft_punk_french_house_2024_10_21" ==
+      assert "emmet_ray_2024_10_21_21_00_00" ==
                EmmetRayParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "whiiiiiiirrrllll_jazz_inspired_by_daft_punk_french_house_2024_10_21" ==
+      assert "emmet_ray_2024_10_21_21_00_00" ==
                EmmetRayParser.ignored_event_id(event)
     end
   end

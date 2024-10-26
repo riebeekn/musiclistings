@@ -44,13 +44,13 @@ defmodule MusicListings.Parsing.VenueParsers.PoetryJazzCafeParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "ben_maclean_group_2024_09_13" == PoetryJazzCafeParser.event_id(event)
+      assert "poetry_jazz_cafe_2024_09_13_21_30_00" == PoetryJazzCafeParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "ben_maclean_group_2024_09_13" ==
+      assert "poetry_jazz_cafe_2024_09_13_21_30_00" ==
                PoetryJazzCafeParser.ignored_event_id(event)
     end
   end

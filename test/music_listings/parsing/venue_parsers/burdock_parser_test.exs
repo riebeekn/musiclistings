@@ -44,13 +44,13 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "gaucho_the_music_of_steely_dan_2024_09_29" == BurdockParser.event_id(event)
+      assert "burdock_2024_09_29_14_00_00" == BurdockParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "gaucho_the_music_of_steely_dan_2024_09_29" == BurdockParser.ignored_event_id(event)
+      assert "burdock_2024_09_29_14_00_00" == BurdockParser.ignored_event_id(event)
     end
   end
 

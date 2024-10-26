@@ -44,13 +44,13 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "strangelove_2025_01_24" == ElMocamboParser.event_id(event)
+      assert "el_mocambo_2025_01_24_20_00_00" == ElMocamboParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "strangelove_2025_01_24" == ElMocamboParser.ignored_event_id(event)
+      assert "el_mocambo_2025_01_24_20_00_00" == ElMocamboParser.ignored_event_id(event)
     end
   end
 

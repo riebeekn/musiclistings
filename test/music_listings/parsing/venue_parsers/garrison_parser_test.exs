@@ -44,13 +44,13 @@ defmodule MusicListings.Parsing.VenueParsers.GarrisonParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "mizmor_2024_07_19" == GarrisonParser.event_id(event)
+      assert "garrison_2024_07_19" == GarrisonParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "mizmor_2024_07_19" == GarrisonParser.ignored_event_id(event)
+      assert "garrison_2024_07_19" == GarrisonParser.ignored_event_id(event)
     end
   end
 
