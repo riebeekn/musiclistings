@@ -9,16 +9,38 @@ Events are populated via a nightly [Oban](https://github.com/oban-bg/oban) job.
 - Copy `.envrc_template` to `.envrc` and update / source the required enviroment
 variables.
   - Environment variables:
-    - `ADMIN_EMAIL` - the email address the application will send communications to.  The application sends an email summary of the nightly event population runs and also when an event is submitted via the UI.  In development these emails will not be sent but instead available at [http://localhost:4000/dev/mailbox](http://localhost:4000/dev/mailbox).  See [http://localhost:4000/dev/gallery](http://localhost:4000/dev/gallery) for a preview of the emails.
+    - `ADMIN_EMAIL` - the email address the application will send communications to.  The application sends an email summary of the nightly event population runs and also when an event is submitted via the UI.  In development these emails will not be sent but instead be available at [http://localhost:4000/dev/mailbox](http://localhost:4000/dev/mailbox).  See [http://localhost:4000/dev/gallery](http://localhost:4000/dev/gallery) for a preview of the emails.
     - `PULL_DATA_FROM_WWW` - if true will scrape events from the web, when false will use the local files located in `test/data`.
 - Run the server (`iex -S mix phx.server`).  Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 - Events are populated via an Oban Job at 7am UTC.
 - To manually populate the events, run the following from the IEx terminal: `MusicListings.Workers.DataRetrievalWorker.perform(%{})`.
+- To run the tests: `mix test`.
 
-## Event population
-The code that performs event parsing / population for individual venues is located in `lib/music_listings/parsing/venue_parsers`.  Each venue has a parser and parsers implement the `lib/music_listings/parsing/venue_parser.ex` behaviour.
+## HTTP Client config
+The http client is configurable via the following setting in `config/config.exs`:
+```
+config :music_listings, :http_client, MusicListings.HttpClient.HTTPoison
+```
+Modules currently exist for [Req](https://github.com/wojtekmach/req) and [HTTPoison](https://github.com/edgurgel/httpoison) (see `lib/music_listings/http_client/req.ex` and `lib/music_listings/http_client/httpoison.ex`).
 
-Event population is initiated via the `lib/music_listings/workers/data_retrieval_worker.ex` Oban job.  The Oban job in turn hands off the population of events from individual venues to `lib/music_listings/crawler.ex`.  This module performs retrieval, parsing and storage of events.
+To add a new http client add a module at `lib/music_listings/http_client/` and implement the `lib/music_listings/http_client.ex` behaviour.
 
-### Tracking events for a new venue
+Initially the http client was not configurable but I ran into some issues with  `brotli` decoding and `Req` (the underlying brotli module was failing on the decoding of some sites) so for now have swapped it out with `HTTPoison`.
+
+## UI
+The UI is a standard Phoenix LiveView application.
+
+Venue filtering persistence is accomplished via local storage, see the `VenueFilter` hook in `assets/js/app.js` which gets called from `lib/music_listings_web/live/event_live/index.ex`.
+
+## Crawling / Event population
+Event population is initiated via the `lib/music_listings/workers/data_retrieval_worker.ex` Oban job.  The Oban job in turn hands off the population of events to `lib/music_listings/crawler.ex`.  This module performs retrieval, parsing and storage of events.
+
+Once event population has concluded an email is sent to the configured `ADMIN_EMAIL` with details of the crawl.  Results are also captured in the `crawl_summaries`, `venue_crawl_summaries` and `crawl_errors` database tables.
+
+### Parsing modules
+The code that performs event parsing for individual venues is located in `lib/music_listings/parsing/venue_parsers`.  Each venue has a parser and parsers implement the `lib/music_listings/parsing/venue_parser.ex` behaviour.
+
+Any errors encountered during parsing will be inserted into the `crawl_errors` database table and included in the aforementioned crawl results email.
+
+### Adding a new venue
 In order to track events for a new venue, a new parser for the venue needs to be created at `lib/music_listings/parsing/venue_parsers`.  The venue also needs to be added to the `venues` database table.  Example data files should be added to `test/data` and a test file for the new parser should be added to `test/music_listings/parsing/venue_parsers`.
