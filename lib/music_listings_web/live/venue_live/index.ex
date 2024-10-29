@@ -5,7 +5,7 @@ defmodule MusicListingsWeb.VenueLive.Index do
   def mount(_params, _session, socket) do
     venues = MusicListings.list_venues()
 
-    {:ok, assign(socket, venues: venues, venue_count: Enum.count(venues))}
+    {:ok, assign(socket, page_title: "Venues", venues: venues, venue_count: Enum.count(venues))}
   end
 
   @impl true

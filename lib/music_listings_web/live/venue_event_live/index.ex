@@ -26,6 +26,7 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
             :events,
             paged_events.events |> Enum.flat_map(fn {_date, events} -> events end)
           )
+          |> assign(:page_title, venue.name)
           |> assign(:venue, venue)
           |> assign(:current_page, paged_events.current_page)
           |> assign(:total_pages, paged_events.total_pages)

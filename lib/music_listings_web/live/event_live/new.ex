@@ -5,7 +5,7 @@ defmodule MusicListingsWeb.EventLive.New do
   @impl true
   def mount(_params, _session, socket) do
     changeset = changeset(:new, %{})
-    socket = assign(socket, :form, to_form(changeset, as: :event))
+    socket = assign(socket, page_title: "Submit an Event", form: to_form(changeset, as: :event))
 
     {:ok, socket}
   end
