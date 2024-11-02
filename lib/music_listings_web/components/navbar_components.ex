@@ -89,7 +89,7 @@ defmodule MusicListingsWeb.NavbarComponents do
         <div class="flex space-x-4">
           <.main_menu_link link_text="Events" href={~p"/"} />
           <.main_menu_link link_text="Venues" href={~p"/venues"} />
-          <!-- <.main_menu_link link_text="Contact" href={~p"/contact"} /> -->
+          <.main_menu_link link_text="Contact" href={~p"/contact"} />
         </div>
       </div>
     </div>
@@ -102,7 +102,7 @@ defmodule MusicListingsWeb.NavbarComponents do
       <div class="space-y-1 px-2 pt-2 pb-3">
         <.mobile_menu_link link_text="Events" href={~p"/"} />
         <.mobile_menu_link link_text="Venues" href={~p"/venues"} />
-        <!-- <.mobile_menu_link link_text="Contact" href={~p"/contact"} /> -->
+        <.mobile_menu_link link_text="Contact" href={~p"/contact"} />
       </div>
     </div>
     """
