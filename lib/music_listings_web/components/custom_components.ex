@@ -38,6 +38,34 @@ defmodule MusicListingsWeb.CustomComponents do
   end
 
   @doc """
+  Renders a CTA section
+
+  ## Examples
+
+  <.cta header="Get in touch">
+    <p>We'd love to hear from you!</p>
+  </.cta>
+  """
+
+  attr :header, :string, required: true
+  slot :inner_block, required: true
+
+  def cta(assigns) do
+    ~H"""
+    <div class="relative px-6 sm:pb-20 pt-6 sm:pt-32 lg:static lg:px-8 lg:py-48">
+      <div class="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
+        <h1 class="text-pretty text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+          <%= @header %>
+        </h1>
+        <div class="text-lg/8 text-zinc-300 mt-6 space-y-6">
+          <%= render_slot(@inner_block) %>
+        </div>
+      </div>
+    </div>
+    """
+  end
+
+  @doc """
   Renders a button link
 
   ## Example

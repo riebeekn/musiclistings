@@ -199,6 +199,7 @@ defmodule MusicListingsWeb.CoreComponents do
   """
   attr :for, :any, required: true, doc: "the data structure for the form"
   attr :as, :any, default: nil, doc: "the server side parameter to collect all input under"
+  attr :action_layout, :string, default: "justify-end", doc: "action button layout to use"
 
   attr :rest, :global,
     include: ~w(autocomplete name rel action enctype method novalidate target multipart),
@@ -213,7 +214,7 @@ defmodule MusicListingsWeb.CoreComponents do
       <div class="space-y-12">
         <div class="mt-10 space-y-8">
           <%= render_slot(@inner_block, f) %>
-          <div :for={action <- @actions} class="mt-6 flex items-center justify-end gap-x-6">
+          <div :for={action <- @actions} class={["mt-6 flex items-center gap-x-6", @action_layout]}>
             <%= render_slot(action, f) %>
           </div>
         </div>
@@ -390,9 +391,9 @@ defmodule MusicListingsWeb.CoreComponents do
         id={@id}
         name={@name}
         class={[
-          "mt-2 block w-full rounded-lg text-zinc-900 focus:ring-0 sm:text-sm sm:leading-6 min-h-[6rem]",
-          @errors == [] && "border-zinc-300 focus:border-zinc-400",
-          @errors != [] && "border-rose-400 focus:border-rose-400"
+          "mt-2 block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-emerald-500 sm:text-sm sm:leading-6 min-h-[6rem]",
+          @errors == [] && "ring-white/10 focus:ring-emerald-500",
+          @errors != [] && "ring-amber-400 focus:ring-amber-400"
         ]}
         {@rest}
       ><%= Phoenix.HTML.Form.normalize_value("textarea", @value) %></textarea>

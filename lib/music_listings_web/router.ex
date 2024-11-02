@@ -25,6 +25,7 @@ defmodule MusicListingsWeb.Router do
     live "/events/new", EventLive.New, :new
     live "/events/venue/:venue_id", VenueEventLive.Index, :index
     live "/venues", VenueLive.Index, :index
+    live "/contact", ContactLive.New, :new
   end
 
   # Other scopes may use custom stacks.
