@@ -181,6 +181,9 @@ jobs:
       # Step: Check for cycles, don't exceed 20
       - name: Check cycles
         run: mix xref graph --format cycles --fail-above 20
+      # Step: Check for
+      - name: Check for transitive compilation dependencies
+        run: mix xref graph --label compile-connected --fail-above 0
       # Step: Run Credo checks
       - name: Run Credo
         run: mix credo --strict
