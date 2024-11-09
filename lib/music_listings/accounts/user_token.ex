@@ -1,3 +1,4 @@
+# credo:disable-for-this-file
 defmodule MusicListings.Accounts.UserToken do
   use Ecto.Schema
   import Ecto.Query

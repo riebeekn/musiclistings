@@ -21,7 +21,7 @@ defmodule MusicListingsWeb.NavbarComponents do
   def navbar(assigns) do
     ~H"""
     <nav class="border-zinc-700 border-b">
-      <.main_menu />
+      <.main_menu current_user={@current_user} />
       <.mobile_menu />
     </nav>
     """
@@ -29,18 +29,38 @@ defmodule MusicListingsWeb.NavbarComponents do
 
   defp main_menu(assigns) do
     ~H"""
-    <div class="block sm:hidden flex flex-auto basis-full overflow-x-auto whitespace-nowrap border-b border-emerald-600 py-4 ">
-      <div class="mx-auto flex items-center gap-4 px-4">
+    <div class="block md:hidden flex flex-auto basis-full overflow-x-auto whitespace-nowrap border-b border-emerald-600 py-4 ">
+      <div class="mx-auto flex flex-col items-center px-4">
         <.last_updated_label />
+        <%= if @current_user do %>
+          <div class="w-full flex justify-center">
+            <.link
+              href={~p"/users/log_out"}
+              method="delete"
+              class="text-emerald-400 font-semibold hover:text-emerald-300"
+            >
+              Log out
+            </.link>
+          </div>
+        <% end %>
       </div>
     </div>
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       <div class="relative flex h-16 items-center justify-between">
         <.mobile_menu_button />
         <.main_menu_links />
-        <div class="absolute inset-y-0 right-0 items-center sm:static sm:inset-auto sm:ml-6 hidden sm:block">
+        <div class="absolute inset-y-0 right-0 items-center sm:static sm:inset-auto sm:ml-6 hidden md:block">
           <div class="relative ml-3">
             <.last_updated_label />
+            <%= if @current_user do %>
+              <.link
+                href={~p"/users/log_out"}
+                method="delete"
+                class="flex justify-end mr-4 text-emerald-400 font-semibold hover:text-emerald-300"
+              >
+                Log out
+              </.link>
+            <% end %>
           </div>
         </div>
       </div>

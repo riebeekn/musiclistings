@@ -1,3 +1,4 @@
+# credo:disable-for-this-file
 defmodule MusicListings.Accounts do
   @moduledoc """
   The Accounts context.

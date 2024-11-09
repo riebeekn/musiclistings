@@ -1,3 +1,4 @@
+# credo:disable-for-this-file
 defmodule MusicListings.Accounts.UserNotifier do
   import Swoosh.Email
 
