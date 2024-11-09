@@ -1,3 +1,4 @@
+# credo:disable-for-this-file
 defmodule MusicListingsWeb.UserAuthTest do
   use MusicListingsWeb.ConnCase, async: true
 

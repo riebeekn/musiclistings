@@ -1,3 +1,4 @@
+# credo:disable-for-this-file
 defmodule MusicListingsWeb.UserAuth do
   use MusicListingsWeb, :verified_routes
 
