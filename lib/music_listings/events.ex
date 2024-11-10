@@ -5,6 +5,7 @@ defmodule MusicListings.Events do
   import Ecto.Query
 
   alias Ecto.Changeset
+  alias MusicListings.Accounts.User
   alias MusicListings.Emails.NewSubmittedEvent
   alias MusicListings.Events.PagedEvents
   alias MusicListings.Mailer
@@ -84,5 +85,16 @@ defmodule MusicListings.Events do
       error ->
         error
     end
+  end
+
+  @spec delete_event(User | nil, pos_integer()) :: {:ok, Event} | {:error, :not_allowed}
+  def delete_event(%User{role: :admin}, event_id) do
+    Event
+    |> Repo.get!(event_id)
+    |> Repo.delete()
+  end
+
+  def delete_event(_user, _event_id) do
+    {:error, :not_allowed}
   end
 end

@@ -7,6 +7,7 @@ defmodule MusicListings do
   alias MusicListings.Events.PagedEvents
   alias MusicListings.Venues
   alias MusicListings.Venues.VenueSummary
+  alias MusicListingsSchema.Event
   alias MusicListingsSchema.IgnoredEvent
   alias MusicListingsSchema.SubmittedEvent
   alias MusicListingsSchema.Venue
@@ -39,6 +40,9 @@ defmodule MusicListings do
           }
         ) :: {:ok, SubmittedEvent.t()} | {:error, Ecto.Changeset.t()}
   defdelegate submit_event(attrs), to: Events
+
+  @spec delete_event(User | nil, pos_integer()) :: {:ok, Event} | {:error, :not_allowed}
+  defdelegate delete_event(user, event_id), to: Events
 
   @type list_venue_opts :: {:restrict_to_pulled_venues?, boolean()}
   @spec list_venues(list(list_venue_opts)) :: list(VenueSummary)

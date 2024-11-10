@@ -25,6 +25,39 @@ defmodule MusicListingsWeb.EventLiveTest do
       assert has_element?(view, "#event-#{e2_id}")
       assert has_element?(view, "#event-#{e3_id}")
     end
+
+    test "does not show the delete buttons", %{
+      conn: conn,
+      e1_id: e1_id,
+      e2_id: e2_id,
+      e3_id: e3_id
+    } do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      refute has_element?(view, "#event-#{e1_id} button")
+      refute has_element?(view, "#event-#{e2_id} button")
+      refute has_element?(view, "#event-#{e3_id} button")
+    end
+  end
+
+  describe "index - logged in as admin" do
+    setup :register_and_log_in_user
+
+    setup do
+      venue = VenuesFixtures.venue_fixture()
+      event = EventsFixtures.event_fixture(venue, date: ~D[2024-08-01])
+      %{event_id: event.id}
+    end
+
+    test "can delete an event", %{conn: conn, event_id: event_id} do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      view
+      |> element("#event-#{event_id} button")
+      |> render_click()
+
+      refute has_element?(view, "#event-#{event_id}")
+    end
   end
 
   describe "new" do

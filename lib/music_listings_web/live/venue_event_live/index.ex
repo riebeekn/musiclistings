@@ -38,6 +38,27 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
     end
   end
 
+  @impl true
+  def handle_event(
+        "delete-event",
+        %{"id" => event_id},
+        %{assigns: %{current_user: current_user}} = socket
+      ) do
+    current_user
+    |> MusicListings.delete_event(event_id)
+    |> case do
+      {:ok, deleted_event} ->
+        events =
+          socket.assigns.events
+          |> Enum.reject(&(&1.id == deleted_event.id))
+
+        {:noreply, assign(socket, :events, events)}
+
+      _no_change ->
+        {:noreply, socket}
+    end
+  end
+
   defparams :index do
     required(:venue_id, :integer, min: 1)
     optional(:page, :integer, min: 1, default: 1)
@@ -54,7 +75,7 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
       <.page_header header="Upcoming Events" />
     </div>
 
-    <.venue_events_list events={@events} />
+    <.venue_events_list events={@events} current_user={@current_user} />
 
     <div class="my-8">
       <.pager
