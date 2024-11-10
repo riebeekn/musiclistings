@@ -356,9 +356,10 @@ defmodule MusicListingsWeb.CustomComponents do
 
   ## Example
 
-  <.events_list events={@events} />
+  <.events_list events={@events} current_user={current_user} />
   """
   attr :events, :list, required: true
+  attr :current_user, :any, required: true
 
   def events_list(assigns) do
     ~H"""
@@ -374,8 +375,8 @@ defmodule MusicListingsWeb.CustomComponents do
                 <.event_venue venue={event.venue} />
                 <.event_age_restriction age_restriction={event.age_restriction} />
               </dt>
-              <dd class="mt-0 sm:mt-1">
-                <.event_title event={event} />
+              <dd class="mt-0 sm:mt-1 flex justify-between">
+                <.event_title_section event={event} current_user={@current_user} />
               </dd>
               <dd class="flex items-center gap-x-2 mt-0 sm:mt-1">
                 <.event_time time={event.time} />
@@ -400,9 +401,10 @@ defmodule MusicListingsWeb.CustomComponents do
 
   ## Example
 
-  <.venue_events_list events={@events} />
+  <.venue_events_list events={@events} current_user={@current_user} />
   """
   attr :events, :list, required: true
+  attr :current_user, :any, required: true
 
   def venue_events_list(assigns) do
     ~H"""
@@ -418,8 +420,8 @@ defmodule MusicListingsWeb.CustomComponents do
               <.event_age_restriction age_restriction={event.age_restriction} />
             </div>
           </dt>
-          <dd class="mt-0 sm:mt-1">
-            <.event_title event={event} />
+          <dd class="mt-0 sm:mt-1 flex justify-between">
+            <.event_title_section event={event} current_user={@current_user} />
           </dd>
           <dd class="flex items-center gap-x-2 mt-0 sm:mt-1">
             <.event_ticket_url
@@ -449,6 +451,22 @@ defmodule MusicListingsWeb.CustomComponents do
     <div class="text-xs sm:text-sm font-medium leading-4 text-zinc-400">
       <span><%= DateHelpers.format_date(@date) %></span>
     </div>
+    """
+  end
+
+  defp event_title_section(assigns) do
+    ~H"""
+    <.event_title event={@event} />
+    <%= if @current_user do %>
+      <button
+        phx-click="delete-event"
+        phx-value-id={@event.id}
+        data-confirm="Are you sure?"
+        class="text-white"
+      >
+        Delete
+      </button>
+    <% end %>
     """
   end
 

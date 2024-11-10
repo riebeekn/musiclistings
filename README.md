@@ -16,6 +16,16 @@ variables.
 - To manually populate the events, run the following from the IEx terminal: `MusicListings.Workers.DataRetrievalWorker.perform(%{})`.
 - To run the tests: `mix test`.
 
+## Admin functionality
+Currently there is very limited admin functionality available (just the ability to delete events).  The Admin functionality is only available when logged in to the application.  
+
+User management is handled by [Phx Gen Auth](https://hexdocs.pm/phoenix/mix_phx_gen_auth.html).  Much of the UI component of `Phx Gen Auth` has been removed as there is no need for users to create accounts etc.  So the admin user needs to be created via `iex`, i.e. open an `iex` session and run the following:
+```
+MusicListings.Accounts.register_user(%{email: "bob_admin@example.com", password: "some_password"})
+```
+
+Now you can login at `/users/log_in`.  When logged in, delete links will be available on both the `/events` and `/events/venue/xx` pages.
+
 ## HTTP Client config
 The http client is configurable via the following setting in `config/config.exs`:
 ```

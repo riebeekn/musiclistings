@@ -3,6 +3,7 @@ defmodule MusicListings.EventsTest do
 
   import Swoosh.TestAssertions
 
+  alias MusicListings.Accounts.User
   alias MusicListings.Events
   alias MusicListings.Events.PagedEvents
   alias MusicListings.EventsFixtures
@@ -103,6 +104,34 @@ defmodule MusicListings.EventsTest do
              }
 
       refute_email_sent()
+    end
+  end
+
+  describe "delete_event/2" do
+    setup do
+      venue = VenuesFixtures.venue_fixture()
+      event = EventsFixtures.event_fixture(venue)
+      %{event: event}
+    end
+
+    test "returns error when no user", %{event: event} do
+      assert {:error, :not_allowed} == Events.delete_event(nil, event.id)
+    end
+
+    test "returns error when user not an admin", %{event: event} do
+      assert {:error, :not_allowed} == Events.delete_event(%User{role: :regular_user}, event.id)
+    end
+
+    test "raises when event not found" do
+      assert_raise Ecto.NoResultsError, fn ->
+        Events.delete_event(%User{role: :admin}, -1)
+      end
+    end
+
+    test "deletes event", %{event: event} do
+      assert {:ok, deleted_event} = Events.delete_event(%User{role: :admin}, event.id)
+
+      assert event.id == deleted_event.id
     end
   end
 end

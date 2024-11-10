@@ -117,11 +117,33 @@ defmodule MusicListingsWeb.EventLive.Index do
     {:noreply, socket}
   end
 
-  defp update_socket_assigns(socket, paged_events, venue_ids) do
+  @impl true
+  def handle_event(
+        "delete-event",
+        %{"id" => event_id},
+        %{assigns: %{current_user: current_user}} = socket
+      ) do
+    MusicListings.delete_event(current_user, event_id)
+
+    paged_events =
+      MusicListings.list_events(
+        page: socket.assigns[:current_page],
+        venue_ids: socket.assigns[:venue_ids]
+      )
+
+    {:noreply, update_socket_assigns(socket, paged_events)}
+  end
+
+  defp update_socket_assigns(socket, paged_events) do
     socket
     |> assign(:events, paged_events.events)
     |> assign(:current_page, paged_events.current_page)
     |> assign(:total_pages, paged_events.total_pages)
+  end
+
+  defp update_socket_assigns(socket, paged_events, venue_ids) do
+    socket
+    |> update_socket_assigns(paged_events)
     |> assign(:venue_ids, venue_ids)
   end
 
@@ -147,7 +169,7 @@ defmodule MusicListingsWeb.EventLive.Index do
       <.loading_indicator />
     <% end %>
 
-    <.events_list events={@events} />
+    <.events_list events={@events} current_user={@current_user} />
 
     <div class="mt-6 pt-6 border-t border-zinc-700">
       <.pager current_page={@current_page} total_pages={@total_pages} path={~p"/events"} />
