@@ -33,7 +33,7 @@ defmodule MusicListings.Parsing.VenueParsers.CocaColaColiseumParserTest do
     test "returns expected events", %{index_html: index_html} do
       events = CocaColaColiseumParser.events(index_html)
 
-      assert 2 = Enum.count(events)
+      assert 3 = Enum.count(events)
     end
   end
 

@@ -66,6 +66,7 @@ defmodule MusicListings.Parsing.ParseHelpers do
     |> String.replace("&amp;", "&")
     |> String.replace("&#8211;", "-")
     |> String.replace("\\u00e9", "é")
+    |> String.replace("\\u00e1", "á")
   end
 
   # ===========================================================================
