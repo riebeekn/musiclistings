@@ -5,7 +5,8 @@ defmodule MusicListingsWeb.ErrorHTMLTest do
   import Phoenix.Template
 
   test "renders 404.html" do
-    assert render_to_string(MusicListingsWeb.ErrorHTML, "404", "html", []) == "Not Found"
+    assert render_to_string(MusicListingsWeb.ErrorHTML, "404", "html", []) =~
+             "It seems like this page doesn't exist"
   end
 
   test "renders 500.html" do
