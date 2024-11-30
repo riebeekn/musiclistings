@@ -70,6 +70,7 @@ defmodule MusicListings.MixProject do
       {:bandit, "~> 1.5"},
       {:req, "~> 0.5.0"},
       {:brotli, "~> 0.3.0"},
+      # {:brotli, git: "https://github.com/yjh0502/erl-brotli", branch: "bugfix/issue-21", override: true},
       {:httpoison, "~> 2.0"},
       {:meeseeks, "~> 0.17.0"},
       {:oban, "~> 2.17"},
