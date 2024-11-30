@@ -19,10 +19,10 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.CarbonhouseParser do
     body
     |> ParseHelpers.clean_html()
     |> Selectors.all_matches(css(".eventItem:not(.team)"))
-    |> Enum.reject(&is_toronto_sceptres?/1)
+    |> Enum.reject(&toronto_sceptres_event?/1)
   end
 
-  defp is_toronto_sceptres?(event_item) do
+  defp toronto_sceptres_event?(event_item) do
     event_item
     |> Selectors.text(css(".title"))
     |> String.contains?("Toronto Sceptres")
