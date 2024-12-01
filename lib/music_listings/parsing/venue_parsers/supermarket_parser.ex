@@ -37,7 +37,9 @@ defmodule MusicListings.Parsing.VenueParsers.SupermarketParser do
   end
 
   @impl true
-  defdelegate ignored_event_id(event), to: ElfsightParser
+  def ignored_event_id(event) do
+    event_id(event)
+  end
 
   @impl true
   defdelegate event_title(event), to: ElfsightParser

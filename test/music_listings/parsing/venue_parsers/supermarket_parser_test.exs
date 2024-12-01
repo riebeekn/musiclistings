@@ -50,7 +50,7 @@ defmodule MusicListings.Parsing.VenueParsers.SupermarketParserTest do
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "78a6a821-c71d-423a-b242-a0b7ec95cdcc" == SupermarketParser.ignored_event_id(event)
+      assert "supermarket_2024_08_06" == SupermarketParser.ignored_event_id(event)
     end
   end
 

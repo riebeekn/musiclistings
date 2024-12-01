@@ -44,13 +44,13 @@ defmodule MusicListings.Parsing.VenueParsers.RebelParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "lw7xanxp" == RebelParser.event_id(event)
+      assert "rebel_2024_08_15" == RebelParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "lw7xanxp" == RebelParser.ignored_event_id(event)
+      assert "rebel_2024_08_15" == RebelParser.ignored_event_id(event)
     end
   end
 

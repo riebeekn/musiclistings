@@ -64,6 +64,6 @@ defmodule MusicListings.Parsing.VenueParsers.BovineParser do
 
   @impl true
   def details_url(event) do
-    "https://www.bovinesexclub.com/#calendar-235dbcca-3a0a-4622-a874-ce1dd5f36933-event-#{event_id(event)}"
+    "https://www.bovinesexclub.com/#calendar-235dbcca-3a0a-4622-a874-ce1dd5f36933-event-#{event["id"]}"
   end
 end

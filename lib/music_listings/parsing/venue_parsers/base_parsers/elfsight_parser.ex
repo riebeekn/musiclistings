@@ -18,21 +18,13 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.ElfsightParser do
   end
 
   def event_id(event, venue_name) do
-    if weekly_event?(event) do
-      date = event_date(event)
+    date = event_date(event)
 
-      ParseHelpers.build_id_from_venue_and_date(venue_name, date)
-    else
-      event["id"]
-    end
+    ParseHelpers.build_id_from_venue_and_date(venue_name, date)
   end
 
   defp weekly_event?(event) do
     event["repeatPeriod"] == "weeklyOn"
-  end
-
-  def ignored_event_id(event) do
-    event["id"]
   end
 
   def event_title(event) do
