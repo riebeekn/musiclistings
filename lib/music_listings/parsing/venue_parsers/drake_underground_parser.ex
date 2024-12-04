@@ -59,7 +59,10 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
 
   @impl true
   def event_date(event) do
-    [year_string, month_string, day_string] = event["fm_date"] |> Enum.at(0) |> String.split("-")
+    date_string =
+      if event["fm_date"] == [""], do: [event["fm_recurring_start"]], else: event["fm_date"]
+
+    [year_string, month_string, day_string] = date_string |> Enum.at(0) |> String.split("-")
 
     ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
   end

@@ -70,8 +70,23 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParserTest do
   end
 
   describe "event_date/1" do
+    setup %{event: event} do
+      event_with_no_fm_date =
+        event
+        |> Map.put("fm_date", [""])
+        |> Map.put("fm_recurring_start", "2024-03-22")
+
+      %{event_with_no_fm_date: event_with_no_fm_date}
+    end
+
     test "returns the event date", %{event: event} do
       assert ~D[2024-10-01] == DrakeUndergroundParser.event_date(event)
+    end
+
+    test "uses the recurring date when date array is missing from event", %{
+      event_with_no_fm_date: event
+    } do
+      assert ~D[2024-03-22] == DrakeUndergroundParser.event_date(event)
     end
   end
 
