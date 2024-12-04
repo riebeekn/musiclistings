@@ -59,7 +59,7 @@ defmodule MusicListings.Crawler.EventStorage do
         ticket_url: parsed_event.ticket_url,
         details_url: parsed_event.details_url
       }
-      |> Event.changeset()
+      |> event_changeset()
       |> Repo.insert!()
 
     payload
@@ -81,7 +81,7 @@ defmodule MusicListings.Crawler.EventStorage do
       ticket_url: parsed_event.ticket_url,
       details_url: parsed_event.details_url
     }
-    |> Event.changeset(existing_event)
+    |> event_changeset(existing_event)
     |> maybe_update(payload)
   end
 
@@ -100,5 +100,24 @@ defmodule MusicListings.Crawler.EventStorage do
     payload
     |> Payload.set_persisted_event(persisted_event)
     |> Payload.set_operation(:updated)
+  end
+
+  defp event_changeset(attrs, event \\ %Event{}) do
+    event
+    |> Ecto.Changeset.cast(attrs, [
+      :external_id,
+      :venue_id,
+      :title,
+      :headliner,
+      :openers,
+      :date,
+      :time,
+      :price_format,
+      :price_lo,
+      :price_hi,
+      :age_restriction,
+      :ticket_url,
+      :details_url
+    ])
   end
 end

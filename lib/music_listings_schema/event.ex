@@ -42,23 +42,4 @@ defmodule MusicListingsSchema.Event do
 
     timestamps()
   end
-
-  def changeset(attrs, event \\ %__MODULE__{}) do
-    event
-    |> Ecto.Changeset.cast(attrs, [
-      :external_id,
-      :venue_id,
-      :title,
-      :headliner,
-      :openers,
-      :date,
-      :time,
-      :price_format,
-      :price_lo,
-      :price_hi,
-      :age_restriction,
-      :ticket_url,
-      :details_url
-    ])
-  end
 end
