@@ -17,14 +17,12 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.ElfsightParser do
     nil
   end
 
-  def event_id(event, venue_name) do
-    date = event_date(event)
-
-    ParseHelpers.build_id_from_venue_and_date(venue_name, date)
+  def event_id(event) do
+    event["id"]
   end
 
-  defp weekly_event?(event) do
-    event["repeatPeriod"] == "weeklyOn"
+  def ignored_event_id(event) do
+    event["id"]
   end
 
   def event_title(event) do
@@ -41,8 +39,21 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.ElfsightParser do
     candidate_date = start_date(event)
 
     if weekly_event?(event) do
-      {date_for_this_week, _date_for_next_week} = next_two_occurrences(candidate_date)
-      date_for_this_week
+      today = DateHelpers.today()
+
+      # Calculate how many days have passed since the initial date
+      days_since_initial = Date.diff(today, candidate_date)
+
+      # Determine the next upcoming occurrence (add days to reach the next week)
+      days_until_next =
+        if rem(days_since_initial, 7) == 0 do
+          0
+        else
+          7 - rem(days_since_initial, 7)
+        end
+
+      # Calculate the next occurrences
+      Date.add(today, days_until_next)
     else
       candidate_date
     end
@@ -51,41 +62,19 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.ElfsightParser do
   defp start_date(event) do
     if is_map(event["start"]) do
       [year_string, month_string, day_string] = event["start"]["date"] |> String.split("-")
+
       ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
     else
       nil
     end
   end
 
-  defp next_two_occurrences(initial_date) do
-    today = DateHelpers.today()
-
-    # Calculate how many days have passed since the initial date
-    days_since_initial = Date.diff(today, initial_date)
-
-    # Determine the next upcoming occurrence (add days to reach the next week)
-    days_until_next =
-      if rem(days_since_initial, 7) == 0 do
-        0
-      else
-        7 - rem(days_since_initial, 7)
-      end
-
-    # Calculate the next two weekly occurrences
-    week_1_date = Date.add(today, days_until_next)
-    week_2_date = Date.add(week_1_date, 7)
-
-    {week_1_date, week_2_date}
+  defp weekly_event?(event) do
+    event["repeatPeriod"] == "weeklyOn"
   end
 
-  def additional_dates(event) do
-    if weekly_event?(event) do
-      start_date = start_date(event)
-      {_date_for_this_week, date_for_next_week} = next_two_occurrences(start_date)
-      [date_for_next_week]
-    else
-      []
-    end
+  def additional_dates(_event) do
+    []
   end
 
   def event_time(event) do

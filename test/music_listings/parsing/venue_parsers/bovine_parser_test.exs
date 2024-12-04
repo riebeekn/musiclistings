@@ -46,13 +46,13 @@ defmodule MusicListings.Parsing.VenueParsers.BovineParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "bovine_2024_09_16" == BovineParser.event_id(event)
+      assert "m038i2v7" == BovineParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "bovine_2024_09_16" ==
+      assert "m038i2v7" ==
                BovineParser.ignored_event_id(event)
     end
   end

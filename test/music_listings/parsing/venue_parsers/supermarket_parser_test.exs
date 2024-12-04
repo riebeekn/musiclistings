@@ -44,13 +44,13 @@ defmodule MusicListings.Parsing.VenueParsers.SupermarketParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "supermarket_2024_08_06" == SupermarketParser.event_id(event)
+      assert "78a6a821-c71d-423a-b242-a0b7ec95cdcc" == SupermarketParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "supermarket_2024_08_06" == SupermarketParser.ignored_event_id(event)
+      assert "78a6a821-c71d-423a-b242-a0b7ec95cdcc" == SupermarketParser.ignored_event_id(event)
     end
   end
 
@@ -78,7 +78,7 @@ defmodule MusicListings.Parsing.VenueParsers.SupermarketParserTest do
 
   describe "additional_dates/1" do
     test "returns a list of additional dates", %{event: event} do
-      assert [~D[2024-08-13]] == SupermarketParser.additional_dates(event)
+      assert [] == SupermarketParser.additional_dates(event)
     end
   end
 

@@ -29,14 +29,10 @@ defmodule MusicListings.Parsing.VenueParsers.BovineParser do
   defdelegate next_page_url(body, current_url), to: ElfsightParser
 
   @impl true
-  def event_id(event) do
-    ElfsightParser.event_id(event, "bovine")
-  end
+  defdelegate event_id(event), to: ElfsightParser
 
   @impl true
-  def ignored_event_id(event) do
-    event_id(event)
-  end
+  defdelegate ignored_event_id(event), to: ElfsightParser
 
   @impl true
   defdelegate event_title(event), to: ElfsightParser
