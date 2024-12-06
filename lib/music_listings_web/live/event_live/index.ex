@@ -8,13 +8,11 @@ defmodule MusicListingsWeb.EventLive.Index do
 
     venues = MusicListings.list_venues(restrict_to_pulled_venues?: false)
 
-    socket =
-      socket
-      |> assign(:venues, venues)
-      |> assign(:venue_ids, venue_ids)
-      |> assign(:venue_filtering_form, to_form(%{}))
-
-    {:ok, socket}
+    socket
+    |> assign(:venues, venues)
+    |> assign(:venue_ids, venue_ids)
+    |> assign(:venue_filtering_form, to_form(%{}))
+    |> ok()
   end
 
   defp get_venue_ids_in_local_storage(socket) do
@@ -57,25 +55,23 @@ defmodule MusicListingsWeb.EventLive.Index do
               venue_ids: venue_ids
             )
 
-          socket =
-            socket
-            |> update_socket_assigns(paged_events, venue_ids)
-            |> assign(:loading, false)
-
-          {:noreply, socket}
+          socket
+          |> update_socket_assigns(paged_events, venue_ids)
+          |> assign(:loading, false)
+          |> noreply()
 
         _error ->
-          {:noreply, push_navigate(socket, to: ~p"/events")}
+          socket
+          |> push_navigate(to: ~p"/events")
+          |> noreply()
       end
     else
-      socket =
-        socket
-        |> assign(:events, [])
-        |> assign(:current_page, 1)
-        |> assign(:total_pages, 0)
-        |> assign(:loading, true)
-
-      {:noreply, socket}
+      socket
+      |> assign(:events, [])
+      |> assign(:current_page, 1)
+      |> assign(:total_pages, 0)
+      |> assign(:loading, true)
+      |> noreply()
     end
   end
 
@@ -94,12 +90,10 @@ defmodule MusicListingsWeb.EventLive.Index do
     paged_events =
       MusicListings.list_events(page: socket.assigns[:current_page], venue_ids: venue_ids)
 
-    socket =
-      socket
-      |> update_socket_assigns(paged_events, venue_ids)
-      |> push_event("saveVenueFilterIdsToLocalStorage", %{venue_ids: venue_ids})
-
-    {:noreply, socket}
+    socket
+    |> update_socket_assigns(paged_events, venue_ids)
+    |> push_event("saveVenueFilterIdsToLocalStorage", %{venue_ids: venue_ids})
+    |> noreply()
   end
 
   @impl true
@@ -109,12 +103,10 @@ defmodule MusicListingsWeb.EventLive.Index do
     paged_events =
       MusicListings.list_events(page: socket.assigns[:current_page], venue_ids: venue_ids)
 
-    socket =
-      socket
-      |> update_socket_assigns(paged_events, venue_ids)
-      |> push_event("clearVenueFilterIdsFromLocalStorage", %{})
-
-    {:noreply, socket}
+    socket
+    |> update_socket_assigns(paged_events, venue_ids)
+    |> push_event("clearVenueFilterIdsFromLocalStorage", %{})
+    |> noreply()
   end
 
   @impl true
@@ -131,7 +123,9 @@ defmodule MusicListingsWeb.EventLive.Index do
         venue_ids: socket.assigns[:venue_ids]
       )
 
-    {:noreply, update_socket_assigns(socket, paged_events)}
+    socket
+    |> update_socket_assigns(paged_events)
+    |> noreply()
   end
 
   defp update_socket_assigns(socket, paged_events) do

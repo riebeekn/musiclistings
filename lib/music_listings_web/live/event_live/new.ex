@@ -5,9 +5,10 @@ defmodule MusicListingsWeb.EventLive.New do
   @impl true
   def mount(_params, _session, socket) do
     changeset = changeset(:new, %{})
-    socket = assign(socket, page_title: "Submit an Event", form: to_form(changeset, as: :event))
 
-    {:ok, socket}
+    socket
+    |> assign(page_title: "Submit an Event", form: to_form(changeset, as: :event))
+    |> ok()
   end
 
   @impl true
@@ -15,31 +16,33 @@ defmodule MusicListingsWeb.EventLive.New do
     with {:ok, _ts_return} <- turnstile_verification(params),
          {:ok, attrs} <- validate(:new, event_params),
          {:ok, _event} <- MusicListings.submit_event(attrs) do
-      {:noreply,
-       socket
-       |> put_flash(
-         :info,
-         "Thank you for submitting your event! We’ll review the details, and once approved (usually within 24 hours), your event will be live on the site."
-       )
-       |> push_navigate(to: ~p"/events")}
+      socket
+      |> put_flash(
+        :info,
+        "Thank you for submitting your event! We’ll review the details, and once approved (usually within 24 hours), your event will be live on the site."
+      )
+      |> push_navigate(to: ~p"/events")
+      |> noreply()
     else
       {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply,
-         socket
-         |> assign(form: to_form(changeset, as: :event))
-         |> Turnstile.refresh()}
+        socket
+        |> assign(form: to_form(changeset, as: :event))
+        |> Turnstile.refresh()
+        |> noreply()
 
       {:error, _} ->
-        {:noreply,
-         socket
-         |> put_flash(:error, "Please try submitting again")
-         |> Turnstile.refresh()}
+        socket
+        |> put_flash(:error, "Please try submitting again")
+        |> Turnstile.refresh()
+        |> noreply()
     end
   end
 
   @impl true
   def handle_event("cancel", _params, socket) do
-    {:noreply, push_navigate(socket, to: ~p"/events")}
+    socket
+    |> push_navigate(to: ~p"/events")
+    |> noreply()
   end
 
   defp turnstile_verification(params) do

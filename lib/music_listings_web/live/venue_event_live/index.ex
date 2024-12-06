@@ -4,7 +4,7 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, socket}
+    ok(socket)
   end
 
   @impl true
@@ -20,21 +20,21 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
             order_by: [:date, :time]
           )
 
-        socket =
-          socket
-          |> assign(
-            :events,
-            paged_events.events |> Enum.flat_map(fn {_date, events} -> events end)
-          )
-          |> assign(:page_title, venue.name)
-          |> assign(:venue, venue)
-          |> assign(:current_page, paged_events.current_page)
-          |> assign(:total_pages, paged_events.total_pages)
-
-        {:noreply, socket}
+        socket
+        |> assign(
+          :events,
+          paged_events.events |> Enum.flat_map(fn {_date, events} -> events end)
+        )
+        |> assign(:page_title, venue.name)
+        |> assign(:venue, venue)
+        |> assign(:current_page, paged_events.current_page)
+        |> assign(:total_pages, paged_events.total_pages)
+        |> noreply()
 
       {:error, _changeset} ->
-        {:noreply, push_navigate(socket, to: ~p"/events")}
+        socket
+        |> push_navigate(to: ~p"/events")
+        |> noreply()
     end
   end
 
@@ -52,10 +52,12 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
           socket.assigns.events
           |> Enum.reject(&(&1.id == deleted_event.id))
 
-        {:noreply, assign(socket, :events, events)}
+        socket
+        |> assign(:events, events)
+        |> noreply()
 
       _no_change ->
-        {:noreply, socket}
+        noreply(socket)
     end
   end
 

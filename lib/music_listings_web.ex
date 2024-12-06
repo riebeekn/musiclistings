@@ -56,6 +56,9 @@ defmodule MusicListingsWeb do
         layout: {MusicListingsWeb.Layouts, :app}
 
       unquote(html_helpers())
+
+      def ok(socket), do: {:ok, socket}
+      def noreply(socket), do: {:noreply, socket}
     end
   end
 

@@ -18,25 +18,25 @@ defmodule MusicListingsWeb.ContactLive.New do
          {:ok, attrs} <- validate(:new, contact_params),
          {:ok, email} <- Mailer.new(attrs.name, attrs.email, attrs.subject, attrs.message),
          {:ok, _mailer_result} <- Mailer.deliver(email) do
-      {:noreply,
-       socket
-       |> put_flash(
-         :info,
-         "Thank you for contacting us, we'll get back to you asap!"
-       )
-       |> push_navigate(to: ~p"/events")}
+      socket
+      |> put_flash(
+        :info,
+        "Thank you for contacting us, we'll get back to you asap!"
+      )
+      |> push_navigate(to: ~p"/events")
+      |> noreply()
     else
       {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply,
-         socket
-         |> assign(form: to_form(changeset, as: :contact))
-         |> Turnstile.refresh()}
+        socket
+        |> assign(form: to_form(changeset, as: :contact))
+        |> Turnstile.refresh()
+        |> noreply()
 
       {:error, _} ->
-        {:noreply,
-         socket
-         |> put_flash(:error, "Please try submitting again")
-         |> Turnstile.refresh()}
+        socket
+        |> put_flash(:error, "Please try submitting again")
+        |> Turnstile.refresh()
+        |> noreply()
     end
   end
 
