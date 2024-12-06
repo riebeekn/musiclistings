@@ -2,31 +2,24 @@ defmodule MusicListings.Emails.NewSubmittedEvent do
   @moduledoc """
   Email that gets sent when an event is submitted
   """
-  use MusicListings.Mailer
+  use MjmlEEx,
+    mjml_template: "templates/new_submitted_event.mjml.eex",
+    layout: MusicListings.Emails.BaseLayout
+
+  alias Swoosh.Email
 
   alias MusicListingsSchema.SubmittedEvent
 
-  def new_email(submitted_event) do
-    new()
-    |> to(Application.get_env(:music_listings, :admin_email))
-    |> from({"Toronto Music Listings", "no-reply@torontomusiclistings.com"})
-    |> subject("New Submitted Event")
-    |> body(mjml(%{submitted_event: submitted_event}))
-  end
+  def new(submitted_event) do
+    body = __MODULE__.render(%{submitted_event: submitted_event})
+    text_body = body |> Premailex.to_text()
 
-  defp mjml(assigns) do
-    ~H"""
-    <.h1>
-      New Submitted Event - {DateTime.to_string(@submitted_event.inserted_at)}
-    </.h1>
-    <.text><b>Id: </b>{@submitted_event.id}</.text>
-    <.text><b>Event title: </b>{@submitted_event.title}</.text>
-    <.text><b>Venue: </b>{@submitted_event.venue}</.text>
-    <.text><b>Date: </b>{@submitted_event.date}</.text>
-    <.text><b>Time: </b>{@submitted_event.time}</.text>
-    <.text><b>Price: </b>{@submitted_event.price}</.text>
-    <.text><b>URL: </b>{@submitted_event.url}</.text>
-    """
+    Email.new()
+    |> Email.to(Application.get_env(:music_listings, :admin_email))
+    |> Email.from({"Toronto Music Listings", "no-reply@torontomusiclistings.com"})
+    |> Email.subject("New Submitted Event")
+    |> Email.html_body(body)
+    |> Email.text_body(text_body)
   end
 
   def preview do
@@ -40,7 +33,7 @@ defmodule MusicListings.Emails.NewSubmittedEvent do
       url: "example.com",
       inserted_at: ~U[2024-01-02 16:53:02.847841Z]
     }
-    |> new_email()
+    |> new()
   end
 
   def preview_details do

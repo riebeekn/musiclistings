@@ -77,7 +77,7 @@ defmodule MusicListings.Events do
     |> case do
       {:ok, submitted_event} ->
         submitted_event
-        |> NewSubmittedEvent.new_email()
+        |> NewSubmittedEvent.new()
         |> Mailer.deliver()
 
         {:ok, submitted_event}

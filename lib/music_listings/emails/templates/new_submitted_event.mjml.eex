@@ -1,0 +1,12 @@
+<mj-text align="center" font-size="24px" font-weight="bold" padding-bottom="16px">
+  New Submitted Event - <%= DateTime.to_string(@submitted_event.inserted_at) %>
+</mj-text>
+<mj-text align="left" font-size="14px" padding-top="2px">
+  <p><b>Id: </b><%= @submitted_event.id %></p>
+  <p><b>Event title: </b><%= @submitted_event.title %></p>
+  <p><b>Venue: </b><%= @submitted_event.venue %></p>
+  <p><b>Date: </b><%= @submitted_event.date %></p>
+  <p><b>Time: </b><%= @submitted_event.time %></p>
+  <p><b>Price: </b><%= @submitted_event.price %></p>
+  <p><b>URL: </b><%= @submitted_event.url %></p>
+</mj-text>

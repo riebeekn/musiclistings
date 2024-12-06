@@ -1,0 +1,10 @@
+<mjml>
+  <mj-body>
+    <!-- main content -->
+    <mj-section background-color="#FFFFFF" padding-bottom="20px" padding-top="20px">
+      <mj-column vertical-align="top" width="100%">
+        <%= @inner_content %>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

@@ -1,0 +1,67 @@
+<mj-text align="center" font-size="24px" font-weight="bold" padding-bottom="16px">
+  Latest Crawl Results - <%= DateTime.to_string(@crawl_summary.inserted_at) %>
+</mj-text>
+<mj-text align="left" font-size="18px" font-weight="bold" padding-top="5px">
+  Summary
+</mj-text>
+<mj-table>
+  <thead>
+    <tr style="border-bottom:1px solid #ecedee;text-align:left;padding:15px 0;">
+      <th style="padding: 0 15px 0 0;">
+        Venue
+      </th>
+      <th style="padding: 0 15px 0 0;">
+        New
+      </th>
+      <th style="padding: 0 15px 0 0;">
+        Updated
+      </th>
+      <th style="padding: 0 15px 0 0;">
+        Duplicates
+      </th>
+      <th style="padding: 0 15px 0 0;">
+        Ignored
+      </th>
+      <th style="padding: 0 15px 0 0;">
+        Parse Errors
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for venue_crawl_summary <- @crawl_summary.venue_crawl_summaries |> Enum.sort_by(& &1.venue.name) do %>
+      <tr>
+        <td><%= venue_crawl_summary.venue.name %></td>
+        <td><%= venue_crawl_summary.new %></td>
+        <td><%= venue_crawl_summary.updated %></td>
+        <td><%= venue_crawl_summary.duplicate %></td>
+        <td><%= venue_crawl_summary.ignored %></td>
+        <td><%= venue_crawl_summary.parse_errors %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr style="border-top:1px solid #ecedee;text-align:left;padding:15px 0;">
+      <td>Total</td>
+      <td><%= @crawl_summary.new %></td>
+      <td><%= @crawl_summary.updated %></td>
+      <td><%= @crawl_summary.duplicate %></td>
+      <td><%= @crawl_summary.ignored %></td>
+      <td><%= @crawl_summary.parse_errors %></td>
+    </tr>
+  </tfoot>
+</mj-table>
+<%= if Enum.count(@crawl_summary.crawl_errors) > 0 do %>
+  <mj-text align="left" font-size="18px" font-weight="bold" padding-top="5px">
+    Errors
+  </mj-text>
+  <%= for crawl_error <- @crawl_summary.crawl_errors |> Enum.sort_by(& &1.venue.name) do %>
+    <mj-text align="left" font-size="14px" padding-top="2px">
+      <p><b>Crawl Error Id: </b><%= crawl_error.id %></p>
+      <p><b>Venue: </b><%= crawl_error.venue.name %></p>
+      <p><b>Error: </b><%= crawl_error.error %></p>
+      <p><b>Raw Event: </b><%= crawl_error.raw_event %></p>
+    </mj-text>
+
+    <mj-divider border-width="1px" border-style="dashed" border-color="lightgrey" />
+  <% end %>
+<% end %>

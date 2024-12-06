@@ -25,7 +25,7 @@ defmodule MusicListings.Workers.DataRetrievalWorker do
     |> case do
       {:ok, crawl_summary} ->
         crawl_summary
-        |> LatestCrawlResults.new_email()
+        |> LatestCrawlResults.new()
         |> Mailer.deliver()
 
       _error ->

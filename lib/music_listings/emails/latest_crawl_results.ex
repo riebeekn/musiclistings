@@ -2,83 +2,30 @@ defmodule MusicListings.Emails.LatestCrawlResults do
   @moduledoc """
   Email that sends latest crawl result summary
   """
-  use MusicListings.Mailer
+  use MjmlEEx,
+    mjml_template: "templates/latest_crawl_results.mjml.eex",
+    layout: MusicListings.Emails.BaseLayout
 
   alias MusicListings.Repo
   alias MusicListingsSchema.CrawlError
   alias MusicListingsSchema.CrawlSummary
   alias MusicListingsSchema.Venue
   alias MusicListingsSchema.VenueCrawlSummary
+  alias Swoosh.Email
 
-  def new_email(crawl_summary) do
+  def new(crawl_summary) do
     crawl_summary =
       Repo.preload(crawl_summary, crawl_errors: [:venue], venue_crawl_summaries: [:venue])
 
-    new()
-    |> to(Application.get_env(:music_listings, :admin_email))
-    |> from({"Toronto Music Listings", "no-reply@torontomusiclistings.com"})
-    |> subject("Latest Crawl Results")
-    |> body(mjml(%{crawl_summary: crawl_summary}))
-  end
+    body = __MODULE__.render(%{crawl_summary: crawl_summary})
+    text_body = body |> Premailex.to_text()
 
-  defp mjml(assigns) do
-    ~H"""
-    <.h1>
-      Latest Crawl Results - {DateTime.to_string(@crawl_summary.inserted_at)}
-    </.h1>
-    <.h2>Summary</.h2>
-    <.table
-      rows={@crawl_summary.venue_crawl_summaries |> Enum.sort_by(& &1.venue.name)}
-      include_footer?={true}
-    >
-      <:col :let={venue_crawl_summary} label="Venue">
-        {venue_crawl_summary.venue.name}
-      </:col>
-      <:col :let={venue_crawl_summary} label="New">
-        {venue_crawl_summary.new}
-      </:col>
-      <:col :let={venue_crawl_summary} label="Updated">
-        {venue_crawl_summary.updated}
-      </:col>
-      <:col :let={venue_crawl_summary} label="Duplicates">
-        {venue_crawl_summary.duplicate}
-      </:col>
-      <:col :let={venue_crawl_summary} label="Ignored">
-        {venue_crawl_summary.ignored}
-      </:col>
-      <:col :let={venue_crawl_summary} label="Parse Errors">
-        {venue_crawl_summary.parse_errors}
-      </:col>
-      <:footer_col>
-        Total
-      </:footer_col>
-      <:footer_col>
-        {@crawl_summary.new}
-      </:footer_col>
-      <:footer_col>
-        {@crawl_summary.updated}
-      </:footer_col>
-      <:footer_col>
-        {@crawl_summary.duplicate}
-      </:footer_col>
-      <:footer_col>
-        {@crawl_summary.ignored}
-      </:footer_col>
-      <:footer_col>
-        {@crawl_summary.parse_errors}
-      </:footer_col>
-    </.table>
-    <%= if Enum.count(@crawl_summary.crawl_errors) > 0 do %>
-      <.h2>Errors</.h2>
-      <%= for crawl_error <- @crawl_summary.crawl_errors |> Enum.sort_by(& &1.venue.name) do %>
-        <.text><b>Crawl Error Id: </b>{crawl_error.id}</.text>
-        <.text><b>Venue: </b>{crawl_error.venue.name}</.text>
-        <.text><b>Error: </b>{crawl_error.error}</.text>
-        <.text><b>Raw Event: </b>{crawl_error.raw_event}</.text>
-        <mj-divider border-width="1px" border-style="dashed" border-color="lightgrey" />
-      <% end %>
-    <% end %>
-    """
+    Email.new()
+    |> Email.to(Application.get_env(:music_listings, :admin_email))
+    |> Email.from({"Toronto Music Listings", "no-reply@torontomusiclistings.com"})
+    |> Email.subject("Latest Crawl Results")
+    |> Email.html_body(body)
+    |> Email.text_body(text_body)
   end
 
   def preview do
@@ -113,7 +60,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     build_crawl_summary()
     |> Map.put(:crawl_errors, [ce1, ce2, ce3])
     |> Map.put(:venue_crawl_summaries, [vcs1, vcs2])
-    |> new_email()
+    |> new()
   end
 
   def preview_details do
