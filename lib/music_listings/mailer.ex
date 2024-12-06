@@ -40,7 +40,7 @@ defmodule MusicListings.Mailer do
       def h1(var!(assigns)) do
         ~H"""
         <mj-text align="center" font-size="24px" font-weight="bold" padding-bottom="16px">
-          <%= render_slot(@inner_block) %>
+          {render_slot(@inner_block)}
         </mj-text>
         """
       end
@@ -48,7 +48,7 @@ defmodule MusicListings.Mailer do
       def h2(var!(assigns)) do
         ~H"""
         <mj-text align="left" font-size="18px" font-weight="bold" padding-top="5px">
-          <%= render_slot(@inner_block) %>
+          {render_slot(@inner_block)}
         </mj-text>
         """
       end
@@ -56,7 +56,7 @@ defmodule MusicListings.Mailer do
       def text(var!(assigns)) do
         ~H"""
         <mj-text align="left" font-size="14px" padding-top="2px">
-          <%= render_slot(@inner_block) %>
+          {render_slot(@inner_block)}
         </mj-text>
         """
       end
@@ -68,7 +68,7 @@ defmodule MusicListings.Mailer do
             <tr style="border-bottom:1px solid #ecedee;text-align:left;padding:15px 0;">
               <%= for col <- @col do %>
                 <th style="padding: 0 15px 0 0;">
-                  <%= col.label %>
+                  {col.label}
                 </th>
               <% end %>
             </tr>
@@ -77,7 +77,7 @@ defmodule MusicListings.Mailer do
             <%= for row <- @rows do %>
               <tr>
                 <%= for col <- @col do %>
-                  <td><%= render_slot(col, row) %></td>
+                  <td>{render_slot(col, row)}</td>
                 <% end %>
               </tr>
             <% end %>
@@ -87,7 +87,7 @@ defmodule MusicListings.Mailer do
               <tr style="border-top:1px solid #ecedee;text-align:left;padding:15px 0;">
                 <%= for fcol <- @footer_col do %>
                   <td>
-                    <%= render_slot(fcol) %>
+                    {render_slot(fcol)}
                   </td>
                 <% end %>
               </tr>
@@ -104,7 +104,7 @@ defmodule MusicListings.Mailer do
             <!-- main content -->
             <mj-section background-color="#FFFFFF" padding-bottom="20px" padding-top="20px">
               <mj-column vertical-align="top" width="100%">
-                <%= @inner_content %>
+                {@inner_content}
               </mj-column>
             </mj-section>
           </mj-body>

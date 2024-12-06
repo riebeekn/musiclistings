@@ -149,7 +149,7 @@ defmodule MusicListingsWeb.NavbarComponents do
       >
         <path d="M3 0L6 3L3 6L0 3Z" stroke-width="2" stroke-linejoin="round"></path>
       </svg>
-      <p><%= MusicListings.data_last_updated_on() %></p>
+      <p>{MusicListings.data_last_updated_on()}</p>
     </div>
     """
   end
@@ -165,7 +165,7 @@ defmodule MusicListingsWeb.NavbarComponents do
       class="text-zinc-400 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
       {@rest}
     >
-      <%= @link_text %>
+      {@link_text}
     </.link>
     """
   end
@@ -176,7 +176,7 @@ defmodule MusicListingsWeb.NavbarComponents do
   defp main_menu_link(assigns) do
     ~H"""
     <a href={@href} class="text-zinc-400 px-3 py-2 rounded-md text-xl font-semibold hover:text-white">
-      <%= @link_text %>
+      {@link_text}
     </a>
     """
   end

@@ -28,10 +28,10 @@ defmodule MusicListingsWeb.CustomComponents do
     ~H"""
     <div class="min-w-0 flex-1 text-zinc-400">
       <h1 class="text-3xl font-bold leading-7 sm:truncate sm:text-4xl sm:tracking-tight">
-        <%= @header %>
+        {@header}
       </h1>
       <p :if={@description} class="mt-4 text-md">
-        <%= @description %>
+        {@description}
       </p>
     </div>
     """
@@ -55,10 +55,10 @@ defmodule MusicListingsWeb.CustomComponents do
     <div class="relative px-6 sm:pb-20 pt-6 sm:pt-32 lg:static lg:px-8 lg:py-48">
       <div class="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
         <h1 class="text-pretty text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-          <%= @header %>
+          {@header}
         </h1>
         <div class="text-lg/8 text-zinc-300 mt-6 space-y-6">
-          <%= render_slot(@inner_block) %>
+          {render_slot(@inner_block)}
         </div>
       </div>
     </div>
@@ -87,7 +87,7 @@ defmodule MusicListingsWeb.CustomComponents do
       <%= if @icon_name && @icon_position == :left do %>
         <MusicListingsWeb.CoreComponents.icon name={@icon_name} class="size-3 mt-1 mr-1" />
       <% end %>
-      <%= @label %>
+      {@label}
       <%= if @icon_name && @icon_position == :right do %>
         <MusicListingsWeb.CoreComponents.icon name={@icon_name} class="size-3 mt-1 ml-1" />
       <% end %>
@@ -186,7 +186,7 @@ defmodule MusicListingsWeb.CustomComponents do
                 role="option"
               >
                 <span class="block truncate">
-                  <label for={"#{venue.id}"}><%= venue.name %></label>
+                  <label for={"#{venue.id}"}>{venue.name}</label>
                 </span>
                 <span class="absolute inset-y-0 left-0 flex items-center pl-1.5">
                   <input
@@ -230,7 +230,7 @@ defmodule MusicListingsWeb.CustomComponents do
     ~H"""
     <%= if @venue_ids != [] do %>
       <div class="text-white text-sm sm:text-base -mt-4 sm:-mt-1 mb-6 sm:mb-4">
-        Filtering by <%= Enum.count(@venue_ids) %> venue(s).
+        Filtering by {Enum.count(@venue_ids)} venue(s).
         <a href="#" phx-click="clear-venue-filtering" class="text-emerald-400 hover:text-emerald-300">
           Clear filter.
         </a>
@@ -251,12 +251,12 @@ defmodule MusicListingsWeb.CustomComponents do
     <div class="block sm:flex text-zinc-200">
       <div class="pr-12 sm:whitespace-nowrap">
         <h2 class="text-4xl font-bold">
-          <%= @venue.name %>
+          {@venue.name}
         </h2>
         <div class="ml-1 mt-2 text-md leading-5">
-          <span class="block"><%= @venue.street %></span>
-          <span class="block"><%= "#{@venue.city} #{@venue.province}" %></span>
-          <span class="block"><%= "#{@venue.country} #{@venue.postal_code}" %></span>
+          <span class="block">{@venue.street}</span>
+          <span class="block">{"#{@venue.city} #{@venue.province}"}</span>
+          <span class="block">{"#{@venue.country} #{@venue.postal_code}"}</span>
           <span class="block mt-1">
             <a
               href={@venue.website}
@@ -314,30 +314,30 @@ defmodule MusicListingsWeb.CustomComponents do
                 <%= for venue <- @venues do %>
                   <tr id={"venue-#{venue.id}"}>
                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">
-                      <%= venue.name %>
+                      {venue.name}
                       <dl class="sm:hidden">
                         <dt class="sr-only">Street</dt>
-                        <dd class="text-zinc-400"><%= venue.street %></dd>
+                        <dd class="text-zinc-400">{venue.street}</dd>
                         <dt class="sr-only">Upcoming Events</dt>
                         <dd class="text-zinc-400">
                           <a
                             href={~p"/events/venue/#{venue.id}"}
                             class="text-emerald-400 hover:text-emerald-500"
                           >
-                            <%= venue.upcoming_event_count %> Upcoming Events
+                            {venue.upcoming_event_count} Upcoming Events
                           </a>
                         </dd>
                       </dl>
                     </td>
                     <td class="hidden sm:table-cell whitespace-nowrap px-3 py-4 text-sm text-zinc-400">
-                      <%= venue.street %>
+                      {venue.street}
                     </td>
                     <td class="hidden sm:table-cell whitespace-nowrap py-4 pl-3 text-right text-sm font-medium">
                       <a
                         href={~p"/events/venue/#{venue.id}"}
                         class="text-emerald-400 hover:text-emerald-500"
                       >
-                        <%= venue.upcoming_event_count %> Upcoming Events
+                        {venue.upcoming_event_count} Upcoming Events
                       </a>
                     </td>
                   </tr>
@@ -441,7 +441,7 @@ defmodule MusicListingsWeb.CustomComponents do
   defp events_date_header(assigns) do
     ~H"""
     <h2 class="text-left text-3xl font-semibold leading-5 text-zinc-400 sm:text-4xl sm:tracking-tight">
-      <time datetime={@date}><%= DateHelpers.format_date(@date) %></time>
+      <time datetime={@date}>{DateHelpers.format_date(@date)}</time>
     </h2>
     """
   end
@@ -449,7 +449,7 @@ defmodule MusicListingsWeb.CustomComponents do
   defp event_date(assigns) do
     ~H"""
     <div class="text-xs sm:text-sm font-medium leading-4 text-zinc-400">
-      <span><%= DateHelpers.format_date(@date) %></span>
+      <span>{DateHelpers.format_date(@date)}</span>
     </div>
     """
   end
@@ -473,9 +473,9 @@ defmodule MusicListingsWeb.CustomComponents do
   defp event_title(assigns) do
     ~H"""
     <div class="text-sm sm:text-lg font-medium leading-6 text-white uppercase">
-      <%= @event.title %>
+      {@event.title}
       <%= if @event.openers != [] do %>
-        with <%= @event.openers |> Enum.join(", ") %>
+        with {@event.openers |> Enum.join(", ")}
       <% end %>
     </div>
     """
@@ -534,7 +534,7 @@ defmodule MusicListingsWeb.CustomComponents do
   defp event_age_restriction(assigns) do
     ~H"""
     <div class="text-xs sm:text-sm whitespace-nowrap text-amber-400">
-      (<%= format_age_restriction(@age_restriction) %>)
+      ({format_age_restriction(@age_restriction)})
     </div>
     """
   end
@@ -549,7 +549,7 @@ defmodule MusicListingsWeb.CustomComponents do
       href={~p"/events/venue/#{@venue.id}"}
       class="text-xs sm:text-sm font-medium leading-4 text-emerald-400 hover:text-emerald-500"
     >
-      <%= @venue.name %>
+      {@venue.name}
     </a>
     """
   end
@@ -558,7 +558,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_time(assigns) do
     ~H"""
-    <time class="text-xs sm:text-sm text-zinc-400"><%= DateHelpers.format_time(@time) %></time>
+    <time class="text-xs sm:text-sm text-zinc-400">{DateHelpers.format_time(@time)}</time>
     """
   end
 
@@ -578,19 +578,19 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_price(%{price_format: :fixed} = assigns) do
     ~H"""
-    $<%= @price_lo %>
+    ${@price_lo}
     """
   end
 
   defp event_price(%{price_format: :range} = assigns) do
     ~H"""
-    $<%= @price_lo %> - $<%= @price_hi %>
+    ${@price_lo} - ${@price_hi}
     """
   end
 
   defp event_price(%{price_format: :variable} = assigns) do
     ~H"""
-    $<%= @price_lo %>+
+    ${@price_lo}+
     """
   end
 end

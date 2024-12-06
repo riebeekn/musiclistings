@@ -17,15 +17,15 @@ defmodule MusicListings.Emails.NewSubmittedEvent do
   defp mjml(assigns) do
     ~H"""
     <.h1>
-      New Submitted Event - <%= DateTime.to_string(@submitted_event.inserted_at) %>
+      New Submitted Event - {DateTime.to_string(@submitted_event.inserted_at)}
     </.h1>
-    <.text><b>Id: </b><%= @submitted_event.id %></.text>
-    <.text><b>Event title: </b><%= @submitted_event.title %></.text>
-    <.text><b>Venue: </b><%= @submitted_event.venue %></.text>
-    <.text><b>Date: </b><%= @submitted_event.date %></.text>
-    <.text><b>Time: </b><%= @submitted_event.time %></.text>
-    <.text><b>Price: </b><%= @submitted_event.price %></.text>
-    <.text><b>URL: </b><%= @submitted_event.url %></.text>
+    <.text><b>Id: </b>{@submitted_event.id}</.text>
+    <.text><b>Event title: </b>{@submitted_event.title}</.text>
+    <.text><b>Venue: </b>{@submitted_event.venue}</.text>
+    <.text><b>Date: </b>{@submitted_event.date}</.text>
+    <.text><b>Time: </b>{@submitted_event.time}</.text>
+    <.text><b>Price: </b>{@submitted_event.price}</.text>
+    <.text><b>URL: </b>{@submitted_event.url}</.text>
     """
   end
 

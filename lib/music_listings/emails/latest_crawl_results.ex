@@ -24,7 +24,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
   defp mjml(assigns) do
     ~H"""
     <.h1>
-      Latest Crawl Results - <%= DateTime.to_string(@crawl_summary.inserted_at) %>
+      Latest Crawl Results - {DateTime.to_string(@crawl_summary.inserted_at)}
     </.h1>
     <.h2>Summary</.h2>
     <.table
@@ -32,49 +32,49 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       include_footer?={true}
     >
       <:col :let={venue_crawl_summary} label="Venue">
-        <%= venue_crawl_summary.venue.name %>
+        {venue_crawl_summary.venue.name}
       </:col>
       <:col :let={venue_crawl_summary} label="New">
-        <%= venue_crawl_summary.new %>
+        {venue_crawl_summary.new}
       </:col>
       <:col :let={venue_crawl_summary} label="Updated">
-        <%= venue_crawl_summary.updated %>
+        {venue_crawl_summary.updated}
       </:col>
       <:col :let={venue_crawl_summary} label="Duplicates">
-        <%= venue_crawl_summary.duplicate %>
+        {venue_crawl_summary.duplicate}
       </:col>
       <:col :let={venue_crawl_summary} label="Ignored">
-        <%= venue_crawl_summary.ignored %>
+        {venue_crawl_summary.ignored}
       </:col>
       <:col :let={venue_crawl_summary} label="Parse Errors">
-        <%= venue_crawl_summary.parse_errors %>
+        {venue_crawl_summary.parse_errors}
       </:col>
       <:footer_col>
         Total
       </:footer_col>
       <:footer_col>
-        <%= @crawl_summary.new %>
+        {@crawl_summary.new}
       </:footer_col>
       <:footer_col>
-        <%= @crawl_summary.updated %>
+        {@crawl_summary.updated}
       </:footer_col>
       <:footer_col>
-        <%= @crawl_summary.duplicate %>
+        {@crawl_summary.duplicate}
       </:footer_col>
       <:footer_col>
-        <%= @crawl_summary.ignored %>
+        {@crawl_summary.ignored}
       </:footer_col>
       <:footer_col>
-        <%= @crawl_summary.parse_errors %>
+        {@crawl_summary.parse_errors}
       </:footer_col>
     </.table>
     <%= if Enum.count(@crawl_summary.crawl_errors) > 0 do %>
       <.h2>Errors</.h2>
       <%= for crawl_error <- @crawl_summary.crawl_errors |> Enum.sort_by(& &1.venue.name) do %>
-        <.text><b>Crawl Error Id: </b><%= crawl_error.id %></.text>
-        <.text><b>Venue: </b><%= crawl_error.venue.name %></.text>
-        <.text><b>Error: </b><%= crawl_error.error %></.text>
-        <.text><b>Raw Event: </b><%= crawl_error.raw_event %></.text>
+        <.text><b>Crawl Error Id: </b>{crawl_error.id}</.text>
+        <.text><b>Venue: </b>{crawl_error.venue.name}</.text>
+        <.text><b>Error: </b>{crawl_error.error}</.text>
+        <.text><b>Raw Event: </b>{crawl_error.raw_event}</.text>
         <mj-divider border-width="1px" border-style="dashed" border-color="lightgrey" />
       <% end %>
     <% end %>
