@@ -2,6 +2,7 @@ defmodule MusicListingsWeb.ContactLive.New do
   use MusicListingsWeb, :live_view
   use Goal
 
+  alias MusicListings.Emails.ContactUs
   alias MusicListings.Mailer
 
   @impl true
@@ -16,7 +17,7 @@ defmodule MusicListingsWeb.ContactLive.New do
   def handle_event("save", %{"contact" => contact_params} = params, socket) do
     with {:ok, _ts_return} <- turnstile_verification(params),
          {:ok, attrs} <- validate(:new, contact_params),
-         {:ok, email} <- Mailer.new(attrs.name, attrs.email, attrs.subject, attrs.message),
+         email <- ContactUs.new_email(attrs),
          {:ok, _mailer_result} <- Mailer.deliver(email) do
       socket
       |> put_flash(
