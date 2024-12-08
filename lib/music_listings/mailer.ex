@@ -8,6 +8,16 @@ defmodule MusicListings.Mailer do
 
       alias Phoenix.HTML.Safe
 
+      @spec to_site_admin(Swoosh.Email.t()) :: Swoosh.Email.t()
+      def to_site_admin(email) do
+        to(email, Application.get_env(:music_listings, :admin_email))
+      end
+
+      @spec from_noreply(Swoosh.Email.t()) :: Swoosh.Email.t()
+      def from_noreply(email) do
+        from(email, {"Toronto Music Listings", "no-reply@torontomusiclistings.com"})
+      end
+
       @spec body(Swoosh.Email.t(), Phoenix.LiveView.Rendered.t()) :: Swoosh.Email.t()
       def body(email, mjml) do
         mjml =

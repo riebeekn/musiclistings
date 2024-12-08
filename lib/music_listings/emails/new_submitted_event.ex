@@ -8,8 +8,8 @@ defmodule MusicListings.Emails.NewSubmittedEvent do
 
   def new_email(submitted_event) do
     new()
-    |> to(Application.get_env(:music_listings, :admin_email))
-    |> from({"Toronto Music Listings", "no-reply@torontomusiclistings.com"})
+    |> to_site_admin()
+    |> from_noreply()
     |> subject("New Submitted Event")
     |> body(mjml(%{submitted_event: submitted_event}))
   end

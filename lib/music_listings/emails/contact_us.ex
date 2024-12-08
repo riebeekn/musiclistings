@@ -6,7 +6,7 @@ defmodule MusicListings.Emails.ContactUs do
 
   def new_email(%{name: sender_name, email: sender_email, subject: subject, message: message}) do
     new()
-    |> to(Application.get_env(:music_listings, :admin_email))
+    |> to_site_admin()
     |> from({sender_name, sender_email})
     |> subject(subject)
     |> text_body(message)

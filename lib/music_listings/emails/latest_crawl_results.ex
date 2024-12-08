@@ -15,8 +15,8 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       Repo.preload(crawl_summary, crawl_errors: [:venue], venue_crawl_summaries: [:venue])
 
     new()
-    |> to(Application.get_env(:music_listings, :admin_email))
-    |> from({"Toronto Music Listings", "no-reply@torontomusiclistings.com"})
+    |> to_site_admin()
+    |> from_noreply()
     |> subject("Latest Crawl Results")
     |> body(mjml(%{crawl_summary: crawl_summary}))
   end
