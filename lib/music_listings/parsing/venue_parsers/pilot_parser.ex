@@ -50,9 +50,20 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
 
   @impl true
   def event_title(event) do
-    event
-    |> Selectors.text(css(".fr-tag strong, .fr-tag b"))
-    |> String.replace(".", "")
+    title =
+      event
+      |> Selectors.text(css(".fr-tag strong, .fr-tag b"))
+      |> String.replace(".", "")
+
+    if title == "" || title == "-" do
+      event
+      |> Selectors.all_matches(css(".fr-tag strong"))
+      |> Enum.at(1)
+      |> Selectors.text(css("strong"))
+      |> String.replace(".", "")
+    else
+      title
+    end
   end
 
   @impl true
@@ -69,7 +80,7 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
       |> String.split("-")
 
     [_day_of_week, month_string, day_string] =
-      full_date_string |> String.replace(",", " ") |> String.split()
+      full_date_string |> String.trim() |> String.replace(",", " ") |> String.split(~r/\p{Zs}+/u)
 
     ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
   end

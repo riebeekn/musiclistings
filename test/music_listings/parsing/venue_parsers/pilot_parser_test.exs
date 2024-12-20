@@ -44,26 +44,26 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "pilot_2024_07_20" == PilotParser.event_id(event)
+      assert "pilot_2025_01_25" == PilotParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "pilot_2024_07_20" == PilotParser.ignored_event_id(event)
+      assert "pilot_2025_01_25" == PilotParser.ignored_event_id(event)
     end
   end
 
   describe "event_title/1" do
     test "returns event title", %{event: event} do
-      assert "Norbert Botos Quartet" == PilotParser.event_title(event)
+      assert "SKA! With SkaFire Roots" == PilotParser.event_title(event)
     end
   end
 
   describe "performers/1" do
     test "returns the event performers", %{event: event} do
       assert %Performers{
-               headliner: "Norbert Botos Quartet",
+               headliner: "SKA! With SkaFire Roots",
                openers: []
              } == PilotParser.performers(event)
     end
@@ -71,7 +71,7 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParserTest do
 
   describe "event_date/1" do
     test "returns the event date", %{event: event} do
-      assert ~D[2024-07-20] == PilotParser.event_date(event)
+      assert ~D[2025-01-25] == PilotParser.event_date(event)
     end
   end
 
