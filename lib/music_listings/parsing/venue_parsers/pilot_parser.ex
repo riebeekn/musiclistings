@@ -29,6 +29,12 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
       body,
       css("div#scvr-section-013c83e7-396f-4090-a781-83f7097a960c p.fr-tag")
     )
+    |> Enum.reject(&empty?/1)
+  end
+
+  defp empty?(result) do
+    content = Selectors.text(result) |> String.trim()
+    content == ""
   end
 
   @impl true

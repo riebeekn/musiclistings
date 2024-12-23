@@ -45,6 +45,10 @@ defmodule MusicListings.Parsing.Selectors do
     Enum.map(content, &Meeseeks.text/1)
   end
 
+  def text(content) do
+    Meeseeks.text(content)
+  end
+
   def data(content) when is_list(content) do
     Enum.map(content, &Meeseeks.data/1)
   end
