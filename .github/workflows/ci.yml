@@ -23,16 +23,16 @@ jobs:
     runs-on: ubuntu-latest
     name: Build
     steps:
+      # Step: Check out the code.
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       # Step: Setup Elixir + Erlang image as the base.
       - name: Set up Elixir
         uses: erlef/setup-beam@v1
         with:
           version-file: .tool-versions
           version-type: strict
-
-      # Step: Check out the code.
-      - name: Checkout code
-        uses: actions/checkout@v4
 
       # Step: Define how to cache deps. Restores existing cache if present.
       - name: Cache deps
@@ -80,16 +80,16 @@ jobs:
     name: Dialyzer
 
     steps:
+      # Step: Check out the code.
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       # Step: Setup Elixir + Erlang image as the base.
       - name: Set up Elixir
         uses: erlef/setup-beam@v1
         with:
           version-file: .tool-versions
           version-type: strict
-
-      # Step: Check out the code.
-      - name: Checkout code
-        uses: actions/checkout@v4
 
       # Step: Grab deps from cache (as the deps cache is populated in the "build" job)
       - name: Cache deps
@@ -138,16 +138,16 @@ jobs:
     name: Audit
 
     steps:
+      # Step: Check out the code.
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       # Step: Setup Elixir + Erlang image as the base.
       - name: Set up Elixir
         uses: erlef/setup-beam@v1
         with:
           version-file: .tool-versions
           version-type: strict
-
-      # Step: Check out the code.
-      - name: Checkout code
-        uses: actions/checkout@v4
 
       # Step: Grab deps from cache (as the deps cache is populated in the "build" job)
       - name: Cache deps
@@ -221,16 +221,16 @@ jobs:
     name: Test
 
     steps:
+      # Step: Check out the code.
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       # Step: Setup Elixir + Erlang image as the base.
       - name: Set up Elixir
         uses: erlef/setup-beam@v1
         with:
           version-file: .tool-versions
           version-type: strict
-
-      # Step: Check out the code.
-      - name: Checkout code
-        uses: actions/checkout@v4
 
       # Step: Grab deps from cache (as the deps cache is populated in the "build" job)
       - name: Cache deps
