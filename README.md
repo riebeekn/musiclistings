@@ -5,8 +5,32 @@ written in [Elixir](https://elixir-lang.org/) and [Phoenix LiveView](https://hex
 
 Events are populated via a nightly [Oban](https://github.com/oban-bg/oban) job.
 
+## Table of Contents
+
+- [Running the app locally](#running-the-app-locally)
+- [Admin functionality](#admin-functionality)
+- [HTTP Client config](#http-client-config)
+- [UI](#ui)
+- [Crawling and Event population](#crawling-and-event-population)
+  - [Parsing modules](#parsing-modules)
+  - [Adding a new venue](#adding-a-new-venue)
+- [Deployment and Infrastructure](#deployment-and-infrastructure)
+  - [Terraform](#terraform)
+  - [Remote access](#remote-access)
+    - [Database](#database)
+    - [IEX](#iex)
+    - [Trouble shooting](#trouble-shooting)
+  - [Releases](#releases)
+    - [Generate the release files](#generate-the-release-files)
+    - [Build the release](#build-the-release)
+    - [Run the release](#run-the-release)
+  - [Docker](#docker)
+    - [Generate the docker file](#generate-the-docker-file)
+    - [Build the docker image](#build-the-docker-image)
+    - [Run the docker image](#run-the-docker-image)
+
 ## Running the app locally
-- Copy `.envrc_template` to `.envrc` and update / source the required enviroment
+- Copy `.envrc_template` to `.envrc` and update / source the required environment
 variables.
   - Environment variables:
     - `ADMIN_EMAIL` - the email address the application will send communications to.  The application sends an email summary of the nightly event population runs and also when an event is submitted via the UI.  In development these emails will not be sent but instead be available at [http://localhost:4000/dev/mailbox](http://localhost:4000/dev/mailbox).  See [http://localhost:4000/dev/gallery](http://localhost:4000/dev/gallery) for a preview of the emails.
@@ -42,7 +66,7 @@ The UI is a standard Phoenix LiveView application.
 
 Venue filtering persistence is accomplished via local storage, see the `VenueFilter` hook in `assets/js/app.js` which gets called from `lib/music_listings_web/live/event_live/index.ex`.
 
-## Crawling / Event population
+## Crawling and Event population
 Event population is initiated via the `lib/music_listings/workers/data_retrieval_worker.ex` Oban job.  The Oban job in turn hands off the population of events to `lib/music_listings/crawler.ex`.  This module performs retrieval, parsing and storage of events.
 
 Once event population has concluded an email is sent to the configured `ADMIN_EMAIL` with details of the crawl.  Results are also captured in the `crawl_summaries`, `venue_crawl_summaries` and `crawl_errors` database tables.
@@ -54,3 +78,183 @@ Any errors encountered during parsing will be inserted into the `crawl_errors` d
 
 ### Adding a new venue
 In order to track events for a new venue, a new parser for the venue needs to be created at `lib/music_listings/parsing/venue_parsers`.  The venue also needs to be added to the `venues` database table.  Example data files should be added to `test/data` and a test file for the new parser should be added to `test/music_listings/parsing/venue_parsers`.
+
+## Deployment and Infrastructure
+Deployment and infrastructure is handled by a combination of Terraform and GitHub actions.  The application is deployed to AWS with CloudFlare as a reverse proxy.
+
+The decision to use AWS was as a learning exercise, a more cost effective solution would be to use a PAAS or a DO droplet or something.
+
+### Terraform
+The Terraform setup is largely based on this excellent example Repo: [https://github.com/danschultzer/elixir-terraform-aws-ecs-example](https://github.com/danschultzer/elixir-terraform-aws-ecs-example).
+
+There are 3 Terraform projects which serve the following purposes:
+- `.infrastructure/core` - Contains the core infrastructure which is shared across different environments (i.e. staging, prod etc.).
+- `.infrastructure/deployments` - Contains environment specific infrastructure, for example `qa`, `staging`, or `prod` infrastructure.
+- `.infrastructure/production` - Represents production infrastructure that was set up manually and has since been imported into Terraform.
+
+See the `README.md` files located in each of the 3 projects for specific information on running the Terraform deployments.  In general the `production` project should never need to be run.  The `core` project needs to be run once to bring up the shared infrastructure, and then the `deployments` project can be run as needed.
+
+### Remote access
+Remote access to the database and local `iex` sessions are accomplished via `ssm` and `aws ecs execute-command`.  Helper scripts are available to make it easy to connect.
+
+#### Database
+To access the database for an environment run the `.db_tunnel.sh` script passing in the name of environment you would like to connect to, for example:
+
+```
+./db_tunnel.sh staging
+```
+
+This will result in output similar to:
+```
+Starting session with SessionId: terraform-user-2ft5jzhcckusb5zeo29gdarfke
+Port 5433 opened for sessionId terraform-user-2ft5jzhcckusb5zeo29gdarfke.
+Waiting for connections..
+```
+
+You can now connect with your local database client.  You will need to retrieve the database password.  This can be done from the `.infrastructure/deployments` directory.  Make sure you are in the correct workspace and then run:
+
+```
+terraform output -raw db_instance_password
+```
+
+This will output the database password.  I.e. something similar to:
+
+```
+➜  deployments git:(main) ✗ terraform output -raw db_instance_password
+%5jw#1Lz$of}D)>th0dMmtlhlo3ZZM>O%
+```
+
+**Note:** exclude the `%` at the end of the string, not sure why that is added to the output on the terminal.  Piping to a text file, i.e. `terraform output -raw db_instance_password > db_pass.txt` does not add the extra `%`.
+
+Now connect with the following parameters:
+
+```
+Host: 127.0.0.1
+Port: 5433
+User: the user you set up in the Terraform deployment
+Password: the password output from above
+```
+
+#### IEX
+To run an `iex` session against a deployed environment run the `aiex.sh` script passing in the name of the environment you would like to connect to, for example:
+
+```
+./aiex.sh staging
+```
+
+You'll now have an `iex` session on the environment.
+
+See the details of the `aiex.sh` script if wanting to do something other than open an `iex` session.  For instance if just wanting to run a shell, change the `Execute the command on the ECS container` command, i.e. instead of this:
+
+```
+# Execute the command on the ECS container
+aws ecs execute-command \
+  --cluster "${ECS_CLUSTER_NAME}" \
+  --task "${AWS_TASK_ID}" \
+  --container "${CONTAINER_NAME}" \
+  --interactive \
+  --command "/bin/sh -c 'bin/music_listings remote'"
+```
+
+Do this:
+
+```
+# Execute the command on the ECS container
+aws ecs execute-command \
+  --cluster "${ECS_CLUSTER_NAME}" \
+  --task "${AWS_TASK_ID}" \
+  --container "${CONTAINER_NAME}" \
+  --interactive \
+  --command "/bin/sh
+```
+
+#### Trouble shooting
+Remote access requires specific settings both locally (you need the AWS CLI installed along with AWS SSM) and on the server (a NAT gateway and enable_remote_execution enabled on the ECS service).
+
+There is handy check command available.  First determine the task id of the AWS task you are attempting to connect to, i.e.
+
+```
+aws ecs list-tasks --cluster "music-listings-staging"
+```
+
+This will output something similar to:
+
+```
+{
+    "taskArns": [
+        "arn:aws:ecs:<region>:<aws account id>:task/music-listings-staging/<task id>"
+    ]
+}
+```
+
+Now run:
+
+```
+bash <( curl -Ls https://raw.githubusercontent.com/aws-containers/amazon-ecs-exec-checker/main/check-ecs-exec.sh ) music-listings-staging <task id>
+```
+
+This will present information regarding whether you have remote access.
+
+### Releases
+The Phoenix application itself is deployed using releases and docker.  If for some reason you need to debug the release, the release can be generated / run locally via:
+
+#### Generate the release files
+```
+mix release.init
+```
+
+#### Build the release
+```
+mix deps.get --only prod
+MIX_ENV=prod mix compile
+MIX_ENV=prod mix assets.deploy
+MIX_ENV=prod mix release --overwrite=true
+```
+
+#### Run the release
+```
+SECRET_KEY_BASE=$(mix phx.gen.secret) \
+PHX_SERVER=true \
+DATABASE_URL=postgres://postgres:postgres@localhost:5432/music_listings_dev \
+PULL_DATA_FROM_WWW=$PULL_DATA_FROM_WWW \
+BREVO_API_KEY="nope" \
+TURNSTILE_SITE_KEY="nope" \
+TURNSTILE_SECRET_KEY="nope" \
+_build/prod/rel/music_listings/bin/music_listings start
+```
+
+**Note:** unless you need to actually test sending emails or turnstile, fake values can be set for these.
+
+You can now access the application at localhost.
+
+### Docker
+If you need to debug the docker container locally, it can be generated / run locally with Docker Desktop via:
+
+#### Generate the docker file
+**Note:** you might need to adjust tool versions versions to generate the docker file.
+```
+mix phx.gen.release --docker
+```
+
+#### Build the docker image
+```
+docker build --tag musiclistings_latest .
+```
+
+#### Run the docker image
+```
+docker run -it -p 4000:4000 \
+  --env SECRET_KEY_BASE=$(mix phx.gen.secret) \
+  --env DATABASE_URL=postgres://nick:postgres@host.docker.internal:5432/music_listings_dev \
+  --env PULL_DATA_FROM_WWW=$PULL_DATA_FROM_WWW \
+  --env PHX_SERVER=$PHX_SERVER \
+  --env DB_SSL=false \
+  --env LOG_LEVEL=debug \
+  --env ADMIN_EMAIL=$ADMIN_EMAIL \
+  --env BREVO_API_KEY="nope" \
+  --env TURNSTILE_SITE_KEY="nope" \
+  --env TURNSTILE_SECRET_KEY="nope" \
+  musiclistings_latest
+```
+
+You can now access the application at localhost.
