@@ -65,7 +65,6 @@ jobs:
       # the cached version.
       - name: Install dependencies
         run: |
-          git config --global url."https://${{ secrets.PAT_TOKEN }}@github.com/motivationworks".insteadOf "git@github.com:motivationworks"
           mix deps.get
 
       # Step: Compile the project treating any warnings as errors.
