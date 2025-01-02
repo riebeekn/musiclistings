@@ -1,0 +1,16 @@
+app_admin_email           = "<admin email address to send emails to>"
+app_domain                = "<app domain, i.e. staging.torontomusiclistings.com>"
+aws_account_id            = "<aws account id>"
+aws_region                = "<aws region, i.e. us-east-1>"
+basic_auth_username       = "<basic auth username - leave this and basic_auth_password blank for no auth>"
+basic_auth_password       = "<basic auth password - leave this and basic_auth_username blank for no auth>"
+cloudflare_account_id     = "<cloudflare account id>"
+cloudflare_api_token      = "<cloudflare api token>"
+cloudflare_zone_id        = "<cloudflare zone id>"
+ecs_service_desired_count = <desired count of ecs service, i.e. 1>
+ecs_task_cpu              = <desired ecs cpu value, i.e. 256, see: https://gist.github.com/matthewjberger/6edfff5649d297bcc454a295c552dc5a>
+ecs_task_memory           = <desired ecs memory value, i.e. 512>
+environment               = "<the environment deploying to, i.e. staging>"
+github_repository         = "<the github repository name>"
+rds_db_username           = "<the rds db username, i.e. dbuser>"
+rds_instance_type         = "<the rds instance type, i.e. db.t3.micro>"
