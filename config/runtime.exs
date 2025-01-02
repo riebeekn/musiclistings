@@ -39,6 +39,22 @@ pull_data_from_www? =
 config :music_listings, :pull_data_from_www?, String.to_existing_atom(pull_data_from_www?)
 
 if config_env() == :prod do
+  if credentials = System.get_env("DATABASE_CREDENTIALS") do
+    %{
+      "engine" => engine,
+      "host" => host,
+      "username" => username,
+      "password" => password,
+      "dbname" => dbname,
+      "port" => port
+    } = Jason.decode!(credentials)
+
+    dsn =
+      "#{engine}://#{URI.encode_www_form(username)}:#{URI.encode_www_form(password)}@#{host}:#{port}/#{dbname}"
+
+    System.put_env("DATABASE_URL", dsn)
+  end
+
   database_url =
     System.get_env("DATABASE_URL") ||
       raise """
@@ -48,8 +64,11 @@ if config_env() == :prod do
 
   maybe_ipv6 = if System.get_env("ECTO_IPV6") in ~w(true 1), do: [:inet6], else: []
 
+  maybe_db_ssl = if System.get_env("DB_SSL") in ~w(false 0), do: false, else: true
+
   config :music_listings, MusicListings.Repo,
-    # ssl: true,
+    ssl: maybe_db_ssl,
+    ssl_opts: [verify: :verify_none],
     url: database_url,
     pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
     socket_options: maybe_ipv6
