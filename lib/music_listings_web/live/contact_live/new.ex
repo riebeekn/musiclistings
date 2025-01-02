@@ -33,7 +33,7 @@ defmodule MusicListingsWeb.ContactLive.New do
         |> Turnstile.refresh()
         |> noreply()
 
-      {:error, _} ->
+      {:error, _error} ->
         socket
         |> put_flash(:error, "Please try submitting again")
         |> Turnstile.refresh()

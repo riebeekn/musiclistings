@@ -627,7 +627,7 @@ defmodule MusicListingsWeb.CoreComponents do
   attr :name, :string, required: true
   attr :class, :string, default: nil
 
-  def icon(%{name: "hero-" <> _} = assigns) do
+  def icon(%{name: "hero-" <> _postfix} = assigns) do
     ~H"""
     <span class={[@name, @class]} />
     """
