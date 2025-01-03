@@ -309,8 +309,8 @@ jobs:
           images: ${{ steps.ecr-login.outputs.registry }}/${{ vars.AWS_ECR_REPO }}
           # The release will be tagged with the branch and the short git sha (and latest if on main)
           tags: |
-            type=sha,prefix={{branch}}-
-            type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
+            type=sha,prefix=${{ github.ref_name != 'main' && 'branch-' || '' }}
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
 
       - name: Build, tag, and push to ECR
         id: docker-build
