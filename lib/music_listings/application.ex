@@ -7,6 +7,8 @@ defmodule MusicListings.Application do
 
   @impl true
   def start(_type, _args) do
+    {:ok, _} = EctoBootMigration.migrate(:music_listings)
+    
     children = [
       MusicListingsWeb.Telemetry,
       MusicListings.Repo,

@@ -54,7 +54,7 @@ defmodule MusicListings.Parsing.VenueParsers.GrossmansParser do
     regex = ~r/page\/(\d+)\/?$/
 
     case Regex.run(regex, url) do
-      [_, page_number] -> String.to_integer(page_number)
+      [_text, page_number] -> String.to_integer(page_number)
       _no_page_number -> nil
     end
   end
