@@ -20,7 +20,8 @@ module "vpc" {
   enable_dns_hostnames = true
   enable_dns_support   = true
   # Note: nat_gateway required for remote access via aws ecs execute-command
-  enable_nat_gateway = true
+  # and to open a DB tunnel.  They are expensive, so only enable if needed.
+  enable_nat_gateway = var.vpc_enable_nat_gateway
 }
 
 # Allows the private subnet to communicate with services
