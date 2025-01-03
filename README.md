@@ -97,6 +97,8 @@ See the `README.md` files located in each of the 3 projects for specific informa
 ### Remote access
 Remote access to the database and local `iex` sessions are accomplished via `ssm` and `aws ecs execute-command`.  Helper scripts are available to make it easy to connect.
 
+**Note:** a NAT gateway is required for this functionality to work but NAT gateways are rather expensive on AWS.  `.infrastructure/deployments` has a `vpc_enable_nat_gateway` variable so it is easy to turn the NAT gateway on and off.  It's suggested to keep it off unless requiring remote access.
+
 #### Database
 To access the database for an environment run the `.db_tunnel.sh` script passing in the name of environment you would like to connect to, for example:
 
