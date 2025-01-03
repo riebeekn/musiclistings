@@ -38,15 +38,25 @@ variable "environment" {
 }
 
 variable "basic_auth_username" {
-  description = "Username for basic authentication"
+  description = <<EOF
+    "Username for basic authentication, if this and basic_auth_password
+    are set to a non-empty value, basic auth will be enabled... default
+    to empty string to avoid accidental enabling of basic auth"
+  EOF
   type        = string
   sensitive   = true
+  default     = ""
 }
 
 variable "basic_auth_password" {
-  description = "Password for basic authentication"
+  description = <<EOF
+    "Password for basic authentication, if this and basic_auth_username
+    are set to a non-empty value, basic auth will be enabled... default
+    to empty string to avoid accidental enabling of basic auth"
+  EOF
   type        = string
   sensitive   = true
+  default     = ""
 }
 
 # Application vars
