@@ -309,8 +309,13 @@ jobs:
           images: ${{ steps.ecr-login.outputs.registry }}/${{ vars.AWS_ECR_REPO }}
           # The release will be tagged with the branch and the short git sha (and latest if on main)
           tags: |
-            type=raw,value=${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}-${{ steps.meta.outputs.short-sha }}
+            type=raw,value=${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}-${{ github.sha[0:7] }}
             type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
+          labels: |
+            org.opencontainers.image.title=${{ github.repository }}
+            org.opencontainers.image.description=Built by GitHub Actions
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.source=${{ github.repositoryUrl }}
 
       - name: Build, tag, and push to ECR
         id: docker-build
