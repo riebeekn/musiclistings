@@ -12,8 +12,8 @@ fi
 ENVIRONMENT=$1
 
 # Variables
-ECS_CLUSTER_NAME="music-listings-aws-${ENVIRONMENT}"
-TARGET_RDS_ENDPOINT="music-listings-aws-${ENVIRONMENT}-database.chnsm0veqbkc.us-east-1.rds.amazonaws.com"
+ECS_CLUSTER_NAME="musiclistings-${ENVIRONMENT}"
+TARGET_RDS_ENDPOINT="musiclistings-${ENVIRONMENT}-database.chnsm0veqbkc.us-east-1.rds.amazonaws.com"
 
 # Fetch the ECS Task ARN
 AWS_TASK_ARN=$(aws ecs list-tasks --cluster "${ECS_CLUSTER_NAME}" | jq -r '.taskArns[]')
