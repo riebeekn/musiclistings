@@ -12,8 +12,8 @@ fi
 ENVIRONMENT=$1
 
 # Variables
-ECS_CLUSTER_NAME="music-listings-aws-${ENVIRONMENT}"
-CONTAINER_NAME="music-listings-aws-${ENVIRONMENT}"
+ECS_CLUSTER_NAME="musiclistings-${ENVIRONMENT}"
+CONTAINER_NAME="musiclistings-${ENVIRONMENT}"
 
 # Fetch the ECS Task ARN
 AWS_TASK_ARN=$(aws ecs list-tasks --cluster "${ECS_CLUSTER_NAME}" | jq -r '.taskArns[]')
