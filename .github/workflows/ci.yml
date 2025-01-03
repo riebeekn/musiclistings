@@ -302,6 +302,10 @@ jobs:
         with:
           mask-password: "true"
 
+      - name: Get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v8
+
       - name: Build image metadata
         id: meta
         uses: docker/metadata-action@v5
@@ -309,8 +313,8 @@ jobs:
           images: ${{ steps.ecr-login.outputs.registry }}/${{ vars.AWS_ECR_REPO }}
           # The release will be tagged with the branch and the short git sha (and latest if on main)
           tags: |
-            type=sha,prefix=${{ github.ref_name != 'main' && 'branch-' || '' }}
-            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
+            type=sha,prefix=${{steps.branch-name.outputs.current_branch}}-
+            type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
 
       - name: Build, tag, and push to ECR
         id: docker-build
