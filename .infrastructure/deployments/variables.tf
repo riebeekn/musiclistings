@@ -122,6 +122,12 @@ variable "rds_encrypt_at_rest" {
   default     = false
 }
 
+variable "rds_allocated_storage" {
+  description = "Allocated storage in GB"
+  type        = number
+  default     = 5
+}
+
 # ECS vars
 variable "ecs_service_desired_count" {
   description = "The number of tasks to run for the ECS service"
