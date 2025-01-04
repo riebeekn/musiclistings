@@ -358,21 +358,21 @@ jobs:
           aws-region: ${{ vars.AWS_REGION }}
 
       - name: Skip non-main branch for prod
-        if: matrix.environment == 'prod' && github.ref_name != 'main'
+        # if: matrix.environment == 'prod' && github.ref_name != 'main'
         run: echo "Skipping prod deployment because the branch is not main."
         continue-on-error: true
 
       # This will download the task definition template managed by Terraform
       # and modify the family and image attributes.
       - name: Build ECS task definition
-        if: matrix.environment != 'prod' || github.ref_name == 'main'
+        # if: matrix.environment != 'prod' || github.ref_name == 'main'
         run: |
           aws ecs describe-task-definition --task-definition ${{vars.AWS_SERVICE_NAME_PREFIX}}-${{ matrix.environment }}-template --query taskDefinition > task-definition.json
           echo "`jq '.family="${{vars.AWS_SERVICE_NAME_PREFIX}}-${{ matrix.environment }}" | .containerDefinitions[0].image="${{ env.DOCKER_IMAGE }}"' task-definition.json`" > task-definition.json
 
 
       - name: Build CodeDeploy app spec
-        if: matrix.environment != 'prod' || github.ref_name == 'main'
+        # if: matrix.environment != 'prod' || github.ref_name == 'main'
         run: |
           cat <<SPEC >> apps-spec.yaml
 
@@ -389,7 +389,7 @@ jobs:
           SPEC
 
       - name: Deploy container
-        if: matrix.environment != 'prod' || github.ref_name == 'main'
+        # if: matrix.environment != 'prod' || github.ref_name == 'main'
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: task-definition.json
