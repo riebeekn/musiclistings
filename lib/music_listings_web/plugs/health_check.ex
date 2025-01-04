@@ -1,4 +1,7 @@
 defmodule MusicListingsWeb.Plugs.HealthCheck do
+  @moduledoc """
+  Health check plug, see: https://jola.dev/posts/health-checks-for-plug-and-phoenix
+  """
   import Plug.Conn
 
   def init(opts), do: opts
