@@ -21,268 +21,269 @@ permissions:
 
 jobs:
   # Build the code
-  # build:
-  #   runs-on: ubuntu-latest
-  #   name: Build
-  #   steps:
-  #     # Step: Check out the code.
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
-  #
-  #     # Step: Setup Elixir + Erlang image as the base.
-  #     - name: Set up Elixir
-  #       uses: erlef/setup-beam@v1
-  #       with:
-  #         version-file: .tool-versions
-  #         version-type: strict
-  #
-  #     # Step: Define how to cache deps. Restores existing cache if present.
-  #     - name: Cache deps
-  #       id: cache-deps
-  #       uses: actions/cache@v4
-  #       env:
-  #         cache-name: cache-elixir-deps
-  #       with:
-  #         path: deps
-  #         key: ${{ runner.os }}-mix-${{ env.cache-name }}-${{ hashFiles('**/mix.lock') }}
-  #         restore-keys: |
-  #           ${{ runner.os }}-mix-${{ env.cache-name }}-
-  #
-  #     # Step: Define how to cache the `_build` directory. After the first run,
-  #     # this speeds up tests runs a lot. This includes not re-compiling our
-  #     # project's downloaded deps every run.
-  #     - name: Cache compiled build
-  #       id: cache-build
-  #       uses: actions/cache@v4
-  #       env:
-  #         cache-name: cache-compiled-build
-  #       with:
-  #         path: _build
-  #         key: ${{ runner.os }}-mix-${{ env.cache-name }}-${{ hashFiles('**/mix.lock') }}
-  #         restore-keys: |
-  #           ${{ runner.os }}-mix-${{ env.cache-name }}-
-  #           ${{ runner.os }}-mix-
-  #
-  #     # Step: Download project dependencies. If unchanged, uses
-  #     # the cached version.
-  #     - name: Install dependencies
-  #       run: |
-  #         mix deps.get
-  #
-  #     # Step: Compile the project treating any warnings as errors.
-  #     # Customize this step if a different behavior is desired.
-  #     - name: Compiles without warnings
-  #       run: mix compile --warnings-as-errors
+  build:
+    runs-on: ubuntu-latest
+    name: Build
+    steps:
+      # Step: Check out the code.
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step: Setup Elixir + Erlang image as the base.
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          version-file: .tool-versions
+          version-type: strict
+
+      # Step: Define how to cache deps. Restores existing cache if present.
+      - name: Cache deps
+        id: cache-deps
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-elixir-deps
+        with:
+          path: deps
+          key: ${{ runner.os }}-mix-${{ env.cache-name }}-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-${{ env.cache-name }}-
+
+      # Step: Define how to cache the `_build` directory. After the first run,
+      # this speeds up tests runs a lot. This includes not re-compiling our
+      # project's downloaded deps every run.
+      - name: Cache compiled build
+        id: cache-build
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-compiled-build
+        with:
+          path: _build
+          key: ${{ runner.os }}-mix-${{ env.cache-name }}-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-${{ env.cache-name }}-
+            ${{ runner.os }}-mix-
+
+      # Step: Download project dependencies. If unchanged, uses
+      # the cached version.
+      - name: Install dependencies
+        run: |
+          mix deps.get
+
+      # Step: Compile the project treating any warnings as errors.
+      # Customize this step if a different behavior is desired.
+      - name: Compiles without warnings
+        run: mix compile --warnings-as-errors
 
   # Dialyzer check
-  # dialyzer:
-  #   runs-on: ubuntu-latest
-  #   needs: build
-  #   name: Dialyzer
-  #
-  #   steps:
-  #     # Step: Check out the code.
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
-  #
-  #     # Step: Setup Elixir + Erlang image as the base.
-  #     - name: Set up Elixir
-  #       uses: erlef/setup-beam@v1
-  #       with:
-  #         version-file: .tool-versions
-  #         version-type: strict
-  #
-  #     # Step: Grab deps from cache (as the deps cache is populated in the "build" job)
-  #     - name: Cache deps
-  #       id: cache-deps
-  #       uses: actions/cache@v4
-  #       env:
-  #         cache-name: cache-elixir-deps
-  #       with:
-  #         path: deps
-  #         key: ${{ runner.os }}-mix-${{ env.cache-name }}-${{ hashFiles('**/mix.lock') }}
-  #         restore-keys: |
-  #           ${{ runner.os }}-mix-${{ env.cache-name }}-
-  #
-  #     # Step: Grab the compiled build from the cache (as the build cache is populated in the "build" job)
-  #     - name: Cache compiled build
-  #       id: cache-build
-  #       uses: actions/cache@v4
-  #       env:
-  #         cache-name: cache-compiled-build
-  #       with:
-  #         path: _build
-  #         key: ${{ runner.os }}-mix-${{ env.cache-name }}-${{ hashFiles('**/mix.lock') }}
-  #         restore-keys: |
-  #           ${{ runner.os }}-mix-${{ env.cache-name }}-
-  #           ${{ runner.os }}-mix-
-  #
-  #     # Step: Grab the compiled build from the cache (as the build cache is populated in the "build" job)
-  #     - name: Cache compiled build
-  #       id: cache-dialyzer
-  #       uses: actions/cache@v4
-  #       env:
-  #         cache-name: cache-dialyzer
-  #       with:
-  #         path: _dialyzer
-  #         key: ${{ runner.os }}-dialyzer-${{ hashFiles('**/mix.lock') }}
-  #         restore-keys: |
-  #           ${{ runner.os }}-Dialyzer-
-  #
-  #     - name: Run Dialyzer
-  #       run: MIX_ENV=dev mix dialyzer
+  dialyzer:
+    runs-on: ubuntu-latest
+    needs: build
+    name: Dialyzer
+
+    steps:
+      # Step: Check out the code.
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step: Setup Elixir + Erlang image as the base.
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          version-file: .tool-versions
+          version-type: strict
+
+      # Step: Grab deps from cache (as the deps cache is populated in the "build" job)
+      - name: Cache deps
+        id: cache-deps
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-elixir-deps
+        with:
+          path: deps
+          key: ${{ runner.os }}-mix-${{ env.cache-name }}-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-${{ env.cache-name }}-
+
+      # Step: Grab the compiled build from the cache (as the build cache is populated in the "build" job)
+      - name: Cache compiled build
+        id: cache-build
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-compiled-build
+        with:
+          path: _build
+          key: ${{ runner.os }}-mix-${{ env.cache-name }}-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-${{ env.cache-name }}-
+            ${{ runner.os }}-mix-
+
+      # Step: Grab the compiled build from the cache (as the build cache is populated in the "build" job)
+      - name: Cache compiled build
+        id: cache-dialyzer
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-dialyzer
+        with:
+          path: _dialyzer
+          key: ${{ runner.os }}-dialyzer-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-Dialyzer-
+
+      - name: Run Dialyzer
+        run: MIX_ENV=dev mix dialyzer
 
   # Perform various auditing tasks such as checking formatting etc.
-  # audit:
-  #   runs-on: ubuntu-latest
-  #   needs: build
-  #   name: Audit
-  #
-  #   steps:
-  #     # Step: Check out the code.
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
-  #
-  #     # Step: Setup Elixir + Erlang image as the base.
-  #     - name: Set up Elixir
-  #       uses: erlef/setup-beam@v1
-  #       with:
-  #         version-file: .tool-versions
-  #         version-type: strict
-  #
-  #     # Step: Grab deps from cache (as the deps cache is populated in the "build" job)
-  #     - name: Cache deps
-  #       id: cache-deps
-  #       uses: actions/cache@v4
-  #       env:
-  #         cache-name: cache-elixir-deps
-  #       with:
-  #         path: deps
-  #         key: ${{ runner.os }}-mix-${{ env.cache-name }}-${{ hashFiles('**/mix.lock') }}
-  #         restore-keys: |
-  #           ${{ runner.os }}-mix-${{ env.cache-name }}-
-  #
-  #     # Step: Grab the compiled build from the cache (as the build cache is populated in the "build" job)
-  #     - name: Cache compiled build
-  #       id: cache-build
-  #       uses: actions/cache@v4
-  #       env:
-  #         cache-name: cache-compiled-build
-  #       with:
-  #         path: _build
-  #         key: ${{ runner.os }}-mix-${{ env.cache-name }}-${{ hashFiles('**/mix.lock') }}
-  #         restore-keys: |
-  #           ${{ runner.os }}-mix-${{ env.cache-name }}-
-  #           ${{ runner.os }}-mix-
-  #
-  #     # Step: Check that the checked in code has already been formatted.
-  #     # This step fails if something was found unformatted.
-  #     - name: Check Formatting
-  #       run: mix format --check-formatted
-  #     # Step: Check for cycles, don't exceed 20
-  #     - name: Check cycles
-  #       run: mix xref graph --format cycles --fail-above 20
-  #     # Step: Check for transitive compilation dependencies
-  #     - name: Check for transitive compilation dependencies
-  #       run: mix xref graph --label compile-connected --fail-above 1
-  #     # Step: Run Credo checks
-  #     - name: Run Credo
-  #       run: mix credo --strict
-  #       # Step: Check for any packages with known security issues
-  #     - name: Check for dependency security vulnerabilities
-  #       run: mix deps.audit
-  #     # Step: Check for any retired packages
-  #     - name: Check for retired packages
-  #       run: mix hex.audit
-  #     # Step: Check for un-used packages
-  #     - name: Check for un-used packages
-  #       run: mix deps.unlock --check-unused
-  #     # Step: Run Sobelow
-  #     - name: Check for Sobelow security vulnerabilities
-  #       run: mix sobelow --config --exit low
+  audit:
+    runs-on: ubuntu-latest
+    needs: build
+    name: Audit
+
+    steps:
+      # Step: Check out the code.
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step: Setup Elixir + Erlang image as the base.
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          version-file: .tool-versions
+          version-type: strict
+
+      # Step: Grab deps from cache (as the deps cache is populated in the "build" job)
+      - name: Cache deps
+        id: cache-deps
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-elixir-deps
+        with:
+          path: deps
+          key: ${{ runner.os }}-mix-${{ env.cache-name }}-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-${{ env.cache-name }}-
+
+      # Step: Grab the compiled build from the cache (as the build cache is populated in the "build" job)
+      - name: Cache compiled build
+        id: cache-build
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-compiled-build
+        with:
+          path: _build
+          key: ${{ runner.os }}-mix-${{ env.cache-name }}-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-${{ env.cache-name }}-
+            ${{ runner.os }}-mix-
+
+      # Step: Check that the checked in code has already been formatted.
+      # This step fails if something was found unformatted.
+      - name: Check Formatting
+        run: mix format --check-formatted
+      # Step: Check for cycles, don't exceed 20
+      - name: Check cycles
+        run: mix xref graph --format cycles --fail-above 20
+      # Step: Check for transitive compilation dependencies
+      - name: Check for transitive compilation dependencies
+        run: mix xref graph --label compile-connected --fail-above 1
+      # Step: Run Credo checks
+      - name: Run Credo
+        run: mix credo --strict
+        # Step: Check for any packages with known security issues
+      - name: Check for dependency security vulnerabilities
+        run: mix deps.audit
+      # Step: Check for any retired packages
+      - name: Check for retired packages
+        run: mix hex.audit
+      # Step: Check for un-used packages
+      - name: Check for un-used packages
+        run: mix deps.unlock --check-unused
+      # Step: Run Sobelow
+      - name: Check for Sobelow security vulnerabilities
+        run: mix sobelow --config --exit low
 
   # Run the tests
-  # test:
-  #   # Set up a Postgres DB service. By default, Phoenix applications
-  #   # use Postgres. This creates a database for running tests.
-  #   # Additional services can be defined here if required.
-  #   services:
-  #     db:
-  #       image: postgres:12
-  #       ports: ["5432:5432"]
-  #       env:
-  #         POSTGRES_PASSWORD: postgres
-  #       options: >-
-  #         --health-cmd pg_isready
-  #         --health-interval 10s
-  #         --health-timeout 5s
-  #         --health-retries 5
-  #   runs-on: ubuntu-latest
-  #   needs: build
-  #   name: Test
-  #
-  #   steps:
-  #     # Step: Check out the code.
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
-  #
-  #     # Step: Setup Elixir + Erlang image as the base.
-  #     - name: Set up Elixir
-  #       uses: erlef/setup-beam@v1
-  #       with:
-  #         version-file: .tool-versions
-  #         version-type: strict
-  #
-  #     # Step: Grab deps from cache (as the deps cache is populated in the "build" job)
-  #     - name: Cache deps
-  #       id: cache-deps
-  #       uses: actions/cache@v4
-  #       env:
-  #         cache-name: cache-elixir-deps
-  #       with:
-  #         path: deps
-  #         key: ${{ runner.os }}-mix-${{ env.cache-name }}-${{ hashFiles('**/mix.lock') }}
-  #         restore-keys: |
-  #           ${{ runner.os }}-mix-${{ env.cache-name }}-
-  #
-  #     # Step: Grab the compiled build from the cache (as the build cache is populated in the "build" job)
-  #     - name: Cache compiled build
-  #       id: cache-build
-  #       uses: actions/cache@v4
-  #       env:
-  #         cache-name: cache-compiled-build
-  #       with:
-  #         path: _build
-  #         key: ${{ runner.os }}-mix-${{ env.cache-name }}-${{ hashFiles('**/mix.lock') }}
-  #         restore-keys: |
-  #           ${{ runner.os }}-mix-${{ env.cache-name }}-
-  #           ${{ runner.os }}-mix-
-  #
-  #     # Step: Execute the tests.
-  #     - name: Run tests
-  #       run: |
-  #         mix ecto.create
-  #         mix ecto.migrate
-  #         mix coveralls
+  test:
+    # Set up a Postgres DB service. By default, Phoenix applications
+    # use Postgres. This creates a database for running tests.
+    # Additional services can be defined here if required.
+    services:
+      db:
+        image: postgres:12
+        ports: ["5432:5432"]
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    runs-on: ubuntu-latest
+    needs: build
+    name: Test
+
+    steps:
+      # Step: Check out the code.
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step: Setup Elixir + Erlang image as the base.
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          version-file: .tool-versions
+          version-type: strict
+
+      # Step: Grab deps from cache (as the deps cache is populated in the "build" job)
+      - name: Cache deps
+        id: cache-deps
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-elixir-deps
+        with:
+          path: deps
+          key: ${{ runner.os }}-mix-${{ env.cache-name }}-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-${{ env.cache-name }}-
+
+      # Step: Grab the compiled build from the cache (as the build cache is populated in the "build" job)
+      - name: Cache compiled build
+        id: cache-build
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-compiled-build
+        with:
+          path: _build
+          key: ${{ runner.os }}-mix-${{ env.cache-name }}-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-${{ env.cache-name }}-
+            ${{ runner.os }}-mix-
+
+      # Step: Execute the tests.
+      - name: Run tests
+        run: |
+          mix ecto.create
+          mix ecto.migrate
+          mix coveralls
 
   # Deploy to Fly
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   needs: [audit, test]
-  #   name: Deploy to Fly
-  #   if: github.ref == 'refs/heads/main'
-  #
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: superfly/flyctl-actions/setup-flyctl@master
-  #     - run: flyctl deploy --remote-only
-  #       env:
-  #         FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [audit, test]
+    name: Deploy to Fly
+    if: github.ref == 'refs/heads/main' && env.DEPLOY_TO_FLY == 'true'
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
   build_and_push_to_ecr:
     runs-on: ubuntu-latest
-    # needs: [audit, test]
+    needs: [audit, test]
     name: "Push Image to ECR"
+    if: env.DEPLOY_TO_AWS == 'true'
     outputs:
       aws_region: ${{ vars.AWS_REGION }}
       docker_image: ${{ steps.ecr-login.outputs.registry }}/${{ vars.AWS_ECR_REPO }}@${{ steps.docker-build.outputs.digest }}
@@ -330,6 +331,7 @@ jobs:
   setup_matrix:
     runs-on: ubuntu-latest
     name: "Setup Deployment Matrix"
+    if: env.DEPLOY_TO_AWS == 'true'
     outputs:
       matrix: ${{ steps.setup_matrix.outputs.matrix_output }}
     steps:
@@ -350,6 +352,7 @@ jobs:
       - build_and_push_to_ecr
       - setup_matrix
     name: "Deploy to ECS"
+    if: env.DEPLOY_TO_AWS == 'true'
     steps:
       - name: Setup AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
