@@ -50,7 +50,7 @@ resource "aws_db_instance" "db" {
   username                = var.rds_db_username
   password                = random_password.db_password.result
   db_name                 = replace(local.name, "-", "_")
-  allocated_storage       = 20
+  allocated_storage       = var.rds_allocated_storage
   storage_type            = "gp2"
   engine                  = "postgres"
   engine_version          = "15.10"
