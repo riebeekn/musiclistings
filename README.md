@@ -3,8 +3,6 @@
 Source code for [https://torontomusiclistings.com](https://torontomusiclistings.com), a music listings aggregator for the Toronto area
 written in [Elixir](https://elixir-lang.org/) and [Phoenix LiveView](https://hexdocs.pm/phoenix_live_view/welcome.html).
 
-Events are populated via a nightly [Oban](https://github.com/oban-bg/oban) job.
-
 ## Table of Contents
 
 - [Running the app locally](#running-the-app-locally)
@@ -14,7 +12,8 @@ Events are populated via a nightly [Oban](https://github.com/oban-bg/oban) job.
 - [Crawling and Event population](#crawling-and-event-population)
   - [Parsing modules](#parsing-modules)
   - [Adding a new venue](#adding-a-new-venue)
-- [Deployment and Infrastructure](#deployment-and-infrastructure)
+- [Hosting and Infrastructure](#hosting-and-infrastructure)
+  - [GitHub Actions](#github-actions)
   - [Terraform](#terraform)
   - [Remote access](#remote-access)
     - [Database](#database)
@@ -67,6 +66,8 @@ The UI is a standard Phoenix LiveView application.
 Venue filtering persistence is accomplished via local storage, see the `VenueFilter` hook in `assets/js/app.js` which gets called from `lib/music_listings_web/live/event_live/index.ex`.
 
 ## Crawling and Event population
+Events are populated via a nightly [Oban](https://github.com/oban-bg/oban) job.
+
 Event population is initiated via the `lib/music_listings/workers/data_retrieval_worker.ex` Oban job.  The Oban job in turn hands off the population of events to `lib/music_listings/crawler.ex`.  This module performs retrieval, parsing and storage of events.
 
 Once event population has concluded an email is sent to the configured `ADMIN_EMAIL` with details of the crawl.  Results are also captured in the `crawl_summaries`, `venue_crawl_summaries` and `crawl_errors` database tables.
@@ -79,25 +80,35 @@ Any errors encountered during parsing will be inserted into the `crawl_errors` d
 ### Adding a new venue
 In order to track events for a new venue, a new parser for the venue needs to be created at `lib/music_listings/parsing/venue_parsers`.  The venue also needs to be added to the `venues` database table.  Example data files should be added to `test/data` and a test file for the new parser should be added to `test/music_listings/parsing/venue_parsers`.
 
-## Deployment and Infrastructure
-Deployment and infrastructure is handled by a combination of Terraform and GitHub actions.  The application is deployed to AWS with CloudFlare as a reverse proxy.
+## Hosting and Infrastructure
+The application is currently hosted on [fly.io](https://fly.io/).
 
-The decision to use AWS was as a learning exercise, a more cost effective solution would be to use a PAAS or a DO droplet or something.
+As a 'fun' experiment I decided to implement an [AWS](https://aws.amazon.com) solution as well.  The decision to use AWS was more as a learning exercise, as it isn't very cost effective for this type of hobby application.
+
+For both the `fly.io` and `AWS` solutions CloudFlare is used as a reverse proxy.
+
+Deployment and infrastructure setup is handled by a combination of Terraform and GitHub Actions.  Unfortunately `fly.io` does not have a Terraform provider so the `fly` infrastructure was set up manually.
+
+### GitHub Actions
+GitHub actions control deployments and are located in `.github/workflows/ci.yml`.  These are relatively standard I think.  Since we have the ability to deploy to multiple hosts (fly and AWS) the deployment actions are dependent on 2 GitHub Action variables:
+
+- `DEPLOY_TO_AWS`: if set to true GHA will attempt to deploy to AWS
+- `DEPLOY_TO_FLY`: if set to true GHA will attempt to deploy to Fly
+
+Both (or neither) of these variables can be set, they are not mutually exclusive.
 
 ### Terraform
 The Terraform setup is largely based on this excellent example Repo: [https://github.com/danschultzer/elixir-terraform-aws-ecs-example](https://github.com/danschultzer/elixir-terraform-aws-ecs-example).
 
 There are 3 Terraform projects which serve the following purposes:
-- `.infrastructure/core` - Contains the core infrastructure which is shared across different environments (i.e. staging, prod etc.).
-- `.infrastructure/deployments` - Contains environment specific infrastructure, for example `qa`, `staging`, or `prod` infrastructure.
+- `.infrastructure/aws/core` - Contains the core infrastructure which is shared across different environments (i.e. staging, prod etc.).
+- `.infrastructure/aws/deployments` - Contains environment specific infrastructure, for example `qa`, `staging`, or `prod` infrastructure.
 - `.infrastructure/production` - Represents production infrastructure that was set up manually and has since been imported into Terraform.
 
 See the `README.md` files located in each of the 3 projects for specific information on running the Terraform deployments.  In general the `production` project should never need to be run.  The `core` project needs to be run once to bring up the shared infrastructure, and then the `deployments` project can be run as needed.
 
 ### Remote access
 Remote access to the database and local `iex` sessions are accomplished via `ssm` and `aws ecs execute-command`.  Helper scripts are available to make it easy to connect.
-
-**Note:** a NAT gateway is required for this functionality to work but NAT gateways are rather expensive on AWS.  `.infrastructure/deployments` has a `vpc_enable_nat_gateway` variable so it is easy to turn the NAT gateway on and off.  It's suggested to keep it off unless requiring remote access.
 
 #### Database
 To access the database for an environment run the `.db_tunnel.sh` script passing in the name of environment you would like to connect to, for example:
