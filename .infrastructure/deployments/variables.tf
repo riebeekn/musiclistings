@@ -91,14 +91,6 @@ variable "vpc_availability_zones" {
   description = "Availability zones for subnets"
 }
 
-variable "vpc_enable_nat_gateway" {
-  description = <<EOF
-      "Whether to enable nat_gateway or not, these are required for
-      remote access via aws ecs execute-command and to open a DB tunnel.
-      They are expensive, so only enable if needed."
-    EOF
-}
-
 # RDS vars
 variable "rds_db_username" {
   description = "The RDS database username"

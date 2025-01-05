@@ -14,4 +14,3 @@ environment               = "<the environment deploying to, i.e. staging>"
 github_repository         = "<the github repository name>"
 rds_db_username           = "<the rds db username, i.e. dbuser>"
 rds_instance_type         = "<the rds instance type, i.e. db.t3.micro>"
-vpc_enable_nat_gateway    = true | false ...for remote access to the database and iex this must be set to true, but is expensive so recommended to be set to false except when requiring remote access.
