@@ -1,11 +1,11 @@
 defmodule MusicListingsWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :music_listings
 
-  plug MusicListingsWeb.Plugs.HealthCheck
+  # if Mix.env() == :prod do
+    plug Plug.SSL, rewrite_on: [:x_forwarded_host, :x_forwarded_port, :x_forwarded_proto]
+  # end
 
-  if Mix.env() == :prod do
-    plug Plug.SSL, force_ssl: true, rewrite_on: [:x_forwarded_host, :x_forwarded_port, :x_forwarded_proto]
-  end
+  plug MusicListingsWeb.Plugs.HealthCheck
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
