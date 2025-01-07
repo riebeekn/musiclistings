@@ -96,7 +96,8 @@ if config_env() == :prod do
     # - change the health check in terraform
     # - figure out how this will work with fly deploys
     # check_origin: ["https://prod.torontomusiclistings.com"],
-    check_origin: [host],
+    # check_origin: [host],
+    check_origin: ["https://#{host}"],
     url: [host: host, port: 443, scheme: "https"],
     http: [
       # Enable IPv6 and bind on all interfaces.
