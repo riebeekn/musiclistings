@@ -1,7 +1,12 @@
 defmodule MusicListingsWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :music_listings
 
+  # Health Check before SSL plug as HC is HTTP not HTTPS
   plug MusicListingsWeb.Plugs.HealthCheck
+
+  if Mix.env() == :prod do
+    plug Plug.SSL, rewrite_on: [:x_forwarded_host, :x_forwarded_port, :x_forwarded_proto]
+  end
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
