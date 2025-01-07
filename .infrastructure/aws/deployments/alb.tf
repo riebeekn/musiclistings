@@ -42,9 +42,7 @@ resource "aws_lb_target_group" "app" {
   health_check {
     enabled = true
     path    = "/health_check"
-    # TODO: get health check in app working with HTTP so can
-    # remove the 301 matcher
-    matcher = "200,301"
+    matcher = "200"
   }
 }
 
