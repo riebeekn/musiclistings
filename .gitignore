@@ -45,3 +45,9 @@ _dialyzer
 notes.txt
 
 *.xlsx
+
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.txt
