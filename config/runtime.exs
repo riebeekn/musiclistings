@@ -39,6 +39,7 @@ pull_data_from_www? =
 config :music_listings, :pull_data_from_www?, String.to_existing_atom(pull_data_from_www?)
 
 if config_env() == :prod do
+  # AWS version
   if credentials = System.get_env("DATABASE_CREDENTIALS") do
     %{
       "engine" => engine,
@@ -53,25 +54,42 @@ if config_env() == :prod do
       "#{engine}://#{URI.encode_www_form(username)}:#{URI.encode_www_form(password)}@#{host}:#{port}/#{dbname}"
 
     System.put_env("DATABASE_URL", dsn)
+
+    database_url =
+      System.get_env("DATABASE_URL") ||
+        raise """
+        environment variable DATABASE_URL is missing.
+        For example: ecto://USER:PASS@HOST/DATABASE
+        """
+
+    maybe_ipv6 = if System.get_env("ECTO_IPV6") in ~w(true 1), do: [:inet6], else: []
+
+    maybe_db_ssl = if System.get_env("DB_SSL") in ~w(false 0), do: false, else: true
+
+    config :music_listings, MusicListings.Repo,
+      ssl: maybe_db_ssl,
+      ssl_opts: [verify: :verify_none],
+      url: database_url,
+      pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+      socket_options: maybe_ipv6
+  else
+    # Fly version
+    database_url =
+      System.get_env("DATABASE_URL") ||
+        raise """
+        environment variable DATABASE_URL is missing.
+        For example: ecto://USER:PASS@HOST/DATABASE
+        """
+
+    maybe_ipv6 = if System.get_env("ECTO_IPV6") in ~w(true 1), do: [:inet6], else: []
+
+    maybe_db_ssl = if System.get_env("DB_SSL") in ~w(false 0), do: false, else: true
+
+    config :music_listings, MusicListings.Repo,
+      url: database_url,
+      pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+      socket_options: maybe_ipv6
   end
-
-  database_url =
-    System.get_env("DATABASE_URL") ||
-      raise """
-      environment variable DATABASE_URL is missing.
-      For example: ecto://USER:PASS@HOST/DATABASE
-      """
-
-  maybe_ipv6 = if System.get_env("ECTO_IPV6") in ~w(true 1), do: [:inet6], else: []
-
-  maybe_db_ssl = if System.get_env("DB_SSL") in ~w(false 0), do: false, else: true
-
-  config :music_listings, MusicListings.Repo,
-    ssl: maybe_db_ssl,
-    ssl_opts: [verify: :verify_none],
-    url: database_url,
-    pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
-    socket_options: maybe_ipv6
 
   # The secret key base is used to sign/encrypt cookies and other secrets.
   # A default value is used in config/dev.exs and config/test.exs but you
@@ -91,7 +109,11 @@ if config_env() == :prod do
   config :music_listings, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
   config :music_listings, MusicListingsWeb.Endpoint,
-    check_origin: [:conn, "https://#{host}"],
+    check_origin: [
+      "https://torontomusiclistings.com",
+      "https://music-listings.fly.dev",
+      "https://#{host}"
+    ],
     url: [host: host, port: 443, scheme: "https"],
     http: [
       # Enable IPv6 and bind on all interfaces.
