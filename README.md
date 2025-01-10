@@ -15,7 +15,7 @@ written in [Elixir](https://elixir-lang.org/) and [Phoenix LiveView](https://hex
 - [Hosting and Infrastructure](#hosting-and-infrastructure)
   - [GitHub Actions](#github-actions)
   - [Terraform](#terraform)
-  - [Remote access](#remote-access)
+  - [AWS Remote access](#aws-remote-access)
     - [Database](#database)
     - [IEX](#iex)
     - [Trouble shooting](#trouble-shooting)
@@ -33,16 +33,16 @@ written in [Elixir](https://elixir-lang.org/) and [Phoenix LiveView](https://hex
 variables.
   - Environment variables:
     - `ADMIN_EMAIL` - the email address the application will send communications to.  The application sends an email summary of the nightly event population runs and also when an event is submitted via the UI.  In development these emails will not be sent but instead be available at [http://localhost:4000/dev/mailbox](http://localhost:4000/dev/mailbox).  See [http://localhost:4000/dev/gallery](http://localhost:4000/dev/gallery) for a preview of the emails.
-    - `PULL_DATA_FROM_WWW` - if true will scrape events from the web, when false will use the local files located in `test/data`.
+    - `PULL_DATA_FROM_WWW` - if true will scrape events from the web, when false will use the local files located in `/test/data`.
 - Run the server (`iex -S mix phx.server`).  Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 - Events are populated via an Oban Job at 7am UTC.
-- To manually populate the events, run the following from the IEx terminal: `MusicListings.Workers.DataRetrievalWorker.perform(%{})`.
+- To manually populate the events, run the worker directly from `iex`: `MusicListings.Workers.DataRetrievalWorker.perform(%{})`.
 - To run the tests: `mix test`.
 
 ## Admin functionality
-Currently there is very limited admin functionality available (just the ability to delete events).  The Admin functionality is only available when logged in to the application.  
+Currently there is limited admin functionality (just the ability to delete events).  The Admin functionality is only available when logged in to the application.  
 
-User management is handled by [Phx Gen Auth](https://hexdocs.pm/phoenix/mix_phx_gen_auth.html).  Much of the UI component of `Phx Gen Auth` has been removed as there is no need for users to create accounts etc.  So the admin user needs to be created via `iex`, i.e. open an `iex` session and run the following:
+User management is handled by [Phx Gen Auth](https://hexdocs.pm/phoenix/mix_phx_gen_auth.html).  Much of the UI component of `Phx Gen Auth` has been removed as there is no need for users to create accounts etc.  As a result the admin user needs to be created via `iex`, i.e. open an `iex` session and run the following:
 ```
 MusicListings.Accounts.register_user(%{email: "bob_admin@example.com", password: "some_password"})
 ```
@@ -72,6 +72,8 @@ Event population is initiated via the `lib/music_listings/workers/data_retrieval
 
 Once event population has concluded an email is sent to the configured `ADMIN_EMAIL` with details of the crawl.  Results are also captured in the `crawl_summaries`, `venue_crawl_summaries` and `crawl_errors` database tables.
 
+The crawler implementation is not very memory efficient.  A list of `payload` structs are built up in memory for each event being parsed.  This might be worth refactoring in the future.
+
 ### Parsing modules
 The code that performs event parsing for individual venues is located in `lib/music_listings/parsing/venue_parsers`.  Each venue has a parser and parsers implement the `lib/music_listings/parsing/venue_parser.ex` behaviour.
 
@@ -83,14 +85,25 @@ In order to track events for a new venue, a new parser for the venue needs to be
 ## Hosting and Infrastructure
 The application is currently hosted on [fly.io](https://fly.io/).
 
-As a 'fun' experiment I decided to implement an [AWS](https://aws.amazon.com) solution as well.  The decision to use AWS was more as a learning exercise, as it isn't very cost effective for this type of hobby application.
+As a 'fun' experiment I decided to implement an [AWS](https://aws.amazon.com) solution as well.  The decision to use AWS was more as a learning exercise, and it isn't very cost effective for a hobby application so for now am sticking with `fly`.  I'm sure I could reduce costs by re-architecting the application and / or infrastructure set-up.  As things stand, approximate daily costs for `AWS` seem to be:
+
+| Service                      | Cost      |
+| ---------------------------- | --------- |
+| VPC                          |   $2.28   |
+| Elastic Load Balancing       |   $0.54   |
+| Relational Database Service  |   $0.45   |
+| Elastic Container Service    |   $0.35   |
+| EC2-Instances                |   $0.20   |
+| Secrets Manager              |   $0.06   |
+| EC2-Other                    |   $0.02   |
+| **Total**                    | **$3.90** |
 
 For both the `fly.io` and `AWS` solutions CloudFlare is used as a reverse proxy.
 
 Deployment and infrastructure setup is handled by a combination of Terraform and GitHub Actions.  Unfortunately `fly.io` does not have a Terraform provider so the `fly` infrastructure was set up manually.
 
 ### GitHub Actions
-GitHub actions control deployments and are located in `.github/workflows/ci.yml`.  These are relatively standard I think.  Since we have the ability to deploy to multiple hosts (fly and AWS) the deployment actions are dependent on 2 GitHub Action variables:
+GitHub actions control deployments and are located in `.github/workflows/ci.yml`.  Since we have the ability to deploy to multiple hosts (fly and AWS) the deployment actions are dependent on 2 GitHub Action variables:
 
 - `DEPLOY_TO_AWS`: if set to true GHA will attempt to deploy to AWS
 - `DEPLOY_TO_FLY`: if set to true GHA will attempt to deploy to Fly
@@ -101,13 +114,13 @@ Both (or neither) of these variables can be set, they are not mutually exclusive
 The Terraform setup is largely based on this excellent example Repo: [https://github.com/danschultzer/elixir-terraform-aws-ecs-example](https://github.com/danschultzer/elixir-terraform-aws-ecs-example).
 
 There are 3 Terraform projects which serve the following purposes:
-- `.infrastructure/aws/core` - Contains the core infrastructure which is shared across different environments (i.e. staging, prod etc.).
-- `.infrastructure/aws/deployments` - Contains environment specific infrastructure, for example `qa`, `staging`, or `prod` infrastructure.
+- `.infrastructure/aws/core` - Contains the core AWS infrastructure which is shared across different environments (i.e. staging, prod etc.).
+- `.infrastructure/aws/deployments` - Contains environment specific AWS infrastructure, for example `qa`, `staging`, or `prod` infrastructure.
 - `.infrastructure/production` - Represents production infrastructure that was set up manually and has since been imported into Terraform.
 
 See the `README.md` files located in each of the 3 projects for specific information on running the Terraform deployments.  In general the `production` project should never need to be run.  The `core` project needs to be run once to bring up the shared infrastructure, and then the `deployments` project can be run as needed.
 
-### Remote access
+### AWS Remote access
 Remote access to the database and local `iex` sessions are accomplished via `ssm` and `aws ecs execute-command`.  Helper scripts are available to make it easy to connect.
 
 #### Database
@@ -187,7 +200,7 @@ Remote access requires specific settings both locally (you need the AWS CLI inst
 There is handy check command available.  First determine the task id of the AWS task you are attempting to connect to, i.e.
 
 ```
-aws ecs list-tasks --cluster "music-listings-staging"
+aws ecs list-tasks --cluster "musiclistings-staging"
 ```
 
 This will output something similar to:
@@ -195,7 +208,7 @@ This will output something similar to:
 ```
 {
     "taskArns": [
-        "arn:aws:ecs:<region>:<aws account id>:task/music-listings-staging/<task id>"
+        "arn:aws:ecs:<region>:<aws account id>:task/musiclistings-staging/<task id>"
     ]
 }
 ```
@@ -203,7 +216,7 @@ This will output something similar to:
 Now run:
 
 ```
-bash <( curl -Ls https://raw.githubusercontent.com/aws-containers/amazon-ecs-exec-checker/main/check-ecs-exec.sh ) music-listings-staging <task id>
+bash <( curl -Ls https://raw.githubusercontent.com/aws-containers/amazon-ecs-exec-checker/main/check-ecs-exec.sh ) musiclistings-staging <task id>
 ```
 
 This will present information regarding whether you have remote access.
