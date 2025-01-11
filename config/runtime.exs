@@ -83,8 +83,6 @@ if config_env() == :prod do
 
     maybe_ipv6 = if System.get_env("ECTO_IPV6") in ~w(true 1), do: [:inet6], else: []
 
-    maybe_db_ssl = if System.get_env("DB_SSL") in ~w(false 0), do: false, else: true
-
     config :music_listings, MusicListings.Repo,
       url: database_url,
       pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
