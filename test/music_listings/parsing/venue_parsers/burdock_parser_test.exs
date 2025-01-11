@@ -6,25 +6,25 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParserTest do
   alias MusicListings.Parsing.VenueParsers.BurdockParser
 
   setup do
-    index_file_path = Path.expand("#{File.cwd!()}/test/data/burdock/index.html")
+    index_file_path = Path.expand("#{File.cwd!()}/test/data/burdock/index.json")
 
     single_event_file_path =
-      Path.expand("#{File.cwd!()}/test/data/burdock/single_event.html")
+      Path.expand("#{File.cwd!()}/test/data/burdock/single_event.json")
 
-    index_html = File.read!(index_file_path)
+    index_html = index_file_path |> File.read!() |> Jason.decode!()
 
     event =
       single_event_file_path
       |> File.read!()
-      |> BurdockParser.events()
-      |> List.first()
+      |> Jason.decode!()
 
     %{index_html: index_html, event: event}
   end
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://burdockbrewery.com/pages/music-hall" == BurdockParser.source_url()
+      assert "https://broker.eventscalendar.co/api/eventbrite/next?count=20&from=1736586000000&project=proj_T8vacNv8cWWeEQAQwLKHb&calendar=103809367271" ==
+               BurdockParser.source_url()
     end
   end
 
@@ -32,7 +32,7 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParserTest do
     test "returns expected events", %{index_html: index_html} do
       events = BurdockParser.events(index_html)
 
-      assert 25 = Enum.count(events)
+      assert 20 = Enum.count(events)
     end
   end
 
@@ -44,26 +44,26 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "burdock_2024_09_29_14_00_00" == BurdockParser.event_id(event)
+      assert "1145157650359" == BurdockParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "burdock_2024_09_29_14_00_00" == BurdockParser.ignored_event_id(event)
+      assert "1145157650359" == BurdockParser.ignored_event_id(event)
     end
   end
 
   describe "event_title/1" do
     test "returns event title", %{event: event} do
-      assert "Gaucho: The Music of Steely Dan" == BurdockParser.event_title(event)
+      assert "Maïa Davies with Havelin" == BurdockParser.event_title(event)
     end
   end
 
   describe "performers/1" do
     test "returns the event performers", %{event: event} do
       assert %Performers{
-               headliner: "Gaucho: The Music of Steely Dan",
+               headliner: "Maïa Davies with Havelin",
                openers: []
              } == BurdockParser.performers(event)
     end
@@ -71,7 +71,7 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParserTest do
 
   describe "event_date/1" do
     test "returns the event date", %{event: event} do
-      assert ~D[2024-09-29] == BurdockParser.event_date(event)
+      assert ~D[2025-03-07] == BurdockParser.event_date(event)
     end
   end
 
@@ -83,13 +83,13 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParserTest do
 
   describe "event_time/1" do
     test "returns the event start time", %{event: event} do
-      assert ~T[14:00:00] == BurdockParser.event_time(event)
+      assert nil == BurdockParser.event_time(event)
     end
   end
 
   describe "price/1" do
     test "returns the event price", %{event: event} do
-      assert %Price{format: :fixed, lo: Decimal.new("15.00"), hi: Decimal.new("15.00")} ==
+      assert %Price{format: :unknown, lo: nil, hi: nil} ==
                BurdockParser.price(event)
     end
   end
@@ -102,14 +102,15 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParserTest do
 
   describe "ticket_url/1" do
     test "returns the event ticket url", %{event: event} do
-      assert "https://burdockbrewery.com/products/gaucho-the-music-of-steely-dan" ==
+      assert "https://eventbrite.com/tickets-external?eid=1145157650359" ==
                BurdockParser.ticket_url(event)
     end
   end
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert nil == BurdockParser.details_url(event)
+      assert "https://www.eventbrite.ca/e/maia-davies-with-havelin-tickets-1145157650359" ==
+               BurdockParser.details_url(event)
     end
   end
 end

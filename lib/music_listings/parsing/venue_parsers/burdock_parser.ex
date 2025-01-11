@@ -4,16 +4,16 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
-  import Meeseeks.CSS
-
   alias MusicListings.HttpClient
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
-  alias MusicListings.Parsing.Selectors
+  alias MusicListingsUtilities.DateHelpers
 
   @impl true
-  def source_url, do: "https://burdockbrewery.com/pages/music-hall"
+  def source_url,
+    do:
+      "https://broker.eventscalendar.co/api/eventbrite/next?count=20&from=1736586000000&project=proj_T8vacNv8cWWeEQAQwLKHb&calendar=103809367271"
 
   @impl true
   def retrieve_events_fun do
@@ -21,17 +21,13 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParser do
   end
 
   @impl true
-  def example_data_file_location, do: "test/data/burdock/index.html"
+  def example_data_file_location, do: "test/data/burdock/index.json"
 
   @impl true
   def events(body) do
-    body
-    |> Selectors.all_matches(css(".product-item.small--one-whole"))
-    |> Enum.reject(&event_missing_date?/1)
-  end
+    body = ParseHelpers.maybe_decode!(body)
 
-  defp event_missing_date?(event) do
-    Selectors.text(event, css(".product-vendorgrid")) == ""
+    body["events"]
   end
 
   @impl true
@@ -41,10 +37,7 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParser do
 
   @impl true
   def event_id(event) do
-    date = event_date(event)
-    time = event_time(event)
-
-    ParseHelpers.build_id_from_venue_and_datetime("burdock", date, time)
+    event["id"]
   end
 
   @impl true
@@ -54,7 +47,7 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParser do
 
   @impl true
   def event_title(event) do
-    Selectors.text(event, css(".product__grid__title"))
+    event["title"]
   end
 
   @impl true
@@ -65,10 +58,11 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParser do
 
   @impl true
   def event_date(event) do
-    [_day_of_week, month, day, _separator, _time] =
-      Selectors.text(event, css(".product-vendorgrid")) |> String.split()
+    {:ok, utc_datetime, _offset} =
+      event["start_time"]
+      |> DateTime.from_iso8601()
 
-    ParseHelpers.build_date_from_month_day_strings(month, day)
+    DateHelpers.to_eastern_date(utc_datetime)
   end
 
   @impl true
@@ -77,18 +71,13 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParser do
   end
 
   @impl true
-  def event_time(event) do
-    [_day_of_week, _month, _day, _separator, time] =
-      Selectors.text(event, css(".product-vendorgrid")) |> String.split()
-
-    ParseHelpers.build_time_from_time_string(time)
+  def event_time(_event) do
+    nil
   end
 
   @impl true
-  def price(event) do
-    event
-    |> Selectors.text(css(".new-price"))
-    |> Price.new()
+  def price(_event) do
+    Price.unknown()
   end
 
   @impl true
@@ -98,13 +87,11 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParser do
 
   @impl true
   def ticket_url(event) do
-    slug = Selectors.url(event, css(".product-link"))
-
-    "https://burdockbrewery.com#{slug}"
+    event["tickets_link"]
   end
 
   @impl true
-  def details_url(_event) do
-    nil
+  def details_url(event) do
+    event["event_link"]
   end
 end
