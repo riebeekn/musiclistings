@@ -55,6 +55,11 @@ variable "github_repository" {
   type        = string
 }
 
+variable "initial_branch_to_deploy" {
+  description = "The initial branch to deploy"
+  type        = string
+}
+
 variable "render_api_key" {
   description = "Render API Key"
   type        = string
