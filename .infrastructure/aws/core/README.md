@@ -1,4 +1,4 @@
-# MusicListings - .infrastructure - core
+# MusicListings - .infrastructure - aws - core
 This folder contains the Terraform code for the core project infrastructure.
 
 This includes resources shared across environments such as the ECR repository, GitHub action
