@@ -13,7 +13,7 @@ resource "render_web_service" "this" {
   region = var.render_region
   runtime_source = {
     docker = {
-      branch   = "main"
+      branch   = var.initial_branch_to_deploy
       repo_url = "https://github.com/${var.github_repository}"
     }
     auto_deploy = false
