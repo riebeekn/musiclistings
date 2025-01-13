@@ -1,8 +1,5 @@
-# MusicListings - .infrastructure - aws - deployments
-This folder contains the Terraform code for performing deployments.
-
-It is dependent on the core infrastructure being provisioned, see the `core`
-folder for more information.
+# MusicListings - .infrastructure - render
+This folder contains the Terraform code for performing Render deployments.
 
 ## Executing the Terraform code
 It is expected that the deployments will be executed against a particular
@@ -38,30 +35,22 @@ current workspace.
 ./tf_apply.sh
 ```
 
-After apply is run, some outputs will be displayed.  These will include items
-to add to the GitHub repository action variables.  These are prefixed with
+After apply is run, some outputs will be displayed.  Included in these is an item
+to add to the GitHub repository action variables.  It is prefixed with
 `github_actions_variable_setting-`.
 
 The following outputs are expected:
 ```
-github_actions_variable_setting-AWS_ACCOUNT_ID = "<an account id>"
-github_actions_variable_setting-AWS_BUILD_ROLE = "<build arn>"
-github_actions_variable_setting-AWS_ECR_REPO = "<ecr repo name>"
-github_actions_variable_setting-AWS_ENVIRONMENTS = "include the current environment which is: 'staging'"
-github_actions_variable_setting-AWS_REGION = "<the aws region>"
-github_actions_variable_setting-AWS_SERVICE_NAME_PREFIX = "<the service prefix>"
+application_url = "<the url of the application, i.e. https://staging.torontomusiclistings.com">
+db_connection_info = "<the connection information for the database>"
+github_actions_variable_setting-RENDER_ENVIRONMENTS = "include the current environment which is: <something like staging:src-123343>"
 ```
 
-Add these to the GitHub repository action variables at the following URL:
+Add the GitHub repository action variable at the following URL:
 https://<the github repo url>/settings/variables/actions.
 
-Once set these variables do not need to be updated when additional deployments
-or environments are set up.
-
-**NOTE:** the exception to this is the `AWS_ENVIRONMENTS` variable.  This should
-include a comma separated list of all environments.  So for example, if you have
-only a staging environment, the value should be `staging`.  If you have staging,
-qa and production environments, the value should be `staging,qa,production`.
+Each environment should be added to RENDER_ENVIRONMENTS and they are comma separated.
+So for example the value of this variable could be `staging:src-123343,qa:src-123344,production:src-123345`.
 
 ### To destroy the infrastructure
 
