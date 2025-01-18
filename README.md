@@ -19,6 +19,9 @@ written in [Elixir](https://elixir-lang.org/) and [Phoenix LiveView](https://hex
     - [Database](#database)
     - [IEX](#iex)
     - [Trouble shooting](#trouble-shooting)
+  - [Render Remote access](#render-remote-access)
+    - [Database](#render-database-access)
+    - [IEX](#render-iex-access)
   - [Releases](#releases)
     - [Generate the release files](#generate-the-release-files)
     - [Build the release](#build-the-release)
@@ -85,7 +88,7 @@ In order to track events for a new venue, a new parser for the venue needs to be
 ## Hosting and Infrastructure
 The application is currently hosted on [fly.io](https://fly.io/).
 
-As a 'fun' experiment I decided to implement an [AWS](https://aws.amazon.com) solution as well.  The decision to use AWS was more as a learning exercise, and it isn't very cost effective for a hobby application so for now am sticking with `fly`.  I'm sure I could reduce costs by re-architecting the application and / or infrastructure set-up.  As things stand, approximate daily costs for `AWS` seem to be:
+I've been experimenting with various hosting platforms and strategies, so there are implementations for [Render](https://render.com/) and [AWS](https://aws.amazon.com) as well.  The decision to use AWS was more as a learning exercise, and it isn't very cost effective for a hobby application so for now am sticking with `fly`.  I'm sure I could reduce costs by re-architecting the application and / or infrastructure set-up.  As things stand, approximate daily costs for `AWS` seem to be:
 
 | Service                      | Cost      |
 | ---------------------------- | --------- |
@@ -98,27 +101,31 @@ As a 'fun' experiment I decided to implement an [AWS](https://aws.amazon.com) so
 | EC2-Other                    |   $0.02   |
 | **Total**                    | **$3.90** |
 
-For both the `fly.io` and `AWS` solutions CloudFlare is used as a reverse proxy.
+I am likely to permanently move to `Render` as I like that I can use Terraform with it.
+
+The `fly.io`, `Render` and `AWS` solutions use CloudFlare as a reverse proxy.
 
 Deployment and infrastructure setup is handled by a combination of Terraform and GitHub Actions.  Unfortunately `fly.io` does not have a Terraform provider so the `fly` infrastructure was set up manually.
 
 ### GitHub Actions
-GitHub actions control deployments and are located in `.github/workflows/ci.yml`.  Since we have the ability to deploy to multiple hosts (fly and AWS) the deployment actions are dependent on 2 GitHub Action variables:
+GitHub actions control deployments and are located in `.github/workflows/ci.yml`.  Since we have the ability to deploy to multiple hosts (fly, Render and AWS) the deployment actions are dependent on 3 corresponding GitHub Action variables:
 
 - `DEPLOY_TO_AWS`: if set to true GHA will attempt to deploy to AWS
 - `DEPLOY_TO_FLY`: if set to true GHA will attempt to deploy to Fly
+- `DEPLOY_TO_RENDER`: if set to true GHA will attempt to deploy to Render
 
-Both (or neither) of these variables can be set, they are not mutually exclusive.
+All (or none) of these variables can be set, they are not mutually exclusive.
 
 ### Terraform
-The Terraform setup is largely based on this excellent example Repo: [https://github.com/danschultzer/elixir-terraform-aws-ecs-example](https://github.com/danschultzer/elixir-terraform-aws-ecs-example).
-
-There are 3 Terraform projects which serve the following purposes:
+There are 4 Terraform projects which serve the following purposes:
 - `.infrastructure/aws/core` - Contains the core AWS infrastructure which is shared across different environments (i.e. staging, prod etc.).
 - `.infrastructure/aws/deployments` - Contains environment specific AWS infrastructure, for example `qa`, `staging`, or `prod` infrastructure.
 - `.infrastructure/production` - Represents production infrastructure that was set up manually and has since been imported into Terraform.
+- `.infrastructure/render` - Contains Render specific infrastructure files.
 
-See the `README.md` files located in each of the 3 projects for specific information on running the Terraform deployments.  In general the `production` project should never need to be run.  The `core` project needs to be run once to bring up the shared infrastructure, and then the `deployments` project can be run as needed.
+See the `README.md` files located in each of the projects for specific information on running the Terraform deployments.  In general the `production` project should never need to be run.  With AWS, the `core` project needs to be run once to bring up the shared infrastructure, and then the `deployments` project can be run as needed.
+
+The AWS Terraform setup is largely based on this excellent example Repo: [https://github.com/danschultzer/elixir-terraform-aws-ecs-example](https://github.com/danschultzer/elixir-terraform-aws-ecs-example).
 
 ### AWS Remote access
 Remote access to the database and local `iex` sessions are accomplished via `ssm` and `aws ecs execute-command`.  Helper scripts are available to make it easy to connect.
@@ -220,6 +227,26 @@ bash <( curl -Ls https://raw.githubusercontent.com/aws-containers/amazon-ecs-exe
 ```
 
 This will present information regarding whether you have remote access.
+
+### Render Remote access
+Remote access is available to both the database and console in Render.
+
+#### Render Database access
+To access the database for an environment, retrieve the connection information from the terraform output.  This can be done from the `.infrastructure/render` directory.  Make sure you are in the correct workspace and then run:
+
+```
+terraform output -json db_connection_info
+```
+
+This will output an `external_connection_string` which can be used with a SQL client to connect to the database.
+
+#### Render IEX access
+I haven't gotten SSH to work from the console for some reason.  So instead use the console available from the render service dashboard, for example: [https://dashboard.render.com/web/srv-cu5shed6l47c73bshhrg/shell](https://dashboard.render.com/web/srv-cu5shed6l47c73bshhrg/shell).
+
+IEX can then be started via:
+```
+/bin/sh -c 'bin/music_listings remote'
+```
 
 ### Releases
 The Phoenix application itself is deployed using releases and docker.  If for some reason you need to debug the release, the release can be generated / run locally via:
