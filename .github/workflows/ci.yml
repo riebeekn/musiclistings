@@ -270,8 +270,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [audit, test]
     name: Deploy to Fly
-    # if: github.ref == 'refs/heads/main' && vars.DEPLOY_TO_FLY == 'true'
-    if: vars.DEPLOY_TO_FLY == 'true'
+    if: github.ref == 'refs/heads/main' && vars.DEPLOY_TO_FLY == 'true'
 
     steps:
       - uses: actions/checkout@v4
@@ -281,6 +280,64 @@ jobs:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
           HOSTING_PLATFORM: "fly"
 
+  # Deploy to Render
+  setup_render_deploy_matrix:
+    runs-on: ubuntu-latest
+    name: "Setup Render Matrix"
+    needs: [audit, test]
+    if: vars.DEPLOY_TO_RENDER == 'true'
+    outputs:
+      matrix: ${{ steps.setup_render_deploy_matrix.outputs.matrix_output }}
+    steps:
+      - id: setup_render_deploy_matrix
+        uses: cschadewitz/dynamic-matrix-input@v1.0.0
+        with:
+          matrix_input: ${{ vars.RENDER_ENVIRONMENTS }}
+
+  deploy_to_render:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: ${{ fromJson(needs.setup_render_deploy_matrix.outputs.matrix) }}
+    needs:
+      - setup_render_deploy_matrix
+    name: "Deploy to Render"
+    if: vars.DEPLOY_TO_RENDER == 'true'
+
+    steps:
+      - name: Extract service id
+        id: extract
+        run: |
+          # Replace colon with a space, split into parts, and store as JSON
+          PARTS=$(echo ${{matrix.environment}} | sed 's/:/ /' | jq -R -s 'split(" ")')
+          ENV_NAME=$(echo $PARTS | jq -r '.[0]')
+          SRV_ID=$(echo $PARTS | jq -r '.[1]')
+
+          # Write values to $GITHUB_ENV safely
+          echo "ENV_NAME=$ENV_NAME" >> $GITHUB_ENV
+          echo "SRV_ID=$SRV_ID" >> $GITHUB_ENV
+
+      - name: Set deploy hook secret
+        id: set_deploy_hook
+        run: |
+          # Construct the secret name dynamically
+          SECRET_NAME="${ENV_NAME^^}_DEPLOY_HOOK"
+          echo "SECRET_NAME=$SECRET_NAME" >> $GITHUB_ENV
+
+      - name: Skip non-main branch for prod
+        if: matrix.environment == 'prod' && github.ref_name != 'main'
+        run: echo "Skipping prod deployment because the branch is not main."
+        continue-on-error: true
+
+      - name: Deploy to Render
+        uses: bankfliptech/deploy-to-render@v1
+        if: matrix.environment != 'prod' || github.ref_name == 'main'
+        with:
+          serviceId: ${{ env.SRV_ID }}
+          apiKey: ${{ secrets.RENDER_API_KEY }}
+          deployHookURL: ${{ secrets[env.SECRET_NAME] }}
+
+  # AWS specific steps
   build_and_push_to_ecr:
     runs-on: ubuntu-latest
     needs: [audit, test]
@@ -332,7 +389,7 @@ jobs:
 
   setup_matrix:
     runs-on: ubuntu-latest
-    name: "Setup Deployment Matrix"
+    name: "Setup AWS Matrix"
     needs: [audit, test, build_and_push_to_ecr]
     if: vars.DEPLOY_TO_AWS == 'true'
     outputs:
@@ -348,7 +405,6 @@ jobs:
     strategy:
       matrix:
         environment: ${{ fromJson(needs.setup_matrix.outputs.matrix) }}
-    concurrency: deployment
     env:
       DOCKER_IMAGE: ${{ needs.build_and_push_to_ecr.outputs.docker_image }}
     needs:
@@ -375,7 +431,6 @@ jobs:
         run: |
           aws ecs describe-task-definition --task-definition ${{vars.AWS_SERVICE_NAME_PREFIX}}-${{ matrix.environment }}-template --query taskDefinition > task-definition.json
           echo "`jq '.family="${{vars.AWS_SERVICE_NAME_PREFIX}}-${{ matrix.environment }}" | .containerDefinitions[0].image="${{ env.DOCKER_IMAGE }}"' task-definition.json`" > task-definition.json
-
 
       - name: Build CodeDeploy app spec
         if: matrix.environment != 'prod' || github.ref_name == 'main'

@@ -14,3 +14,14 @@ output "github_actions_variable_setting-RENDER_ENVIRONMENTS" {
     if you have multiple environments use a comma separated list, such as staging, qa"
   EOF
 }
+
+output "github_actions_secret_setting-ENV_DEPLOY_HOOK" {
+  value = "include a deploy hook secret for the current environment, name the secret ${upper(var.environment)}_DEPLOY_HOOK and set it to the deploy hook url in the service settings See https://dashboard.render.com/web/${render_web_service.this.id}/settings, the hook is not available programmatically thus why this has to be done manually"
+
+  description = <<EOF
+    "The deploy hook for the current environment - add this as a GHA secret, i.e. name the secret STAGING_DEPLOY_HOOK...
+    then get the value from the Render dashboard settings
+
+    The value is not available programitically, thus the value needs to be retrieved manually"
+  EOF
+}
