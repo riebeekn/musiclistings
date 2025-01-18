@@ -325,13 +325,13 @@ jobs:
           echo "SECRET_NAME=$SECRET_NAME" >> $GITHUB_ENV
 
       - name: Skip non-main branch for prod
-        if: matrix.environment == 'prod' && github.ref_name != 'main'
+        if: env.ENV_NAME == 'prod' && github.ref_name != 'main'
         run: echo "Skipping prod deployment because the branch is not main."
         continue-on-error: true
 
       - name: Deploy to Render
         uses: bankfliptech/deploy-to-render@v1
-        if: matrix.environment != 'prod' || github.ref_name == 'main'
+        if: env.ENV_NAME != 'prod' || github.ref_name == 'main'
         with:
           serviceId: ${{ env.SRV_ID }}
           apiKey: ${{ secrets.RENDER_API_KEY }}
