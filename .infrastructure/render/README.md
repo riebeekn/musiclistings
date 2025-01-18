@@ -37,16 +37,22 @@ current workspace.
 
 After apply is run, some outputs will be displayed.  Included in these is an item
 to add to the GitHub repository action variables.  It is prefixed with
-`github_actions_variable_setting-`.
+`github_actions_variable_setting-`.  Likewise there is an item to add to the GitHub repository action secrets.  It is prefixed with `github_actions_secret_setting-`.
 
 The following outputs are expected:
 ```
 application_url = "<the url of the application, i.e. https://staging.torontomusiclistings.com">
+
 db_connection_info = "<the connection information for the database>"
+
+github_actions_secret_setting-ENV_DEPLOY_HOOK = "include a deploy hook secret for the current environment, name the secret <ENV>_DEPLOY_HOOK and set it to the deploy hook url in the service settings See https://dashboard.render.com/web/srv-cu5ut6l6l47c73bt7vog/settings, the hook is not available programmatically thus why this has to be done manually"
+
 github_actions_variable_setting-RENDER_ENVIRONMENTS = "include the current environment which is: <something like staging:src-123343>"
 ```
 
-Add the GitHub repository action variable at the following URL:
+As per the above a `<ENV>_DEPLOY_HOOK` secret needs to be set in GitHub where `<ENV>` is replaced by the current environment (for example `STAGING_DEPLOY_HOOK`, `PROD_DEPLOY_HOOK` etc.).  The value of this needs to be retrieved manually from the Render Dashboard for the created web service as the value is not available from Terraform.
+
+Add the GitHub repository action variable and the secret at the following URL:
 https://<the github repo url>/settings/variables/actions.
 
 Each environment should be added to RENDER_ENVIRONMENTS and they are comma separated.
