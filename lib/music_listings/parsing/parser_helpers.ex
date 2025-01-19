@@ -221,6 +221,7 @@ defmodule MusicListings.Parsing.ParseHelpers do
   @spec build_time_from_time_string(String.t()) :: Time.t()
   def build_time_from_time_string(time_string) do
     (time_string || "")
+    |> String.replace("EST", "")
     |> String.replace(":PM", " pm")
     |> String.replace("p.m.", "pm")
     |> String.trim()

@@ -56,26 +56,29 @@ defmodule MusicListings.Parsing.VenueParsers.HughsRoomParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "tom-wilson-tehahahake-trio" == HughsRoomParser.event_id(event)
+      assert "original-people-original-songs-with-the-north-sound" ==
+               HughsRoomParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns event id", %{event: event} do
-      assert "tom-wilson-tehahahake-trio" == HughsRoomParser.event_id(event)
+      assert "original-people-original-songs-with-the-north-sound" ==
+               HughsRoomParser.event_id(event)
     end
   end
 
   describe "event_title/1" do
     test "returns event title", %{event: event} do
-      assert "Tom Wilson TEHÅHÀHAKE Trio" == HughsRoomParser.event_title(event)
+      assert "Original People Original Songs with The North Sound" ==
+               HughsRoomParser.event_title(event)
     end
   end
 
   describe "performers/1" do
     test "returns the event performers", %{event: event} do
       assert %Performers{
-               headliner: "Tom Wilson TEHÅHÀHAKE Trio",
+               headliner: "Original People Original Songs with The North Sound",
                openers: []
              } == HughsRoomParser.performers(event)
     end
@@ -83,7 +86,7 @@ defmodule MusicListings.Parsing.VenueParsers.HughsRoomParserTest do
 
   describe "event_date/1" do
     test "returns the event date", %{event: event} do
-      assert ~D[2024-09-20] == HughsRoomParser.event_date(event)
+      assert ~D[2025-03-26] == HughsRoomParser.event_date(event)
     end
   end
 
@@ -101,7 +104,7 @@ defmodule MusicListings.Parsing.VenueParsers.HughsRoomParserTest do
 
   describe "price/1" do
     test "returns the event price", %{event: event} do
-      assert %Price{format: :fixed, lo: Decimal.new("50.00"), hi: Decimal.new("50.00")} ==
+      assert %Price{format: :range, lo: Decimal.new("15.00"), hi: Decimal.new("30.00")} ==
                HughsRoomParser.price(event)
     end
   end
@@ -114,7 +117,7 @@ defmodule MusicListings.Parsing.VenueParsers.HughsRoomParserTest do
 
   describe "ticket_url/1" do
     test "returns the event ticket url", %{event: event} do
-      assert "https://www.showpass.com/tom-wilson-tehahahake-trio" ==
+      assert "https://www.showpass.com/original-people-original-songs-with-the-north-sound" ==
                HughsRoomParser.ticket_url(event)
     end
   end

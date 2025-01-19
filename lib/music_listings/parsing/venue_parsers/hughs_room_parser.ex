@@ -89,11 +89,18 @@ defmodule MusicListings.Parsing.VenueParsers.HughsRoomParser do
   def event_date(event) do
     [_day_of_week, month_string, day_string, year_string] =
       event
-      |> Selectors.text(css(".showpass-detail-event-date .info i.fa-calendar + span"))
+      |> Selectors.text(css(".showpass-detail-event-date .start-date .day"))
+      |> if_nil_try_alternate_date_selector(event)
       |> String.split()
 
     ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
   end
+
+  defp if_nil_try_alternate_date_selector(nil = _captured_value, event) do
+    Selectors.text(event, css(".showpass-detail-event-date .info i.fa-calendar + span"))
+  end
+
+  defp if_nil_try_alternate_date_selector(captured_value, _event), do: captured_value
 
   @impl true
   def additional_dates(_event) do
@@ -103,9 +110,16 @@ defmodule MusicListings.Parsing.VenueParsers.HughsRoomParser do
   @impl true
   def event_time(event) do
     event
-    |> Selectors.text(css(".showpass-detail-event-date .info i.fa-clock-o + span"))
+    |> Selectors.text(css(".showpass-detail-event-date .start-date .time"))
+    |> if_nil_try_alternate_time_selector(event)
     |> ParseHelpers.build_time_from_time_string()
   end
+
+  defp if_nil_try_alternate_time_selector(nil = _captured_value, event) do
+    Selectors.text(event, css(".showpass-detail-event-date .info i.fa-clock-o + span"))
+  end
+
+  defp if_nil_try_alternate_time_selector(captured_value, _event), do: captured_value
 
   @impl true
   def price(event) do
