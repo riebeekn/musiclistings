@@ -52,11 +52,11 @@ github_actions_variable_setting-RENDER_ENVIRONMENTS = "include the current envir
 
 As per the above a `<ENV>_DEPLOY_HOOK` secret needs to be set in GitHub where `<ENV>` is replaced by the current environment (for example `STAGING_DEPLOY_HOOK`, `PROD_DEPLOY_HOOK` etc.).  The value of this needs to be retrieved manually from the Render Dashboard for the created web service as the value is not available from Terraform.
 
-Add the GitHub repository action variable and the secret at the following URL:
-https://<the github repo url>/settings/variables/actions.
-
-Each environment should be added to RENDER_ENVIRONMENTS and they are comma separated.
+Likewise each environment should be added to a RENDER_ENVIRONMENTS GitHub actions variable and they are comma separated.
 So for example the value of this variable could be `staging:src-123343,qa:src-123344,production:src-123345`.
+
+Add the GitHub repository action variable and the secret at the following URL:
+https://the_github_repo_url/settings/variables/actions.
 
 ### To destroy the infrastructure
 
