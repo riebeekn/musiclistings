@@ -4,9 +4,20 @@
 # and basic auth worker
 
 # DNS Record
-resource "cloudflare_record" "this" {
+resource "cloudflare_record" "root_cname" {
   zone_id = var.cloudflare_zone_id
-  name    = var.environment
+  # in prod use root, in other environments use the environment name
+  name    = var.environment == "prod" ? "@" : var.environment
+  content = replace(render_web_service.this.url, "https://", "")
+  type    = "CNAME"
+  proxied = true
+}
+
+resource "cloudflare_record" "www_cname" {
+  # only create the www record in prod
+  count   = var.environment == "prod" ? 1 : 0
+  zone_id = var.cloudflare_zone_id
+  name    = "www"
   content = replace(render_web_service.this.url, "https://", "")
   type    = "CNAME"
   proxied = true

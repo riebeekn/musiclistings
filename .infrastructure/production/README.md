@@ -1,15 +1,14 @@
 # MusicListings - .infrastructure - production
 This Terraform project represents existing production infrastructure that was created
-manually and has now been imported into Terraform.
+manually with initial deployment to Fly.io and has now been imported into Terraform.
 
 Resources imported:
 
-- DNS Settings
+- Some DNS Settings
 - Turnstile Widget
 
 Not everything has been imported, email forwarding settings, which in turn create the
-MX DNS records have not been imported.  The Domain itself has not been imported either.
-With both of these I am not sure if / how to import them.
+MX DNS records have not been imported.
 
 Everything has been marked with a `prevent_destroy = true` lifecycle rule as none of these
 resources should be destroyed.

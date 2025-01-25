@@ -1,5 +1,5 @@
 output "application_url" {
-  value = "https://${cloudflare_record.this.hostname}"
+  value = "https://${cloudflare_record.root_cname.hostname}"
 }
 
 output "db_connection_info" {

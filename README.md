@@ -86,9 +86,9 @@ Any errors encountered during parsing will be inserted into the `crawl_errors` d
 In order to track events for a new venue, a new parser for the venue needs to be created at `lib/music_listings/parsing/venue_parsers`.  The venue also needs to be added to the `venues` database table.  Example data files should be added to `test/data` and a test file for the new parser should be added to `test/music_listings/parsing/venue_parsers`.
 
 ## Hosting and Infrastructure
-The application is currently hosted on [fly.io](https://fly.io/).
+The application is currently hosted ~~on [fly.io](https://fly.io/)~~ on [Render](https://render.com/).  Initially deployed to `fly`, having a Terraform provider available for Render made me decide to switch to Render.  The `fly` specific deployment files are still part of the project in case I decide I ever want to move back to `fly`.
 
-I've been experimenting with various hosting platforms and strategies, so there are implementations for [Render](https://render.com/) and [AWS](https://aws.amazon.com) as well.  The decision to use AWS was more as a learning exercise, and it isn't very cost effective for a hobby application so for now am sticking with `fly`.  I'm sure I could reduce costs by re-architecting the application and / or infrastructure set-up.  As things stand, approximate daily costs for `AWS` seem to be:
+There is also an [AWS](https://aws.amazon.com) implementation.  This was more of a learning exercise, and it isn't very cost effective for a hobby application.  I'm sure I could reduce costs by re-architecting the application and / or infrastructure set-up.  As things stand, approximate daily costs for `AWS` would be:
 
 | Service                      | Cost      |
 | ---------------------------- | --------- |
@@ -101,11 +101,10 @@ I've been experimenting with various hosting platforms and strategies, so there 
 | EC2-Other                    |   $0.02   |
 | **Total**                    | **$3.90** |
 
-I am likely to permanently move to `Render` as I like that I can use Terraform with it.
 
 The `fly.io`, `Render` and `AWS` solutions use CloudFlare as a reverse proxy.
 
-Deployment and infrastructure setup is handled by a combination of Terraform and GitHub Actions.  Unfortunately `fly.io` does not have a Terraform provider so the `fly` infrastructure was set up manually.
+Deployment and infrastructure setup is handled by a combination of Terraform and GitHub Actions.  Unfortunately `fly.io` does not have a Terraform provider so the initial `fly` infrastructure was set up manually.
 
 ### GitHub Actions
 GitHub actions control deployments and are located in `.github/workflows/ci.yml`.  Since we have the ability to deploy to multiple hosts (fly, Render and AWS) the deployment actions are dependent on 3 corresponding GitHub Action variables:
@@ -120,7 +119,7 @@ All (or none) of these variables can be set, they are not mutually exclusive.
 There are 4 Terraform projects which serve the following purposes:
 - `.infrastructure/aws/core` - Contains the core AWS infrastructure which is shared across different environments (i.e. staging, prod etc.).
 - `.infrastructure/aws/deployments` - Contains environment specific AWS infrastructure, for example `qa`, `staging`, or `prod` infrastructure.
-- `.infrastructure/production` - Represents production infrastructure that was set up manually and has since been imported into Terraform.
+- `.infrastructure/production` - Represents initial production infrastructure that was set up manually and has since been imported into Terraform, currently just contains some email related DNS settings.
 - `.infrastructure/render` - Contains Render specific infrastructure files.
 
 See the `README.md` files located in each of the projects for specific information on running the Terraform deployments.  In general the `production` project should never need to be run.  With AWS, the `core` project needs to be run once to bring up the shared infrastructure, and then the `deployments` project can be run as needed.
