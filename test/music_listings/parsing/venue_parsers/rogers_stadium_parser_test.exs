@@ -6,25 +6,24 @@ defmodule MusicListings.Parsing.VenueParsers.RogersStadiumParserTest do
   alias MusicListings.Parsing.VenueParsers.RogersStadiumParser
 
   setup do
-    index_file_path = Path.expand("#{File.cwd!()}/test/data/rogers_stadium/index.html")
+    index_file_path = Path.expand("#{File.cwd!()}/test/data/rogers_stadium/index.json")
 
     single_event_file_path =
-      Path.expand("#{File.cwd!()}/test/data/rogers_stadium/single_event.html")
+      Path.expand("#{File.cwd!()}/test/data/rogers_stadium/single_event.json")
 
-    index_html = File.read!(index_file_path)
+    index_html = File.read!(index_file_path) |> Jason.decode!()
 
     event =
       single_event_file_path
       |> File.read!()
-      |> RogersStadiumParser.events()
-      |> List.first()
+      |> Jason.decode!()
 
     %{index_html: index_html, event: event}
   end
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://www.livenation.com/venue/KovZ917ARzt/rogers-stadium-events" ==
+      assert "https://api.livenation.com/graphql" ==
                RogersStadiumParser.source_url()
     end
   end
@@ -33,7 +32,7 @@ defmodule MusicListings.Parsing.VenueParsers.RogersStadiumParserTest do
     test "returns expected events", %{index_html: index_html} do
       events = RogersStadiumParser.events(index_html)
 
-      assert 4 = Enum.count(events)
+      assert 10 = Enum.count(events)
     end
   end
 
@@ -45,21 +44,21 @@ defmodule MusicListings.Parsing.VenueParsers.RogersStadiumParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "rogers_stadium_2025_08_25_19_30_00" ==
+      assert "1A8ZkAYGkdOQfsK" ==
                RogersStadiumParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "rogers_stadium_2025_08_25_19_30_00" ==
+      assert "1A8ZkAYGkdOQfsK" ==
                RogersStadiumParser.ignored_event_id(event)
     end
   end
 
   describe "event_title/1" do
     test "returns event title", %{event: event} do
-      assert "OASIS LIVE '25" ==
+      assert "Stray Kids World Tour [dominATE TORONTO]" ==
                RogersStadiumParser.event_title(event)
     end
   end
@@ -67,15 +66,15 @@ defmodule MusicListings.Parsing.VenueParsers.RogersStadiumParserTest do
   describe "performers/1" do
     test "returns the event performers", %{event: event} do
       assert %Performers{
-               headliner: "Oasis",
-               openers: ["Cage The Elephant"]
+               headliner: "Stray Kids",
+               openers: []
              } == RogersStadiumParser.performers(event)
     end
   end
 
   describe "event_date/1" do
     test "returns the event date", %{event: event} do
-      assert ~D[2025-08-25] == RogersStadiumParser.event_date(event)
+      assert ~D[2025-06-29] == RogersStadiumParser.event_date(event)
     end
   end
 
@@ -106,7 +105,7 @@ defmodule MusicListings.Parsing.VenueParsers.RogersStadiumParserTest do
 
   describe "ticket_url/1" do
     test "returns the event ticket url", %{event: event} do
-      assert "https://www.livenation.com/event/1A8ZkAvGkdh9N8l/oasis-live-25" ==
+      assert "https://www.ticketmaster.ca/stray-kids-world-tour-dominate-toronto-toronto-ontario-06-29-2025/event/10006170E0694C53" ==
                RogersStadiumParser.ticket_url(event)
     end
   end

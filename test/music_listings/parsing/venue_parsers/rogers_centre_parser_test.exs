@@ -6,25 +6,24 @@ defmodule MusicListings.Parsing.VenueParsers.RogersCentreParserTest do
   alias MusicListings.Parsing.VenueParsers.RogersCentreParser
 
   setup do
-    index_file_path = Path.expand("#{File.cwd!()}/test/data/rogers_centre/index.html")
+    index_file_path = Path.expand("#{File.cwd!()}/test/data/rogers_centre/index.json")
 
     single_event_file_path =
-      Path.expand("#{File.cwd!()}/test/data/rogers_centre/single_event.html")
+      Path.expand("#{File.cwd!()}/test/data/rogers_centre/single_event.json")
 
-    index_html = File.read!(index_file_path)
+    index_html = File.read!(index_file_path) |> Jason.decode!()
 
     event =
       single_event_file_path
       |> File.read!()
-      |> RogersCentreParser.events()
-      |> List.first()
+      |> Jason.decode!()
 
     %{index_html: index_html, event: event}
   end
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://www.livenation.com/venue/KovZpa3Bbe/rogers-centre-events" ==
+      assert "https://api.livenation.com/graphql" ==
                RogersCentreParser.source_url()
     end
   end
@@ -33,7 +32,7 @@ defmodule MusicListings.Parsing.VenueParsers.RogersCentreParserTest do
     test "returns expected events", %{index_html: index_html} do
       events = RogersCentreParser.events(index_html)
 
-      assert 10 = Enum.count(events)
+      assert 12 = Enum.count(events)
     end
   end
 
@@ -45,21 +44,21 @@ defmodule MusicListings.Parsing.VenueParsers.RogersCentreParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "rogers_centre_2024_08_02_18_00_00" ==
+      assert "1AvZZbfGkHdoVWb" ==
                RogersCentreParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "rogers_centre_2024_08_02_18_00_00" ==
+      assert "1AvZZbfGkHdoVWb" ==
                RogersCentreParser.ignored_event_id(event)
     end
   end
 
   describe "event_title/1" do
     test "returns event title", %{event: event} do
-      assert "Def Leppard / Journey: The Summer Stadium Tour with Cheap Trick" ==
+      assert "Billy Joel" ==
                RogersCentreParser.event_title(event)
     end
   end
@@ -67,15 +66,15 @@ defmodule MusicListings.Parsing.VenueParsers.RogersCentreParserTest do
   describe "performers/1" do
     test "returns the event performers", %{event: event} do
       assert %Performers{
-               headliner: "Def Leppard",
-               openers: ["Journey", "Cheap Trick"]
+               headliner: "Billy Joel",
+               openers: []
              } == RogersCentreParser.performers(event)
     end
   end
 
   describe "event_date/1" do
     test "returns the event date", %{event: event} do
-      assert ~D[2024-08-02] == RogersCentreParser.event_date(event)
+      assert ~D[2025-03-15] == RogersCentreParser.event_date(event)
     end
   end
 
@@ -87,7 +86,7 @@ defmodule MusicListings.Parsing.VenueParsers.RogersCentreParserTest do
 
   describe "event_time/1" do
     test "returns the event start time", %{event: event} do
-      assert ~T[18:00:00] == RogersCentreParser.event_time(event)
+      assert ~T[20:00:00] == RogersCentreParser.event_time(event)
     end
   end
 
@@ -106,7 +105,7 @@ defmodule MusicListings.Parsing.VenueParsers.RogersCentreParserTest do
 
   describe "ticket_url/1" do
     test "returns the event ticket url", %{event: event} do
-      assert "https://www.livenation.com/event/G5vZZ9z6yjKEU/def-leppard-journey-the-summer-stadium-tour-with-cheap-trick" ==
+      assert "https://www.ticketmaster.ca/billy-joel-toronto-ontario-03-15-2025/event/1000614F03474F58" ==
                RogersCentreParser.ticket_url(event)
     end
   end

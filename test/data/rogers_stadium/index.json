@@ -1,0 +1,762 @@
+{
+  "data": {
+    "getEvents": [
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9179Vpf",
+            "genre": "Pop",
+            "name": "Stray Kids",
+            "slug": "stray-kids",
+            "tm_id": "2593788"
+          }
+        ],
+        "created_on": "2024-11-18T15:02:05Z",
+        "discovery_id": "1A8ZkAYGkdOQfsK",
+        "event_date": "2025-06-29",
+        "event_date_timestamp_utc": "2025-06-29T23:30:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "19:30:00",
+        "event_timezone": "America/Toronto",
+        "genre": "Pop",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/328/ec0a213f-d159-468d-a463-d5dd988f3328_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "Stray Kids World Tour [dominATE TORONTO]",
+        "presales": [
+          {
+            "end_date_time": "2024-11-22T19:30:00Z",
+            "is_ln_promoted": false,
+            "name": "Artist Presale",
+            "start_date_time": "2024-11-22T16:00:00Z"
+          },
+          {
+            "end_date_time": "2024-11-22T19:30:00Z",
+            "is_ln_promoted": false,
+            "name": "Artist Presale VIP Packages",
+            "start_date_time": "2024-11-22T16:00:00Z"
+          },
+          {
+            "end_date_time": "2025-06-23T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "VIP Packages Onsale",
+            "start_date_time": "2024-11-22T20:00:00Z"
+          }
+        ],
+        "sales_start_date_time": "2024-11-22T20:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/10006170E0694C53/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "stray-kids-world-tour-dominate-toronto",
+        "tm_id": "10006170E0694C53",
+        "type": "REGULAR",
+        "upsell": [],
+        "url": "https://www.ticketmaster.ca/stray-kids-world-tour-dominate-toronto-toronto-ontario-06-29-2025/event/10006170E0694C53",
+        "venue": {
+          "discovery_id": "KovZ917ARzt",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "105 Carl Hall Road",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M3K0A1"
+          },
+          "name": "Rogers Stadium",
+          "slug": "rogers-stadium",
+          "tm_id": "132627"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9171izV",
+            "genre": "Rock",
+            "name": "Coldplay",
+            "slug": "coldplay",
+            "tm_id": "806431"
+          },
+          {
+            "discovery_id": "K8vZ917QeP0",
+            "genre": "R&B",
+            "name": "Ayra Starr",
+            "slug": "ayra-starr",
+            "tm_id": "2854699"
+          },
+          {
+            "discovery_id": "K8vZ917hm7f",
+            "genre": "World",
+            "name": "Elyanna",
+            "slug": "elyanna",
+            "tm_id": "3056125"
+          }
+        ],
+        "created_on": "2024-10-08T11:00:38Z",
+        "discovery_id": "1A8ZkA7Gkdr80hW",
+        "event_date": "2025-07-07",
+        "event_date_timestamp_utc": "2025-07-07T22:00:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "18:00:00",
+        "event_timezone": "America/Toronto",
+        "genre": "Rock",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/35d/83661bca-e5e4-44ea-86ac-1a27ebfaa35d_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "Coldplay: Music Of The Spheres World Tour - delivered by DHL",
+        "presales": [],
+        "sales_start_date_time": "2024-10-11T16:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/10006144DE4246FD/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "coldplay-music-of-the-spheres-world-tour-delivered-by-dhl",
+        "tm_id": "10006144DE4246FD",
+        "type": "REGULAR",
+        "upsell": [],
+        "url": "https://www.ticketmaster.ca/coldplay-music-of-the-spheres-world-toronto-ontario-07-07-2025/event/10006144DE4246FD",
+        "venue": {
+          "discovery_id": "KovZ917ARzt",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "105 Carl Hall Road",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M3K0A1"
+          },
+          "name": "Rogers Stadium",
+          "slug": "rogers-stadium",
+          "tm_id": "132627"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9171izV",
+            "genre": "Rock",
+            "name": "Coldplay",
+            "slug": "coldplay",
+            "tm_id": "806431"
+          },
+          {
+            "discovery_id": "K8vZ917QeP0",
+            "genre": "R&B",
+            "name": "Ayra Starr",
+            "slug": "ayra-starr",
+            "tm_id": "2854699"
+          },
+          {
+            "discovery_id": "K8vZ917hm7f",
+            "genre": "World",
+            "name": "Elyanna",
+            "slug": "elyanna",
+            "tm_id": "3056125"
+          }
+        ],
+        "created_on": "2024-10-08T11:00:39Z",
+        "discovery_id": "1k7Zv-o_GA2OvLL",
+        "event_date": "2025-07-08",
+        "event_date_timestamp_utc": "2025-07-08T22:00:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "18:00:00",
+        "event_timezone": "America/Toronto",
+        "genre": "Rock",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/35d/83661bca-e5e4-44ea-86ac-1a27ebfaa35d_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "Coldplay: Music Of The Spheres World Tour - delivered by DHL",
+        "presales": [],
+        "sales_start_date_time": "2024-10-11T16:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/100061459F8017DF/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "coldplay-music-of-the-spheres-world-tour-delivered-by-dhl",
+        "tm_id": "100061459F8017DF",
+        "type": "REGULAR",
+        "upsell": [],
+        "url": "https://www.ticketmaster.ca/coldplay-music-of-the-spheres-world-toronto-ontario-07-08-2025/event/100061459F8017DF",
+        "venue": {
+          "discovery_id": "KovZ917ARzt",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "105 Carl Hall Road",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M3K0A1"
+          },
+          "name": "Rogers Stadium",
+          "slug": "rogers-stadium",
+          "tm_id": "132627"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9171izV",
+            "genre": "Rock",
+            "name": "Coldplay",
+            "slug": "coldplay",
+            "tm_id": "806431"
+          },
+          {
+            "discovery_id": "K8vZ917QeP0",
+            "genre": "R&B",
+            "name": "Ayra Starr",
+            "slug": "ayra-starr",
+            "tm_id": "2854699"
+          },
+          {
+            "discovery_id": "K8vZ917hm7f",
+            "genre": "World",
+            "name": "Elyanna",
+            "slug": "elyanna",
+            "tm_id": "3056125"
+          }
+        ],
+        "created_on": "2024-10-11T13:45:29Z",
+        "discovery_id": "1A8ZkAFGkd0xoTV",
+        "event_date": "2025-07-11",
+        "event_date_timestamp_utc": "2025-07-11T22:00:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "18:00:00",
+        "event_timezone": "America/Toronto",
+        "genre": "Rock",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/35d/83661bca-e5e4-44ea-86ac-1a27ebfaa35d_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "Coldplay: Music Of The Spheres World Tour - delivered by DHL",
+        "presales": [],
+        "sales_start_date_time": "2024-10-11T17:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/10006148E4891FF4/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "coldplay-music-of-the-spheres-world-tour-delivered-by-dhl",
+        "tm_id": "10006148E4891FF4",
+        "type": "REGULAR",
+        "upsell": [],
+        "url": "https://www.ticketmaster.ca/coldplay-music-of-the-spheres-world-toronto-ontario-07-11-2025/event/10006148E4891FF4",
+        "venue": {
+          "discovery_id": "KovZ917ARzt",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "105 Carl Hall Road",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M3K0A1"
+          },
+          "name": "Rogers Stadium",
+          "slug": "rogers-stadium",
+          "tm_id": "132627"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9171izV",
+            "genre": "Rock",
+            "name": "Coldplay",
+            "slug": "coldplay",
+            "tm_id": "806431"
+          },
+          {
+            "discovery_id": "K8vZ917QeP0",
+            "genre": "R&B",
+            "name": "Ayra Starr",
+            "slug": "ayra-starr",
+            "tm_id": "2854699"
+          },
+          {
+            "discovery_id": "K8vZ917hm7f",
+            "genre": "World",
+            "name": "Elyanna",
+            "slug": "elyanna",
+            "tm_id": "3056125"
+          }
+        ],
+        "created_on": "2024-10-11T13:45:28Z",
+        "discovery_id": "1A8ZkAFGkd0ReZ7",
+        "event_date": "2025-07-12",
+        "event_date_timestamp_utc": "2025-07-12T22:00:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "18:00:00",
+        "event_timezone": "America/Toronto",
+        "genre": "Rock",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/35d/83661bca-e5e4-44ea-86ac-1a27ebfaa35d_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "Coldplay: Music Of The Spheres World Tour - delivered by DHL",
+        "presales": [],
+        "sales_start_date_time": "2024-10-11T17:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/10006148E4BC2004/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "coldplay-music-of-the-spheres-world-tour-delivered-by-dhl",
+        "tm_id": "10006148E4BC2004",
+        "type": "REGULAR",
+        "upsell": [],
+        "url": "https://www.ticketmaster.ca/coldplay-music-of-the-spheres-world-toronto-ontario-07-12-2025/event/10006148E4BC2004",
+        "venue": {
+          "discovery_id": "KovZ917ARzt",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "105 Carl Hall Road",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M3K0A1"
+          },
+          "name": "Rogers Stadium",
+          "slug": "rogers-stadium",
+          "tm_id": "132627"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9171fw7",
+            "genre": "Rock",
+            "name": "Oasis",
+            "slug": "oasis",
+            "tm_id": "766720"
+          },
+          {
+            "discovery_id": "K8vZ917G1zf",
+            "genre": "Rock",
+            "name": "Cage The Elephant",
+            "slug": "cage-the-elephant",
+            "tm_id": "40575"
+          }
+        ],
+        "created_on": "2024-09-30T12:01:06Z",
+        "discovery_id": "1AvZZbKGkRpTfg8",
+        "event_date": "2025-08-24",
+        "event_date_timestamp_utc": "2025-08-24T23:30:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "19:30:00",
+        "event_timezone": "America/Toronto",
+        "genre": "Rock",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/9ad/888e39aa-37e6-4458-96f7-164732afb9ad_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "OASIS LIVE '25",
+        "presales": [],
+        "sales_start_date_time": "2024-10-04T16:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/1000613BD6FD4D50/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "oasis-live-25",
+        "tm_id": "1000613BD6FD4D50",
+        "type": "REGULAR",
+        "upsell": [],
+        "url": "https://www.ticketmaster.ca/oasis-live-25-toronto-ontario-08-24-2025/event/1000613BD6FD4D50",
+        "venue": {
+          "discovery_id": "KovZ917ARzt",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "105 Carl Hall Road",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M3K0A1"
+          },
+          "name": "Rogers Stadium",
+          "slug": "rogers-stadium",
+          "tm_id": "132627"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9171fw7",
+            "genre": "Rock",
+            "name": "Oasis",
+            "slug": "oasis",
+            "tm_id": "766720"
+          },
+          {
+            "discovery_id": "K8vZ917G1zf",
+            "genre": "Rock",
+            "name": "Cage The Elephant",
+            "slug": "cage-the-elephant",
+            "tm_id": "40575"
+          }
+        ],
+        "created_on": "2024-10-02T19:01:03Z",
+        "discovery_id": "1A8ZkAvGkdh9N8l",
+        "event_date": "2025-08-25",
+        "event_date_timestamp_utc": "2025-08-25T23:30:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "19:30:00",
+        "event_timezone": "America/Toronto",
+        "genre": "Rock",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/9ad/888e39aa-37e6-4458-96f7-164732afb9ad_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "OASIS LIVE '25",
+        "presales": [],
+        "sales_start_date_time": "2024-10-04T16:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/10006141DB5E342B/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "oasis-live-25",
+        "tm_id": "10006141DB5E342B",
+        "type": "REGULAR",
+        "upsell": [],
+        "url": "https://www.ticketmaster.ca/oasis-live-25-toronto-ontario-08-25-2025/event/10006141DB5E342B",
+        "venue": {
+          "discovery_id": "KovZ917ARzt",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "105 Carl Hall Road",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M3K0A1"
+          },
+          "name": "Rogers Stadium",
+          "slug": "rogers-stadium",
+          "tm_id": "132627"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9171_N0",
+            "genre": "Metal",
+            "name": "System Of A Down",
+            "slug": "system-of-a-down",
+            "tm_id": "726146"
+          },
+          {
+            "discovery_id": "K8vZ9171pP7",
+            "genre": "Metal",
+            "name": "Deftones",
+            "slug": "deftones",
+            "tm_id": "777416"
+          },
+          {
+            "discovery_id": "K8vZ9173RN0",
+            "genre": "Rock",
+            "name": "Polyphia",
+            "slug": "polyphia",
+            "tm_id": "2026502"
+          },
+          {
+            "discovery_id": "K8vZ917Csz7",
+            "genre": "Dance/Electronic",
+            "name": "Wisp",
+            "slug": "wisp",
+            "tm_id": "1623870"
+          }
+        ],
+        "created_on": "2024-12-09T15:36:50Z",
+        "discovery_id": "1A8Zkk7GkeT9xq1",
+        "event_date": "2025-09-03",
+        "event_date_timestamp_utc": "2025-09-03T21:30:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "17:30:00",
+        "event_timezone": "America/Toronto",
+        "genre": "Metal",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/223/7ad6212c-ddab-4864-91e1-8c2ca2b12223_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "System Of A Down & Deftones with special guest Polyphia ",
+        "presales": [
+          {
+            "end_date_time": "2024-12-13T04:59:00Z",
+            "is_ln_promoted": false,
+            "name": "Deftones Presale",
+            "start_date_time": "2024-12-11T17:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-13T04:59:00Z",
+            "is_ln_promoted": false,
+            "name": "System Of A Down Presale",
+            "start_date_time": "2024-12-11T17:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-13T04:59:00Z",
+            "is_ln_promoted": false,
+            "name": "Live INSIDER Presale",
+            "start_date_time": "2024-12-12T17:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-13T04:59:00Z",
+            "is_ln_promoted": true,
+            "name": "Live Nation Presale",
+            "start_date_time": "2024-12-12T17:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-13T04:59:00Z",
+            "is_ln_promoted": false,
+            "name": "Spotify Presale",
+            "start_date_time": "2024-12-12T17:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-13T04:59:00Z",
+            "is_ln_promoted": false,
+            "name": "Ticketmaster Presale",
+            "start_date_time": "2024-12-12T17:00:00Z"
+          }
+        ],
+        "sales_start_date_time": "2024-12-13T17:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/10006184BF5E274A/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "system-of-a-down-deftones-with-special-guest-polyphia",
+        "tm_id": "10006184BF5E274A",
+        "type": "REGULAR",
+        "upsell": [],
+        "url": "https://www.ticketmaster.ca/system-of-a-down-deftones-with-toronto-ontario-09-03-2025/event/10006184BF5E274A",
+        "venue": {
+          "discovery_id": "KovZ917ARzt",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "105 Carl Hall Road",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M3K0A1"
+          },
+          "name": "Rogers Stadium",
+          "slug": "rogers-stadium",
+          "tm_id": "132627"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9171_N0",
+            "genre": "Metal",
+            "name": "System Of A Down",
+            "slug": "system-of-a-down",
+            "tm_id": "726146"
+          },
+          {
+            "discovery_id": "K8vZ9171pP7",
+            "genre": "Metal",
+            "name": "Deftones",
+            "slug": "deftones",
+            "tm_id": "777416"
+          },
+          {
+            "discovery_id": "K8vZ9173RN0",
+            "genre": "Rock",
+            "name": "Polyphia",
+            "slug": "polyphia",
+            "tm_id": "2026502"
+          },
+          {
+            "discovery_id": "K8vZ917Csz7",
+            "genre": "Dance/Electronic",
+            "name": "Wisp",
+            "slug": "wisp",
+            "tm_id": "1623870"
+          }
+        ],
+        "created_on": "2024-12-12T14:00:32Z",
+        "discovery_id": "1AvZZbbGkmJ6vdj",
+        "event_date": "2025-09-05",
+        "event_date_timestamp_utc": "2025-09-05T21:30:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "17:30:00",
+        "event_timezone": "America/Toronto",
+        "genre": "Metal",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/223/7ad6212c-ddab-4864-91e1-8c2ca2b12223_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "System Of A Down & Deftones with special guest Polyphia ",
+        "presales": [
+          {
+            "end_date_time": "2024-12-13T04:59:00Z",
+            "is_ln_promoted": false,
+            "name": "Deftones Presale",
+            "start_date_time": "2024-12-12T17:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-13T04:59:00Z",
+            "is_ln_promoted": false,
+            "name": "Live INSIDER Presale",
+            "start_date_time": "2024-12-12T17:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-13T04:59:00Z",
+            "is_ln_promoted": true,
+            "name": "Live Nation Presale",
+            "start_date_time": "2024-12-12T17:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-13T04:59:00Z",
+            "is_ln_promoted": false,
+            "name": "Spotify Presale",
+            "start_date_time": "2024-12-12T17:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-13T04:59:00Z",
+            "is_ln_promoted": false,
+            "name": "System Of A Down Presale",
+            "start_date_time": "2024-12-12T17:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-13T04:59:00Z",
+            "is_ln_promoted": false,
+            "name": "Ticketmaster Presale",
+            "start_date_time": "2024-12-12T17:00:00Z"
+          }
+        ],
+        "sales_start_date_time": "2024-12-13T17:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/1000618BA61C10DC/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "system-of-a-down-deftones-with-special-guest-polyphia",
+        "tm_id": "1000618BA61C10DC",
+        "type": "REGULAR",
+        "upsell": [],
+        "url": "https://www.ticketmaster.ca/system-of-a-down-deftones-with-toronto-ontario-09-05-2025/event/1000618BA61C10DC",
+        "venue": {
+          "discovery_id": "KovZ917ARzt",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "105 Carl Hall Road",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M3K0A1"
+          },
+          "name": "Rogers Stadium",
+          "slug": "rogers-stadium",
+          "tm_id": "132627"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917o-E7",
+            "genre": "Rock",
+            "name": "Hozier",
+            "slug": "hozier",
+            "tm_id": "1896592"
+          },
+          {
+            "discovery_id": "K8vZ917j9-0",
+            "genre": "Alternative",
+            "name": "Gigi Perez",
+            "slug": "gigi-perez",
+            "tm_id": "3111106"
+          },
+          {
+            "discovery_id": "K8vZ917hlEV",
+            "genre": "Folk",
+            "name": "Amble",
+            "slug": "amble",
+            "tm_id": "1262844"
+          }
+        ],
+        "created_on": "2025-01-30T16:01:58Z",
+        "discovery_id": "1AvZZbNGkUa5ZRV",
+        "event_date": "2025-09-10",
+        "event_date_timestamp_utc": "2025-09-10T23:00:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "offsale",
+        "event_time": "19:00:00",
+        "event_timezone": "America/Toronto",
+        "genre": "Rock",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/9fe/d6cc61a9-9850-4e4b-9a7e-893c63c629fe_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "Hozier - Unreal Unearth Tour 2025",
+        "presales": [
+          {
+            "end_date_time": "2025-02-06T18:30:00Z",
+            "is_ln_promoted": false,
+            "name": "Artist Presale",
+            "start_date_time": "2025-02-06T15:00:00Z"
+          }
+        ],
+        "sales_start_date_time": "2025-02-06T19:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/1000623D892C0BF4/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "hozier-unreal-unearth-tour-2025",
+        "tm_id": "1000623D892C0BF4",
+        "type": "REGULAR",
+        "upsell": [],
+        "url": "https://www.ticketmaster.ca/hozier-unreal-unearth-tour-2025-toronto-ontario-09-10-2025/event/1000623D892C0BF4",
+        "venue": {
+          "discovery_id": "KovZ917ARzt",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "105 Carl Hall Road",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M3K0A1"
+          },
+          "name": "Rogers Stadium",
+          "slug": "rogers-stadium",
+          "tm_id": "132627"
+        }
+      }
+    ]
+  }
+}

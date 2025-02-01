@@ -1,0 +1,3164 @@
+{
+  "data": {
+    "getEvents": [
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917hYJV",
+            "genre": "Rock",
+            "name": "Sessanta",
+            "slug": "sessanta",
+            "tm_id": "5431705"
+          },
+          {
+            "discovery_id": "K8vZ9171FBf",
+            "genre": "Rock",
+            "name": "Primus",
+            "slug": "primus",
+            "tm_id": "239"
+          },
+          {
+            "discovery_id": "K8vZ917CTE0",
+            "genre": "Rock",
+            "name": "Puscifer",
+            "slug": "puscifer",
+            "tm_id": "871595"
+          },
+          {
+            "discovery_id": "K8vZ9171rq0",
+            "genre": "Rock",
+            "name": "A Perfect Circle",
+            "slug": "a-perfect-circle",
+            "tm_id": "707500"
+          }
+        ],
+        "created_on": "2024-09-16T14:01:24Z",
+        "discovery_id": "1AvZZb3Gkz0k9eI",
+        "event_date": "2025-05-22",
+        "event_date_timestamp_utc": "2025-05-23T00:00:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "event_timezone": "America/New_York",
+        "genre": "Rock",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/adb/e3720658-2731-4183-b8c4-ae77744bfadb_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "Sessanta V 2.0: Primus, Puscifer, A Perfect Circle",
+        "presales": [],
+        "sales_start_date_time": "2024-09-20T14:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/1000612E241970A8/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "sessanta-v-2-0-primus-puscifer-a-perfect-circle",
+        "tm_id": "1000612E241970A8",
+        "type": "REGULAR",
+        "upsell": [
+          {
+            "classification_id": "KZFzBErXgnZfZ7vAF1",
+            "discovery_id": "1AvZZbfGkYuWVDf",
+            "images": [
+              {
+                "fallback": false,
+                "image_url": "https://s1.ticketm.net/dam/a/93e/3fb89083-1ef5-4b12-8073-04d07131b93e_1450861_RETINA_PORTRAIT_16_9.jpg"
+              }
+            ],
+            "name": "Lawn Chair Rental - Sessanta - Not a Concert Ticket",
+            "type": "Lawn Chair Rental",
+            "url": "https://www.ticketmaster.ca/lawn-chair-rental-sessanta-not-a-toronto-ontario-05-22-2025/event/1000614C0DF74ED4"
+          }
+        ],
+        "url": "https://www.ticketmaster.ca/sessanta-v-20-primus-puscifer-a-toronto-ontario-05-22-2025/event/1000612E241970A8",
+        "venue": {
+          "discovery_id": "KovZpZAEkkIA",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "909 Lakeshore Blvd. W.",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M6K 3L3"
+          },
+          "name": "Budweiser Stage",
+          "slug": "budweiser-stage",
+          "tm_id": "131073"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9171uvV",
+            "genre": "Rock",
+            "name": "Billy Idol",
+            "slug": "billy-idol",
+            "tm_id": "735323"
+          },
+          {
+            "discovery_id": "K8vZ917uAm0",
+            "genre": "Rock",
+            "name": "Joan Jett & the Blackhearts",
+            "slug": "joan-jett-the-blackhearts",
+            "tm_id": "837666"
+          }
+        ],
+        "created_on": "2025-01-21T15:01:12Z",
+        "discovery_id": "1A8ZkFYGkdMbKAB",
+        "event_date": "2025-05-23",
+        "event_date_timestamp_utc": "2025-05-23T23:30:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "19:30:00",
+        "event_timezone": "America/New_York",
+        "genre": "Rock",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/820/01d6c8b3-78f1-473d-b0f7-6139edc76820_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "Billy Idol:  It's A Nice Day To...Tour Again!",
+        "presales": [
+          {
+            "end_date_time": "2025-01-24T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Billy Idol Artist Presale",
+            "start_date_time": "2025-01-22T14:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-24T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Billy Idol VIP Package Presale",
+            "start_date_time": "2025-01-22T14:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-24T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Joan Jett & the Blackhearts Presale",
+            "start_date_time": "2025-01-22T14:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-24T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Joan Jett & the Blackhearts VIP Presale",
+            "start_date_time": "2025-01-22T14:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-24T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Live INSIDER presale",
+            "start_date_time": "2025-01-23T14:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-24T02:00:00Z",
+            "is_ln_promoted": true,
+            "name": "Live Nation Presale",
+            "start_date_time": "2025-01-23T14:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-24T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Ticketmaster Presale",
+            "start_date_time": "2025-01-23T14:00:00Z"
+          },
+          {
+            "end_date_time": "2025-05-10T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Front of the Line Amex Reserved Tickets",
+            "start_date_time": "2025-01-24T14:00:00Z"
+          },
+          {
+            "end_date_time": "2025-05-10T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "RBCxMUSIC Preferred Tickets",
+            "start_date_time": "2025-01-24T14:00:00Z"
+          },
+          {
+            "end_date_time": "2025-05-10T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Rogers Customer Exclusive Tickets",
+            "start_date_time": "2025-01-24T14:00:00Z"
+          },
+          {
+            "end_date_time": "2025-05-17T01:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Billy Idol VIP Package Onsale",
+            "start_date_time": "2025-01-24T14:00:00Z"
+          },
+          {
+            "end_date_time": "2025-05-17T01:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Joan Jett & the Blackhearts VIP Onsale",
+            "start_date_time": "2025-01-24T14:00:00Z"
+          }
+        ],
+        "sales_start_date_time": "2025-01-24T14:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/10006230F761317A/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "billy-idol-it-s-a-nice-day-to-tour-again",
+        "tm_id": "10006230F761317A",
+        "type": "REGULAR",
+        "upsell": [
+          {
+            "classification_id": "KZFzBErXgnZfZ7vAF1",
+            "discovery_id": "16vZZbNfFG7lVFd",
+            "images": [
+              {
+                "fallback": false,
+                "image_url": "https://s1.ticketm.net/dam/a/93e/3fb89083-1ef5-4b12-8073-04d07131b93e_1450861_RETINA_PORTRAIT_16_9.jpg"
+              }
+            ],
+            "name": "Lawn Chair Rental - Billy Idol - Not a Concert Ticket",
+            "type": "Lawn Chair Rental",
+            "url": "https://www.ticketmaster.ca/lawn-chair-rental-billy-idol-not-toronto-ontario-05-23-2025/event/1000623508AF4203"
+          }
+        ],
+        "url": "https://www.ticketmaster.ca/billy-idol-its-a-nice-day-toronto-ontario-05-23-2025/event/10006230F761317A",
+        "venue": {
+          "discovery_id": "KovZpZAEkkIA",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "909 Lakeshore Blvd. W.",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M6K 3L3"
+          },
+          "name": "Budweiser Stage",
+          "slug": "budweiser-stage",
+          "tm_id": "131073"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9175zpV",
+            "genre": "Country",
+            "name": "Jason Aldean",
+            "slug": "jason-aldean",
+            "tm_id": "984829"
+          },
+          {
+            "discovery_id": "K8vZ917btK7",
+            "genre": "Country",
+            "name": "Nate Smith",
+            "slug": "nate-smith",
+            "tm_id": "2709759"
+          },
+          {
+            "discovery_id": "K8vZ917odXf",
+            "genre": "Country",
+            "name": "RaeLynn",
+            "slug": "raelynn",
+            "tm_id": "1852152"
+          },
+          {
+            "discovery_id": "K8vZ9178r30",
+            "genre": "Country",
+            "name": "Dee Jay Silver",
+            "slug": "dee-jay-silver",
+            "tm_id": "1795460"
+          }
+        ],
+        "created_on": "2025-01-21T14:00:34Z",
+        "discovery_id": "1A8ZkFYGkdqz3Jm",
+        "event_date": "2025-05-24",
+        "event_date_timestamp_utc": "2025-05-24T23:30:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "19:30:00",
+        "event_timezone": "America/New_York",
+        "genre": "Country",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/a95/faf4bf30-a0c8-429f-a9ba-f5c904bd4a95_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "Jason Aldean: Full Throttle Tour 2025",
+        "presales": [
+          {
+            "end_date_time": "2025-01-24T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Aldean Army Fan Club Bundle Presale",
+            "start_date_time": "2025-01-22T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-24T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Aldean Army Fan Club Presale",
+            "start_date_time": "2025-01-22T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-24T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Preferred Seating Presale",
+            "start_date_time": "2025-01-22T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-24T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "VIP Packages Presale",
+            "start_date_time": "2025-01-22T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-24T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Front Of The Line Amex Presale Tickets",
+            "start_date_time": "2025-01-23T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-24T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Live INSIDER Presale",
+            "start_date_time": "2025-01-23T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-24T03:00:00Z",
+            "is_ln_promoted": true,
+            "name": "Live Nation Presale",
+            "start_date_time": "2025-01-23T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-24T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Support Artist Presales",
+            "start_date_time": "2025-01-23T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-24T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Ticketmaster Presale",
+            "start_date_time": "2025-01-23T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-05-11T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Front Of The Line Amex Reserved Tickets",
+            "start_date_time": "2025-01-24T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-05-11T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "RBCxMUSIC Ticket Access",
+            "start_date_time": "2025-01-24T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-05-11T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Rogers Customer Exclusive Tickets",
+            "start_date_time": "2025-01-24T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-05-18T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "VIP Packages Onsale",
+            "start_date_time": "2025-01-24T15:00:00Z"
+          }
+        ],
+        "sales_start_date_time": "2025-01-24T15:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/10006230DDE129AE/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "jason-aldean-full-throttle-tour-2025",
+        "tm_id": "10006230DDE129AE",
+        "type": "REGULAR",
+        "upsell": [
+          {
+            "classification_id": "KZFzBErXgnZfZ7vAF1",
+            "discovery_id": "1A8ZkFVGkdJ2ead",
+            "images": [
+              {
+                "fallback": false,
+                "image_url": "https://s1.ticketm.net/dam/a/93e/3fb89083-1ef5-4b12-8073-04d07131b93e_1450861_RETINA_PORTRAIT_16_9.jpg"
+              }
+            ],
+            "name": "Lawn Chair Rental - Jason Aldean - NOT a Concert Ticket",
+            "type": "Lawn Chair Rental",
+            "url": "https://www.ticketmaster.ca/lawn-chair-rental-jason-aldean-not-toronto-ontario-05-24-2025/event/10006234E63C2243"
+          },
+          {
+            "classification_id": "KZFzBErXgnZfZ7v7lv",
+            "discovery_id": "1A8ZkFMGkdxZS0n",
+            "images": [
+              {
+                "fallback": false,
+                "image_url": "https://s1.ticketm.net/dam/a/237/61c8c185-03c1-4d6e-8acd-21d7660e2237_RETINA_PORTRAIT_16_9.jpg"
+              }
+            ],
+            "name": "Nate Smith VIP Upgrade (TICKET NOT INCLUDED)",
+            "type": "Special Entry",
+            "url": "https://www.ticketmaster.ca/nate-smith-vip-upgrade-ticket-not-toronto-ontario-05-24-2025/event/10006237E203392A"
+          }
+        ],
+        "url": "https://www.ticketmaster.ca/jason-aldean-full-throttle-tour-2025-toronto-ontario-05-24-2025/event/10006230DDE129AE",
+        "venue": {
+          "discovery_id": "KovZpZAEkkIA",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "909 Lakeshore Blvd. W.",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M6K 3L3"
+          },
+          "name": "Budweiser Stage",
+          "slug": "budweiser-stage",
+          "tm_id": "131073"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917GHdV",
+            "genre": "Rock",
+            "name": "Pierce The Veil",
+            "slug": "pierce-the-veil",
+            "tm_id": "1487015"
+          },
+          {
+            "discovery_id": "K8vZ917Gmh7",
+            "genre": "Rock",
+            "name": "Sleeping With Sirens",
+            "slug": "sleeping-with-sirens",
+            "tm_id": "1404292"
+          },
+          {
+            "discovery_id": "K8vZ917KUTV",
+            "genre": "Dance/Electronic",
+            "name": "Beach Weather",
+            "slug": "beach-weather",
+            "tm_id": "2163588"
+          }
+        ],
+        "created_on": "2024-12-03T15:02:05Z",
+        "discovery_id": "1AvZZb9GklZGx6A",
+        "event_date": "2025-05-28",
+        "event_date_timestamp_utc": "2025-05-28T23:00:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "event_timezone": "America/New_York",
+        "genre": "Rock",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/152/f08da163-513d-44ff-b62f-50c268517152_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "Pierce The Veil - I Can't Hear You World Tour",
+        "presales": [
+          {
+            "end_date_time": "2024-12-06T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Front Of The Line® by American Express®",
+            "start_date_time": "2024-12-03T17:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-06T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "VIP Packages Presale",
+            "start_date_time": "2024-12-03T17:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-06T14:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Pierce The Veil Artist Presale",
+            "start_date_time": "2024-12-04T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-06T14:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Sleeping With Sirens Club Presale",
+            "start_date_time": "2024-12-04T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-06T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Live INSIDER Presale",
+            "start_date_time": "2024-12-05T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-06T03:00:00Z",
+            "is_ln_promoted": true,
+            "name": "Live Nation Presale",
+            "start_date_time": "2024-12-05T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-06T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Ticketmaster Presale",
+            "start_date_time": "2024-12-05T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-06T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Spotify Presale",
+            "start_date_time": "2024-12-05T17:00:00Z"
+          },
+          {
+            "end_date_time": "2025-05-22T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "VIP Packages Onsale",
+            "start_date_time": "2024-12-06T15:00:00Z"
+          }
+        ],
+        "sales_start_date_time": "2024-12-06T15:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/1000617AC03221C5/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "pierce-the-veil-i-can-t-hear-you-world-tour",
+        "tm_id": "1000617AC03221C5",
+        "type": "REGULAR",
+        "upsell": [
+          {
+            "classification_id": "KZFzBErXgnZfZ7vAF1",
+            "discovery_id": "1AvZZb9GkSUWwW7",
+            "images": [
+              {
+                "fallback": false,
+                "image_url": "https://s1.ticketm.net/dam/a/93e/3fb89083-1ef5-4b12-8073-04d07131b93e_1450861_RETINA_PORTRAIT_16_9.jpg"
+              }
+            ],
+            "name": "Lawn Chair Rental - Pierce The Veil - NOT A CONCERT TICKET",
+            "type": "Lawn Chair Rental",
+            "url": "https://www.ticketmaster.ca/lawn-chair-rental-pierce-the-veil-toronto-ontario-05-28-2025/event/1000617CF6F72F44"
+          }
+        ],
+        "url": "https://www.ticketmaster.ca/pierce-the-veil-i-cant-hear-toronto-ontario-05-28-2025/event/1000617AC03221C5",
+        "venue": {
+          "discovery_id": "KovZpZAEkkIA",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "909 Lakeshore Blvd. W.",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M6K 3L3"
+          },
+          "name": "Budweiser Stage",
+          "slug": "budweiser-stage",
+          "tm_id": "131073"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917o_af",
+            "genre": "Rock",
+            "name": "ONE OK ROCK",
+            "slug": "one-ok-rock",
+            "tm_id": "1884284"
+          },
+          {
+            "discovery_id": "K8vZ9179d0f",
+            "genre": "Rock",
+            "name": "Stand Atlantic",
+            "slug": "stand-atlantic",
+            "tm_id": "2505552"
+          }
+        ],
+        "created_on": "2025-01-23T15:00:34Z",
+        "discovery_id": "1A8ZkFUGkd0TNyk",
+        "event_date": "2025-06-04",
+        "event_date_timestamp_utc": "2025-06-05T00:00:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "event_timezone": "America/New_York",
+        "genre": "Rock",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/598/5f4e3c72-c793-4705-8517-5ed6f238e598_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "ONE OK ROCK DETOX NORTH AMERICAN TOUR 2025",
+        "presales": [
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Front Of The Line Amex Presale Tickets",
+            "start_date_time": "2025-01-28T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T04:59:00Z",
+            "is_ln_promoted": false,
+            "name": "Artist Presale",
+            "start_date_time": "2025-01-28T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T04:59:00Z",
+            "is_ln_promoted": false,
+            "name": "VIP Package Presale",
+            "start_date_time": "2025-01-28T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "PSS Additional Access Offer",
+            "start_date_time": "2025-01-29T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T04:59:00Z",
+            "is_ln_promoted": true,
+            "name": "Live Nation Presale",
+            "start_date_time": "2025-01-29T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T04:59:00Z",
+            "is_ln_promoted": false,
+            "name": "Ticketmaster Presale",
+            "start_date_time": "2025-01-29T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T04:59:00Z",
+            "is_ln_promoted": false,
+            "name": "Bandsintown Presale",
+            "start_date_time": "2025-01-30T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T04:59:00Z",
+            "is_ln_promoted": false,
+            "name": "Live INSIDER Presale",
+            "start_date_time": "2025-01-30T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T04:59:00Z",
+            "is_ln_promoted": false,
+            "name": "Spotify Presale",
+            "start_date_time": "2025-01-30T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-05-22T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Front Of The Line Amex Reserved Tickets",
+            "start_date_time": "2025-01-31T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-05-22T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "RBCxMUSIC Ticket Access",
+            "start_date_time": "2025-01-31T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-05-22T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Rogers Customer Exclusive Tickets",
+            "start_date_time": "2025-01-31T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-05-22T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "VIP Package Onsale",
+            "start_date_time": "2025-01-31T15:00:00Z"
+          }
+        ],
+        "sales_start_date_time": "2025-01-31T15:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/10006236E4FE3E46/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "one-ok-rock-detox-north-american-tour-2025",
+        "tm_id": "10006236E4FE3E46",
+        "type": "REGULAR",
+        "upsell": [],
+        "url": "https://www.ticketmaster.ca/one-ok-rock-detox-north-american-toronto-ontario-06-04-2025/event/10006236E4FE3E46",
+        "venue": {
+          "discovery_id": "KovZpZAEkkIA",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "909 Lakeshore Blvd. W.",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M6K 3L3"
+          },
+          "name": "Budweiser Stage",
+          "slug": "budweiser-stage",
+          "tm_id": "131073"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917bxm7",
+            "genre": "Classical",
+            "name": "HAUSER",
+            "slug": "hauser",
+            "tm_id": "2693760"
+          }
+        ],
+        "created_on": "2024-10-14T14:01:17Z",
+        "discovery_id": "1A8ZkA6GkeyDo5p",
+        "event_date": "2025-06-17",
+        "event_date_timestamp_utc": "2025-06-18T00:00:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "event_timezone": "America/New_York",
+        "genre": "Classical",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/e1c/cfc88d38-f24c-46e5-8d87-6f82e496fe1c_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "HAUSER - The Rebel Is Back",
+        "presales": [
+          {
+            "end_date_time": "2025-01-01T04:59:00Z",
+            "is_ln_promoted": false,
+            "name": "TM Holiday Promotion 2024",
+            "start_date_time": "2024-11-29T15:00:00Z"
+          }
+        ],
+        "sales_start_date_time": "2024-10-18T14:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/10006147B9ED12D6/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "hauser-the-rebel-is-back",
+        "tm_id": "10006147B9ED12D6",
+        "type": "REGULAR",
+        "upsell": [],
+        "url": "https://www.ticketmaster.ca/hauser-the-rebel-is-back-toronto-ontario-06-17-2025/event/10006147B9ED12D6",
+        "venue": {
+          "discovery_id": "KovZpZAEkkIA",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "909 Lakeshore Blvd. W.",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M6K 3L3"
+          },
+          "name": "Budweiser Stage",
+          "slug": "budweiser-stage",
+          "tm_id": "131073"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ91712mV",
+            "genre": "Rock",
+            "name": "Simple Minds",
+            "slug": "simple-minds",
+            "tm_id": "736120"
+          },
+          {
+            "discovery_id": "K8vZ9171pvf",
+            "genre": "Rock",
+            "name": "Modern English",
+            "slug": "modern-english",
+            "tm_id": "828438"
+          },
+          {
+            "discovery_id": "K8vZ9175oNV",
+            "genre": "Rock",
+            "name": "Soft Cell",
+            "slug": "soft-cell",
+            "tm_id": "847004"
+          }
+        ],
+        "created_on": "2025-01-27T14:01:26Z",
+        "discovery_id": "1A8ZkFVGke0J8ym",
+        "event_date": "2025-06-18",
+        "event_date_timestamp_utc": "2025-06-18T23:00:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "event_timezone": "America/New_York",
+        "genre": "Rock",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/880/85553065-0c5c-41f3-9e33-03bff75c2880_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "Simple Minds: Alive & Kicking Tour 2025",
+        "presales": [
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Front Of The Line® Amex Presale Tickets",
+            "start_date_time": "2025-01-28T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Simple Minds VIP Packages Presale",
+            "start_date_time": "2025-01-28T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Live INSIDER Presale",
+            "start_date_time": "2025-01-29T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": true,
+            "name": "Live Nation Presale",
+            "start_date_time": "2025-01-29T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "PSS Additional Access Presale",
+            "start_date_time": "2025-01-29T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Simple Minds Artist Presale",
+            "start_date_time": "2025-01-29T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Ticketmaster Presale",
+            "start_date_time": "2025-01-29T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Spotify Presale",
+            "start_date_time": "2025-01-29T17:00:00Z"
+          },
+          {
+            "end_date_time": "2025-06-05T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Front Of The Line® Reserved Tickets",
+            "start_date_time": "2025-01-31T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-06-05T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "RBCxMUSIC Preferred Tickets",
+            "start_date_time": "2025-01-31T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-06-05T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Rogers Customer Exclusive Tickets",
+            "start_date_time": "2025-01-31T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-06-12T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Simple Minds VIP Packages Onsale",
+            "start_date_time": "2025-01-31T15:00:00Z"
+          }
+        ],
+        "sales_start_date_time": "2025-01-31T15:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/10006234A4990E6E/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "simple-minds-alive-kicking-tour-2025",
+        "tm_id": "10006234A4990E6E",
+        "type": "REGULAR",
+        "upsell": [
+          {
+            "classification_id": "KZFzBErXgnZfZ7vAF1",
+            "discovery_id": "1A8ZkFVGkeJwODo",
+            "images": [
+              {
+                "fallback": false,
+                "image_url": "https://s1.ticketm.net/dam/a/93e/3fb89083-1ef5-4b12-8073-04d07131b93e_1450861_RETINA_PORTRAIT_16_9.jpg"
+              }
+            ],
+            "name": "Lawn Chair Rental - Simple Minds - NOT A CONCERT TICKET",
+            "type": "Lawn Chair Rental",
+            "url": "https://www.ticketmaster.ca/lawn-chair-rental-simple-minds-not-toronto-ontario-06-18-2025/event/10006234A6CA0ED1"
+          }
+        ],
+        "url": "https://www.ticketmaster.ca/simple-minds-alive-kicking-tour-2025-toronto-ontario-06-18-2025/event/10006234A4990E6E",
+        "venue": {
+          "discovery_id": "KovZpZAEkkIA",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "909 Lakeshore Blvd. W.",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M6K 3L3"
+          },
+          "name": "Budweiser Stage",
+          "slug": "budweiser-stage",
+          "tm_id": "131073"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917GaY0",
+            "genre": "Rock",
+            "name": "City and Colour",
+            "slug": "city-and-colour",
+            "tm_id": "40232"
+          }
+        ],
+        "created_on": "2025-01-27T14:01:42Z",
+        "discovery_id": "1A8ZkFMGkdAQxnj",
+        "event_date": "2025-06-20",
+        "event_date_timestamp_utc": "2025-06-20T23:00:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "event_timezone": "America/New_York",
+        "genre": "Rock",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/0b8/acddc42f-136f-4791-8d09-5bbebc31c0b8_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "City and Colour - Celebrating 20 Years of Sometimes",
+        "presales": [
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Artist Presale",
+            "start_date_time": "2025-01-28T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Front Of The Line Amex Presale Tickets",
+            "start_date_time": "2025-01-28T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": true,
+            "name": "Live Nation Presale",
+            "start_date_time": "2025-01-29T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Ticketmaster Presale",
+            "start_date_time": "2025-01-29T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Live INSIDER Presale",
+            "start_date_time": "2025-01-30T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Spotify Presale",
+            "start_date_time": "2025-01-30T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-06-07T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Front Of The Line Amex Reserved Tickets",
+            "start_date_time": "2025-01-31T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-06-07T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "RBCxMUSIC Ticket Access",
+            "start_date_time": "2025-01-31T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-06-07T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Rogers Customer Exclusive Tickets",
+            "start_date_time": "2025-01-31T15:00:00Z"
+          }
+        ],
+        "sales_start_date_time": "2025-01-31T15:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/10006237C56A2A9C/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "city-and-colour-celebrating-20-years-of-sometimes",
+        "tm_id": "10006237C56A2A9C",
+        "type": "REGULAR",
+        "upsell": [
+          {
+            "classification_id": "KZFzBErXgnZfZ7vAF1",
+            "discovery_id": "1AvZZbNGkIiMfL-",
+            "images": [
+              {
+                "fallback": false,
+                "image_url": "https://s1.ticketm.net/dam/a/93e/3fb89083-1ef5-4b12-8073-04d07131b93e_1450861_RETINA_PORTRAIT_16_9.jpg"
+              }
+            ],
+            "name": "Lawn Chair Rental - City and Colour - NOT A CONCERT TICKET",
+            "type": "Lawn Chair Rental",
+            "url": "https://www.ticketmaster.ca/lawn-chair-rental-city-and-colour-toronto-ontario-06-20-2025/event/1000623A2CDD47E1"
+          }
+        ],
+        "url": "https://www.ticketmaster.ca/city-and-colour-celebrating-20-years-toronto-ontario-06-20-2025/event/10006237C56A2A9C",
+        "venue": {
+          "discovery_id": "KovZpZAEkkIA",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "909 Lakeshore Blvd. W.",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M6K 3L3"
+          },
+          "name": "Budweiser Stage",
+          "slug": "budweiser-stage",
+          "tm_id": "131073"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ91710df",
+            "genre": "Country",
+            "name": "Keith Urban",
+            "slug": "keith-urban",
+            "tm_id": "7708"
+          },
+          {
+            "discovery_id": "K8vZ917QKSV",
+            "genre": "Country",
+            "name": "Chase Matthew",
+            "slug": "chase-matthew",
+            "tm_id": "5376479"
+          },
+          {
+            "discovery_id": "K8vZ917_PHV",
+            "genre": "Country",
+            "name": "Alana Springsteen",
+            "slug": "alana-springsteen",
+            "tm_id": "2820408"
+          },
+          {
+            "discovery_id": "K8vZ917hxH7",
+            "genre": "Country",
+            "name": "Karley Scott Collins",
+            "slug": "karley-scott-collins",
+            "tm_id": "3039058"
+          }
+        ],
+        "created_on": "2025-01-13T14:00:34Z",
+        "discovery_id": "1A8ZkFtGkdYa3xP",
+        "event_date": "2025-06-21",
+        "event_date_timestamp_utc": "2025-06-21T23:00:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "event_timezone": "America/New_York",
+        "genre": "Country",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/6b2/447dab0b-becd-4631-99b4-6aacbabdc6b2_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "Keith Urban: High and Alive World Tour",
+        "presales": [
+          {
+            "end_date_time": "2025-01-17T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "The 'Ville: Phoenix Club Presale",
+            "start_date_time": "2025-01-16T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-17T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "VIP Packages Presale",
+            "start_date_time": "2025-01-16T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-06-15T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "VIP Packages Onsale",
+            "start_date_time": "2025-01-17T15:00:00Z"
+          }
+        ],
+        "sales_start_date_time": "2025-01-17T15:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/10006229F02528A5/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "keith-urban-high-and-alive-world-tour",
+        "tm_id": "10006229F02528A5",
+        "type": "REGULAR",
+        "upsell": [
+          {
+            "classification_id": "KZFzBErXgnZfZ7vAF1",
+            "discovery_id": "1AvZZbxGkTYXdpJ",
+            "images": [
+              {
+                "fallback": false,
+                "image_url": "https://s1.ticketm.net/dam/a/93e/3fb89083-1ef5-4b12-8073-04d07131b93e_1450861_RETINA_PORTRAIT_16_9.jpg"
+              }
+            ],
+            "name": "Lawn Chair Rental - Keith Urban - NOT A CONCERT TICKET",
+            "type": "Lawn Chair Rental",
+            "url": "https://www.ticketmaster.ca/lawn-chair-rental-keith-urban-not-toronto-ontario-06-21-2025/event/1000622FF0F835A6"
+          }
+        ],
+        "url": "https://www.ticketmaster.ca/keith-urban-high-and-alive-world-toronto-ontario-06-21-2025/event/10006229F02528A5",
+        "venue": {
+          "discovery_id": "KovZpZAEkkIA",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "909 Lakeshore Blvd. W.",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M6K 3L3"
+          },
+          "name": "Budweiser Stage",
+          "slug": "budweiser-stage",
+          "tm_id": "131073"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917ppOV",
+            "genre": "Pop",
+            "name": "Peach Pit",
+            "slug": "peach-pit",
+            "tm_id": "2419773"
+          },
+          {
+            "discovery_id": "K8vZ9173zX7",
+            "genre": "Folk",
+            "name": "Briston Maroney",
+            "slug": "briston-maroney",
+            "tm_id": "2048390"
+          },
+          {
+            "discovery_id": "K8vZ917_EZ0",
+            "genre": "Rock",
+            "name": "Bnny",
+            "slug": "bnny",
+            "tm_id": "2822221"
+          }
+        ],
+        "created_on": "2024-11-19T15:02:38Z",
+        "discovery_id": "1AvZZbpGkWc-OSR",
+        "event_date": "2025-06-26",
+        "event_date_timestamp_utc": "2025-06-26T23:00:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "event_timezone": "America/New_York",
+        "genre": "Pop",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/b74/9442dd51-42b9-428e-998c-4695d321fb74_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "Peach Pit & Briston Maroney: Long Hair, Long Life Tour",
+        "presales": [
+          {
+            "end_date_time": "2024-11-21T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "PSS Additional Access Presale",
+            "start_date_time": "2024-11-20T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-11-21T04:59:00Z",
+            "is_ln_promoted": false,
+            "name": "Amex Front Of The Line® Presale Tickets",
+            "start_date_time": "2024-11-20T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-11-21T04:59:00Z",
+            "is_ln_promoted": false,
+            "name": "Artist Presale",
+            "start_date_time": "2024-11-20T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-11-21T04:59:00Z",
+            "is_ln_promoted": true,
+            "name": "Live Nation Presale",
+            "start_date_time": "2024-11-20T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-11-21T04:59:00Z",
+            "is_ln_promoted": false,
+            "name": "Ticketmaster Presale",
+            "start_date_time": "2024-11-20T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-11-21T04:59:00Z",
+            "is_ln_promoted": false,
+            "name": "VIP Package Presale",
+            "start_date_time": "2024-11-20T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-11-21T16:40:00Z",
+            "is_ln_promoted": false,
+            "name": "Official Platinum Presale",
+            "start_date_time": "2024-11-20T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-11-21T04:59:00Z",
+            "is_ln_promoted": false,
+            "name": "Live INSIDER Presale",
+            "start_date_time": "2024-11-20T17:00:00Z"
+          },
+          {
+            "end_date_time": "2024-11-21T04:59:00Z",
+            "is_ln_promoted": false,
+            "name": "Spotify Presale",
+            "start_date_time": "2024-11-20T17:00:00Z"
+          },
+          {
+            "end_date_time": "2025-06-13T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "VIP Package Onsale",
+            "start_date_time": "2024-11-21T17:00:00Z"
+          },
+          {
+            "end_date_time": "2025-06-27T01:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Official Platinum",
+            "start_date_time": "2024-11-21T17:00:00Z"
+          }
+        ],
+        "sales_start_date_time": "2024-11-21T17:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/1000616F6D860CEF/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "peach-pit-briston-maroney-long-hair-long-life-tour",
+        "tm_id": "1000616F6D860CEF",
+        "type": "REGULAR",
+        "upsell": [],
+        "url": "https://www.ticketmaster.ca/peach-pit-briston-maroney-long-hair-toronto-ontario-06-26-2025/event/1000616F6D860CEF",
+        "venue": {
+          "discovery_id": "KovZpZAEkkIA",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "909 Lakeshore Blvd. W.",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M6K 3L3"
+          },
+          "name": "Budweiser Stage",
+          "slug": "budweiser-stage",
+          "tm_id": "131073"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9171GM7",
+            "genre": "Rock",
+            "name": "James Taylor",
+            "slug": "james-taylor",
+            "tm_id": "1516"
+          },
+          {
+            "discovery_id": "K8vZ917Q-u0",
+            "genre": "Rock",
+            "name": "Tiny Habits",
+            "slug": "tiny-habits",
+            "tm_id": "5384217"
+          }
+        ],
+        "created_on": "2024-12-09T16:03:13Z",
+        "discovery_id": "1avZZbboA7VZd2ak",
+        "event_date": "2025-06-27",
+        "event_date_timestamp_utc": "2025-06-27T23:30:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "19:30:00",
+        "event_timezone": "America/New_York",
+        "genre": "Rock",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/494/4a231626-0e28-4f17-b002-71cf03aab494_602141_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "James Taylor And His All-Star Band",
+        "presales": [
+          {
+            "end_date_time": "2024-12-13T13:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Front Of The Line® by American Express®",
+            "start_date_time": "2024-12-11T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-13T14:45:00Z",
+            "is_ln_promoted": false,
+            "name": "Official Platinum Presale",
+            "start_date_time": "2024-12-11T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-13T13:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Live INSIDER Presale",
+            "start_date_time": "2024-12-12T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-13T13:00:00Z",
+            "is_ln_promoted": true,
+            "name": "Live Nation Presale",
+            "start_date_time": "2024-12-12T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-06-28T01:30:00Z",
+            "is_ln_promoted": false,
+            "name": "Official Platinum",
+            "start_date_time": "2024-12-13T15:00:00Z"
+          }
+        ],
+        "sales_start_date_time": "2024-12-13T15:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/1000618445134E85/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "james-taylor-and-his-all-star-band",
+        "tm_id": "1000618445134E85",
+        "type": "REGULAR",
+        "upsell": [
+          {
+            "classification_id": "KZFzBErXgnZfZ7vAF1",
+            "discovery_id": "1k7Zv-xfGA1Xdf-",
+            "images": [
+              {
+                "fallback": false,
+                "image_url": "https://s1.ticketm.net/dam/a/93e/3fb89083-1ef5-4b12-8073-04d07131b93e_1450861_RETINA_PORTRAIT_16_9.jpg"
+              }
+            ],
+            "name": "Lawn Chair Rental - James Taylor - Not A Concert Ticket",
+            "type": "Lawn Chair Rental",
+            "url": "https://www.ticketmaster.ca/lawn-chair-rental-james-taylor-not-toronto-ontario-06-27-2025/event/100061894AF83521"
+          }
+        ],
+        "url": "https://www.ticketmaster.ca/james-taylor-and-his-allstar-band-toronto-ontario-06-27-2025/event/1000618445134E85",
+        "venue": {
+          "discovery_id": "KovZpZAEkkIA",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "909 Lakeshore Blvd. W.",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M6K 3L3"
+          },
+          "name": "Budweiser Stage",
+          "slug": "budweiser-stage",
+          "tm_id": "131073"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9171blf",
+            "genre": "Rock",
+            "name": "Incubus",
+            "slug": "incubus",
+            "tm_id": "741166"
+          },
+          {
+            "discovery_id": "K8vZ917Gvm0",
+            "genre": "Rock",
+            "name": "Manchester Orchestra",
+            "slug": "manchester-orchestra",
+            "tm_id": "1098628"
+          }
+        ],
+        "created_on": "2025-01-27T15:01:25Z",
+        "discovery_id": "1A8ZkFzGkd3fS_5",
+        "event_date": "2025-06-30",
+        "event_date_timestamp_utc": "2025-06-30T23:30:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "19:30:00",
+        "event_timezone": "America/New_York",
+        "genre": "Rock",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/906/78f03ed7-2615-4705-a61e-8c70fb426906_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "INCUBUS - Performing MORNING VIEW In Its Entirety + The Hits",
+        "presales": [
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Front of the Line by American Express",
+            "start_date_time": "2025-01-28T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Incubus VIP Packages Presale",
+            "start_date_time": "2025-01-28T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Incubus Fan Presale",
+            "start_date_time": "2025-01-28T17:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Manchester Orchestra Fan Presale",
+            "start_date_time": "2025-01-28T17:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": true,
+            "name": "Live Nation Presale",
+            "start_date_time": "2025-01-29T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "PSS Additional Access Presale",
+            "start_date_time": "2025-01-29T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Ticketmaster Presale",
+            "start_date_time": "2025-01-29T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Live INSIDER Presale",
+            "start_date_time": "2025-01-30T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Spotify Presale",
+            "start_date_time": "2025-01-30T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-06-17T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Front of the Line by American Express",
+            "start_date_time": "2025-01-31T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-06-17T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "RBCxMusic Tickets",
+            "start_date_time": "2025-01-31T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-06-17T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Rogers Customer Exclusive Tickets",
+            "start_date_time": "2025-01-31T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-06-24T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Incubus VIP Packages Onsale",
+            "start_date_time": "2025-01-31T15:00:00Z"
+          }
+        ],
+        "sales_start_date_time": "2025-01-31T15:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/10006238D253364B/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "incubus-performing-morning-view-in-its-entirety-the-hits",
+        "tm_id": "10006238D253364B",
+        "type": "REGULAR",
+        "upsell": [
+          {
+            "classification_id": "KZFzBErXgnZfZ7vAF1",
+            "discovery_id": "1AvZZbNGkX9csiF",
+            "images": [
+              {
+                "fallback": false,
+                "image_url": "https://s1.ticketm.net/dam/a/93e/3fb89083-1ef5-4b12-8073-04d07131b93e_1450861_RETINA_PORTRAIT_16_9.jpg"
+              }
+            ],
+            "name": "Lawn Chair Rental - Incubus - NOT a Concert Ticket",
+            "type": "Lawn Chair Rental",
+            "url": "https://www.ticketmaster.ca/lawn-chair-rental-incubus-not-a-toronto-ontario-06-30-2025/event/1000623F97B71B08"
+          },
+          {
+            "classification_id": "KZFzBErXgnZfZ7v7lv",
+            "discovery_id": "1AvZZbNGkicOKBe",
+            "images": [
+              {
+                "fallback": false,
+                "image_url": "https://s1.ticketm.net/dam/a/906/78f03ed7-2615-4705-a61e-8c70fb426906_RETINA_PORTRAIT_16_9.jpg"
+              }
+            ],
+            "name": "Incubus VIP Upgrades (Event Ticket Sold Separately)",
+            "type": "Special Entry",
+            "url": "https://www.ticketmaster.ca/incubus-vip-upgrades-event-ticket-sold-toronto-ontario-06-30-2025/event/1000623B2D813E82"
+          }
+        ],
+        "url": "https://www.ticketmaster.ca/incubus-performing-morning-view-in-its-toronto-ontario-06-30-2025/event/10006238D253364B",
+        "venue": {
+          "discovery_id": "KovZpZAEkkIA",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "909 Lakeshore Blvd. W.",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M6K 3L3"
+          },
+          "name": "Budweiser Stage",
+          "slug": "budweiser-stage",
+          "tm_id": "131073"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ91713NV",
+            "genre": "Rock",
+            "name": "Dave Matthews Band",
+            "slug": "dave-matthews-band",
+            "tm_id": "746531"
+          }
+        ],
+        "created_on": "2025-01-28T17:00:52Z",
+        "discovery_id": "1A8ZkFsGkdoAwR1",
+        "event_date": "2025-07-08",
+        "event_date_timestamp_utc": "2025-07-09T00:00:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "offsale",
+        "event_time": "20:00:00",
+        "event_timezone": "America/New_York",
+        "genre": "Rock",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/2da/c2fd9e5f-8dbd-49d4-b762-bf4efee282da_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "Dave Matthews Band",
+        "presales": [],
+        "sales_start_date_time": "2025-02-21T15:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/10006231D1172BCA/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "dave-matthews-band",
+        "tm_id": "10006231D1172BCA",
+        "type": "REGULAR",
+        "upsell": [],
+        "url": "https://www.ticketmaster.ca/dave-matthews-band-toronto-ontario-07-08-2025/event/10006231D1172BCA",
+        "venue": {
+          "discovery_id": "KovZpZAEkkIA",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "909 Lakeshore Blvd. W.",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M6K 3L3"
+          },
+          "name": "Budweiser Stage",
+          "slug": "budweiser-stage",
+          "tm_id": "131073"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9171ux0",
+            "genre": "Comedy",
+            "name": "Weird Al Yankovic",
+            "slug": "weird-al-yankovic",
+            "tm_id": "772893"
+          },
+          {
+            "discovery_id": "K8vZ9173BY0",
+            "genre": "Comedy",
+            "name": "Puddles Pity Party",
+            "slug": "puddles-pity-party",
+            "tm_id": "2039164"
+          }
+        ],
+        "created_on": "2024-09-23T17:01:12Z",
+        "discovery_id": "1k7Zv-GUGAGY8Y1",
+        "event_date": "2025-07-09",
+        "event_date_timestamp_utc": "2025-07-10T00:00:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "event_timezone": "America/New_York",
+        "genre": "Comedy",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/e23/ce609b68-dd49-4ebc-a034-6b52a6a67e23_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "\"Weird Al\" Yankovic: Bigger & Weirder 2025 Tour",
+        "presales": [
+          {
+            "end_date_time": "2025-01-01T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "2 for 1 Tickets Offer",
+            "start_date_time": "2024-11-29T15:00:00Z"
+          }
+        ],
+        "sales_start_date_time": "2024-09-27T14:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/100061336CC10C0A/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "weird-al-yankovic-bigger-weirder-2025-tour",
+        "tm_id": "100061336CC10C0A",
+        "type": "REGULAR",
+        "upsell": [
+          {
+            "classification_id": "KZFzBErXgnZfZ7vAF1",
+            "discovery_id": "1AvZZbfGkYCyfHy",
+            "images": [
+              {
+                "fallback": false,
+                "image_url": "https://s1.ticketm.net/dam/a/93e/3fb89083-1ef5-4b12-8073-04d07131b93e_1450861_RETINA_PORTRAIT_16_9.jpg"
+              }
+            ],
+            "name": "Lawn Chair Rental - Weird Al Yankovic - NOT A CONCERT TICKET",
+            "type": "Lawn Chair Rental",
+            "url": "https://www.ticketmaster.ca/lawn-chair-rental-weird-al-yankovic-toronto-ontario-07-09-2025/event/1000614C0EE54F39"
+          }
+        ],
+        "url": "https://www.ticketmaster.ca/weird-al-yankovic-bigger-weirder-2025-toronto-ontario-07-09-2025/event/100061336CC10C0A",
+        "venue": {
+          "discovery_id": "KovZpZAEkkIA",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "909 Lakeshore Blvd. W.",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M6K 3L3"
+          },
+          "name": "Budweiser Stage",
+          "slug": "budweiser-stage",
+          "tm_id": "131073"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917G4u0",
+            "genre": "Country",
+            "name": "Luke Bryan",
+            "slug": "luke-bryan",
+            "tm_id": "1044173"
+          }
+        ],
+        "created_on": "2025-01-27T14:01:24Z",
+        "discovery_id": "1A8ZkFMGkd3DKev",
+        "event_date": "2025-07-10",
+        "event_date_timestamp_utc": "2025-07-10T23:00:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "offsale",
+        "event_time": "19:00:00",
+        "event_timezone": "America/New_York",
+        "genre": "Country",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/5f4/eb869c18-97d2-40c5-b8f7-c873e237c5f4_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "Luke Bryan: Country Song Came On Tour",
+        "presales": [
+          {
+            "end_date_time": "2025-02-14T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Live INSIDER Presale",
+            "start_date_time": "2025-02-13T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-02-14T03:00:00Z",
+            "is_ln_promoted": true,
+            "name": "Live Nation Presale",
+            "start_date_time": "2025-02-13T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-02-14T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Support Presales",
+            "start_date_time": "2025-02-13T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-02-14T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Ticketmaster Presale",
+            "start_date_time": "2025-02-13T15:00:00Z"
+          }
+        ],
+        "sales_start_date_time": "2025-02-14T15:00:00Z",
+        "seatmap_image": "",
+        "similar_event_count": 0,
+        "slug": "luke-bryan-country-song-came-on-tour",
+        "tm_id": "10006237D2ED3081",
+        "type": "REGULAR",
+        "upsell": [],
+        "url": "https://www.ticketmaster.ca/luke-bryan-country-song-came-on-toronto-ontario-07-10-2025/event/10006237D2ED3081",
+        "venue": {
+          "discovery_id": "KovZpZAEkkIA",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "909 Lakeshore Blvd. W.",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M6K 3L3"
+          },
+          "name": "Budweiser Stage",
+          "slug": "budweiser-stage",
+          "tm_id": "131073"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917Cqe0",
+            "genre": "Country",
+            "name": "Thomas Rhett",
+            "slug": "thomas-rhett",
+            "tm_id": "1592857"
+          },
+          {
+            "discovery_id": "K8vZ917jYYf",
+            "genre": "Country",
+            "name": "Tucker Wetmore",
+            "slug": "tucker-wetmore",
+            "tm_id": "3157347"
+          },
+          {
+            "discovery_id": "K8vZ917hEzV",
+            "genre": "Country",
+            "name": "The Castellows",
+            "slug": "the-castellows",
+            "tm_id": "3047573"
+          }
+        ],
+        "created_on": "2024-09-16T13:00:37Z",
+        "discovery_id": "1AvZZb3GkVUNkRu",
+        "event_date": "2025-07-17",
+        "event_date_timestamp_utc": "2025-07-17T23:30:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "19:30:00",
+        "event_timezone": "America/New_York",
+        "genre": "Country",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/2ac/c19721dd-50bc-498b-b037-5f4c0ada72ac_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "Thomas Rhett: Better In Boots Tour 2025",
+        "presales": [],
+        "sales_start_date_time": "2024-10-11T14:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/1000612D368C6BCD/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "thomas-rhett-better-in-boots-tour-2025",
+        "tm_id": "1000612D368C6BCD",
+        "type": "REGULAR",
+        "upsell": [
+          {
+            "classification_id": "KZFzBErXgnZfZ7vAF1",
+            "discovery_id": "1AvZZb4GkS0gwrx",
+            "images": [
+              {
+                "fallback": false,
+                "image_url": "https://s1.ticketm.net/dam/a/93e/3fb89083-1ef5-4b12-8073-04d07131b93e_1450861_RETINA_PORTRAIT_16_9.jpg"
+              }
+            ],
+            "name": "Lawn Chair Rental - Thomas Rhett - NOT a Concert Ticket",
+            "type": "Lawn Chair Rental",
+            "url": "https://www.ticketmaster.ca/lawn-chair-rental-thomas-rhett-not-toronto-ontario-07-17-2025/event/1000615CE4D727A2"
+          }
+        ],
+        "url": "https://www.ticketmaster.ca/thomas-rhett-better-in-boots-tour-toronto-ontario-07-17-2025/event/1000612D368C6BCD",
+        "venue": {
+          "discovery_id": "KovZpZAEkkIA",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "909 Lakeshore Blvd. W.",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M6K 3L3"
+          },
+          "name": "Budweiser Stage",
+          "slug": "budweiser-stage",
+          "tm_id": "131073"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917135f",
+            "genre": "Rock",
+            "name": "Rod Stewart",
+            "slug": "rod-stewart",
+            "tm_id": "736200"
+          },
+          {
+            "discovery_id": "K8vZ9171uU7",
+            "genre": "Rock",
+            "name": "Cheap Trick",
+            "slug": "cheap-trick",
+            "tm_id": "734740"
+          }
+        ],
+        "created_on": "2024-11-18T15:01:10Z",
+        "discovery_id": "1AvZZbpGkBJeVo3",
+        "event_date": "2025-07-22",
+        "event_date_timestamp_utc": "2025-07-22T23:30:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "19:30:00",
+        "event_timezone": "America/New_York",
+        "genre": "Rock",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/615/c9d1f714-57de-4e29-9d62-cb403420d615_786331_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "Rod Stewart: One Last Time",
+        "presales": [
+          {
+            "end_date_time": "2024-11-22T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Amex Front Of The Line® Presale Tickets",
+            "start_date_time": "2024-11-19T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-11-22T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Preferred Seating Offer",
+            "start_date_time": "2024-11-19T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-11-22T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Rod Stewart Fan Club Bundle Presale",
+            "start_date_time": "2024-11-19T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-11-22T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Rod Stewart Fan Club Presale",
+            "start_date_time": "2024-11-19T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-11-22T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Cheap Trick Presale",
+            "start_date_time": "2024-11-20T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-11-22T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "PSS Additional Access Offer",
+            "start_date_time": "2024-11-20T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-11-22T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Live INSIDER Presale",
+            "start_date_time": "2024-11-21T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-11-22T03:00:00Z",
+            "is_ln_promoted": true,
+            "name": "Live Nation Presale",
+            "start_date_time": "2024-11-21T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-11-22T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Ticketmaster Presale",
+            "start_date_time": "2024-11-21T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-07-09T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Amex Front Of The Line® Reserved Tickets",
+            "start_date_time": "2024-11-22T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-07-09T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "RBCxMUSIC Ticket Access",
+            "start_date_time": "2024-11-22T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-07-09T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Rogers Customer Exclusive Tickets",
+            "start_date_time": "2024-11-22T15:00:00Z"
+          }
+        ],
+        "sales_start_date_time": "2024-11-22T15:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/1000616EA60B4452/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "rod-stewart-one-last-time",
+        "tm_id": "1000616EA60B4452",
+        "type": "REGULAR",
+        "upsell": [
+          {
+            "classification_id": "KZFzBErXgnZfZ7vAF1",
+            "discovery_id": "1A8ZkAwGkdSn3WJ",
+            "images": [
+              {
+                "fallback": false,
+                "image_url": "https://s1.ticketm.net/dam/a/93e/3fb89083-1ef5-4b12-8073-04d07131b93e_1450861_RETINA_PORTRAIT_16_9.jpg"
+              }
+            ],
+            "name": "Lawn Chair Rental - Rod Stewart - NOT a Concert Ticket",
+            "type": "Lawn Chair Rental",
+            "url": "https://www.ticketmaster.ca/lawn-chair-rental-rod-stewart-not-toronto-ontario-07-22-2025/event/10006172F3A92F66"
+          }
+        ],
+        "url": "https://www.ticketmaster.ca/rod-stewart-one-last-time-toronto-ontario-07-22-2025/event/1000616EA60B4452",
+        "venue": {
+          "discovery_id": "KovZpZAEkkIA",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "909 Lakeshore Blvd. W.",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M6K 3L3"
+          },
+          "name": "Budweiser Stage",
+          "slug": "budweiser-stage",
+          "tm_id": "131073"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917_vc7",
+            "genre": "Pop",
+            "name": "Gracie Abrams",
+            "slug": "gracie-abrams",
+            "tm_id": "2763148"
+          },
+          {
+            "discovery_id": "K8vZ917be9f",
+            "genre": "Pop",
+            "name": "ROLE MODEL",
+            "slug": "role-model",
+            "tm_id": "2629945"
+          }
+        ],
+        "created_on": "2024-12-09T17:00:56Z",
+        "discovery_id": "1A8ZkkAGkd5deph",
+        "event_date": "2025-07-26",
+        "event_date_timestamp_utc": "2025-07-27T00:00:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "event_timezone": "America/New_York",
+        "genre": "Pop",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/4a2/7451169e-a112-426d-bac7-a1b6dedc44a2_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "Gracie Abrams: The Secret Of Us Deluxe Tour with Role Model",
+        "presales": [
+          {
+            "end_date_time": "2024-12-13T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Artist Presale",
+            "start_date_time": "2024-12-12T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-13T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Artist Presale VIP Packages",
+            "start_date_time": "2024-12-12T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-07-20T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "VIP Packages Onsale",
+            "start_date_time": "2024-12-13T15:00:00Z"
+          }
+        ],
+        "sales_start_date_time": "2024-12-13T15:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/10006185CB0C259B/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "gracie-abrams-the-secret-of-us-deluxe-tour-with-role-model",
+        "tm_id": "10006185CB0C259B",
+        "type": "REGULAR",
+        "upsell": [],
+        "url": "https://www.ticketmaster.ca/gracie-abrams-the-secret-of-us-toronto-ontario-07-26-2025/event/10006185CB0C259B",
+        "venue": {
+          "discovery_id": "KovZpZAEkkIA",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "909 Lakeshore Blvd. W.",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M6K 3L3"
+          },
+          "name": "Budweiser Stage",
+          "slug": "budweiser-stage",
+          "tm_id": "131073"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9173ujV",
+            "genre": "Dance/Electronic",
+            "name": "RÜFÜS DU SOL",
+            "slug": "rufus-du-sol",
+            "tm_id": "1957114"
+          },
+          {
+            "discovery_id": "K8vZ917QvH7",
+            "genre": "Dance/Electronic",
+            "name": "Overmono",
+            "slug": "overmono",
+            "tm_id": "2855055"
+          }
+        ],
+        "created_on": "2024-10-18T12:00:40Z",
+        "discovery_id": "1k7Zv-feGAu_VBK",
+        "event_date": "2025-07-29",
+        "event_date_timestamp_utc": "2025-07-29T23:00:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "event_timezone": "America/New_York",
+        "genre": "Dance/Electronic",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/404/1d8668b5-4925-4633-8230-d1f69db4a404_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "RÜFÜS DU SOL Inhale / Exhale World Tour 2025",
+        "presales": [
+          {
+            "end_date_time": "2025-01-27T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "RÜFÜS DU SOL Inhale / Exhale World Tour",
+            "start_date_time": "2025-01-24T15:00:00Z"
+          }
+        ],
+        "sales_start_date_time": "2024-10-24T14:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/100061502D674E93/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "rufus-du-sol-inhale-exhale-world-tour-2025",
+        "tm_id": "100061502D674E93",
+        "type": "REGULAR",
+        "upsell": [],
+        "url": "https://www.ticketmaster.ca/rufus-du-sol-inhale-exhale-world-toronto-ontario-07-29-2025/event/100061502D674E93",
+        "venue": {
+          "discovery_id": "KovZpZAEkkIA",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "909 Lakeshore Blvd. W.",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M6K 3L3"
+          },
+          "name": "Budweiser Stage",
+          "slug": "budweiser-stage",
+          "tm_id": "131073"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9173ujV",
+            "genre": "Dance/Electronic",
+            "name": "RÜFÜS DU SOL",
+            "slug": "rufus-du-sol",
+            "tm_id": "1957114"
+          },
+          {
+            "discovery_id": "K8vZ917QvH7",
+            "genre": "Dance/Electronic",
+            "name": "Overmono",
+            "slug": "overmono",
+            "tm_id": "2855055"
+          }
+        ],
+        "created_on": "2024-10-22T14:45:32Z",
+        "discovery_id": "1k7Zv-feGAuQfBb",
+        "event_date": "2025-07-30",
+        "event_date_timestamp_utc": "2025-07-30T23:00:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "event_timezone": "America/New_York",
+        "genre": "Dance/Electronic",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/404/1d8668b5-4925-4633-8230-d1f69db4a404_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "RÜFÜS DU SOL Inhale / Exhale World Tour 2025",
+        "presales": [
+          {
+            "end_date_time": "2025-01-27T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "RÜFÜS DU SOL Inhale / Exhale World Tour",
+            "start_date_time": "2025-01-24T15:00:00Z"
+          }
+        ],
+        "sales_start_date_time": "2024-10-24T14:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/100061502D694E98/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "rufus-du-sol-inhale-exhale-world-tour-2025",
+        "tm_id": "100061502D694E98",
+        "type": "REGULAR",
+        "upsell": [],
+        "url": "https://www.ticketmaster.ca/rufus-du-sol-inhale-exhale-world-toronto-ontario-07-30-2025/event/100061502D694E98",
+        "venue": {
+          "discovery_id": "KovZpZAEkkIA",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "909 Lakeshore Blvd. W.",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M6K 3L3"
+          },
+          "name": "Budweiser Stage",
+          "slug": "budweiser-stage",
+          "tm_id": "131073"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9171Yef",
+            "genre": "Hip-Hop/Rap",
+            "name": "Nelly",
+            "slug": "nelly",
+            "tm_id": "806787"
+          },
+          {
+            "discovery_id": "K8vZ9175k20",
+            "genre": "Hip-Hop/Rap",
+            "name": "St. Lunatics",
+            "slug": "st-lunatics",
+            "tm_id": "835021"
+          },
+          {
+            "discovery_id": "K8vZ9171iff",
+            "genre": "Hip-Hop/Rap",
+            "name": "Ja Rule",
+            "slug": "ja-rule",
+            "tm_id": "718029"
+          },
+          {
+            "discovery_id": "K8vZ9171LXV",
+            "genre": "Hip-Hop/Rap",
+            "name": "Eve",
+            "slug": "eve",
+            "tm_id": "768687"
+          },
+          {
+            "discovery_id": "K8vZ9175hz7",
+            "genre": "R&B",
+            "name": "Chingy",
+            "slug": "chingy",
+            "tm_id": "882591"
+          }
+        ],
+        "created_on": "2024-12-09T18:01:16Z",
+        "discovery_id": "1A8Zkk7GkdBZSDy",
+        "event_date": "2025-07-31",
+        "event_date_timestamp_utc": "2025-08-01T00:00:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "event_timezone": "America/New_York",
+        "genre": "Hip-Hop/Rap",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/dfa/a1625472-fd62-4fce-94b4-365c3c5d1dfa_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "Nelly with Ja Rule, Eve & Special Guests: Where The Party At Tour",
+        "presales": [
+          {
+            "end_date_time": "2024-12-13T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Amex Front Of The Line® Presale Tickets",
+            "start_date_time": "2024-12-10T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-13T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "VIP Packages Presale",
+            "start_date_time": "2024-12-10T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-13T03:00:00Z",
+            "is_ln_promoted": true,
+            "name": "Live Nation Presale",
+            "start_date_time": "2024-12-11T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-13T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Ticketmaster Presale",
+            "start_date_time": "2024-12-11T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-13T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Live INSIDER presale",
+            "start_date_time": "2024-12-12T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-13T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Spotify Presale",
+            "start_date_time": "2024-12-12T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-07-25T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "VIP Packages Onsale",
+            "start_date_time": "2024-12-13T15:00:00Z"
+          }
+        ],
+        "sales_start_date_time": "2024-12-13T15:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/10006184FA033EF9/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "nelly-with-ja-rule-eve-special-guests-where-the-party-at-tour",
+        "tm_id": "10006184FA033EF9",
+        "type": "REGULAR",
+        "upsell": [
+          {
+            "classification_id": "KZFzBErXgnZfZ7vAF1",
+            "discovery_id": "1AvZZbbGktsE8t4",
+            "images": [
+              {
+                "fallback": false,
+                "image_url": "https://s1.ticketm.net/dam/a/93e/3fb89083-1ef5-4b12-8073-04d07131b93e_1450861_RETINA_PORTRAIT_16_9.jpg"
+              }
+            ],
+            "name": "Lawn Chair Rental - Nelly - Not a Concert Ticket",
+            "type": "Lawn Chair Rental",
+            "url": "https://www.ticketmaster.ca/lawn-chair-rental-nelly-not-a-toronto-ontario-07-31-2025/event/1000618A719D0A55"
+          },
+          {
+            "classification_id": "KZFzBErXgnZfZ7v7lv",
+            "discovery_id": "16vZZbb0fG7sS08",
+            "images": [
+              {
+                "fallback": false,
+                "image_url": "https://s1.ticketm.net/dam/a/dfa/a1625472-fd62-4fce-94b4-365c3c5d1dfa_RETINA_PORTRAIT_16_9.jpg"
+              }
+            ],
+            "name": "Nelly VIP Experiences (Event Ticket Sold Separately)",
+            "type": "Special Entry",
+            "url": "https://www.ticketmaster.ca/nelly-vip-experiences-event-ticket-sold-toronto-ontario-07-31-2025/event/1000618914C73910"
+          },
+          {
+            "classification_id": "KZFzBErXgnZfZ7v7lv",
+            "discovery_id": "1AvZZbNGklyL0ew",
+            "images": [
+              {
+                "fallback": false,
+                "image_url": "https://s1.ticketm.net/dam/a/2be/9d28f8ca-c65b-46b7-adba-c2ca414a52be_RETINA_PORTRAIT_16_9.jpg"
+              }
+            ],
+            "name": "Ja Rule VIP Experiences (Event Ticket Sold Separately)",
+            "type": "Special Entry",
+            "url": "https://www.ticketmaster.ca/ja-rule-vip-experiences-event-ticket-toronto-ontario-07-31-2025/event/1000623AF97E40B2"
+          }
+        ],
+        "url": "https://www.ticketmaster.ca/nelly-with-ja-rule-eve-special-toronto-ontario-07-31-2025/event/10006184FA033EF9",
+        "venue": {
+          "discovery_id": "KovZpZAEkkIA",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "909 Lakeshore Blvd. W.",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M6K 3L3"
+          },
+          "name": "Budweiser Stage",
+          "slug": "budweiser-stage",
+          "tm_id": "131073"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ91716MV",
+            "genre": "Rock",
+            "name": "Goo Goo Dolls",
+            "slug": "goo-goo-dolls",
+            "tm_id": "735190"
+          },
+          {
+            "discovery_id": "K8vZ9171DF0",
+            "genre": "Rock",
+            "name": "Dashboard Confessional",
+            "slug": "dashboard-confessional",
+            "tm_id": "703045"
+          }
+        ],
+        "created_on": "2024-11-15T15:01:08Z",
+        "discovery_id": "16vZZbpfJG7S48a",
+        "event_date": "2025-08-10",
+        "event_date_timestamp_utc": "2025-08-10T23:30:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "19:30:00",
+        "event_timezone": "America/New_York",
+        "genre": "Rock",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/37b/aa20723c-d054-4521-914f-ccad35fa437b_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "GOO GOO DOLLS with DASHBOARD CONFESSIONAL - Summer Anthem Tour 2025",
+        "presales": [
+          {
+            "end_date_time": "2024-11-22T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Amex Front Of The Line® Presale Tickets",
+            "start_date_time": "2024-11-19T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-11-22T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Artist Presale",
+            "start_date_time": "2024-11-19T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-11-22T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "VIP Packages Presale",
+            "start_date_time": "2024-11-19T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-11-22T14:40:00Z",
+            "is_ln_promoted": false,
+            "name": "Official Platinum Presale",
+            "start_date_time": "2024-11-19T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-11-22T14:00:00Z",
+            "is_ln_promoted": true,
+            "name": "Live Nation Presale",
+            "start_date_time": "2024-11-20T14:00:00Z"
+          },
+          {
+            "end_date_time": "2024-11-22T14:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Ticketmaster Presale",
+            "start_date_time": "2024-11-20T14:00:00Z"
+          },
+          {
+            "end_date_time": "2024-11-22T14:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Spotify Presale",
+            "start_date_time": "2024-11-21T14:00:00Z"
+          },
+          {
+            "end_date_time": "2024-11-22T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Live INSIDER Presale",
+            "start_date_time": "2024-11-21T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-08-03T21:00:00Z",
+            "is_ln_promoted": false,
+            "name": "VIP Packages Onsale",
+            "start_date_time": "2024-11-22T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-08-11T01:30:00Z",
+            "is_ln_promoted": false,
+            "name": "Official Platinum",
+            "start_date_time": "2024-11-22T15:00:00Z"
+          }
+        ],
+        "sales_start_date_time": "2024-11-22T15:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/1000616526CD5409/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "goo-goo-dolls-with-dashboard-confessional-summer-anthem-tour-2025",
+        "tm_id": "1000616526CD5409",
+        "type": "REGULAR",
+        "upsell": [
+          {
+            "classification_id": "KZFzBErXgnZfZ7vAF1",
+            "discovery_id": "1AvZZbNGkBtgkKi",
+            "images": [
+              {
+                "fallback": false,
+                "image_url": "https://s1.ticketm.net/dam/a/93e/3fb89083-1ef5-4b12-8073-04d07131b93e_1450861_RETINA_PORTRAIT_16_9.jpg"
+              }
+            ],
+            "name": "Lawn Chair Rental - Goo Goo Dolls - Not A Concert Ticket",
+            "type": "Lawn Chair Rental",
+            "url": "https://www.ticketmaster.ca/lawn-chair-rental-goo-goo-dolls-toronto-ontario-08-10-2025/event/1000623EA9D464EC"
+          }
+        ],
+        "url": "https://www.ticketmaster.ca/goo-goo-dolls-with-dashboard-confessional-toronto-ontario-08-10-2025/event/1000616526CD5409",
+        "venue": {
+          "discovery_id": "KovZpZAEkkIA",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "909 Lakeshore Blvd. W.",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M6K 3L3"
+          },
+          "name": "Budweiser Stage",
+          "slug": "budweiser-stage",
+          "tm_id": "131073"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ91712Vf",
+            "genre": "Rock",
+            "name": "Styx",
+            "slug": "styx",
+            "tm_id": "736216"
+          },
+          {
+            "discovery_id": "K8vZ917oddf",
+            "genre": "Rock",
+            "name": "Kevin Cronin Band",
+            "slug": "kevin-cronin-band",
+            "tm_id": "1849868"
+          },
+          {
+            "discovery_id": "K8vZ917GJj7",
+            "genre": "Rock",
+            "name": "Don Felder",
+            "slug": "don-felder",
+            "tm_id": "744908"
+          }
+        ],
+        "created_on": "2024-12-06T16:00:45Z",
+        "discovery_id": "1A8Zkk7GkeyTe4D",
+        "event_date": "2025-08-13",
+        "event_date_timestamp_utc": "2025-08-13T22:45:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "18:45:00",
+        "event_timezone": "America/New_York",
+        "genre": "Rock",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/9c5/9402b0e3-8fcf-412c-baf5-f304846dd9c5_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "Styx & Kevin Cronin + Don Felder The Brotherhood of Rock Tour",
+        "presales": [
+          {
+            "end_date_time": "2024-12-13T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Front Of The Line® by American Express®",
+            "start_date_time": "2024-12-09T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-13T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "VIP Packages Presale",
+            "start_date_time": "2024-12-09T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-13T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Artist Presales",
+            "start_date_time": "2024-12-10T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-13T03:00:00Z",
+            "is_ln_promoted": true,
+            "name": "Live Nation Presale",
+            "start_date_time": "2024-12-11T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-13T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Ticketmaster Presale",
+            "start_date_time": "2024-12-11T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-13T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Live INSIDER Presale",
+            "start_date_time": "2024-12-12T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-07-31T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "VIP Packages Onsale",
+            "start_date_time": "2024-12-13T15:00:00Z"
+          }
+        ],
+        "sales_start_date_time": "2024-12-13T15:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/10006184B9FC257B/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "styx-kevin-cronin-don-felder-the-brotherhood-of-rock-tour",
+        "tm_id": "10006184B9FC257B",
+        "type": "REGULAR",
+        "upsell": [
+          {
+            "classification_id": "KZFzBErXgnZfZ7vAF1",
+            "discovery_id": "1k7Zv-xbGAu2YRI",
+            "images": [
+              {
+                "fallback": false,
+                "image_url": "https://s1.ticketm.net/dam/a/93e/3fb89083-1ef5-4b12-8073-04d07131b93e_1450861_RETINA_PORTRAIT_16_9.jpg"
+              }
+            ],
+            "name": "Lawn Chair Rental - Styx & Kevin Cronin - NOT A CONCERT TICKET",
+            "type": "Lawn Chair Rental",
+            "url": "https://www.ticketmaster.ca/lawn-chair-rental-styx-kevin-cronin-toronto-ontario-08-13-2025/event/100061898D3F0BE8"
+          }
+        ],
+        "url": "https://www.ticketmaster.ca/styx-kevin-cronin-don-felder-the-toronto-ontario-08-13-2025/event/10006184B9FC257B",
+        "venue": {
+          "discovery_id": "KovZpZAEkkIA",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "909 Lakeshore Blvd. W.",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M6K 3L3"
+          },
+          "name": "Budweiser Stage",
+          "slug": "budweiser-stage",
+          "tm_id": "131073"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9175Kbf",
+            "genre": "Rock",
+            "name": "Coheed and Cambria",
+            "slug": "coheed-and-cambria",
+            "tm_id": "852827"
+          },
+          {
+            "discovery_id": "K8vZ91755X0",
+            "genre": "Rock",
+            "name": "Taking Back Sunday",
+            "slug": "taking-back-sunday",
+            "tm_id": "826874"
+          },
+          {
+            "discovery_id": "K8vZ91733PV",
+            "genre": "Rock",
+            "name": "Foxing",
+            "slug": "foxing",
+            "tm_id": "1975091"
+          }
+        ],
+        "created_on": "2025-01-14T15:03:17Z",
+        "discovery_id": "1AvZZbxGknTu-lz",
+        "event_date": "2025-08-24",
+        "event_date_timestamp_utc": "2025-08-24T22:30:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "18:30:00",
+        "event_timezone": "America/New_York",
+        "genre": "Rock",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/c6a/16dfb1a7-6729-4733-9775-ee254ccd3c6a_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "Coheed and Cambria * Taking Back Sunday",
+        "presales": [
+          {
+            "end_date_time": "2025-01-17T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Coheed and Cambria Presale",
+            "start_date_time": "2025-01-15T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-17T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Preferred Seating Offer",
+            "start_date_time": "2025-01-15T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-17T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Taking Back Sunday Presale",
+            "start_date_time": "2025-01-15T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-17T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "VIP Presale",
+            "start_date_time": "2025-01-15T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-17T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Front Of The Line by American Express",
+            "start_date_time": "2025-01-15T17:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-17T03:00:00Z",
+            "is_ln_promoted": true,
+            "name": "Live Nation Presale",
+            "start_date_time": "2025-01-15T17:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-17T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Ticketmaster Presale",
+            "start_date_time": "2025-01-15T17:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-17T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Bandsintown Presale",
+            "start_date_time": "2025-01-16T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-17T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "BLABBERMOUTH Presale",
+            "start_date_time": "2025-01-16T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-17T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Foxing Presale",
+            "start_date_time": "2025-01-16T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-17T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Knotfest Presale",
+            "start_date_time": "2025-01-16T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-17T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Live INSIDER Presale",
+            "start_date_time": "2025-01-16T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-17T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Spotify Presale",
+            "start_date_time": "2025-01-16T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-08-18T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "VIP Onsale",
+            "start_date_time": "2025-01-17T15:00:00Z"
+          }
+        ],
+        "sales_start_date_time": "2025-01-17T15:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/1000622ABF361AF8/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "coheed-and-cambria-taking-back-sunday",
+        "tm_id": "1000622ABF361AF8",
+        "type": "REGULAR",
+        "upsell": [],
+        "url": "https://www.ticketmaster.ca/coheed-and-cambria-taking-back-sunday-toronto-ontario-08-24-2025/event/1000622ABF361AF8",
+        "venue": {
+          "discovery_id": "KovZpZAEkkIA",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "909 Lakeshore Blvd. W.",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M6K 3L3"
+          },
+          "name": "Budweiser Stage",
+          "slug": "budweiser-stage",
+          "tm_id": "131073"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917C1E0",
+            "genre": "Rock",
+            "name": "Tedeschi Trucks Band",
+            "slug": "tedeschi-trucks-band",
+            "tm_id": "1567745"
+          },
+          {
+            "discovery_id": "K8vZ9175Sn0",
+            "genre": "Rock",
+            "name": "Gov't Mule",
+            "slug": "gov-t-mule",
+            "tm_id": "5209273"
+          },
+          {
+            "discovery_id": "K8vZ917hAG0",
+            "genre": "Pop",
+            "name": "Nolan",
+            "slug": "nolan",
+            "tm_id": "2970024"
+          }
+        ],
+        "created_on": "2025-01-22T15:00:52Z",
+        "discovery_id": "15vZZbNf7qN4b",
+        "event_date": "2025-09-03",
+        "event_date_timestamp_utc": "2025-09-03T22:30:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "18:30:00",
+        "event_timezone": "America/New_York",
+        "genre": "Rock",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/0d9/95ad6727-3707-4bfe-8e76-64eaa04660d9_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "Tedeschi Trucks Band & Gov't Mule: Live In 25",
+        "presales": [
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Front Of The Line Amex Presale Tickets",
+            "start_date_time": "2025-01-28T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Preferred Seating Offer",
+            "start_date_time": "2025-01-28T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Tedeschi Truck Band VIP Presale",
+            "start_date_time": "2025-01-28T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Tedeschi Trucks Band Fan Club Presale",
+            "start_date_time": "2025-01-28T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Gov't Mule VIP Package Presale",
+            "start_date_time": "2025-01-28T18:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": true,
+            "name": "Live Nation Presale",
+            "start_date_time": "2025-01-29T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-01-31T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Ticketmaster Presale",
+            "start_date_time": "2025-01-29T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-05-22T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Front Of The Line Amex Reserved Tickets",
+            "start_date_time": "2025-01-31T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-05-22T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "RBCxMUSIC Ticket Access",
+            "start_date_time": "2025-01-31T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-05-22T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Rogers Customer Exclusive Tickets",
+            "start_date_time": "2025-01-31T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-08-28T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "VIP Package Public Onsale",
+            "start_date_time": "2025-01-31T15:00:00Z"
+          }
+        ],
+        "sales_start_date_time": "2025-01-31T15:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/1000623504763558/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "tedeschi-trucks-band-gov-t-mule-live-in-25",
+        "tm_id": "1000623504763558",
+        "type": "REGULAR",
+        "upsell": [
+          {
+            "classification_id": "KZFzBErXgnZfZ7vAF1",
+            "discovery_id": "1A8ZkFUGkdCgK37",
+            "images": [
+              {
+                "fallback": false,
+                "image_url": "https://s1.ticketm.net/dam/a/93e/3fb89083-1ef5-4b12-8073-04d07131b93e_1450861_RETINA_PORTRAIT_16_9.jpg"
+              }
+            ],
+            "name": "Lawn Chair Rental - Tedeschi Trucks Band - Not A Concert Ticket",
+            "type": "Lawn Chair Rental",
+            "url": "https://www.ticketmaster.ca/lawn-chair-rental-tedeschi-trucks-band-toronto-ontario-09-03-2025/event/10006236CED53484"
+          }
+        ],
+        "url": "https://www.ticketmaster.ca/tedeschi-trucks-band-govt-mule-live-toronto-ontario-09-03-2025/event/1000623504763558",
+        "venue": {
+          "discovery_id": "KovZpZAEkkIA",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "909 Lakeshore Blvd. W.",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M6K 3L3"
+          },
+          "name": "Budweiser Stage",
+          "slug": "budweiser-stage",
+          "tm_id": "131073"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9174RDf",
+            "genre": "Folk",
+            "name": "Mt. Joy",
+            "slug": "mt-joy",
+            "tm_id": "2328939"
+          }
+        ],
+        "created_on": "2024-12-02T17:00:45Z",
+        "discovery_id": "1A8ZkAyGkdx04e1",
+        "event_date": "2025-09-11",
+        "event_date_timestamp_utc": "2025-09-12T00:00:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "event_timezone": "America/New_York",
+        "genre": "Folk",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/a08/0a4edfa3-9893-4ace-9815-f8d3f27d2a08_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "Mt. Joy",
+        "presales": [
+          {
+            "end_date_time": "2024-12-06T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Artist Presale",
+            "start_date_time": "2024-12-03T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-06T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "VIP Package Presale",
+            "start_date_time": "2024-12-03T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-06T14:40:00Z",
+            "is_ln_promoted": false,
+            "name": "Official Platinum Presale",
+            "start_date_time": "2024-12-03T15:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-06T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Front Of The Line by American Express®",
+            "start_date_time": "2024-12-03T17:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-06T03:00:00Z",
+            "is_ln_promoted": true,
+            "name": "Live Nation Presale",
+            "start_date_time": "2024-12-03T17:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-06T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Ticketmaster Presale",
+            "start_date_time": "2024-12-03T17:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-06T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Spotify Presale",
+            "start_date_time": "2024-12-04T17:00:00Z"
+          },
+          {
+            "end_date_time": "2024-12-06T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Live INSIDER Presale",
+            "start_date_time": "2024-12-05T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-09-05T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "VIP Package Onsale",
+            "start_date_time": "2024-12-06T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-09-12T02:30:00Z",
+            "is_ln_promoted": false,
+            "name": "Official Platinum",
+            "start_date_time": "2024-12-06T15:00:00Z"
+          }
+        ],
+        "sales_start_date_time": "2024-12-06T15:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/10006179E291508A/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "mt-joy",
+        "tm_id": "10006179E291508A",
+        "type": "REGULAR",
+        "upsell": [
+          {
+            "classification_id": "KZFzBErXgnZfZ7vAF1",
+            "discovery_id": "1AvZZb9GkSgheD6",
+            "images": [
+              {
+                "fallback": false,
+                "image_url": "https://s1.ticketm.net/dam/a/93e/3fb89083-1ef5-4b12-8073-04d07131b93e_1450861_RETINA_PORTRAIT_16_9.jpg"
+              }
+            ],
+            "name": "Lawn Chair Rental - Mt. Joy - Not A Concert Ticket",
+            "type": "Lawn Chair Rental",
+            "url": "https://www.ticketmaster.ca/lawn-chair-rental-mt-joy-not-toronto-ontario-09-11-2025/event/1000617CF56C2EC7"
+          }
+        ],
+        "url": "https://www.ticketmaster.ca/mt-joy-toronto-ontario-09-11-2025/event/10006179E291508A",
+        "venue": {
+          "discovery_id": "KovZpZAEkkIA",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "909 Lakeshore Blvd. W.",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M6K 3L3"
+          },
+          "name": "Budweiser Stage",
+          "slug": "budweiser-stage",
+          "tm_id": "131073"
+        }
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9179YD0",
+            "genre": "Country",
+            "name": "Lainey Wilson",
+            "slug": "lainey-wilson",
+            "tm_id": "2584330"
+          },
+          {
+            "discovery_id": "K8vZ917fYXf",
+            "genre": "Country",
+            "name": "Muscadine Bloodline",
+            "slug": "muscadine-bloodline",
+            "tm_id": "2247495"
+          },
+          {
+            "discovery_id": "K8vZ917heVV",
+            "genre": "Country",
+            "name": "Lauren Watkins",
+            "slug": "lauren-watkins",
+            "tm_id": "2965634"
+          }
+        ],
+        "created_on": "2025-01-31T14:00:38Z",
+        "discovery_id": "1AvZZbNGkDEJEZH",
+        "event_date": "2025-09-25",
+        "event_date_timestamp_utc": "2025-09-25T23:00:00.000000",
+        "event_end_date": null,
+        "event_end_date_timestamp_utc": null,
+        "event_end_time": null,
+        "event_status_code": "offsale",
+        "event_time": "19:00:00",
+        "event_timezone": "America/New_York",
+        "genre": "Country",
+        "healthcheck_type": "",
+        "images": [
+          {
+            "fallback": false,
+            "image_url": "https://s1.ticketm.net/dam/a/5ee/678dba0f-134b-4020-a963-f9f9023bb5ee_ARTIST_PAGE_3_2.jpg"
+          }
+        ],
+        "name": "Lainey Wilson: Whirlwind World Tour",
+        "presales": [
+          {
+            "end_date_time": "2025-02-04T14:45:00Z",
+            "is_ln_promoted": false,
+            "name": "Wild Horses Fan Club VIP Package Presale",
+            "start_date_time": "2025-02-04T13:00:00Z"
+          },
+          {
+            "end_date_time": "2025-02-07T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Wild Horses Fan Club Presale",
+            "start_date_time": "2025-02-04T13:00:00Z"
+          },
+          {
+            "end_date_time": "2025-02-07T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "VIP Package Presale",
+            "start_date_time": "2025-02-04T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-02-07T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Live INSIDER Presale",
+            "start_date_time": "2025-02-06T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-02-07T03:00:00Z",
+            "is_ln_promoted": true,
+            "name": "Live Nation Presale",
+            "start_date_time": "2025-02-06T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-02-07T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Muscadine Bloodline Presale",
+            "start_date_time": "2025-02-06T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-02-07T03:00:00Z",
+            "is_ln_promoted": false,
+            "name": "Ticketmaster Presale",
+            "start_date_time": "2025-02-06T15:00:00Z"
+          },
+          {
+            "end_date_time": "2025-09-19T02:00:00Z",
+            "is_ln_promoted": false,
+            "name": "VIP Package Onsale",
+            "start_date_time": "2025-02-07T15:00:00Z"
+          }
+        ],
+        "sales_start_date_time": "2025-02-07T15:00:00Z",
+        "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/1000623EE79A703C/staticImage?type=png&systemId=HOST",
+        "similar_event_count": 0,
+        "slug": "lainey-wilson-whirlwind-world-tour",
+        "tm_id": "1000623EE79A703C",
+        "type": "REGULAR",
+        "upsell": [],
+        "url": "https://www.ticketmaster.ca/lainey-wilson-whirlwind-world-tour-toronto-ontario-09-25-2025/event/1000623EE79A703C",
+        "venue": {
+          "discovery_id": "KovZpZAEkkIA",
+          "is_livenation_owned": true,
+          "location": {
+            "address": "909 Lakeshore Blvd. W.",
+            "city": "Toronto",
+            "country": "CA",
+            "state": "ON",
+            "zip_code": "M6K 3L3"
+          },
+          "name": "Budweiser Stage",
+          "slug": "budweiser-stage",
+          "tm_id": "131073"
+        }
+      }
+    ]
+  }
+}
