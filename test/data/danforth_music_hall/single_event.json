@@ -1,0 +1,28 @@
+{
+  "artists": [
+    {
+      "discovery_id": "K8vZ917j4W0",
+      "name": "Kerry King",
+      "genre_id": "KnvZfZ7vAvt",
+      "genre": "Metal"
+    },
+    {
+      "discovery_id": "K8vZ917GdO0",
+      "name": "Municipal Waste",
+      "genre_id": "KnvZfZ7vAvt",
+      "genre": "Metal"
+    },
+    {
+      "discovery_id": "K8vZ91798lf",
+      "name": "Alien Weaponry",
+      "genre_id": "KnvZfZ7vAvt",
+      "genre": "Metal"
+    }
+  ],
+  "discovery_id": "1AvZZbKGkRzv9Zn",
+  "event_date": "2025-02-01",
+  "event_status_code": "onsale",
+  "event_time": "18:00:00",
+  "name": "KERRY KING - Presented By F7 Entertainment",
+  "url": "https://www.ticketmaster.ca/kerry-king-presented-by-f7-entertainment-toronto-ontario-02-01-2025/event/1000613BF805702A"
+}

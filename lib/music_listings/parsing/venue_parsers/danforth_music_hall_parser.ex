@@ -4,39 +4,74 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
-  import Meeseeks.CSS
-  import Meeseeks.XPath
-
   alias MusicListings.HttpClient
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
-  alias MusicListings.Parsing.Selectors
 
   @impl true
-  def source_url, do: "https://thedanforth.com"
+  def source_url, do: "https://api.livenation.com/graphql"
 
   @impl true
   def retrieve_events_fun do
-    fn url -> HttpClient.get(url) end
+    fn url ->
+      headers = [
+        {"accept", "*/*"},
+        {"content-type", "application/json; charset=UTF-8"},
+        {"x-api-key", "da2-jmvb5y2gjfcrrep3wzeumqwgaq"}
+      ]
+
+      query = """
+      query EVENTS_PAGE($include_genres: String, $start_date_time: String, $end_date_time: String) {
+        getEvents(
+          filter: {exclude_status_codes: ["cancelled", "postponed"], venue_id: "KovZpa3yBe", start_date_time: $start_date_time, end_date_time: $end_date_time, include_genres: $include_genres}
+          limit: 72
+          offset: 0
+          order: "ascending"
+          sort_by: "start_date"
+        ) {
+          artists {
+            discovery_id
+            name
+            genre_id
+            genre
+          }
+          discovery_id
+          event_date
+          event_status_code
+          event_time
+
+          name
+          url
+        }
+      }
+      """
+
+      body = %{
+        query: query
+      }
+
+      HttpClient.post(url, body, headers)
+    end
   end
 
   @impl true
-  def example_data_file_location, do: "test/data/danforth_music_hall/index.html"
+  def example_data_file_location, do: "test/data/danforth_music_hall/index.json"
 
   @impl true
   def events(body) do
-    Selectors.all_matches(body, css(".event-block"))
+    body = ParseHelpers.maybe_decode!(body)
+    body["data"]["getEvents"]
   end
 
   @impl true
-  def next_page_url(body, _current_url) do
-    Selectors.url(body, css(".nav-next a"))
+  def next_page_url(_body, _current_url) do
+    nil
   end
 
   @impl true
   def event_id(event) do
-    Selectors.id(event, css(".event-block"))
+    event["discovery_id"]
   end
 
   @impl true
@@ -46,26 +81,20 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParser do
 
   @impl true
   def event_title(event) do
-    Selectors.text(event, css(".entry-title"))
+    event["name"]
   end
 
   @impl true
   def performers(event) do
-    event
-    |> Selectors.all_matches(css(".artistname"))
-    |> Selectors.text()
+    event["artists"]
+    |> Enum.map(& &1["name"])
     |> Performers.new()
   end
 
   @impl true
   def event_date(event) do
-    event
-    |> Selectors.class(css(".listingdate"))
-    |> String.split()
-    |> Enum.at(1)
-    |> String.to_integer()
-    |> DateTime.from_unix!()
-    |> DateTime.to_date()
+    event["event_date"]
+    |> Date.from_iso8601!()
   end
 
   @impl true
@@ -75,47 +104,23 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParser do
 
   @impl true
   def event_time(event) do
-    event
-    |> Selectors.text(xpath("//div[@class='doors']/following-sibling::div[1]"))
-    |> String.split("-")
-    |> Enum.at(0)
-    |> ParseHelpers.build_time_from_time_string()
+    event["event_time"]
+    |> Time.from_iso8601!()
   end
 
   @impl true
-  def price(event) do
-    price_string =
-      event
-      |> Selectors.text(xpath("//div[@class='tickets']/following-sibling::div[1]"))
-      |> String.downcase()
-
-    if price_string == "tbd" do
-      Price.unknown()
-    else
-      Price.new(price_string)
-    end
+  def price(_event) do
+    Price.unknown()
   end
 
   @impl true
-  def age_restriction(event) do
-    time_age =
-      event
-      |> Selectors.text(xpath("//div[@class='doors']/following-sibling::div[1]"))
-      |> String.downcase()
-
-    if time_age == "tbd" do
-      :unknown
-    else
-      time_age
-      |> String.split("-")
-      |> Enum.at(1)
-      |> ParseHelpers.age_restriction_string_to_enum()
-    end
+  def age_restriction(_event) do
+    :unknown
   end
 
   @impl true
   def ticket_url(event) do
-    Selectors.url(event, css(".ticketlink a"))
+    event["url"]
   end
 
   @impl true
