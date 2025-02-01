@@ -1,0 +1,1180 @@
+{
+    "data": {
+        "getEvents": [
+            {
+                "artists": [
+                    {
+                        "discovery_id": "K8vZ9171uv0",
+                        "genre": "Rock",
+                        "name": "Billy Joel",
+                        "slug": "billy-joel",
+                        "tm_id": "735392"
+                    }
+                ],
+                "created_on": "2024-10-17T14:00:51Z",
+                "discovery_id": "1AvZZbfGkHdoVWb",
+                "event_date": "2025-03-15",
+                "event_date_timestamp_utc": "2025-03-16T00:00:00.000000",
+                "event_end_date": null,
+                "event_end_date_timestamp_utc": null,
+                "event_end_time": null,
+                "event_status_code": "onsale",
+                "event_time": "20:00:00",
+                "event_timezone": "America/New_York",
+                "genre": "Rock",
+                "healthcheck_type": "",
+                "images": [
+                    {
+                        "fallback": false,
+                        "image_url": "https://s1.ticketm.net/dam/a/bc3/48a3747f-f6e1-403f-bca8-658c20b98bc3_1544981_ARTIST_PAGE_3_2.jpg"
+                    }
+                ],
+                "name": "Billy Joel",
+                "presales": [
+                    {
+                        "end_date_time": "2025-03-16T01:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Limited View Admission Onsale",
+                        "start_date_time": "2024-12-20T21:00:00Z"
+                    }
+                ],
+                "sales_start_date_time": "2024-10-25T14:00:00Z",
+                "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/1000614F03474F58/staticImage?type=png&systemId=HOST",
+                "similar_event_count": 0,
+                "slug": "billy-joel",
+                "tm_id": "1000614F03474F58",
+                "type": "REGULAR",
+                "upsell": [],
+                "url": "https://www.ticketmaster.ca/billy-joel-toronto-ontario-03-15-2025/event/1000614F03474F58",
+                "venue": {
+                    "discovery_id": "KovZpa3Bbe",
+                    "is_livenation_owned": false,
+                    "location": {
+                        "address": "1 Blue Jays Way",
+                        "city": "Toronto",
+                        "country": "CA",
+                        "state": "ON",
+                        "zip_code": "M5V 1J3"
+                    },
+                    "name": "Rogers Centre",
+                    "slug": "rogers-centre",
+                    "tm_id": "131114"
+                }
+            },
+            {
+                "artists": [
+                    {
+                        "discovery_id": "K8vZ9171G9V",
+                        "genre": "Metal",
+                        "name": "Metallica",
+                        "slug": "metallica",
+                        "tm_id": "735647"
+                    },
+                    {
+                        "discovery_id": "K8vZ91715N7",
+                        "genre": "Metal",
+                        "name": "Pantera",
+                        "slug": "pantera",
+                        "tm_id": "1254"
+                    },
+                    {
+                        "discovery_id": "K8vZ91715N0",
+                        "genre": "Rock",
+                        "name": "Suicidal Tendencies",
+                        "slug": "suicidal-tendencies",
+                        "tm_id": "736220"
+                    },
+                    {
+                        "discovery_id": "K8vZ9171bCf",
+                        "genre": "Metal",
+                        "name": "Limp Bizkit",
+                        "slug": "limp-bizkit",
+                        "tm_id": "792633"
+                    },
+                    {
+                        "discovery_id": "K8vZ917uqZ7",
+                        "genre": "Rock",
+                        "name": "Ice Nine Kills",
+                        "slug": "ice-nine-kills",
+                        "tm_id": "1183983"
+                    }
+                ],
+                "created_on": "2024-09-19T11:00:36Z",
+                "discovery_id": "1A8Zk7wGkdhgdeP",
+                "event_date": "2025-04-24",
+                "event_date_timestamp_utc": "2025-04-24T04:00:01.000000",
+                "event_end_date": "2025-04-26",
+                "event_end_date_timestamp_utc": "2025-04-27T03:59:59.000000",
+                "event_end_time": "23:59:59",
+                "event_status_code": "onsale",
+                "event_time": "00:00:01",
+                "event_timezone": "America/New_York",
+                "genre": "Metal",
+                "healthcheck_type": "",
+                "images": [
+                    {
+                        "fallback": false,
+                        "image_url": "https://s1.ticketm.net/dam/a/6bf/4d98a9bf-2443-4152-8137-143cfa25a6bf_1853051_ARTIST_PAGE_3_2.jpg"
+                    }
+                ],
+                "name": "Metallica M72 World Tour 2-day Ticket",
+                "presales": [],
+                "sales_start_date_time": "2024-09-27T14:00:00Z",
+                "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/10006132DBD430A5/staticImage?type=png&systemId=HOST",
+                "similar_event_count": 0,
+                "slug": "metallica-m72-world-tour-2-day-ticket",
+                "tm_id": "10006132DBD430A5",
+                "type": "REGULAR",
+                "upsell": [],
+                "url": "https://www.ticketmaster.ca/metallica-m72-world-tour-2day-ticket-toronto-ontario-04-24-2025/event/10006132DBD430A5",
+                "venue": {
+                    "discovery_id": "KovZpa3Bbe",
+                    "is_livenation_owned": false,
+                    "location": {
+                        "address": "1 Blue Jays Way",
+                        "city": "Toronto",
+                        "country": "CA",
+                        "state": "ON",
+                        "zip_code": "M5V 1J3"
+                    },
+                    "name": "Rogers Centre",
+                    "slug": "rogers-centre",
+                    "tm_id": "131114"
+                }
+            },
+            {
+                "artists": [
+                    {
+                        "discovery_id": "K8vZ9171G9V",
+                        "genre": "Metal",
+                        "name": "Metallica",
+                        "slug": "metallica",
+                        "tm_id": "735647"
+                    },
+                    {
+                        "discovery_id": "K8vZ91715N7",
+                        "genre": "Metal",
+                        "name": "Pantera",
+                        "slug": "pantera",
+                        "tm_id": "1254"
+                    },
+                    {
+                        "discovery_id": "K8vZ91715N0",
+                        "genre": "Rock",
+                        "name": "Suicidal Tendencies",
+                        "slug": "suicidal-tendencies",
+                        "tm_id": "736220"
+                    }
+                ],
+                "created_on": "2025-01-10T12:00:21Z",
+                "discovery_id": "1A8Zk7wGkdhwSeq",
+                "event_date": "2025-04-24",
+                "event_date_timestamp_utc": "2025-04-24T22:00:00.000000",
+                "event_end_date": null,
+                "event_end_date_timestamp_utc": null,
+                "event_end_time": null,
+                "event_status_code": "onsale",
+                "event_time": "18:00:00",
+                "event_timezone": "America/New_York",
+                "genre": "Metal",
+                "healthcheck_type": "",
+                "images": [
+                    {
+                        "fallback": false,
+                        "image_url": "https://s1.ticketm.net/dam/a/6bf/4d98a9bf-2443-4152-8137-143cfa25a6bf_1853051_ARTIST_PAGE_3_2.jpg"
+                    }
+                ],
+                "name": "Metallica M72 World Tour 1-day Ticket",
+                "presales": [
+                    {
+                        "end_date_time": "2025-01-17T03:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Legacy & Fifth Member Presale",
+                        "start_date_time": "2025-01-13T14:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-01-15T14:59:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Metallica Fan Club VIP Packages Presale",
+                        "start_date_time": "2025-01-13T14:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-01-17T03:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "VIP Packages Presale",
+                        "start_date_time": "2025-01-15T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-01-17T03:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Ticketmaster Presale",
+                        "start_date_time": "2025-01-15T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-01-17T03:00:00Z",
+                        "is_ln_promoted": true,
+                        "name": "Live Nation Presale",
+                        "start_date_time": "2025-01-15T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-01-17T03:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Local Presales",
+                        "start_date_time": "2025-01-16T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-04-15T02:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "VIP Packages Onsale",
+                        "start_date_time": "2025-01-17T15:00:00Z"
+                    }
+                ],
+                "sales_start_date_time": "2025-01-17T15:00:00Z",
+                "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/10006132DBCB309D/staticImage?type=png&systemId=HOST",
+                "similar_event_count": 0,
+                "slug": "metallica-m72-world-tour-1-day-ticket",
+                "tm_id": "10006132DBCB309D",
+                "type": "REGULAR",
+                "upsell": [
+                    {
+                        "classification_id": "KZFzBErXgnZfZ7v7lv",
+                        "discovery_id": "1k7Zv-CfGA5DUHh",
+                        "images": [
+                            {
+                                "fallback": false,
+                                "image_url": "https://s1.ticketm.net/dam/a/5a0/a7b3e6de-7357-4b2e-998a-0e4636d9a5a0_RETINA_PORTRAIT_16_9.jpg"
+                            }
+                        ],
+                        "name": "Pantera Meet & Greet Upgrade - TICKET NOT INCLUDED",
+                        "type": "Special Entry",
+                        "url": "https://www.ticketmaster.ca/pantera-meet-greet-upgrade-ticket-not-toronto-ontario-04-24-2025/event/100061394BEF6F1B"
+                    }
+                ],
+                "url": "https://www.ticketmaster.ca/metallica-m72-world-tour-1day-ticket-toronto-ontario-04-24-2025/event/10006132DBCB309D",
+                "venue": {
+                    "discovery_id": "KovZpa3Bbe",
+                    "is_livenation_owned": false,
+                    "location": {
+                        "address": "1 Blue Jays Way",
+                        "city": "Toronto",
+                        "country": "CA",
+                        "state": "ON",
+                        "zip_code": "M5V 1J3"
+                    },
+                    "name": "Rogers Centre",
+                    "slug": "rogers-centre",
+                    "tm_id": "131114"
+                }
+            },
+            {
+                "artists": [
+                    {
+                        "discovery_id": "K8vZ9171G9V",
+                        "genre": "Metal",
+                        "name": "Metallica",
+                        "slug": "metallica",
+                        "tm_id": "735647"
+                    },
+                    {
+                        "discovery_id": "K8vZ9171bCf",
+                        "genre": "Metal",
+                        "name": "Limp Bizkit",
+                        "slug": "limp-bizkit",
+                        "tm_id": "792633"
+                    },
+                    {
+                        "discovery_id": "K8vZ917uqZ7",
+                        "genre": "Rock",
+                        "name": "Ice Nine Kills",
+                        "slug": "ice-nine-kills",
+                        "tm_id": "1183983"
+                    }
+                ],
+                "created_on": "2025-01-10T12:00:22Z",
+                "discovery_id": "1A8Zk7wGkdhSSeN",
+                "event_date": "2025-04-26",
+                "event_date_timestamp_utc": "2025-04-26T22:00:00.000000",
+                "event_end_date": null,
+                "event_end_date_timestamp_utc": null,
+                "event_end_time": null,
+                "event_status_code": "onsale",
+                "event_time": "18:00:00",
+                "event_timezone": "America/New_York",
+                "genre": "Metal",
+                "healthcheck_type": "",
+                "images": [
+                    {
+                        "fallback": false,
+                        "image_url": "https://s1.ticketm.net/dam/a/6bf/4d98a9bf-2443-4152-8137-143cfa25a6bf_1853051_ARTIST_PAGE_3_2.jpg"
+                    }
+                ],
+                "name": "Metallica M72 World Tour 1-day Ticket",
+                "presales": [
+                    {
+                        "end_date_time": "2025-01-17T03:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Legacy & Fifth Member Presale",
+                        "start_date_time": "2025-01-13T14:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-01-15T14:59:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Metallica Fan Club VIP Packages Presale",
+                        "start_date_time": "2025-01-13T14:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-01-17T03:00:00Z",
+                        "is_ln_promoted": true,
+                        "name": "Live Nation Presale",
+                        "start_date_time": "2025-01-15T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-01-17T03:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Ticketmaster Presale",
+                        "start_date_time": "2025-01-15T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-01-17T03:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "VIP Packages Presale",
+                        "start_date_time": "2025-01-15T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-01-17T03:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Local Presales",
+                        "start_date_time": "2025-01-16T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-04-17T02:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "VIP Packages Onsale",
+                        "start_date_time": "2025-01-17T15:00:00Z"
+                    }
+                ],
+                "sales_start_date_time": "2025-01-17T15:00:00Z",
+                "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/10006132DBCF30A3/staticImage?type=png&systemId=HOST",
+                "similar_event_count": 0,
+                "slug": "metallica-m72-world-tour-1-day-ticket",
+                "tm_id": "10006132DBCF30A3",
+                "type": "REGULAR",
+                "upsell": [],
+                "url": "https://www.ticketmaster.ca/metallica-m72-world-tour-1day-ticket-toronto-ontario-04-26-2025/event/10006132DBCF30A3",
+                "venue": {
+                    "discovery_id": "KovZpa3Bbe",
+                    "is_livenation_owned": false,
+                    "location": {
+                        "address": "1 Blue Jays Way",
+                        "city": "Toronto",
+                        "country": "CA",
+                        "state": "ON",
+                        "zip_code": "M5V 1J3"
+                    },
+                    "name": "Rogers Centre",
+                    "slug": "rogers-centre",
+                    "tm_id": "131114"
+                }
+            },
+            {
+                "artists": [
+                    {
+                        "discovery_id": "K8vZ917KjPf",
+                        "genre": "Hip-Hop/Rap",
+                        "name": "Post Malone",
+                        "slug": "post-malone",
+                        "tm_id": "2119390"
+                    },
+                    {
+                        "discovery_id": "K8vZ9174y8V",
+                        "genre": "Country",
+                        "name": "Jelly Roll",
+                        "slug": "jelly-roll",
+                        "tm_id": "2131374"
+                    },
+                    {
+                        "discovery_id": "K8vZ917_hZV",
+                        "genre": "Country",
+                        "name": "Sierra Ferrell",
+                        "slug": "sierra-ferrell",
+                        "tm_id": "2796700"
+                    }
+                ],
+                "created_on": "2024-11-19T15:02:47Z",
+                "discovery_id": "1k7Zv-jZGAGhpeT",
+                "event_date": "2025-05-26",
+                "event_date_timestamp_utc": "2025-05-26T23:30:00.000000",
+                "event_end_date": null,
+                "event_end_date_timestamp_utc": null,
+                "event_end_time": null,
+                "event_status_code": "onsale",
+                "event_time": "19:30:00",
+                "event_timezone": "America/New_York",
+                "genre": "Hip-Hop/Rap",
+                "healthcheck_type": "",
+                "images": [
+                    {
+                        "fallback": false,
+                        "image_url": "https://s1.ticketm.net/dam/a/b84/cc552e7a-f3f5-422f-b266-aab35054cb84_ARTIST_PAGE_3_2.jpg"
+                    }
+                ],
+                "name": "Post Malone Presents: The BIG ASS Stadium Tour",
+                "presales": [
+                    {
+                        "end_date_time": "2024-11-26T04:59:00Z",
+                        "is_ln_promoted": false,
+                        "name": "VIP Packages Presale",
+                        "start_date_time": "2024-11-20T17:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2024-11-26T04:59:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Front Of The Line by American Express",
+                        "start_date_time": "2024-11-20T17:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2024-11-23T04:59:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Artist Presale",
+                        "start_date_time": "2024-11-22T14:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2024-11-26T14:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Venue Presale",
+                        "start_date_time": "2024-11-25T14:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2024-11-26T14:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Spotify Presale",
+                        "start_date_time": "2024-11-25T14:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2024-11-26T14:00:00Z",
+                        "is_ln_promoted": true,
+                        "name": "Live Nation Presale",
+                        "start_date_time": "2024-11-25T14:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2024-11-26T04:59:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Jelly Roll Presale",
+                        "start_date_time": "2024-11-25T17:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-05-20T02:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "VIP Packages Onsale",
+                        "start_date_time": "2024-11-26T17:00:00Z"
+                    }
+                ],
+                "sales_start_date_time": "2024-11-26T17:00:00Z",
+                "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/100061700C6D60BF/staticImage?type=png&systemId=HOST",
+                "similar_event_count": 0,
+                "slug": "post-malone-presents-the-big-ass-stadium-tour",
+                "tm_id": "100061700C6D60BF",
+                "type": "REGULAR",
+                "upsell": [],
+                "url": "https://www.ticketmaster.ca/post-malone-presents-the-big-ass-toronto-ontario-05-26-2025/event/100061700C6D60BF",
+                "venue": {
+                    "discovery_id": "KovZpa3Bbe",
+                    "is_livenation_owned": false,
+                    "location": {
+                        "address": "1 Blue Jays Way",
+                        "city": "Toronto",
+                        "country": "CA",
+                        "state": "ON",
+                        "zip_code": "M5V 1J3"
+                    },
+                    "name": "Rogers Centre",
+                    "slug": "rogers-centre",
+                    "tm_id": "131114"
+                }
+            },
+            {
+                "artists": [
+                    {
+                        "discovery_id": "K8vZ917GSg0",
+                        "genre": "Hip-Hop/Rap",
+                        "name": "Kendrick Lamar",
+                        "slug": "kendrick-lamar",
+                        "tm_id": "1480454"
+                    },
+                    {
+                        "discovery_id": "K8vZ917o6G0",
+                        "genre": "R&B",
+                        "name": "SZA",
+                        "slug": "sza",
+                        "tm_id": "1858419"
+                    }
+                ],
+                "created_on": "2024-12-03T14:39:08Z",
+                "discovery_id": "1A8ZkAMGkexOe3O",
+                "event_date": "2025-06-12",
+                "event_date_timestamp_utc": "2025-06-12T23:00:00.000000",
+                "event_end_date": null,
+                "event_end_date_timestamp_utc": null,
+                "event_end_time": null,
+                "event_status_code": "onsale",
+                "event_time": "19:00:00",
+                "event_timezone": "America/New_York",
+                "genre": "Hip-Hop/Rap",
+                "healthcheck_type": "",
+                "images": [
+                    {
+                        "fallback": false,
+                        "image_url": "https://s1.ticketm.net/dam/a/f7c/00abe3c8-7939-4399-8f3c-a65c89fb9f7c_ARTIST_PAGE_3_2.jpg"
+                    }
+                ],
+                "name": "Grand National Tour: Kendrick Lamar and SZA",
+                "presales": [
+                    {
+                        "end_date_time": "2024-12-06T03:00:00Z",
+                        "is_ln_promoted": true,
+                        "name": "Live Nation Presale",
+                        "start_date_time": "2024-12-04T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2024-12-06T03:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "PSS Additional Access Presale",
+                        "start_date_time": "2024-12-04T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2024-12-06T03:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "VIP Package Presale",
+                        "start_date_time": "2024-12-04T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2024-12-06T14:45:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Debranded Platinum Presale",
+                        "start_date_time": "2024-12-04T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2024-12-06T14:45:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Official Platinum Presale",
+                        "start_date_time": "2024-12-04T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-06-13T01:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Official Platinum Onsale",
+                        "start_date_time": "2024-12-06T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-06-06T02:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "VIP Package Public Onsale",
+                        "start_date_time": "2024-12-06T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-01-13T02:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Debranded Platinum Onsale",
+                        "start_date_time": "2024-12-06T15:00:00Z"
+                    }
+                ],
+                "sales_start_date_time": "2024-12-06T15:00:00Z",
+                "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/10006177A28024A0/staticImage?type=png&systemId=HOST",
+                "similar_event_count": 0,
+                "slug": "grand-national-tour-kendrick-lamar-and-sza",
+                "tm_id": "10006177A28024A0",
+                "type": "REGULAR",
+                "upsell": [],
+                "url": "https://www.ticketmaster.ca/grand-national-tour-kendrick-lamar-and-toronto-ontario-06-12-2025/event/10006177A28024A0",
+                "venue": {
+                    "discovery_id": "KovZpa3Bbe",
+                    "is_livenation_owned": false,
+                    "location": {
+                        "address": "1 Blue Jays Way",
+                        "city": "Toronto",
+                        "country": "CA",
+                        "state": "ON",
+                        "zip_code": "M5V 1J3"
+                    },
+                    "name": "Rogers Centre",
+                    "slug": "rogers-centre",
+                    "tm_id": "131114"
+                }
+            },
+            {
+                "artists": [
+                    {
+                        "discovery_id": "K8vZ917GSg0",
+                        "genre": "Hip-Hop/Rap",
+                        "name": "Kendrick Lamar",
+                        "slug": "kendrick-lamar",
+                        "tm_id": "1480454"
+                    },
+                    {
+                        "discovery_id": "K8vZ917o6G0",
+                        "genre": "R&B",
+                        "name": "SZA",
+                        "slug": "sza",
+                        "tm_id": "1858419"
+                    }
+                ],
+                "created_on": "2024-12-05T23:03:31Z",
+                "discovery_id": "1AvZZb9GkS8k33F",
+                "event_date": "2025-06-13",
+                "event_date_timestamp_utc": "2025-06-13T23:00:00.000000",
+                "event_end_date": null,
+                "event_end_date_timestamp_utc": null,
+                "event_end_time": null,
+                "event_status_code": "onsale",
+                "event_time": "19:00:00",
+                "event_timezone": "America/New_York",
+                "genre": "Hip-Hop/Rap",
+                "healthcheck_type": "",
+                "images": [
+                    {
+                        "fallback": false,
+                        "image_url": "https://s1.ticketm.net/dam/a/f7c/00abe3c8-7939-4399-8f3c-a65c89fb9f7c_ARTIST_PAGE_3_2.jpg"
+                    }
+                ],
+                "name": "Grand National Tour: Kendrick Lamar and SZA",
+                "presales": [
+                    {
+                        "end_date_time": "2025-06-07T02:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "VIP Package Public Onsale",
+                        "start_date_time": "2024-12-06T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-06-13T23:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Debranded Platinum Onsale",
+                        "start_date_time": "2024-12-06T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-06-13T23:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Official Platinum Onsale",
+                        "start_date_time": "2024-12-06T15:00:00Z"
+                    }
+                ],
+                "sales_start_date_time": "2024-12-06T15:00:00Z",
+                "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/1000617CD0192488/staticImage?type=png&systemId=HOST",
+                "similar_event_count": 0,
+                "slug": "grand-national-tour-kendrick-lamar-and-sza",
+                "tm_id": "1000617CD0192488",
+                "type": "REGULAR",
+                "upsell": [],
+                "url": "https://www.ticketmaster.ca/grand-national-tour-kendrick-lamar-and-toronto-ontario-06-13-2025/event/1000617CD0192488",
+                "venue": {
+                    "discovery_id": "KovZpa3Bbe",
+                    "is_livenation_owned": false,
+                    "location": {
+                        "address": "1 Blue Jays Way",
+                        "city": "Toronto",
+                        "country": "CA",
+                        "state": "ON",
+                        "zip_code": "M5V 1J3"
+                    },
+                    "name": "Rogers Centre",
+                    "slug": "rogers-centre",
+                    "tm_id": "131114"
+                }
+            },
+            {
+                "artists": [
+                    {
+                        "discovery_id": "K8vZ9172Ln7",
+                        "genre": "Hip-Hop/Rap",
+                        "name": "The Weeknd",
+                        "slug": "the-weeknd",
+                        "tm_id": "1697014"
+                    },
+                    {
+                        "discovery_id": "K8vZ917KLZ7",
+                        "genre": "Hip-Hop/Rap",
+                        "name": "Playboi Carti",
+                        "slug": "playboi-carti",
+                        "tm_id": "2123805"
+                    },
+                    {
+                        "discovery_id": "K8vZfZ7EJtk",
+                        "genre": "Dance/Electronic",
+                        "name": "Mike Dean",
+                        "slug": "mike-dean",
+                        "tm_id": "2801569"
+                    }
+                ],
+                "created_on": "2025-01-31T15:01:59Z",
+                "discovery_id": "1AvZZbNGkDuRpYP",
+                "event_date": "2025-07-27",
+                "event_date_timestamp_utc": "2025-07-27T23:00:00.000000",
+                "event_end_date": null,
+                "event_end_date_timestamp_utc": null,
+                "event_end_time": null,
+                "event_status_code": "offsale",
+                "event_time": "19:00:00",
+                "event_timezone": "America/New_York",
+                "genre": "Hip-Hop/Rap",
+                "healthcheck_type": "",
+                "images": [
+                    {
+                        "fallback": false,
+                        "image_url": "https://s1.ticketm.net/dam/a/966/779d1731-4094-4a97-bc16-1341dcb41966_ARTIST_PAGE_3_2.jpg"
+                    }
+                ],
+                "name": "The Weeknd: After Hours Til Dawn Tour With Playboi Carti And Mike Dean",
+                "presales": [
+                    {
+                        "end_date_time": "2025-02-06T14:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Artist Presale",
+                        "start_date_time": "2025-02-05T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-02-07T14:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Artist Presale VIP Packages",
+                        "start_date_time": "2025-02-05T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-02-07T14:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Official Platinum Presale",
+                        "start_date_time": "2025-02-05T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-02-07T14:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "VIP Package Presale",
+                        "start_date_time": "2025-02-05T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-02-07T03:00:00Z",
+                        "is_ln_promoted": true,
+                        "name": "Live Nation Presale",
+                        "start_date_time": "2025-02-06T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-02-07T03:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Front Of The Line by American Express",
+                        "start_date_time": "2025-02-06T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-02-07T03:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Radio/Venue/Local Presale",
+                        "start_date_time": "2025-02-06T17:00:00Z"
+                    }
+                ],
+                "sales_start_date_time": "2025-02-07T15:00:00Z",
+                "seatmap_image": "",
+                "similar_event_count": 0,
+                "slug": "the-weeknd-after-hours-til-dawn-tour-with-playboi-carti-and-mike-dean",
+                "tm_id": "1000623ECDBD6C25",
+                "type": "REGULAR",
+                "upsell": [],
+                "url": "https://www.ticketmaster.ca/the-weeknd-after-hours-til-dawn-toronto-ontario-07-27-2025/event/1000623ECDBD6C25",
+                "venue": {
+                    "discovery_id": "KovZpa3Bbe",
+                    "is_livenation_owned": false,
+                    "location": {
+                        "address": "1 Blue Jays Way",
+                        "city": "Toronto",
+                        "country": "CA",
+                        "state": "ON",
+                        "zip_code": "M5V 1J3"
+                    },
+                    "name": "Rogers Centre",
+                    "slug": "rogers-centre",
+                    "tm_id": "131114"
+                }
+            },
+            {
+                "artists": [
+                    {
+                        "discovery_id": "K8vZ9172Ln7",
+                        "genre": "Hip-Hop/Rap",
+                        "name": "The Weeknd",
+                        "slug": "the-weeknd",
+                        "tm_id": "1697014"
+                    },
+                    {
+                        "discovery_id": "K8vZ917KLZ7",
+                        "genre": "Hip-Hop/Rap",
+                        "name": "Playboi Carti",
+                        "slug": "playboi-carti",
+                        "tm_id": "2123805"
+                    },
+                    {
+                        "discovery_id": "K8vZfZ7EJtk",
+                        "genre": "Dance/Electronic",
+                        "name": "Mike Dean",
+                        "slug": "mike-dean",
+                        "tm_id": "2801569"
+                    }
+                ],
+                "created_on": "2025-01-31T15:01:58Z",
+                "discovery_id": "1AvZZbNGkDuspYt",
+                "event_date": "2025-07-28",
+                "event_date_timestamp_utc": "2025-07-28T23:00:00.000000",
+                "event_end_date": null,
+                "event_end_date_timestamp_utc": null,
+                "event_end_time": null,
+                "event_status_code": "offsale",
+                "event_time": "19:00:00",
+                "event_timezone": "America/New_York",
+                "genre": "Hip-Hop/Rap",
+                "healthcheck_type": "",
+                "images": [
+                    {
+                        "fallback": false,
+                        "image_url": "https://s1.ticketm.net/dam/a/966/779d1731-4094-4a97-bc16-1341dcb41966_ARTIST_PAGE_3_2.jpg"
+                    }
+                ],
+                "name": "The Weeknd: After Hours Til Dawn Tour With Playboi Carti And Mike Dean",
+                "presales": [
+                    {
+                        "end_date_time": "2025-02-07T14:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "VIP Package Presale",
+                        "start_date_time": "2025-02-05T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-02-06T14:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Artist Presale",
+                        "start_date_time": "2025-02-05T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-02-07T14:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Artist Presale VIP Packages",
+                        "start_date_time": "2025-02-05T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-02-07T14:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Official Platinum Presale",
+                        "start_date_time": "2025-02-05T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-02-07T03:00:00Z",
+                        "is_ln_promoted": true,
+                        "name": "Live Nation Presale",
+                        "start_date_time": "2025-02-06T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-02-07T03:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Front Of The Line by American Express",
+                        "start_date_time": "2025-02-06T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-02-07T03:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Radio/Venue/Local Presale",
+                        "start_date_time": "2025-02-06T17:00:00Z"
+                    }
+                ],
+                "sales_start_date_time": "2025-02-07T15:00:00Z",
+                "seatmap_image": "",
+                "similar_event_count": 0,
+                "slug": "the-weeknd-after-hours-til-dawn-tour-with-playboi-carti-and-mike-dean",
+                "tm_id": "1000623ECDC56C29",
+                "type": "REGULAR",
+                "upsell": [],
+                "url": "https://www.ticketmaster.ca/the-weeknd-after-hours-til-dawn-toronto-ontario-07-28-2025/event/1000623ECDC56C29",
+                "venue": {
+                    "discovery_id": "KovZpa3Bbe",
+                    "is_livenation_owned": false,
+                    "location": {
+                        "address": "1 Blue Jays Way",
+                        "city": "Toronto",
+                        "country": "CA",
+                        "state": "ON",
+                        "zip_code": "M5V 1J3"
+                    },
+                    "name": "Rogers Centre",
+                    "slug": "rogers-centre",
+                    "tm_id": "131114"
+                }
+            },
+            {
+                "artists": [
+                    {
+                        "discovery_id": "K8vZ9175mU7",
+                        "genre": "Rock",
+                        "name": "My Chemical Romance",
+                        "slug": "my-chemical-romance",
+                        "tm_id": "859324"
+                    },
+                    {
+                        "discovery_id": "K8vZ9171F7V",
+                        "genre": "Rock",
+                        "name": "Pixies",
+                        "slug": "pixies",
+                        "tm_id": "906179"
+                    }
+                ],
+                "created_on": "2024-11-12T18:02:22Z",
+                "discovery_id": "1k7Zv-QFGACrZX8",
+                "event_date": "2025-08-22",
+                "event_date_timestamp_utc": "2025-08-22T22:00:00.000000",
+                "event_end_date": null,
+                "event_end_date_timestamp_utc": null,
+                "event_end_time": null,
+                "event_status_code": "onsale",
+                "event_time": "18:00:00",
+                "event_timezone": "America/New_York",
+                "genre": "Rock",
+                "healthcheck_type": "",
+                "images": [
+                    {
+                        "fallback": false,
+                        "image_url": "https://s1.ticketm.net/dam/a/91f/1aea6f3e-eb49-44e9-9c3c-10286221091f_ARTIST_PAGE_3_2.jpg"
+                    }
+                ],
+                "name": "My Chemical Romance: The Black Parade",
+                "presales": [
+                    {
+                        "end_date_time": "2024-11-17T15:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "PSS Additional Access Presale",
+                        "start_date_time": "2024-11-15T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-08-23T00:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Preferred Seating Onsale",
+                        "start_date_time": "2024-11-15T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-08-23T00:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Official Platinum Onsale",
+                        "start_date_time": "2024-11-15T15:00:00Z"
+                    }
+                ],
+                "sales_start_date_time": "2024-11-15T15:00:00Z",
+                "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/100061688E780F90/staticImage?type=png&systemId=HOST",
+                "similar_event_count": 0,
+                "slug": "my-chemical-romance-the-black-parade",
+                "tm_id": "100061688E780F90",
+                "type": "REGULAR",
+                "upsell": [],
+                "url": "https://www.ticketmaster.ca/my-chemical-romance-the-black-parade-toronto-ontario-08-22-2025/event/100061688E780F90",
+                "venue": {
+                    "discovery_id": "KovZpa3Bbe",
+                    "is_livenation_owned": false,
+                    "location": {
+                        "address": "1 Blue Jays Way",
+                        "city": "Toronto",
+                        "country": "CA",
+                        "state": "ON",
+                        "zip_code": "M5V 1J3"
+                    },
+                    "name": "Rogers Centre",
+                    "slug": "rogers-centre",
+                    "tm_id": "131114"
+                }
+            },
+            {
+                "artists": [
+                    {
+                        "discovery_id": "K8vZ9174qlV",
+                        "genre": "Country",
+                        "name": "Morgan Wallen",
+                        "slug": "morgan-wallen",
+                        "tm_id": "2288122"
+                    },
+                    {
+                        "discovery_id": "K8vZ9175iO0",
+                        "genre": "Country",
+                        "name": "Miranda Lambert",
+                        "slug": "miranda-lambert",
+                        "tm_id": "948174"
+                    },
+                    {
+                        "discovery_id": "K8vZ917jQA7",
+                        "genre": "Country",
+                        "name": "Gavin Adcock",
+                        "slug": "gavin-adcock",
+                        "tm_id": "3095044"
+                    }
+                ],
+                "created_on": "2025-01-24T14:00:44Z",
+                "discovery_id": "1A8ZkFMGkd8i3Hy",
+                "event_date": "2025-09-04",
+                "event_date_timestamp_utc": "2025-09-04T21:30:00.000000",
+                "event_end_date": null,
+                "event_end_date_timestamp_utc": null,
+                "event_end_time": null,
+                "event_status_code": "onsale",
+                "event_time": "17:30:00",
+                "event_timezone": "America/New_York",
+                "genre": "Country",
+                "healthcheck_type": "",
+                "images": [
+                    {
+                        "fallback": false,
+                        "image_url": "https://s1.ticketm.net/dam/a/68c/b889729a-9af0-4a79-8c38-1b1ac86a868c_ARTIST_PAGE_3_2.jpg"
+                    }
+                ],
+                "name": "Morgan Wallen: I'm The Problem Tour",
+                "presales": [
+                    {
+                        "end_date_time": "2025-01-31T03:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Artist Presale",
+                        "start_date_time": "2025-01-30T17:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-01-31T03:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Artist Presale Official Platinum",
+                        "start_date_time": "2025-01-30T17:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-01-31T03:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Artist Presale VIP Packages",
+                        "start_date_time": "2025-01-30T17:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-08-29T02:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "VIP Package Onsale",
+                        "start_date_time": "2025-01-31T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-09-05T01:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Official Platinum Onsale",
+                        "start_date_time": "2025-01-31T15:00:00Z"
+                    }
+                ],
+                "sales_start_date_time": "2025-01-31T15:00:00Z",
+                "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/10006237D0B12F39/staticImage?type=png&systemId=HOST",
+                "similar_event_count": 0,
+                "slug": "morgan-wallen-i-m-the-problem-tour",
+                "tm_id": "10006237D0B12F39",
+                "type": "REGULAR",
+                "upsell": [],
+                "url": "https://www.ticketmaster.ca/morgan-wallen-im-the-problem-tour-toronto-ontario-09-04-2025/event/10006237D0B12F39",
+                "venue": {
+                    "discovery_id": "KovZpa3Bbe",
+                    "is_livenation_owned": false,
+                    "location": {
+                        "address": "1 Blue Jays Way",
+                        "city": "Toronto",
+                        "country": "CA",
+                        "state": "ON",
+                        "zip_code": "M5V 1J3"
+                    },
+                    "name": "Rogers Centre",
+                    "slug": "rogers-centre",
+                    "tm_id": "131114"
+                }
+            },
+            {
+                "artists": [
+                    {
+                        "discovery_id": "K8vZ9174qlV",
+                        "genre": "Country",
+                        "name": "Morgan Wallen",
+                        "slug": "morgan-wallen",
+                        "tm_id": "2288122"
+                    },
+                    {
+                        "discovery_id": "K8vZ91713ZV",
+                        "genre": "Country",
+                        "name": "Brooks & Dunn",
+                        "slug": "brooks-dunn",
+                        "tm_id": "732704"
+                    },
+                    {
+                        "discovery_id": "K8vZ917jQA7",
+                        "genre": "Country",
+                        "name": "Gavin Adcock",
+                        "slug": "gavin-adcock",
+                        "tm_id": "3095044"
+                    }
+                ],
+                "created_on": "2025-01-24T14:00:48Z",
+                "discovery_id": "1A8ZkFMGkd8meHD",
+                "event_date": "2025-09-05",
+                "event_date_timestamp_utc": "2025-09-05T21:30:00.000000",
+                "event_end_date": null,
+                "event_end_date_timestamp_utc": null,
+                "event_end_time": null,
+                "event_status_code": "onsale",
+                "event_time": "17:30:00",
+                "event_timezone": "America/New_York",
+                "genre": "Country",
+                "healthcheck_type": "",
+                "images": [
+                    {
+                        "fallback": false,
+                        "image_url": "https://s1.ticketm.net/dam/a/68c/b889729a-9af0-4a79-8c38-1b1ac86a868c_ARTIST_PAGE_3_2.jpg"
+                    }
+                ],
+                "name": "Morgan Wallen: I'm The Problem Tour",
+                "presales": [
+                    {
+                        "end_date_time": "2025-01-31T03:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Artist Presale VIP Packages",
+                        "start_date_time": "2025-01-30T18:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-01-31T03:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Artist Presale Official Platinum",
+                        "start_date_time": "2025-01-30T18:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-01-31T03:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Artist Presale",
+                        "start_date_time": "2025-01-30T18:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-08-30T02:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "VIP Package Onsale",
+                        "start_date_time": "2025-01-31T15:00:00Z"
+                    },
+                    {
+                        "end_date_time": "2025-09-06T01:00:00Z",
+                        "is_ln_promoted": false,
+                        "name": "Official Platinum Onsale",
+                        "start_date_time": "2025-01-31T15:00:00Z"
+                    }
+                ],
+                "sales_start_date_time": "2025-01-31T15:00:00Z",
+                "seatmap_image": "https://mapsapi.tmol.io/maps/geometry/3/event/10006237D0B82F3B/staticImage?type=png&systemId=HOST",
+                "similar_event_count": 0,
+                "slug": "morgan-wallen-i-m-the-problem-tour",
+                "tm_id": "10006237D0B82F3B",
+                "type": "REGULAR",
+                "upsell": [],
+                "url": "https://www.ticketmaster.ca/morgan-wallen-im-the-problem-tour-toronto-ontario-09-05-2025/event/10006237D0B82F3B",
+                "venue": {
+                    "discovery_id": "KovZpa3Bbe",
+                    "is_livenation_owned": false,
+                    "location": {
+                        "address": "1 Blue Jays Way",
+                        "city": "Toronto",
+                        "country": "CA",
+                        "state": "ON",
+                        "zip_code": "M5V 1J3"
+                    },
+                    "name": "Rogers Centre",
+                    "slug": "rogers-centre",
+                    "tm_id": "131114"
+                }
+            }
+        ]
+    }
+}

@@ -6,26 +6,24 @@ defmodule MusicListings.Parsing.VenueParsers.BudweiserStageParserTest do
   alias MusicListings.Parsing.VenueParsers.BudweiserStageParser
 
   setup do
-    index_file_path = Path.expand("#{File.cwd!()}/test/data/budweiser_stage/index.html")
+    index_file_path = Path.expand("#{File.cwd!()}/test/data/budweiser_stage/index.json")
 
     single_event_file_path =
-      Path.expand("#{File.cwd!()}/test/data/budweiser_stage/single_event.html")
+      Path.expand("#{File.cwd!()}/test/data/budweiser_stage/single_event.json")
 
-    index_html = File.read!(index_file_path)
+    index_html = File.read!(index_file_path) |> Jason.decode!()
 
     event =
       single_event_file_path
       |> File.read!()
-      |> BudweiserStageParser.events()
-      |> List.first()
+      |> Jason.decode!()
 
     %{index_html: index_html, event: event}
   end
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://www.livenation.com/venue/KovZpZAEkkIA/budweiser-stage-events" ==
-               BudweiserStageParser.source_url()
+      assert "https://api.livenation.com/graphql" == BudweiserStageParser.source_url()
     end
   end
 
@@ -33,7 +31,7 @@ defmodule MusicListings.Parsing.VenueParsers.BudweiserStageParserTest do
     test "returns expected events", %{index_html: index_html} do
       events = BudweiserStageParser.events(index_html)
 
-      assert 48 = Enum.count(events)
+      assert 27 = Enum.count(events)
     end
   end
 
@@ -45,36 +43,37 @@ defmodule MusicListings.Parsing.VenueParsers.BudweiserStageParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "budweiser_stage_2024_07_14_19_00_00" ==
+      assert "1AvZZb3Gkz0k9eI" ==
                BudweiserStageParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "budweiser_stage_2024_07_14_19_00_00" ==
+      assert "1AvZZb3Gkz0k9eI" ==
                BudweiserStageParser.ignored_event_id(event)
     end
   end
 
   describe "event_title/1" do
     test "returns event title", %{event: event} do
-      assert "Alanis Morissette - The Triple Moon Tour" == BudweiserStageParser.event_title(event)
+      assert "Sessanta V 2.0: Primus, Puscifer, A Perfect Circle" ==
+               BudweiserStageParser.event_title(event)
     end
   end
 
   describe "performers/1" do
     test "returns the event performers", %{event: event} do
       assert %Performers{
-               headliner: "Alanis Morissette",
-               openers: ["Joan Jett & the Blackhearts", "Morgan Wade"]
+               headliner: "Sessanta",
+               openers: ["Primus", "Puscifer", "A Perfect Circle"]
              } == BudweiserStageParser.performers(event)
     end
   end
 
   describe "event_date/1" do
     test "returns the event date", %{event: event} do
-      assert ~D[2024-07-14] == BudweiserStageParser.event_date(event)
+      assert ~D[2025-05-22] == BudweiserStageParser.event_date(event)
     end
   end
 
@@ -86,7 +85,7 @@ defmodule MusicListings.Parsing.VenueParsers.BudweiserStageParserTest do
 
   describe "event_time/1" do
     test "returns the event start time", %{event: event} do
-      assert ~T[19:00:00] == BudweiserStageParser.event_time(event)
+      assert ~T[20:00:00] == BudweiserStageParser.event_time(event)
     end
   end
 
@@ -105,7 +104,7 @@ defmodule MusicListings.Parsing.VenueParsers.BudweiserStageParserTest do
 
   describe "ticket_url/1" do
     test "returns the event ticket url", %{event: event} do
-      assert "https:\/\/www.livenation.com\/event\/G5vZZ9UBGCvW_\/alanis-morissette-the-triple-moon-tour" ==
+      assert "https://www.ticketmaster.ca/sessanta-v-20-primus-puscifer-a-toronto-ontario-05-22-2025/event/1000612E241970A8" ==
                BudweiserStageParser.ticket_url(event)
     end
   end

@@ -7,10 +7,13 @@ defmodule MusicListings.Parsing.VenueParsers.BudweiserStageParser do
   alias MusicListings.Parsing.VenueParsers.BaseParsers.LiveNationParser
 
   @impl true
-  def source_url, do: "https://www.livenation.com/venue/KovZpZAEkkIA/budweiser-stage-events"
+  defdelegate source_url, to: LiveNationParser
 
+  @live_nation_venue_id "KovZpZAEkkIA"
   @impl true
-  defdelegate retrieve_events_fun, to: LiveNationParser
+  def retrieve_events_fun do
+    LiveNationParser.retrieve_events_fun(@live_nation_venue_id)
+  end
 
   @impl true
   def example_data_file_location, do: "test/data/budweiser_stage/index.html"
@@ -22,9 +25,7 @@ defmodule MusicListings.Parsing.VenueParsers.BudweiserStageParser do
   defdelegate next_page_url(body, current_url), to: LiveNationParser
 
   @impl true
-  def event_id(event) do
-    LiveNationParser.event_id(event, "budweiser_stage")
-  end
+  defdelegate event_id(event), to: LiveNationParser
 
   @impl true
   def ignored_event_id(event) do

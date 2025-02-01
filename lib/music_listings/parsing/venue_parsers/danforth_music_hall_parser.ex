@@ -4,75 +4,28 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
-  alias MusicListings.HttpClient
-  alias MusicListings.Parsing.ParseHelpers
-  alias MusicListings.Parsing.Performers
-  alias MusicListings.Parsing.Price
+  alias MusicListings.Parsing.VenueParsers.BaseParsers.LiveNationParser
 
   @impl true
-  def source_url, do: "https://api.livenation.com/graphql"
+  defdelegate source_url, to: LiveNationParser
 
+  @live_nation_venue_id "KovZpa3yBe"
   @impl true
   def retrieve_events_fun do
-    fn url ->
-      headers = [
-        {"accept", "*/*"},
-        {"content-type", "application/json; charset=UTF-8"},
-        {"x-api-key", "da2-jmvb5y2gjfcrrep3wzeumqwgaq"}
-      ]
-
-      query = """
-      query EVENTS_PAGE($include_genres: String, $start_date_time: String, $end_date_time: String) {
-        getEvents(
-          filter: {exclude_status_codes: ["cancelled", "postponed"], venue_id: "KovZpa3yBe", start_date_time: $start_date_time, end_date_time: $end_date_time, include_genres: $include_genres}
-          limit: 72
-          offset: 0
-          order: "ascending"
-          sort_by: "start_date"
-        ) {
-          artists {
-            discovery_id
-            name
-            genre_id
-            genre
-          }
-          discovery_id
-          event_date
-          event_status_code
-          event_time
-
-          name
-          url
-        }
-      }
-      """
-
-      body = %{
-        query: query
-      }
-
-      HttpClient.post(url, body, headers)
-    end
+    LiveNationParser.retrieve_events_fun(@live_nation_venue_id)
   end
 
   @impl true
   def example_data_file_location, do: "test/data/danforth_music_hall/index.json"
 
   @impl true
-  def events(body) do
-    body = ParseHelpers.maybe_decode!(body)
-    body["data"]["getEvents"]
-  end
+  defdelegate events(body), to: LiveNationParser
 
   @impl true
-  def next_page_url(_body, _current_url) do
-    nil
-  end
+  defdelegate next_page_url(body, current_url), to: LiveNationParser
 
   @impl true
-  def event_id(event) do
-    event["discovery_id"]
-  end
+  defdelegate event_id(event), to: LiveNationParser
 
   @impl true
   def ignored_event_id(event) do
@@ -80,51 +33,29 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParser do
   end
 
   @impl true
-  def event_title(event) do
-    event["name"]
-  end
+  defdelegate event_title(event), to: LiveNationParser
 
   @impl true
-  def performers(event) do
-    event["artists"]
-    |> Enum.map(& &1["name"])
-    |> Performers.new()
-  end
+  defdelegate performers(event), to: LiveNationParser
 
   @impl true
-  def event_date(event) do
-    event["event_date"]
-    |> Date.from_iso8601!()
-  end
+  defdelegate event_date(event), to: LiveNationParser
 
   @impl true
-  def additional_dates(_event) do
-    []
-  end
+  defdelegate additional_dates(event), to: LiveNationParser
 
   @impl true
-  def event_time(event) do
-    event["event_time"]
-    |> Time.from_iso8601!()
-  end
+  defdelegate event_time(event), to: LiveNationParser
 
   @impl true
-  def price(_event) do
-    Price.unknown()
-  end
+  defdelegate price(event), to: LiveNationParser
 
   @impl true
-  def age_restriction(_event) do
-    :unknown
-  end
+  defdelegate age_restriction(event), to: LiveNationParser
 
   @impl true
-  def ticket_url(event) do
-    event["url"]
-  end
+  defdelegate ticket_url(event), to: LiveNationParser
 
   @impl true
-  def details_url(_event) do
-    nil
-  end
+  defdelegate details_url(event), to: LiveNationParser
 end

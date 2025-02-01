@@ -1,0 +1,34 @@
+{
+  "artists": [
+    {
+      "discovery_id": "K8vZ917hYJV",
+      "name": "Sessanta",
+      "genre_id": "KnvZfZ7vAeA",
+      "genre": "Rock"
+    },
+    {
+      "discovery_id": "K8vZ9171FBf",
+      "name": "Primus",
+      "genre_id": "KnvZfZ7vAeA",
+      "genre": "Rock"
+    },
+    {
+      "discovery_id": "K8vZ917CTE0",
+      "name": "Puscifer",
+      "genre_id": "KnvZfZ7vAeA",
+      "genre": "Rock"
+    },
+    {
+      "discovery_id": "K8vZ9171rq0",
+      "name": "A Perfect Circle",
+      "genre_id": "KnvZfZ7vAeA",
+      "genre": "Rock"
+    }
+  ],
+  "discovery_id": "1AvZZb3Gkz0k9eI",
+  "event_date": "2025-05-22",
+  "event_status_code": "onsale",
+  "event_time": "20:00:00",
+  "name": "Sessanta V 2.0: Primus, Puscifer, A Perfect Circle",
+  "url": "https://www.ticketmaster.ca/sessanta-v-20-primus-puscifer-a-toronto-ontario-05-22-2025/event/1000612E241970A8"
+}
