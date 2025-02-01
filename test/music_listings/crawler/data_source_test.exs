@@ -15,7 +15,7 @@ defmodule MusicListings.Crawler.DataSourceTest do
 
       # Just check the number of payloads and that they are populated with
       # raw events
-      assert 68 = Enum.count(payloads)
+      assert 71 = Enum.count(payloads)
       assert Enum.all?(payloads, &(&1.raw_event != nil))
     end
   end

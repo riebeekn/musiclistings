@@ -3,13 +3,13 @@ defmodule MusicListings.PayloadsFixtures do
   Payloads related fixtures
   """
   alias MusicListings.Crawler.Payload
-  alias MusicListings.Parsing.VenueParsers.DanforthMusicHallParser
+  alias MusicListings.Parsing.VenueParsers.VelvetUndergroundParser
 
   def load_payloads(source_file) do
     "#{File.cwd!()}/#{source_file}"
     |> Path.expand()
     |> File.read!()
-    |> DanforthMusicHallParser.events()
+    |> VelvetUndergroundParser.events()
     |> Enum.map(&Payload.new/1)
   end
 end

@@ -6,25 +6,24 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParserTest do
   alias MusicListings.Parsing.VenueParsers.DanforthMusicHallParser
 
   setup do
-    index_file_path = Path.expand("#{File.cwd!()}/test/data/danforth_music_hall/index.html")
+    index_file_path = Path.expand("#{File.cwd!()}/test/data/danforth_music_hall/index.json")
 
     single_event_file_path =
-      Path.expand("#{File.cwd!()}/test/data/danforth_music_hall/single_event.html")
+      Path.expand("#{File.cwd!()}/test/data/danforth_music_hall/single_event.json")
 
-    index_html = File.read!(index_file_path)
+    index_html = File.read!(index_file_path) |> Jason.decode!()
 
     event =
       single_event_file_path
       |> File.read!()
-      |> DanforthMusicHallParser.events()
-      |> List.first()
+      |> Jason.decode!()
 
     %{index_html: index_html, event: event}
   end
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://thedanforth.com" == DanforthMusicHallParser.source_url()
+      assert "https://api.livenation.com/graphql" == DanforthMusicHallParser.source_url()
     end
   end
 
@@ -32,7 +31,7 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParserTest do
     test "returns expected events", %{index_html: index_html} do
       events = DanforthMusicHallParser.events(index_html)
 
-      assert 68 = Enum.count(events)
+      assert 71 = Enum.count(events)
     end
   end
 
@@ -44,34 +43,35 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "post-17036" == DanforthMusicHallParser.event_id(event)
+      assert "1AvZZbKGkRzv9Zn" == DanforthMusicHallParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "post-17036" == DanforthMusicHallParser.ignored_event_id(event)
+      assert "1AvZZbKGkRzv9Zn" == DanforthMusicHallParser.ignored_event_id(event)
     end
   end
 
   describe "event_title/1" do
     test "returns event title", %{event: event} do
-      assert "Northlane" == DanforthMusicHallParser.event_title(event)
+      assert "KERRY KING - Presented By F7 Entertainment" ==
+               DanforthMusicHallParser.event_title(event)
     end
   end
 
   describe "performers/1" do
     test "returns the event performers", %{event: event} do
       assert %Performers{
-               headliner: "Northlane",
-               openers: ["Invent Animate", "Thornhill", "Windwaker"]
+               headliner: "Kerry King",
+               openers: ["Municipal Waste", "Alien Weaponry"]
              } == DanforthMusicHallParser.performers(event)
     end
   end
 
   describe "event_date/1" do
     test "returns the event date", %{event: event} do
-      assert ~D[2024-07-05] == DanforthMusicHallParser.event_date(event)
+      assert ~D[2025-02-01] == DanforthMusicHallParser.event_date(event)
     end
   end
 
@@ -89,20 +89,20 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParserTest do
 
   describe "price/1" do
     test "returns the event price", %{event: event} do
-      assert %Price{format: :range, lo: Decimal.new("30.00"), hi: Decimal.new("50.00")} ==
+      assert %Price{format: :unknown, lo: nil, hi: nil} ==
                DanforthMusicHallParser.price(event)
     end
   end
 
   describe "age_restriction/1" do
     test "returns the event age restriction", %{event: event} do
-      assert :all_ages == DanforthMusicHallParser.age_restriction(event)
+      assert :unknown == DanforthMusicHallParser.age_restriction(event)
     end
   end
 
   describe "ticket_url/1" do
     test "returns the event ticket url", %{event: event} do
-      assert "https:\/\/www.ticketmaster.ca\/event\/1000603D7B880DBA" ==
+      assert "https://www.ticketmaster.ca/kerry-king-presented-by-f7-entertainment-toronto-ontario-02-01-2025/event/1000613BF805702A" ==
                DanforthMusicHallParser.ticket_url(event)
     end
   end
