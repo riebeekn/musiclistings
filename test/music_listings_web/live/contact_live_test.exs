@@ -7,7 +7,7 @@ defmodule MusicListingsWeb.ContactLiveTest do
   describe "new" do
     test "saves submitted event with valid parameters", %{conn: conn} do
       {:ok, view, _html} = live(conn, ~p"/contact")
-      assert has_element?(view, "h1", "Get in touch")
+      assert has_element?(view, "h1", "About")
 
       {:ok, _view, html} =
         view

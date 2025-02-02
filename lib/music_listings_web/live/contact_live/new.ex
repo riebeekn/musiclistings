@@ -61,12 +61,26 @@ defmodule MusicListingsWeb.ContactLive.New do
     ~H"""
     <div class="relative isolate">
       <div class="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
-        <.cta header="Get in touch">
+        <.cta header="About">
           <p>
-            We’d love to hear from you! Whether you have a question, suggestion, or want to share an upcoming event, we’re here for it!
+            Toronto Music Listings came about as a fun side project to help me keep track of live shows happening in Toronto.
           </p>
           <p>
-            Drop us a message, and we’ll get back to you as soon as possible!
+            The code is open source so if you're interested in seeing how the sausage is made, check out the
+            <a
+              href="https://github.com/riebeekn/musiclistings"
+              class="text-emerald-400 hover:text-emerald-500"
+              target="_blank"
+            >
+              GitHub
+            </a>
+            repo.
+          </p>
+          <p>
+            Have a question, suggestion, or want to share an upcoming event?
+          </p>
+          <p>
+            Drop me a message, and I’ll get back to you as soon as possible!
           </p>
         </.cta>
 
