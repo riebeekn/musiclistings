@@ -82,7 +82,8 @@ defmodule MusicListings.MixProject do
       {:error_tracker, "~> 0.2"},
       {:phoenix_turnstile, "~> 1.0"},
       # {:ecto_boot_migration, "~> 0.3.0"},
-      {:ecto_boot_migration, git: "https://github.com/mwhitworth/ecto_boot_migration", branch: "elixir-1.17-fix"},
+      {:ecto_boot_migration,
+       git: "https://github.com/mwhitworth/ecto_boot_migration", branch: "elixir-1.17-fix"},
       # build / dev / test related deps
       {:swoosh_gallery, "~> 0.2.0"},
       {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
