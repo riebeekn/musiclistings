@@ -62,7 +62,7 @@ defmodule MusicListings.Crawler do
       |> DataSource.retrieve_events(parser.source_url(), pull_data_from_www?)
       |> maybe_insert_no_events_error(venue, crawl_summary)
       |> EventParser.parse_events(parser, venue, crawl_summary)
-      |> EventStorage.save_events()
+      |> EventStorage.save_events(crawl_summary)
       |> List.flatten()
       |> insert_venue_summary(venue, crawl_summary)
     end)
@@ -94,7 +94,7 @@ defmodule MusicListings.Crawler do
       updated: venue_stats.updated,
       duplicate: venue_stats.duplicate,
       ignored: venue_stats.ignored,
-      parse_errors: venue_stats.parse_errors
+      errors: venue_stats.errors
     }
     |> Repo.insert!()
 
@@ -113,7 +113,7 @@ defmodule MusicListings.Crawler do
       updated: stats.updated,
       duplicate: stats.duplicate,
       ignored: stats.ignored,
-      parse_errors: stats.parse_errors,
+      errors: stats.errors,
       completed_at: DateHelpers.now()
     })
     |> Repo.update()

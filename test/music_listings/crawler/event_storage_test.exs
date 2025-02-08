@@ -3,6 +3,8 @@ defmodule MusicListings.Crawler.EventStorageTest do
 
   alias MusicListings.Crawler.EventStorage
   alias MusicListings.Crawler.Payload
+  alias MusicListings.CrawlSummariesFixtures
+  alias MusicListingsSchema.CrawlError
   alias MusicListingsSchema.Event
 
   describe "save_events/1" do
@@ -27,13 +29,17 @@ defmodule MusicListings.Crawler.EventStorageTest do
         }
       ]
 
-      %{payloads: payloads}
+      crawl_summary = CrawlSummariesFixtures.crawl_summary_fixture()
+
+      %{payloads: payloads, crawl_summary: crawl_summary}
     end
 
     test "saves the event and updates the operation and persisted event on the payload", %{
-      payloads: payloads
+      payloads: payloads,
+      crawl_summary: crawl_summary
     } do
-      [payload] = EventStorage.save_events(payloads)
+      [payload] =
+        EventStorage.save_events(payloads, crawl_summary)
 
       assert :created == payload.operation
 
@@ -56,15 +62,42 @@ defmodule MusicListings.Crawler.EventStorageTest do
              } = payload.persisted_event
     end
 
-    test "performs no operation on a duplicate event", %{payloads: payloads} do
-      EventStorage.save_events(payloads)
-      [payload] = EventStorage.save_events(payloads)
+    test "performs no operation on a duplicate event", %{
+      payloads: payloads,
+      crawl_summary: crawl_summary
+    } do
+      EventStorage.save_events(payloads, crawl_summary)
+      [payload] = EventStorage.save_events(payloads, crawl_summary)
 
       assert :noop == payload.operation
     end
 
-    test "updates and existing event that has changed", %{payloads: payloads} do
-      EventStorage.save_events(payloads)
+    test "returns save_error and inserts a crawl error on invalid parsed event", %{
+      payloads: payloads,
+      crawl_summary: crawl_summary
+    } do
+      # update the parsed event to have a blank title
+      payloads =
+        Enum.map(payloads, fn
+          %Payload{parsed_event: %Event{} = event} = payload ->
+            %{payload | parsed_event: %{event | title: ""}}
+        end)
+
+      [payload] = EventStorage.save_events(payloads, crawl_summary)
+
+      assert :noop == payload.operation
+      assert :save_error = payload.status
+
+      assert [crawl_error] = Repo.all(CrawlError)
+      assert crawl_error.type == :save_error
+      assert crawl_error.error =~ "not_null_violation"
+    end
+
+    test "updates an existing event that has changed", %{
+      payloads: payloads,
+      crawl_summary: crawl_summary
+    } do
+      EventStorage.save_events(payloads, crawl_summary)
 
       Event
       |> last()
@@ -72,13 +105,13 @@ defmodule MusicListings.Crawler.EventStorageTest do
       |> Ecto.Changeset.change(%{title: "Some title which we need to update"})
       |> Repo.update!()
 
-      [payload] = EventStorage.save_events(payloads)
+      [payload] = EventStorage.save_events(payloads, crawl_summary)
       assert :updated == payload.operation
     end
 
-    test "does nothing where payload status is not :ok" do
+    test "does nothing where payload status is not :ok", %{crawl_summary: crawl_summary} do
       payload = %Payload{status: :parse_error}
-      assert [payload] == EventStorage.save_events([payload])
+      assert [payload] == EventStorage.save_events([payload], crawl_summary)
     end
   end
 end

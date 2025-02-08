@@ -46,8 +46,8 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       <:col :let={venue_crawl_summary} label="Ignored">
         {venue_crawl_summary.ignored}
       </:col>
-      <:col :let={venue_crawl_summary} label="Parse Errors">
-        {venue_crawl_summary.parse_errors}
+      <:col :let={venue_crawl_summary} label="Errors">
+        {venue_crawl_summary.errors}
       </:col>
       <:footer_col>
         Total
@@ -65,7 +65,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
         {@crawl_summary.ignored}
       </:footer_col>
       <:footer_col>
-        {@crawl_summary.parse_errors}
+        {@crawl_summary.errors}
       </:footer_col>
     </.table>
     <%= if Enum.count(@crawl_summary.crawl_errors) > 0 do %>
@@ -93,7 +93,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
         ignored: 4,
         new: 2,
         updated: 16,
-        parse_errors: 1
+        errors: 1
       })
 
     vcs2 =
@@ -102,7 +102,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
         ignored: 2,
         new: 10,
         updated: 8,
-        parse_errors: 2
+        errors: 2
       })
 
     # errors
@@ -137,7 +137,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       ignored: 6,
       new: 12,
       updated: 24,
-      parse_errors: 3,
+      errors: 3,
       inserted_at: DateTime.utc_now()
     }
   end
@@ -147,7 +147,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
          ignored: ignored,
          new: new,
          updated: updated,
-         parse_errors: parse_errors
+         errors: errors
        }) do
     %VenueCrawlSummary{
       venue: venue,
@@ -155,7 +155,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       ignored: ignored,
       new: new,
       updated: updated,
-      parse_errors: parse_errors
+      errors: errors
     }
   end
 
