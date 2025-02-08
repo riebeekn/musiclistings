@@ -12,7 +12,7 @@ defmodule MusicListingsSchema.CrawlSummary do
           updated: pos_integer(),
           duplicate: pos_integer(),
           ignored: pos_integer(),
-          parse_errors: pos_integer(),
+          errors: pos_integer(),
           completed_at: DateTime.t(),
           inserted_at: DateTime.t(),
           updated_at: DateTime.t()
@@ -23,7 +23,7 @@ defmodule MusicListingsSchema.CrawlSummary do
     field :updated, :integer
     field :duplicate, :integer
     field :ignored, :integer
-    field :parse_errors, :integer
+    field :errors, :integer
     field :completed_at, :utc_datetime
 
     has_many :venue_crawl_summaries, VenueCrawlSummary

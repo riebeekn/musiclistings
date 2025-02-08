@@ -12,7 +12,7 @@ defmodule MusicListingsSchema.VenueCrawlSummary do
     field :updated, :integer
     field :duplicate, :integer
     field :ignored, :integer
-    field :parse_errors, :integer
+    field :errors, :integer
 
     timestamps(updated_at: false)
   end

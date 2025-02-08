@@ -24,7 +24,7 @@ defmodule MusicListings.CrawlerTest do
                 new: 127,
                 updated: 0,
                 duplicate: 0,
-                parse_errors: 0
+                errors: 0
               }} = Crawler.crawl([danforth, velvet_underground])
 
       assert 127 = Repo.aggregate(Event, :count)
