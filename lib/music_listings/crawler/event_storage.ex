@@ -38,7 +38,7 @@ defmodule MusicListings.Crawler.EventStorage do
       )
 
     if existing_event do
-      maybe_update_event(payload, parsed_event, existing_event)
+      maybe_update_event(payload, parsed_event, existing_event, crawl_summary)
     else
       insert_event(payload, parsed_event, crawl_summary)
     end
@@ -82,7 +82,7 @@ defmodule MusicListings.Crawler.EventStorage do
       |> Payload.set_operation(:noop)
   end
 
-  defp maybe_update_event(payload, parsed_event, existing_event) do
+  defp maybe_update_event(payload, parsed_event, existing_event, crawl_summary) do
     %{
       title: parsed_event.title,
       headliner: parsed_event.headliner,
@@ -97,17 +97,22 @@ defmodule MusicListings.Crawler.EventStorage do
       details_url: parsed_event.details_url
     }
     |> event_changeset(existing_event)
-    |> maybe_update(payload)
+    |> maybe_update(payload, parsed_event, crawl_summary)
   end
 
-  defp maybe_update(%Ecto.Changeset{changes: changes, errors: errors}, payload)
+  defp maybe_update(
+         %Ecto.Changeset{changes: changes, errors: errors},
+         payload,
+         _parsed_event,
+         _crawl_summary
+       )
        when changes == %{} and errors == [] do
     payload
     |> Payload.set_persisted_event(payload)
     |> Payload.set_operation(:noop)
   end
 
-  defp maybe_update(changeset, payload) do
+  defp maybe_update(changeset, payload, parsed_event, crawl_summary) do
     persisted_event =
       changeset
       |> Repo.update!()
@@ -115,6 +120,19 @@ defmodule MusicListings.Crawler.EventStorage do
     payload
     |> Payload.set_persisted_event(persisted_event)
     |> Payload.set_operation(:updated)
+  rescue
+    error ->
+      %CrawlError{
+        crawl_summary_id: crawl_summary.id,
+        venue_id: parsed_event.venue_id,
+        type: :save_error,
+        error: "Error when updating event: #{inspect(error)}"
+      }
+      |> Repo.insert!()
+
+      payload
+      |> Payload.set_save_error(error)
+      |> Payload.set_operation(:noop)
   end
 
   defp event_changeset(attrs, event \\ %Event{}) do

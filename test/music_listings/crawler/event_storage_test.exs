@@ -109,6 +109,29 @@ defmodule MusicListings.Crawler.EventStorageTest do
       assert :updated == payload.operation
     end
 
+    test "on an invalid update returns save_error and inserts a crawl error", %{
+      payloads: payloads,
+      crawl_summary: crawl_summary
+    } do
+      EventStorage.save_events(payloads, crawl_summary)
+
+      # update the parsed event to have a blank title
+      payloads =
+        Enum.map(payloads, fn
+          %Payload{parsed_event: %Event{} = event} = payload ->
+            %{payload | parsed_event: %{event | title: ""}}
+        end)
+
+      [payload] = EventStorage.save_events(payloads, crawl_summary)
+
+      assert :noop == payload.operation
+      assert :save_error = payload.status
+
+      assert [crawl_error] = Repo.all(CrawlError)
+      assert crawl_error.type == :save_error
+      assert crawl_error.error =~ "not_null_violation"
+    end
+
     test "does nothing where payload status is not :ok", %{crawl_summary: crawl_summary} do
       payload = %Payload{status: :parse_error}
       assert [payload] == EventStorage.save_events([payload], crawl_summary)
