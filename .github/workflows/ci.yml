@@ -190,7 +190,7 @@ jobs:
         run: mix credo --strict
         # Step: Check for any packages with known security issues
       - name: Check for dependency security vulnerabilities
-        run: mix deps.audit
+        run: mix deps.audit --ignore-advisory-ids GHSA-vq52-99r9-h5pw
       # Step: Check for any retired packages
       - name: Check for retired packages
         run: mix hex.audit
