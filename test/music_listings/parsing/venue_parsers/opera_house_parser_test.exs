@@ -6,25 +6,24 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParserTest do
   alias MusicListings.Parsing.VenueParsers.OperaHouseParser
 
   setup do
-    index_file_path = Path.expand("#{File.cwd!()}/test/data/opera_house/index.html")
+    index_file_path = Path.expand("#{File.cwd!()}/test/data/opera_house/index.json")
 
     single_event_file_path =
-      Path.expand("#{File.cwd!()}/test/data/opera_house/single_event.html")
+      Path.expand("#{File.cwd!()}/test/data/opera_house/single_event.json")
 
     index_html = File.read!(index_file_path)
 
     event =
       single_event_file_path
       |> File.read!()
-      |> OperaHouseParser.events()
-      |> List.first()
+      |> Jason.decode!()
 
     %{index_html: index_html, event: event}
   end
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://theoperahousetoronto.com/calendar/" == OperaHouseParser.source_url()
+      assert "https://api.livenation.com/graphql" == OperaHouseParser.source_url()
     end
   end
 
@@ -32,7 +31,7 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParserTest do
     test "returns expected events", %{index_html: index_html} do
       events = OperaHouseParser.events(index_html)
 
-      assert 62 = Enum.count(events)
+      assert 30 = Enum.count(events)
     end
   end
 
@@ -44,34 +43,34 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "opera_house_2024_11_28_19_00_00" == OperaHouseParser.event_id(event)
+      assert "1A8Zk7VGkd1ZkgO" == OperaHouseParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "opera_house_2024_11_28_19_00_00" == OperaHouseParser.ignored_event_id(event)
+      assert "1A8Zk7VGkd1ZkgO" == OperaHouseParser.ignored_event_id(event)
     end
   end
 
   describe "event_title/1" do
     test "returns event title", %{event: event} do
-      assert "ZEAL & ARDOR w/ Gaerea, Zetra" == OperaHouseParser.event_title(event)
+      assert "Hulvey - \"All For You\" Tour" == OperaHouseParser.event_title(event)
     end
   end
 
   describe "performers/1" do
     test "returns the event performers", %{event: event} do
       assert %Performers{
-               headliner: "ZEAL & ARDOR w/ Gaerea, Zetra",
-               openers: []
+               headliner: "Hulvey",
+               openers: ["nobigdyl."]
              } == OperaHouseParser.performers(event)
     end
   end
 
   describe "event_date/1" do
     test "returns the event date", %{event: event} do
-      assert ~D[2024-11-28] == OperaHouseParser.event_date(event)
+      assert ~D[2025-02-20] == OperaHouseParser.event_date(event)
     end
   end
 
@@ -96,21 +95,20 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParserTest do
 
   describe "age_restriction/1" do
     test "returns the event age restriction", %{event: event} do
-      assert :nineteen_plus == OperaHouseParser.age_restriction(event)
+      assert :unknown == OperaHouseParser.age_restriction(event)
     end
   end
 
   describe "ticket_url/1" do
     test "returns the event ticket url", %{event: event} do
-      assert "https://www.ticketmaster.ca/event/100060EAEEF1300A" ==
+      assert "https://www.ticketmaster.ca/hulvey-all-for-you-tour-toronto-ontario-02-20-2025/event/10006134CA006D60" ==
                OperaHouseParser.ticket_url(event)
     end
   end
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert "https://theoperahousetoronto.com/event/zeal-ardor/" ==
-               OperaHouseParser.details_url(event)
+      assert nil == OperaHouseParser.details_url(event)
     end
   end
 end

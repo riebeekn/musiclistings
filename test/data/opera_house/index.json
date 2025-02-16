@@ -1,0 +1,648 @@
+{
+  "data": {
+    "getEvents": [
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917h_n0",
+            "name": "Hulvey",
+            "genre_id": "KnvZfZ7vAv1",
+            "genre": "Hip-Hop/Rap"
+          },
+          {
+            "discovery_id": "K8vZ9179ox7",
+            "name": "nobigdyl.",
+            "genre_id": "KnvZfZ7vAv1",
+            "genre": "Hip-Hop/Rap"
+          }
+        ],
+        "discovery_id": "1A8Zk7VGkd1ZkgO",
+        "event_date": "2025-02-20",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Hulvey - \"All For You\" Tour",
+        "url": "https://www.ticketmaster.ca/hulvey-all-for-you-tour-toronto-ontario-02-20-2025/event/10006134CA006D60"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9178zP0",
+            "name": "Dear Rouge",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ917fx_f",
+            "name": "Bleeker",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1AvZZbfGkcAN9eu",
+        "event_date": "2025-02-22",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Dear Rouge",
+        "url": "https://www.ticketmaster.ca/dear-rouge-toronto-ontario-02-22-2025/event/1000614B458D708D"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917oq37",
+            "name": "Aurie Styla",
+            "genre_id": "KnvZfZ7vAe1",
+            "genre": "Comedy"
+          }
+        ],
+        "discovery_id": "1A8Zk7YGkdqFe9f",
+        "event_date": "2025-02-23",
+        "event_status_code": "onsale",
+        "event_time": "18:30:00",
+        "name": "Aurie Styla - The Aurator Tour",
+        "url": "https://www.ticketmaster.ca/aurie-styla-the-aurator-tour-toronto-ontario-02-23-2025/event/10006130DD2025D4"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917fKd7",
+            "name": "Make Them Suffer",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          },
+          {
+            "discovery_id": "K8vZ917GWb0",
+            "name": "Like Moths To Flames",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ917br-7",
+            "name": "Aviana",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          },
+          {
+            "discovery_id": "K8vZ917hOD0",
+            "name": "Windwaker",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          }
+        ],
+        "discovery_id": "1A8ZkAUGkdk44yz",
+        "event_date": "2025-02-26",
+        "event_status_code": "onsale",
+        "event_time": "18:00:00",
+        "name": "Make Them Suffer",
+        "url": "https://www.ticketmaster.ca/make-them-suffer-toronto-ontario-02-26-2025/event/10006176C6555E78"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917QRJV",
+            "name": "Jamie Fine",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          },
+          {
+            "discovery_id": "K8vZ917QVgV",
+            "name": "ari hicks",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          }
+        ],
+        "discovery_id": "1AvZZbpGkXtYdEc",
+        "event_date": "2025-02-27",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Jamie Fine: If This Is It...Tour",
+        "url": "https://www.ticketmaster.ca/jamie-fine-if-this-is-ittour-toronto-ontario-02-27-2025/event/1000616FA9C039ED"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917q2p0",
+            "name": "Tinzo + Jojo",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          }
+        ],
+        "discovery_id": "1k7Zv-4_GA1csoP",
+        "event_date": "2025-03-01",
+        "event_status_code": "onsale",
+        "event_time": "22:00:00",
+        "name": "Tinzo + Jojo",
+        "url": "https://www.ticketmaster.ca/tinzo-jojo-toronto-ontario-03-01-2025/event/100061559AB71465"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917haF7",
+            "name": "Catch Your Breath",
+            "genre_id": "KnvZfZ7vAvv",
+            "genre": "Alternative"
+          },
+          {
+            "discovery_id": "K8vZ917hT4f",
+            "name": "Archers",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          },
+          {
+            "discovery_id": "K8vZ9173cE7",
+            "name": "The Funeral Portrait",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ917ft_V",
+            "name": "If Not For Me",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          }
+        ],
+        "discovery_id": "1AvZZb4GkXUio-A",
+        "event_date": "2025-03-02",
+        "event_status_code": "onsale",
+        "event_time": "17:30:00",
+        "name": "CATCH YOUR BREATH \"THE BROKEN SOULS TOUR\"",
+        "url": "https://www.ticketmaster.ca/catch-your-breath-the-broken-souls-toronto-ontario-03-02-2025/event/1000615FB6B11845"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9175pX0",
+            "name": "Matt Nathanson",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ9175NLf",
+            "name": "Rachael Yamagata",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1AvZZbKGkn-R36J",
+        "event_date": "2025-03-04",
+        "event_status_code": "onsale",
+        "event_time": "18:00:00",
+        "name": "Matt Nathanson - Wheel of Song Tour",
+        "url": "https://www.ticketmaster.ca/matt-nathanson-wheel-of-song-tour-toronto-ontario-03-04-2025/event/1000613AA1BD21E6"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917_x80",
+            "name": "Jack Kays",
+            "genre_id": "KnvZfZ7vAvv",
+            "genre": "Alternative"
+          },
+          {
+            "discovery_id": "K8vZ917pAJf",
+            "name": "Remo Drive",
+            "genre_id": "KnvZfZ7vAvv",
+            "genre": "Alternative"
+          }
+        ],
+        "discovery_id": "1AvZZbKGkRoJ0xB",
+        "event_date": "2025-03-11",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Jack Kays - Washed Up Dried Out",
+        "url": "https://www.ticketmaster.ca/jack-kays-washed-up-dried-out-toronto-ontario-03-11-2025/event/1000613BD19A48BA"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917p65V",
+            "name": "SahBabii",
+            "genre_id": "KnvZfZ7vAv1",
+            "genre": "Hip-Hop/Rap"
+          }
+        ],
+        "discovery_id": "1AvZZbbGkMQpSYY",
+        "event_date": "2025-03-12",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "SahBabii - The Resurrection Tour",
+        "url": "https://www.ticketmaster.ca/sahbabii-the-resurrection-tour-toronto-ontario-03-12-2025/event/1000618DDA5B3C30"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917hhX7",
+            "name": "Paris Paloma",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          },
+          {
+            "discovery_id": "K8vZ917q2Of",
+            "name": "Sarah Julia",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1A8Zk7VGkexaxab",
+        "event_date": "2025-03-13",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Paris Paloma Cacophony North American Tour",
+        "url": "https://www.ticketmaster.ca/paris-paloma-cacophony-north-american-tour-toronto-ontario-03-13-2025/event/10006134A2262258"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917hKR0",
+            "name": "Stephen Wilson Jr.",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1A8ZkAdGkd5TF6V",
+        "event_date": "2025-03-14",
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "name": "Stephen Wilson Jr. - MOVED TO THE OPERA HOUSE",
+        "url": "https://www.ticketmaster.ca/stephen-wilson-jr-moved-to-the-toronto-ontario-03-14-2025/event/10006143CBFC81F4"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917jcfV",
+            "name": "All The Feels R&B",
+            "genre_id": "KnvZfZ7vAe6",
+            "genre": "Undefined"
+          }
+        ],
+        "discovery_id": "1A8ZkFEGkdSRog5",
+        "event_date": "2025-03-15",
+        "event_status_code": "onsale",
+        "event_time": "21:00:00",
+        "name": "ALL THE FEELS",
+        "url": "https://www.ticketmaster.ca/all-the-feels-toronto-ontario-03-15-2025/event/10006227F3BD1D4B"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917qNTf",
+            "name": "CalledOut Music",
+            "genre_id": "KnvZfZ7vAe7",
+            "genre": "Religious"
+          }
+        ],
+        "discovery_id": "16vZZbNOPG7YP6D",
+        "event_date": "2025-03-19",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "CALLEDOUT MUSIC: BEST DAYS OF OUR LIVES",
+        "url": "https://www.ticketmaster.ca/calledout-music-best-days-of-our-toronto-ontario-03-19-2025/event/1000623825C251FB"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917hYW0",
+            "name": "Yugyeom",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          }
+        ],
+        "discovery_id": "1AvZZbNGkDNtpWF",
+        "event_date": "2025-03-20",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Yugyeom",
+        "url": "https://www.ticketmaster.ca/yugyeom-toronto-ontario-03-20-2025/event/1000623EE3A56F48"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917CJN7",
+            "name": "Alcest",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          },
+          {
+            "discovery_id": "K8vZ9179Mb7",
+            "name": "MONO",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ9179tFV",
+            "name": "Kaelan Mikla",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          }
+        ],
+        "discovery_id": "1AvZZb3GkUlUxj2",
+        "event_date": "2025-03-21",
+        "event_status_code": "onsale",
+        "event_time": "18:30:00",
+        "name": "ALCEST \"LES CHANTS DE L'AURORE NORTH AMERICAN TOUR 2025\"",
+        "url": "https://www.ticketmaster.ca/alcest-les-chants-de-laurore-north-toronto-ontario-03-21-2025/event/1000612DABDA270F"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917hiuV",
+            "name": "United We Dance",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          },
+          {
+            "discovery_id": "K8vZ917qSR7",
+            "name": "Jonathan Hess",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          },
+          {
+            "discovery_id": "K8vZ917qSRf",
+            "name": "Adonix",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          }
+        ],
+        "discovery_id": "1k7ZvxC7GA2VAOp",
+        "event_date": "2025-03-22",
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "name": "United We Dance: The Ultimate Rave Experience",
+        "url": "https://www.ticketmaster.ca/united-we-dance-the-ultimate-rave-toronto-ontario-03-22-2025/event/100062384FD05816"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917oN2V",
+            "name": "Spencer Sutherland",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ917Q1X0",
+            "name": "Stacey Ryan",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          },
+          {
+            "discovery_id": "K8vZ917Qw70",
+            "name": "Cloe Wilder",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          }
+        ],
+        "discovery_id": "1A8Zk76GkdYDVBc",
+        "event_date": "2025-03-26",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Spencer Sutherland - The Drama North American Tour",
+        "url": "https://www.ticketmaster.ca/spencer-sutherland-the-drama-north-american-toronto-ontario-03-26-2025/event/10006107F0EF4EAD"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917QVV0",
+            "name": "Tommy Richman",
+            "genre_id": "KnvZfZ7vAvv",
+            "genre": "Alternative"
+          },
+          {
+            "discovery_id": "K8vZ917q4z0",
+            "name": "Mynameisntjmack",
+            "genre_id": "KnvZfZ7vAv1",
+            "genre": "Hip-Hop/Rap"
+          },
+          {
+            "discovery_id": "K8vZ917_gCV",
+            "name": "Paco",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1A8ZkA4GkdRkf1G",
+        "event_date": "2025-03-27",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Tommy Richman",
+        "url": "https://www.ticketmaster.ca/tommy-richman-toronto-ontario-03-27-2025/event/10006155EF19428C"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9175gJV",
+            "name": "Bedouin Soundclash",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1A8Zk7SGkdnnV81",
+        "event_date": "2025-03-29",
+        "event_status_code": "rescheduled",
+        "event_time": "19:00:00",
+        "name": "Bedouin Soundclash - 20 Years of Sounding A Mosaic",
+        "url": "https://www.ticketmaster.ca/bedouin-soundclash-20-years-of-sounding-toronto-ontario-03-29-2025/event/10006133EAAB440A"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9175M4f",
+            "name": "Bayside",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ917pnLf",
+            "name": "Sincere Engineer",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1AvZZbxGklQK3Gg",
+        "event_date": "2025-04-01",
+        "event_status_code": "onsale",
+        "event_time": "00:00:01",
+        "name": "Bayside - 25th Anniversary: The Errors Tour - 2 Day Ticket",
+        "url": "https://www.ticketmaster.ca/bayside-25th-anniversary-the-errors-tour-toronto-ontario-04-01-2025/event/1000622ADA4D2335"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9175M4f",
+            "name": "Bayside",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ917pnLf",
+            "name": "Sincere Engineer",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1AvZZbxGkl_M3GP",
+        "event_date": "2025-04-01",
+        "event_status_code": "onsale",
+        "event_time": "18:30:00",
+        "name": "Bayside - 25th Anniversary: The Errors Tour",
+        "url": "https://www.ticketmaster.ca/bayside-25th-anniversary-the-errors-tour-toronto-ontario-04-01-2025/event/1000622AD9DD2325"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9175M4f",
+            "name": "Bayside",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ917pnLf",
+            "name": "Sincere Engineer",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1AvZZbxGklQZxGI",
+        "event_date": "2025-04-02",
+        "event_status_code": "onsale",
+        "event_time": "18:30:00",
+        "name": "Bayside - 25th Anniversary: The Errors Tour",
+        "url": "https://www.ticketmaster.ca/bayside-25th-anniversary-the-errors-tour-toronto-ontario-04-02-2025/event/1000622ADA022328"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917uJ37",
+            "name": "Marc Scibilia",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1A8Zk7wGkdKTxsv",
+        "event_date": "2025-04-04",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Marc Scibilia: More To This World Tour",
+        "url": "https://www.ticketmaster.ca/marc-scibilia-more-to-this-world-toronto-ontario-04-04-2025/event/10006132D3FE2C41"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917QIRf",
+            "name": "Maddie Zahm",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          }
+        ],
+        "discovery_id": "1A8Zkk3Gkd2NsUZ",
+        "event_date": "2025-04-05",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Maddie Zahm - The Sad & Sexy Tour",
+        "url": "https://www.ticketmaster.ca/maddie-zahm-the-sad-sexy-tour-toronto-ontario-04-05-2025/event/10006192CF8F1D80"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917Q_w7",
+            "name": "Daniel Seavey",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ917ji4V",
+            "name": "sombr",
+            "genre_id": "KnvZfZ7vAvv",
+            "genre": "Alternative"
+          },
+          {
+            "discovery_id": "K8vZ917QDk0",
+            "name": "Kyle Kelly",
+            "genre_id": "KnvZfZ7vAv6",
+            "genre": "Country"
+          }
+        ],
+        "discovery_id": "16vZZbNQ4G7WoA8",
+        "event_date": "2025-04-10",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Daniel Seavey",
+        "url": "https://www.ticketmaster.ca/daniel-seavey-toronto-ontario-04-10-2025/event/1000623695F51150"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917Q57f",
+            "name": "Black Sherif",
+            "genre_id": "KnvZfZ7vAv1",
+            "genre": "Hip-Hop/Rap"
+          }
+        ],
+        "discovery_id": "1AvZZbbGktlYZIl",
+        "event_date": "2025-04-12",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Black Sherif: IRONBOY Tour",
+        "url": "https://www.ticketmaster.ca/black-sherif-ironboy-tour-toronto-ontario-04-12-2025/event/1000618A6BC00A2B"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9171oO0",
+            "name": "Gang of Four",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1AvZZbKGklqSA2w",
+        "event_date": "2025-04-23",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Gang of Four",
+        "url": "https://www.ticketmaster.ca/gang-of-four-toronto-ontario-04-23-2025/event/1000613ADDCC53F2"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917beWV",
+            "name": "The Linda Lindas",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "15vZZb4ZUogZ8",
+        "event_date": "2025-04-26",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "The Linda Lindas",
+        "url": "https://www.ticketmaster.ca/the-linda-lindas-toronto-ontario-04-26-2025/event/1000615036475010"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917QKhf",
+            "name": "Twin Tribes",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ9175CH0",
+            "name": "The Chameleons",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ917qUAf",
+            "name": "Vandal Moon",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          }
+        ],
+        "discovery_id": "16vZZb03AG7zOcU",
+        "event_date": "2025-04-28",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Twin Tribes & The Chameleons: Darker Skies Tour",
+        "url": "https://www.ticketmaster.ca/twin-tribes-the-chameleons-darker-skies-toronto-ontario-04-28-2025/event/1000624485E20B76"
+      }
+    ]
+  }
+}
