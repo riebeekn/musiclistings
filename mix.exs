@@ -26,7 +26,8 @@ defmodule MusicListings.MixProject do
       ],
       dialyzer: [
         plt_local_path: "_dialyzer",
-        plt_core_path: "_dialyzer"
+        plt_core_path: "_dialyzer",
+        plt_add_apps: [:mix]
       ]
     ]
   end
@@ -84,6 +85,7 @@ defmodule MusicListings.MixProject do
       # {:ecto_boot_migration, "~> 0.3.0"},
       {:ecto_boot_migration,
        git: "https://github.com/mwhitworth/ecto_boot_migration", branch: "elixir-1.17-fix"},
+      {:nimble_csv, "~> 1.2"},
       # build / dev / test related deps
       {:swoosh_gallery, "~> 0.2.0"},
       {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
