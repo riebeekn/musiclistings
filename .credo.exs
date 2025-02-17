@@ -178,7 +178,6 @@
           {Credo.Check.Warning.MixEnv, []},
           {Credo.Check.Consistency.UnusedVariableNames, []},
           {Credo.Check.Design.DuplicatedCode, []},
-          {Credo.Check.Readability.AliasAs, []},
           {Credo.Check.Readability.NestedFunctionCalls, []},
           {Credo.Check.Refactor.AppendSingleItem, []},
           {Credo.Check.Refactor.FilterReject, []},

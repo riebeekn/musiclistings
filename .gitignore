@@ -51,3 +51,4 @@ notes.txt
 *.tfstate.*
 *.tfvars
 *.txt
+*.csv
