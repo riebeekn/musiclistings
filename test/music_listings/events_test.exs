@@ -10,6 +10,7 @@ defmodule MusicListings.EventsTest do
   alias MusicListings.VenuesFixtures
   alias MusicListingsSchema.Event
   alias MusicListingsSchema.SubmittedEvent
+  alias MusicListingsUtilities.DateHelpers
 
   describe "list_events/1" do
     setup do
@@ -20,10 +21,16 @@ defmodule MusicListings.EventsTest do
       EventsFixtures.event_fixture(venue_2, date: ~D[2024-08-01], title: "ev2")
       EventsFixtures.event_fixture(venue_2, date: ~D[2024-08-02], title: "ev3")
 
+      EventsFixtures.event_fixture(venue_2,
+        date: ~D[2024-08-02],
+        title: "ev4",
+        deleted_at: DateTime.utc_now()
+      )
+
       %{venue_1_id: venue_1.id, venue_2_id: venue_2.id}
     end
 
-    test "lists events grouped by date, ignoring events in the past", %{
+    test "lists events grouped by date, ignoring events in the past and deleted events", %{
       venue_1_id: venue_1_id,
       venue_2_id: venue_2_id
     } do
@@ -132,6 +139,7 @@ defmodule MusicListings.EventsTest do
       assert {:ok, deleted_event} = Events.delete_event(%User{role: :admin}, event.id)
 
       assert event.id == deleted_event.id
+      assert deleted_event.deleted_at == DateHelpers.now()
     end
   end
 end

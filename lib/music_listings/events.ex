@@ -35,6 +35,7 @@ defmodule MusicListings.Events do
     pagination_result =
       Event
       |> where([event], event.date >= ^today)
+      |> where([event], is_nil(event.deleted_at))
       |> maybe_filter_by_venues(venue_ids)
       |> order_by(^order_by_fields)
       |> preload(:venue)
@@ -91,7 +92,8 @@ defmodule MusicListings.Events do
   def delete_event(%User{role: :admin}, event_id) do
     Event
     |> Repo.get!(event_id)
-    |> Repo.delete()
+    |> Ecto.Changeset.change(%{deleted_at: DateHelpers.now()})
+    |> Repo.update()
   end
 
   def delete_event(_user, _event_id) do

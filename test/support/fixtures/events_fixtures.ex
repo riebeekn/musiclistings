@@ -40,7 +40,8 @@ defmodule MusicListings.EventsFixtures do
       :price_hi,
       :age_restriction,
       :ticket_url,
-      :details_url
+      :details_url,
+      :deleted_at
     ])
   end
 end
