@@ -37,7 +37,7 @@ defmodule MusicListings.Parsing.ParseHelpers do
 
   @spec replace_punctuation_and_spaces(String.t()) :: String.t()
   def replace_punctuation_and_spaces(string) do
-    space_and_punct_regex = ~r/[\p{P}\p{Z}]+/u
+    space_and_punct_regex = ~r/[\p{P}\p{Z}|]+/u
 
     Regex.replace(space_and_punct_regex, string, "_")
   end

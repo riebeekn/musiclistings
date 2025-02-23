@@ -11,11 +11,10 @@ defmodule MusicListings.CrawlerTest do
   # These are pretty naive tests, might want to enhance them down the road
   describe "crawl/1" do
     test "expected number of events are inserted" do
-      danforth = VenuesFixtures.venue_fixture()
+      venue_1 = VenuesFixtures.venue_fixture()
 
-      velvet_underground =
+      venue_2 =
         VenuesFixtures.venue_fixture(%{
-          name: "Velvet Underground",
           parser_module_name: "VelvetUndergroundParser"
         })
 
@@ -25,7 +24,7 @@ defmodule MusicListings.CrawlerTest do
                 updated: 0,
                 duplicate: 0,
                 errors: 0
-              }} = Crawler.crawl([danforth, velvet_underground])
+              }} = Crawler.crawl([venue_1, venue_2])
 
       assert 127 = Repo.aggregate(Event, :count)
     end
