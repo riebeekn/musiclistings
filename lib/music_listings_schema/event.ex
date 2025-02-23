@@ -37,6 +37,7 @@ defmodule MusicListingsSchema.Event do
 
     field :ticket_url, :string
     field :details_url, :string
+    field :deleted_at, :utc_datetime
 
     belongs_to :venue, MusicListingsSchema.Venue
 
