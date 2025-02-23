@@ -12,7 +12,7 @@ defmodule MusicListings.VenuesFixtures do
   defp valid_venue_attributes(attrs) do
     params =
       Enum.into(attrs, %{
-        name: "The Danforth Music Hall",
+        name: Faker.Lorem.sentence(),
         pull_events?: true,
         parser_module_name: "DanforthMusicHallParser",
         street: Faker.Address.street_address(),

@@ -6,7 +6,7 @@ defmodule MusicListings.Parsing.ParserHelpersTest do
   describe "build_id_from_title_and_date/2" do
     test "replaces punctuation and spaces" do
       assert "some_event_2024_12_14" ==
-               ParseHelpers.build_id_from_title_and_date("some-*&'#  event", ~D[2024-12-14])
+               ParseHelpers.build_id_from_title_and_date("some|-*&'#  event", ~D[2024-12-14])
     end
 
     test "replaces cancelled" do
