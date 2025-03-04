@@ -1,27 +1,17 @@
-# Generate a random secret key base
-resource "random_password" "secret_key_base" {
-  length  = 64
-  special = true
-  numeric = true
-  upper   = true
-  lower   = true
-}
-
-resource "render_web_service" "this" {
-  name   = "${local.name}-web-service"
-  plan   = var.render_web_service_plan
+resource "render_cron_job" "this" {
+  name   = "${local.name}-crawler"
+  plan   = var.render_cron_service_plan
   region = var.render_region
   runtime_source = {
     docker = {
-      branch   = var.initial_branch_to_deploy
-      repo_url = "https://github.com/${var.github_repository}"
+      branch      = var.branch_to_deploy_for_cron_service
+      repo_url    = "https://github.com/${var.github_repository}"
       auto_deploy = false
     }
   }
-  health_check_path = "/health_check"
-  custom_domains = [
-    { name : var.app_domain }
-  ]
+  schedule      = var.render_cron_service_schedule
+  start_command = "bin/music_listings start"
+
   env_vars = {
     "ADMIN_EMAIL" = {
       value = var.app_admin_email
@@ -44,8 +34,8 @@ resource "render_web_service" "this" {
     "DATABASE_URL" = {
       value = render_postgres.this.connection_info.internal_connection_string
     },
-    "PHX_HOST" = {
-      value = var.app_domain
+    "CRAWL_AND_EXIT" = {
+      value = "true"
     }
   }
 }

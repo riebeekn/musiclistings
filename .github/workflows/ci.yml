@@ -13,6 +13,7 @@ env:
   MIX_ENV: test
   ADMIN_EMAIL: "some_email@example.com"
   PULL_DATA_FROM_WWW: false
+  CRAWL_AND_EXIT: false
 
 permissions:
   # This is necessary for Github Actions OIDC
@@ -281,27 +282,40 @@ jobs:
           HOSTING_PLATFORM: "fly"
 
   # Deploy to Render
-  setup_render_deploy_matrix:
+  setup_render_ws_deploy_matrix:
     runs-on: ubuntu-latest
-    name: "Setup Render Matrix"
+    name: "Setup Render WS Matrix"
     needs: [audit, test]
     if: vars.DEPLOY_TO_RENDER == 'true'
     outputs:
-      matrix: ${{ steps.setup_render_deploy_matrix.outputs.matrix_output }}
+      matrix: ${{ steps.setup_render_ws_deploy_matrix.outputs.matrix_output }}
     steps:
-      - id: setup_render_deploy_matrix
+      - id: setup_render_ws_deploy_matrix
         uses: cschadewitz/dynamic-matrix-input@v1.0.0
         with:
           matrix_input: ${{ vars.RENDER_ENVIRONMENTS }}
 
-  deploy_to_render:
+  setup_render_cron_deploy_matrix:
+    runs-on: ubuntu-latest
+    name: "Setup Render CRON Matrix"
+    needs: [audit, test]
+    if: vars.DEPLOY_TO_RENDER == 'true'
+    outputs:
+      matrix: ${{ steps.setup_render_cron_deploy_matrix.outputs.matrix_output }}
+    steps:
+      - id: setup_render_cron_deploy_matrix
+        uses: cschadewitz/dynamic-matrix-input@v1.0.0
+        with:
+          matrix_input: ${{ vars.RENDER_CRON_ENVIRONMENTS }}
+
+  deploy_webservice_to_render:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        environment: ${{ fromJson(needs.setup_render_deploy_matrix.outputs.matrix) }}
+        environment: ${{ fromJson(needs.setup_render_ws_deploy_matrix.outputs.matrix) }}
     needs:
-      - setup_render_deploy_matrix
-    name: "Deploy to Render"
+      - setup_render_ws_deploy_matrix
+    name: "Deploy WS to Render"
     if: vars.DEPLOY_TO_RENDER == 'true'
 
     steps:
@@ -336,6 +350,42 @@ jobs:
           serviceId: ${{ env.SRV_ID }}
           apiKey: ${{ secrets.RENDER_API_KEY }}
           deployHookURL: ${{ secrets[env.SECRET_NAME] }}
+
+  deploy_cron_service_to_render:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: ${{ fromJson(needs.setup_render_cron_deploy_matrix.outputs.matrix) }}
+    needs:
+      - setup_render_cron_deploy_matrix
+    name: "Deploy CRON to Render"
+    if: vars.DEPLOY_TO_RENDER == 'true'
+
+    steps:
+      - name: Extract service id
+        id: extract
+        run: |
+          # Replace colon with a space, split into parts, and store as JSON
+          PARTS=$(echo ${{matrix.environment}} | sed 's/:/ /' | jq -R -s 'split(" ")')
+          ENV_NAME=$(echo $PARTS | jq -r '.[0]')
+          SRV_ID=$(echo $PARTS | jq -r '.[1]')
+
+          # Write values to $GITHUB_ENV safely
+          echo "ENV_NAME=$ENV_NAME" >> $GITHUB_ENV
+          echo "SRV_ID=$SRV_ID" >> $GITHUB_ENV
+
+      - name: Skip non-main branch for prod
+        if: env.ENV_NAME == 'prod' && github.ref_name != 'main'
+        run: echo "Skipping prod deployment because the branch is not main."
+        continue-on-error: true
+
+      - name: Deploy
+        uses: johnbeynon/render-deploy-action@v0.0.9
+        if: env.ENV_NAME != 'prod' || github.ref_name == 'main'
+        with:
+          service-id: ${{ env.SRV_ID }}
+          api-key: ${{ secrets.RENDER_API_KEY }}
+          wait-for-success: true
 
   # AWS specific steps
   build_and_push_to_ecr:

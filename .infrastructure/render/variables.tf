@@ -60,6 +60,11 @@ variable "initial_branch_to_deploy" {
   type        = string
 }
 
+variable "branch_to_deploy_for_cron_service" {
+  description = "The initial branch to deploy"
+  type        = string
+}
+
 variable "render_api_key" {
   description = "Render API Key"
   type        = string
@@ -84,6 +89,16 @@ variable "render_postgres_plan" {
 
 variable "render_web_service_plan" {
   description = "The Render web service plan"
+  type        = string
+}
+
+variable "render_cron_service_plan" {
+  description = "The Render cron service plan"
+  type        = string
+}
+
+variable "render_cron_service_schedule" {
+  description = "The cron schedule"
   type        = string
 }
 
