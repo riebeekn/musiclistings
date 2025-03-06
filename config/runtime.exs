@@ -38,6 +38,8 @@ pull_data_from_www? =
 
 config :music_listings, :pull_data_from_www?, String.to_existing_atom(pull_data_from_www?)
 
+# used in application.ex to determine if we should just run the crawler
+# and then shut down the server
 crawl_and_exit? = System.get_env("CRAWL_AND_EXIT", "false")
 
 config :music_listings, :crawl_and_exit?, String.to_existing_atom(crawl_and_exit?)
