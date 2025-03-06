@@ -38,7 +38,7 @@ variables.
     - `ADMIN_EMAIL` - the email address the application will send communications to.  The application sends an email summary of the nightly event population runs and also when an event is submitted via the UI.  In development these emails will not be sent but instead be available at [http://localhost:4000/dev/mailbox](http://localhost:4000/dev/mailbox).  See [http://localhost:4000/dev/gallery](http://localhost:4000/dev/gallery) for a preview of the emails.
     - `PULL_DATA_FROM_WWW` - if true will scrape events from the web, when false will use the local files located in `/test/data`.
 - Run the server (`iex -S mix phx.server`).  Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-- Events are populated via an Oban Job at 7am UTC.
+- Events are populated via an Oban Job at 7am UTC.  **NOTE:** on production this has changed to a Render Cron job, see details in the [Crawling and Event population](#crawling-and-event-population) section.
 - To manually populate the events, run the worker directly from `iex`: `MusicListings.Workers.DataRetrievalWorker.perform(%{})`.
 - To run the tests: `mix test`.
 
@@ -69,9 +69,15 @@ The UI is a standard Phoenix LiveView application.
 Venue filtering persistence is accomplished via local storage, see the `VenueFilter` hook in `assets/js/app.js` which gets called from `lib/music_listings_web/live/event_live/index.ex`.
 
 ## Crawling and Event population
+<s>
 Events are populated via a nightly [Oban](https://github.com/oban-bg/oban) job.
 
 Event population is initiated via the `lib/music_listings/workers/data_retrieval_worker.ex` Oban job.  The Oban job in turn hands off the population of events to `lib/music_listings/crawler.ex`.  This module performs retrieval, parsing and storage of events.
+</s>
+
+Events were previously populated via an Oban job but are now handled via a [Render Cron](https://render.com/docs/cronjobs) job.  See `lib/music_listings/application.ex` for implementation details.  The `crawl_and_exit?` section of `application.ex` starts up the server, runs the crawler and then shuts down the server.
+
+The Oban implementation is still in place but the jobs are not currently being run.  The reason for this change is the crawling takes up a fair bit of memory meaning a larger server instance is required just to run a once nightly job without memory errors.  Moving to a Render Cron job means we can use a cheaper server instance for the main application.
 
 Once event population has concluded an email is sent to the configured `ADMIN_EMAIL` with details of the crawl.  Results are also captured in the `crawl_summaries`, `venue_crawl_summaries` and `crawl_errors` database tables.
 
