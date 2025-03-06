@@ -35,8 +35,8 @@ current workspace.
 ./tf_apply.sh
 ```
 
-After apply is run, some outputs will be displayed.  Included in these is an item
-to add to the GitHub repository action variables.  It is prefixed with
+After apply is run, some outputs will be displayed.  Included in these are two items
+to add to the GitHub repository action variables.  They are prefixed with
 `github_actions_variable_setting-`.  Likewise there is an item to add to the GitHub repository action secrets.  It is prefixed with `github_actions_secret_setting-`.
 
 The following outputs are expected:
@@ -48,12 +48,17 @@ db_connection_info = "<the connection information for the database>"
 github_actions_secret_setting-ENV_DEPLOY_HOOK = "include a deploy hook secret for the current environment, name the secret <ENV>_DEPLOY_HOOK and set it to the deploy hook url in the service settings See https://dashboard.render.com/web/srv-cu5ut6l6l47c73bt7vog/settings, the hook is not available programmatically thus why this has to be done manually"
 
 github_actions_variable_setting-RENDER_ENVIRONMENTS = "include the current environment which is: <something like staging:src-123343>"
+
+github_actions_variable_setting-RENDER_CRON_ENVIRONMENTS = "include the current environment which is: <something like staging:crn-123343>"
 ```
 
 As per the above a `<ENV>_DEPLOY_HOOK` secret needs to be set in GitHub where `<ENV>` is replaced by the current environment (for example `STAGING_DEPLOY_HOOK`, `PROD_DEPLOY_HOOK` etc.).  The value of this needs to be retrieved manually from the Render Dashboard for the created web service as the value is not available from Terraform.
 
 Likewise each environment should be added to a RENDER_ENVIRONMENTS GitHub actions variable and they are comma separated.
 So for example the value of this variable could be `staging:src-123343,qa:src-123344,production:src-123345`.
+
+Do the same and add each environment to a RENDER_CRON_ENVIRONMENTS GitHub actions variable, again they are comma separated.
+So for example the value of this variable could be `staging:crn-123343,qa:crn-123344,production:crn-123345`.
 
 Add the GitHub repository action variable and the secret at the following URL:
 https://the_github_repo_url/settings/variables/actions.
