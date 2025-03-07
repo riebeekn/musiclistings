@@ -24,8 +24,6 @@ defmodule MusicListings.Application do
       DataRetrievalWorker.perform(%{})
 
       System.stop(0)
-
-      {:ok, pid}
     else
       {:ok, _migrated} = EctoBootMigration.migrate(:music_listings)
 
