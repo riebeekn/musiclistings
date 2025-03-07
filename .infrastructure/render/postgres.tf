@@ -4,8 +4,10 @@ data "http" "myip" {
 }
 
 resource "render_postgres" "this" {
-  name          = "${local.name}-database"
-  plan          = var.render_postgres_plan
+  name = "${local.name}-database"
+  plan = var.render_postgres_plan
+  # can't select disk size for free plan
+  disk_size_gb  = var.render_postgres_plan == "free" ? null : var.render_postgres_disk_size
   region        = var.render_region
   version       = "15"
   database_name = replace(local.name, "-", "_")

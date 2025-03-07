@@ -15,6 +15,7 @@ branch_to_deploy_for_cron_service = "<the branch to deploy for the cron service,
 render_api_key                    = "<the render api key>"
 render_owner_id                   = "<the render owner id>"
 render_postgres_plan              = "<the render postgres plan>"
+render_postgres_disk_size         = "<the render postgres disk size>"
 render_region                     = "<the render region>"
 render_web_service_plan           = "<the render web service plan>"
 render_cron_service_plan          = "<the render cron service plan>"

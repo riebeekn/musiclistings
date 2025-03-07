@@ -87,6 +87,11 @@ variable "render_postgres_plan" {
   type        = string
 }
 
+variable "render_postgres_disk_size" {
+  description = "The Render postgres disk size in GB"
+  type        = number
+}
+
 variable "render_web_service_plan" {
   description = "The Render web service plan"
   type        = string
