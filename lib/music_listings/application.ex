@@ -20,7 +20,7 @@ defmodule MusicListings.Application do
       # See https://hexdocs.pm/elixir/Supervisor.html
       # for other strategies and supported options
       opts = [strategy: :one_for_one, name: MusicListings.Supervisor]
-      {:ok, pid} = Supervisor.start_link(children, opts)
+      Supervisor.start_link(children, opts)
       DataRetrievalWorker.perform(%{})
 
       System.stop(0)
