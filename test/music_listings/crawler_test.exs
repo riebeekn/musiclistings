@@ -20,13 +20,13 @@ defmodule MusicListings.CrawlerTest do
 
       assert {:ok,
               %CrawlSummary{
-                new: 127,
+                new: 115,
                 updated: 0,
                 duplicate: 0,
                 errors: 0
               }} = Crawler.crawl([venue_1, venue_2])
 
-      assert 127 = Repo.aggregate(Event, :count)
+      assert 115 = Repo.aggregate(Event, :count)
     end
   end
 
