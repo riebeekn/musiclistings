@@ -44,13 +44,6 @@ crawl_and_exit? = System.get_env("CRAWL_AND_EXIT", "false")
 
 config :music_listings, :crawl_and_exit?, String.to_existing_atom(crawl_and_exit?)
 
-# default to false as instead of Oban we are using Render Cron on production
-run_background_jobs? = System.get_env("RUN_BACKGROUND_JOBS", "false") |> String.to_atom()
-
-if run_background_jobs? == false do
-  config :music_listings, Oban, queues: false
-end
-
 if config_env() == :prod do
   # AWS version
   if credentials = System.get_env("DATABASE_CREDENTIALS") do

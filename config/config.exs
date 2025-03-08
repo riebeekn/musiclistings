@@ -69,8 +69,11 @@ config :music_listings, Oban,
   plugins: [
     {Oban.Plugins.Cron,
      crontab: [
-       # run at 7am UTC which is 3am EST
-       {"0 7 * * *", MusicListings.Workers.DataRetrievalWorker, max_attempts: 1}
+       # run at 6am UTC which is 3am EST
+       # ... switched to no longer run via Oban but via Render Cron Job
+       # {"0 6 * * *", MusicListings.Workers.DataRetrievalWorker, max_attempts: 1}
+       # run at 7am UTC
+       {"0 7 * * *", MusicListings.Workers.PurgeEventsWorker, max_attempts: 1}
      ]}
   ]
 
