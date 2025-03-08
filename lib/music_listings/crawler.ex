@@ -62,12 +62,31 @@ defmodule MusicListings.Crawler do
       |> DataSource.retrieve_events(parser.source_url(), pull_data_from_www?)
       |> maybe_insert_no_events_error(venue, crawl_summary)
       |> EventParser.parse_events(parser, venue, crawl_summary)
+      |> Enum.reject(&(no_date?(&1) || event_in_the_past?(&1)))
       |> EventStorage.save_events(crawl_summary)
       |> List.flatten()
       |> insert_venue_summary(venue, crawl_summary)
     end)
     |> CrawlStats.new()
     |> update_crawl_summary_with_stats(crawl_summary)
+  end
+
+  defp no_date?(payload) do
+    if payload.status == :ok do
+      payload.parsed_event.date == nil
+    else
+      false
+    end
+  end
+
+  defp event_in_the_past?(payload) do
+    if payload.status == :ok do
+      two_days_ago = DateHelpers.now() |> DateHelpers.to_eastern_date() |> Date.add(-2)
+
+      Date.compare(payload.parsed_event.date, two_days_ago) == :lt
+    else
+      false
+    end
   end
 
   defp maybe_insert_no_events_error(payloads, venue, crawl_summary) do
