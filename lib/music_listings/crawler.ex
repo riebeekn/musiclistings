@@ -73,7 +73,11 @@ defmodule MusicListings.Crawler do
 
   defp no_date?(payload) do
     if payload.status == :ok do
-      payload.parsed_event.date == nil
+      if is_list(payload.parsed_event) do
+        Enum.any?(payload.parsed_event, &is_nil/1)
+      else
+        is_nil(payload.parsed_event.date)
+      end
     else
       false
     end
@@ -83,7 +87,11 @@ defmodule MusicListings.Crawler do
     if payload.status == :ok do
       two_days_ago = DateHelpers.now() |> DateHelpers.to_eastern_date() |> Date.add(-2)
 
-      Date.compare(payload.parsed_event.date, two_days_ago) == :lt
+      if is_list(payload.parsed_event) do
+        Enum.any?(payload.parsed_event, &(Date.compare(&1.date, two_days_ago) == :lt))
+      else
+        Date.compare(payload.parsed_event.date, two_days_ago) == :lt
+      end
     else
       false
     end
