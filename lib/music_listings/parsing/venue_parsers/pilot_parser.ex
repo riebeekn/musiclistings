@@ -34,7 +34,11 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
 
   defp empty?(result) do
     content = Selectors.text(result) |> String.trim()
-    content == ""
+    content == "" || has_no_title?(result)
+  end
+
+  defp has_no_title?(result) do
+    Selectors.text(result, css(".fr-tag strong, .fr-tag b")) == nil
   end
 
   @impl true
@@ -59,7 +63,9 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
     title =
       event
       |> Selectors.text(css(".fr-tag strong, .fr-tag b"))
+      |> String.replace("\u00A0", " ")
       |> String.replace(".", "")
+      |> String.trim_leading("- ")
 
     if title == "" || title == "-" do
       event
