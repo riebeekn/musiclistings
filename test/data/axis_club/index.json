@@ -1,0 +1,263 @@
+{
+  "data": {
+    "getEvents": [
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917_gp0",
+            "name": "Corook",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ917qOb0",
+            "name": "Kel Cripe",
+            "genre_id": "KnvZfZ7vAe1",
+            "genre": "Comedy"
+          }
+        ],
+        "discovery_id": "1AvZZbpGkUmZNfo",
+        "event_date": "2025-03-10",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "corook: Committed to a Bit Tour",
+        "url": "https://www.ticketmaster.ca/corook-committed-to-a-bit-tour-toronto-ontario-03-10-2025/event/1000616DAE023511"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917j820",
+            "name": "Jessica Baio",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          },
+          {
+            "discovery_id": "K8vZ917q8NV",
+            "name": "Ni/Co",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          }
+        ],
+        "discovery_id": "1AvZZbpGkzx49VB",
+        "event_date": "2025-03-11",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Jessica Baio",
+        "url": "https://www.ticketmaster.ca/jessica-baio-toronto-ontario-03-11-2025/event/1000616E22557D3A"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917bZzV",
+            "name": "Hazlett",
+            "genre_id": "KnvZfZ7vAvv",
+            "genre": "Alternative"
+          },
+          {
+            "discovery_id": "K8vZ917qUtf",
+            "name": "Abby Powledge",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          }
+        ],
+        "discovery_id": "1A8ZkAPGkeRQvlf",
+        "event_date": "2025-03-13",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Hazlett",
+        "url": "https://www.ticketmaster.ca/hazlett-toronto-ontario-03-13-2025/event/10006165AF681AD4"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917jyBf",
+            "name": "Waylon Wyatt",
+            "genre_id": "KnvZfZ7vAv6",
+            "genre": "Country"
+          },
+          {
+            "discovery_id": "K8vZ917j4Z0",
+            "name": "Clover County",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          }
+        ],
+        "discovery_id": "1AvZZbpGkmS6vG-",
+        "event_date": "2025-03-14",
+        "event_status_code": "onsale",
+        "event_time": "18:00:00",
+        "name": "Waylon Wyatt",
+        "url": "https://www.ticketmaster.ca/waylon-wyatt-toronto-ontario-03-14-2025/event/1000616BB31C1321"
+      },
+      {
+        "artists": [],
+        "discovery_id": "1AtZkFVGkdPvdH1",
+        "event_date": "2025-03-15",
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "name": "Broadway Rave",
+        "url": "https://www.ticketweb.ca/event/broadway-rave-the-axis-club-tickets/14204183?REFERRAL_ID=tmfeed"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917hN57",
+            "name": "Emei",
+            "genre_id": "KnvZfZ7vAvv",
+            "genre": "Alternative"
+          },
+          {
+            "discovery_id": "K8vZ917jUef",
+            "name": "Haiden Henderson",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          },
+          {
+            "discovery_id": "K8vZ917hb0f",
+            "name": "Ashley Mehta",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1A8Zk7VGkdikEYe",
+        "event_date": "2025-03-18",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Emei",
+        "url": "https://www.ticketmaster.ca/emei-toronto-ontario-03-18-2025/event/10006134EC1A7C02"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917Qe9V",
+            "name": "Aysanabee",
+            "genre_id": "KnvZfZ7vAva",
+            "genre": "Folk"
+          },
+          {
+            "discovery_id": "K8vZ917QOz7",
+            "name": "Sebastian Gaskin",
+            "genre_id": "KnvZfZ7vAee",
+            "genre": "R&B"
+          },
+          {
+            "discovery_id": "K8vZ917qMd7",
+            "name": "Natasha Fisher",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          }
+        ],
+        "discovery_id": "1A8ZkAJGkd6SfFk",
+        "event_date": "2025-03-21",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Aysanabee",
+        "url": "https://www.ticketmaster.ca/aysanabee-toronto-ontario-03-21-2025/event/10006166C7CD4206"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9179YTf",
+            "name": "Neal Francis",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1A8Zkk3Gkd7j-II",
+        "event_date": "2025-03-22",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Neal Francis - Return to Zero Tour",
+        "url": "https://www.ticketmaster.ca/neal-francis-return-to-zero-tour-toronto-ontario-03-22-2025/event/10006192C4721A28"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9174zt7",
+            "name": "Confidence Man",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ917hIGf",
+            "name": "veggi",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          }
+        ],
+        "discovery_id": "1k7Zv-f_GAu2-wM",
+        "event_date": "2025-03-26",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Confidence Man",
+        "url": "https://www.ticketmaster.ca/confidence-man-toronto-ontario-03-26-2025/event/100061519D3E1CB7"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917phs0",
+            "name": "The War and Treaty",
+            "genre_id": "KnvZfZ7vAva",
+            "genre": "Folk"
+          },
+          {
+            "discovery_id": "K8vZ917_Wn0",
+            "name": "Tiera Kennedy",
+            "genre_id": "KnvZfZ7vAv6",
+            "genre": "Country"
+          }
+        ],
+        "discovery_id": "1AvZZb9GkwVjvhR",
+        "event_date": "2025-04-01",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "The War and Treaty",
+        "url": "https://www.ticketmaster.ca/the-war-and-treaty-toronto-ontario-04-01-2025/event/1000617CB47016EF"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9178Z_7",
+            "name": "Rebecca Black",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ9173I9f",
+            "name": "Blue Hawaii",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          }
+        ],
+        "discovery_id": "168Zkk60yZACv8eA",
+        "event_date": "2025-04-02",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Rebecca Black Presents: The SALVATION Tour",
+        "url": "https://www.ticketmaster.ca/rebecca-black-presents-the-salvation-tour-toronto-ontario-04-02-2025/event/10006187939D0F14"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9179el0",
+            "name": "The Free Label",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          },
+          {
+            "discovery_id": "K8vZ917QjK0",
+            "name": "SHEBAD",
+            "genre_id": "KnvZfZ7vAee",
+            "genre": "R&B"
+          }
+        ],
+        "discovery_id": "1A8Zkk8GkdpF-Vs",
+        "event_date": "2025-04-04",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "The Free Label",
+        "url": "https://www.ticketmaster.ca/the-free-label-toronto-ontario-04-04-2025/event/10006190D6221D31"
+      }
+    ]
+  }
+}

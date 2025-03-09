@@ -1,0 +1,22 @@
+{
+  "artists": [
+    {
+      "discovery_id": "K8vZ9179el0",
+      "name": "The Free Label",
+      "genre_id": "KnvZfZ7vAev",
+      "genre": "Pop"
+    },
+    {
+      "discovery_id": "K8vZ917QjK0",
+      "name": "SHEBAD",
+      "genre_id": "KnvZfZ7vAee",
+      "genre": "R&B"
+    }
+  ],
+  "discovery_id": "1A8Zkk8GkdpF-Vs",
+  "event_date": "2025-04-04",
+  "event_status_code": "onsale",
+  "event_time": "19:00:00",
+  "name": "The Free Label",
+  "url": "https://www.ticketmaster.ca/the-free-label-toronto-ontario-04-04-2025/event/10006190D6221D31"
+}

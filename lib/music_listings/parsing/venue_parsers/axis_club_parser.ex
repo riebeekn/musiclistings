@@ -4,44 +4,28 @@ defmodule MusicListings.Parsing.VenueParsers.AxisClubParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
-  import Meeseeks.CSS
-
-  alias MusicListings.HttpClient
-  alias MusicListings.Parsing.ParseHelpers
-  alias MusicListings.Parsing.Performers
-  alias MusicListings.Parsing.Price
-  alias MusicListings.Parsing.Selectors
+  alias MusicListings.Parsing.VenueParsers.BaseParsers.LiveNationParser
 
   @impl true
-  def source_url, do: "https://theaxisclub.com/all-events/"
+  defdelegate source_url, to: LiveNationParser
 
+  @live_nation_venue_id "KovZpZAFlF1A"
   @impl true
   def retrieve_events_fun do
-    fn url -> HttpClient.get(url) end
+    LiveNationParser.retrieve_events_fun(@live_nation_venue_id)
   end
 
   @impl true
-  def example_data_file_location, do: "test/data/axis_club/index.html"
+  def example_data_file_location, do: "test/data/axis_club/index.json"
 
   @impl true
-  def events(body) do
-    body
-    |> Selectors.match_one(css("script[type=\"application/ld+json\"]"))
-    |> Selectors.data()
-    |> Jason.decode!()
-  end
+  defdelegate events(body), to: LiveNationParser
 
   @impl true
-  def next_page_url(_body, _current_url) do
-    nil
-  end
+  defdelegate next_page_url(body, current_url), to: LiveNationParser
 
   @impl true
-  def event_id(event) do
-    date = event_date(event)
-
-    ParseHelpers.build_id_from_venue_and_date("axis_club", date)
-  end
+  defdelegate event_id(event), to: LiveNationParser
 
   @impl true
   def ignored_event_id(event) do
@@ -49,51 +33,29 @@ defmodule MusicListings.Parsing.VenueParsers.AxisClubParser do
   end
 
   @impl true
-  def event_title(event) do
-    event["name"]
-    |> ParseHelpers.fix_encoding()
-  end
+  defdelegate event_title(event), to: LiveNationParser
 
   @impl true
-  def performers(event) do
-    [event["name"]]
-    |> Performers.new()
-  end
+  defdelegate performers(event), to: LiveNationParser
 
   @impl true
-  def event_date(event) do
-    event["startDate"]
-    |> NaiveDateTime.from_iso8601!()
-    |> NaiveDateTime.to_date()
-  end
+  defdelegate event_date(event), to: LiveNationParser
 
   @impl true
-  def additional_dates(_event) do
-    []
-  end
+  defdelegate additional_dates(event), to: LiveNationParser
 
   @impl true
-  def event_time(_event) do
-    nil
-  end
+  defdelegate event_time(event), to: LiveNationParser
 
   @impl true
-  def price(_event) do
-    Price.unknown()
-  end
+  defdelegate price(event), to: LiveNationParser
 
   @impl true
-  def age_restriction(_event) do
-    :unknown
-  end
+  defdelegate age_restriction(event), to: LiveNationParser
 
   @impl true
-  def ticket_url(_event) do
-    nil
-  end
+  defdelegate ticket_url(event), to: LiveNationParser
 
   @impl true
-  def details_url(event) do
-    event["url"]
-  end
+  defdelegate details_url(event), to: LiveNationParser
 end

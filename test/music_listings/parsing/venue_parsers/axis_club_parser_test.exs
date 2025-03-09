@@ -6,24 +6,24 @@ defmodule MusicListings.Parsing.VenueParsers.AxisClubParserTest do
   alias MusicListings.Parsing.VenueParsers.AxisClubParser
 
   setup do
-    index_file_path = Path.expand("#{File.cwd!()}/test/data/axis_club/index.html")
+    index_file_path = Path.expand("#{File.cwd!()}/test/data/axis_club/index.json")
 
     single_event_file_path =
-      Path.expand("#{File.cwd!()}/test/data/axis_club/single_event.html")
+      Path.expand("#{File.cwd!()}/test/data/axis_club/single_event.json")
 
     index_html = File.read!(index_file_path)
 
     event =
       single_event_file_path
       |> File.read!()
-      |> AxisClubParser.events()
+      |> Jason.decode!()
 
     %{index_html: index_html, event: event}
   end
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://theaxisclub.com/all-events/" == AxisClubParser.source_url()
+      assert "https://api.livenation.com/graphql" == AxisClubParser.source_url()
     end
   end
 
@@ -31,7 +31,7 @@ defmodule MusicListings.Parsing.VenueParsers.AxisClubParserTest do
     test "returns expected events", %{index_html: index_html} do
       events = AxisClubParser.events(index_html)
 
-      assert 35 = Enum.count(events)
+      assert 12 = Enum.count(events)
     end
   end
 
@@ -43,34 +43,34 @@ defmodule MusicListings.Parsing.VenueParsers.AxisClubParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "axis_club_2024_08_08" == AxisClubParser.event_id(event)
+      assert "1A8Zkk8GkdpF-Vs" == AxisClubParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "axis_club_2024_08_08" == AxisClubParser.ignored_event_id(event)
+      assert "1A8Zkk8GkdpF-Vs" == AxisClubParser.ignored_event_id(event)
     end
   end
 
   describe "event_title/1" do
     test "returns event title", %{event: event} do
-      assert "BANNERS" == AxisClubParser.event_title(event)
+      assert "The Free Label" == AxisClubParser.event_title(event)
     end
   end
 
   describe "performers/1" do
     test "returns the event performers", %{event: event} do
       assert %Performers{
-               headliner: "BANNERS",
-               openers: []
+               headliner: "The Free Label",
+               openers: ["SHEBAD"]
              } == AxisClubParser.performers(event)
     end
   end
 
   describe "event_date/1" do
     test "returns the event date", %{event: event} do
-      assert ~D[2024-08-08] == AxisClubParser.event_date(event)
+      assert ~D[2025-04-04] == AxisClubParser.event_date(event)
     end
   end
 
@@ -82,7 +82,7 @@ defmodule MusicListings.Parsing.VenueParsers.AxisClubParserTest do
 
   describe "event_time/1" do
     test "returns the event start time", %{event: event} do
-      assert nil == AxisClubParser.event_time(event)
+      assert ~T[19:00:00] == AxisClubParser.event_time(event)
     end
   end
 
@@ -101,13 +101,14 @@ defmodule MusicListings.Parsing.VenueParsers.AxisClubParserTest do
 
   describe "ticket_url/1" do
     test "returns the event ticket url", %{event: event} do
-      assert nil == AxisClubParser.ticket_url(event)
+      assert "https://www.ticketmaster.ca/the-free-label-toronto-ontario-04-04-2025/event/10006190D6221D31" ==
+               AxisClubParser.ticket_url(event)
     end
   end
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert "https://theaxisclub.com/event/banners/" == AxisClubParser.details_url(event)
+      assert nil == AxisClubParser.details_url(event)
     end
   end
 end
