@@ -1,0 +1,264 @@
+{
+  "data": {
+    "getEvents": [
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917Kysf",
+            "name": "Nathaniel Rateliff & The Night Sweats",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ917pNG7",
+            "name": "The Teskey Brothers",
+            "genre_id": "KnvZfZ7vAvd",
+            "genre": "Blues"
+          }
+        ],
+        "discovery_id": "1A8ZkA8GkdP8KSz",
+        "event_date": "2025-03-21",
+        "event_status_code": "onsale",
+        "event_time": "19:30:00",
+        "name": "Nathaniel Rateliff & The Night Sweats: South of Here Tour",
+        "url": "https://www.ticketmaster.ca/nathaniel-rateliff-the-night-sweats-south-toronto-ontario-03-21-2025/event/10006150E5413CF8"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9174y8V",
+            "name": "Jelly Roll",
+            "genre_id": "KnvZfZ7vAv6",
+            "genre": "Country"
+          },
+          {
+            "discovery_id": "K8vZ917h770",
+            "name": "Josh Ross",
+            "genre_id": "KnvZfZ7vAv6",
+            "genre": "Country"
+          },
+          {
+            "discovery_id": "K8vZ917qpm0",
+            "name": "Savannah Dexter",
+            "genre_id": "KnvZfZ7vAv6",
+            "genre": "Country"
+          },
+          {
+            "discovery_id": "K8vZ917qpmV",
+            "name": "Brabo Gator",
+            "genre_id": "KnvZfZ7vAv6",
+            "genre": "Country"
+          }
+        ],
+        "discovery_id": "1A8ZkA0GkddY0Hl",
+        "event_date": "2025-03-22",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Jelly Roll: Beautifully Broken Tour",
+        "url": "https://www.ticketmaster.ca/jelly-roll-beautifully-broken-tour-toronto-ontario-03-22-2025/event/10006164C3C24F2B"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ91715ZV",
+            "name": "Mary J. Blige",
+            "genre_id": "KnvZfZ7vAee",
+            "genre": "R&B"
+          },
+          {
+            "discovery_id": "K8vZ9175Ho0",
+            "name": "NE-YO",
+            "genre_id": "KnvZfZ7vAee",
+            "genre": "R&B"
+          },
+          {
+            "discovery_id": "K8vZ9175Rj0",
+            "name": "Mario",
+            "genre_id": "KnvZfZ7vAee",
+            "genre": "R&B"
+          }
+        ],
+        "discovery_id": "1AvZZbKGkn9aom5",
+        "event_date": "2025-03-24",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Mary J. Blige: The For My Fans Tour with NE-YO & Mario",
+        "url": "https://www.ticketmaster.ca/mary-j-blige-the-for-my-toronto-ontario-03-24-2025/event/1000613A97251B8B"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9175Dyf",
+            "name": "Kylie Minogue",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          },
+          {
+            "discovery_id": "K8vZ917Cvi0",
+            "name": "Romy",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1AvZZbKGkB-5v98",
+        "event_date": "2025-03-29",
+        "event_status_code": "onsale",
+        "event_time": "19:30:00",
+        "name": "Kylie Minogue - Tension Tour",
+        "url": "https://www.ticketmaster.ca/kylie-minogue-tension-tour-toronto-ontario-03-29-2025/event/1000613EA12C15D0"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917CscV",
+            "name": "Satinder Sartaaj",
+            "genre_id": "KnvZfZ7vAeF",
+            "genre": "World"
+          }
+        ],
+        "discovery_id": "1A8ZkkdGkeWH-99",
+        "event_date": "2025-04-06",
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "name": "Satinder Sartaaj - The Sphere Of Eminence Tour",
+        "url": "https://www.ticketmaster.ca/satinder-sartaaj-the-sphere-of-eminence-toronto-ontario-04-06-2025/event/10006183BDF215D7"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9171Eo0",
+            "name": "Disturbed",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          },
+          {
+            "discovery_id": "K8vZ917GZFf",
+            "name": "Daughtry",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ9172tCf",
+            "name": "Nothing More",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1A8ZkAFGkdirxk4",
+        "event_date": "2025-04-07",
+        "event_status_code": "onsale",
+        "event_time": "18:30:00",
+        "name": "Disturbed: The Sickness 25th Anniversary Tour",
+        "url": "https://www.ticketmaster.ca/disturbed-the-sickness-25th-anniversary-tour-toronto-ontario-04-07-2025/event/10006148EC7A2195"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917oIlV",
+            "name": "J Balvin",
+            "genre_id": "KnvZfZ7vAv1",
+            "genre": "Hip-Hop/Rap"
+          }
+        ],
+        "discovery_id": "1AvZZbpGkXUY7Fv",
+        "event_date": "2025-04-08",
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "name": "J Balvin - Back To The Rayo Tour",
+        "url": "https://www.ticketmaster.ca/j-balvin-back-to-the-rayo-toronto-ontario-04-08-2025/event/1000616FB6C04201"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917KkmV",
+            "name": "Kelsea Ballerini",
+            "genre_id": "KnvZfZ7vAv6",
+            "genre": "Country"
+          },
+          {
+            "discovery_id": "K8vZ917pH0f",
+            "name": "Sasha Alex Sloan",
+            "genre_id": "KnvZfZ7vAvv",
+            "genre": "Alternative"
+          },
+          {
+            "discovery_id": "K8vZ917jYeV",
+            "name": "MaRynn Taylor",
+            "genre_id": "KnvZfZ7vAv6",
+            "genre": "Country"
+          }
+        ],
+        "discovery_id": "1AvZZbfGkXthvTA",
+        "event_date": "2025-04-13",
+        "event_status_code": "rescheduled",
+        "event_time": "19:00:00",
+        "name": "Kelsea Ballerini  Live On Tour",
+        "url": "https://www.ticketmaster.ca/kelsea-ballerini-live-on-tour-toronto-ontario-04-13-2025/event/1000614FA96C1FC5"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917Q6K0",
+            "name": "Rema",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          }
+        ],
+        "discovery_id": "1AvZZbNGkTCYKgh",
+        "event_date": "2025-05-11",
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "name": "REMA: HEIS WORLD TOUR",
+        "url": "https://www.ticketmaster.ca/rema-heis-world-tour-toronto-ontario-05-11-2025/event/1000623FCEC13D5B"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9172cfV",
+            "name": "Babbu Maan",
+            "genre_id": "KnvZfZ7vAeF",
+            "genre": "World"
+          }
+        ],
+        "discovery_id": "1AvZZbPGkI4o7do",
+        "event_date": "2025-05-17",
+        "event_status_code": "onsale",
+        "event_time": "20:30:00",
+        "name": "Babbu Maan: The One Maan Show",
+        "url": "https://www.ticketmaster.ca/babbu-maan-the-one-maan-show-toronto-ontario-05-17-2025/event/1000625A154440D1"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9171xeV",
+            "name": "Shakira",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          }
+        ],
+        "discovery_id": "1AvZZbFGkRDEKcW",
+        "event_date": "2025-05-26",
+        "event_status_code": "rescheduled",
+        "event_time": "19:30:00",
+        "name": "Shakira - Las Mujeres Ya No Lloran - World Tour",
+        "url": "https://www.ticketmaster.ca/shakira-las-mujeres-ya-no-lloran-toronto-ontario-05-26-2025/event/1000608BFB9D3B7D"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9171u5V",
+            "name": "Barry Manilow",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          }
+        ],
+        "discovery_id": "1A8ZkkAGkeIrsln",
+        "event_date": "2025-05-31",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Manilow: The Last Toronto Concert",
+        "url": "https://www.ticketmaster.ca/manilow-the-last-toronto-concert-toronto-ontario-05-31-2025/event/10006185A87B1AEA"
+      }
+    ]
+  }
+}

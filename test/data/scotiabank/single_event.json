@@ -1,0 +1,28 @@
+{
+  "artists": [
+    {
+      "discovery_id": "K8vZ9171Eo0",
+      "name": "Disturbed",
+      "genre_id": "KnvZfZ7vAvt",
+      "genre": "Metal"
+    },
+    {
+      "discovery_id": "K8vZ917GZFf",
+      "name": "Daughtry",
+      "genre_id": "KnvZfZ7vAeA",
+      "genre": "Rock"
+    },
+    {
+      "discovery_id": "K8vZ9172tCf",
+      "name": "Nothing More",
+      "genre_id": "KnvZfZ7vAeA",
+      "genre": "Rock"
+    }
+  ],
+  "discovery_id": "1A8ZkAFGkdirxk4",
+  "event_date": "2025-04-07",
+  "event_status_code": "onsale",
+  "event_time": "18:30:00",
+  "name": "Disturbed: The Sickness 25th Anniversary Tour",
+  "url": "https://www.ticketmaster.ca/disturbed-the-sickness-25th-anniversary-tour-toronto-ontario-04-07-2025/event/10006148EC7A2195"
+}
