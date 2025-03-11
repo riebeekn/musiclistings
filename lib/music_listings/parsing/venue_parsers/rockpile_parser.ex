@@ -13,7 +13,7 @@ defmodule MusicListings.Parsing.VenueParsers.RockpileParser do
   alias MusicListings.Parsing.Selectors
 
   @impl true
-  def source_url, do: "https://therockpile.ca"
+  def source_url, do: "https://therockpile.ca/event-directory/"
 
   @impl true
   def retrieve_events_fun do
@@ -26,7 +26,9 @@ defmodule MusicListings.Parsing.VenueParsers.RockpileParser do
   @impl true
   def events(body) do
     body
-    |> Selectors.all_matches(css(".tw-section"))
+    |> Selectors.match_one(css("script[type=\"application/ld+json\"]"))
+    |> Selectors.data()
+    |> Jason.decode!()
   end
 
   @impl true
@@ -50,8 +52,8 @@ defmodule MusicListings.Parsing.VenueParsers.RockpileParser do
 
   @impl true
   def event_title(event) do
-    event
-    |> Selectors.text(css(".tw-name a"))
+    event["name"]
+    |> ParseHelpers.fix_encoding()
   end
 
   @impl true
@@ -62,10 +64,9 @@ defmodule MusicListings.Parsing.VenueParsers.RockpileParser do
 
   @impl true
   def event_date(event) do
-    [month_string, day_string, year_string] =
-      event |> Selectors.text(css(".tw-event-date")) |> String.split()
-
-    ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
+    event["startDate"]
+    |> NaiveDateTime.from_iso8601!()
+    |> NaiveDateTime.to_date()
   end
 
   @impl true
@@ -75,9 +76,9 @@ defmodule MusicListings.Parsing.VenueParsers.RockpileParser do
 
   @impl true
   def event_time(event) do
-    event
-    |> Selectors.text(css(".tw-event-time"))
-    |> ParseHelpers.build_time_from_time_string()
+    event["startDate"]
+    |> NaiveDateTime.from_iso8601!()
+    |> NaiveDateTime.to_time()
   end
 
   @impl true
@@ -86,21 +87,17 @@ defmodule MusicListings.Parsing.VenueParsers.RockpileParser do
   end
 
   @impl true
-  def age_restriction(event) do
-    event
-    |> Selectors.text(css(".tw-age-restriction"))
-    |> ParseHelpers.age_restriction_string_to_enum()
+  def age_restriction(_event) do
+    :unknown
   end
 
   @impl true
-  def ticket_url(event) do
-    event
-    |> Selectors.url(css(".tw-info-price-buy-tix a"))
+  def ticket_url(_event) do
+    nil
   end
 
   @impl true
   def details_url(event) do
-    event
-    |> Selectors.url(css(".tw-name a"))
+    event["url"]
   end
 end
