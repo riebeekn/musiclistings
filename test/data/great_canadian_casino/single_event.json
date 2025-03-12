@@ -1,5 +1,34 @@
 {
-  "property": "23676",
-  "language": "en",
-  "renderd_content": "\t\t\u003Cdiv id=\"card-container\" class=\"container-xxl sn-promotions padt6 padb6\"\u003E\n\t\t\t\u003Cdiv id=\"card-container-row\" class=\"row row-cols-1 row-cols-md-3 row-cols-lg-4\"\u003E\n\t\t\t\t\t\t\t\t\t\t\u003C!-- CARD START ENT --\u003E\n\t\t\t\t\t\t\u003Cdiv data-groups='[\"on\"]'\n\t\t\t\t\t\t\t class=\"location-card-col col promo-card on ticketed 23676 the_theatre great_canadian_casino_resort_toronto \"\u003E\n\t\t\t\t\t\t\t\u003Cdiv class=\"promo-img\"\u003E\n\t\t\t\t\t\t\t\t\u003Ca href=\"/event/lost-evenings/\"\n\t\t\t\t\t\t\t\t   title=\"Frank Turner Presents Lost Evenings VII - Click for full event\"\u003E\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\u003Cimg alt=\"Frank Turner Presents Lost Evenings 7\" src=\"https://cdn.greatcanadian.com/wp-content/uploads/2023/11/Frank-Turner_600x600.jpg\" srcset='https://cdn.greatcanadian.com/wp-content/uploads/2023/11/Frank-Turner_600x600.jpg 600w, https://cdn.greatcanadian.com/wp-content/uploads/2023/11/Frank-Turner_600x600-300x300.jpg 300w, https://cdn.greatcanadian.com/wp-content/uploads/2023/11/Frank-Turner_600x600-150x150.jpg 150w'   decoding='async' loading='lazy' sizes='(max-width: 600px) 100vw, 600px' class='promo-card-photo ratio ratio-1x1' width='600' height='600'\u003E\u003C/a\u003E\n\t\t\t\t\t\t\t\u003C/div\u003E\n\t\t\t\t\t\t\t\u003Cdiv class=\"promo-content\"\u003E\n\t\t\t\t\t\t\t\t\u003Ch2\u003EFrank Turner Presents Lost Evenings VII\u003C/h2\u003E\n\t\t\t\t\t\t\t\t\u003Cdiv class=\"promo-location\"\u003E\n\t\t\t\t\t\t\t\t\t\u003Cdiv class=\"row g-0\"\u003E\n\t\t\t\t\t\t\t\t\t\t\u003Cdiv class=\"col-auto\"\u003E\u003Cimg\n\t\t\t\t\t\t\t\t\t\t\t\tsrc=\"/wp-content/themes/gce-theme/images/map.svg\"\n\t\t\t\t\t\t\t\t\t\t\t\talt=\"\"\u003E\n\t\t\t\t\t\t\t\t\t\t\u003C/div\u003E\n\n\t\t\t\t\t\t\t\t\t\t\u003Cdiv class=\"col\"\u003EGreat Canadian Casino Resort Toronto\t\t\t\t\t\t\t\t\t\t\t\u003Cspan\u003EThe Theatre\u003C/span\u003E\u003C/div\u003E\n\n\t\t\t\t\t\t\t\t\t\u003C/div\u003E\n\t\t\t\t\t\t\t\t\u003C/div\u003E\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\u003Cdiv class=\"promo-date promo-widget-home\"\u003E\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\u003Cdiv class=\"row g-0\"\u003E\n\t\t\t\t\t\t\t\t\t\t\t\u003Cdiv class=\"col-auto\"\u003E\u003Cimg\n\t\t\t\t\t\t\t\t\t\t\t\t\tsrc=\"/wp-content/themes/gce-theme/images/cal.svg\"\n\t\t\t\t\t\t\t\t\t\t\t\t\talt=\"\"\u003E\n\t\t\t\t\t\t\t\t\t\t\t\u003C/div\u003E\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\u003Cdiv\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"col\"\u003ESeptember 19, 2024 - September 22, 2024\u003C/div\u003E\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\u003C/div\u003E\n\t\t\t\t\t\t\t\t\t\t\u003Cspan\n\t\t\t\t\t\t\t\t\t\t\tclass=\"d-none start-date\"\u003ESeptember 20, 2024\u003C/span\u003E\n\t\t\t\t\t\t\t\t\t\u003C/div\u003E\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\u003Ca href=\"/event/lost-evenings/\"\u003ELearn More\u003C/a\u003E\n\t\t\t\t\t\t\t\t\u003Ca class=\"btn gold\" href=\"https://www.ticketmaster.ca/the-theatre-at-great-canadian-casino-tickets-toronto/venue/132544\"\u003EBuy Tickets\u003C/a\u003E\n\t\t\t\t\t\t\t\u003C/div\u003E\n\t\t\t\t\t\t\u003C/div\u003E\n\t\t\t\t\t\t\u003C!-- CARD END --\u003E\n\t\t\t\t\t\t\t\t\t\t\t\t\u003C"
+  "artists": [
+    {
+      "discovery_id": "K8vZ9175Ylf",
+      "name": "Trivium",
+      "genre_id": "KnvZfZ7vAeA",
+      "genre": "Rock"
+    },
+    {
+      "discovery_id": "K8vZ9175mG0",
+      "name": "Bullet for My Valentine",
+      "genre_id": "KnvZfZ7vAeA",
+      "genre": "Rock"
+    },
+    {
+      "discovery_id": "K8vZ917GGe7",
+      "name": "August Burns Red",
+      "genre_id": "KnvZfZ7vAvt",
+      "genre": "Metal"
+    },
+    {
+      "discovery_id": "K8vZ917G-XV",
+      "name": "Bleed From Within",
+      "genre_id": "KnvZfZ7vAvt",
+      "genre": "Metal"
+    }
+  ],
+  "discovery_id": "1AvZZb3GkUg-3mX",
+  "event_date": "2025-05-04",
+  "event_status_code": "onsale",
+  "event_time": "18:30:00",
+  "name": "Trivium & Bullet for My Valentine: The Poisoned Ascendancy",
+  "url": "https://www.ticketmaster.ca/trivium-bullet-for-my-valentine-the-toronto-ontario-05-04-2025/event/1000612DB5852BBE"
 }
