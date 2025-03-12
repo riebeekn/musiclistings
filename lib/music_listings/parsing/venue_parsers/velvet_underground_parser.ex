@@ -4,39 +4,28 @@ defmodule MusicListings.Parsing.VenueParsers.VelvetUndergroundParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
-  import Meeseeks.CSS
-
-  alias MusicListings.HttpClient
-  alias MusicListings.Parsing.ParseHelpers
-  alias MusicListings.Parsing.Performers
-  alias MusicListings.Parsing.Price
-  alias MusicListings.Parsing.Selectors
+  alias MusicListings.Parsing.VenueParsers.BaseParsers.LiveNationParser
 
   @impl true
-  def source_url, do: "https://thevelvet.ca/events/"
+  defdelegate source_url, to: LiveNationParser
 
+  @live_nation_venue_id "KovZpZAFlFAA"
   @impl true
   def retrieve_events_fun do
-    fn url -> HttpClient.get(url) end
+    LiveNationParser.retrieve_events_fun(@live_nation_venue_id)
   end
 
   @impl true
-  def example_data_file_location, do: "test/data/velvet_underground/index.html"
+  def example_data_file_location, do: "test/data/velvet_underground/index.json"
 
   @impl true
-  def events(body) do
-    Selectors.all_matches(body, css(".event-block"))
-  end
+  defdelegate events(body), to: LiveNationParser
 
   @impl true
-  def next_page_url(body, _current_url) do
-    Selectors.url(body, css(".nav-previous a"))
-  end
+  defdelegate next_page_url(body, current_url), to: LiveNationParser
 
   @impl true
-  def event_id(event) do
-    Selectors.id(event, css(".event-block"))
-  end
+  defdelegate event_id(event), to: LiveNationParser
 
   @impl true
   def ignored_event_id(event) do
@@ -44,76 +33,29 @@ defmodule MusicListings.Parsing.VenueParsers.VelvetUndergroundParser do
   end
 
   @impl true
-  def event_title(event) do
-    Selectors.text(event, css(".event-title"))
-  end
+  defdelegate event_title(event), to: LiveNationParser
 
   @impl true
-  def performers(event) do
-    event
-    |> Selectors.all_matches(css(".event-artist-name"))
-    |> Selectors.text()
-    |> Performers.new()
-  end
+  defdelegate performers(event), to: LiveNationParser
 
   @impl true
-  def event_date(event) do
-    date_string = Selectors.attr(event, "data-event-date")
-
-    year_string = String.slice(date_string, 0..3)
-    month_string = String.slice(date_string, 4..5)
-    day_string = String.slice(date_string, 6..7)
-
-    ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
-  end
+  defdelegate event_date(event), to: LiveNationParser
 
   @impl true
-  def additional_dates(_event) do
-    []
-  end
+  defdelegate additional_dates(event), to: LiveNationParser
 
   @impl true
-  def event_time(event) do
-    event
-    |> Selectors.all_matches(css(".event-meta"))
-    |> Selectors.text()
-    |> Enum.find(fn element -> element |> String.contains?("Ages:") end)
-    |> String.split("|")
-    |> Enum.at(0)
-    |> String.split(" ")
-    |> Enum.at(1)
-    |> ParseHelpers.build_time_from_time_string()
-  end
+  defdelegate event_time(event), to: LiveNationParser
 
   @impl true
-  def price(event) do
-    event
-    |> Selectors.all_matches(css(".event-meta"))
-    |> Selectors.text()
-    |> Enum.find(fn element -> element |> String.contains?("Price:") end)
-    |> Price.new()
-  end
+  defdelegate price(event), to: LiveNationParser
 
   @impl true
-  def age_restriction(event) do
-    event
-    |> Selectors.all_matches(css(".event-meta"))
-    |> Selectors.text()
-    |> Enum.find(fn element -> element |> String.contains?("Ages:") end)
-    |> String.split("|")
-    |> Enum.at(1)
-    |> String.split(":")
-    |> Enum.at(1)
-    |> ParseHelpers.age_restriction_string_to_enum()
-  end
+  defdelegate age_restriction(event), to: LiveNationParser
 
   @impl true
-  def ticket_url(event) do
-    Selectors.url(event, css(".event-ticket-link"))
-  end
+  defdelegate ticket_url(event), to: LiveNationParser
 
   @impl true
-  def details_url(_event) do
-    nil
-  end
+  defdelegate details_url(event), to: LiveNationParser
 end
