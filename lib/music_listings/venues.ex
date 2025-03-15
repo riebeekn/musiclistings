@@ -41,4 +41,13 @@ defmodule MusicListings.Venues do
 
   @spec get_venue!(pos_integer()) :: Venue
   def get_venue!(venue_id), do: Repo.get!(Venue, venue_id)
+
+  def fetch_venue_by_name(venue_name) do
+    from(venue in Venue, where: fragment("lower(?) = lower(?)", venue.name, ^venue_name))
+    |> Repo.one()
+    |> case do
+      nil -> {:error, :venue_not_found}
+      venue -> {:ok, venue}
+    end
+  end
 end

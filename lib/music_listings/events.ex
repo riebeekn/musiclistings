@@ -99,4 +99,13 @@ defmodule MusicListings.Events do
   def delete_event(_user, _event_id) do
     {:error, :not_allowed}
   end
+
+  def fetch_submitted_event(submitted_event_id) do
+    SubmittedEvent
+    |> Repo.get(submitted_event_id)
+    |> case do
+      nil -> {:error, :submitted_event_not_found}
+      submitted_event -> {:ok, submitted_event}
+    end
+  end
 end

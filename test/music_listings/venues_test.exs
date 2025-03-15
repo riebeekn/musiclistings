@@ -42,4 +42,26 @@ defmodule MusicListings.VenuesTest do
                Venues.list_venues()
     end
   end
+
+  describe "fetch_venue_by_name/1" do
+    setup do
+      venue = VenuesFixtures.venue_fixture(name: "Some Venue")
+
+      %{venue_id: venue.id, venue: venue}
+    end
+
+    test "returns venue when it exists", %{venue_id: venue_id, venue: venue} do
+      assert {:ok, %Venue{id: ^venue_id}} = Venues.fetch_venue_by_name(venue.name)
+    end
+
+    test "ignores casing", %{venue_id: venue_id, venue: venue} do
+      upcase_name = String.upcase(venue.name)
+
+      assert {:ok, %Venue{id: ^venue_id}} = Venues.fetch_venue_by_name(upcase_name)
+    end
+
+    test "returns error when not found" do
+      assert {:error, :venue_not_found} = Venues.fetch_venue_by_name("non-existant venue")
+    end
+  end
 end
