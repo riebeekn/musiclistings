@@ -5,8 +5,10 @@ defmodule MusicListings.EventsTest do
   alias MusicListings.Events
   alias MusicListings.Events.PagedEvents
   alias MusicListings.EventsFixtures
+  alias MusicListings.SubmittedEventsFixtures
   alias MusicListings.VenuesFixtures
   alias MusicListingsSchema.Event
+  alias MusicListingsSchema.SubmittedEvent
   alias MusicListingsUtilities.DateHelpers
 
   describe "list_events/1" do
@@ -75,6 +77,59 @@ defmodule MusicListings.EventsTest do
                   ]}
                ]
              } = Events.list_events(venue_ids: [venue_1_id])
+    end
+  end
+
+  describe "list_submitted_events/1" do
+    setup do
+      venue_name = "A venue name"
+
+      SubmittedEventsFixtures.submitted_event_fixture(venue_name,
+        date: ~D[2024-07-30],
+        title: "ev0"
+      )
+
+      SubmittedEventsFixtures.submitted_event_fixture(venue_name,
+        date: ~D[2024-08-01],
+        title: "ev1"
+      )
+
+      SubmittedEventsFixtures.submitted_event_fixture(venue_name,
+        date: ~D[2024-08-01],
+        title: "ev2"
+      )
+
+      SubmittedEventsFixtures.submitted_event_fixture(venue_name,
+        date: ~D[2024-08-02],
+        title: "ev3"
+      )
+
+      :ok
+    end
+
+    test "lists events sorted by date and title" do
+      assert %PagedEvents{
+               current_page: 1,
+               total_pages: 1,
+               events: [
+                 %SubmittedEvent{
+                   title: "ev0",
+                   date: ~D[2024-07-30]
+                 },
+                 %SubmittedEvent{
+                   title: "ev1",
+                   date: ~D[2024-08-01]
+                 },
+                 %SubmittedEvent{
+                   title: "ev2",
+                   date: ~D[2024-08-01]
+                 },
+                 %SubmittedEvent{
+                   title: "ev3",
+                   date: ~D[2024-08-02]
+                 }
+               ]
+             } = Events.list_submitted_events()
     end
   end
 
