@@ -6,9 +6,7 @@ defmodule MusicListings.Events do
 
   alias Ecto.Changeset
   alias MusicListings.Accounts.User
-  alias MusicListings.Emails.NewSubmittedEvent
   alias MusicListings.Events.PagedEvents
-  alias MusicListings.Mailer
   alias MusicListings.Repo
   alias MusicListingsSchema.Event
   alias MusicListingsSchema.SubmittedEvent
@@ -60,39 +58,11 @@ defmodule MusicListings.Events do
     |> where([event], event.venue_id in ^venue_ids)
   end
 
-  @spec submit_event(
-          attrs :: %{
-            title: String.t(),
-            venue: String.t(),
-            date: Date.t(),
-            time: String.t(),
-            price: String.t(),
-            url: String.t()
-          }
-        ) :: {:ok, SubmittedEvent.t()} | {:error, Ecto.Changeset.t()}
-  def submit_event(attrs) do
-    %SubmittedEvent{}
-    |> Changeset.cast(attrs, [:title, :venue, :date, :time, :price, :url])
-    |> Changeset.validate_required([:title, :venue, :date])
-    |> Repo.insert()
-    |> case do
-      {:ok, submitted_event} ->
-        submitted_event
-        |> NewSubmittedEvent.new_email()
-        |> Mailer.deliver()
-
-        {:ok, submitted_event}
-
-      error ->
-        error
-    end
-  end
-
   @spec delete_event(User | nil, pos_integer()) :: {:ok, Event} | {:error, :not_allowed}
   def delete_event(%User{role: :admin}, event_id) do
     Event
     |> Repo.get!(event_id)
-    |> Ecto.Changeset.change(%{deleted_at: DateHelpers.now()})
+    |> Changeset.change(%{deleted_at: DateHelpers.now()})
     |> Repo.update()
   end
 
