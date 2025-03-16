@@ -30,6 +30,8 @@ defmodule MusicListings do
   @spec list_events(list(list_events_opts)) :: PagedEvents.t()
   defdelegate list_events(opts \\ []), to: Events
 
+  defdelegate list_submitted_events(opts \\ []), to: Events
+
   @spec submit_event(
           attrs :: %{
             title: String.t(),
@@ -45,8 +47,8 @@ defmodule MusicListings do
   @spec delete_event(User | nil, pos_integer()) :: {:ok, Event} | {:error, :not_allowed}
   defdelegate delete_event(user, event_id), to: Events
 
-  @spec approve_submitted_event(pos_integer()) :: {:ok, Event} | {:error, atom()}
-  defdelegate approve_submitted_event(submitted_event_id), to: EventSubmissionService
+  @spec approve_submitted_event(User, pos_integer()) :: {:ok, Event} | {:error, atom()}
+  defdelegate approve_submitted_event(user, submitted_event_id), to: EventSubmissionService
 
   @type list_venue_opts :: {:restrict_to_pulled_venues?, boolean()}
   @spec list_venues(list(list_venue_opts)) :: list(VenueSummary)
