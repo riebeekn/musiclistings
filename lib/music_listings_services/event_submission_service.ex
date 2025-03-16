@@ -3,6 +3,7 @@ defmodule MusicListingsServices.EventSubmissionService do
   Service module for handling functionality around submitted events
   """
   alias Ecto.Changeset
+  alias MusicListings.Accounts.User
   alias MusicListings.Emails.NewSubmittedEvent
   alias MusicListings.Events
   alias MusicListings.Mailer
@@ -47,8 +48,8 @@ defmodule MusicListingsServices.EventSubmissionService do
   @doc """
   Turns a submitted event into an event record
   """
-  @spec approve_submitted_event(pos_integer()) :: {:ok, Event} | {:error, atom()}
-  def approve_submitted_event(submitted_event_id) do
+  @spec approve_submitted_event(User, pos_integer()) :: {:ok, Event} | {:error, atom()}
+  def approve_submitted_event(%User{role: :admin}, submitted_event_id) do
     with {:ok, submitted_event} <- Events.fetch_submitted_event(submitted_event_id),
          {:ok, venue} <- Venues.fetch_venue_by_name(submitted_event.venue) do
       external_id =
@@ -78,6 +79,10 @@ defmodule MusicListingsServices.EventSubmissionService do
         |> Repo.insert!()
       end)
     end
+  end
+
+  def approve_submitted_event(_user, _submitted_event_id) do
+    {:error, :not_allowed}
   end
 
   defp parse_price_or_default_to_unknown(price_string) do

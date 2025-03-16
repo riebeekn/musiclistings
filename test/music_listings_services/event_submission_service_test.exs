@@ -3,6 +3,7 @@ defmodule MusicListingsServices.EventSubmissionServiceTest do
 
   import Swoosh.TestAssertions
 
+  alias MusicListings.Accounts.User
   alias MusicListings.SubmittedEventsFixtures
   alias MusicListings.VenuesFixtures
   alias MusicListingsSchema.Event
@@ -54,7 +55,11 @@ defmodule MusicListingsServices.EventSubmissionServiceTest do
       venue: venue,
       submitted_event: submitted_event
     } do
-      assert {:ok, event} = EventSubmissionService.approve_submitted_event(submitted_event.id)
+      assert {:ok, event} =
+               EventSubmissionService.approve_submitted_event(
+                 %User{role: :admin},
+                 submitted_event.id
+               )
 
       venue_id = venue.id
       external_id = "#{submitted_event.id}_bob_mintzer_quartet_2024_04_02"
@@ -84,9 +89,22 @@ defmodule MusicListingsServices.EventSubmissionServiceTest do
       assert true = submitted_event.approved?
     end
 
+    test "returns error when no user", %{submitted_event: submitted_event} do
+      assert {:error, :not_allowed} ==
+               EventSubmissionService.approve_submitted_event(nil, submitted_event.id)
+    end
+
+    test "returns error when user not an admin", %{submitted_event: submitted_event} do
+      assert {:error, :not_allowed} ==
+               EventSubmissionService.approve_submitted_event(
+                 %User{role: :regular_user},
+                 submitted_event.id
+               )
+    end
+
     test "returns an error when submitted event not found" do
       assert {:error, :submitted_event_not_found} ==
-               EventSubmissionService.approve_submitted_event(-1)
+               EventSubmissionService.approve_submitted_event(%User{role: :admin}, -1)
     end
 
     test "returns an error when venue not found", %{
@@ -96,7 +114,10 @@ defmodule MusicListingsServices.EventSubmissionServiceTest do
       Repo.delete!(venue)
 
       assert {:error, :venue_not_found} ==
-               EventSubmissionService.approve_submitted_event(submitted_event.id)
+               EventSubmissionService.approve_submitted_event(
+                 %User{role: :admin},
+                 submitted_event.id
+               )
     end
 
     test "with invalid price defaults to unknown price", %{submitted_event: submitted_event} do
@@ -105,7 +126,11 @@ defmodule MusicListingsServices.EventSubmissionServiceTest do
         |> Ecto.Changeset.change(%{price: "this isn't a valid price string!"})
         |> Repo.update!()
 
-      assert {:ok, event} = EventSubmissionService.approve_submitted_event(submitted_event.id)
+      assert {:ok, event} =
+               EventSubmissionService.approve_submitted_event(
+                 %User{role: :admin},
+                 submitted_event.id
+               )
 
       assert %Event{
                price_format: :unknown,
