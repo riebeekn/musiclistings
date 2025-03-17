@@ -82,24 +82,22 @@ defmodule MusicListings.EventsTest do
 
   describe "list_submitted_events/1" do
     setup do
-      venue_name = "A venue name"
-
-      SubmittedEventsFixtures.submitted_event_fixture(venue_name,
+      SubmittedEventsFixtures.submitted_event_fixture(
         date: ~D[2024-07-30],
         title: "ev0"
       )
 
-      SubmittedEventsFixtures.submitted_event_fixture(venue_name,
+      SubmittedEventsFixtures.submitted_event_fixture(
         date: ~D[2024-08-01],
         title: "ev1"
       )
 
-      SubmittedEventsFixtures.submitted_event_fixture(venue_name,
+      SubmittedEventsFixtures.submitted_event_fixture(
         date: ~D[2024-08-01],
         title: "ev2"
       )
 
-      SubmittedEventsFixtures.submitted_event_fixture(venue_name,
+      SubmittedEventsFixtures.submitted_event_fixture(
         date: ~D[2024-08-02],
         title: "ev3"
       )
