@@ -396,6 +396,101 @@ defmodule MusicListingsWeb.CustomComponents do
     """
   end
 
+  attr :submitted_events, :list, required: true
+
+  def submitted_events(assigns) do
+    ~H"""
+    <table class="min-w-full divide-y divide-gray-700">
+      <thead>
+        <tr>
+          <.submitted_event_column_header label="Title / URL" first_col={true} />
+          <.submitted_event_column_header label="Venue" />
+          <.submitted_event_column_header label="Date" />
+          <.submitted_event_column_header label="Time" />
+          <.submitted_event_column_header label="Price" />
+          <.submitted_event_column_header label="Status" sr_only={true} />
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-800">
+        <%= for submitted_event <- @submitted_events do %>
+          <tr id={"event-#{submitted_event.id}"}>
+            <.submitted_event_title title={submitted_event.title} url={submitted_event.url} />
+            <.submitted_event_column_value value={submitted_event.venue} />
+            <.submitted_event_column_value value={submitted_event.date} />
+            <.submitted_event_column_value value={
+              format_submitted_event_optional_field(submitted_event.time)
+            } />
+            <.submitted_event_column_value value={
+              format_submitted_event_optional_field(submitted_event.price)
+            } />
+            <.submitted_event_approval_status submitted_event={submitted_event} />
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    """
+  end
+
+  defp submitted_event_title(assigns) do
+    ~H"""
+    <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0 text-white">
+      <div class="flex items-center">
+        <div>
+          <div class="font-medium">{@title}</div>
+          <a href={@url} target="_blank" class="mt-1 text-emerald-400 hover:text-emerald-300">
+            {@url}
+          </a>
+        </div>
+      </div>
+    </td>
+    """
+  end
+
+  defp submitted_event_column_value(assigns) do
+    ~H"""
+    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
+      {@value}
+    </td>
+    """
+  end
+
+  defp submitted_event_approval_status(assigns) do
+    ~H"""
+    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+      <span :if={@submitted_event.approved?} class="text-amber-400">Approved</span>
+      <button
+        :if={!@submitted_event.approved?}
+        phx-click="approve-submitted-event"
+        phx-value-id={@submitted_event.id}
+        data-confirm="Are you sure?"
+        class="inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition rounded-full py-1 px-3 bg-emerald-400/10 text-emerald-400 ring-1 ring-inset ring-emerald-400/20 hover:text-emerald-300 hover:ring-emerald-300"
+      >
+        Approve
+      </button>
+    </td>
+    """
+  end
+
+  defp submitted_event_column_header(assigns) do
+    th_class =
+      if assigns[:first_col],
+        do: "py-3.5 pl-4 pr-3 text-left text-md font-semibold text-white sm:pl-0",
+        else: "px-3 py-3.5 text-left text-md font-semibold text-white"
+
+    span_class = if assigns[:sr_only], do: "sr-only", else: ""
+
+    assigns = assign(assigns, th_class: th_class, span_class: span_class)
+
+    ~H"""
+    <th scope="col" class={@th_class}>
+      <span class={@span_class}>{@label}</span>
+    </th>
+    """
+  end
+
+  defp format_submitted_event_optional_field(nil), do: "- - -"
+  defp format_submitted_event_optional_field(string), do: string
+
   @doc """
   Renders a list of events for the passed in events, specific to a single venue
 
