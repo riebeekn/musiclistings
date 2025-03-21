@@ -7,10 +7,11 @@ resource "render_postgres" "this" {
   name = "${local.name}-database"
   plan = var.render_postgres_plan
   # can't select disk size for free plan
-  disk_size_gb  = var.render_postgres_plan == "free" ? null : var.render_postgres_disk_size
-  region        = var.render_region
-  version       = "15"
-  database_name = replace(local.name, "-", "_")
+  disk_size_gb   = var.render_postgres_plan == "free" ? null : var.render_postgres_disk_size
+  region         = var.render_region
+  environment_id = render_project.this.environments["default"].id
+  version        = "15"
+  database_name  = replace(local.name, "-", "_")
 
   ip_allow_list = [
     {
