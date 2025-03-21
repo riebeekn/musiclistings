@@ -48,7 +48,8 @@ defmodule MusicListingsServices.EventSubmissionService do
   @doc """
   Turns a submitted event into an event record
   """
-  @spec approve_submitted_event(User, pos_integer()) :: {:ok, Event} | {:error, atom()}
+  @spec approve_submitted_event(User, pos_integer()) ::
+          {:ok, Event} | {:error, :not_allowed | :venue_not_found | :submitted_event_not_found}
   def approve_submitted_event(%User{role: :admin}, submitted_event_id) do
     with {:ok, submitted_event} <- Events.fetch_submitted_event(submitted_event_id),
          {:ok, venue} <- Venues.fetch_venue_by_name(submitted_event.venue) do
