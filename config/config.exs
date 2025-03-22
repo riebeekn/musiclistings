@@ -58,6 +58,10 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+# Configure HB logger
+config :honeybadger,
+  use_logger: true
+
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
@@ -82,11 +86,6 @@ config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase
 
 # Set env
 config :music_listings, env: Mix.env()
-
-# Error tracker config
-config :error_tracker,
-  repo: MusicListings.Repo,
-  otp_app: :music_listings
 
 config :music_listings, :http_client, MusicListings.HttpClient.HTTPoison
 
