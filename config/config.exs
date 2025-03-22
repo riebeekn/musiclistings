@@ -87,11 +87,6 @@ config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase
 # Set env
 config :music_listings, env: Mix.env()
 
-# Error tracker config
-config :error_tracker,
-  repo: MusicListings.Repo,
-  otp_app: :music_listings
-
 config :music_listings, :http_client, MusicListings.HttpClient.HTTPoison
 
 # Import environment specific config. This must remain at the bottom

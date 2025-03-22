@@ -80,7 +80,6 @@ defmodule MusicListings.MixProject do
       {:scrivener_ecto, "~> 3.0"},
       {:redirect, "~> 0.4.0"},
       {:goal, "~> 1.0"},
-      {:error_tracker, "~> 0.2"},
       {:phoenix_turnstile, "~> 1.0"},
       # {:ecto_boot_migration, "~> 0.3.0"},
       {:ecto_boot_migration,
