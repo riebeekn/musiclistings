@@ -86,6 +86,7 @@ defmodule MusicListings.MixProject do
       {:ecto_boot_migration,
        git: "https://github.com/mwhitworth/ecto_boot_migration", branch: "elixir-1.17-fix"},
       {:nimble_csv, "~> 1.2"},
+      {:honeybadger, "~>0.23"},
       # build / dev / test related deps
       {:swoosh_gallery, "~> 0.2.0"},
       {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
