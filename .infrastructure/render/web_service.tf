@@ -47,6 +47,12 @@ resource "render_web_service" "this" {
     },
     "PHX_HOST" = {
       value = var.app_domain
+    },
+    "HONEYBADGER_API_KEY" = {
+      value = var.app_honeybadger_api_key
+    },
+    "HONEYBADGER_ENV" = {
+      value = var.environment
     }
   }
 }

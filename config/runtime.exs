@@ -203,4 +203,22 @@ if config_env() == :prod do
   config :phoenix_turnstile,
     site_key: turnstile_site_key,
     secret_key: turnstile_secret_key
+
+  honeybadger_api_key =
+    System.get_env("HONEYBADGER_API_KEY") ||
+      raise """
+      environment variable HONEYBADGER_API_KEY is missing.
+      For example: hbp_1234abcd
+      """
+
+  honeybadger_env =
+    System.get_env("HONEYBADGER_ENV") ||
+      raise """
+      environment variable HONEYBADGER_ENV is missing.
+      For example: prod
+      """
+
+  config :honeybadger,
+    api_key: honeybadger_api_key,
+    environment_name: honeybadger_env
 end

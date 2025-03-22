@@ -37,6 +37,12 @@ resource "render_cron_job" "this" {
     },
     "CRAWL_AND_EXIT" = {
       value = "true"
+    },
+    "HONEYBADGER_API_KEY" = {
+      value = var.app_honeybadger_api_key
+    },
+    "HONEYBADGER_ENV" = {
+      value = var.environment
     }
   }
 }

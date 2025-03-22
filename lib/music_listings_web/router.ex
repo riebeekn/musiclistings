@@ -1,5 +1,6 @@
 defmodule MusicListingsWeb.Router do
   use MusicListingsWeb, :router
+  use Honeybadger.Plug
 
   import MusicListingsWeb.UserAuth
 

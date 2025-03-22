@@ -124,6 +124,12 @@ variable "app_domain" {
   type        = string
 }
 
+variable "app_honeybadger_api_key" {
+  description = "The honeybadger api key"
+  type        = string
+  sensitive   = true
+}
+
 variable "app_turnstile_site_key" {
   description = <<EOT
     Turnstile site key, optional, leaving blank will result in turnstile not being enabled, but will mean no forms can be submitted,
