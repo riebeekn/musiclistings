@@ -8,10 +8,9 @@ resource "random_password" "secret_key_base" {
 }
 
 resource "render_web_service" "this" {
-  name           = "${local.name}-web-service"
-  plan           = var.render_web_service_plan
-  region         = var.render_region
-  environment_id = render_project.this.environments["default"].id
+  name   = "${local.name}-web-service"
+  plan   = var.render_web_service_plan
+  region = var.render_region
   runtime_source = {
     docker = {
       branch      = var.initial_branch_to_deploy

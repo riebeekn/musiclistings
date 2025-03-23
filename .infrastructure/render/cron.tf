@@ -1,8 +1,7 @@
 resource "render_cron_job" "this" {
-  name           = "${local.name}-crawler"
-  plan           = var.render_cron_service_plan
-  region         = var.render_region
-  environment_id = render_project.this.environments["default"].id
+  name   = "${local.name}-crawler"
+  plan   = var.render_cron_service_plan
+  region = var.render_region
   runtime_source = {
     docker = {
       branch      = var.branch_to_deploy_for_cron_service
