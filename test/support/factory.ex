@@ -2,8 +2,27 @@
 defmodule MusicListings.Factory do
   use ExMachina.Ecto, repo: MusicListings.Repo
 
+  alias MusicListingsSchema.Event
   alias MusicListingsSchema.SubmittedEvent
   alias MusicListingsSchema.Venue
+
+  def event_factory do
+    %Event{
+      venue: build(:venue),
+      external_id: Ecto.UUID.generate(),
+      title: "Bob Mintzer Quartet",
+      headliner: "Bob Mintzer",
+      openers: [],
+      date: ~D[2024-04-02],
+      time: ~T[20:00:00],
+      price_format: :fixed,
+      price_lo: 10.00,
+      price_hi: 20.00,
+      age_restriction: :all_ages,
+      ticket_url: "https://tickets@example.com",
+      details_url: "https://details@example.com"
+    }
+  end
 
   def submitted_event_factory do
     %SubmittedEvent{

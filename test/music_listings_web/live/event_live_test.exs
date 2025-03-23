@@ -3,15 +3,12 @@ defmodule MusicListingsWeb.EventLiveTest do
 
   import Phoenix.LiveViewTest
 
-  alias MusicListings.EventsFixtures
-
   describe "index" do
     setup do
-      venue = insert(:venue)
-      e0 = EventsFixtures.event_fixture(venue, date: ~D[2024-07-30], title: "ev0")
-      e1 = EventsFixtures.event_fixture(venue, date: ~D[2024-08-01], title: "ev1")
-      e2 = EventsFixtures.event_fixture(venue, date: ~D[2024-08-01], title: "ev2")
-      e3 = EventsFixtures.event_fixture(venue, date: ~D[2024-08-02], title: "ev3")
+      e0 = insert(:event, date: ~D[2024-07-30], title: "ev0")
+      e1 = insert(:event, date: ~D[2024-08-01], title: "ev1")
+      e2 = insert(:event, date: ~D[2024-08-01], title: "ev2")
+      e3 = insert(:event, date: ~D[2024-08-02], title: "ev3")
 
       %{e0_id: e0.id, e1_id: e1.id, e2_id: e2.id, e3_id: e3.id}
     end
@@ -43,8 +40,7 @@ defmodule MusicListingsWeb.EventLiveTest do
     setup :register_and_log_in_user
 
     setup do
-      venue = insert(:venue)
-      event = EventsFixtures.event_fixture(venue, date: ~D[2024-08-01])
+      event = insert(:event, date: ~D[2024-08-01])
       %{event_id: event.id}
     end
 

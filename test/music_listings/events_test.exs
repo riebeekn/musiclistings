@@ -4,7 +4,6 @@ defmodule MusicListings.EventsTest do
   alias MusicListings.Accounts.User
   alias MusicListings.Events
   alias MusicListings.Events.PagedEvents
-  alias MusicListings.EventsFixtures
   alias MusicListingsSchema.Event
   alias MusicListingsSchema.SubmittedEvent
   alias MusicListingsUtilities.DateHelpers
@@ -13,12 +12,13 @@ defmodule MusicListings.EventsTest do
     setup do
       venue_1 = insert(:venue)
       venue_2 = insert(:venue)
-      EventsFixtures.event_fixture(venue_1, date: ~D[2024-07-30], title: "ev0")
-      EventsFixtures.event_fixture(venue_1, date: ~D[2024-08-01], title: "ev1")
-      EventsFixtures.event_fixture(venue_2, date: ~D[2024-08-01], title: "ev2")
-      EventsFixtures.event_fixture(venue_2, date: ~D[2024-08-02], title: "ev3")
+      insert(:event, venue: venue_1, date: ~D[2024-07-30], title: "ev0")
+      insert(:event, venue: venue_1, date: ~D[2024-08-01], title: "ev1")
+      insert(:event, venue: venue_2, date: ~D[2024-08-01], title: "ev2")
+      insert(:event, venue: venue_2, date: ~D[2024-08-02], title: "ev3")
 
-      EventsFixtures.event_fixture(venue_2,
+      insert(:event,
+        venue: venue_2,
         date: ~D[2024-08-02],
         title: "ev4",
         deleted_at: DateTime.utc_now()
@@ -117,7 +117,7 @@ defmodule MusicListings.EventsTest do
   describe "delete_event/2" do
     setup do
       venue = insert(:venue)
-      event = EventsFixtures.event_fixture(venue)
+      event = insert(:event, venue: venue)
       %{event: event}
     end
 
