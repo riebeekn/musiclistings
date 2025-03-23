@@ -3,7 +3,6 @@ defmodule MusicListings.Crawler.EventStorageTest do
 
   alias MusicListings.Crawler.EventStorage
   alias MusicListings.Crawler.Payload
-  alias MusicListings.CrawlSummariesFixtures
   alias MusicListingsSchema.CrawlError
   alias MusicListingsSchema.Event
 
@@ -29,7 +28,7 @@ defmodule MusicListings.Crawler.EventStorageTest do
         }
       ]
 
-      crawl_summary = CrawlSummariesFixtures.crawl_summary_fixture()
+      crawl_summary = insert(:crawl_summary)
 
       %{payloads: payloads, crawl_summary: crawl_summary}
     end

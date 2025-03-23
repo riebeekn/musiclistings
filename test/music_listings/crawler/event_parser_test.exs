@@ -3,7 +3,6 @@ defmodule MusicListings.Crawler.EventParserTest do
 
   alias MusicListings.Crawler.EventParser
   alias MusicListings.Crawler.Payload
-  alias MusicListings.CrawlSummariesFixtures
   alias MusicListings.Parsing.VenueParsers.HistoryParser
   alias MusicListings.PayloadsFixtures
   alias MusicListingsSchema.Venue
@@ -25,7 +24,7 @@ defmodule MusicListings.Crawler.EventParserTest do
           payloads,
           HistoryParser,
           venue,
-          CrawlSummariesFixtures.crawl_summary_fixture()
+          insert(:crawl_summary)
         )
 
       venue_id = venue.id
@@ -58,7 +57,7 @@ defmodule MusicListings.Crawler.EventParserTest do
           parse_error_payloads,
           HistoryParser,
           venue,
-          CrawlSummariesFixtures.crawl_summary_fixture()
+          insert(:crawl_summary)
         )
 
       assert :parse_error = payload.status

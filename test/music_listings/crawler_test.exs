@@ -2,7 +2,6 @@ defmodule MusicListings.CrawlerTest do
   use MusicListings.DataCase, async: true
 
   alias MusicListings.Crawler
-  alias MusicListings.CrawlSummariesFixtures
   alias MusicListings.Repo
   alias MusicListingsSchema.CrawlSummary
   alias MusicListingsSchema.Event
@@ -32,7 +31,7 @@ defmodule MusicListings.CrawlerTest do
 
     test "ignores nil completed_at records" do
       _cs1 =
-        CrawlSummariesFixtures.crawl_summary_fixture()
+        insert(:crawl_summary)
         |> Ecto.Changeset.change(%{completed_at: nil})
         |> Repo.update!()
 
@@ -41,12 +40,12 @@ defmodule MusicListings.CrawlerTest do
 
     test "returns the most recent completed at time when data" do
       _cs1 =
-        CrawlSummariesFixtures.crawl_summary_fixture()
+        insert(:crawl_summary)
         |> Ecto.Changeset.change(%{completed_at: ~U[2022-08-07 19:11:40Z]})
         |> Repo.update!()
 
       _cs2 =
-        CrawlSummariesFixtures.crawl_summary_fixture()
+        insert(:crawl_summary)
         |> Ecto.Changeset.change(%{completed_at: ~U[2021-08-07 19:11:40Z]})
         |> Repo.update!()
 

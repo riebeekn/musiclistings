@@ -2,9 +2,14 @@
 defmodule MusicListings.Factory do
   use ExMachina.Ecto, repo: MusicListings.Repo
 
+  alias MusicListingsSchema.CrawlSummary
   alias MusicListingsSchema.Event
   alias MusicListingsSchema.SubmittedEvent
   alias MusicListingsSchema.Venue
+
+  def crawl_summary_factory do
+    %CrawlSummary{}
+  end
 
   def event_factory do
     %Event{
