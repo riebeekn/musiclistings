@@ -4,14 +4,13 @@ defmodule MusicListings.VenuesTest do
   alias MusicListings.EventsFixtures
   alias MusicListings.Venues
   alias MusicListings.Venues.VenueSummary
-  alias MusicListings.VenuesFixtures
   alias MusicListingsSchema.Venue
 
   describe "list_venues/0" do
     setup do
       Repo.delete_all(Venue)
-      venue_2 = VenuesFixtures.venue_fixture(name: "venue two", street: "v2 street")
-      venue_1 = VenuesFixtures.venue_fixture(name: "venue one", street: "v1 street")
+      venue_2 = insert(:venue, name: "venue two", street: "v2 street")
+      venue_1 = insert(:venue, name: "venue one", street: "v1 street")
 
       # mocked date of today is 2024-08-01
       _excluded_old_event =
@@ -45,7 +44,7 @@ defmodule MusicListings.VenuesTest do
 
   describe "fetch_venue_by_name/1" do
     setup do
-      venue = VenuesFixtures.venue_fixture(name: "Some Venue")
+      venue = insert(:venue, name: "Some Venue")
 
       %{venue_id: venue.id, venue: venue}
     end

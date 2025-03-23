@@ -4,19 +4,14 @@ defmodule MusicListings.CrawlerTest do
   alias MusicListings.Crawler
   alias MusicListings.CrawlSummariesFixtures
   alias MusicListings.Repo
-  alias MusicListings.VenuesFixtures
   alias MusicListingsSchema.CrawlSummary
   alias MusicListingsSchema.Event
 
   # These are pretty naive tests, might want to enhance them down the road
   describe "crawl/1" do
     test "expected number of events are inserted" do
-      venue_1 = VenuesFixtures.venue_fixture()
-
-      venue_2 =
-        VenuesFixtures.venue_fixture(%{
-          parser_module_name: "VelvetUndergroundParser"
-        })
+      venue_1 = insert(:venue)
+      venue_2 = insert(:venue, parser_module_name: "VelvetUndergroundParser")
 
       assert {:ok,
               %CrawlSummary{

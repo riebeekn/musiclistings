@@ -4,7 +4,6 @@ defmodule MusicListingsServices.EventSubmissionServiceTest do
   import Swoosh.TestAssertions
 
   alias MusicListings.Accounts.User
-  alias MusicListings.VenuesFixtures
   alias MusicListingsSchema.Event
   alias MusicListingsSchema.SubmittedEvent
   alias MusicListingsServices.EventSubmissionService
@@ -44,7 +43,7 @@ defmodule MusicListingsServices.EventSubmissionServiceTest do
 
   describe "approve_submitted_event/1" do
     setup do
-      venue = VenuesFixtures.venue_fixture(%{name: "My Music Venue"})
+      venue = insert(:venue, name: "My Music Venue")
       submitted_event = insert(:submitted_event, venue: venue.name)
 
       %{venue: venue, submitted_event: submitted_event}
