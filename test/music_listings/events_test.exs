@@ -5,7 +5,6 @@ defmodule MusicListings.EventsTest do
   alias MusicListings.Events
   alias MusicListings.Events.PagedEvents
   alias MusicListings.EventsFixtures
-  alias MusicListings.SubmittedEventsFixtures
   alias MusicListings.VenuesFixtures
   alias MusicListingsSchema.Event
   alias MusicListingsSchema.SubmittedEvent
@@ -82,25 +81,10 @@ defmodule MusicListings.EventsTest do
 
   describe "list_submitted_events/1" do
     setup do
-      SubmittedEventsFixtures.submitted_event_fixture(
-        date: ~D[2024-07-30],
-        title: "ev0"
-      )
-
-      SubmittedEventsFixtures.submitted_event_fixture(
-        date: ~D[2024-08-01],
-        title: "ev1"
-      )
-
-      SubmittedEventsFixtures.submitted_event_fixture(
-        date: ~D[2024-08-01],
-        title: "ev2"
-      )
-
-      SubmittedEventsFixtures.submitted_event_fixture(
-        date: ~D[2024-08-02],
-        title: "ev3"
-      )
+      insert(:submitted_event, date: ~D[2024-07-30], title: "ev0")
+      insert(:submitted_event, date: ~D[2024-08-01], title: "ev1")
+      insert(:submitted_event, date: ~D[2024-08-01], title: "ev2")
+      insert(:submitted_event, date: ~D[2024-08-02], title: "ev3")
 
       :ok
     end

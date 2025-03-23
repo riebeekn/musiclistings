@@ -3,7 +3,6 @@ defmodule MusicListingsWeb.SubmittedEventLiveTest do
 
   import Phoenix.LiveViewTest
 
-  alias MusicListings.SubmittedEventsFixtures
   alias MusicListings.VenuesFixtures
 
   describe "index - when not logged in" do
@@ -20,14 +19,8 @@ defmodule MusicListingsWeb.SubmittedEventLiveTest do
     setup do
       venue = VenuesFixtures.venue_fixture()
 
-      e0 =
-        SubmittedEventsFixtures.submitted_event_fixture(
-          date: ~D[2024-07-30],
-          title: "ev0",
-          venue: venue.name
-        )
-
-      e1 = SubmittedEventsFixtures.submitted_event_fixture(date: ~D[2024-08-01], title: "ev1")
+      e0 = insert(:submitted_event, date: ~D[2024-07-30], title: "ev0", venue: venue.name)
+      e1 = insert(:submitted_event, date: ~D[2024-08-01], title: "ev1")
 
       %{e0_id: e0.id, e1_id: e1.id}
     end

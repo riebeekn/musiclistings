@@ -24,6 +24,7 @@ defmodule MusicListings.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import MusicListings.DataCase
+      import MusicListings.Factory
     end
   end
 

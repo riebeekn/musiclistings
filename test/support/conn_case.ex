@@ -23,7 +23,7 @@ defmodule MusicListingsWeb.ConnCase do
       @endpoint MusicListingsWeb.Endpoint
 
       use MusicListingsWeb, :verified_routes
-
+      import MusicListings.Factory
       import MusicListingsWeb.ConnCase
       import Phoenix.ConnTest
       # Import conveniences for testing with connections
