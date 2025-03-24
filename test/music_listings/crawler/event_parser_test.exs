@@ -4,12 +4,11 @@ defmodule MusicListings.Crawler.EventParserTest do
   alias MusicListings.Crawler.EventParser
   alias MusicListings.Crawler.Payload
   alias MusicListings.Parsing.VenueParsers.HistoryParser
-  alias MusicListings.PayloadsFixtures
   alias MusicListingsSchema.Venue
 
   describe "parse_events/3" do
     setup do
-      payloads = PayloadsFixtures.load_payloads("test/data/history/single_event.html")
+      payloads = load_payloads("test/data/history/single_event.html")
       venue = Repo.get_by!(Venue, name: "History")
 
       %{payloads: payloads, venue: venue}
@@ -49,8 +48,7 @@ defmodule MusicListings.Crawler.EventParserTest do
     end
 
     test "on failed parse returns payload populated with parse error", %{venue: venue} do
-      parse_error_payloads =
-        PayloadsFixtures.load_payloads("test/data/history/parse_error_event.html")
+      parse_error_payloads = load_payloads("test/data/history/parse_error_event.html")
 
       [payload] =
         EventParser.parse_events(
@@ -62,5 +60,13 @@ defmodule MusicListings.Crawler.EventParserTest do
 
       assert :parse_error = payload.status
     end
+  end
+
+  defp load_payloads(source_file) do
+    "#{File.cwd!()}/#{source_file}"
+    |> Path.expand()
+    |> File.read!()
+    |> HistoryParser.events()
+    |> Enum.map(&Payload.new/1)
   end
 end
