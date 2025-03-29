@@ -34,6 +34,20 @@ defmodule MusicListings.Parsing.VenueParsers.CneParserTest do
 
       assert 152 = Enum.count(events)
     end
+
+    test "handles no performers response" do
+      body = """
+      {
+        "code": "no_performers_found",
+        "message": "No performers found",
+        "data": {
+          "status": 200
+        }
+      }
+      """
+
+      assert [] == CneParser.events(body)
+    end
   end
 
   describe "next_page_url/2" do

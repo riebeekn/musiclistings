@@ -24,7 +24,12 @@ defmodule MusicListings.Parsing.VenueParsers.CneParser do
 
   @impl true
   def events(body) do
-    ParseHelpers.maybe_decode!(body)
+    body
+    |> ParseHelpers.maybe_decode!()
+    |> case do
+      %{"code" => "no_performers_found"} -> []
+      decoded_body -> decoded_body
+    end
   end
 
   @impl true
