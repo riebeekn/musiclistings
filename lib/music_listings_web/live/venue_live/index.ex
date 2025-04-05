@@ -14,6 +14,11 @@ defmodule MusicListingsWeb.VenueLive.Index do
   def render(assigns) do
     ~H"""
     <.page_header header="Venues" description={"Tracking events from #{@venue_count} venues."} />
+    <%= if @current_user do %>
+      <div class="mt-4">
+        <.button_link url={~p"/venues/new"} label="New Venue" />
+      </div>
+    <% end %>
     <.venue_summary venues={@venues} />
     """
   end

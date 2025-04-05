@@ -31,4 +31,53 @@ defmodule MusicListingsWeb.VenueLiveTest do
       assert html =~ "1 Upcoming Events"
     end
   end
+
+  describe "new - when not logged in" do
+    test "redirects to log in when attempting to access page", %{conn: conn} do
+      assert {:error, {:redirect, redirect_map}} = live(conn, ~p"/venues/new")
+
+      assert redirect_map.to == "/users/log_in"
+    end
+  end
+
+  describe "new - logged in" do
+    setup :register_and_log_in_user
+
+    test "saves submitted event with valid parameters", %{conn: conn} do
+      {:ok, view, _html} = live(conn, ~p"/venues/new")
+      assert has_element?(view, "h1", "New Venue")
+
+      {:ok, _view, html} =
+        view
+        |> form("#venue-form", %{
+          "venue" => %{
+            "name" => "Bob's Bar",
+            "street" => "123 Street",
+            "city" => "TO",
+            "province" => "ON",
+            "country" => "CA",
+            "postal_code" => "PC",
+            "website" => "WS",
+            "google_map_url" => "MURL",
+            "parser_module_name" => "n/a",
+            "pull_events?" => false
+          }
+        })
+        |> render_submit()
+        |> follow_redirect(conn, ~p"/venues")
+
+      assert html =~ "Venue created."
+    end
+
+    test "displays errors with invalid attributes", %{conn: conn} do
+      {:ok, view, _html} = live(conn, ~p"/venues/new")
+
+      view
+      |> form("#venue-form", %{"venue" => %{}})
+
+      assert view
+             |> form("#venue-form", %{"venue" => %{}})
+             |> render_submit() =~ "can&#39;t be blank"
+    end
+  end
 end
