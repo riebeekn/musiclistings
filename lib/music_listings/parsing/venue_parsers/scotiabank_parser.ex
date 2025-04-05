@@ -9,7 +9,7 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParser do
   @impl true
   defdelegate source_url, to: LiveNationParser
 
-  @live_nation_venue_id "KovZpZAFlvvA"
+  @live_nation_venue_id "KovZpZAFFE1A"
   @impl true
   def retrieve_events_fun do
     LiveNationParser.retrieve_events_fun(@live_nation_venue_id)
