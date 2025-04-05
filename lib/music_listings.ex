@@ -58,4 +58,22 @@ defmodule MusicListings do
 
   @spec get_venue!(pos_integer()) :: Venue
   defdelegate get_venue!(venue_id), to: Venues
+
+  # TODO: fix dialyzer error
+  # @spec create_venue(
+  #         User,
+  #         attrs :: %{
+  #           name: String.t(),
+  #           street: String.t(),
+  #           city: String.t(),
+  #           province: String.t(),
+  #           country: String.t(),
+  #           postal_code: String.t(),
+  #           website: String.t(),
+  #           google_map_url: String.t(),
+  #           parser_module_name: String.t(),
+  #           pull_events?: boolean()
+  #         }
+  #       ) :: {:ok, Venue} | {:error, Ecto.Changeset.t() | :not_allowed}
+  defdelegate create_venue(user, attrs), to: Venues
 end

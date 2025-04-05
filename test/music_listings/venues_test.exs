@@ -1,6 +1,7 @@
 defmodule MusicListings.VenuesTest do
   use MusicListings.DataCase, async: true
 
+  alias MusicListings.Accounts.User
   alias MusicListings.Venues
   alias MusicListings.Venues.VenueSummary
   alias MusicListingsSchema.Venue
@@ -60,6 +61,49 @@ defmodule MusicListings.VenuesTest do
 
     test "returns error when not found" do
       assert {:error, :venue_not_found} = Venues.fetch_venue_by_name("non-existant venue")
+    end
+  end
+
+  describe "create_venue/2" do
+    test "returns error when no user" do
+      assert {:error, :not_allowed} == Venues.create_venue(nil, %{})
+    end
+
+    test "returns error when user not an admin" do
+      assert {:error, :not_allowed} == Venues.create_venue(%User{role: :regular_user}, %{})
+    end
+
+    @valid_attrs %{
+      name: "Bob's Bar",
+      street: "123 Street",
+      city: "TO",
+      province: "ON",
+      country: "CA",
+      postal_code: "PC",
+      website: "WS",
+      google_map_url: "MURL",
+      parser_module_name: "n/a",
+      pull_events?: false
+    }
+    test "with valid attributes creates a venue" do
+      assert {:ok, @valid_attrs} = Venues.create_venue(%User{role: :admin}, @valid_attrs)
+    end
+
+    test "returns a changeset with invalid attributes" do
+      assert {:error, changeset} = Venues.create_venue(%User{role: :admin}, %{})
+
+      assert errors_on(changeset) == %{
+               city: ["can't be blank"],
+               country: ["can't be blank"],
+               google_map_url: ["can't be blank"],
+               name: ["can't be blank"],
+               parser_module_name: ["can't be blank"],
+               postal_code: ["can't be blank"],
+               province: ["can't be blank"],
+               pull_events?: ["can't be blank"],
+               street: ["can't be blank"],
+               website: ["can't be blank"]
+             }
     end
   end
 end
