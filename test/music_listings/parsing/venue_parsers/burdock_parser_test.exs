@@ -23,7 +23,7 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParserTest do
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://broker.eventscalendar.co/api/eventbrite/next?count=20&from=1736586000000&project=proj_T8vacNv8cWWeEQAQwLKHb&calendar=103809367271" ==
+      assert "https://broker.eventscalendar.co/api/eventbrite/next?count=20&from=1722470400000&project=proj_T8vacNv8cWWeEQAQwLKHb&calendar=103809367271" ==
                BurdockParser.source_url()
     end
   end

@@ -11,9 +11,15 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParser do
   alias MusicListingsUtilities.DateHelpers
 
   @impl true
-  def source_url,
-    do:
-      "https://broker.eventscalendar.co/api/eventbrite/next?count=20&from=1736586000000&project=proj_T8vacNv8cWWeEQAQwLKHb&calendar=103809367271"
+  def source_url do
+    now_ms = DateHelpers.now() |> DateTime.to_unix(:millisecond)
+
+    "https://broker.eventscalendar.co/api/eventbrite/next" <>
+      "?count=20" <>
+      "&from=#{now_ms}" <>
+      "&project=proj_T8vacNv8cWWeEQAQwLKHb" <>
+      "&calendar=103809367271"
+  end
 
   @impl true
   def retrieve_events_fun do
