@@ -4,6 +4,8 @@ defmodule MusicListings.Venues do
   """
   import Ecto.Query
 
+  alias Ecto.Changeset
+  alias MusicListings.Accounts.User
   alias MusicListings.Repo
   alias MusicListings.Venues.VenueSummary
   alias MusicListingsSchema.Event
@@ -42,6 +44,7 @@ defmodule MusicListings.Venues do
   @spec get_venue!(pos_integer()) :: Venue
   def get_venue!(venue_id), do: Repo.get!(Venue, venue_id)
 
+  @spec fetch_venue_by_name(String.t()) :: {:ok, Venue} | {:error, :venue_not_found}
   def fetch_venue_by_name(venue_name) do
     from(venue in Venue, where: fragment("lower(?) = lower(?)", venue.name, ^venue_name))
     |> Repo.one()
@@ -49,5 +52,43 @@ defmodule MusicListings.Venues do
       nil -> {:error, :venue_not_found}
       venue -> {:ok, venue}
     end
+  end
+
+  @create_attrs [
+    :name,
+    :street,
+    :city,
+    :province,
+    :country,
+    :postal_code,
+    :website,
+    :google_map_url,
+    :parser_module_name,
+    :pull_events?
+  ]
+  @spec create_venue(
+          User,
+          attrs :: %{
+            name: String.t(),
+            street: String.t(),
+            city: String.t(),
+            province: String.t(),
+            country: String.t(),
+            postal_code: String.t(),
+            website: String.t(),
+            google_map_url: String.t(),
+            parser_module_name: String.t(),
+            pull_events?: boolean()
+          }
+        ) :: {:ok, Venue} | {:error, Ecto.Changeset.t() | :not_allowed}
+  def create_venue(%User{role: :admin}, attrs) do
+    %Venue{}
+    |> Changeset.cast(attrs, @create_attrs)
+    |> Changeset.validate_required(@create_attrs)
+    |> Repo.insert()
+  end
+
+  def create_venue(_user, _attrs) do
+    {:error, :not_allowed}
   end
 end
