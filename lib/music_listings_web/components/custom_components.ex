@@ -10,8 +10,33 @@ defmodule MusicListingsWeb.CustomComponents do
     router: MusicListingsWeb.Router,
     statics: MusicListingsWeb.static_paths()
 
+  alias MusicListings.Accounts.User
   alias MusicListingsUtilities.DateHelpers
   alias Phoenix.LiveView.JS
+
+  @doc """
+  Scopes the inner element to an admin user, declining to render
+  it for non-admin users
+
+  ## Examples
+
+  <.when_admin current_user={@current_user}>
+    I will only render if a user is logged in and is an admin.
+  </.when_admin>
+  """
+  attr :current_user, :any, required: true
+  slot :inner_block, required: true
+
+  def when_admin(assigns) do
+    ~H"""
+    <%= if admin?(@current_user) do %>
+      {render_slot(@inner_block)}
+    <% end %>
+    """
+  end
+
+  defp admin?(%User{role: :admin}), do: true
+  defp admin?(_user_or_nil), do: false
 
   @doc """
   Renders a page header with an optional description
@@ -552,7 +577,7 @@ defmodule MusicListingsWeb.CustomComponents do
   defp event_title_section(assigns) do
     ~H"""
     <.event_title event={@event} />
-    <%= if @current_user do %>
+    <.when_admin current_user={@current_user}>
       <button
         phx-click="delete-event"
         phx-value-id={@event.id}
@@ -561,7 +586,7 @@ defmodule MusicListingsWeb.CustomComponents do
       >
         Delete
       </button>
-    <% end %>
+    </.when_admin>
     """
   end
 

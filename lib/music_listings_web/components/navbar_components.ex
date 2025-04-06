@@ -9,6 +9,8 @@ defmodule MusicListingsWeb.NavbarComponents do
     router: MusicListingsWeb.Router,
     statics: MusicListingsWeb.static_paths()
 
+  import MusicListingsWeb.CoreComponents, only: [icon: 1]
+  import MusicListingsWeb.CustomComponents, only: [when_admin: 1]
   alias Phoenix.LiveView.JS
 
   @doc """
@@ -32,7 +34,7 @@ defmodule MusicListingsWeb.NavbarComponents do
     <div class="block md:hidden flex flex-auto basis-full overflow-x-auto whitespace-nowrap border-b border-emerald-600 py-4 ">
       <div class="mx-auto flex flex-col items-center px-4">
         <.last_updated_label />
-        <%= if @current_user do %>
+        <.when_admin current_user={@current_user}>
           <div class="w-full flex justify-center">
             <.link
               href={~p"/users/log_out"}
@@ -42,7 +44,7 @@ defmodule MusicListingsWeb.NavbarComponents do
               Log out
             </.link>
           </div>
-        <% end %>
+        </.when_admin>
       </div>
     </div>
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -52,7 +54,7 @@ defmodule MusicListingsWeb.NavbarComponents do
         <div class="absolute inset-y-0 right-0 items-center sm:static sm:inset-auto sm:ml-6 hidden md:block">
           <div class="relative ml-3">
             <.last_updated_label />
-            <%= if @current_user do %>
+            <.when_admin current_user={@current_user}>
               <.link
                 href={~p"/users/log_out"}
                 method="delete"
@@ -60,7 +62,7 @@ defmodule MusicListingsWeb.NavbarComponents do
               >
                 Log out
               </.link>
-            <% end %>
+            </.when_admin>
           </div>
         </div>
       </div>
@@ -85,16 +87,13 @@ defmodule MusicListingsWeb.NavbarComponents do
                 Icon when menu is open.
               -->
         <span id="mobile_menu_is_open_icon" class="hidden">
-          <MusicListingsWeb.CoreComponents.icon name="hero-x-mark" class="h-6 w-6 stroke-current" />
+          <.icon name="hero-x-mark" class="h-6 w-6 stroke-current" />
         </span>
         <!--
                 Icon when menu is closed.
               -->
         <span id="mobile_menu_is_closed_icon" class="block">
-          <MusicListingsWeb.CoreComponents.icon
-            name="hero-bars-3-solid"
-            class="h-6 w-6 stroke-current"
-          />
+          <.icon name="hero-bars-3-solid" class="h-6 w-6 stroke-current" />
         </span>
       </button>
     </div>
@@ -110,11 +109,9 @@ defmodule MusicListingsWeb.NavbarComponents do
           <.main_menu_link link_text="Events" href={~p"/"} />
           <.main_menu_link link_text="Venues" href={~p"/venues"} />
           <.main_menu_link link_text="About" href={~p"/contact"} />
-          <.main_menu_link
-            :if={@current_user}
-            link_text="Submitted Events"
-            href={~p"/submitted_events"}
-          />
+          <.when_admin current_user={@current_user}>
+            <.main_menu_link link_text="Submitted Events" href={~p"/submitted_events"} />
+          </.when_admin>
         </div>
       </div>
     </div>
@@ -128,11 +125,9 @@ defmodule MusicListingsWeb.NavbarComponents do
         <.mobile_menu_link link_text="Events" href={~p"/"} />
         <.mobile_menu_link link_text="Venues" href={~p"/venues"} />
         <.mobile_menu_link link_text="About" href={~p"/contact"} />
-        <.mobile_menu_link
-          :if={@current_user}
-          link_text="Submitted Events"
-          href={~p"/submitted_events"}
-        />
+        <.when_admin current_user={@current_user}>
+          <.mobile_menu_link link_text="Submitted Events" href={~p"/submitted_events"} />
+        </.when_admin>
       </div>
     </div>
     """
@@ -194,7 +189,8 @@ defmodule MusicListingsWeb.NavbarComponents do
   defp toggle_mobile_menu(js \\ %JS{}) do
     js
     |> JS.toggle(to: "#mobile-menu", in: "ease-out duration-100", out: "ease-in duration-75")
-    |> JS.toggle(to: ["#mobile_menu_is_closed_icon", "#mobile_menu_is_open_icon"])
+    |> JS.toggle(to: "#mobile_menu_is_closed_icon")
+    |> JS.toggle(to: "#mobile_menu_is_open_icon")
   end
 
   defp hide_mobile_menu(js \\ %JS{}) do
