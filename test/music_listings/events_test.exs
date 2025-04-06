@@ -88,6 +88,14 @@ defmodule MusicListings.EventsTest do
       :ok
     end
 
+    test "returns error when no user" do
+      assert {:error, :not_allowed} == Events.list_submitted_events(nil)
+    end
+
+    test "returns error when user not an admin" do
+      assert {:error, :not_allowed} == Events.list_submitted_events(%User{role: :regular_user})
+    end
+
     test "lists events sorted by date and title" do
       assert %PagedEvents{
                current_page: 1,
@@ -110,7 +118,7 @@ defmodule MusicListings.EventsTest do
                    date: ~D[2024-08-02]
                  }
                ]
-             } = Events.list_submitted_events()
+             } = Events.list_submitted_events(%User{role: :admin})
     end
   end
 

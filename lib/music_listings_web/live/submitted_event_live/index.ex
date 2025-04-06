@@ -8,12 +8,12 @@ defmodule MusicListingsWeb.SubmittedEventLive.Index do
   end
 
   @impl true
-  def handle_params(params, _uri, socket) do
+  def handle_params(params, _uri, %{assigns: %{current_user: current_user}} = socket) do
     if connected?(socket) do
       case validate(:index, params) do
         {:ok, normalized_params} ->
           paged_events =
-            MusicListings.list_submitted_events(page: normalized_params[:page])
+            MusicListings.list_submitted_events(current_user, page: normalized_params[:page])
 
           socket
           |> update_socket_assigns(paged_events)
@@ -45,7 +45,8 @@ defmodule MusicListingsWeb.SubmittedEventLive.Index do
     |> MusicListings.approve_submitted_event(submitted_event_id)
     |> case do
       {:ok, _event} ->
-        paged_events = MusicListings.list_submitted_events(page: socket.assigns[:page])
+        paged_events =
+          MusicListings.list_submitted_events(current_user, page: socket.assigns[:page])
 
         socket
         |> update_socket_assigns(paged_events)

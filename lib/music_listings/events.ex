@@ -58,7 +58,10 @@ defmodule MusicListings.Events do
     |> where([event], event.venue_id in ^venue_ids)
   end
 
-  def list_submitted_events(opts \\ []) do
+  @spec list_submitted_events(User, list(list_events_opts)) :: PagedEvents.t()
+  def list_submitted_events(user, opts \\ [])
+
+  def list_submitted_events(%User{role: :admin}, opts) do
     page = Keyword.get(opts, :page, @default_page)
     page_size = Keyword.get(opts, :page_size, @default_page_size)
 
@@ -72,6 +75,10 @@ defmodule MusicListings.Events do
       current_page: pagination_result.page_number,
       total_pages: pagination_result.total_pages
     }
+  end
+
+  def list_submitted_events(_user, _opts) do
+    {:error, :not_allowed}
   end
 
   @spec delete_event(User | nil, pos_integer()) :: {:ok, Event} | {:error, :not_allowed}

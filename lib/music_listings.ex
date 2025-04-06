@@ -30,7 +30,8 @@ defmodule MusicListings do
   @spec list_events(list(list_events_opts)) :: PagedEvents.t()
   defdelegate list_events(opts \\ []), to: Events
 
-  defdelegate list_submitted_events(opts \\ []), to: Events
+  # @spec list_submitted_events(User, list(list_events_opts)) :: PagedEvents.t()
+  defdelegate list_submitted_events(user, opts \\ []), to: Events
 
   @spec submit_event(
           attrs :: %{
@@ -47,7 +48,6 @@ defmodule MusicListings do
   @spec delete_event(User | nil, pos_integer()) :: {:ok, Event} | {:error, :not_allowed}
   defdelegate delete_event(user, event_id), to: Events
 
-  # TODO: fix dialyzer error
   # @spec approve_submitted_event(User, pos_integer()) ::
   #         {:ok, Event} | {:error, :not_allowed | :venue_not_found | :submitted_event_not_found}
   defdelegate approve_submitted_event(user, submitted_event_id), to: EventSubmissionService
@@ -59,7 +59,6 @@ defmodule MusicListings do
   @spec get_venue!(pos_integer()) :: Venue
   defdelegate get_venue!(venue_id), to: Venues
 
-  # TODO: fix dialyzer error
   # @spec create_venue(
   #         User,
   #         attrs :: %{
