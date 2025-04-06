@@ -4,44 +4,26 @@ defmodule MusicListings.Parsing.VenueParsers.CastrosLoungeParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
-  import Meeseeks.CSS
-
-  alias MusicListings.HttpClient
-  alias MusicListings.Parsing.ParseHelpers
-  alias MusicListings.Parsing.Performers
-  alias MusicListings.Parsing.Price
-  alias MusicListings.Parsing.Selectors
+  alias MusicListings.Parsing.VenueParsers.BaseParsers.WordpressParser
 
   @impl true
-  def source_url, do: "https://castroslounge.com/events/month/"
+  def source_url, do: "https://castroslounge.com/events/"
 
   @impl true
-  def retrieve_events_fun do
-    fn url -> HttpClient.get(url) end
-  end
+  defdelegate retrieve_events_fun, to: WordpressParser
 
   @impl true
   def example_data_file_location, do: "test/data/castros_lounge/index.html"
 
   @impl true
-  def events(body) do
-    body
-    |> Selectors.match_one(css("script[type=\"application/ld+json\"]"))
-    |> Selectors.data()
-    |> Jason.decode!()
-  end
+  defdelegate events(body), to: WordpressParser
 
   @impl true
-  def next_page_url(_body, _current_url) do
-    nil
-  end
+  defdelegate next_page_url(body, current_url), to: WordpressParser
 
   @impl true
   def event_id(event) do
-    date = event_date(event)
-    time = event_time(event)
-
-    ParseHelpers.build_id_from_venue_and_datetime("castros_lounge", date, time)
+    WordpressParser.event_id(event, "castros_lounge")
   end
 
   @impl true
@@ -50,53 +32,29 @@ defmodule MusicListings.Parsing.VenueParsers.CastrosLoungeParser do
   end
 
   @impl true
-  def event_title(event) do
-    event["name"]
-    |> ParseHelpers.fix_encoding()
-  end
+  defdelegate event_title(event), to: WordpressParser
 
   @impl true
-  def performers(event) do
-    [event["name"]]
-    |> Performers.new()
-  end
+  defdelegate performers(event), to: WordpressParser
 
   @impl true
-  def event_date(event) do
-    event["startDate"]
-    |> NaiveDateTime.from_iso8601!()
-    |> NaiveDateTime.to_date()
-  end
+  defdelegate event_date(event), to: WordpressParser
 
   @impl true
-  def additional_dates(_event) do
-    []
-  end
+  defdelegate additional_dates(event), to: WordpressParser
 
   @impl true
-  def event_time(event) do
-    event["startDate"]
-    |> NaiveDateTime.from_iso8601!()
-    |> NaiveDateTime.to_time()
-  end
+  defdelegate event_time(event), to: WordpressParser
 
   @impl true
-  def price(_event) do
-    Price.unknown()
-  end
+  defdelegate price(event), to: WordpressParser
 
   @impl true
-  def age_restriction(_event) do
-    :unknown
-  end
+  defdelegate age_restriction(event), to: WordpressParser
 
   @impl true
-  def ticket_url(_event) do
-    nil
-  end
+  defdelegate ticket_url(event), to: WordpressParser
 
   @impl true
-  def details_url(event) do
-    event["url"]
-  end
+  defdelegate details_url(event), to: WordpressParser
 end

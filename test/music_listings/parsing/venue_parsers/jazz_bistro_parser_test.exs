@@ -24,7 +24,7 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParserTest do
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://jazzbistro.ca/event-calendar/month/2024-08/" ==
+      assert "https://jazzbistro.ca/event-calendar/" ==
                JazzBistroParser.source_url()
     end
   end
@@ -38,19 +38,28 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParserTest do
   end
 
   describe "next_page_url/2" do
-    setup do
-      %{next_page_url: "https://jazzbistro.ca/event-calendar/month/2024-09/"}
+    test "returns the next page url", %{index_html: index_html} do
+      assert "https://jazzbistro.ca/event-calendar/list/page/2/" ==
+               JazzBistroParser.next_page_url(
+                 index_html,
+                 "https://jazzbistro.ca/event-calendar/"
+               )
     end
 
-    test "returns the next page url", %{index_html: index_html, next_page_url: next_page_url} do
-      assert next_page_url == JazzBistroParser.next_page_url(index_html, nil)
+    test "after grabbing page 3 it returns page 4", %{index_html: index_html} do
+      assert "https://jazzbistro.ca/event-calendar/list/page/4/" ==
+               JazzBistroParser.next_page_url(
+                 index_html,
+                 "https://jazzbistro.ca/event-calendar/list/page/3/"
+               )
     end
 
-    test "returns nil when already processed the next page", %{
-      index_html: index_html,
-      next_page_url: next_page_url
-    } do
-      assert nil == JazzBistroParser.next_page_url(index_html, next_page_url)
+    test "returns the nil after grabbing page 4", %{index_html: index_html} do
+      assert nil ==
+               JazzBistroParser.next_page_url(
+                 index_html,
+                 "https://jazzbistro.ca/event-calendar/list/page/4/"
+               )
     end
   end
 

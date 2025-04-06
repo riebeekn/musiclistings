@@ -4,27 +4,13 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
-  import Meeseeks.CSS
-
-  alias MusicListings.HttpClient
-  alias MusicListings.Parsing.ParseHelpers
-  alias MusicListings.Parsing.Performers
-  alias MusicListings.Parsing.Price
-  alias MusicListings.Parsing.Selectors
-  alias MusicListingsUtilities.DateHelpers
+  alias MusicListings.Parsing.VenueParsers.BaseParsers.WordpressParser
 
   @impl true
-  def source_url do
-    today = DateHelpers.today()
-    padded_month_string = today.month |> Integer.to_string() |> String.pad_leading(2, "0")
-
-    "https://jazzbistro.ca/event-calendar/month/#{today.year}-#{padded_month_string}/"
-  end
+  def source_url, do: "https://jazzbistro.ca/event-calendar/"
 
   @impl true
-  def retrieve_events_fun do
-    fn url -> HttpClient.get(url) end
-  end
+  defdelegate retrieve_events_fun, to: WordpressParser
 
   @impl true
   def example_data_file_location, do: "test/data/jazz_bistro/index.html"
@@ -32,33 +18,16 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParser do
   @impl true
   def events(body) do
     body
-    |> Selectors.match_one(css("script[type=\"application/ld+json\"]"))
-    |> Selectors.data()
-    |> Jason.decode!()
+    |> WordpressParser.events()
     |> Enum.filter(&(&1["@type"] == "Event"))
   end
 
   @impl true
-  def next_page_url(_body, current_url) do
-    next_month = DateHelpers.today() |> Date.shift(month: 1)
-    padded_month_string = next_month.month |> Integer.to_string() |> String.pad_leading(2, "0")
-
-    next_page_url =
-      "https://jazzbistro.ca/event-calendar/month/#{next_month.year}-#{padded_month_string}/"
-
-    if current_url == next_page_url do
-      nil
-    else
-      next_page_url
-    end
-  end
+  defdelegate next_page_url(body, current_url), to: WordpressParser
 
   @impl true
   def event_id(event) do
-    date = event_date(event)
-    time = event_time(event)
-
-    ParseHelpers.build_id_from_venue_and_datetime("jazz_bistro", date, time)
+    WordpressParser.event_id(event, "jazz_bistro")
   end
 
   @impl true
@@ -67,53 +36,29 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParser do
   end
 
   @impl true
-  def event_title(event) do
-    event["name"]
-    |> ParseHelpers.fix_encoding()
-  end
+  defdelegate event_title(event), to: WordpressParser
 
   @impl true
-  def performers(event) do
-    [event_title(event)]
-    |> Performers.new()
-  end
+  defdelegate performers(event), to: WordpressParser
 
   @impl true
-  def event_date(event) do
-    event["startDate"]
-    |> NaiveDateTime.from_iso8601!()
-    |> NaiveDateTime.to_date()
-  end
+  defdelegate event_date(event), to: WordpressParser
 
   @impl true
-  def additional_dates(_event) do
-    []
-  end
+  defdelegate additional_dates(event), to: WordpressParser
 
   @impl true
-  def event_time(event) do
-    event["startDate"]
-    |> NaiveDateTime.from_iso8601!()
-    |> NaiveDateTime.to_time()
-  end
+  defdelegate event_time(event), to: WordpressParser
 
   @impl true
-  def price(_event) do
-    Price.unknown()
-  end
+  defdelegate price(event), to: WordpressParser
 
   @impl true
-  def age_restriction(_event) do
-    :unknown
-  end
+  defdelegate age_restriction(event), to: WordpressParser
 
   @impl true
-  def ticket_url(_event) do
-    nil
-  end
+  defdelegate ticket_url(event), to: WordpressParser
 
   @impl true
-  def details_url(event) do
-    event["url"]
-  end
+  defdelegate details_url(event), to: WordpressParser
 end

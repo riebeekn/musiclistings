@@ -23,7 +23,7 @@ defmodule MusicListings.Parsing.VenueParsers.CastrosLoungeParserTest do
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://castroslounge.com/events/month/" == CastrosLoungeParser.source_url()
+      assert "https://castroslounge.com/events/" == CastrosLoungeParser.source_url()
     end
   end
 
@@ -37,7 +37,27 @@ defmodule MusicListings.Parsing.VenueParsers.CastrosLoungeParserTest do
 
   describe "next_page_url/2" do
     test "returns the next page url", %{index_html: index_html} do
-      assert nil == CastrosLoungeParser.next_page_url(index_html, nil)
+      assert "https://castroslounge.com/events/list/page/2/" ==
+               CastrosLoungeParser.next_page_url(
+                 index_html,
+                 "https://castroslounge.com/events/"
+               )
+    end
+
+    test "after grabbing page 3 it returns page 4", %{index_html: index_html} do
+      assert "https://castroslounge.com/events/list/page/4/" ==
+               CastrosLoungeParser.next_page_url(
+                 index_html,
+                 "https://castroslounge.com/events/list/page/3/"
+               )
+    end
+
+    test "returns the nil after grabbing page 4", %{index_html: index_html} do
+      assert nil ==
+               CastrosLoungeParser.next_page_url(
+                 index_html,
+                 "https://castroslounge.com/events/list/page/4/"
+               )
     end
   end
 

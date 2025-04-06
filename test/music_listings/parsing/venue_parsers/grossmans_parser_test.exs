@@ -40,7 +40,7 @@ defmodule MusicListings.Parsing.VenueParsers.GrossmansParserTest do
       assert "https://grossmanstavern.com/events/list/page/2/" ==
                GrossmansParser.next_page_url(
                  index_html,
-                 "https://grossmanstavern.com/events/list/page/1/"
+                 "https://grossmanstavern.com/events/"
                )
     end
 
