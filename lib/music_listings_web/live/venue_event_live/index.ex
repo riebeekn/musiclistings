@@ -16,8 +16,7 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
         paged_events =
           MusicListings.list_events(
             page: normalized_params[:page],
-            venue_ids: [normalized_params.venue_id],
-            order_by: [:date, :time]
+            venue_ids: [normalized_params.venue_id]
           )
 
         socket
@@ -47,13 +46,18 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
     current_user
     |> MusicListings.delete_event(event_id)
     |> case do
-      {:ok, deleted_event} ->
-        events =
-          socket.assigns.events
-          |> Enum.reject(&(&1.id == deleted_event.id))
+      {:ok, _deleted_event} ->
+        paged_events =
+          MusicListings.list_events(
+            page: socket.assigns[:current_page],
+            venue_ids: [socket.assigns[:venue].id]
+          )
 
         socket
-        |> assign(:events, events)
+        |> assign(
+          :events,
+          paged_events.events |> Enum.flat_map(fn {_date, events} -> events end)
+        )
         |> noreply()
 
       _no_change ->
