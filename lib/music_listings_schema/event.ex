@@ -5,6 +5,7 @@ defmodule MusicListingsSchema.Event do
   use MusicListingsSchema.Schema
 
   @type t :: %__MODULE__{
+          id: pos_integer(),
           external_id: String.t(),
           title: String.t(),
           headliner: String.t(),

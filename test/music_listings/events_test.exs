@@ -3,19 +3,22 @@ defmodule MusicListings.EventsTest do
 
   alias MusicListings.Accounts.User
   alias MusicListings.Events
+  alias MusicListings.Events.EventInfo
   alias MusicListings.Events.PagedEvents
+  alias MusicListings.Events.ShowTimeInfo
   alias MusicListingsSchema.Event
   alias MusicListingsSchema.SubmittedEvent
+  alias MusicListingsSchema.Venue
   alias MusicListingsUtilities.DateHelpers
 
   describe "list_events/1" do
     setup do
       venue_1 = insert(:venue)
       venue_2 = insert(:venue)
-      insert(:event, venue: venue_1, date: ~D[2024-07-30], title: "ev0")
-      insert(:event, venue: venue_1, date: ~D[2024-08-01], title: "ev1")
-      insert(:event, venue: venue_2, date: ~D[2024-08-01], title: "ev2")
-      insert(:event, venue: venue_2, date: ~D[2024-08-02], title: "ev3")
+      insert(:event, venue: venue_1, date: ~D[2024-07-30], title: "ev0", time: ~T[18:00:00])
+      insert(:event, venue: venue_1, date: ~D[2024-08-01], title: "ev1", time: ~T[19:00:00])
+      insert(:event, venue: venue_2, date: ~D[2024-08-01], title: "ev2", time: ~T[20:00:00])
+      insert(:event, venue: venue_2, date: ~D[2024-08-02], title: "ev3", time: ~T[12:00:00])
 
       insert(:event,
         venue: venue_2,
@@ -37,23 +40,56 @@ defmodule MusicListings.EventsTest do
                events: [
                  {~D[2024-08-01],
                   [
-                    %Event{
+                    %EventInfo{
                       title: "ev1",
                       date: ~D[2024-08-01],
-                      venue_id: ^venue_1_id
+                      venue: %Venue{id: ^venue_1_id},
+                      showtimes: [%ShowTimeInfo{time: ~T[19:00:00]}]
                     },
-                    %Event{
+                    %EventInfo{
                       title: "ev2",
                       date: ~D[2024-08-01],
-                      venue_id: ^venue_2_id
+                      venue: %Venue{id: ^venue_2_id},
+                      showtimes: [%ShowTimeInfo{time: ~T[20:00:00]}]
                     }
                   ]},
                  {~D[2024-08-02],
                   [
-                    %Event{
+                    %EventInfo{
                       title: "ev3",
                       date: ~D[2024-08-02],
-                      venue_id: ^venue_2_id
+                      venue: %Venue{id: ^venue_2_id},
+                      showtimes: [%ShowTimeInfo{time: ~T[12:00:00]}]
+                    }
+                  ]}
+               ]
+             } = Events.list_events()
+    end
+
+    test "handles events with multiple showtimes for the same date" do
+      Repo.delete_all(Event)
+      e1 = insert(:event, date: ~D[2024-08-01], time: ~T[16:00:00], title: "ev5")
+      e2 = insert(:event, date: ~D[2024-08-01], time: ~T[20:00:00], title: "ev5")
+      e3 = insert(:event, date: ~D[2024-08-01], time: ~T[14:00:00], title: "ev5")
+
+      e1_id = e1.id
+      e2_id = e2.id
+      e3_id = e3.id
+
+      assert %PagedEvents{
+               current_page: 1,
+               total_pages: 1,
+               events: [
+                 {~D[2024-08-01],
+                  [
+                    %EventInfo{
+                      title: "ev5",
+                      date: ~D[2024-08-01],
+                      showtimes: [
+                        %ShowTimeInfo{event_id: ^e3_id, time: ~T[14:00:00]},
+                        %ShowTimeInfo{event_id: ^e1_id, time: ~T[16:00:00]},
+                        %ShowTimeInfo{event_id: ^e2_id, time: ~T[20:00:00]}
+                      ]
                     }
                   ]}
                ]
@@ -61,16 +97,16 @@ defmodule MusicListings.EventsTest do
     end
 
     test "can filter by venue", %{venue_1_id: venue_1_id} do
-      assert %MusicListings.Events.PagedEvents{
+      assert %PagedEvents{
                current_page: 1,
                total_pages: 1,
                events: [
                  {~D[2024-08-01],
                   [
-                    %MusicListingsSchema.Event{
+                    %EventInfo{
                       title: "ev1",
                       date: ~D[2024-08-01],
-                      venue_id: ^venue_1_id
+                      venue: %Venue{id: ^venue_1_id}
                     }
                   ]}
                ]

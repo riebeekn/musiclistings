@@ -6,7 +6,9 @@ defmodule MusicListings.Events do
 
   alias Ecto.Changeset
   alias MusicListings.Accounts.User
+  alias MusicListings.Events.EventInfo
   alias MusicListings.Events.PagedEvents
+  alias MusicListings.Events.ShowTimeInfo
   alias MusicListings.Repo
   alias MusicListingsSchema.Event
   alias MusicListingsSchema.SubmittedEvent
@@ -41,7 +43,40 @@ defmodule MusicListings.Events do
 
     grouped_events =
       pagination_result.entries
+      |> Enum.group_by(&{&1.date, &1.title})
+      |> Enum.map(fn {{date, title}, events} ->
+        [first_show | _rest] = events
+
+        shows =
+          events
+          |> Enum.map(fn event ->
+            %ShowTimeInfo{
+              event_id: event.id,
+              time: event.time,
+              ticket_url: event.ticket_url,
+              details_url: event.details_url
+            }
+          end)
+          |> Enum.sort_by(& &1.time)
+
+        %EventInfo{
+          date: date,
+          title: title,
+          openers: first_show.openers,
+          venue: first_show.venue,
+          price_lo: first_show.price_lo,
+          price_hi: first_show.price_hi,
+          price_format: first_show.price_format,
+          age_restriction: first_show.age_restriction,
+          showtimes: shows,
+          has_multiple_showtimes?: Enum.count(shows) > 1
+        }
+      end)
       |> Enum.group_by(& &1.date)
+      |> Enum.map(fn {date, events} ->
+        sorted_events = Enum.sort_by(events, & &1.title)
+        {date, sorted_events}
+      end)
       |> Enum.sort_by(fn {date, _events} -> date end, Date)
 
     %PagedEvents{

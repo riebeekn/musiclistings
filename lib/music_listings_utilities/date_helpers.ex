@@ -70,8 +70,6 @@ defmodule MusicListingsUtilities.DateHelpers do
   end
 
   def format_time(%Time{} = time) do
-    ~D[2000-01-01]
-    |> DateTime.new!(time)
-    |> Calendar.strftime("%-I:%M%p")
+    Calendar.strftime(time, "%-I:%M%p")
   end
 end

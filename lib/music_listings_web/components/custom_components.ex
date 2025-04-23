@@ -395,7 +395,7 @@ defmodule MusicListingsWeb.CustomComponents do
         </dt>
         <dl class="divide-y divide-zinc-600 mb-12">
           <%= for event <- events do %>
-            <div id={"event-#{event.id}"} class="py-2">
+            <div class="py-2">
               <dt class="flex items-center justify-between sm:justify-start sm:gap-x-2">
                 <.event_venue venue={event.venue} />
                 <.event_age_restriction age_restriction={event.age_restriction} />
@@ -403,16 +403,19 @@ defmodule MusicListingsWeb.CustomComponents do
               <dd class="mt-0 sm:mt-1 flex justify-between">
                 <.event_title_section event={event} current_user={@current_user} />
               </dd>
-              <dd class="flex items-center gap-x-2 mt-0 sm:mt-1">
-                <.event_time time={event.time} />
-                <.event_ticket_url
-                  ticket_url={event.ticket_url}
-                  price_format={event.price_format}
-                  price_lo={event.price_lo}
-                  price_hi={event.price_hi}
-                />
-                <.event_details_url details_url={event.details_url} />
-              </dd>
+              <%= for showtime <- event.showtimes do %>
+                <dd id={"event-#{showtime.event_id}"} class="flex items-center gap-x-2 mt-0 sm:mt-1">
+                  <.event_time time={showtime.time} />
+                  <.event_ticket_url
+                    ticket_url={showtime.ticket_url}
+                    price_format={event.price_format}
+                    price_lo={event.price_lo}
+                    price_hi={event.price_hi}
+                  />
+                  <.event_details_url details_url={showtime.details_url} />
+                  <.delete_event_link current_user={@current_user} event_id={showtime.event_id} />
+                </dd>
+              <% end %>
             </div>
           <% end %>
         </dl>
@@ -530,11 +533,10 @@ defmodule MusicListingsWeb.CustomComponents do
     ~H"""
     <dl class="divide-y divide-zinc-600">
       <%= for event <- @events do %>
-        <div id={"event-#{event.id}"} class="py-2 sm:py-4">
+        <div class="py-2 sm:py-4">
           <dt class="flex items-center justify-between sm:justify-start sm:gap-x-2">
             <div class="flex items-center gap-x-1">
               <.event_date date={event.date} />
-              <.event_time time={event.time} />
             </div>
             <div>
               <.event_age_restriction age_restriction={event.age_restriction} />
@@ -543,15 +545,19 @@ defmodule MusicListingsWeb.CustomComponents do
           <dd class="mt-0 sm:mt-1 flex justify-between">
             <.event_title_section event={event} current_user={@current_user} />
           </dd>
-          <dd class="flex items-center gap-x-2 mt-0 sm:mt-1">
-            <.event_ticket_url
-              ticket_url={event.ticket_url}
-              price_format={event.price_format}
-              price_lo={event.price_lo}
-              price_hi={event.price_hi}
-            />
-            <.event_details_url details_url={event.details_url} />
-          </dd>
+          <%= for showtime <- event.showtimes do %>
+            <dd id={"event-#{showtime.event_id}"} class="flex items-center gap-x-2 mt-0 sm:mt-1">
+              <.event_time time={showtime.time} />
+              <.event_ticket_url
+                ticket_url={showtime.ticket_url}
+                price_format={event.price_format}
+                price_lo={event.price_lo}
+                price_hi={event.price_hi}
+              />
+              <.event_details_url details_url={showtime.details_url} />
+              <.delete_event_link current_user={@current_user} event_id={showtime.event_id} />
+            </dd>
+          <% end %>
         </div>
       <% end %>
     </dl>
@@ -577,16 +583,6 @@ defmodule MusicListingsWeb.CustomComponents do
   defp event_title_section(assigns) do
     ~H"""
     <.event_title event={@event} />
-    <.when_admin current_user={@current_user}>
-      <button
-        phx-click="delete-event"
-        phx-value-id={@event.id}
-        data-confirm="Are you sure?"
-        class="text-white"
-      >
-        Delete
-      </button>
-    </.when_admin>
     """
   end
 
@@ -678,7 +674,9 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_time(assigns) do
     ~H"""
-    <time class="text-xs sm:text-sm text-zinc-400">{DateHelpers.format_time(@time)}</time>
+    <time class="text-xs sm:text-sm text-zinc-400 font-sans [font-variant-numeric:tabular-nums]">
+      {DateHelpers.format_time(@time)}
+    </time>
     """
   end
 
@@ -711,6 +709,21 @@ defmodule MusicListingsWeb.CustomComponents do
   defp event_price(%{price_format: :variable} = assigns) do
     ~H"""
     ${@price_lo}+
+    """
+  end
+
+  defp delete_event_link(assigns) do
+    ~H"""
+    <.when_admin current_user={@current_user}>
+      <button
+        phx-click="delete-event"
+        phx-value-id={@event_id}
+        data-confirm="Are you sure?"
+        class="text-white"
+      >
+        Delete
+      </button>
+    </.when_admin>
     """
   end
 end

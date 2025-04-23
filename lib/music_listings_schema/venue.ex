@@ -4,6 +4,20 @@ defmodule MusicListingsSchema.Venue do
   """
   use MusicListingsSchema.Schema
 
+  @type t :: %__MODULE__{
+          id: pos_integer(),
+          name: String.t(),
+          pull_events?: boolean(),
+          parser_module_name: String.t(),
+          street: String.t(),
+          city: String.t(),
+          province: String.t(),
+          country: String.t(),
+          postal_code: String.t(),
+          google_map_url: String.t(),
+          website: String.t()
+        }
+
   schema "venues" do
     field :name, :string
     field :pull_events?, :boolean, source: :pull_events
