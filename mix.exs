@@ -27,7 +27,8 @@ defmodule MusicListings.MixProject do
       dialyzer: [
         plt_local_path: "_dialyzer",
         plt_core_path: "_dialyzer",
-        plt_add_apps: [:mix]
+        plt_add_apps: [:mix],
+        ignore_warnings: ".dialyzer_ignore.exs"
       ]
     ]
   end
