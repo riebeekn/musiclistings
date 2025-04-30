@@ -60,7 +60,8 @@ config :logger, :console,
 
 # Configure HB logger
 config :honeybadger,
-  use_logger: true
+  use_logger: true,
+  insights_enabled: true
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
