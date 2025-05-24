@@ -13,7 +13,7 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
   alias MusicListings.Parsing.Selectors
 
   @impl true
-  def source_url, do: "https://www.thepilot.ca/happening-at-the-pilot"
+  def source_url, do: "https://www.thepilot.ca/events"
 
   @impl true
   def retrieve_events_fun do
@@ -25,20 +25,34 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
 
   @impl true
   def events(body) do
-    Selectors.all_matches(
-      body,
-      css("div#scvr-section-013c83e7-396f-4090-a781-83f7097a960c p.fr-tag")
-    )
-    |> Enum.reject(&empty?/1)
+    body
+    |> Selectors.all_matches(css("script[type=\"application/ld+json\"]"))
+    |> Enum.flat_map(fn script ->
+      case Selectors.data(script) do
+        nil ->
+          []
+
+        json ->
+          json
+          |> remove_trailing_commas()
+          |> Jason.decode()
+          |> case do
+            {:ok, items} when is_list(items) ->
+              Enum.filter(items, &(&1["@type"] == "Event"))
+
+            {:ok, item} when is_map(item) ->
+              if item["@type"] == "Event", do: [item], else: []
+
+            _ ->
+              []
+          end
+      end
+    end)
   end
 
-  defp empty?(result) do
-    content = Selectors.text(result) |> String.trim()
-    content == "" || has_no_title?(result)
-  end
-
-  defp has_no_title?(result) do
-    Selectors.text(result, css(".fr-tag strong, .fr-tag b")) == nil
+  defp remove_trailing_commas(json) do
+    # Removes trailing commas before } or ]
+    Regex.replace(~r/,\s*([\]}])/m, json, "\\1")
   end
 
   @impl true
@@ -60,22 +74,8 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
 
   @impl true
   def event_title(event) do
-    title =
-      event
-      |> Selectors.text(css(".fr-tag strong, .fr-tag b"))
-      |> String.replace("\u00A0", " ")
-      |> String.replace(".", "")
-      |> String.trim_leading("- ")
-
-    if title == "" || title == "-" do
-      event
-      |> Selectors.all_matches(css(".fr-tag strong"))
-      |> Enum.at(1)
-      |> Selectors.text(css("strong"))
-      |> String.replace(".", "")
-    else
-      title
-    end
+    event["name"]
+    |> ParseHelpers.fix_encoding()
   end
 
   @impl true
@@ -86,15 +86,18 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
 
   @impl true
   def event_date(event) do
-    [full_date_string | _rest] =
-      event
-      |> Selectors.text(css(".fr-tag"))
-      |> String.split("-")
+    event
+    |> parse_datetime()
+    |> DateTime.to_date()
+  end
 
-    [_day_of_week, month_string, day_string] =
-      full_date_string |> String.trim() |> String.replace(",", " ") |> String.split(~r/\p{Zs}+/u)
+  defp parse_datetime(event) do
+    {:ok, datetime, _} =
+      event["startDate"]
+      |> String.replace(~r/(\+|\-)(\d{2})(\d{2})$/, "\\1\\2:\\3")
+      |> DateTime.from_iso8601()
 
-    ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
+    datetime
   end
 
   @impl true
@@ -103,8 +106,11 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
   end
 
   @impl true
-  def event_time(_event) do
-    nil
+  def event_time(event) do
+    event
+    |> parse_datetime()
+    |> DateTime.to_time()
+    |> Map.put(:second, 0)
   end
 
   @impl true
@@ -123,7 +129,7 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
   end
 
   @impl true
-  def details_url(_event) do
-    "https://www.thepilot.ca/happening-at-the-pilot"
+  def details_url(event) do
+    event["url"]
   end
 end

@@ -24,7 +24,7 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParserTest do
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://www.thepilot.ca/happening-at-the-pilot" == PilotParser.source_url()
+      assert "https://www.thepilot.ca/events" == PilotParser.source_url()
     end
   end
 
@@ -32,7 +32,7 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParserTest do
     test "returns expected events", %{index_html: index_html} do
       events = PilotParser.events(index_html)
 
-      assert 9 == Enum.count(events)
+      assert 18 == Enum.count(events)
     end
   end
 
@@ -44,26 +44,27 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "pilot_2025_01_25" == PilotParser.event_id(event)
+      assert "pilot_2025_05_02" == PilotParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "pilot_2025_01_25" == PilotParser.ignored_event_id(event)
+      assert "pilot_2025_05_02" == PilotParser.ignored_event_id(event)
     end
   end
 
   describe "event_title/1" do
     test "returns event title", %{event: event} do
-      assert "SKA! With SkaFire Roots" == PilotParser.event_title(event)
+      assert "LIVE MUSIC - GENERATOR PARTY - Presents: NIRVANA vs. HOLE!" ==
+               PilotParser.event_title(event)
     end
   end
 
   describe "performers/1" do
     test "returns the event performers", %{event: event} do
       assert %Performers{
-               headliner: "SKA! With SkaFire Roots",
+               headliner: "LIVE MUSIC - GENERATOR PARTY - Presents: NIRVANA vs. HOLE!",
                openers: []
              } == PilotParser.performers(event)
     end
@@ -71,7 +72,7 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParserTest do
 
   describe "event_date/1" do
     test "returns the event date", %{event: event} do
-      assert ~D[2025-01-25] == PilotParser.event_date(event)
+      assert ~D[2025-05-02] == PilotParser.event_date(event)
     end
   end
 
@@ -83,7 +84,7 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParserTest do
 
   describe "event_time/1" do
     test "returns the event start time", %{event: event} do
-      assert nil == PilotParser.event_time(event)
+      assert ~T[20:00:00] == PilotParser.event_time(event)
     end
   end
 
@@ -108,7 +109,8 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParserTest do
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert "https://www.thepilot.ca/happening-at-the-pilot" == PilotParser.details_url(event)
+      assert "https://thepilot.ca/events/18490/live-music-cabin-fever-copy-2" ==
+               PilotParser.details_url(event)
     end
   end
 end
