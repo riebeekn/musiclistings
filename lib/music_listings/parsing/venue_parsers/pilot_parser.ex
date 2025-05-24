@@ -36,18 +36,23 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
           json
           |> remove_trailing_commas()
           |> Jason.decode()
-          |> case do
-            {:ok, items} when is_list(items) ->
-              Enum.filter(items, &(&1["@type"] == "Event"))
-
-            {:ok, item} when is_map(item) ->
-              if item["@type"] == "Event", do: [item], else: []
-
-            _ ->
-              []
-          end
+          |> process_decoded_data()
       end
     end)
+  end
+
+  defp process_decoded_data(data) do
+    data
+    |> case do
+      {:ok, items} when is_list(items) ->
+        Enum.filter(items, &(&1["@type"] == "Event"))
+
+      {:ok, item} when is_map(item) ->
+        if item["@type"] == "Event", do: [item], else: []
+
+      _no_events ->
+        []
+    end
   end
 
   defp remove_trailing_commas(json) do
@@ -92,7 +97,7 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParser do
   end
 
   defp parse_datetime(event) do
-    {:ok, datetime, _} =
+    {:ok, datetime, _offset} =
       event["startDate"]
       |> String.replace(~r/(\+|\-)(\d{2})(\d{2})$/, "\\1\\2:\\3")
       |> DateTime.from_iso8601()
