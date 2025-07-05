@@ -57,16 +57,6 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
     |> Performers.new()
   end
 
-  # @impl true
-  # def event_date(event) do
-  #   date_string =
-  #     if event["fm_date"] == [""], do: [event["fm_recurring_start"]], else: event["fm_date"]
-  #
-  #   [year_string, month_string, day_string] = date_string |> Enum.at(0) |> String.split("-")
-  #
-  #   ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
-  # end
-
   @impl true
   def event_date(event) do
     if Application.get_env(:music_listings, :env) == :test do
@@ -80,10 +70,10 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
         {:ok, %{body: body}} ->
           extract_date_from_event_page(body)
 
-        _ ->
+        _fallback ->
           # Fall back to post date if we can't get the event page
           post_date_string = event["date"]
-          [date_part, _] = String.split(post_date_string, "T")
+          [date_part, _rest] = String.split(post_date_string, "T")
           [year_string, month_string, day_string] = String.split(date_part, "-")
 
           ParseHelpers.build_date_from_year_month_day_strings(
@@ -100,24 +90,24 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
     date_regex = ~r/(\w+)\.\s+(\d+),\s+(\d+:\d+[AP]M)/i
 
     case Regex.run(date_regex, body) do
-      [_, month_string, day_string, _time_string] ->
+      [_ign, month_string, day_string, _time_string] ->
         # If date is found, parse it (year is assumed to be current or next year)
         ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
 
-      _ ->
+      _fallback ->
         # If we can't find the date pattern, look for date in image URL or title
         # Images often have names like "thumbnail_07-July-04-2025-Cicadachar"
         image_date_regex = ~r/(\w+)-(\d+)-(\d{4})/i
 
         case Regex.run(image_date_regex, body) do
-          [_, month_string, day_string, year_string] ->
+          [_ign, month_string, day_string, year_string] ->
             ParseHelpers.build_date_from_year_month_day_strings(
               year_string,
               month_string,
               day_string
             )
 
-          _ ->
+          _fallback ->
             # Default to today if we can't find any date information
             Date.utc_today()
         end
