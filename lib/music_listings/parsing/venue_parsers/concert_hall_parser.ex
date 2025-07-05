@@ -25,8 +25,10 @@ defmodule MusicListings.Parsing.VenueParsers.ConcertHallParser do
 
   @impl true
   def events(body) do
+    # body
+    # |> Selectors.all_matches(css(".event-listing"))
     body
-    |> Selectors.all_matches(css("script[type=\"application/ld+json\"]"))
+    |> Selectors.all_matches(css(".event-listing script[type=\"application/ld+json\"]"))
     |> Selectors.data()
     |> Enum.map(&(&1 |> ParseHelpers.strip_extra_quotes() |> Jason.decode!()))
   end
@@ -84,8 +86,9 @@ defmodule MusicListings.Parsing.VenueParsers.ConcertHallParser do
   end
 
   @impl true
-  def price(_event) do
-    Price.unknown()
+  def price(event) do
+    event["offers"]["price"]
+    |> Price.new()
   end
 
   @impl true

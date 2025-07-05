@@ -33,6 +33,9 @@ defmodule MusicListings.Parsing.ParseHelpers do
       end)
 
     cleaned_json
+    |> String.replace(~r/,\s*([}\]])/, "\\1")
+    |> String.replace(~r/""+/, "\"")
+    |> String.replace(~r/,\s*"/, ", \"")
   end
 
   @spec replace_punctuation_and_spaces(String.t()) :: String.t()
