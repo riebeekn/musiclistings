@@ -97,7 +97,8 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
       _fallback ->
         # If we can't find the date pattern, look for date in image URL or title
         # Images often have names like "thumbnail_07-July-04-2025-Cicadachar"
-        image_date_regex = ~r/(\w+)-(\d+)-(\d{4})/i
+        image_date_regex =
+          ~r/\b(January|February|March|April|May|June|July|August|September|October|November|December)[-_](\d{1,2})[-_](\d{4})\b/i
 
         case Regex.run(image_date_regex, body) do
           [_ign, month_string, day_string, year_string] ->
