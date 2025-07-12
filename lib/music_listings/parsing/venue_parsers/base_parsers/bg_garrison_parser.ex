@@ -47,16 +47,65 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.BgGarrisonParser do
   end
 
   def event_date(event) do
-    [_day_of_week, month_string, day_string] =
-      event
-      |> Selectors.text(css("#calendar_date"))
-      |> String.split()
+    date_parts = split_event_date_into_parts(event)
 
-    ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
+    cond do
+      # Range: THURSDAY OCTOBER 02 - SATURDAY OCTOBER 04
+      date_range?(date_parts) ->
+        [_ignore_1, month1, day1, _ignore_2, _ignore_3, _ignore_4, _ignore_5] = date_parts
+        ParseHelpers.build_date_from_month_day_strings(month1, day1)
+
+      # Standard: THURSDAY OCTOBER 02
+      single_date?(date_parts) ->
+        [_weekday, month, day] = date_parts
+        ParseHelpers.build_date_from_month_day_strings(month, day)
+
+      true ->
+        raise "Unrecognized date format: #{inspect(date_parts)}"
+    end
   end
 
-  def additional_dates(_event) do
-    []
+  def additional_dates(event) do
+    date_parts = split_event_date_into_parts(event)
+
+    if date_range?(date_parts) do
+      parse_additional_dates(date_parts)
+    else
+      []
+    end
+  end
+
+  defp parse_additional_dates(date_parts) do
+    [_wday1, month1, day1, "-", _wday2, month2, day2] = date_parts
+
+    {start_day, _remainder} = Integer.parse(day1)
+    {end_day, _remainder} = Integer.parse(day2)
+
+    start_day..end_day
+    # skip the first day
+    |> Enum.drop(1)
+    |> Enum.map(fn day ->
+      m = if month1 != month2, do: month2, else: month1
+      ParseHelpers.build_date_from_month_day_strings(m, Integer.to_string(day))
+    end)
+  end
+
+  defp date_range?(date_parts), do: Enum.count(date_parts) >= 7
+  defp single_date?(date_parts), do: Enum.count(date_parts) == 3
+
+  defp split_event_date_into_parts(event) do
+    event
+    |> Selectors.text(css("#calendar_date"))
+    |> String.replace(~r/\s+/, " ")
+    |> String.upcase()
+    |> String.split(" ", trim: true)
+    |> Enum.map(&normalize_day_string/1)
+  end
+
+  defp normalize_day_string(str) do
+    # Fix common OCR-ish typo: "o2" → "02"
+    str
+    |> String.replace(~r/\Ao(\d)\z/i, "0\\1")
   end
 
   def event_time(_event) do
