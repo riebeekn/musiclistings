@@ -25,7 +25,7 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.ToLiveParser do
     body["items"]
     |> Enum.reject(
       &(&1["fields"]["eventStatus"] == "Cancelled" || &1["fields"]["label1"] == "Cancelled" ||
-          &1["fields"]["label1"] == "Postponed")
+          &1["fields"]["label1"] == "Postponed" || is_nil(&1["fields"]["dateTime"]))
     )
   end
 
