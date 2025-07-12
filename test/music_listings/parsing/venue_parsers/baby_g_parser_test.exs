@@ -56,15 +56,15 @@ defmodule MusicListings.Parsing.VenueParsers.BabyGParserTest do
 
   describe "event_title/1" do
     test "returns event title", %{event: event} do
-      assert "URBAN HEAT" == BabyGParser.event_title(event)
+      assert "PROJECT NOWHERE III" == BabyGParser.event_title(event)
     end
   end
 
   describe "performers/1" do
     test "returns the event performers", %{event: event} do
       assert %Performers{
-               headliner: "URBAN HEAT",
-               openers: ["WINGTIPS GVLLOWS"]
+               headliner: "PROJECT NOWHERE III",
+               openers: ["Over 50+ artists TBA"]
              } == BabyGParser.performers(event)
     end
   end
@@ -77,7 +77,7 @@ defmodule MusicListings.Parsing.VenueParsers.BabyGParserTest do
 
   describe "additional_dates/1" do
     test "returns a list of additional dates", %{event: event} do
-      assert [] == BabyGParser.additional_dates(event)
+      assert [~D[2024-10-03], ~D[2024-10-04]] == BabyGParser.additional_dates(event)
     end
   end
 
@@ -102,7 +102,7 @@ defmodule MusicListings.Parsing.VenueParsers.BabyGParserTest do
 
   describe "ticket_url/1" do
     test "returns the event ticket url", %{event: event} do
-      assert "https:\/\/link.dice.fm/o26378d291e9" ==
+      assert "https:\/\/link.dice.fm/g1ecc15b4fde" ==
                BabyGParser.ticket_url(event)
     end
   end
