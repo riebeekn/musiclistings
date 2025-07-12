@@ -318,6 +318,270 @@
         "locale": "en-US"
       },
       "fields": {
+        "id": "Missing datetime field - Xenia Concerts January 2025",
+        "billingName": "Xenia Concerts & TO Live present: An Adaptive Concert with Jazz Is What?!",
+        "tileDescription": "Join us to hear Jazz is What?! and let them take you on a fun-filled journey with song, music, and interactive musical activities!",
+        "subTitle": "meridian hall, toronto, Xenia Concerts Presents: An Adaptive Concert with Jazz Is What?!, Family-Friendly, Accessible, Free, concert",
+        "image": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Asset",
+            "id": "2n0tA84DGA3FGwYXe4b8tW"
+          }
+        },
+        "squareImage": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Asset",
+            "id": "2n0tA84DGA3FGwYXe4b8tW"
+          }
+        },
+        "rectangleImage": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Asset",
+            "id": "56myfgANdVzemyI7RHE5jC"
+          }
+        },
+        "longRectangleImage": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Asset",
+            "id": "5xNRkWN1ov3jER7WfC6g83"
+          }
+        },
+        "bannerRectangleImage": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Asset",
+            "id": "6AVYrOv31ZonIEVx855t7"
+          }
+        },
+        "label1": "On Sale",
+        "ctaLabel": "11 am Registration",
+        "ctaLabelUrl1": "External:https://www.eventbrite.ca/e/xenia-concerts-presents-an-adaptive-concert-with-jazz-is-what-tickets-989113784957?aff=oddtdtcreator",
+        "ctaLabel1HideAfterDate": true,
+        "ctaLabel2": "2 pm Registration",
+        "ctaLabelUrl2": "External:https://www.eventbrite.ca/e/xenia-concerts-presents-an-adaptive-concert-with-jazz-is-what-tickets-991316774157?aff=oddtdtcreator",
+        "ctaLabel2HideAfterDate": true,
+        "detailPageCarousel": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Entry",
+            "id": "UCrENGB8efQKwXgoiy5zU"
+          }
+        },
+        "tabContainer": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Entry",
+            "id": "4FeBZTx7rC7bUGPBiI9CFv"
+          }
+        },
+        "detailPageBottomCommonContainer": [
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Entry",
+              "id": "4YJg4YXWKSG0mwe1sljFo9"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Entry",
+              "id": "2tWKWMPffUpuejm3ipYBRN"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Entry",
+              "id": "2KgqvyEWYEsRtv9t2YONZY"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Entry",
+              "id": "2sQMXWX831OT23zIY7boT5"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Entry",
+              "id": "55GcWnqlvoehj5rek8xj0e"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Entry",
+              "id": "lJWRvOOYdDtJHvIYRuQ9D"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Entry",
+              "id": "7mghBHdVyMgZCs8ec7aa4h"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Entry",
+              "id": "5pF0bAONXVyt81b2dQP2Dd"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Entry",
+              "id": "5dJ1artltjYWnpHIADkVqn"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Entry",
+              "id": "6oeRtWET0PGWZrX5eIbcXU"
+            }
+          }
+        ],
+        "showComingSoon": false,
+        "eventStatus": "Active",
+        "showAfterExpired": false,
+        "accessibilityLabelBackgroundColor": "Grey",
+        "accessibilityLabelTextColor": "Black",
+        "accessibilityLabelBackgroundColor2": "Grey",
+        "accessibilityLabelTextColor2": "Black",
+        "hideFromSearch": false,
+        "hideFromFilterResults": false,
+        "hideFromTileStack": false,
+        "hideFromTileRow": false
+      }
+    },
+    {
+      "metadata": {
+        "tags": [
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Tag",
+              "id": "cardTypeEvent"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Tag",
+              "id": "concertTileStack"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Tag",
+              "id": "contemporaryJazz"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Tag",
+              "id": "eventsPageConcerts"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Tag",
+              "id": "free"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Tag",
+              "id": "genreChildrenFamily"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Tag",
+              "id": "genreConcerts"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Tag",
+              "id": "genreMusicOther"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Tag",
+              "id": "jazz"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Tag",
+              "id": "meridianHall"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Tag",
+              "id": "theatreSpaceMeridianHall"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Tag",
+              "id": "xeniaConcertsUpcomingEvents"
+            }
+          }
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "nmxu5kj1b6ch"
+          }
+        },
+        "id": "6F4N8RCy412GjXdYY6IKF0",
+        "type": "Entry",
+        "createdAt": "2024-08-29T16:45:37.253Z",
+        "updatedAt": "2024-08-29T16:46:37.807Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "revision": 2,
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "tileModel"
+          }
+        },
+        "locale": "en-US"
+      },
+      "fields": {
         "id": "Xenia Concerts January 2025",
         "billingName": "Xenia Concerts & TO Live present: An Adaptive Concert with Jazz Is What?!",
         "tileDescription": "Join us to hear Jazz is What?! and let them take you on a fun-filled journey with song, music, and interactive musical activities!",
