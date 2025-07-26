@@ -64,7 +64,7 @@ defmodule MusicListings.Parsing.VenueParsers.HughsRoomParser do
   @impl true
   def event_id(event) do
     event
-    |> Selectors.match_one(css(".showpass-event-title a.open-ticket-widget"))
+    |> Selectors.match_one(css(".action-bar a.open-ticket-widget"))
     |> Selectors.attr("id")
   end
 
@@ -76,7 +76,7 @@ defmodule MusicListings.Parsing.VenueParsers.HughsRoomParser do
   @impl true
   def event_title(event) do
     event
-    |> Selectors.text(css(".open-ticket-widget"))
+    |> Selectors.text(css(".showpass-event-title h3"))
   end
 
   @impl true
