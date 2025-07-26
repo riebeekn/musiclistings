@@ -49,7 +49,7 @@ defmodule MusicListings.Parsing.VenueParsers.HughsRoomParserTest do
       assert nil ==
                HughsRoomParser.next_page_url(
                  index_html,
-                 "https://hughsroomlive.com/on-stage/?page_number=8"
+                 "https://hughsroomlive.com/on-stage/?page_number=9"
                )
     end
   end
