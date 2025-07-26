@@ -75,7 +75,7 @@ defmodule MusicListings.MixProject do
       {:meeseeks, "~> 0.18.0"},
       {:oban, "~> 2.17"},
       {:premailex, "~> 0.3.0"},
-      {:mjml, "~> 5.1.0"},
+      {:mjml, "~> 5.1"},
       {:floki, ">= 0.30.0"},
       {:tzdata, "~> 1.1"},
       {:scrivener_ecto, "~> 3.0"},
