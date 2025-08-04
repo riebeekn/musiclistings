@@ -20,7 +20,9 @@ import "phoenix_html";
 // Establish Phoenix Socket and LiveView configuration.
 import { Socket } from "phoenix";
 import { LiveSocket } from "phoenix_live_view";
-import { hooks as colocatedHooks } from "phoenix-colocated/music_listings";
+// When you start using colocated hooks, uncomment the following line:
+// import { hooks as colocatedHooks } from "phoenix-colocated/music_listings";
+
 import topbar from "../vendor/topbar";
 import { TurnstileHook } from "phoenix_turnstile";
 
@@ -55,7 +57,9 @@ let params = (node) => {
 let liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: 2500,
   params: params,
-  hooks: { ...Hooks, ...colocatedHooks },
+  hooks: Hooks,
+  // When using colocated hooks, merge them like this:
+  // hooks: { ...Hooks, ...colocatedHooks },
 });
 
 // Show progress bar on live navigation and form submits
