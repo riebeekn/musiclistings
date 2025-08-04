@@ -78,6 +78,8 @@ config :phoenix, :plug_init_mode, :runtime
 config :phoenix_live_view,
   # Include HEEx debug annotations as HTML comments in rendered markup
   debug_heex_annotations: true,
+  # Include data-phx-loc attributes for improved debugging
+  debug_attributes: true,
   # Enable helpful, but potentially expensive runtime checks
   enable_expensive_runtime_checks: true
 
