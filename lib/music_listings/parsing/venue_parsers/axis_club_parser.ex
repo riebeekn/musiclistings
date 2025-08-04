@@ -1,6 +1,6 @@
 defmodule MusicListings.Parsing.VenueParsers.AxisClubParser do
   @moduledoc """
-  Parser for extracing events from https://theaxisclub.com/
+  Parser for extracing events from https://www.themodclub.com/ (formely Axis Club)
   """
   @behaviour MusicListings.Parsing.VenueParser
 
