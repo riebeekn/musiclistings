@@ -296,6 +296,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
       <div class="relative w-full h-36 my-8 sm:my-0">
         <iframe
+          id={"venue-map-#{@venue.id}"}
           class="absolute top-0 left-0 w-full h-full"
           src={@venue.google_map_url}
           frameborder="0"
@@ -305,6 +306,8 @@ defmodule MusicListingsWeb.CustomComponents do
           tabindex="0"
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
+          sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+          phx-update="ignore"
         >
         </iframe>
       </div>
