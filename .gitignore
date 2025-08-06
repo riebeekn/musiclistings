@@ -52,3 +52,5 @@ notes.txt
 *.tfvars
 *.txt
 *.csv
+
+.claude
