@@ -7,7 +7,6 @@ defmodule MusicListings.MixProject do
       version: "0.1.0",
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:phoenix_live_view] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
@@ -30,7 +29,8 @@ defmodule MusicListings.MixProject do
         plt_core_path: "_dialyzer",
         plt_add_apps: [:mix],
         ignore_warnings: ".dialyzer_ignore.exs"
-      ]
+      ],
+      listeners: [Phoenix.CodeReloader]
     ]
   end
 
@@ -54,13 +54,13 @@ defmodule MusicListings.MixProject do
   defp deps do
     [
       {:bcrypt_elixir, "~> 3.0"},
-      {:phoenix, "~> 1.7.14"},
-      {:phoenix_ecto, "~> 4.5"},
-      {:ecto_sql, "~> 3.10"},
+      {:phoenix, "~> 1.8.0"},
+      {:phoenix_ecto, "~> 4.6"},
+      {:ecto_sql, "~> 3.12"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 4.1"},
       {:phoenix_live_view, "~> 1.1"},
-      {:phoenix_live_dashboard, "~> 0.8.3"},
+      {:phoenix_live_dashboard, "~> 0.8.5"},
       {:lazy_html, ">= 0.0.0", only: :test},
       {:swoosh, "~> 1.5"},
       {:finch, "~> 0.13"},
