@@ -105,7 +105,7 @@ The parsing system is highly modular with a clear hierarchy:
 
 ### Key Workflows
 
-1. **Event Crawling**: 
+1. **Event Crawling**:
    - Triggered via Render Cron job (see `lib/music_listings/application.ex`)
    - `Crawler` module fetches data from each venue
    - Venue-specific parsers extract event information
@@ -162,7 +162,7 @@ MusicListings.Workers.DataRetrievalWorker.perform(%{})
 ```elixir
 # Create admin user (in IEx)
 MusicListings.Accounts.register_user(%{
-  email: "admin@example.com", 
+  email: "admin@example.com",
   password: "secure_password"
 })
 ```
@@ -179,7 +179,7 @@ MusicListings.Accounts.register_user(%{
 - Application deploys automatically via GitHub Actions
 - Deployment targets controlled by GitHub Action variables:
   - `DEPLOY_TO_RENDER`
-  - `DEPLOY_TO_FLY` 
+  - `DEPLOY_TO_FLY`
   - `DEPLOY_TO_AWS`
 - Infrastructure managed via Terraform (`.infrastructure/` directory)
 - Uses CloudFlare as reverse proxy
@@ -190,3 +190,8 @@ MusicListings.Accounts.register_user(%{
 2. **Memory Management**: Crawling builds payloads in memory - be mindful of venue count
 3. **HTTP Client**: Configurable via `config :music_listings, :http_client`
 4. **LiveView Hooks**: Venue filter persistence uses JavaScript hooks in `assets/js/app.js`
+
+## Development Workflow
+
+1. Always run `mix format`, `mix dialyzer` and `mix credo --strict` after all changes have been made and fix any warnings
+2. Always run `mix test` after all changes have been made and ensure all the tests pass
