@@ -141,6 +141,12 @@ To add support for a new venue:
 4. Add test data in `test/data/[venue_name]/`
 5. Create test file at `test/music_listings/parsing/venue_parsers/[venue_name]_parser_test.exs`
 
+### Important information regarding adding a new venue
+1. If events are recurring and have a duplicate ID, use a combination of the venue name and event date as the event_id so that recurring events are inserted for all the appropriate dates. The ParseHelpers module contains `build_id_from_venue_and_date` and `build_id_from_venue_and_datetime` functions for this purpose.
+2. When adding the migration for the new venue populate the `google_map_url` value with the URL for the google map venue, the URL should include a pin marker for the venue.
+3. When browsing a venue's site be mindful of rate limits and do not hammer the site with requests!
+4. `MusicListings.Crawler.crawl` can be called passing in a list just containing the new venue to check that the crawler executes correctly.
+
 ## Database Operations
 
 ### Common Ecto Commands
@@ -193,5 +199,5 @@ MusicListings.Accounts.register_user(%{
 
 ## Development Workflow
 
-1. Always run `mix format`, `mix dialyzer` and `mix credo --strict` after all changes have been made and fix any warnings
+1. Always run `mix check` after all changes have been made and fix any warnings
 2. Always run `mix test` after all changes have been made and ensure all the tests pass
