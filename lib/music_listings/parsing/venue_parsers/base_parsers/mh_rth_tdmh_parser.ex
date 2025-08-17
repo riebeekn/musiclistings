@@ -3,33 +3,52 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   Base parser for Massey Hall, Roy Thomson Hall and
   TD Music Hall, as they are on a single site
   """
+  import Meeseeks.CSS
+
   alias MusicListings.HttpClient
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
-
-  def source_url, do: "https://www.mhrth.com/api/performance-feed/12"
+  alias MusicListings.Parsing.Selectors
 
   def retrieve_events_fun do
     fn url -> HttpClient.get(url) end
   end
 
-  def event(body, facility_no) do
-    body = ParseHelpers.maybe_decode!(body)
-
-    body["result"]["GetPerformancesEx4Result"]["Performance"]
-    |> Enum.filter(&(&1["cmsFacilityData"]["FacilityID"] == facility_no))
+  def events(body) do
+    body
+    |> Selectors.all_matches(css(".c-card--event"))
   end
 
-  def next_page_url(_body, _current_url), do: nil
+  def next_page_url(_body, current_url) do
+    current_page =
+      current_url
+      |> URI.parse()
+      |> Map.get(:query)
+      |> URI.decode_query()
+      |> Map.get("page")
+      |> String.to_integer()
 
-  def event_id(event), do: event["perf_no"]
+    if current_page < 5 do
+      current_page_string = Integer.to_string(current_page)
+      next_page_string = (current_page + 1) |> Integer.to_string()
+      String.replace(current_url, current_page_string, next_page_string)
+    else
+      nil
+    end
+  end
+
+  def event_id(event) do
+    title = event_title(event)
+    date = event_date(event)
+
+    ParseHelpers.build_id_from_title_and_date(title, date)
+  end
 
   def ignored_event_id(event), do: event_id(event)
 
   def event_title(event) do
-    event["cmsData"]["Title"]
-    |> String.trim()
+    Selectors.text(event, css(".c-card__title"))
   end
 
   def performers(event) do
@@ -38,19 +57,42 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   end
 
   def event_date(event) do
-    event["perf_date"]
-    |> NaiveDateTime.from_iso8601!()
-    |> NaiveDateTime.to_date()
+    [first | _remaining_dates] =
+      event
+      |> event_dates()
+      |> String.split(" - ", trim: true)
+
+    Date.from_iso8601!(first)
   end
 
-  def additional_dates(_event) do
-    []
+  def additional_dates(event) do
+    event
+    |> event_dates()
+    |> String.split(" - ", trim: true)
+    |> case do
+      [_no_additional_dates] ->
+        []
+
+      [start_date_string, end_date_string] ->
+        start_date = Date.from_iso8601!(start_date_string)
+        end_date = Date.from_iso8601!(end_date_string)
+
+        start_date
+        |> Date.range(end_date)
+        # skip the first (primary) date
+        |> Enum.drop(1)
+        |> Enum.to_list()
+    end
   end
 
-  def event_time(event) do
-    event["perf_date"]
-    |> NaiveDateTime.from_iso8601!()
-    |> NaiveDateTime.to_time()
+  defp event_dates(event) do
+    event
+    |> Selectors.match_one(css(".c-card__time time"))
+    |> Selectors.attr("datetime")
+  end
+
+  def event_time(_event) do
+    nil
   end
 
   def price(_event) do
@@ -66,6 +108,8 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   end
 
   def details_url(event) do
-    event["cmsData"]["URL"]
+    event
+    |> Selectors.match_one(css(".c-card__cover-link"))
+    |> Selectors.attr("href")
   end
 end

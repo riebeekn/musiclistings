@@ -6,21 +6,18 @@ defmodule MusicListings.Parsing.VenueParsers.MasseyHallParser do
 
   alias MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser
 
-  @massey_hall_facility_no 12
-
+  @base_url "https://masseyhall.mhrth.com"
   @impl true
-  defdelegate source_url, to: MhRthTdmhParser
+  def source_url, do: "#{@base_url}/tickets/?page=1"
 
   @impl true
   defdelegate retrieve_events_fun, to: MhRthTdmhParser
 
   @impl true
-  def example_data_file_location, do: "test/data/massey_hall/index.json"
+  def example_data_file_location, do: "test/data/massey_hall/index.html"
 
   @impl true
-  def events(body) do
-    MhRthTdmhParser.event(body, @massey_hall_facility_no)
-  end
+  defdelegate events(body), to: MhRthTdmhParser
 
   @impl true
   defdelegate next_page_url(body, current_url), to: MhRthTdmhParser
@@ -56,5 +53,8 @@ defmodule MusicListings.Parsing.VenueParsers.MasseyHallParser do
   defdelegate ticket_url(event), to: MhRthTdmhParser
 
   @impl true
-  defdelegate details_url(event), to: MhRthTdmhParser
+  def details_url(event) do
+    details_path = MhRthTdmhParser.details_url(event)
+    "#{@base_url}#{details_path}"
+  end
 end

@@ -1,25 +1,30 @@
 defmodule MusicListings.Parsing.VenueParsers.RoyThomsonHallParser do
   @moduledoc """
-  Parser for extracing events from https://masseyhall.mhrth.com/
+  Parser for extracing events from https://roythomsonhall.mhrth.com
   """
   @behaviour MusicListings.Parsing.VenueParser
 
   alias MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser
 
-  @roy_thomson_hall_facility_no 13
-
+  @base_url "https://roythomsonhall.mhrth.com"
   @impl true
-  defdelegate source_url, to: MhRthTdmhParser
+  def source_url, do: "#{@base_url}/tickets/?page=1"
 
   @impl true
   defdelegate retrieve_events_fun, to: MhRthTdmhParser
 
   @impl true
-  def example_data_file_location, do: "test/data/roy_thomson_hall/index.json"
+  def example_data_file_location, do: "test/data/roy_thomson_hall/index.html"
 
   @impl true
   def events(body) do
-    MhRthTdmhParser.event(body, @roy_thomson_hall_facility_no)
+    body
+    |> MhRthTdmhParser.events()
+    |> Enum.reject(fn event ->
+      event
+      |> event_title()
+      |> String.starts_with?("TIFF - ")
+    end)
   end
 
   @impl true
@@ -56,5 +61,8 @@ defmodule MusicListings.Parsing.VenueParsers.RoyThomsonHallParser do
   defdelegate ticket_url(event), to: MhRthTdmhParser
 
   @impl true
-  defdelegate details_url(event), to: MhRthTdmhParser
+  def details_url(event) do
+    details_path = MhRthTdmhParser.details_url(event)
+    "#{@base_url}#{details_path}"
+  end
 end
