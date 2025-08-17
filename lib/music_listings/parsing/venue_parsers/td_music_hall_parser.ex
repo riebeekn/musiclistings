@@ -1,26 +1,23 @@
 defmodule MusicListings.Parsing.VenueParsers.TDMusicHallParser do
   @moduledoc """
-  Parser for extracing events from https://masseyhall.mhrth.com/
+  Parser for extracing events from https://tdmusichall.mhrth.com/
   """
   @behaviour MusicListings.Parsing.VenueParser
 
   alias MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser
 
-  @td_music_hall_facility_no 301
-
+  @base_url "https://tdmusichall.mhrth.com"
   @impl true
-  defdelegate source_url, to: MhRthTdmhParser
+  def source_url, do: "#{@base_url}/tickets/?page=1"
 
   @impl true
   defdelegate retrieve_events_fun, to: MhRthTdmhParser
 
   @impl true
-  def example_data_file_location, do: "test/data/td_music_hall/index.json"
+  def example_data_file_location, do: "test/data/td_music_hall/index.html"
 
   @impl true
-  def events(body) do
-    MhRthTdmhParser.event(body, @td_music_hall_facility_no)
-  end
+  defdelegate events(body), to: MhRthTdmhParser
 
   @impl true
   defdelegate next_page_url(body, current_url), to: MhRthTdmhParser
@@ -56,5 +53,8 @@ defmodule MusicListings.Parsing.VenueParsers.TDMusicHallParser do
   defdelegate ticket_url(event), to: MhRthTdmhParser
 
   @impl true
-  defdelegate details_url(event), to: MhRthTdmhParser
+  def details_url(event) do
+    details_path = MhRthTdmhParser.details_url(event)
+    "#{@base_url}#{details_path}"
+  end
 end
