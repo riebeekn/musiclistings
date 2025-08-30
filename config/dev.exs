@@ -87,4 +87,7 @@ config :phoenix_live_view,
 config :swoosh, :api_client, false
 
 # Use empty api key for dev
-config :honeybadger, api_key: ""
+config :honeybadger,
+  api_key: "",
+  use_logger: false,
+  insights_enabled: false

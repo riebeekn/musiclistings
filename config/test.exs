@@ -43,4 +43,7 @@ config :phoenix_live_view,
 config :music_listings, Oban, testing: :inline
 
 # Use empty api key for test
-config :honeybadger, api_key: ""
+config :honeybadger,
+  api_key: "",
+  use_logger: false,
+  insights_enabled: false
