@@ -27,6 +27,22 @@ defmodule MusicListings.Parsing.VenueParsers.HughsRoomParser do
   def events(body) do
     body
     |> Selectors.all_matches(css(".showpass-event-card"))
+    |> Enum.filter(&has_valid_date?/1)
+  end
+
+  defp has_valid_date?(event) do
+    date_text =
+      Selectors.text(event, css(".showpass-detail-event-date .start-date .day")) ||
+        Selectors.text(event, css(".showpass-detail-event-date .info i.fa-calendar + span"))
+
+    case date_text do
+      nil ->
+        false
+
+      text ->
+        text = String.trim(text)
+        text != "" and not String.contains?(text, "TBD")
+    end
   end
 
   @impl true
@@ -63,9 +79,14 @@ defmodule MusicListings.Parsing.VenueParsers.HughsRoomParser do
 
   @impl true
   def event_id(event) do
-    event
-    |> Selectors.match_one(css(".action-bar a.open-ticket-widget"))
-    |> Selectors.attr("id")
+    %URI{query: query} =
+      event
+      |> Selectors.url(css(".showpass-event-title h3 a"))
+      |> URI.parse()
+
+    query
+    |> URI.decode_query()
+    |> Map.get("slug")
   end
 
   @impl true
