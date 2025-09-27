@@ -1,0 +1,79 @@
+{
+  "id": "68d1a6893043e954726b8b6c",
+  "collectionId": "68ae25e366b1226c46621c27",
+  "recordType": 12,
+  "addedOn": 1756792800595,
+  "updatedOn": 1758572892628,
+  "starred": false,
+  "passthrough": false,
+  "tags": [],
+  "categories": [],
+  "workflowState": 1,
+  "authorId": "54f0e2a6e4b01a42939fa209",
+  "systemDataId": "1758572887033-GXXUPN5UN0AI7WWLFM59",
+  "systemDataVariants": "402x503,100w,300w",
+  "systemDataSourceType": "PNG",
+  "filename": "Copy%2Bof%2BLive%2BAt%2BDina%2527s%2BTavern.png",
+  "mediaFocalPoint": {
+    "x": 0.5,
+    "y": 0.5,
+    "source": 3
+  },
+  "colorData": {
+    "topLeftAverage": "dd673b",
+    "topRightAverage": "824129",
+    "bottomLeftAverage": "4e2b1d",
+    "bottomRightAverage": "593020",
+    "centerAverage": "4f2b1e",
+    "suggestedBgColor": "46271b"
+  },
+  "urlId": "mbgcamilleleon",
+  "title": "MBG // CAMILLE LÉON",
+  "sourceUrl": "",
+  "body": null,
+  "excerpt": "<p class=\"sqsrte-large\" style=\"white-space:pre-wrap;\" data-rte-preserve-empty=\"true\"><strong>6PM DOORS, 8PM TUNES</strong></p>",
+  "location": {
+    "mapZoom": 12,
+    "mapLat": 43.6583997,
+    "mapLng": -79.40068699999999,
+    "markerLat": 40.7207559,
+    "markerLng": -74.00076130000002,
+    "addressTitle": "Dina's Tavern",
+    "addressLine1": "486 Spadina Avenue",
+    "addressLine2": "Toronto, ON, M5S 2H1",
+    "addressCountry": "Canada"
+  },
+  "customContent": null,
+  "likeCount": 0,
+  "commentCount": 0,
+  "publicCommentCount": 0,
+  "commentState": 2,
+  "unsaved": false,
+  "author": {
+    "id": "54f0e2a6e4b01a42939fa209",
+    "displayName": "Track & Field",
+    "firstName": "Nickie",
+    "lastName": "Minshall",
+    "websiteUrl": "",
+    "bio": ""
+  },
+  "fullUrl": "/events/mbgcamilleleon",
+  "assetUrl": "https://images.squarespace-cdn.com/content/v1/6851851c5ad92431ae338f0d/1758572887033-GXXUPN5UN0AI7WWLFM59/Copy%252Bof%252BLive%252BAt%252BDina%252527s%252BTavern.png",
+  "contentType": "image/png",
+  "structuredContent": {
+    "_type": "CalendarEvent",
+    "startDate": 1758758400988,
+    "endDate": 1758762000988
+  },
+  "startDate": 1758758400988,
+  "endDate": 1758762000988,
+  "items": [],
+  "pushedServices": {},
+  "pendingPushedServices": {},
+  "seoData": {
+    "seoTitle": "MBG // CAMILLE LÉON",
+    "seoHidden": false
+  },
+  "originalSize": "402x503",
+  "recordTypeLabel": "event"
+}
