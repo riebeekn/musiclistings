@@ -23,7 +23,7 @@ defmodule MusicListings.Parsing.VenueParsers.DromTabernaParserTest do
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://www.dromtaberna.com/api/open/GetItemsByMonth?month=8-2024&collectionId=62c7b220c14f6e5949312039&crumb=BaGbBC9SWUozNDMxZWE4MzRjMTg5OTQ4ZjkyMGQ1NjUzZGJhYzNj" ==
+      assert "https://www.dromtaberna.com/api/open/GetItemsByMonth?month=8-2024&collectionId=62c7b220c14f6e5949312039&crumb=BQ4mS5WCnRzZOTgxYWRjMGUxZTk0Y2MzNjhkYTQ0NGU0ZDA2MGUy" ==
                DromTabernaParser.source_url()
     end
   end
@@ -40,7 +40,7 @@ defmodule MusicListings.Parsing.VenueParsers.DromTabernaParserTest do
     setup do
       %{
         next_page_url:
-          "https://www.dromtaberna.com/api/open/GetItemsByMonth?month=9-2024&collectionId=62099f5a37eb917826df65cc&crumb=BZxZJlGW0oALYzcxZDM5MjgzOGE1NmQ0ZTcyOWY3NjdhZWFmMDVi"
+          "https://www.dromtaberna.com/api/open/GetItemsByMonth?month=9-2024&collectionId=62c7b220c14f6e5949312039&crumb=BQ4mS5WCnRzZOTgxYWRjMGUxZTk0Y2MzNjhkYTQ0NGU0ZDA2MGUy"
       }
     end
 

@@ -6,24 +6,21 @@ defmodule MusicListings.Parsing.VenueParsers.DromTabernaParser do
 
   import Meeseeks.CSS
 
-  alias MusicListings.HttpClient
-  alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
-  alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.Selectors
-  alias MusicListingsUtilities.DateHelpers
+  alias MusicListings.Parsing.VenueParsers.BaseParsers.SquareSpaceJsonParser
+
+  @base_url "https://www.dromtaberna.com"
+  @collection_id "62c7b220c14f6e5949312039"
+  @crumb "BQ4mS5WCnRzZOTgxYWRjMGUxZTk0Y2MzNjhkYTQ0NGU0ZDA2MGUy"
 
   @impl true
   def source_url do
-    today = DateHelpers.today()
-
-    "https://www.dromtaberna.com/api/open/GetItemsByMonth?month=#{today.month}-#{today.year}&collectionId=62c7b220c14f6e5949312039&crumb=BaGbBC9SWUozNDMxZWE4MzRjMTg5OTQ4ZjkyMGQ1NjUzZGJhYzNj"
+    SquareSpaceJsonParser.source_url(@base_url, @collection_id, @crumb)
   end
 
   @impl true
-  def retrieve_events_fun do
-    fn url -> HttpClient.get(url) end
-  end
+  defdelegate retrieve_events_fun, to: SquareSpaceJsonParser
 
   @impl true
   def example_data_file_location, do: "test/data/drom_taberna/index.json"
@@ -31,33 +28,20 @@ defmodule MusicListings.Parsing.VenueParsers.DromTabernaParser do
   @impl true
   def events(body) do
     body
-    |> ParseHelpers.maybe_decode!()
+    |> SquareSpaceJsonParser.events()
     |> Enum.reject(fn content -> content["systemDataId"] == "PLACEHOLDER" end)
   end
 
   @impl true
   def next_page_url(_body, current_url) do
-    next_month = DateHelpers.today() |> Date.shift(month: 1)
-
-    next_page_url =
-      "https://www.dromtaberna.com/api/open/GetItemsByMonth?month=#{next_month.month}-#{next_month.year}&collectionId=62099f5a37eb917826df65cc&crumb=BZxZJlGW0oALYzcxZDM5MjgzOGE1NmQ0ZTcyOWY3NjdhZWFmMDVi"
-
-    if current_url == next_page_url do
-      nil
-    else
-      next_page_url
-    end
+    SquareSpaceJsonParser.next_page_url(current_url, @base_url, @collection_id, @crumb)
   end
 
   @impl true
-  def event_id(event) do
-    event["id"]
-  end
+  defdelegate event_id(event), to: SquareSpaceJsonParser
 
   @impl true
-  def ignored_event_id(event) do
-    event_id(event)
-  end
+  defdelegate ignored_event_id(event), to: SquareSpaceJsonParser
 
   @impl true
   def event_title(event) do
@@ -80,16 +64,10 @@ defmodule MusicListings.Parsing.VenueParsers.DromTabernaParser do
   end
 
   @impl true
-  def event_date(event) do
-    event["startDate"]
-    |> DateTime.from_unix!(:millisecond)
-    |> DateHelpers.to_eastern_date()
-  end
+  defdelegate event_date(event), to: SquareSpaceJsonParser
 
   @impl true
-  def additional_dates(_event) do
-    []
-  end
+  defdelegate additional_dates(event), to: SquareSpaceJsonParser
 
   @impl true
   def event_time(_event) do
@@ -97,19 +75,13 @@ defmodule MusicListings.Parsing.VenueParsers.DromTabernaParser do
   end
 
   @impl true
-  def price(_event) do
-    Price.unknown()
-  end
+  defdelegate price(event), to: SquareSpaceJsonParser
 
   @impl true
-  def age_restriction(_event) do
-    :unknown
-  end
+  defdelegate age_restriction(event), to: SquareSpaceJsonParser
 
   @impl true
-  def ticket_url(_event) do
-    nil
-  end
+  defdelegate ticket_url(event), to: SquareSpaceJsonParser
 
   @impl true
   def details_url(event) do
