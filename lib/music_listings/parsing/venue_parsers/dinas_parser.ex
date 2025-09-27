@@ -4,105 +4,63 @@ defmodule MusicListings.Parsing.VenueParsers.DinasParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
-  alias MusicListings.HttpClient
-  alias MusicListings.Parsing.ParseHelpers
-  alias MusicListings.Parsing.Performers
-  alias MusicListings.Parsing.Price
-  alias MusicListingsUtilities.DateHelpers
+  alias MusicListings.Parsing.VenueParsers.BaseParsers.SquareSpaceJsonParser
+
+  @base_url "https://www.dinastavern.com"
+  @collection_id "68ae25e366b1226c46621c27"
+  @crumb "BSnq4OaZLAN4MjM2MDY2ZmIyYmRkZWJmYjA0MWM3YTk2ZTRmNmE0"
 
   @impl true
   def source_url do
-    today = DateHelpers.today()
-
-    "https://www.dinastavern.com/api/open/GetItemsByMonth?month=#{today.month}-#{today.year}&collectionId=68ae25e366b1226c46621c27&crumb=BSnq4OaZLAN4MjM2MDY2ZmIyYmRkZWJmYjA0MWM3YTk2ZTRmNmE0"
+    SquareSpaceJsonParser.source_url(@base_url, @collection_id, @crumb)
   end
 
   @impl true
-  def retrieve_events_fun do
-    fn url -> HttpClient.get(url) end
-  end
+  defdelegate retrieve_events_fun, to: SquareSpaceJsonParser
 
   @impl true
   def example_data_file_location, do: "test/data/dinas/index.json"
 
   @impl true
-  def events(body) do
-    ParseHelpers.maybe_decode!(body)
-  end
+  defdelegate events(body), to: SquareSpaceJsonParser
 
   @impl true
   def next_page_url(_body, current_url) do
-    next_month = DateHelpers.today() |> Date.shift(month: 1)
-
-    next_page_url =
-      "https://www.dinastavern.com/api/open/GetItemsByMonth?month=#{next_month.month}-#{next_month.year}&collectionId=68ae25e366b1226c46621c27&crumb=BSnq4OaZLAN4MjM2MDY2ZmIyYmRkZWJmYjA0MWM3YTk2ZTRmNmE0"
-
-    if current_url == next_page_url do
-      nil
-    else
-      next_page_url
-    end
+    SquareSpaceJsonParser.next_page_url(current_url, @base_url, @collection_id, @crumb)
   end
 
   @impl true
-  def event_id(event) do
-    event["id"]
-  end
+  defdelegate event_id(event), to: SquareSpaceJsonParser
 
   @impl true
-  def ignored_event_id(event) do
-    event_id(event)
-  end
+  defdelegate ignored_event_id(event), to: SquareSpaceJsonParser
 
   @impl true
-  def event_title(event) do
-    event["title"]
-    |> ParseHelpers.fix_encoding()
-  end
+  defdelegate event_title(event), to: SquareSpaceJsonParser
 
   @impl true
-  def performers(event) do
-    [event_title(event)]
-    |> Performers.new()
-  end
+  defdelegate performers(event), to: SquareSpaceJsonParser
 
   @impl true
-  def event_date(event) do
-    event["startDate"]
-    |> DateTime.from_unix!(:millisecond)
-    |> DateHelpers.to_eastern_date()
-  end
+  defdelegate event_date(event), to: SquareSpaceJsonParser
 
   @impl true
-  def additional_dates(_event) do
-    []
-  end
+  defdelegate additional_dates(event), to: SquareSpaceJsonParser
 
   @impl true
-  def event_time(event) do
-    event["startDate"]
-    |> DateTime.from_unix!(:millisecond)
-    |> DateHelpers.to_eastern_datetime()
-    |> DateTime.to_time()
-  end
+  defdelegate event_time(event), to: SquareSpaceJsonParser
 
   @impl true
-  def price(_event) do
-    Price.unknown()
-  end
+  defdelegate price(event), to: SquareSpaceJsonParser
 
   @impl true
-  def age_restriction(_event) do
-    :unknown
-  end
+  defdelegate age_restriction(event), to: SquareSpaceJsonParser
 
   @impl true
-  def ticket_url(_event) do
-    nil
-  end
+  defdelegate ticket_url(event), to: SquareSpaceJsonParser
 
   @impl true
   def details_url(event) do
-    "https://www.dinastavern.com/events/#{event["urlId"]}"
+    SquareSpaceJsonParser.details_url(event, @base_url)
   end
 end
