@@ -33,8 +33,19 @@ defmodule MusicListings.Parsing.VenueParsers.ArraymusicParser.DateParser do
     year_1 = String.to_integer(year_1_string) + 2_000
     year_2 = String.to_integer(year_2_string) + 2_000
 
-    [raw_date_string, _time] = String.split(raw_date_time_string, "@")
-    date_strings = raw_date_string |> String.split("•") |> Enum.map(&String.trim/1)
+    # Handle both old format (dates @ time) and new format (dates • time)
+    # Split by @ first if it exists, otherwise filter out time strings
+    date_strings =
+      if String.contains?(raw_date_time_string, "@") do
+        [raw_date_string, _time] = String.split(raw_date_time_string, "@")
+        raw_date_string |> String.split("•") |> Enum.map(&String.trim/1)
+      else
+        # New format: Split by • and filter out time strings (anything containing ":" or "am"/"pm")
+        raw_date_time_string
+        |> String.split("•")
+        |> Enum.map(&String.trim/1)
+        |> Enum.reject(&(String.contains?(&1, ":") or String.contains?(&1, ~w(am pm AM PM))))
+      end
 
     dates =
       Enum.reduce(date_strings, {year_1, []}, fn date_string, {current_year, acc} ->
