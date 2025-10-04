@@ -14,7 +14,7 @@ defmodule MusicListings.Parsing.VenueParsers.ArraymusicParser do
   alias MusicListings.Parsing.VenueParsers.ArraymusicParser.DateParser
 
   @impl true
-  def source_url, do: "https://www.arraymusic.ca/current-season/24-25-season-at-a-glance/"
+  def source_url, do: "https://www.arraymusic.ca/current-season/25-26-season-at-a-glance/"
 
   @impl true
   def retrieve_events_fun do

@@ -88,7 +88,7 @@ defmodule MusicListings.Crawler do
       two_days_ago = DateHelpers.now() |> DateHelpers.to_eastern_date() |> Date.add(-2)
 
       if is_list(payload.parsed_event) do
-        Enum.any?(payload.parsed_event, &(Date.compare(&1.date, two_days_ago) == :lt))
+        Enum.all?(payload.parsed_event, &(Date.compare(&1.date, two_days_ago) == :lt))
       else
         Date.compare(payload.parsed_event.date, two_days_ago) == :lt
       end
