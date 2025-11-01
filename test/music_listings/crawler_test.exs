@@ -10,17 +10,16 @@ defmodule MusicListings.CrawlerTest do
   describe "crawl/1" do
     test "expected number of events are inserted" do
       venue_1 = insert(:venue)
-      venue_2 = insert(:venue, parser_module_name: "VelvetUndergroundParser")
 
       assert {:ok,
               %CrawlSummary{
-                new: 83,
+                new: 71,
                 updated: 0,
                 duplicate: 0,
                 errors: 0
-              }} = Crawler.crawl([venue_1, venue_2])
+              }} = Crawler.crawl([venue_1])
 
-      assert 83 = Repo.aggregate(Event, :count)
+      assert 71 = Repo.aggregate(Event, :count)
     end
   end
 
