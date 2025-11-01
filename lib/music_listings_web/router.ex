@@ -6,6 +6,15 @@ defmodule MusicListingsWeb.Router do
 
   import Redirect
 
+  # In development, allow localhost frames for email previews
+  @frame_src (if Application.compile_env(:music_listings, :dev_routes) do
+                "https://challenges.cloudflare.com http://localhost:4000;"
+              else
+                "https://challenges.cloudflare.com;"
+              end)
+
+  @csp_policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' wss: https:; frame-src #{@frame_src}"
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -14,8 +23,7 @@ defmodule MusicListingsWeb.Router do
     plug :protect_from_forgery
 
     plug :put_secure_browser_headers, %{
-      "content-security-policy" =>
-        "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' wss: https:; frame-src https://challenges.cloudflare.com;"
+      "content-security-policy" => @csp_policy
     }
 
     plug :fetch_current_user
