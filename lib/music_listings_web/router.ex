@@ -12,7 +12,12 @@ defmodule MusicListingsWeb.Router do
     plug :fetch_live_flash
     plug :put_root_layout, html: {MusicListingsWeb.Layouts, :root}
     plug :protect_from_forgery
-    plug :put_secure_browser_headers
+
+    plug :put_secure_browser_headers, %{
+      "content-security-policy" =>
+        "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' wss: https:; frame-src https://challenges.cloudflare.com;"
+    }
+
     plug :fetch_current_user
   end
 
