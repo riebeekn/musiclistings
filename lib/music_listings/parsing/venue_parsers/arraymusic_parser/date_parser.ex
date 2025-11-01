@@ -8,15 +8,18 @@ defmodule MusicListings.Parsing.VenueParsers.ArraymusicParser.DateParser do
 
   @spec parse_dates(String.t(), String.t()) :: %__MODULE__{}
   def parse_dates(event_title, raw_date_time_string) do
+    # Normalize separators - replace ª with •
+    normalized_date_string = String.replace(raw_date_time_string, "ª", "•")
+
     cond do
-      String.contains?(raw_date_time_string, "•") && String.contains?(event_title, "|") ->
-        parse_multi_date_format(event_title, raw_date_time_string)
+      String.contains?(normalized_date_string, "•") && String.contains?(event_title, "|") ->
+        parse_multi_date_format(event_title, normalized_date_string)
 
-      String.contains?(raw_date_time_string, "•") ->
-        parse_multi_date_format_year_in_first_date(raw_date_time_string)
+      String.contains?(normalized_date_string, "•") ->
+        parse_multi_date_format_year_in_first_date(normalized_date_string)
 
-      String.contains?(raw_date_time_string, ",") ->
-        parse_single_date_format(raw_date_time_string)
+      String.contains?(normalized_date_string, ",") ->
+        parse_single_date_format(normalized_date_string)
 
       true ->
         %__MODULE__{date: nil, additional_dates: []}
