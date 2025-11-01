@@ -9,7 +9,7 @@ defmodule MusicListings.Parsing.VenueParsers.QueenElizabthTheatreParser do
   @impl true
   def source_url,
     do:
-      "https://gateway.admitone.com/embed/live-events?venueId=60ad698c2a3c42001744a78f,5f2c38d9b49c22464830180a,5fff3fc4252a3e0017753b8c,60ad698c2a3c42001744a78d,623a293401b1e63c3d61094c&order=asc"
+      "https://gateway.admitone.com/embed/live-events?venueId=60ad698c2a3c42001744a78f,5f2c38d9b49c22464830180a,5fff3fc4252a3e0017753b8c,60ad698c2a3c42001744a78d,623a293401b1e63c3d61094c,68fa6d3c1dff5fce0420bf70&order=asc"
 
   @impl true
   defdelegate retrieve_events_fun, to: AdmitOneParser
