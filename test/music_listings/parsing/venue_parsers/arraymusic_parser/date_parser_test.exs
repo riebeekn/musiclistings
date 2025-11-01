@@ -58,5 +58,40 @@ defmodule MusicListings.Parsing.VenueParsers.ArraymusicParser.DateParserTest do
                  "Nov 15 @ 8:00 pm ET and Nov 17 @ 3:00 pm ET"
                )
     end
+
+    test "parses dates with ª separator (Exit Points example)" do
+      assert %DateParser{
+               date: ~D[2025-08-29],
+               additional_dates: [
+                 ~D[2025-09-26],
+                 ~D[2025-10-31],
+                 ~D[2025-11-28],
+                 ~D[2026-01-30],
+                 ~D[2026-02-27],
+                 ~D[2026-03-27],
+                 ~D[2026-04-24],
+                 ~D[2026-05-29],
+                 ~D[2026-06-26]
+               ]
+             } ==
+               DateParser.parse_dates(
+                 "Exit Points 25|26",
+                 "Aug 29 • Sep 26 • Oct 31 • Nov 28 ª Jan 30 • Feb 27 • Mar 27 • Apr 24 • May 29 • Jun 26 @ 7:30 pm ET"
+               )
+    end
+
+    test "parses dates with multiple ª separators" do
+      assert %DateParser{
+               date: ~D[2024-11-28],
+               additional_dates: [
+                 ~D[2025-01-30],
+                 ~D[2025-02-27]
+               ]
+             } ==
+               DateParser.parse_dates(
+                 "Test Event 24|25",
+                 "Nov 28 ª Jan 30 ª Feb 27 @ 7:30 pm ET"
+               )
+    end
   end
 end
