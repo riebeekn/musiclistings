@@ -8,9 +8,9 @@ defmodule MusicListingsWeb.Router do
 
   # In development, allow localhost frames for email previews
   @frame_src (if Application.compile_env(:music_listings, :dev_routes) do
-                "https://challenges.cloudflare.com http://localhost:4000;"
+                "https://challenges.cloudflare.com https://www.google.com http://localhost:4000;"
               else
-                "https://challenges.cloudflare.com;"
+                "https://challenges.cloudflare.com https://www.google.com;"
               end)
 
   @csp_policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' wss: https:; frame-src #{@frame_src}"
