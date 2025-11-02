@@ -464,11 +464,15 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp submitted_event_title(assigns) do
     ~H"""
-    <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0 text-white">
+    <td class="py-5 pl-4 pr-3 text-sm sm:pl-0 text-white w-1/2">
       <div class="flex items-center">
-        <div>
+        <div class="break-words">
           <div class="font-medium">{@title}</div>
-          <a href={@url} target="_blank" class="mt-1 text-emerald-400 hover:text-emerald-300">
+          <a
+            href={@url}
+            target="_blank"
+            class="mt-1 text-emerald-400 hover:text-emerald-300 break-all"
+          >
             {@url}
           </a>
         </div>
@@ -479,7 +483,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp submitted_event_column_value(assigns) do
     ~H"""
-    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
+    <td class="whitespace-nowrap px-2 py-4 text-sm text-gray-300">
       {@value}
     </td>
     """
@@ -505,8 +509,8 @@ defmodule MusicListingsWeb.CustomComponents do
   defp submitted_event_column_header(assigns) do
     th_class =
       if assigns[:first_col],
-        do: "py-3.5 pl-4 pr-3 text-left text-md font-semibold text-white sm:pl-0",
-        else: "px-3 py-3.5 text-left text-md font-semibold text-white"
+        do: "py-3.5 pl-4 pr-3 text-left text-md font-semibold text-white sm:pl-0 w-1/2",
+        else: "px-2 py-3.5 text-left text-md font-semibold text-white"
 
     span_class = if assigns[:sr_only], do: "sr-only", else: ""
 
