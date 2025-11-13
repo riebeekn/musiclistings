@@ -174,6 +174,104 @@ defmodule MusicListingsWeb.CustomComponents do
   end
 
   @doc """
+  Renders the date filter
+
+  ## Example
+
+  <.date_filter for={@form} selected_date={@selected_date} />
+  """
+
+  attr :for, :any, required: true, doc: "the data structure for the form"
+  attr :selected_date, :string, default: nil
+
+  def date_filter(assigns) do
+    ~H"""
+    <div id="date-filter-component" phx-hook="DateFilter">
+      <a
+        href="#"
+        phx-click={toggle_date_filtering()}
+        class="inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition rounded-full py-1 px-3 bg-emerald-400/10 text-emerald-400 ring-1 ring-inset ring-emerald-400/20 hover:text-emerald-300 hover:ring-emerald-300"
+      >
+        Jump to date
+        <span id="date-filter-chevron" class="inline-block transition duration-200">
+          <MusicListingsWeb.CoreComponents.icon name="hero-chevron-down" class="size-4" />
+        </span>
+      </a>
+
+      <.form
+        for={@for}
+        id="date-filter-form"
+        class="hidden"
+        phx-change={JS.push("date-filter-changed") |> toggle_date_filtering()}
+      >
+        <div class="relative" phx-click-away={toggle_date_filtering()}>
+          <div class="absolute z-10 mt-1 rounded-md bg-zinc-900 py-3 px-4 shadow-lg ring-1 ring-inset ring-white/10 hover:ring-white/20">
+            <div class="flex flex-col gap-2">
+              <label for="filter_date" class="text-sm font-medium text-white">
+                Select date:
+              </label>
+              <input
+                type="date"
+                id="filter_date"
+                name="date"
+                value={@selected_date}
+                class="rounded-md border-zinc-700 bg-zinc-800 text-white text-sm focus:border-emerald-400 focus:ring-emerald-400"
+              />
+            </div>
+          </div>
+        </div>
+      </.form>
+    </div>
+    """
+  end
+
+  defp toggle_date_filtering(js \\ %JS{}) do
+    js
+    |> JS.toggle(
+      to: "#date-filter-form",
+      in: {"transition ease-in-out duration-200", "opacity-0", "opacity-100"},
+      out: {"transition ease-in-out duration-200", "opacity-100", "opacity-0"}
+    )
+    |> JS.toggle_class("rotate-180", to: "#date-filter-chevron")
+  end
+
+  @doc """
+  Renders the date filter status
+
+  ## Example
+
+  <.date_filter_status selected_date={@selected_date} />
+  """
+  attr :selected_date, :string, default: nil
+
+  def date_filter_status(assigns) do
+    ~H"""
+    <%= if @selected_date do %>
+      <div class="text-white text-sm sm:text-base -mt-4 sm:-mt-1 mb-6 sm:mb-4">
+        Showing events from {format_filter_date(@selected_date)} onwards.
+        <a
+          id="clear-date-filter"
+          href="#"
+          phx-click="clear-date-filter"
+          class="text-emerald-400 hover:text-emerald-300"
+        >
+          Clear date filter.
+        </a>
+      </div>
+    <% end %>
+    """
+  end
+
+  defp format_filter_date(date_string) when is_binary(date_string) do
+    case Date.from_iso8601(date_string) do
+      {:ok, date} -> DateHelpers.format_date(date)
+      _error -> date_string
+    end
+  end
+
+  defp format_filter_date(_other), do: ""
+
+  @doc """
   Renders the venue filter
 
   ## Example
@@ -573,7 +671,10 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp events_date_header(assigns) do
     ~H"""
-    <h2 class="text-left text-3xl font-semibold leading-5 text-zinc-400 sm:text-4xl sm:tracking-tight">
+    <h2
+      id={"date-#{@date}"}
+      class="text-left text-3xl font-semibold leading-5 text-zinc-400 sm:text-4xl sm:tracking-tight scroll-mt-4"
+    >
       <time datetime={@date}>{DateHelpers.format_date(@date)}</time>
     </h2>
     """

@@ -22,19 +22,22 @@ defmodule MusicListings.Events do
           | {:page_size, pos_integer()}
           | {:venue_ids,
              list(pos_integer())
-             | {:order_by, list(atom())}}
+             | {:order_by, list(atom())}
+             | {:from_date, Date.t()}}
   @spec list_events(list(list_events_opts)) :: PagedEvents.t()
   def list_events(opts \\ []) do
     page = Keyword.get(opts, :page, @default_page)
     page_size = Keyword.get(opts, :page_size, @default_page_size)
     venue_ids = Keyword.get(opts, :venue_ids, [])
+    from_date = Keyword.get(opts, :from_date, nil)
     order_by_fields = Keyword.get(opts, :order_by, [:date, :title])
 
     today = DateHelpers.now() |> DateHelpers.to_eastern_date()
+    start_date = from_date || today
 
     pagination_result =
       Event
-      |> where([event], event.date >= ^today)
+      |> where([event], event.date >= ^start_date)
       |> where([event], is_nil(event.deleted_at))
       |> maybe_filter_by_venues(venue_ids)
       |> order_by(^order_by_fields)

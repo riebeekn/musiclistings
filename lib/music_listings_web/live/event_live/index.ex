@@ -5,13 +5,16 @@ defmodule MusicListingsWeb.EventLive.Index do
   @impl true
   def mount(_params, _session, socket) do
     venue_ids = get_venue_ids_in_local_storage(socket)
+    selected_date = get_selected_date_in_local_storage(socket)
 
     venues = MusicListings.list_venues(restrict_to_pulled_venues?: false)
 
     socket
     |> assign(:venues, venues)
     |> assign(:venue_ids, venue_ids)
+    |> assign(:selected_date, selected_date)
     |> assign(:venue_filtering_form, to_form(%{}))
+    |> assign(:date_filtering_form, to_form(%{}))
     |> ok()
   end
 
@@ -19,14 +22,10 @@ defmodule MusicListingsWeb.EventLive.Index do
     socket
     |> get_connect_params()
     |> case do
-      %{"venue_ids" => venue_ids} ->
-        if is_binary(venue_ids) do
-          venue_ids
-          |> String.split(",")
-          |> filter_venue_ids()
-        else
-          []
-        end
+      %{"venue_ids" => venue_ids} when is_binary(venue_ids) ->
+        venue_ids
+        |> String.split(",")
+        |> filter_venue_ids()
 
       _default ->
         []
@@ -42,17 +41,36 @@ defmodule MusicListingsWeb.EventLive.Index do
     end)
   end
 
+  defp get_selected_date_in_local_storage(socket) do
+    socket
+    |> get_connect_params()
+    |> case do
+      %{"selected_date" => selected_date} when is_binary(selected_date) ->
+        case Date.from_iso8601(selected_date) do
+          {:ok, _date} -> selected_date
+          _error -> nil
+        end
+
+      _default ->
+        nil
+    end
+  end
+
   @impl true
   def handle_params(params, _uri, socket) do
     if connected?(socket) do
       venue_ids = socket.assigns[:venue_ids] || []
+      selected_date = socket.assigns[:selected_date]
 
       case validate(:index, params) do
         {:ok, normalized_params} ->
+          from_date = parse_selected_date(selected_date)
+
           paged_events =
             MusicListings.list_events(
               page: normalized_params[:page],
-              venue_ids: venue_ids
+              venue_ids: venue_ids,
+              from_date: from_date
             )
 
           socket
@@ -87,8 +105,14 @@ defmodule MusicListingsWeb.EventLive.Index do
         end
       end)
 
+    from_date = parse_selected_date(socket.assigns[:selected_date])
+
     paged_events =
-      MusicListings.list_events(page: socket.assigns[:current_page], venue_ids: venue_ids)
+      MusicListings.list_events(
+        page: socket.assigns[:current_page],
+        venue_ids: venue_ids,
+        from_date: from_date
+      )
 
     socket
     |> update_socket_assigns(paged_events, venue_ids)
@@ -100,12 +124,53 @@ defmodule MusicListingsWeb.EventLive.Index do
   def handle_event("clear-venue-filtering", _params, socket) do
     venue_ids = []
 
+    from_date = parse_selected_date(socket.assigns[:selected_date])
+
     paged_events =
-      MusicListings.list_events(page: socket.assigns[:current_page], venue_ids: venue_ids)
+      MusicListings.list_events(
+        page: socket.assigns[:current_page],
+        venue_ids: venue_ids,
+        from_date: from_date
+      )
 
     socket
     |> update_socket_assigns(paged_events, venue_ids)
     |> push_event("clearVenueFilterIdsFromLocalStorage", %{})
+    |> noreply()
+  end
+
+  @impl true
+  def handle_event("date-filter-changed", %{"date" => date}, socket) do
+    selected_date = parse_selected_date(date)
+
+    paged_events =
+      MusicListings.list_events(
+        page: 1,
+        venue_ids: socket.assigns[:venue_ids],
+        from_date: selected_date
+      )
+
+    socket
+    |> update_socket_assigns(paged_events)
+    |> assign(:selected_date, selected_date)
+    |> assign(:current_page, 1)
+    |> push_event("saveDateFilterToLocalStorage", %{selected_date: selected_date || ""})
+    |> noreply()
+  end
+
+  @impl true
+  def handle_event("clear-date-filter", _params, socket) do
+    paged_events =
+      MusicListings.list_events(
+        page: 1,
+        venue_ids: socket.assigns[:venue_ids]
+      )
+
+    socket
+    |> update_socket_assigns(paged_events)
+    |> assign(:selected_date, nil)
+    |> assign(:current_page, 1)
+    |> push_event("clearDateFilterFromLocalStorage", %{})
     |> noreply()
   end
 
@@ -141,6 +206,17 @@ defmodule MusicListingsWeb.EventLive.Index do
     |> assign(:venue_ids, venue_ids)
   end
 
+  defp parse_selected_date(nil), do: nil
+
+  defp parse_selected_date(""), do: nil
+
+  defp parse_selected_date(date_string) when is_binary(date_string) do
+    case Date.from_iso8601(date_string) do
+      {:ok, date} -> date
+      _error -> nil
+    end
+  end
+
   defparams :index do
     optional(:page, :integer, min: 1, default: 1)
   end
@@ -149,15 +225,21 @@ defmodule MusicListingsWeb.EventLive.Index do
   def render(assigns) do
     ~H"""
     <div
-      class="flex justify-between mb-8 sm:mb-4 -mt-2"
+      class="flex flex-wrap gap-2 justify-between mb-8 sm:mb-4 -mt-2"
       data-venue-filter-restore="true"
       data-storage-key="venue_ids"
+      data-date-filter-restore="true"
+      data-date-storage-key="selected_date"
     >
-      <.venue_filter for={@venue_filtering_form} venues={@venues} venue_ids={@venue_ids} />
+      <div class="flex flex-wrap gap-2">
+        <.venue_filter for={@venue_filtering_form} venues={@venues} venue_ids={@venue_ids} />
+        <.date_filter for={@date_filtering_form} selected_date={@selected_date} />
+      </div>
       <.button_link label="Submit an event" url={~p"/events/new"} icon_name="hero-arrow-right" />
     </div>
 
     <.venue_filter_status venue_ids={@venue_ids} />
+    <.date_filter_status selected_date={@selected_date} />
 
     <%= if @loading do %>
       <.loading_indicator />

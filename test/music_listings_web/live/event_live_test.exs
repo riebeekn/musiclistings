@@ -36,6 +36,96 @@ defmodule MusicListingsWeb.EventLiveTest do
     end
   end
 
+  describe "date filtering" do
+    setup do
+      venue = insert(:venue)
+      e1 = insert(:event, venue: venue, date: ~D[2024-08-01], title: "ev1")
+      e2 = insert(:event, venue: venue, date: ~D[2024-08-05], title: "ev2")
+      e3 = insert(:event, venue: venue, date: ~D[2024-08-10], title: "ev3")
+
+      %{venue_id: venue.id, e1_id: e1.id, e2_id: e2.id, e3_id: e3.id}
+    end
+
+    test "filters events by selected date", %{
+      conn: conn,
+      e1_id: e1_id,
+      e2_id: e2_id,
+      e3_id: e3_id
+    } do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      # Initially all events should be visible
+      assert has_element?(view, "#event-#{e1_id}")
+      assert has_element?(view, "#event-#{e2_id}")
+      assert has_element?(view, "#event-#{e3_id}")
+
+      # Filter to show events from 2024-08-05 onwards
+      view
+      |> element("#date-filter-form")
+      |> render_change(%{"date" => "2024-08-05"})
+
+      # Only e2 and e3 should be visible
+      refute has_element?(view, "#event-#{e1_id}")
+      assert has_element?(view, "#event-#{e2_id}")
+      assert has_element?(view, "#event-#{e3_id}")
+
+      # Should show the date filter status message
+      assert render(view) =~ "Showing events from"
+      assert render(view) =~ "Mon, Aug 05 2024"
+    end
+
+    test "clears date filter", %{conn: conn, e1_id: e1_id, e2_id: e2_id, e3_id: e3_id} do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      # Apply a date filter
+      view
+      |> element("#date-filter-form")
+      |> render_change(%{"date" => "2024-08-10"})
+
+      # Only e3 should be visible
+      refute has_element?(view, "#event-#{e1_id}")
+      refute has_element?(view, "#event-#{e2_id}")
+      assert has_element?(view, "#event-#{e3_id}")
+
+      # Clear the filter
+      view
+      |> element("#clear-date-filter")
+      |> render_click()
+
+      # All events should be visible again
+      assert has_element?(view, "#event-#{e1_id}")
+      assert has_element?(view, "#event-#{e2_id}")
+      assert has_element?(view, "#event-#{e3_id}")
+
+      # Filter status message should be gone
+      refute render(view) =~ "Showing events from"
+    end
+
+    test "combines date filter with venue filter", %{conn: conn, venue_id: venue_id} do
+      # Create another venue with events
+      other_venue = insert(:venue)
+      e4 = insert(:event, venue: other_venue, date: ~D[2024-08-05], title: "ev4")
+
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      # Apply venue filter first
+      view
+      |> element("#venue-filters")
+      |> render_change(%{"#{venue_id}" => "true"})
+
+      # Should show events from first venue only
+      refute has_element?(view, "#event-#{e4.id}")
+
+      # Now apply date filter
+      view
+      |> element("#date-filter-form")
+      |> render_change(%{"date" => "2024-08-05"})
+
+      # Should show only events from first venue starting from Aug 5
+      refute has_element?(view, "#event-#{e4.id}")
+    end
+  end
+
   describe "index - logged in as admin" do
     setup :register_and_log_in_user
 
