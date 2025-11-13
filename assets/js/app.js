@@ -42,16 +42,41 @@ Hooks.VenueFilter = {
     });
   },
 };
+Hooks.DateFilter = {
+  mounted() {
+    this.handleEvent("saveDateFilterToLocalStorage", ({ selected_date }) => {
+      localStorage.setItem("selected_date", selected_date);
+    });
+    this.handleEvent("clearDateFilterFromLocalStorage", () => {
+      localStorage.removeItem("selected_date");
+    });
+  },
+};
 
 let params = (node) => {
-  var restoreNode =
+  var venueRestoreNode =
     node && node.querySelector("div[data-venue-filter-restore='true']");
-  if (restoreNode) {
-    var key = restoreNode.getAttribute("data-storage-key");
-    return { _csrf_token: csrfToken, venue_ids: localStorage.getItem(key) };
-  } else {
-    return { _csrf_token: csrfToken };
+  var dateRestoreNode =
+    node && node.querySelector("div[data-date-filter-restore='true']");
+
+  var venue_ids = null;
+  var selected_date = null;
+
+  if (venueRestoreNode) {
+    var venueKey = venueRestoreNode.getAttribute("data-storage-key");
+    venue_ids = localStorage.getItem(venueKey);
   }
+
+  if (dateRestoreNode) {
+    var dateKey = dateRestoreNode.getAttribute("data-date-storage-key");
+    selected_date = localStorage.getItem(dateKey);
+  }
+
+  return {
+    _csrf_token: csrfToken,
+    venue_ids: venue_ids,
+    selected_date: selected_date,
+  };
 };
 
 let liveSocket = new LiveSocket("/live", Socket, {
@@ -76,7 +101,7 @@ window.addEventListener(
       window.scrollTo(0, 0);
     }
   },
-  false,
+  false
 );
 
 // connect if there are any LiveViews on the page

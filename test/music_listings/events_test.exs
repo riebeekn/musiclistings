@@ -112,6 +112,56 @@ defmodule MusicListings.EventsTest do
                ]
              } = Events.list_events(venue_ids: [venue_1_id])
     end
+
+    test "can filter by from_date" do
+      assert %PagedEvents{
+               current_page: 1,
+               total_pages: 1,
+               events: [
+                 {~D[2024-08-02],
+                  [
+                    %EventInfo{
+                      title: "ev3",
+                      date: ~D[2024-08-02]
+                    }
+                  ]}
+               ]
+             } = Events.list_events(from_date: ~D[2024-08-02])
+    end
+
+    test "can combine venue filter and from_date filter", %{venue_2_id: venue_2_id} do
+      assert %PagedEvents{
+               current_page: 1,
+               total_pages: 1,
+               events: [
+                 {~D[2024-08-02],
+                  [
+                    %EventInfo{
+                      title: "ev3",
+                      date: ~D[2024-08-02],
+                      venue: %Venue{id: ^venue_2_id}
+                    }
+                  ]}
+               ]
+             } = Events.list_events(venue_ids: [venue_2_id], from_date: ~D[2024-08-02])
+    end
+
+    test "from_date filters events starting from that date onwards" do
+      # Should include ev1, ev2, and ev3
+      assert %PagedEvents{
+               events: [
+                 {~D[2024-08-01], _events_on_aug_1},
+                 {~D[2024-08-02], _events_on_aug_2}
+               ]
+             } = Events.list_events(from_date: ~D[2024-08-01])
+    end
+
+    test "from_date with nil behaves same as no filter" do
+      result_with_nil = Events.list_events(from_date: nil)
+      result_without = Events.list_events()
+
+      assert result_with_nil.events == result_without.events
+    end
   end
 
   describe "list_submitted_events/1" do
