@@ -5,7 +5,9 @@ defmodule MusicListingsWeb.EventLive.Index do
   @impl true
   def mount(_params, _session, socket) do
     venue_ids = get_venue_ids_in_local_storage(socket)
-    selected_date = get_selected_date_in_local_storage(socket)
+
+    selected_date =
+      get_selected_date_in_local_storage(socket) || Date.to_iso8601(Date.utc_today())
 
     venues = MusicListings.list_venues(restrict_to_pulled_venues?: false)
 
@@ -160,17 +162,21 @@ defmodule MusicListingsWeb.EventLive.Index do
 
   @impl true
   def handle_event("clear-date-filter", _params, socket) do
+    today = Date.to_iso8601(Date.utc_today())
+    selected_date = parse_selected_date(today)
+
     paged_events =
       MusicListings.list_events(
         page: 1,
-        venue_ids: socket.assigns[:venue_ids]
+        venue_ids: socket.assigns[:venue_ids],
+        from_date: selected_date
       )
 
     socket
     |> update_socket_assigns(paged_events)
-    |> assign(:selected_date, nil)
+    |> assign(:selected_date, today)
     |> assign(:current_page, 1)
-    |> push_event("clearDateFilterFromLocalStorage", %{})
+    |> push_event("saveDateFilterToLocalStorage", %{selected_date: today})
     |> noreply()
   end
 

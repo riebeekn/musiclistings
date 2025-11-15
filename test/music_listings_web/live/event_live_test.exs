@@ -5,10 +5,14 @@ defmodule MusicListingsWeb.EventLiveTest do
 
   describe "index" do
     setup do
-      e0 = insert(:event, date: ~D[2024-07-30], title: "ev0")
-      e1 = insert(:event, date: ~D[2024-08-01], title: "ev1")
-      e2 = insert(:event, date: ~D[2024-08-01], title: "ev2")
-      e3 = insert(:event, date: ~D[2024-08-02], title: "ev3")
+      today = Date.utc_today()
+      yesterday = Date.add(today, -1)
+      tomorrow = Date.add(today, 1)
+
+      e0 = insert(:event, date: yesterday, title: "ev0")
+      e1 = insert(:event, date: today, title: "ev1")
+      e2 = insert(:event, date: today, title: "ev2")
+      e3 = insert(:event, date: tomorrow, title: "ev3")
 
       %{e0_id: e0.id, e1_id: e1.id, e2_id: e2.id, e3_id: e3.id}
     end
@@ -38,73 +42,84 @@ defmodule MusicListingsWeb.EventLiveTest do
 
   describe "date filtering" do
     setup do
+      today = Date.utc_today()
       venue = insert(:venue)
-      e1 = insert(:event, venue: venue, date: ~D[2024-08-01], title: "ev1")
-      e2 = insert(:event, venue: venue, date: ~D[2024-08-05], title: "ev2")
-      e3 = insert(:event, venue: venue, date: ~D[2024-08-10], title: "ev3")
+      e1 = insert(:event, venue: venue, date: today, title: "ev1")
+      e2 = insert(:event, venue: venue, date: Date.add(today, 4), title: "ev2")
+      e3 = insert(:event, venue: venue, date: Date.add(today, 9), title: "ev3")
 
-      %{venue_id: venue.id, e1_id: e1.id, e2_id: e2.id, e3_id: e3.id}
+      %{venue_id: venue.id, e1_id: e1.id, e2_id: e2.id, e3_id: e3.id, today: today}
     end
 
     test "filters events by selected date", %{
       conn: conn,
       e1_id: e1_id,
       e2_id: e2_id,
-      e3_id: e3_id
+      e3_id: e3_id,
+      today: today
     } do
       {:ok, view, _html} = live(conn, ~p"/events")
 
-      # Initially all events should be visible
+      # Initially all events should be visible (default filter is today)
       assert has_element?(view, "#event-#{e1_id}")
       assert has_element?(view, "#event-#{e2_id}")
       assert has_element?(view, "#event-#{e3_id}")
 
-      # Filter to show events from 2024-08-05 onwards
+      # Filter to show events from 4 days from now onwards
+      filter_date = Date.add(today, 4)
+
       view
       |> element("#date-filter-form")
-      |> render_change(%{"date" => "2024-08-05"})
+      |> render_change(%{"date" => Date.to_iso8601(filter_date)})
 
       # Only e2 and e3 should be visible
       refute has_element?(view, "#event-#{e1_id}")
       assert has_element?(view, "#event-#{e2_id}")
       assert has_element?(view, "#event-#{e3_id}")
 
-      # Should show the date filter status message
+      # Should show the date filter status message (since it's not today)
       assert render(view) =~ "Showing events from"
-      assert render(view) =~ "Mon, Aug 05 2024"
     end
 
-    test "clears date filter", %{conn: conn, e1_id: e1_id, e2_id: e2_id, e3_id: e3_id} do
+    test "clears date filter", %{
+      conn: conn,
+      e1_id: e1_id,
+      e2_id: e2_id,
+      e3_id: e3_id,
+      today: today
+    } do
       {:ok, view, _html} = live(conn, ~p"/events")
 
       # Apply a date filter
+      filter_date = Date.add(today, 9)
+
       view
       |> element("#date-filter-form")
-      |> render_change(%{"date" => "2024-08-10"})
+      |> render_change(%{"date" => Date.to_iso8601(filter_date)})
 
       # Only e3 should be visible
       refute has_element?(view, "#event-#{e1_id}")
       refute has_element?(view, "#event-#{e2_id}")
       assert has_element?(view, "#event-#{e3_id}")
 
-      # Clear the filter
+      # Clear the filter (should reset to today)
       view
       |> element("#clear-date-filter")
       |> render_click()
 
-      # All events should be visible again
+      # All events should be visible again (starting from today)
       assert has_element?(view, "#event-#{e1_id}")
       assert has_element?(view, "#event-#{e2_id}")
       assert has_element?(view, "#event-#{e3_id}")
 
-      # Filter status message should be gone
+      # Filter status message should be gone (since filter is today)
       refute render(view) =~ "Showing events from"
     end
 
-    test "combines date filter with venue filter", %{conn: conn, venue_id: venue_id} do
+    test "combines date filter with venue filter", %{conn: conn, venue_id: venue_id, today: today} do
       # Create another venue with events
       other_venue = insert(:venue)
-      e4 = insert(:event, venue: other_venue, date: ~D[2024-08-05], title: "ev4")
+      e4 = insert(:event, venue: other_venue, date: Date.add(today, 4), title: "ev4")
 
       {:ok, view, _html} = live(conn, ~p"/events")
 
@@ -117,11 +132,13 @@ defmodule MusicListingsWeb.EventLiveTest do
       refute has_element?(view, "#event-#{e4.id}")
 
       # Now apply date filter
+      filter_date = Date.add(today, 4)
+
       view
       |> element("#date-filter-form")
-      |> render_change(%{"date" => "2024-08-05"})
+      |> render_change(%{"date" => Date.to_iso8601(filter_date)})
 
-      # Should show only events from first venue starting from Aug 5
+      # Should show only events from first venue starting from the filter date
       refute has_element?(view, "#event-#{e4.id}")
     end
   end
@@ -130,7 +147,8 @@ defmodule MusicListingsWeb.EventLiveTest do
     setup :register_and_log_in_user
 
     setup do
-      event = insert(:event, date: ~D[2024-08-01])
+      today = Date.utc_today()
+      event = insert(:event, date: today)
       %{event_id: event.id}
     end
 
