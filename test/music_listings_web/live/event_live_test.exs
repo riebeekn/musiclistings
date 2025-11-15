@@ -116,7 +116,11 @@ defmodule MusicListingsWeb.EventLiveTest do
       refute render(view) =~ "Showing events from"
     end
 
-    test "combines date filter with venue filter", %{conn: conn, venue_id: venue_id, today: today} do
+    test "combines date filter with venue filter (venue filter first)", %{
+      conn: conn,
+      venue_id: venue_id,
+      today: today
+    } do
       # Create another venue with events
       other_venue = insert(:venue)
       e4 = insert(:event, venue: other_venue, date: Date.add(today, 4), title: "ev4")
@@ -139,6 +143,45 @@ defmodule MusicListingsWeb.EventLiveTest do
       |> render_change(%{"date" => Date.to_iso8601(filter_date)})
 
       # Should show only events from first venue starting from the filter date
+      refute has_element?(view, "#event-#{e4.id}")
+    end
+
+    test "combines date filter with venue filter (date filter first)", %{
+      conn: conn,
+      venue_id: venue_id,
+      e1_id: e1_id,
+      e2_id: e2_id,
+      e3_id: e3_id,
+      today: today
+    } do
+      # Create another venue with events
+      other_venue = insert(:venue)
+      e4 = insert(:event, venue: other_venue, date: Date.add(today, 4), title: "ev4")
+
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      # Apply date filter first
+      filter_date = Date.add(today, 4)
+
+      view
+      |> element("#date-filter-form")
+      |> render_change(%{"date" => Date.to_iso8601(filter_date)})
+
+      # Should show e2, e3, and e4 (all events from filter_date onwards)
+      refute has_element?(view, "#event-#{e1_id}")
+      assert has_element?(view, "#event-#{e2_id}")
+      assert has_element?(view, "#event-#{e3_id}")
+      assert has_element?(view, "#event-#{e4.id}")
+
+      # Now apply venue filter (this is where the bug occurred)
+      view
+      |> element("#venue-filters")
+      |> render_change(%{"#{venue_id}" => "true"})
+
+      # Should show only events from first venue starting from the filter date
+      refute has_element?(view, "#event-#{e1_id}")
+      assert has_element?(view, "#event-#{e2_id}")
+      assert has_element?(view, "#event-#{e3_id}")
       refute has_element?(view, "#event-#{e4.id}")
     end
   end

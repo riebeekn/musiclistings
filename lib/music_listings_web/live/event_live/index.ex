@@ -152,11 +152,13 @@ defmodule MusicListingsWeb.EventLive.Index do
         from_date: selected_date
       )
 
+    selected_date_string = if selected_date, do: Date.to_iso8601(selected_date), else: ""
+
     socket
     |> update_socket_assigns(paged_events)
-    |> assign(:selected_date, selected_date)
+    |> assign(:selected_date, selected_date_string)
     |> assign(:current_page, 1)
-    |> push_event("saveDateFilterToLocalStorage", %{selected_date: selected_date || ""})
+    |> push_event("saveDateFilterToLocalStorage", %{selected_date: selected_date_string})
     |> noreply()
   end
 
