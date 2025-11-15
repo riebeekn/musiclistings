@@ -246,7 +246,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   def date_filter_status(assigns) do
     ~H"""
-    <%= if @selected_date do %>
+    <%= if @selected_date && !today?(@selected_date) do %>
       <div class="text-white text-sm sm:text-base -mt-4 sm:-mt-1 mb-6 sm:mb-4">
         Showing events from {format_filter_date(@selected_date)} onwards.
         <a
@@ -261,6 +261,15 @@ defmodule MusicListingsWeb.CustomComponents do
     <% end %>
     """
   end
+
+  defp today?(date_string) when is_binary(date_string) do
+    case Date.from_iso8601(date_string) do
+      {:ok, date} -> Date.compare(date, Date.utc_today()) == :eq
+      _error -> false
+    end
+  end
+
+  defp today?(_other), do: false
 
   defp format_filter_date(date_string) when is_binary(date_string) do
     case Date.from_iso8601(date_string) do
