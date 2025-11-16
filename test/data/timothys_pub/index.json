@@ -1,0 +1,6677 @@
+{
+  "events": [
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1947",
+        "seq": 0,
+        "tid": 1763269200000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763269200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763355600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "TONY PAGLIA TRIO 5PM"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": [
+              "LIVE-@-TIMOTHY'S-PUB"
+            ]
+          }
+        },
+        "imageId": "BWC_5ac28ec4df82fe65f5ff634e",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5ac28ec4df82fe65f5ff634e",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5ac28ec4df82fe65f5ff634e",
+            "name": "TONY PAGLIA",
+            "altText": "TONY PAGLIA",
+            "width": 1000,
+            "height": 1777,
+            "size": 689456,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5ac28ec4df82fe65f5ff634e",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C06C2C_0901_01C06C2C-0-01C071CC_1947-01C06C2C-0-0",
+      "ctstamp": 1761158006377,
+      "dtstamp": 1761158006377,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "962",
+        "seq": 0,
+        "tid": 1763269200000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763269200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763355600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "$1.35 WINGS (With beverage purchase - Eat in Only)"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5aa4503cdf82fe1d795b2f85",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5aa4503cdf82fe1d795b2f85",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5aa4503cdf82fe1d795b2f85",
+            "name": "Wings 2",
+            "altText": "Wings 2",
+            "width": 600,
+            "height": 312,
+            "size": 84265,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5aa4503cdf82fe1d795b2f85",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C06C2C_0994_01C06C2C-0-01C071CC_962-01C06C2C-0-0",
+      "ctstamp": 1657045429096,
+      "dtstamp": 1714584879063,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1516",
+        "seq": 0,
+        "tid": 1763353800000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763353800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763353800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Fireball Shots $4"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_664b739854c09b7d1aca3d35",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "664b739854c09b7d1aca3d35",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "664b739854c09b7d1aca3d35",
+            "name": "Timothys Fireball and Sheep Dog.PNG",
+            "altText": "Timothys Fireball and Sheep Dog.PNG",
+            "width": 1080,
+            "height": 1920,
+            "size": 2040843,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_664b739854c09b7d1aca3d35",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C071AE_0904_01C071AE-1-01C071AE_1516-01C071AE-0-0",
+      "ctstamp": 1716220901591,
+      "dtstamp": 1756993521080,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1719",
+        "seq": 0,
+        "tid": 1763353800000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763353800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763353800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Jameson Whiskey Shots $5"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_67805cbdc1c9522556ce2914",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "67805cbdc1c9522556ce2914",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "67805cbdc1c9522556ce2914",
+            "name": "Jameson",
+            "altText": "Jameson",
+            "width": 852,
+            "height": 852,
+            "size": 285395,
+            "masterFormat": "png",
+            "variantFormat": "png",
+            "oldId": "BWC_67805cbdc1c9522556ce2914",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C071AE_0904_01C071AE-1-01C071AE_1719-01C071AE-0-0",
+      "ctstamp": 1736463900974,
+      "dtstamp": 1736465630064,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1722",
+        "seq": 0,
+        "tid": 1763355600000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763355600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763442000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "All Draft at Domestic Prices"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_678059a1c1c9522556ce264f",
+        "attachments": [],
+        "noDetail": false,
+        "version": 2,
+        "imageIdNg": "678059a1c1c9522556ce264f",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "678059a1c1c9522556ce264f",
+            "name": "Draft",
+            "altText": "Draft",
+            "width": 1000,
+            "height": 592,
+            "size": 79315,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_678059a1c1c9522556ce264f",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C071CC_0904_01C071CC-0-01C0776C_1722-01C071CC-0-0",
+      "ctstamp": 1736464855130,
+      "dtstamp": 1736464855130,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1989",
+        "seq": 0,
+        "tid": 1763355600000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763355600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763442000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "STEVIE C. @ 7PM"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": [
+              "LIVE-@-TIMOTHY'S-PUB"
+            ]
+          }
+        },
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageSets": []
+      },
+      "sorter": "999_01C071CC_0901_01C071CC-0-01C0776C_1989-01C071CC-0-0",
+      "ctstamp": 1762796772628,
+      "dtstamp": 1762796782887,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "962",
+        "seq": 0,
+        "tid": 1763355600000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763355600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763442000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "$1.35 WINGS (With beverage purchase - Eat in Only)"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5aa4503cdf82fe1d795b2f85",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5aa4503cdf82fe1d795b2f85",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5aa4503cdf82fe1d795b2f85",
+            "name": "Wings 2",
+            "altText": "Wings 2",
+            "width": 600,
+            "height": 312,
+            "size": 84265,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5aa4503cdf82fe1d795b2f85",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C071CC_0994_01C071CC-0-01C0776C_962-01C071CC-0-0",
+      "ctstamp": 1657045429096,
+      "dtstamp": 1714584879063,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1516",
+        "seq": 0,
+        "tid": 1763440200000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763440200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763440200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Fireball Shots $4"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_664b739854c09b7d1aca3d35",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "664b739854c09b7d1aca3d35",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "664b739854c09b7d1aca3d35",
+            "name": "Timothys Fireball and Sheep Dog.PNG",
+            "altText": "Timothys Fireball and Sheep Dog.PNG",
+            "width": 1080,
+            "height": 1920,
+            "size": 2040843,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_664b739854c09b7d1aca3d35",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0774E_0904_01C0774E-1-01C0774E_1516-01C0774E-0-0",
+      "ctstamp": 1716220901591,
+      "dtstamp": 1756993521080,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1656",
+        "seq": 0,
+        "tid": 1763440200000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763440200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763440200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Kids Eat Free Mondays (See menu attached for details)"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_66f05e2e6e1e462de2dd4cad",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "66f05e2e6e1e462de2dd4cad",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "66f05e2e6e1e462de2dd4cad",
+            "name": "KIDS EAT FREE MONDAYS_page-0001",
+            "altText": "KIDS EAT FREE MONDAYS_page-0001",
+            "width": 1275,
+            "height": 1650,
+            "size": 112323,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_66f05e2e6e1e462de2dd4cad",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0774E_0904_01C0774E-1-01C0774E_1656-01C0774E-0-0",
+      "ctstamp": 1728584254134,
+      "dtstamp": 1736465716088,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1953",
+        "seq": 0,
+        "tid": 1763442000000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763442000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763528400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "GIG RABBIT @ 7PM"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": [
+              "LIVE-@-TIMOTHY'S-PUB"
+            ]
+          }
+        },
+        "imageId": "BWC_68f92a2e19e75c29e19e1090",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "68f92a2e19e75c29e19e1090",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "68f92a2e19e75c29e19e1090",
+            "name": "GIG RABI",
+            "altText": "GIG RABI",
+            "width": 200,
+            "height": 200,
+            "size": 5953,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_68f92a2e19e75c29e19e1090",
+            "tags": []
+          },
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "68f92a5819e75c29e19e10a2",
+            "name": "GIG RABBIT",
+            "altText": "GIG RABBIT",
+            "width": 960,
+            "height": 400,
+            "size": 67817,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_68f92a5819e75c29e19e10a2",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0776C_0901_01C0776C-0-01C07D0C_1953-01C0776C-0-0",
+      "ctstamp": 1761159857624,
+      "dtstamp": 1761159915781,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "963",
+        "seq": 0,
+        "tid": 1763517600000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763517600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763517600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "$5 BAR SHOTS"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5aa45466df82fe1d795b3f94",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5aa45466df82fe1d795b3f94",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5aa45466df82fe1d795b3f94",
+            "name": "cubalibre",
+            "altText": "cubalibre",
+            "width": 885,
+            "height": 1200,
+            "size": 96872,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5aa45466df82fe1d795b3f94",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C07C58_0904_01C07C58-1-01C07C58_963-01C07C58-0-0",
+      "ctstamp": 1657046073006,
+      "dtstamp": 1657046271337,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1516",
+        "seq": 0,
+        "tid": 1763526600000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763526600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763526600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Fireball Shots $4"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_664b739854c09b7d1aca3d35",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "664b739854c09b7d1aca3d35",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "664b739854c09b7d1aca3d35",
+            "name": "Timothys Fireball and Sheep Dog.PNG",
+            "altText": "Timothys Fireball and Sheep Dog.PNG",
+            "width": 1080,
+            "height": 1920,
+            "size": 2040843,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_664b739854c09b7d1aca3d35",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C07CEE_0904_01C07CEE-1-01C07CEE_1516-01C07CEE-0-0",
+      "ctstamp": 1716220901591,
+      "dtstamp": 1756993521080,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1666",
+        "seq": 0,
+        "tid": 1763528400000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763528400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763614800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "GREG WYARD @ 7:30PM"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": [
+              "LIVE-@-TIMOTHY'S-PUB"
+            ]
+          }
+        },
+        "imageId": "BWC_6693fdbb8bbd8946838a62fa",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "6693fdbb8bbd8946838a62fa",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "6693fdbb8bbd8946838a62fa",
+            "name": "Greg at Timothy's July 21st 2021",
+            "altText": "Greg at Timothy's July 21st 2021",
+            "width": 4032,
+            "height": 3024,
+            "size": 2243615,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_6693fdbb8bbd8946838a62fa",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C07D0C_0804_01C07D0C-0-01C082AC_1666-01C07D0C-0-0",
+      "ctstamp": 1730763233579,
+      "dtstamp": 1751916022859,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "962",
+        "seq": 0,
+        "tid": 1763528400000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763528400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763614800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "$1.35 WINGS (With beverage purchase - Eat in Only)"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5aa4503cdf82fe1d795b2f85",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5aa4503cdf82fe1d795b2f85",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5aa4503cdf82fe1d795b2f85",
+            "name": "Wings 2",
+            "altText": "Wings 2",
+            "width": 600,
+            "height": 312,
+            "size": 84265,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5aa4503cdf82fe1d795b2f85",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C07D0C_0994_01C07D0C-0-01C082AC_962-01C07D0C-0-0",
+      "ctstamp": 1657045429096,
+      "dtstamp": 1714584879063,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1516",
+        "seq": 0,
+        "tid": 1763613000000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763613000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763613000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Fireball Shots $4"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_664b739854c09b7d1aca3d35",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "664b739854c09b7d1aca3d35",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "664b739854c09b7d1aca3d35",
+            "name": "Timothys Fireball and Sheep Dog.PNG",
+            "altText": "Timothys Fireball and Sheep Dog.PNG",
+            "width": 1080,
+            "height": 1920,
+            "size": 2040843,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_664b739854c09b7d1aca3d35",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0828E_0904_01C0828E-1-01C0828E_1516-01C0828E-0-0",
+      "ctstamp": 1716220901591,
+      "dtstamp": 1756993521080,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1718",
+        "seq": 0,
+        "tid": 1763614740000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763614740000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763614740000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "House Wine $7 - 6oz Glass - All Day!"
+        },
+        "description": {
+          "text": "Seasons VQA wine series $1 per ounce all day!!!"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5aa451b4df82fe1d795b353c",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5aa451b4df82fe1d795b353c",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5aa451b4df82fe1d795b353c",
+            "name": "red-or-white-wine",
+            "altText": "red-or-white-wine",
+            "width": 200,
+            "height": 300,
+            "size": 7212,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5aa451b4df82fe1d795b353c",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C082AB_0904_01C082AB-1-01C082AB_1718-01C082AB-0-0",
+      "ctstamp": 1736462835362,
+      "dtstamp": 1736463131434,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1963",
+        "seq": 0,
+        "tid": 1763614800000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763614800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763701200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "FIRE WHEN READY @ 7PM"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": [
+              "LIVE-@-TIMOTHY'S-PUB"
+            ]
+          }
+        },
+        "imageId": "BWC_676f38e0b1730a442f62fd19",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "676f38e0b1730a442f62fd19",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "676f38e0b1730a442f62fd19",
+            "name": "FIRE WHEN READY",
+            "altText": "FIRE WHEN READY",
+            "width": 1080,
+            "height": 1080,
+            "size": 236520,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_676f38e0b1730a442f62fd19",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C082AC_0901_01C082AC-0-01C0884C_1963-01C082AC-0-0",
+      "ctstamp": 1761161398147,
+      "dtstamp": 1761161398147,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1651",
+        "seq": 0,
+        "tid": 1763654400000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763654400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763654400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Cheeseburger in Paradise!"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_6707dcd8cdfd2d1ec671c228",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "6707dcd8cdfd2d1ec671c228",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "6707dcd8cdfd2d1ec671c228",
+            "name": "CHEESEBURGER IN PARADISE",
+            "altText": "CHEESEBURGER IN PARADISE",
+            "width": 937,
+            "height": 1172,
+            "size": 141007,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_6707dcd8cdfd2d1ec671c228",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C08540_0904_01C08540-1-01C08540_1651-01C08540-0-0",
+      "ctstamp": 1728580756457,
+      "dtstamp": 1758145021195,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1516",
+        "seq": 0,
+        "tid": 1763699400000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763699400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763699400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Fireball Shots $4"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_664b739854c09b7d1aca3d35",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "664b739854c09b7d1aca3d35",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "664b739854c09b7d1aca3d35",
+            "name": "Timothys Fireball and Sheep Dog.PNG",
+            "altText": "Timothys Fireball and Sheep Dog.PNG",
+            "width": 1080,
+            "height": 1920,
+            "size": 2040843,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_664b739854c09b7d1aca3d35",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0882E_0904_01C0882E-1-01C0882E_1516-01C0882E-0-0",
+      "ctstamp": 1716220901591,
+      "dtstamp": 1756993521080,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1720",
+        "seq": 0,
+        "tid": 1763699400000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763699400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763699400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Landshark Tall Boys $5 & Pints $6"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_6780574ac1c9522556ce2525",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "6780574ac1c9522556ce2525",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "6780574ac1c9522556ce2525",
+            "name": "Landshark",
+            "altText": "Landshark",
+            "width": 1068,
+            "height": 990,
+            "size": 116829,
+            "masterFormat": "png",
+            "variantFormat": "png",
+            "oldId": "BWC_6780574ac1c9522556ce2525",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0882E_0904_01C0882E-1-01C0882E_1720-01C0882E-0-0",
+      "ctstamp": 1736464212500,
+      "dtstamp": 1736465493859,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1964",
+        "seq": 0,
+        "tid": 1763701200000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763701200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763787600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "ORANGEMAN BAND @ 9PM (15 cover)"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": [
+              "LIVE-@-TIMOTHY'S-PUB"
+            ]
+          }
+        },
+        "imageId": "BWC_655a540dc97d05556fa3daf5",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "655a540dc97d05556fa3daf5",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "655a540dc97d05556fa3daf5",
+            "name": "ORANGEMAN",
+            "altText": "ORANGEMAN",
+            "width": 637,
+            "height": 334,
+            "size": 35193,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_655a540dc97d05556fa3daf5",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0884C_0901_01C0884C-0-01C08DEC_1964-01C0884C-0-0",
+      "ctstamp": 1761161423148,
+      "dtstamp": 1761161423148,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1721",
+        "seq": 0,
+        "tid": 1763758800000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763758800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763769600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "2-4-1 Fish & Chips - Buy 1 piece dinner get 2 pieces of fish! 4-7PM"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5bda339adf82fe344ff4ef9a",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5bda339adf82fe344ff4ef9a",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5bda339adf82fe344ff4ef9a",
+            "name": "fish_and_chips_smaller1",
+            "altText": "fish_and_chips_smaller1",
+            "width": 480,
+            "height": 360,
+            "size": 32114,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5bda339adf82fe344ff4ef9a",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C08C0C_0904_01C08C0C-1-01C08CC0_1721-01C08C0C-0-0",
+      "ctstamp": 1736464704338,
+      "dtstamp": 1737302426577,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1516",
+        "seq": 0,
+        "tid": 1763785800000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763785800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763785800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Fireball Shots $4"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_664b739854c09b7d1aca3d35",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "664b739854c09b7d1aca3d35",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "664b739854c09b7d1aca3d35",
+            "name": "Timothys Fireball and Sheep Dog.PNG",
+            "altText": "Timothys Fireball and Sheep Dog.PNG",
+            "width": 1080,
+            "height": 1920,
+            "size": 2040843,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_664b739854c09b7d1aca3d35",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C08DCE_0904_01C08DCE-1-01C08DCE_1516-01C08DCE-0-0",
+      "ctstamp": 1716220901591,
+      "dtstamp": 1756993521080,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1717",
+        "seq": 0,
+        "tid": 1763787540000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763787540000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763787540000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Pinot Grigio & Cabernet Sauvignon $1 per ounce all day"
+        },
+        "description": {
+          "text": "Seasons VQA wine series $1 per ounce all day!!!"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5aa451b4df82fe1d795b353c",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5aa451b4df82fe1d795b353c",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5aa451b4df82fe1d795b353c",
+            "name": "red-or-white-wine",
+            "altText": "red-or-white-wine",
+            "width": 200,
+            "height": 300,
+            "size": 7212,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5aa451b4df82fe1d795b353c",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C08DEB_0904_01C08DEB-1-01C08DEB_1717-01C08DEB-0-0",
+      "ctstamp": 1736462450861,
+      "dtstamp": 1760547994953,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1966",
+        "seq": 0,
+        "tid": 1763787600000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763787600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763874000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "TAUNTED BY GIRLS 3-7PM"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": [
+              "LIVE-@-TIMOTHY'S-PUB"
+            ]
+          }
+        },
+        "imageId": "BWC_5acfc8e1df82fe785ea9e638",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5acfc8e1df82fe785ea9e638",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5acfc8e1df82fe785ea9e638",
+            "name": "tbg_timothy's_poster",
+            "altText": "tbg_timothy's_poster",
+            "width": 576,
+            "height": 756,
+            "size": 611447,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5acfc8e1df82fe785ea9e638",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C08DEC_0901_01C08DEC-0-01C0938C_1966-01C08DEC-0-0",
+      "ctstamp": 1761161738994,
+      "dtstamp": 1761161738994,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1965",
+        "seq": 0,
+        "tid": 1763863200000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763863200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763863200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "HOT BUTTERED SOUL @ 9PM (10. cover)"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": [
+              "LIVE-@-TIMOTHY'S-PUB"
+            ]
+          }
+        },
+        "imageId": "BWC_63d54a569f3594100f992048",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "63d54a569f3594100f992048",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "63d54a569f3594100f992048",
+            "name": "HOT BUTTERED SOUL",
+            "altText": "HOT BUTTERED SOUL",
+            "width": 909,
+            "height": 909,
+            "size": 32882,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_63d54a569f3594100f992048",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C092D8_0901_01C092D8-1-01C092D8_1965-01C092D8-0-0",
+      "ctstamp": 1761161707215,
+      "dtstamp": 1761161707215,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "966",
+        "seq": 0,
+        "tid": 1763866800000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763866800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763866800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "$5 JAGER SHOTS"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5aa45627df82fe1d795b4611",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5aa45627df82fe1d795b4611",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5aa45627df82fe1d795b4611",
+            "name": "Jager",
+            "altText": "Jager",
+            "width": 194,
+            "height": 259,
+            "size": 6645,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5aa45627df82fe1d795b4611",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C09314_0904_01C09314-1-01C09314_966-01C09314-0-0",
+      "ctstamp": 1657048489188,
+      "dtstamp": 1657048516910,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1516",
+        "seq": 0,
+        "tid": 1763872200000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763872200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763872200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Fireball Shots $4"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_664b739854c09b7d1aca3d35",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "664b739854c09b7d1aca3d35",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "664b739854c09b7d1aca3d35",
+            "name": "Timothys Fireball and Sheep Dog.PNG",
+            "altText": "Timothys Fireball and Sheep Dog.PNG",
+            "width": 1080,
+            "height": 1920,
+            "size": 2040843,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_664b739854c09b7d1aca3d35",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0936E_0904_01C0936E-1-01C0936E_1516-01C0936E-0-0",
+      "ctstamp": 1716220901591,
+      "dtstamp": 1756993521080,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1952",
+        "seq": 0,
+        "tid": 1763874000000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763874000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763960400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "ROBBIE LANE & THE DISCIPLES 6PM ($20. cover)"
+        },
+        "description": {
+          "text": "http://www.robbielane.com/"
+        },
+        "tagset": {
+          "tags": {
+            "default": [
+              "LIVE-@-TIMOTHY'S-PUB"
+            ]
+          }
+        },
+        "imageId": "BWC_5de3dcd6df82fe582dd2a984",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5de3dcd6df82fe582dd2a984",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5de3dcd6df82fe582dd2a984",
+            "name": "ROBBIE LANE",
+            "altText": "ROBBIE LANE",
+            "width": 244,
+            "height": 336,
+            "size": 19707,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5de3dcd6df82fe582dd2a984",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0938C_0901_01C0938C-0-01C0992C_1952-01C0938C-0-0",
+      "ctstamp": 1761159452242,
+      "dtstamp": 1761159452242,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "962",
+        "seq": 0,
+        "tid": 1763874000000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763874000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763960400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "$1.35 WINGS (With beverage purchase - Eat in Only)"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5aa4503cdf82fe1d795b2f85",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5aa4503cdf82fe1d795b2f85",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5aa4503cdf82fe1d795b2f85",
+            "name": "Wings 2",
+            "altText": "Wings 2",
+            "width": 600,
+            "height": 312,
+            "size": 84265,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5aa4503cdf82fe1d795b2f85",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0938C_0994_01C0938C-0-01C0992C_962-01C0938C-0-0",
+      "ctstamp": 1657045429096,
+      "dtstamp": 1714584879063,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1516",
+        "seq": 0,
+        "tid": 1763958600000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763958600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763958600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Fireball Shots $4"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_664b739854c09b7d1aca3d35",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "664b739854c09b7d1aca3d35",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "664b739854c09b7d1aca3d35",
+            "name": "Timothys Fireball and Sheep Dog.PNG",
+            "altText": "Timothys Fireball and Sheep Dog.PNG",
+            "width": 1080,
+            "height": 1920,
+            "size": 2040843,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_664b739854c09b7d1aca3d35",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0990E_0904_01C0990E-1-01C0990E_1516-01C0990E-0-0",
+      "ctstamp": 1716220901591,
+      "dtstamp": 1756993521080,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1719",
+        "seq": 0,
+        "tid": 1763958600000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763958600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1763958600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Jameson Whiskey Shots $5"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_67805cbdc1c9522556ce2914",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "67805cbdc1c9522556ce2914",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "67805cbdc1c9522556ce2914",
+            "name": "Jameson",
+            "altText": "Jameson",
+            "width": 852,
+            "height": 852,
+            "size": 285395,
+            "masterFormat": "png",
+            "variantFormat": "png",
+            "oldId": "BWC_67805cbdc1c9522556ce2914",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0990E_0904_01C0990E-1-01C0990E_1719-01C0990E-0-0",
+      "ctstamp": 1736463900974,
+      "dtstamp": 1736465630064,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1722",
+        "seq": 0,
+        "tid": 1763960400000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763960400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764046800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "All Draft at Domestic Prices"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_678059a1c1c9522556ce264f",
+        "attachments": [],
+        "noDetail": false,
+        "version": 2,
+        "imageIdNg": "678059a1c1c9522556ce264f",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "678059a1c1c9522556ce264f",
+            "name": "Draft",
+            "altText": "Draft",
+            "width": 1000,
+            "height": 592,
+            "size": 79315,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_678059a1c1c9522556ce264f",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0992C_0904_01C0992C-0-01C09ECC_1722-01C0992C-0-0",
+      "ctstamp": 1736464855130,
+      "dtstamp": 1736464855130,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "962",
+        "seq": 0,
+        "tid": 1763960400000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1763960400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764046800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "$1.35 WINGS (With beverage purchase - Eat in Only)"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5aa4503cdf82fe1d795b2f85",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5aa4503cdf82fe1d795b2f85",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5aa4503cdf82fe1d795b2f85",
+            "name": "Wings 2",
+            "altText": "Wings 2",
+            "width": 600,
+            "height": 312,
+            "size": 84265,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5aa4503cdf82fe1d795b2f85",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0992C_0994_01C0992C-0-01C09ECC_962-01C0992C-0-0",
+      "ctstamp": 1657045429096,
+      "dtstamp": 1714584879063,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1516",
+        "seq": 0,
+        "tid": 1764045000000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764045000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764045000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Fireball Shots $4"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_664b739854c09b7d1aca3d35",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "664b739854c09b7d1aca3d35",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "664b739854c09b7d1aca3d35",
+            "name": "Timothys Fireball and Sheep Dog.PNG",
+            "altText": "Timothys Fireball and Sheep Dog.PNG",
+            "width": 1080,
+            "height": 1920,
+            "size": 2040843,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_664b739854c09b7d1aca3d35",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C09EAE_0904_01C09EAE-1-01C09EAE_1516-01C09EAE-0-0",
+      "ctstamp": 1716220901591,
+      "dtstamp": 1756993521080,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1656",
+        "seq": 0,
+        "tid": 1764045000000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764045000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764045000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Kids Eat Free Mondays (See menu attached for details)"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_66f05e2e6e1e462de2dd4cad",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "66f05e2e6e1e462de2dd4cad",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "66f05e2e6e1e462de2dd4cad",
+            "name": "KIDS EAT FREE MONDAYS_page-0001",
+            "altText": "KIDS EAT FREE MONDAYS_page-0001",
+            "width": 1275,
+            "height": 1650,
+            "size": 112323,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_66f05e2e6e1e462de2dd4cad",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C09EAE_0904_01C09EAE-1-01C09EAE_1656-01C09EAE-0-0",
+      "ctstamp": 1728584254134,
+      "dtstamp": 1736465716088,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1943",
+        "seq": 0,
+        "tid": 1764046800000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764046800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764133200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "JOHN ROGERS & JAMES NARO @7PM"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": [
+              "LIVE-@-TIMOTHY'S-PUB"
+            ]
+          }
+        },
+        "imageId": "BWC_676ee795b1730a442f62d2e8",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "676ee795b1730a442f62d2e8",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "676ee795b1730a442f62d2e8",
+            "name": "ROGERS & NARO",
+            "altText": "ROGERS & NARO",
+            "width": 750,
+            "height": 536,
+            "size": 71345,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_676ee795b1730a442f62d2e8",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C09ECC_0901_01C09ECC-0-01C0A46C_1943-01C09ECC-0-0",
+      "ctstamp": 1761157862141,
+      "dtstamp": 1761157862141,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "963",
+        "seq": 0,
+        "tid": 1764122400000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764122400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764122400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "$5 BAR SHOTS"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5aa45466df82fe1d795b3f94",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5aa45466df82fe1d795b3f94",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5aa45466df82fe1d795b3f94",
+            "name": "cubalibre",
+            "altText": "cubalibre",
+            "width": 885,
+            "height": 1200,
+            "size": 96872,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5aa45466df82fe1d795b3f94",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0A3B8_0904_01C0A3B8-1-01C0A3B8_963-01C0A3B8-0-0",
+      "ctstamp": 1657046073006,
+      "dtstamp": 1657046271337,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1516",
+        "seq": 0,
+        "tid": 1764131400000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764131400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764131400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Fireball Shots $4"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_664b739854c09b7d1aca3d35",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "664b739854c09b7d1aca3d35",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "664b739854c09b7d1aca3d35",
+            "name": "Timothys Fireball and Sheep Dog.PNG",
+            "altText": "Timothys Fireball and Sheep Dog.PNG",
+            "width": 1080,
+            "height": 1920,
+            "size": 2040843,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_664b739854c09b7d1aca3d35",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0A44E_0904_01C0A44E-1-01C0A44E_1516-01C0A44E-0-0",
+      "ctstamp": 1716220901591,
+      "dtstamp": 1756993521080,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1666",
+        "seq": 0,
+        "tid": 1764133200000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764133200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764219600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "GREG WYARD @ 7:30PM"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": [
+              "LIVE-@-TIMOTHY'S-PUB"
+            ]
+          }
+        },
+        "imageId": "BWC_6693fdbb8bbd8946838a62fa",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "6693fdbb8bbd8946838a62fa",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "6693fdbb8bbd8946838a62fa",
+            "name": "Greg at Timothy's July 21st 2021",
+            "altText": "Greg at Timothy's July 21st 2021",
+            "width": 4032,
+            "height": 3024,
+            "size": 2243615,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_6693fdbb8bbd8946838a62fa",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0A46C_0804_01C0A46C-0-01C0AA0C_1666-01C0A46C-0-0",
+      "ctstamp": 1730763233579,
+      "dtstamp": 1751916022859,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "962",
+        "seq": 0,
+        "tid": 1764133200000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764133200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764219600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "$1.35 WINGS (With beverage purchase - Eat in Only)"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5aa4503cdf82fe1d795b2f85",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5aa4503cdf82fe1d795b2f85",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5aa4503cdf82fe1d795b2f85",
+            "name": "Wings 2",
+            "altText": "Wings 2",
+            "width": 600,
+            "height": 312,
+            "size": 84265,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5aa4503cdf82fe1d795b2f85",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0A46C_0994_01C0A46C-0-01C0AA0C_962-01C0A46C-0-0",
+      "ctstamp": 1657045429096,
+      "dtstamp": 1714584879063,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1516",
+        "seq": 0,
+        "tid": 1764217800000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764217800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764217800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Fireball Shots $4"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_664b739854c09b7d1aca3d35",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "664b739854c09b7d1aca3d35",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "664b739854c09b7d1aca3d35",
+            "name": "Timothys Fireball and Sheep Dog.PNG",
+            "altText": "Timothys Fireball and Sheep Dog.PNG",
+            "width": 1080,
+            "height": 1920,
+            "size": 2040843,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_664b739854c09b7d1aca3d35",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0A9EE_0904_01C0A9EE-1-01C0A9EE_1516-01C0A9EE-0-0",
+      "ctstamp": 1716220901591,
+      "dtstamp": 1756993521080,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1718",
+        "seq": 0,
+        "tid": 1764219540000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764219540000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764219540000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "House Wine $7 - 6oz Glass - All Day!"
+        },
+        "description": {
+          "text": "Seasons VQA wine series $1 per ounce all day!!!"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5aa451b4df82fe1d795b353c",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5aa451b4df82fe1d795b353c",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5aa451b4df82fe1d795b353c",
+            "name": "red-or-white-wine",
+            "altText": "red-or-white-wine",
+            "width": 200,
+            "height": 300,
+            "size": 7212,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5aa451b4df82fe1d795b353c",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0AA0B_0904_01C0AA0B-1-01C0AA0B_1718-01C0AA0B-0-0",
+      "ctstamp": 1736462835362,
+      "dtstamp": 1736463131434,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1326",
+        "seq": 0,
+        "tid": 1764219600000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764219600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764306000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "OYSTER NIGHT! 5-8PM"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": [
+              "Promote-Events",
+              "Live-Music"
+            ]
+          }
+        },
+        "imageId": "BWC_6514765c41fad31755da131c",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "6514765c41fad31755da131c",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "6514765c41fad31755da131c",
+            "name": "Oyster Night 2.JPG",
+            "altText": "Oyster Night 2.JPG",
+            "width": 4000,
+            "height": 4000,
+            "size": 1157506,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_6514765c41fad31755da131c",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0AA0C_0854_01C0AA0C-0-01C0AFAC_1326-01C0AA0C-0-0",
+      "ctstamp": 1695840287014,
+      "dtstamp": 1729372490250,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1988",
+        "seq": 0,
+        "tid": 1764219600000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764219600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764306000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "THE BREAKFAST CLUB @ 8 PM (10 cover)"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": [
+              "LIVE-@-TIMOTHY'S-PUB"
+            ]
+          }
+        },
+        "imageId": "BWC_67b2357d1c08c97c9529b632",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "67b2357d1c08c97c9529b632",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "67b2357d1c08c97c9529b632",
+            "name": "BREAKFAST CLUB",
+            "altText": "BREAKFAST CLUB",
+            "width": 750,
+            "height": 483,
+            "size": 41706,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_67b2357d1c08c97c9529b632",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0AA0C_0901_01C0AA0C-0-01C0AFAC_1988-01C0AA0C-0-0",
+      "ctstamp": 1761253033065,
+      "dtstamp": 1761271653953,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "223",
+        "seq": 0,
+        "tid": 1764219600000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764219600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764306000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "US TURKEY DAY & NFL FOOTBALL! FREE BUFFET & PRIZES!"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": [
+              "Promote-Events"
+            ]
+          }
+        },
+        "imageId": "BWC_5bc3c2d8df82fe79112694e7",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5bc3c2d8df82fe79112694e7",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5bc3c2d8df82fe79112694e7",
+            "name": "THANKSGIVING TURKEY FOOTBALL",
+            "altText": "THANKSGIVING TURKEY FOOTBALL",
+            "width": 209,
+            "height": 241,
+            "size": 15829,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5bc3c2d8df82fe79112694e7",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0AA0C_0901_01C0AA0C-0-01C0AFAC_223-01C0AA0C-0-0",
+      "ctstamp": 1539556065909,
+      "dtstamp": 1761253339411,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1651",
+        "seq": 0,
+        "tid": 1764259200000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764259200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764259200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Cheeseburger in Paradise!"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_6707dcd8cdfd2d1ec671c228",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "6707dcd8cdfd2d1ec671c228",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "6707dcd8cdfd2d1ec671c228",
+            "name": "CHEESEBURGER IN PARADISE",
+            "altText": "CHEESEBURGER IN PARADISE",
+            "width": 937,
+            "height": 1172,
+            "size": 141007,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_6707dcd8cdfd2d1ec671c228",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0ACA0_0904_01C0ACA0-1-01C0ACA0_1651-01C0ACA0-0-0",
+      "ctstamp": 1728580756457,
+      "dtstamp": 1758145021195,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1516",
+        "seq": 0,
+        "tid": 1764304200000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764304200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764304200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Fireball Shots $4"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_664b739854c09b7d1aca3d35",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "664b739854c09b7d1aca3d35",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "664b739854c09b7d1aca3d35",
+            "name": "Timothys Fireball and Sheep Dog.PNG",
+            "altText": "Timothys Fireball and Sheep Dog.PNG",
+            "width": 1080,
+            "height": 1920,
+            "size": 2040843,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_664b739854c09b7d1aca3d35",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0AF8E_0904_01C0AF8E-1-01C0AF8E_1516-01C0AF8E-0-0",
+      "ctstamp": 1716220901591,
+      "dtstamp": 1756993521080,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1720",
+        "seq": 0,
+        "tid": 1764304200000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764304200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764304200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Landshark Tall Boys $5 & Pints $6"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_6780574ac1c9522556ce2525",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "6780574ac1c9522556ce2525",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "6780574ac1c9522556ce2525",
+            "name": "Landshark",
+            "altText": "Landshark",
+            "width": 1068,
+            "height": 990,
+            "size": 116829,
+            "masterFormat": "png",
+            "variantFormat": "png",
+            "oldId": "BWC_6780574ac1c9522556ce2525",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0AF8E_0904_01C0AF8E-1-01C0AF8E_1720-01C0AF8E-0-0",
+      "ctstamp": 1736464212500,
+      "dtstamp": 1736465493859,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1967",
+        "seq": 0,
+        "tid": 1764306000000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764306000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764392400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "STONED AND ROLLING @ 9PM"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": [
+              "LIVE-@-TIMOTHY'S-PUB"
+            ]
+          }
+        },
+        "imageId": "BWC_66f195b86e1e462de2ddf5fc",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "66f195b86e1e462de2ddf5fc",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "66f195b86e1e462de2ddf5fc",
+            "name": "STONED & ROLLING",
+            "altText": "STONED & ROLLING",
+            "width": 2048,
+            "height": 2048,
+            "size": 146628,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_66f195b86e1e462de2ddf5fc",
+            "tags": []
+          },
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "686d7abbe2a0bd08170c3e03",
+            "name": "Tims 3.PNG",
+            "altText": "Tims 3.PNG",
+            "width": 672,
+            "height": 859,
+            "size": 471887,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_686d7abbe2a0bd08170c3e03",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0AFAC_0901_01C0AFAC-0-01C0B54C_1967-01C0AFAC-0-0",
+      "ctstamp": 1761161782749,
+      "dtstamp": 1761161782749,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1721",
+        "seq": 0,
+        "tid": 1764363600000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764363600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764374400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "2-4-1 Fish & Chips - Buy 1 piece dinner get 2 pieces of fish! 4-7PM"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5bda339adf82fe344ff4ef9a",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5bda339adf82fe344ff4ef9a",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5bda339adf82fe344ff4ef9a",
+            "name": "fish_and_chips_smaller1",
+            "altText": "fish_and_chips_smaller1",
+            "width": 480,
+            "height": 360,
+            "size": 32114,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5bda339adf82fe344ff4ef9a",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0B36C_0904_01C0B36C-1-01C0B420_1721-01C0B36C-0-0",
+      "ctstamp": 1736464704338,
+      "dtstamp": 1737302426577,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1516",
+        "seq": 0,
+        "tid": 1764390600000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764390600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764390600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Fireball Shots $4"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_664b739854c09b7d1aca3d35",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "664b739854c09b7d1aca3d35",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "664b739854c09b7d1aca3d35",
+            "name": "Timothys Fireball and Sheep Dog.PNG",
+            "altText": "Timothys Fireball and Sheep Dog.PNG",
+            "width": 1080,
+            "height": 1920,
+            "size": 2040843,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_664b739854c09b7d1aca3d35",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0B52E_0904_01C0B52E-1-01C0B52E_1516-01C0B52E-0-0",
+      "ctstamp": 1716220901591,
+      "dtstamp": 1756993521080,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1717",
+        "seq": 0,
+        "tid": 1764392340000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764392340000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764392340000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Pinot Grigio & Cabernet Sauvignon $1 per ounce all day"
+        },
+        "description": {
+          "text": "Seasons VQA wine series $1 per ounce all day!!!"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5aa451b4df82fe1d795b353c",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5aa451b4df82fe1d795b353c",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5aa451b4df82fe1d795b353c",
+            "name": "red-or-white-wine",
+            "altText": "red-or-white-wine",
+            "width": 200,
+            "height": 300,
+            "size": 7212,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5aa451b4df82fe1d795b353c",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0B54B_0904_01C0B54B-1-01C0B54B_1717-01C0B54B-0-0",
+      "ctstamp": 1736462450861,
+      "dtstamp": 1760547994953,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1972",
+        "seq": 0,
+        "tid": 1764392400000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764392400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764478800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "TONY PAGLIA & THE NOMADS 3-7PM"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": [
+              "LIVE-@-TIMOTHY'S-PUB"
+            ]
+          }
+        },
+        "imageId": "BWC_63d178279f3594100f97bcd8",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "63d178279f3594100f97bcd8",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "63d178279f3594100f97bcd8",
+            "name": "TONY PAGLIA & THE NOMADS",
+            "altText": "TONY PAGLIA & THE NOMADS",
+            "width": 960,
+            "height": 540,
+            "size": 70800,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_63d178279f3594100f97bcd8",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0B54C_0901_01C0B54C-0-01C0BAEC_1972-01C0B54C-0-0",
+      "ctstamp": 1761162078312,
+      "dtstamp": 1761162078312,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1968",
+        "seq": 0,
+        "tid": 1764468000000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764468000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764468000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "YOUR NEW NEIGHBOURS @ 9PM"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": [
+              "LIVE-@-TIMOTHY'S-PUB"
+            ]
+          }
+        },
+        "imageId": "BWC_63a4a6c5f629d6494abaa35e",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "63a4a6c5f629d6494abaa35e",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "63a4a6c5f629d6494abaa35e",
+            "name": "YOUR NEW NEIGHBOURS",
+            "altText": "YOUR NEW NEIGHBOURS",
+            "width": 918,
+            "height": 500,
+            "size": 77751,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_63a4a6c5f629d6494abaa35e",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0BA38_0901_01C0BA38-1-01C0BA38_1968-01C0BA38-0-0",
+      "ctstamp": 1761161818762,
+      "dtstamp": 1761161818762,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "966",
+        "seq": 0,
+        "tid": 1764471600000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764471600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764471600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "$5 JAGER SHOTS"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5aa45627df82fe1d795b4611",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5aa45627df82fe1d795b4611",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5aa45627df82fe1d795b4611",
+            "name": "Jager",
+            "altText": "Jager",
+            "width": 194,
+            "height": 259,
+            "size": 6645,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5aa45627df82fe1d795b4611",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0BA74_0904_01C0BA74-1-01C0BA74_966-01C0BA74-0-0",
+      "ctstamp": 1657048489188,
+      "dtstamp": 1657048516910,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1516",
+        "seq": 0,
+        "tid": 1764477000000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764477000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764477000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Fireball Shots $4"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_664b739854c09b7d1aca3d35",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "664b739854c09b7d1aca3d35",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "664b739854c09b7d1aca3d35",
+            "name": "Timothys Fireball and Sheep Dog.PNG",
+            "altText": "Timothys Fireball and Sheep Dog.PNG",
+            "width": 1080,
+            "height": 1920,
+            "size": 2040843,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_664b739854c09b7d1aca3d35",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0BACE_0904_01C0BACE-1-01C0BACE_1516-01C0BACE-0-0",
+      "ctstamp": 1716220901591,
+      "dtstamp": 1756993521080,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1949",
+        "seq": 0,
+        "tid": 1764478800000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764478800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764565200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "DONNIE MEEKER BAND @ 5PM"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": [
+              "LIVE-@-TIMOTHY'S-PUB"
+            ]
+          }
+        },
+        "imageId": "BWC_67803ad9c1c9522556ce0ebc",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "67803ad9c1c9522556ce0ebc",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "67803ad9c1c9522556ce0ebc",
+            "name": "Donnie Meeker & the Romeos",
+            "altText": "Donnie Meeker & the Romeos",
+            "width": 6806,
+            "height": 5310,
+            "size": 3494461,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_67803ad9c1c9522556ce0ebc",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0BAEC_0901_01C0BAEC-0-01C0C08C_1949-01C0BAEC-0-0",
+      "ctstamp": 1761158075595,
+      "dtstamp": 1761158075595,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "962",
+        "seq": 0,
+        "tid": 1764478800000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764478800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764565200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "$1.35 WINGS (With beverage purchase - Eat in Only)"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5aa4503cdf82fe1d795b2f85",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5aa4503cdf82fe1d795b2f85",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5aa4503cdf82fe1d795b2f85",
+            "name": "Wings 2",
+            "altText": "Wings 2",
+            "width": 600,
+            "height": 312,
+            "size": 84265,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5aa4503cdf82fe1d795b2f85",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0BAEC_0994_01C0BAEC-0-01C0C08C_962-01C0BAEC-0-0",
+      "ctstamp": 1657045429096,
+      "dtstamp": 1714584879063,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1516",
+        "seq": 0,
+        "tid": 1764563400000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764563400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764563400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Fireball Shots $4"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_664b739854c09b7d1aca3d35",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "664b739854c09b7d1aca3d35",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "664b739854c09b7d1aca3d35",
+            "name": "Timothys Fireball and Sheep Dog.PNG",
+            "altText": "Timothys Fireball and Sheep Dog.PNG",
+            "width": 1080,
+            "height": 1920,
+            "size": 2040843,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_664b739854c09b7d1aca3d35",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0C06E_0904_01C0C06E-1-01C0C06E_1516-01C0C06E-0-0",
+      "ctstamp": 1716220901591,
+      "dtstamp": 1756993521080,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1719",
+        "seq": 0,
+        "tid": 1764563400000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764563400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764563400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Jameson Whiskey Shots $5"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_67805cbdc1c9522556ce2914",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "67805cbdc1c9522556ce2914",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "67805cbdc1c9522556ce2914",
+            "name": "Jameson",
+            "altText": "Jameson",
+            "width": 852,
+            "height": 852,
+            "size": 285395,
+            "masterFormat": "png",
+            "variantFormat": "png",
+            "oldId": "BWC_67805cbdc1c9522556ce2914",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0C06E_0904_01C0C06E-1-01C0C06E_1719-01C0C06E-0-0",
+      "ctstamp": 1736463900974,
+      "dtstamp": 1736465630064,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1722",
+        "seq": 0,
+        "tid": 1764565200000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764565200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764651600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "All Draft at Domestic Prices"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_678059a1c1c9522556ce264f",
+        "attachments": [],
+        "noDetail": false,
+        "version": 2,
+        "imageIdNg": "678059a1c1c9522556ce264f",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "678059a1c1c9522556ce264f",
+            "name": "Draft",
+            "altText": "Draft",
+            "width": 1000,
+            "height": 592,
+            "size": 79315,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_678059a1c1c9522556ce264f",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0C08C_0904_01C0C08C-0-01C0C62C_1722-01C0C08C-0-0",
+      "ctstamp": 1736464855130,
+      "dtstamp": 1736464855130,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "962",
+        "seq": 0,
+        "tid": 1764565200000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764565200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764651600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "$1.35 WINGS (With beverage purchase - Eat in Only)"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5aa4503cdf82fe1d795b2f85",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5aa4503cdf82fe1d795b2f85",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5aa4503cdf82fe1d795b2f85",
+            "name": "Wings 2",
+            "altText": "Wings 2",
+            "width": 600,
+            "height": 312,
+            "size": 84265,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5aa4503cdf82fe1d795b2f85",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0C08C_0994_01C0C08C-0-01C0C62C_962-01C0C08C-0-0",
+      "ctstamp": 1657045429096,
+      "dtstamp": 1714584879063,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1516",
+        "seq": 0,
+        "tid": 1764649800000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764649800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764649800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Fireball Shots $4"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_664b739854c09b7d1aca3d35",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "664b739854c09b7d1aca3d35",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "664b739854c09b7d1aca3d35",
+            "name": "Timothys Fireball and Sheep Dog.PNG",
+            "altText": "Timothys Fireball and Sheep Dog.PNG",
+            "width": 1080,
+            "height": 1920,
+            "size": 2040843,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_664b739854c09b7d1aca3d35",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0C60E_0904_01C0C60E-1-01C0C60E_1516-01C0C60E-0-0",
+      "ctstamp": 1716220901591,
+      "dtstamp": 1756993521080,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1656",
+        "seq": 0,
+        "tid": 1764649800000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764649800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764649800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Kids Eat Free Mondays (See menu attached for details)"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_66f05e2e6e1e462de2dd4cad",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "66f05e2e6e1e462de2dd4cad",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "66f05e2e6e1e462de2dd4cad",
+            "name": "KIDS EAT FREE MONDAYS_page-0001",
+            "altText": "KIDS EAT FREE MONDAYS_page-0001",
+            "width": 1275,
+            "height": 1650,
+            "size": 112323,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_66f05e2e6e1e462de2dd4cad",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0C60E_0904_01C0C60E-1-01C0C60E_1656-01C0C60E-0-0",
+      "ctstamp": 1728584254134,
+      "dtstamp": 1736465716088,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1976",
+        "seq": 0,
+        "tid": 1764651600000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764651600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764738000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "VITO & FRANK @ 7PM"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": [
+              "LIVE-@-TIMOTHY'S-PUB"
+            ]
+          }
+        },
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageSets": []
+      },
+      "sorter": "999_01C0C62C_0901_01C0C62C-0-01C0CBCC_1976-01C0C62C-0-0",
+      "ctstamp": 1761162235891,
+      "dtstamp": 1761162251507,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "963",
+        "seq": 0,
+        "tid": 1764727200000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764727200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764727200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "$5 BAR SHOTS"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5aa45466df82fe1d795b3f94",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5aa45466df82fe1d795b3f94",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5aa45466df82fe1d795b3f94",
+            "name": "cubalibre",
+            "altText": "cubalibre",
+            "width": 885,
+            "height": 1200,
+            "size": 96872,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5aa45466df82fe1d795b3f94",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0CB18_0904_01C0CB18-1-01C0CB18_963-01C0CB18-0-0",
+      "ctstamp": 1657046073006,
+      "dtstamp": 1657046271337,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1516",
+        "seq": 0,
+        "tid": 1764736200000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764736200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764736200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Fireball Shots $4"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_664b739854c09b7d1aca3d35",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "664b739854c09b7d1aca3d35",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "664b739854c09b7d1aca3d35",
+            "name": "Timothys Fireball and Sheep Dog.PNG",
+            "altText": "Timothys Fireball and Sheep Dog.PNG",
+            "width": 1080,
+            "height": 1920,
+            "size": 2040843,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_664b739854c09b7d1aca3d35",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0CBAE_0904_01C0CBAE-1-01C0CBAE_1516-01C0CBAE-0-0",
+      "ctstamp": 1716220901591,
+      "dtstamp": 1756993521080,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1666",
+        "seq": 0,
+        "tid": 1764738000000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764738000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764824400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "GREG WYARD @ 7:30PM"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": [
+              "LIVE-@-TIMOTHY'S-PUB"
+            ]
+          }
+        },
+        "imageId": "BWC_6693fdbb8bbd8946838a62fa",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "6693fdbb8bbd8946838a62fa",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "6693fdbb8bbd8946838a62fa",
+            "name": "Greg at Timothy's July 21st 2021",
+            "altText": "Greg at Timothy's July 21st 2021",
+            "width": 4032,
+            "height": 3024,
+            "size": 2243615,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_6693fdbb8bbd8946838a62fa",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0CBCC_0804_01C0CBCC-0-01C0D16C_1666-01C0CBCC-0-0",
+      "ctstamp": 1730763233579,
+      "dtstamp": 1751916022859,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "962",
+        "seq": 0,
+        "tid": 1764738000000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764738000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764824400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "$1.35 WINGS (With beverage purchase - Eat in Only)"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5aa4503cdf82fe1d795b2f85",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5aa4503cdf82fe1d795b2f85",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5aa4503cdf82fe1d795b2f85",
+            "name": "Wings 2",
+            "altText": "Wings 2",
+            "width": 600,
+            "height": 312,
+            "size": 84265,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5aa4503cdf82fe1d795b2f85",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0CBCC_0994_01C0CBCC-0-01C0D16C_962-01C0CBCC-0-0",
+      "ctstamp": 1657045429096,
+      "dtstamp": 1714584879063,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1516",
+        "seq": 0,
+        "tid": 1764822600000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764822600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764822600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Fireball Shots $4"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_664b739854c09b7d1aca3d35",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "664b739854c09b7d1aca3d35",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "664b739854c09b7d1aca3d35",
+            "name": "Timothys Fireball and Sheep Dog.PNG",
+            "altText": "Timothys Fireball and Sheep Dog.PNG",
+            "width": 1080,
+            "height": 1920,
+            "size": 2040843,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_664b739854c09b7d1aca3d35",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0D14E_0904_01C0D14E-1-01C0D14E_1516-01C0D14E-0-0",
+      "ctstamp": 1716220901591,
+      "dtstamp": 1756993521080,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1718",
+        "seq": 0,
+        "tid": 1764824340000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764824340000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764824340000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "House Wine $7 - 6oz Glass - All Day!"
+        },
+        "description": {
+          "text": "Seasons VQA wine series $1 per ounce all day!!!"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5aa451b4df82fe1d795b353c",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5aa451b4df82fe1d795b353c",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5aa451b4df82fe1d795b353c",
+            "name": "red-or-white-wine",
+            "altText": "red-or-white-wine",
+            "width": 200,
+            "height": 300,
+            "size": 7212,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5aa451b4df82fe1d795b353c",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0D16B_0904_01C0D16B-1-01C0D16B_1718-01C0D16B-0-0",
+      "ctstamp": 1736462835362,
+      "dtstamp": 1736463131434,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1957",
+        "seq": 0,
+        "tid": 1764824400000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764824400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764910800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "McLOVIN @ 7PM"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": [
+              "LIVE-@-TIMOTHY'S-PUB"
+            ]
+          }
+        },
+        "imageId": "BWC_669702b88bbd8946838c23fe",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "669702b88bbd8946838c23fe",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "669702b88bbd8946838c23fe",
+            "name": "McLovin.JPG",
+            "altText": "McLovin.JPG",
+            "width": 1600,
+            "height": 1444,
+            "size": 148690,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_669702b88bbd8946838c23fe",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0D16C_0901_01C0D16C-0-01C0D70C_1957-01C0D16C-0-0",
+      "ctstamp": 1761160185657,
+      "dtstamp": 1761160185657,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1651",
+        "seq": 0,
+        "tid": 1764864000000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764864000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764864000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Cheeseburger in Paradise!"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_6707dcd8cdfd2d1ec671c228",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "6707dcd8cdfd2d1ec671c228",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "6707dcd8cdfd2d1ec671c228",
+            "name": "CHEESEBURGER IN PARADISE",
+            "altText": "CHEESEBURGER IN PARADISE",
+            "width": 937,
+            "height": 1172,
+            "size": 141007,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_6707dcd8cdfd2d1ec671c228",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0D400_0904_01C0D400-1-01C0D400_1651-01C0D400-0-0",
+      "ctstamp": 1728580756457,
+      "dtstamp": 1758145021195,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1516",
+        "seq": 0,
+        "tid": 1764909000000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764909000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764909000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Fireball Shots $4"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_664b739854c09b7d1aca3d35",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "664b739854c09b7d1aca3d35",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "664b739854c09b7d1aca3d35",
+            "name": "Timothys Fireball and Sheep Dog.PNG",
+            "altText": "Timothys Fireball and Sheep Dog.PNG",
+            "width": 1080,
+            "height": 1920,
+            "size": 2040843,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_664b739854c09b7d1aca3d35",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0D6EE_0904_01C0D6EE-1-01C0D6EE_1516-01C0D6EE-0-0",
+      "ctstamp": 1716220901591,
+      "dtstamp": 1756993521080,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1720",
+        "seq": 0,
+        "tid": 1764909000000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764909000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764909000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Landshark Tall Boys $5 & Pints $6"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_6780574ac1c9522556ce2525",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "6780574ac1c9522556ce2525",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "6780574ac1c9522556ce2525",
+            "name": "Landshark",
+            "altText": "Landshark",
+            "width": 1068,
+            "height": 990,
+            "size": 116829,
+            "masterFormat": "png",
+            "variantFormat": "png",
+            "oldId": "BWC_6780574ac1c9522556ce2525",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0D6EE_0904_01C0D6EE-1-01C0D6EE_1720-01C0D6EE-0-0",
+      "ctstamp": 1736464212500,
+      "dtstamp": 1736465493859,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1990",
+        "seq": 0,
+        "tid": 1764910800000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764910800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764997200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "GROOVESTONE @ 9PM (10. cover)"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": [
+              "LIVE-@-TIMOTHY'S-PUB"
+            ]
+          }
+        },
+        "imageId": "BWC_5aa4481ddf82fe1d795b0fe0",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5aa4481ddf82fe1d795b0fe0",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5aa4481ddf82fe1d795b0fe0",
+            "name": "GROOVESTONE 102817",
+            "altText": "GROOVESTONE 102817",
+            "width": 1077,
+            "height": 864,
+            "size": 131367,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5aa4481ddf82fe1d795b0fe0",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0D70C_0901_01C0D70C-0-01C0DCAC_1990-01C0D70C-0-0",
+      "ctstamp": 1762796978676,
+      "dtstamp": 1762796978676,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1975",
+        "seq": 0,
+        "tid": 1764910800000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764910800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764997200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "THE DOUBLE WIDES @ 9PM"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": [
+              "LIVE-@-TIMOTHY'S-PUB"
+            ]
+          }
+        },
+        "imageId": "BWC_67ba1d781c08c97c952ebcd0",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "67ba1d781c08c97c952ebcd0",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "67ba1d781c08c97c952ebcd0",
+            "name": "THE DOUBLE WIDES",
+            "altText": "THE DOUBLE WIDES",
+            "width": 1600,
+            "height": 1949,
+            "size": 1689970,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_67ba1d781c08c97c952ebcd0",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0D70C_0901_01C0D70C-0-01C0DCAC_1975-01C0D70C-0-0",
+      "ctstamp": 1761162157787,
+      "dtstamp": 1761162157787,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1721",
+        "seq": 0,
+        "tid": 1764968400000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764968400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764979200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "2-4-1 Fish & Chips - Buy 1 piece dinner get 2 pieces of fish! 4-7PM"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5bda339adf82fe344ff4ef9a",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5bda339adf82fe344ff4ef9a",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5bda339adf82fe344ff4ef9a",
+            "name": "fish_and_chips_smaller1",
+            "altText": "fish_and_chips_smaller1",
+            "width": 480,
+            "height": 360,
+            "size": 32114,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5bda339adf82fe344ff4ef9a",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0DACC_0904_01C0DACC-1-01C0DB80_1721-01C0DACC-0-0",
+      "ctstamp": 1736464704338,
+      "dtstamp": 1737302426577,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1516",
+        "seq": 0,
+        "tid": 1764995400000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764995400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764995400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Fireball Shots $4"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_664b739854c09b7d1aca3d35",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "664b739854c09b7d1aca3d35",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "664b739854c09b7d1aca3d35",
+            "name": "Timothys Fireball and Sheep Dog.PNG",
+            "altText": "Timothys Fireball and Sheep Dog.PNG",
+            "width": 1080,
+            "height": 1920,
+            "size": 2040843,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_664b739854c09b7d1aca3d35",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0DC8E_0904_01C0DC8E-1-01C0DC8E_1516-01C0DC8E-0-0",
+      "ctstamp": 1716220901591,
+      "dtstamp": 1756993521080,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1717",
+        "seq": 0,
+        "tid": 1764997140000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764997140000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1764997140000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Pinot Grigio & Cabernet Sauvignon $1 per ounce all day"
+        },
+        "description": {
+          "text": "Seasons VQA wine series $1 per ounce all day!!!"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5aa451b4df82fe1d795b353c",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5aa451b4df82fe1d795b353c",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5aa451b4df82fe1d795b353c",
+            "name": "red-or-white-wine",
+            "altText": "red-or-white-wine",
+            "width": 200,
+            "height": 300,
+            "size": 7212,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5aa451b4df82fe1d795b353c",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0DCAB_0904_01C0DCAB-1-01C0DCAB_1717-01C0DCAB-0-0",
+      "ctstamp": 1736462450861,
+      "dtstamp": 1760547994953,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1978",
+        "seq": 0,
+        "tid": 1764997200000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1764997200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1765083600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "THE MUSIC FACTORY 3-7PM"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": [
+              "LIVE-@-TIMOTHY'S-PUB"
+            ]
+          }
+        },
+        "imageId": "BWC_655a38b4c97d05556fa3d05f",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "655a38b4c97d05556fa3d05f",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "655a38b4c97d05556fa3d05f",
+            "name": "The Music Factory.PNG",
+            "altText": "The Music Factory.PNG",
+            "width": 612,
+            "height": 723,
+            "size": 371304,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_655a38b4c97d05556fa3d05f",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0DCAC_0901_01C0DCAC-0-01C0E24C_1978-01C0DCAC-0-0",
+      "ctstamp": 1761162316148,
+      "dtstamp": 1761162316148,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1977",
+        "seq": 0,
+        "tid": 1765072800000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1765072800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1765072800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "MOUNTAIN LION TRAPPERS @ 9PM"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": [
+              "LIVE-@-TIMOTHY'S-PUB"
+            ]
+          }
+        },
+        "imageId": "BWC_5bc37531df82fe7e3e6b94fa",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5bc37531df82fe7e3e6b94fa",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5bc37531df82fe7e3e6b94fa",
+            "name": "MOUNTAIN LION TRAPPERS",
+            "altText": "MOUNTAIN LION TRAPPERS",
+            "width": 206,
+            "height": 206,
+            "size": 11880,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5bc37531df82fe7e3e6b94fa",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0E198_0901_01C0E198-1-01C0E198_1977-01C0E198-0-0",
+      "ctstamp": 1761162283987,
+      "dtstamp": 1761162283987,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "966",
+        "seq": 0,
+        "tid": 1765076400000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1765076400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1765076400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "$5 JAGER SHOTS"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5aa45627df82fe1d795b4611",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5aa45627df82fe1d795b4611",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5aa45627df82fe1d795b4611",
+            "name": "Jager",
+            "altText": "Jager",
+            "width": 194,
+            "height": 259,
+            "size": 6645,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5aa45627df82fe1d795b4611",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0E1D4_0904_01C0E1D4-1-01C0E1D4_966-01C0E1D4-0-0",
+      "ctstamp": 1657048489188,
+      "dtstamp": 1657048516910,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1516",
+        "seq": 0,
+        "tid": 1765081800000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1765081800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1765081800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Fireball Shots $4"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_664b739854c09b7d1aca3d35",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "664b739854c09b7d1aca3d35",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "664b739854c09b7d1aca3d35",
+            "name": "Timothys Fireball and Sheep Dog.PNG",
+            "altText": "Timothys Fireball and Sheep Dog.PNG",
+            "width": 1080,
+            "height": 1920,
+            "size": 2040843,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_664b739854c09b7d1aca3d35",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0E22E_0904_01C0E22E-1-01C0E22E_1516-01C0E22E-0-0",
+      "ctstamp": 1716220901591,
+      "dtstamp": 1756993521080,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1951",
+        "seq": 0,
+        "tid": 1765083600000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1765083600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1765170000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "TIMOTHY'S PUB SILENT AUCTION in support of our local SALVATION ARMY! 2-7pm"
+        },
+        "description": {
+          "text": "It's that time of year again! And it's earlier than usual to get your Christmas shopping done early! If you would like to contribute to this great event, please reach out to Tim or any of our wonderfu"
+        },
+        "tagset": {
+          "tags": {
+            "default": [
+              "Promote-Events"
+            ]
+          }
+        },
+        "imageId": "BWC_63694c983438a07515808c93",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "63694c983438a07515808c93",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "63694c983438a07515808c93",
+            "name": "Shhh Silent Auction",
+            "altText": "Shhh Silent Auction",
+            "width": 184,
+            "height": 274,
+            "size": 6877,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_63694c983438a07515808c93",
+            "tags": []
+          },
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5fc8333be9d13346436576f3",
+            "name": "Salvation Army Santa Logo",
+            "altText": "Salvation Army Santa Logo",
+            "width": 802,
+            "height": 918,
+            "size": 339608,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5fc8333be9d13346436576f3",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0E24C_0901_01C0E24C-0-01C0E7EC_1951-01C0E24C-0-0",
+      "ctstamp": 1761158434693,
+      "dtstamp": 1761159363522,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "962",
+        "seq": 0,
+        "tid": 1765083600000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1765083600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1765170000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "$1.35 WINGS (With beverage purchase - Eat in Only)"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5aa4503cdf82fe1d795b2f85",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5aa4503cdf82fe1d795b2f85",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5aa4503cdf82fe1d795b2f85",
+            "name": "Wings 2",
+            "altText": "Wings 2",
+            "width": 600,
+            "height": 312,
+            "size": 84265,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5aa4503cdf82fe1d795b2f85",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0E24C_0994_01C0E24C-0-01C0E7EC_962-01C0E24C-0-0",
+      "ctstamp": 1657045429096,
+      "dtstamp": 1714584879063,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1516",
+        "seq": 0,
+        "tid": 1765168200000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1765168200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1765168200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Fireball Shots $4"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_664b739854c09b7d1aca3d35",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "664b739854c09b7d1aca3d35",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "664b739854c09b7d1aca3d35",
+            "name": "Timothys Fireball and Sheep Dog.PNG",
+            "altText": "Timothys Fireball and Sheep Dog.PNG",
+            "width": 1080,
+            "height": 1920,
+            "size": 2040843,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_664b739854c09b7d1aca3d35",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0E7CE_0904_01C0E7CE-1-01C0E7CE_1516-01C0E7CE-0-0",
+      "ctstamp": 1716220901591,
+      "dtstamp": 1756993521080,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1719",
+        "seq": 0,
+        "tid": 1765168200000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1765168200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1765168200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Jameson Whiskey Shots $5"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_67805cbdc1c9522556ce2914",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "67805cbdc1c9522556ce2914",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "67805cbdc1c9522556ce2914",
+            "name": "Jameson",
+            "altText": "Jameson",
+            "width": 852,
+            "height": 852,
+            "size": 285395,
+            "masterFormat": "png",
+            "variantFormat": "png",
+            "oldId": "BWC_67805cbdc1c9522556ce2914",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0E7CE_0904_01C0E7CE-1-01C0E7CE_1719-01C0E7CE-0-0",
+      "ctstamp": 1736463900974,
+      "dtstamp": 1736465630064,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1722",
+        "seq": 0,
+        "tid": 1765170000000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1765170000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1765256400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "All Draft at Domestic Prices"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_678059a1c1c9522556ce264f",
+        "attachments": [],
+        "noDetail": false,
+        "version": 2,
+        "imageIdNg": "678059a1c1c9522556ce264f",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "678059a1c1c9522556ce264f",
+            "name": "Draft",
+            "altText": "Draft",
+            "width": 1000,
+            "height": 592,
+            "size": 79315,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_678059a1c1c9522556ce264f",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0E7EC_0904_01C0E7EC-0-01C0ED8C_1722-01C0E7EC-0-0",
+      "ctstamp": 1736464855130,
+      "dtstamp": 1736464855130,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "962",
+        "seq": 0,
+        "tid": 1765170000000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1765170000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1765256400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "$1.35 WINGS (With beverage purchase - Eat in Only)"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5aa4503cdf82fe1d795b2f85",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5aa4503cdf82fe1d795b2f85",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5aa4503cdf82fe1d795b2f85",
+            "name": "Wings 2",
+            "altText": "Wings 2",
+            "width": 600,
+            "height": 312,
+            "size": 84265,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5aa4503cdf82fe1d795b2f85",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0E7EC_0994_01C0E7EC-0-01C0ED8C_962-01C0E7EC-0-0",
+      "ctstamp": 1657045429096,
+      "dtstamp": 1714584879063,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1516",
+        "seq": 0,
+        "tid": 1765254600000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1765254600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1765254600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Fireball Shots $4"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_664b739854c09b7d1aca3d35",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "664b739854c09b7d1aca3d35",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "664b739854c09b7d1aca3d35",
+            "name": "Timothys Fireball and Sheep Dog.PNG",
+            "altText": "Timothys Fireball and Sheep Dog.PNG",
+            "width": 1080,
+            "height": 1920,
+            "size": 2040843,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_664b739854c09b7d1aca3d35",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0ED6E_0904_01C0ED6E-1-01C0ED6E_1516-01C0ED6E-0-0",
+      "ctstamp": 1716220901591,
+      "dtstamp": 1756993521080,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1656",
+        "seq": 0,
+        "tid": 1765254600000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1765254600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1765254600000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Kids Eat Free Mondays (See menu attached for details)"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_66f05e2e6e1e462de2dd4cad",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "66f05e2e6e1e462de2dd4cad",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "66f05e2e6e1e462de2dd4cad",
+            "name": "KIDS EAT FREE MONDAYS_page-0001",
+            "altText": "KIDS EAT FREE MONDAYS_page-0001",
+            "width": 1275,
+            "height": 1650,
+            "size": 112323,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_66f05e2e6e1e462de2dd4cad",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0ED6E_0904_01C0ED6E-1-01C0ED6E_1656-01C0ED6E-0-0",
+      "ctstamp": 1728584254134,
+      "dtstamp": 1736465716088,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1944",
+        "seq": 0,
+        "tid": 1765256400000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1765256400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1765342800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "JOHN ROGERS & JAMES NARO @7PM"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": [
+              "LIVE-@-TIMOTHY'S-PUB"
+            ]
+          }
+        },
+        "imageId": "BWC_676ee795b1730a442f62d2e8",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "676ee795b1730a442f62d2e8",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "676ee795b1730a442f62d2e8",
+            "name": "ROGERS & NARO",
+            "altText": "ROGERS & NARO",
+            "width": 750,
+            "height": 536,
+            "size": 71345,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_676ee795b1730a442f62d2e8",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0ED8C_0901_01C0ED8C-0-01C0F32C_1944-01C0ED8C-0-0",
+      "ctstamp": 1761157884163,
+      "dtstamp": 1761157884163,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "singleton",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "963",
+        "seq": 0,
+        "tid": 1765332000000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1765332000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1765332000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "$5 BAR SHOTS"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5aa45466df82fe1d795b3f94",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5aa45466df82fe1d795b3f94",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5aa45466df82fe1d795b3f94",
+            "name": "cubalibre",
+            "altText": "cubalibre",
+            "width": 885,
+            "height": 1200,
+            "size": 96872,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5aa45466df82fe1d795b3f94",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0F278_0904_01C0F278-1-01C0F278_963-01C0F278-0-0",
+      "ctstamp": 1657046073006,
+      "dtstamp": 1657046271337,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1516",
+        "seq": 0,
+        "tid": 1765341000000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1765341000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1765341000000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Fireball Shots $4"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_664b739854c09b7d1aca3d35",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "664b739854c09b7d1aca3d35",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "664b739854c09b7d1aca3d35",
+            "name": "Timothys Fireball and Sheep Dog.PNG",
+            "altText": "Timothys Fireball and Sheep Dog.PNG",
+            "width": 1080,
+            "height": 1920,
+            "size": 2040843,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_664b739854c09b7d1aca3d35",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0F30E_0904_01C0F30E-1-01C0F30E_1516-01C0F30E-0-0",
+      "ctstamp": 1716220901591,
+      "dtstamp": 1756993521080,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1666",
+        "seq": 0,
+        "tid": 1765342800000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1765342800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1765429200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "GREG WYARD @ 7:30PM"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": [
+              "LIVE-@-TIMOTHY'S-PUB"
+            ]
+          }
+        },
+        "imageId": "BWC_6693fdbb8bbd8946838a62fa",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "6693fdbb8bbd8946838a62fa",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "6693fdbb8bbd8946838a62fa",
+            "name": "Greg at Timothy's July 21st 2021",
+            "altText": "Greg at Timothy's July 21st 2021",
+            "width": 4032,
+            "height": 3024,
+            "size": 2243615,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_6693fdbb8bbd8946838a62fa",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0F32C_0804_01C0F32C-0-01C0F8CC_1666-01C0F32C-0-0",
+      "ctstamp": 1730763233579,
+      "dtstamp": 1751916022859,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "962",
+        "seq": 0,
+        "tid": 1765342800000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1765342800000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1765429200000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": true
+      },
+      "content": {
+        "summary": {
+          "text": "$1.35 WINGS (With beverage purchase - Eat in Only)"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5aa4503cdf82fe1d795b2f85",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5aa4503cdf82fe1d795b2f85",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5aa4503cdf82fe1d795b2f85",
+            "name": "Wings 2",
+            "altText": "Wings 2",
+            "width": 600,
+            "height": 312,
+            "size": 84265,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5aa4503cdf82fe1d795b2f85",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0F32C_0994_01C0F32C-0-01C0F8CC_962-01C0F32C-0-0",
+      "ctstamp": 1657045429096,
+      "dtstamp": 1714584879063,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1516",
+        "seq": 0,
+        "tid": 1765427400000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1765427400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1765427400000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "Fireball Shots $4"
+        },
+        "description": {
+          "text": ""
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_664b739854c09b7d1aca3d35",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "664b739854c09b7d1aca3d35",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "664b739854c09b7d1aca3d35",
+            "name": "Timothys Fireball and Sheep Dog.PNG",
+            "altText": "Timothys Fireball and Sheep Dog.PNG",
+            "width": 1080,
+            "height": 1920,
+            "size": 2040843,
+            "masterFormat": "png",
+            "variantFormat": "jpg",
+            "oldId": "BWC_664b739854c09b7d1aca3d35",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0F8AE_0904_01C0F8AE-1-01C0F8AE_1516-01C0F8AE-0-0",
+      "ctstamp": 1716220901591,
+      "dtstamp": 1756993521080,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    },
+    {
+      "calid": "5a690bfcdf82fe1b7be4130c",
+      "eid": {
+        "uid": "1718",
+        "seq": 0,
+        "tid": 1765429140000,
+        "rid": 0
+      },
+      "when": {
+        "start": {
+          "millis": 1765429140000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "end": {
+          "millis": 1765429140000,
+          "tzid": "America/Toronto",
+          "ltz": "EST",
+          "offset": -18000000
+        },
+        "allDay": false
+      },
+      "content": {
+        "summary": {
+          "text": "House Wine $7 - 6oz Glass - All Day!"
+        },
+        "description": {
+          "text": "Seasons VQA wine series $1 per ounce all day!!!"
+        },
+        "tagset": {
+          "tags": {
+            "default": []
+          }
+        },
+        "imageId": "BWC_5aa451b4df82fe1d795b353c",
+        "attachments": [],
+        "noDetail": false,
+        "version": 1,
+        "imageIdNg": "5aa451b4df82fe1d795b353c",
+        "imageSets": [
+          {
+            "ownerId": "5a690baadf82fe1b7be4122f",
+            "ownerType": "user",
+            "id": "5aa451b4df82fe1d795b353c",
+            "name": "red-or-white-wine",
+            "altText": "red-or-white-wine",
+            "width": 200,
+            "height": 300,
+            "size": 7212,
+            "masterFormat": "jpg",
+            "variantFormat": "jpg",
+            "oldId": "BWC_5aa451b4df82fe1d795b353c",
+            "tags": []
+          }
+        ]
+      },
+      "sorter": "999_01C0F8CB_0904_01C0F8CB-1-01C0F8CB_1718-01C0F8CB-0-0",
+      "ctstamp": 1736462835362,
+      "dtstamp": 1736463131434,
+      "status": {
+        "name": "scheduled"
+      },
+      "kind": "repeat",
+      "isExternal": false
+    }
+  ],
+  "metaData": {
+    "to": 3477,
+    "from": 3377,
+    "end": 101,
+    "hasNext": true,
+    "start": 0,
+    "hasPrev": true
+  }
+}
