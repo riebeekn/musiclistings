@@ -184,6 +184,30 @@ defmodule MusicListingsWeb.EventLiveTest do
       assert has_element?(view, "#event-#{e3_id}")
       refute has_element?(view, "#event-#{e4.id}")
     end
+
+    test "resets past dates in localStorage to today on mount", %{
+      conn: conn,
+      e1_id: e1_id,
+      e2_id: e2_id,
+      e3_id: e3_id,
+      today: today
+    } do
+      # Simulate localStorage containing a past date
+      past_date = Date.add(today, -5)
+
+      {:ok, view, _html} =
+        conn
+        |> put_connect_params(%{"selected_date" => Date.to_iso8601(past_date)})
+        |> live(~p"/events")
+
+      # All events from today onwards should be visible (not from the past date)
+      assert has_element?(view, "#event-#{e1_id}")
+      assert has_element?(view, "#event-#{e2_id}")
+      assert has_element?(view, "#event-#{e3_id}")
+
+      # Filter status message should not be shown (since we reset to today)
+      refute render(view) =~ "Showing events from"
+    end
   end
 
   describe "index - logged in as admin" do
