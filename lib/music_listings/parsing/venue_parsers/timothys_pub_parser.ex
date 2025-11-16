@@ -4,33 +4,25 @@ defmodule MusicListings.Parsing.VenueParsers.TimothysPubParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
-  alias MusicListings.HttpClient
-  alias MusicListings.Parsing.ParseHelpers
-  alias MusicListings.Parsing.Performers
-  alias MusicListings.Parsing.Price
-  alias MusicListingsUtilities.DateHelpers
+  alias MusicListings.Parsing.VenueParsers.BaseParsers.TockifyParser
+
+  @venue_name "timothys_pub"
+  @calendar_name "robinbrem"
 
   @impl true
   def source_url do
-    unix_today_in_milliseconds =
-      (DateHelpers.today() |> DateTime.new!(~T[00:00:00]) |> DateTime.to_unix()) * 1_000
-
-    "https://tockify.com/api/ngevent?max=48&view=agenda&calname=robinbrem&start-inclusive=true&longForm=false&showAll=false&startms=#{unix_today_in_milliseconds}"
+    TockifyParser.build_source_url(@calendar_name)
   end
 
   @impl true
-  def retrieve_events_fun do
-    fn url -> HttpClient.get(url) end
-  end
+  defdelegate retrieve_events_fun, to: TockifyParser
 
   @impl true
   def example_data_file_location, do: "test/data/timothys_pub/index.json"
 
   @impl true
   def events(body) do
-    body = ParseHelpers.maybe_decode!(body)
-
-    body["events"]
+    TockifyParser.events(body)
     |> Enum.filter(&has_live_music_tag?/1)
   end
 
@@ -40,16 +32,11 @@ defmodule MusicListings.Parsing.VenueParsers.TimothysPubParser do
   end
 
   @impl true
-  def next_page_url(_body, _current_url) do
-    # no next page
-    nil
-  end
+  defdelegate next_page_url(body, current_url), to: TockifyParser
 
   @impl true
   def event_id(event) do
-    date = event_date(event)
-
-    ParseHelpers.build_id_from_venue_and_date("timothys_pub", date)
+    TockifyParser.event_id_from_date(@venue_name, event)
   end
 
   @impl true
@@ -58,27 +45,16 @@ defmodule MusicListings.Parsing.VenueParsers.TimothysPubParser do
   end
 
   @impl true
-  def event_title(event) do
-    event["content"]["summary"]["text"]
-  end
+  defdelegate event_title(event), to: TockifyParser
 
   @impl true
-  def performers(event) do
-    [event_title(event)]
-    |> Performers.new()
-  end
+  defdelegate performers(event), to: TockifyParser
 
   @impl true
-  def event_date(event) do
-    event["when"]["start"]["millis"]
-    |> DateTime.from_unix!(:millisecond)
-    |> DateHelpers.to_eastern_date()
-  end
+  defdelegate event_date(event), to: TockifyParser
 
   @impl true
-  def additional_dates(_event) do
-    []
-  end
+  defdelegate additional_dates(event), to: TockifyParser
 
   @impl true
   def event_time(_event) do
@@ -86,22 +62,14 @@ defmodule MusicListings.Parsing.VenueParsers.TimothysPubParser do
   end
 
   @impl true
-  def price(_event) do
-    Price.unknown()
-  end
+  defdelegate price(event), to: TockifyParser
 
   @impl true
-  def age_restriction(_event) do
-    :unknown
-  end
+  defdelegate age_restriction(event), to: TockifyParser
 
   @impl true
-  def ticket_url(event) do
-    event["content"]["customButtonLink"]
-  end
+  defdelegate ticket_url(event), to: TockifyParser
 
   @impl true
-  def details_url(_event) do
-    nil
-  end
+  defdelegate details_url(event), to: TockifyParser
 end
