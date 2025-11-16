@@ -44,17 +44,15 @@ defmodule MusicListingsWeb.EventLive.Index do
   end
 
   defp get_selected_date_in_local_storage(socket) do
-    socket
-    |> get_connect_params()
-    |> case do
-      %{"selected_date" => selected_date} when is_binary(selected_date) ->
-        case Date.from_iso8601(selected_date) do
-          {:ok, _date} -> selected_date
-          _error -> nil
-        end
+    today = Date.utc_today()
 
-      _default ->
-        nil
+    with %{"selected_date" => selected_date} when is_binary(selected_date) <-
+           get_connect_params(socket),
+         {:ok, date} <- Date.from_iso8601(selected_date),
+         comparison when comparison in [:gt, :eq] <- Date.compare(date, today) do
+      selected_date
+    else
+      _invalid_or_past_date -> nil
     end
   end
 
