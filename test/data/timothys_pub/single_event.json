@@ -1,0 +1,82 @@
+{
+  "calid": "5a690bfcdf82fe1b7be4130c",
+  "eid": {
+    "uid": "1953",
+    "seq": 0,
+    "tid": 1763442000000,
+    "rid": 0
+  },
+  "when": {
+    "start": {
+      "millis": 1763442000000,
+      "tzid": "America/Toronto",
+      "ltz": "EST",
+      "offset": -18000000
+    },
+    "end": {
+      "millis": 1763528400000,
+      "tzid": "America/Toronto",
+      "ltz": "EST",
+      "offset": -18000000
+    },
+    "allDay": true
+  },
+  "content": {
+    "summary": {
+      "text": "GIG RABBIT @ 7PM"
+    },
+    "description": {
+      "text": ""
+    },
+    "tagset": {
+      "tags": {
+        "default": [
+          "LIVE-@-TIMOTHY'S-PUB"
+        ]
+      }
+    },
+    "imageId": "BWC_68f92a2e19e75c29e19e1090",
+    "attachments": [],
+    "noDetail": false,
+    "version": 1,
+    "imageIdNg": "68f92a2e19e75c29e19e1090",
+    "imageSets": [
+      {
+        "ownerId": "5a690baadf82fe1b7be4122f",
+        "ownerType": "user",
+        "id": "68f92a2e19e75c29e19e1090",
+        "name": "GIG RABI",
+        "altText": "GIG RABI",
+        "width": 200,
+        "height": 200,
+        "size": 5953,
+        "masterFormat": "jpg",
+        "variantFormat": "jpg",
+        "oldId": "BWC_68f92a2e19e75c29e19e1090",
+        "tags": []
+      },
+      {
+        "ownerId": "5a690baadf82fe1b7be4122f",
+        "ownerType": "user",
+        "id": "68f92a5819e75c29e19e10a2",
+        "name": "GIG RABBIT",
+        "altText": "GIG RABBIT",
+        "width": 960,
+        "height": 400,
+        "size": 67817,
+        "masterFormat": "jpg",
+        "variantFormat": "jpg",
+        "oldId": "BWC_68f92a5819e75c29e19e10a2",
+        "tags": []
+      }
+    ]
+  },
+  "sorter": "999_01C0776C_0901_01C0776C-0-01C07D0C_1953-01C0776C-0-0",
+  "ctstamp": 1761159857624,
+  "dtstamp": 1761159915781,
+  "status": {
+    "name": "scheduled"
+  },
+  "kind": "singleton",
+  "isExternal": false
+}
