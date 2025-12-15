@@ -14,7 +14,13 @@ defmodule MusicListings.Application do
         MusicListingsWeb.Telemetry,
         MusicListings.Repo,
         # Start the Finch HTTP client for sending emails
-        {Finch, name: MusicListings.Finch}
+        {Finch, name: MusicListings.Finch},
+        # Start the Finch HTTP client for Req with larger pool for crawling
+        {Finch,
+         name: MusicListings.ReqFinch,
+         pools: %{
+           :default => [size: 100, count: 4]
+         }}
       ]
 
       # See https://hexdocs.pm/elixir/Supervisor.html
@@ -35,6 +41,12 @@ defmodule MusicListings.Application do
         {Phoenix.PubSub, name: MusicListings.PubSub},
         # Start the Finch HTTP client for sending emails
         {Finch, name: MusicListings.Finch},
+        # Start the Finch HTTP client for Req with larger pool for crawling
+        {Finch,
+         name: MusicListings.ReqFinch,
+         pools: %{
+           :default => [size: 100, count: 4]
+         }},
         # Start a worker by calling: MusicListings.Worker.start_link(arg)
         # {MusicListings.Worker, arg},
         # Start to serve requests, typically the last entry
