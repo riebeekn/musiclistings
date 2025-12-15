@@ -88,7 +88,7 @@ config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase
 # Set env
 config :music_listings, env: Mix.env()
 
-config :music_listings, :http_client, MusicListings.HttpClient.HTTPoison
+config :music_listings, :http_client, MusicListings.HttpClient.Req
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

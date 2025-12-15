@@ -9,7 +9,7 @@ defmodule MusicListings.HttpClient.Req do
   @impl true
   def get(url, headers \\ []) do
     url
-    |> Req.get(headers)
+    |> Req.get(headers: headers, finch: MusicListings.ReqFinch, receive_timeout: 30_000)
     |> case do
       {:ok, response} -> {:ok, Response.new(response)}
       {:error, error} -> {:error, error}
@@ -19,7 +19,12 @@ defmodule MusicListings.HttpClient.Req do
   @impl true
   def post(url, body, headers) do
     url
-    |> Req.post(headers: headers, json: body)
+    |> Req.post(
+      headers: headers,
+      json: body,
+      finch: MusicListings.ReqFinch,
+      receive_timeout: 30_000
+    )
     |> case do
       {:ok, response} -> {:ok, Response.new(response)}
       {:error, error} -> {:error, error}
