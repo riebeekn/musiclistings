@@ -19,7 +19,16 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParser do
   def example_data_file_location, do: "test/data/scotiabank/index.json"
 
   @impl true
-  defdelegate events(body), to: LiveNationParser
+  def events(body) do
+    body
+    |> LiveNationParser.events()
+    |> Enum.reject(fn event ->
+      title = event_title(event)
+
+      String.contains?(title, "Leafs Fan Access") or
+        String.contains?(title, "Raptors Fan Access")
+    end)
+  end
 
   @impl true
   defdelegate next_page_url(body, current_url), to: LiveNationParser
