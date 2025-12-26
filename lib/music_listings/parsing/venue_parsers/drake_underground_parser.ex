@@ -48,7 +48,9 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
 
   @impl true
   def event_title(event) do
-    event["title"]["rendered"] |> String.trim()
+    event["title"]["rendered"]
+    |> ParseHelpers.clean_html()
+    |> ParseHelpers.fix_encoding()
   end
 
   @impl true
