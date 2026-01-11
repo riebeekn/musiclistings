@@ -89,7 +89,7 @@ defmodule MusicListings.Parsing.VenueParsers.AnnabelsParserTest do
 
   describe "price/1" do
     test "returns the event price", %{event: event} do
-      assert %Price{format: :fixed, hi: Decimal.new("35.00"), lo: Decimal.new("35.00")} ==
+      assert %Price{format: :unknown, hi: nil, lo: nil} ==
                AnnabelsParser.price(event)
     end
   end

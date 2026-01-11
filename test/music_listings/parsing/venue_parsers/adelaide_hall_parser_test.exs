@@ -89,7 +89,7 @@ defmodule MusicListings.Parsing.VenueParsers.AdelaideHallParserTest do
 
   describe "price/1" do
     test "returns the event price", %{event: event} do
-      assert %Price{format: :fixed, hi: Decimal.new("17.50"), lo: Decimal.new("17.50")} ==
+      assert %Price{format: :unknown, hi: nil, lo: nil} ==
                AdelaideHallParser.price(event)
     end
   end

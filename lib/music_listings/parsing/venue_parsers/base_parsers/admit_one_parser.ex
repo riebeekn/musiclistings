@@ -53,9 +53,8 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.AdmitOneParser do
     |> ParseHelpers.build_time_from_time_string()
   end
 
-  def price(event) do
-    event["price_range"]
-    |> Price.new()
+  def price(_event) do
+    Price.unknown()
   end
 
   def age_restriction(event) do
