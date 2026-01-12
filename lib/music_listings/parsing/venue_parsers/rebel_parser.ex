@@ -4,61 +4,122 @@ defmodule MusicListings.Parsing.VenueParsers.RebelParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
+  import Meeseeks.CSS
+
+  alias MusicListings.HttpClient
   alias MusicListings.Parsing.ParseHelpers
-
-  alias MusicListings.Parsing.VenueParsers.BaseParsers.ElfsightParser
-
-  @impl true
-  def source_url,
-    do:
-      "https://core.service.elfsight.com/p/boot/?page=https%3A%2F%2Frebeltoronto.com%2Fevents%2F&w=737e2434-3a70-460f-aa98-a1ec67d0b60b"
+  alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Price
+  alias MusicListings.Parsing.Selectors
 
   @impl true
-  defdelegate retrieve_events_fun, to: ElfsightParser
+  def source_url, do: "https://rebeltoronto.com/events/"
 
   @impl true
-  def example_data_file_location, do: "test/data/rebel/index.json"
-
-  @impl true
-  def events(body) do
-    body = ParseHelpers.maybe_decode!(body)
-
-    body["data"]["widgets"]["737e2434-3a70-460f-aa98-a1ec67d0b60b"]["data"]["settings"]["events"]
+  def retrieve_events_fun do
+    fn url -> HttpClient.get(url) end
   end
 
   @impl true
-  defdelegate next_page_url(body, current_url), to: ElfsightParser
+  def example_data_file_location, do: "test/data/rebel/index.html"
 
   @impl true
-  defdelegate event_id(event), to: ElfsightParser
+  def events(body) do
+    Selectors.all_matches(body, css(".e-loop-item"))
+  end
 
   @impl true
-  defdelegate ignored_event_id(event), to: ElfsightParser
+  def next_page_url(_body, _current_url) do
+    nil
+  end
 
   @impl true
-  defdelegate event_title(event), to: ElfsightParser
+  def event_id(event) do
+    event
+    |> Selectors.attr("class")
+    |> extract_event_id_from_class()
+  end
+
+  defp extract_event_id_from_class(class_string) do
+    ~r/post-(\d+)/
+    |> Regex.run(class_string)
+    |> case do
+      [_prefix, id] -> id
+      _not_found -> nil
+    end
+  end
 
   @impl true
-  defdelegate performers(event), to: ElfsightParser
+  def ignored_event_id(event) do
+    event_id(event)
+  end
 
   @impl true
-  defdelegate event_date(event), to: ElfsightParser
+  def event_title(event) do
+    event
+    |> Selectors.text(css("h2.elementor-heading-title"))
+    |> String.trim()
+  end
 
   @impl true
-  defdelegate additional_dates(event), to: ElfsightParser
+  def performers(event) do
+    [event_title(event)]
+    |> Performers.new()
+  end
 
   @impl true
-  defdelegate event_time(event), to: ElfsightParser
+  def event_date(event) do
+    date_string =
+      event
+      |> Selectors.text(css("div.elementor-heading-title"))
+      |> String.trim()
+
+    parse_date(date_string)
+  end
+
+  defp parse_date(date_string) do
+    # Format: "Friday, January 23"
+    [_day_of_week, month_day] = String.split(date_string, ", ")
+    [month_string, day_string] = String.split(month_day)
+
+    ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
+  end
 
   @impl true
-  defdelegate price(event), to: ElfsightParser
+  def additional_dates(_event) do
+    []
+  end
 
   @impl true
-  defdelegate age_restriction(event), to: ElfsightParser
+  def event_time(_event) do
+    nil
+  end
 
   @impl true
-  defdelegate ticket_url(event), to: ElfsightParser
+  def price(_event) do
+    Price.unknown()
+  end
 
   @impl true
-  defdelegate details_url(event), to: ElfsightParser
+  def age_restriction(_event) do
+    :nineteen_plus
+  end
+
+  @impl true
+  def ticket_url(event) do
+    event
+    |> Selectors.all_matches(css("a.elementor-button"))
+    |> Enum.find_value(fn link ->
+      text = Selectors.text(link)
+
+      if text && String.contains?(text, "Buy Tickets") do
+        Selectors.attr(link, "href")
+      end
+    end)
+  end
+
+  @impl true
+  def details_url(_event) do
+    "https://rebeltoronto.com/events/"
+  end
 end
