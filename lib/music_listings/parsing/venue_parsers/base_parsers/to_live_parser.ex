@@ -67,10 +67,15 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.ToLiveParser do
       {:ok, end_date, _offset} = DateTime.from_iso8601(end_date_string)
       est_end_date = DateHelpers.to_eastern_date(end_date)
 
-      [_opening_date | remaining_dates] =
-        Date.range(est_start_date, est_end_date) |> Enum.to_list()
+      # Guard against invalid date ranges (e.g., API data has wrong year)
+      if Date.compare(est_end_date, est_start_date) == :gt do
+        [_opening_date | remaining_dates] =
+          Date.range(est_start_date, est_end_date) |> Enum.to_list()
 
-      remaining_dates
+        remaining_dates
+      else
+        []
+      end
     else
       []
     end
