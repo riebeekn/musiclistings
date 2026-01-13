@@ -1,0 +1,193 @@
+{
+  "component": {
+    "events": [
+      {
+        "id": "63fbd282-5832-4d80-bf29-645d2745f820",
+        "location": {
+          "name": "The Redwood Theatre",
+          "coordinates": {
+            "lat": 43.671236,
+            "lng": -79.3271529
+          },
+          "address": "1300 Gerrard St E, Toronto, ON M4L 1Y7, Canada",
+          "type": 0,
+          "fullAddress": {
+            "country": "CA",
+            "subdivision": "ON",
+            "city": "Toronto",
+            "postalCode": "M4L 1Y7",
+            "streetAddress": {
+              "number": "1300",
+              "name": "Gerrard Street East",
+              "apt": ""
+            },
+            "formattedAddress": "1300 Gerrard St E, Toronto, ON M4L 1Y7, Canada",
+            "geocode": {
+              "latitude": 43.671236,
+              "longitude": -79.3271529
+            },
+            "countryFullname": "Canada",
+            "subdivisions": [
+              {
+                "code": "ON",
+                "name": "Ontario",
+                "type": 1
+              },
+              {
+                "code": "Toronto",
+                "name": "Toronto",
+                "type": 2
+              },
+              {
+                "code": "Toronto",
+                "name": "Toronto",
+                "type": 3
+              },
+              {
+                "code": "CA",
+                "name": "Canada",
+                "type": 6
+              }
+            ]
+          },
+          "tbd": false
+        },
+        "scheduling": {
+          "config": {
+            "scheduleTbd": false,
+            "startDate": "2026-01-18T00:00:00.000Z",
+            "endDate": "2026-01-18T03:30:00.000Z",
+            "timeZoneId": "America/Toronto",
+            "endDateHidden": false,
+            "showTimeZone": false,
+            "recurrences": {
+              "occurrences": [],
+              "status": 0
+            }
+          },
+          "formatted": "January 17, 2026, 7:00\u201310:30 p.m.",
+          "startDateFormatted": "January 17, 2026",
+          "startTimeFormatted": "7:00 p.m.",
+          "endDateFormatted": "January 17, 2026",
+          "endTimeFormatted": "10:30 p.m."
+        },
+        "title": "Sudan Remember Us",
+        "description": "Presented by Ease End Acts, Sudan Remember Us  is a 2024 documentary film written and directed by Hind Meddeb. It depicts the aftermath of the Sudanese revolution, which resulted in the 2019 overthrow of Sudanese leader Omar al-Bashir and a military coup d'\u00e9tat in 2021.",
+        "about": "",
+        "mainImage": {
+          "id": "cc523a_96c551268d3340e4b7bfa52bb0dfb846~mv2.jpg",
+          "url": "https://static.wixstatic.com/media/cc523a_96c551268d3340e4b7bfa52bb0dfb846~mv2.jpg",
+          "height": 1080,
+          "width": 1080
+        },
+        "slug": "film-screening-gaza-doctors-under-attack-1",
+        "language": "en",
+        "created": "2025-12-10T16:10:08.507Z",
+        "modified": "2026-01-05T21:10:36.000Z",
+        "status": 0,
+        "registration": {
+          "type": 3,
+          "status": 6,
+          "rsvpCollection": {
+            "config": {
+              "rsvpStatusOptions": 0,
+              "waitlist": false,
+              "confirmationMessages": {
+                "positiveConfirmation": {
+                  "title": "Thank you!",
+                  "message": "An email with all the event info was sent to you.",
+                  "addToCalendarActionLabel": "Add to Calendar",
+                  "shareActionLabel": "Share"
+                },
+                "waitlistMessages": {
+                  "title": "Thanks! You've been added to the waitlist.",
+                  "message": "We'll update you if additional spots become available.",
+                  "addToCalendarActionLabel": "Add to Calendar",
+                  "shareActionLabel": "Share"
+                },
+                "negativeMessages": {
+                  "title": "Sorry You Can't Make It",
+                  "shareActionLabel": "Share"
+                }
+              }
+            }
+          },
+          "ticketing": {
+            "lowestPrice": "$17.37",
+            "highestPrice": "$17.37",
+            "currency": "CAD",
+            "config": {
+              "guestAssignedTickets": false,
+              "taxConfig": {
+                "type": 2,
+                "name": "HST",
+                "rate": "13",
+                "appliesToDonations": false
+              },
+              "ticketLimitPerOrder": 50,
+              "reservationDurationInMinutes": 20,
+              "gracePeriodInMinutes": 120,
+              "confirmationMessages": {
+                "title": "Thank you, {Guest Name}",
+                "message": "You\u2019re all set for {Event Name}. A confirmation email was sent to {Guest Email}.",
+                "downloadTicketsLabel": "Download Tickets",
+                "addToCalendarActionLabel": "Add to Calendar",
+                "shareActionLabel": "Share"
+              },
+              "checkoutType": 1
+            },
+            "lowestTicketPrice": {
+              "amount": "17.37",
+              "currency": "CAD",
+              "value": "17.37"
+            },
+            "highestTicketPrice": {
+              "amount": "17.37",
+              "currency": "CAD",
+              "value": "17.37"
+            },
+            "lowestTicketPriceFormatted": "$17.37",
+            "highestTicketPriceFormatted": "$17.37",
+            "soldOut": false
+          },
+          "external": {
+            "registration": "https://actionnetwork.org/ticketed_events/sudan-remember-us-the-redwood-theatre-january-17?clear_id=true"
+          },
+          "restrictedTo": 0,
+          "initialType": 2
+        },
+        "calendarLinks": {
+          "google": "http://calendar.google.com/calendar/render?action=TEMPLATE&text=Sudan+Remember+Us&dates=20260118T000000Z%2F20260118T033000Z&location=1300+Gerrard+St+E%2C+Toronto%2C+ON+M4L+1Y7%2C+Canada",
+          "ics": "https://www.wixevents.com/media/v2/calendar?token=JWS.eyJraWQiOiJpb21iOUJ0eSIsImFsZyI6IkhTMjU2In0.eyJkYXRhIjoie1wiaW5zdGFuY2VJZFwiOlwiMGJiZDUxNDktMTkwNS00NDkyLWJjYWEtNDMxNjgzYzE4MDFkXCIsXCJldmVudElkXCI6e1widmFsdWVcIjpcIjYzZmJkMjgyLTU4MzItNGQ4MC1iZjI5LTY0NWQyNzQ1ZjgyMFwifSxcIm9jTGlua1wiOm51bGx9IiwiaWF0IjoxNzY4MjUzNjc2fQ.N3hxQKq3hEED3z8RCLOpcrg4c8QPxr7rS60YNIvbQqk"
+        },
+        "instanceId": "0bbd5149-1905-4492-bcaa-431683c1801d",
+        "guestListConfig": {
+          "publicGuestList": true
+        },
+        "userId": "cc523abc-5154-4c8a-8d96-21f2481bb546",
+        "onlineConferencing": {
+          "providerName": ""
+        },
+        "seoSettings": {
+          "slug": "film-screening-gaza-doctors-under-attack-1",
+          "advancedSeoData": {
+            "tags": []
+          },
+          "hidden": false
+        },
+        "assignedContactsLabel": "custom.film-screening-gaza-doctors-under-attack-1-12-24-2",
+        "categories": [],
+        "eventDisplaySettings": {
+          "hideEventDetailsButton": false,
+          "hideEventDetailsPage": false
+        },
+        "labellingSettings": {
+          "assignedContactsLabelDeleted": false
+        },
+        "publishedDate": "2025-12-10T16:17:55.206Z",
+        "badges": [],
+        "memberOffer": false
+      }
+    ]
+  }
+}
