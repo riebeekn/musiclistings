@@ -19,7 +19,7 @@ defmodule MusicListings.HttpClient.HTTPoison do
             {:ok, Response.new(response)}
 
           _needs_decoding ->
-            {:ok, body} = ExBrotli.decompress(response.body)
+            {:ok, body} = :brotli.decode(response.body)
             {:ok, Response.new(response.status_code, body)}
         end
 
