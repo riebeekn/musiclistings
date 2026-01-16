@@ -6,12 +6,12 @@ defmodule MusicListings.Parsing.VenueParsers.RedwoodTheatreParserTest do
   alias MusicListings.Parsing.VenueParsers.RedwoodTheatreParser
 
   setup do
-    index_file_path = Path.expand("#{File.cwd!()}/test/data/redwood_theatre/index.json")
+    index_file_path = Path.expand("#{File.cwd!()}/test/data/redwood_theatre/index.html")
 
     single_event_file_path =
-      Path.expand("#{File.cwd!()}/test/data/redwood_theatre/single_event.json")
+      Path.expand("#{File.cwd!()}/test/data/redwood_theatre/single_event.html")
 
-    index_json = File.read!(index_file_path)
+    index_html = File.read!(index_file_path)
 
     event =
       single_event_file_path
@@ -19,27 +19,26 @@ defmodule MusicListings.Parsing.VenueParsers.RedwoodTheatreParserTest do
       |> RedwoodTheatreParser.events()
       |> List.first()
 
-    %{index_json: index_json, event: event}
+    %{index_html: index_html, event: event}
   end
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert RedwoodTheatreParser.source_url() =~
-               "https://www.theredwoodtheatre.com/_api/wix-one-events-server/html/v2/widget-data"
+      assert "https://www.theredwoodtheatre.com/" == RedwoodTheatreParser.source_url()
     end
   end
 
   describe "events/1" do
-    test "returns expected events", %{index_json: index_json} do
-      events = RedwoodTheatreParser.events(index_json)
+    test "returns expected events", %{index_html: index_html} do
+      events = RedwoodTheatreParser.events(index_html)
 
       assert 18 = Enum.count(events)
     end
   end
 
   describe "next_page_url/2" do
-    test "returns the next page url", %{index_json: index_json} do
-      assert nil == RedwoodTheatreParser.next_page_url(index_json, nil)
+    test "returns the next page url", %{index_html: index_html} do
+      assert nil == RedwoodTheatreParser.next_page_url(index_html, nil)
     end
   end
 
