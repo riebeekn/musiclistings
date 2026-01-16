@@ -1,0 +1,254 @@
+{
+  "data": {
+    "getEvents": [
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917abc01",
+            "name": "The Black Dahlia Murder",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          },
+          {
+            "discovery_id": "K8vZ917abc02",
+            "name": "After The Burial",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          }
+        ],
+        "discovery_id": "1A8ZkHLk1abc01",
+        "event_date": "2026-02-15",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "The Black Dahlia Murder - Servitude Tour",
+        "url": "https://www.ticketmaster.ca/the-black-dahlia-murder-toronto-ontario-02-15-2026/event/abc123"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917def01",
+            "name": "Thy Art Is Murder",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          }
+        ],
+        "discovery_id": "1A8ZkHLk1abc02",
+        "event_date": "2026-02-22",
+        "event_status_code": "onsale",
+        "event_time": "18:30:00",
+        "name": "Thy Art Is Murder",
+        "url": "https://www.ticketmaster.ca/thy-art-is-murder-toronto-ontario-02-22-2026/event/def456"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917ghi01",
+            "name": "Carnifex",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          },
+          {
+            "discovery_id": "K8vZ917ghi02",
+            "name": "Lorna Shore",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          },
+          {
+            "discovery_id": "K8vZ917ghi03",
+            "name": "Signs of the Swarm",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          }
+        ],
+        "discovery_id": "1A8ZkHLk1abc03",
+        "event_date": "2026-03-01",
+        "event_status_code": "onsale",
+        "event_time": "18:00:00",
+        "name": "Carnifex - World War X Tour",
+        "url": "https://www.ticketmaster.ca/carnifex-toronto-ontario-03-01-2026/event/ghi789"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917jkl01",
+            "name": "Whitechapel",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          }
+        ],
+        "discovery_id": "1A8ZkHLk1abc04",
+        "event_date": "2026-03-08",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Whitechapel",
+        "url": "https://www.ticketmaster.ca/whitechapel-toronto-ontario-03-08-2026/event/jkl012"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917mno01",
+            "name": "Terror",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          }
+        ],
+        "discovery_id": "1A8ZkHLk1abc05",
+        "event_date": "2026-03-15",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Terror - The Walls Will Fall Tour",
+        "url": "https://www.ticketmaster.ca/terror-toronto-ontario-03-15-2026/event/mno345"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917pqr01",
+            "name": "Hatebreed",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          }
+        ],
+        "discovery_id": "1A8ZkHLk1abc06",
+        "event_date": "2026-03-22",
+        "event_status_code": "onsale",
+        "event_time": "18:00:00",
+        "name": "Hatebreed - 25th Anniversary Tour",
+        "url": "https://www.ticketmaster.ca/hatebreed-toronto-ontario-03-22-2026/event/pqr678"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917stu01",
+            "name": "Dying Fetus",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          }
+        ],
+        "discovery_id": "1A8ZkHLk1abc07",
+        "event_date": "2026-03-29",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Dying Fetus",
+        "url": "https://www.ticketmaster.ca/dying-fetus-toronto-ontario-03-29-2026/event/stu901"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917vwx01",
+            "name": "Knocked Loose",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          },
+          {
+            "discovery_id": "K8vZ917vwx02",
+            "name": "Show Me The Body",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          }
+        ],
+        "discovery_id": "1A8ZkHLk1abc08",
+        "event_date": "2026-04-05",
+        "event_status_code": "onsale",
+        "event_time": "18:30:00",
+        "name": "Knocked Loose",
+        "url": "https://www.ticketmaster.ca/knocked-loose-toronto-ontario-04-05-2026/event/vwx234"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917yza01",
+            "name": "Cattle Decapitation",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          }
+        ],
+        "discovery_id": "1A8ZkHLk1abc09",
+        "event_date": "2026-04-12",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Cattle Decapitation",
+        "url": "https://www.ticketmaster.ca/cattle-decapitation-toronto-ontario-04-12-2026/event/yza567"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917bcd01",
+            "name": "Cannibal Corpse",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          }
+        ],
+        "discovery_id": "1A8ZkHLk1abc10",
+        "event_date": "2026-04-19",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Cannibal Corpse - Chaos Horrific Tour",
+        "url": "https://www.ticketmaster.ca/cannibal-corpse-toronto-ontario-04-19-2026/event/bcd890"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917efg01",
+            "name": "Obituary",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          }
+        ],
+        "discovery_id": "1A8ZkHLk1abc11",
+        "event_date": "2026-04-26",
+        "event_status_code": "onsale",
+        "event_time": "18:00:00",
+        "name": "Obituary",
+        "url": "https://www.ticketmaster.ca/obituary-toronto-ontario-04-26-2026/event/efg123"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917hij01",
+            "name": "Fit For An Autopsy",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          }
+        ],
+        "discovery_id": "1A8ZkHLk1abc12",
+        "event_date": "2026-05-03",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Fit For An Autopsy",
+        "url": "https://www.ticketmaster.ca/fit-for-an-autopsy-toronto-ontario-05-03-2026/event/hij456"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917klm01",
+            "name": "Born of Osiris",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          }
+        ],
+        "discovery_id": "1A8ZkHLk1abc13",
+        "event_date": "2026-05-10",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Born of Osiris",
+        "url": "https://www.ticketmaster.ca/born-of-osiris-toronto-ontario-05-10-2026/event/klm789"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917nop01",
+            "name": "Oceano",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          }
+        ],
+        "discovery_id": "1A8ZkHLk1abc14",
+        "event_date": "2026-05-17",
+        "event_status_code": "onsale",
+        "event_time": "18:30:00",
+        "name": "Oceano",
+        "url": "https://www.ticketmaster.ca/oceano-toronto-ontario-05-17-2026/event/nop012"
+      }
+    ]
+  }
+}
