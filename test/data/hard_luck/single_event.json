@@ -1,0 +1,22 @@
+{
+  "artists": [
+    {
+      "discovery_id": "K8vZ917abc01",
+      "name": "The Black Dahlia Murder",
+      "genre_id": "KnvZfZ7vAvt",
+      "genre": "Metal"
+    },
+    {
+      "discovery_id": "K8vZ917abc02",
+      "name": "After The Burial",
+      "genre_id": "KnvZfZ7vAvt",
+      "genre": "Metal"
+    }
+  ],
+  "discovery_id": "1A8ZkHLk1abc01",
+  "event_date": "2026-02-15",
+  "event_status_code": "onsale",
+  "event_time": "19:00:00",
+  "name": "The Black Dahlia Murder - Servitude Tour",
+  "url": "https://www.ticketmaster.ca/the-black-dahlia-murder-toronto-ontario-02-15-2026/event/abc123"
+}
