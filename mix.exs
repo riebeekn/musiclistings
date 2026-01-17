@@ -11,12 +11,6 @@ defmodule MusicListings.MixProject do
       aliases: aliases(),
       deps: deps(),
       test_coverage: [tool: ExCoveralls],
-      preferred_cli_env: [
-        coveralls: :test,
-        "coveralls.detail": :test,
-        "coveralls.post": :test,
-        "coveralls.html": :test
-      ],
       # Docs
       name: "Music Listings",
       docs: [
@@ -31,6 +25,17 @@ defmodule MusicListings.MixProject do
         ignore_warnings: ".dialyzer_ignore.exs"
       ],
       listeners: [Phoenix.CodeReloader]
+    ]
+  end
+
+  def cli do
+    [
+      preferred_envs: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ]
     ]
   end
 
