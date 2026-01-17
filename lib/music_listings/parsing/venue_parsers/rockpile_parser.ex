@@ -13,9 +13,6 @@ defmodule MusicListings.Parsing.VenueParsers.RockpileParser do
   defdelegate retrieve_events_fun, to: WordpressParser
 
   @impl true
-  def example_data_file_location, do: "test/data/rockpile/index.html"
-
-  @impl true
   defdelegate events(body), to: WordpressParser
 
   @impl true

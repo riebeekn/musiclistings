@@ -16,9 +16,6 @@ defmodule MusicListings.Parsing.VenueParsers.RivoliParser do
   defdelegate retrieve_events_fun, to: WixParser
 
   @impl true
-  def example_data_file_location, do: "test/data/rivoli/index.html"
-
-  @impl true
   def events(body) do
     json =
       body

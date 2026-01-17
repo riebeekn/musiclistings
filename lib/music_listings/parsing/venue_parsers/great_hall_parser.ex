@@ -21,9 +21,6 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParser do
   end
 
   @impl true
-  def example_data_file_location, do: "test/data/great_hall/index.html"
-
-  @impl true
   def events(body) do
     Selectors.all_matches(body, css(".tgh-future"))
   end

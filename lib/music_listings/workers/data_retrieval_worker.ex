@@ -19,9 +19,7 @@ defmodule MusicListings.Workers.DataRetrievalWorker do
 
     query
     |> Repo.all()
-    |> Crawler.crawl(
-      pull_data_from_www?: Application.get_env(:music_listings, :pull_data_from_www?)
-    )
+    |> Crawler.crawl()
     |> case do
       {:ok, crawl_summary} ->
         crawl_summary

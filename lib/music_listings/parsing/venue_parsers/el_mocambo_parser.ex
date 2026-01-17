@@ -21,9 +21,6 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
   end
 
   @impl true
-  def example_data_file_location, do: "test/data/el_mocambo/index.html"
-
-  @impl true
   def events(body) do
     body
     |> Selectors.all_matches(css(".bdt-event-item"))

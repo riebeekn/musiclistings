@@ -6,10 +6,10 @@ defmodule MusicListings.Parsing.VenueParsers.Bsmt254ParserTest do
   alias MusicListings.Parsing.VenueParsers.Bsmt254Parser
 
   setup do
-    index_file_path = Path.expand("#{File.cwd!()}/test/data/bsmt_254/index.html")
+    index_file_path = Path.expand("#{File.cwd!()}/test/data/bsmt254/index.html")
 
     single_event_file_path =
-      Path.expand("#{File.cwd!()}/test/data/bsmt_254/single_event.html")
+      Path.expand("#{File.cwd!()}/test/data/bsmt254/single_event.html")
 
     index_html = File.read!(index_file_path)
 

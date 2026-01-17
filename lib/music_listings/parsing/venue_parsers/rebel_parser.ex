@@ -21,9 +21,6 @@ defmodule MusicListings.Parsing.VenueParsers.RebelParser do
   end
 
   @impl true
-  def example_data_file_location, do: "test/data/rebel/index.html"
-
-  @impl true
   def events(body) do
     Selectors.all_matches(body, css(".e-loop-item"))
   end

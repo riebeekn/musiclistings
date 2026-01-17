@@ -15,9 +15,6 @@ defmodule MusicListings.Parsing.VenueParsers.MeridianArtsCentreParser do
   defdelegate retrieve_events_fun, to: ToLiveParser
 
   @impl true
-  def example_data_file_location, do: "test/data/meridian_arts_centre/index.json"
-
-  @impl true
   defdelegate events(body), to: ToLiveParser
 
   @impl true

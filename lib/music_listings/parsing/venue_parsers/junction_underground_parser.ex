@@ -16,9 +16,6 @@ defmodule MusicListings.Parsing.VenueParsers.JunctionUndergroundParser do
   defdelegate retrieve_events_fun, to: WordpressParser
 
   @impl true
-  def example_data_file_location, do: "test/data/junction_underground/index.html"
-
-  @impl true
 
   def events(body) do
     body

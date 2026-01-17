@@ -14,9 +14,6 @@ defmodule MusicListings.Parsing.VenueParsers.MasseyHallParser do
   defdelegate retrieve_events_fun, to: MhRthTdmhParser
 
   @impl true
-  def example_data_file_location, do: "test/data/massey_hall/index.html"
-
-  @impl true
   defdelegate events(body), to: MhRthTdmhParser
 
   @impl true

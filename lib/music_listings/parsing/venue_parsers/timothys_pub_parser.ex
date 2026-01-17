@@ -19,9 +19,6 @@ defmodule MusicListings.Parsing.VenueParsers.TimothysPubParser do
   defdelegate retrieve_events_fun, to: TockifyParser
 
   @impl true
-  def example_data_file_location, do: "test/data/timothys_pub/index.json"
-
-  @impl true
   def events(body) do
     TockifyParser.events(body)
     |> Enum.filter(&has_live_music_tag?/1)

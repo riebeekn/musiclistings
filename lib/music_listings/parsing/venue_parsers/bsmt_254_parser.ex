@@ -21,9 +21,6 @@ defmodule MusicListings.Parsing.VenueParsers.Bsmt254Parser do
   end
 
   @impl true
-  def example_data_file_location, do: "test/data/bsmt_254/index.html"
-
-  @impl true
   def events(body) do
     Selectors.all_matches(body, css(".homeEventWrap"))
   end

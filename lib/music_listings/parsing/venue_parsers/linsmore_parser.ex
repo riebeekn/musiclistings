@@ -21,9 +21,6 @@ defmodule MusicListings.Parsing.VenueParsers.LinsmoreParser do
   end
 
   @impl true
-  def example_data_file_location, do: "test/data/linsmore/index.html"
-
-  @impl true
   def events(body) do
     # this is a bit of a horror show...
     # in the future maybe clean this up

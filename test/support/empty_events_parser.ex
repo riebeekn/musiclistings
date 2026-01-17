@@ -17,9 +17,6 @@ defmodule MusicListings.Parsing.VenueParsers.EmptyEventsParser do
   end
 
   @impl true
-  def example_data_file_location, do: "test/data/empty_events/index.json"
-
-  @impl true
   def events(body) do
     body = ParseHelpers.maybe_decode!(body)
     body["data"]["getEvents"]

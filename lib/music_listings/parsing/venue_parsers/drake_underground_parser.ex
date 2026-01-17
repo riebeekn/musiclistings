@@ -17,9 +17,6 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
       "https://thedrake.ca/wp-json/wp/v2/event?event_location=#{@drake_underground_location_id}&per_page=100"
 
   @impl true
-  def example_data_file_location, do: "test/data/drake_underground/index.json"
-
-  @impl true
   def retrieve_events_fun do
     fn url -> HttpClient.get(url) end
   end

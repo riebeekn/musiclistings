@@ -20,9 +20,6 @@ defmodule MusicListings.Parsing.VenueParsers.CneParser do
   end
 
   @impl true
-  def example_data_file_location, do: "test/data/cne/index.json"
-
-  @impl true
   def events(body) do
     body
     |> ParseHelpers.maybe_decode!()

@@ -13,9 +13,6 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParser do
   defdelegate retrieve_events_fun, to: CarbonhouseParser
 
   @impl true
-  def example_data_file_location, do: "test/data/history/index.html"
-
-  @impl true
   defdelegate events(body), to: CarbonhouseParser
 
   @impl true

@@ -15,9 +15,6 @@ defmodule MusicListings.Parsing.VenueParsers.QueenElizabthTheatreParser do
   defdelegate retrieve_events_fun, to: AdmitOneParser
 
   @impl true
-  def example_data_file_location, do: "test/data/queen_elizabeth_theatre/index.json"
-
-  @impl true
   defdelegate events(body), to: AdmitOneParser
 
   @impl true

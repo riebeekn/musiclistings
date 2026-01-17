@@ -18,8 +18,6 @@ defmodule MusicListings.Crawler do
 
   require Logger
 
-  @type crawler_opts :: {:pull_data_from_www?, boolean()}
-
   @doc """
   The crawl function is called to retrieve and store events.  Events will
   be inserted or updated depending on whether the event already exists
@@ -31,22 +29,14 @@ defmodule MusicListings.Crawler do
   modules which implement the MusicListings.Parsing.Parser behaviour.
   In this way specific parsers or combination of parsers can be run.
 
-  ## Options
-
-  An optional `:pull_data_from_www` option is available which defaults to false.
-  The purpose of this option is to allow for local testing / development to run
-  against existing downloaded data files located at `test/data/`
-
   ## Example
 
   iex> danforth = Repo.get!(Venue, 5)
   iex> Crawler.crawl([danforth])
   """
-  @spec crawl(venues :: list(Venue), opts :: list(crawler_opts)) ::
+  @spec crawl(venues :: list(Venue)) ::
           {:ok, CrawlSummary.t()} | {:error, Ecto.Changeset.t()}
-  def crawl(venues, opts \\ []) do
-    pull_data_from_www? = Keyword.get(opts, :pull_data_from_www?, false)
-
+  def crawl(venues) do
     crawl_summary = init_crawl_summary()
 
     venues
@@ -56,7 +46,7 @@ defmodule MusicListings.Crawler do
       case get_parser(venue) do
         {:ok, parser} ->
           parser
-          |> DataSource.retrieve_events(parser.source_url(), pull_data_from_www?)
+          |> DataSource.retrieve_events(parser.source_url())
           |> maybe_insert_no_events_error(venue, crawl_summary)
           |> EventParser.parse_events(parser, venue, crawl_summary)
           |> Enum.reject(&(no_date?(&1) || event_in_the_past?(&1)))

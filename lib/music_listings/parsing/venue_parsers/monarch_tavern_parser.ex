@@ -18,9 +18,6 @@ defmodule MusicListings.Parsing.VenueParsers.MonarchTavernParser do
   defdelegate retrieve_events_fun, to: TockifyParser
 
   @impl true
-  def example_data_file_location, do: "test/data/monarch_tavern/index.json"
-
-  @impl true
   defdelegate events(body), to: TockifyParser
 
   @impl true

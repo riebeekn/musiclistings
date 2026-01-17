@@ -16,9 +16,6 @@ defmodule MusicListings.Parsing.VenueParsers.BudweiserStageParser do
   end
 
   @impl true
-  def example_data_file_location, do: "test/data/budweiser_stage/index.html"
-
-  @impl true
   defdelegate events(body), to: LiveNationParser
 
   @impl true

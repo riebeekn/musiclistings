@@ -21,9 +21,6 @@ defmodule MusicListings.Parsing.VenueParsers.HughsRoomParser do
   end
 
   @impl true
-  def example_data_file_location, do: "test/data/hughs_room/index.html"
-
-  @impl true
   def events(body) do
     body
     |> Selectors.all_matches(css(".showpass-event-card"))

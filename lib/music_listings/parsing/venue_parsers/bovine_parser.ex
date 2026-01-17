@@ -16,9 +16,6 @@ defmodule MusicListings.Parsing.VenueParsers.BovineParser do
   defdelegate retrieve_events_fun, to: ElfsightParser
 
   @impl true
-  def example_data_file_location, do: "test/data/bovine/index.json"
-
-  @impl true
   def events(body) do
     body = ParseHelpers.maybe_decode!(body)
 

@@ -16,9 +16,6 @@ defmodule MusicListings.Parsing.VenueParsers.OperaHouseParser do
   end
 
   @impl true
-  def example_data_file_location, do: "test/data/opera_house/index.json"
-
-  @impl true
   defdelegate events(body), to: LiveNationParser
 
   @impl true

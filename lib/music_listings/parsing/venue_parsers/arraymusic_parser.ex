@@ -22,9 +22,6 @@ defmodule MusicListings.Parsing.VenueParsers.ArraymusicParser do
   end
 
   @impl true
-  def example_data_file_location, do: "test/data/arraymusic/index.html"
-
-  @impl true
   def events(body) do
     Selectors.all_matches(body, css(".sp-pcp-post-details-content"))
   end

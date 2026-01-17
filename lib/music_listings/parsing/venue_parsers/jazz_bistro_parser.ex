@@ -13,9 +13,6 @@ defmodule MusicListings.Parsing.VenueParsers.JazzBistroParser do
   defdelegate retrieve_events_fun, to: WordpressParser
 
   @impl true
-  def example_data_file_location, do: "test/data/jazz_bistro/index.html"
-
-  @impl true
   def events(body) do
     body
     |> WordpressParser.events()

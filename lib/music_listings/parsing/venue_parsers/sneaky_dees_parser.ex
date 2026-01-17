@@ -21,9 +21,6 @@ defmodule MusicListings.Parsing.VenueParsers.SneakyDeesParser do
   end
 
   @impl true
-  def example_data_file_location, do: "test/data/sneaky_dees/index.html"
-
-  @impl true
   def events(body) do
     body
     |> Selectors.all_matches(css(".events-collection-item"))

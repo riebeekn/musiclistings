@@ -5,24 +5,8 @@ defmodule MusicListings.CrawlerTest do
   alias MusicListings.Repo
   alias MusicListingsSchema.CrawlError
   alias MusicListingsSchema.CrawlSummary
-  alias MusicListingsSchema.Event
 
-  # These are pretty naive tests, might want to enhance them down the road
   describe "crawl/1" do
-    test "expected number of events are inserted" do
-      venue_1 = insert(:venue)
-
-      assert {:ok,
-              %CrawlSummary{
-                new: 71,
-                updated: 0,
-                duplicate: 0,
-                errors: 0
-              }} = Crawler.crawl([venue_1])
-
-      assert 71 = Repo.aggregate(Event, :count)
-    end
-
     test "creates invalid_parser_error when parser module does not exist" do
       venue = insert(:venue, parser_module_name: "NonExistentParser")
 

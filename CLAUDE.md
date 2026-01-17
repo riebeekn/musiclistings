@@ -125,7 +125,6 @@ The parsing system is highly modular with a clear hierarchy:
 
 Key environment variables (set in `.envrc` from `.envrc_template`):
 - `ADMIN_EMAIL`: Receives crawl summaries and submission notifications
-- `PULL_DATA_FROM_WWW`: `true` for production, `false` to use test data
 - `DATABASE_URL`: PostgreSQL connection string
 - `SECRET_KEY_BASE`: Phoenix secret key
 - `TURNSTILE_SITE_KEY` / `TURNSTILE_SECRET_KEY`: Cloudflare Turnstile for spam protection

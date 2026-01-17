@@ -19,9 +19,6 @@ defmodule MusicListings.Parsing.VenueParsers.DinasParser do
   defdelegate retrieve_events_fun, to: SquareSpaceJsonParser
 
   @impl true
-  def example_data_file_location, do: "test/data/dinas/index.json"
-
-  @impl true
   defdelegate events(body), to: SquareSpaceJsonParser
 
   @impl true

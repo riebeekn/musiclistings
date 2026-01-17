@@ -16,9 +16,6 @@ defmodule MusicListings.Parsing.VenueParsers.DanforthMusicHallParser do
   end
 
   @impl true
-  def example_data_file_location, do: "test/data/danforth_music_hall/index.json"
-
-  @impl true
   defdelegate events(body), to: LiveNationParser
 
   @impl true

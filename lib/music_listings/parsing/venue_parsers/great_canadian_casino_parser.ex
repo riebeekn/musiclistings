@@ -16,9 +16,6 @@ defmodule MusicListings.Parsing.VenueParsers.GreatCanadianCasinoParser do
   end
 
   @impl true
-  def example_data_file_location, do: "test/data/great_canadian_casino/index.json"
-
-  @impl true
   defdelegate events(body), to: LiveNationParser
 
   @impl true

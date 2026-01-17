@@ -23,9 +23,6 @@ defmodule MusicListings.Parsing.VenueParsers.DromTabernaParser do
   defdelegate retrieve_events_fun, to: SquareSpaceJsonParser
 
   @impl true
-  def example_data_file_location, do: "test/data/drom_taberna/index.json"
-
-  @impl true
   def events(body) do
     body
     |> SquareSpaceJsonParser.events()

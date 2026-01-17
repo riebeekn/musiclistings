@@ -21,9 +21,6 @@ defmodule MusicListings.Parsing.VenueParsers.EmmetRayParser do
   end
 
   @impl true
-  def example_data_file_location, do: "test/data/emmet_ray/index.html"
-
-  @impl true
   def events(body) do
     Selectors.all_matches(body, css(".fusion-events-post"))
   end

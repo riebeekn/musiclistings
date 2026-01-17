@@ -13,9 +13,6 @@ defmodule MusicListings.Parsing.VenueParsers.GarrisonParser do
   defdelegate retrieve_events_fun, to: BgGarrisonParser
 
   @impl true
-  def example_data_file_location, do: "test/data/garrison/index.html"
-
-  @impl true
   defdelegate events(body), to: BgGarrisonParser
 
   @impl true

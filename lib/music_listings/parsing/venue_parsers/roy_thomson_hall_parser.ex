@@ -14,9 +14,6 @@ defmodule MusicListings.Parsing.VenueParsers.RoyThomsonHallParser do
   defdelegate retrieve_events_fun, to: MhRthTdmhParser
 
   @impl true
-  def example_data_file_location, do: "test/data/roy_thomson_hall/index.html"
-
-  @impl true
   def events(body) do
     body
     |> MhRthTdmhParser.events()

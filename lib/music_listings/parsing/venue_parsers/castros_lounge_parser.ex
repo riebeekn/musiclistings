@@ -13,9 +13,6 @@ defmodule MusicListings.Parsing.VenueParsers.CastrosLoungeParser do
   defdelegate retrieve_events_fun, to: WordpressParser
 
   @impl true
-  def example_data_file_location, do: "test/data/castros_lounge/index.html"
-
-  @impl true
   defdelegate events(body), to: WordpressParser
 
   @impl true

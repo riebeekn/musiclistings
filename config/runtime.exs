@@ -29,15 +29,6 @@ admin_email =
 
 config :music_listings, :admin_email, admin_email
 
-pull_data_from_www? =
-  System.get_env("PULL_DATA_FROM_WWW") ||
-    raise """
-    environment variable PULL_DATA_FROM_WWW is missing.
-    For example: true
-    """
-
-config :music_listings, :pull_data_from_www?, String.to_existing_atom(pull_data_from_www?)
-
 # used in application.ex to determine if we should just run the crawler
 # and then shut down the server
 crawl_and_exit? = System.get_env("CRAWL_AND_EXIT", "false")

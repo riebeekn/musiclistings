@@ -38,9 +38,6 @@ resource "render_web_service" "this" {
     "SECRET_KEY_BASE" = {
       value = random_password.secret_key_base.result
     },
-    "PULL_DATA_FROM_WWW" = {
-      value = "true"
-    },
     "DATABASE_URL" = {
       value = render_postgres.this.connection_info.internal_connection_string
     },

@@ -16,9 +16,6 @@ defmodule MusicListings.Parsing.VenueParsers.ScotiabankParser do
   end
 
   @impl true
-  def example_data_file_location, do: "test/data/scotiabank/index.json"
-
-  @impl true
   def events(body) do
     body
     |> LiveNationParser.events()

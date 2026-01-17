@@ -28,10 +28,6 @@ resource "aws_ecs_task_definition" "app" {
           value = var.app_admin_email
         },
         {
-          name  = "PULL_DATA_FROM_WWW",
-          value = "true"
-        },
-        {
           name  = "PHX_HOST",
           value = var.app_domain
         }

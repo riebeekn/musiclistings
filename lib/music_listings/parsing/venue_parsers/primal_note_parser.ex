@@ -15,9 +15,6 @@ defmodule MusicListings.Parsing.VenueParsers.PrimalNoteParser do
   defdelegate retrieve_events_fun, to: SquareSpaceParser
 
   @impl true
-  def example_data_file_location, do: "test/data/primal_note/index.html"
-
-  @impl true
   defdelegate events(body), to: SquareSpaceParser
 
   @impl true

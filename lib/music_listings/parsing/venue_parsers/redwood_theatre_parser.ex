@@ -16,9 +16,6 @@ defmodule MusicListings.Parsing.VenueParsers.RedwoodTheatreParser do
   defdelegate retrieve_events_fun, to: WixParser
 
   @impl true
-  def example_data_file_location, do: "test/data/redwood_theatre/index.html"
-
-  @impl true
   def events(body) do
     json =
       body

@@ -21,9 +21,6 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParser do
   end
 
   @impl true
-  def example_data_file_location, do: "test/data/phoenix/index.html"
-
-  @impl true
   def events(body) do
     Selectors.all_matches(body, css(".event-item"))
   end

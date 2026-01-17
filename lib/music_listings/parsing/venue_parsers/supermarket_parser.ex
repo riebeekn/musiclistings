@@ -19,9 +19,6 @@ defmodule MusicListings.Parsing.VenueParsers.SupermarketParser do
   end
 
   @impl true
-  def example_data_file_location, do: "test/data/supermarket/index.json"
-
-  @impl true
   def events(body) do
     body = ParseHelpers.maybe_decode!(body)
 

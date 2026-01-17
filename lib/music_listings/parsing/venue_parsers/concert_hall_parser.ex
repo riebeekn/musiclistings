@@ -21,9 +21,6 @@ defmodule MusicListings.Parsing.VenueParsers.ConcertHallParser do
   end
 
   @impl true
-  def example_data_file_location, do: "test/data/concert_hall/index.html"
-
-  @impl true
   def events(body) do
     # body
     # |> Selectors.all_matches(css(".event-listing"))

@@ -36,7 +36,6 @@ written in [Elixir](https://elixir-lang.org/) and [Phoenix LiveView](https://hex
 variables.
   - Environment variables:
     - `ADMIN_EMAIL` - the email address the application will send communications to.  The application sends an email summary of the nightly event population runs and also when an event is submitted via the UI.  In development these emails will not be sent but instead be available at [http://localhost:4000/dev/mailbox](http://localhost:4000/dev/mailbox).  See [http://localhost:4000/dev/gallery](http://localhost:4000/dev/gallery) for a preview of the emails.
-    - `PULL_DATA_FROM_WWW` - if true will scrape events from the web, when false will use the local files located in `/test/data`.
 - Run the server (`iex -S mix phx.server`).  Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 - Events are populated via an Oban Job at 7am UTC.  **NOTE:** on production this has changed to a Render Cron job, see details in the [Crawling and Event population](#crawling-and-event-population) section.
 - To manually populate the events, run the worker directly from `iex`: `MusicListings.Workers.DataRetrievalWorker.perform(%{})`.
@@ -274,7 +273,6 @@ MIX_ENV=prod mix release --overwrite=true
 SECRET_KEY_BASE=$(mix phx.gen.secret) \
 PHX_SERVER=true \
 DATABASE_URL=postgres://postgres:postgres@localhost:5432/music_listings_dev \
-PULL_DATA_FROM_WWW=$PULL_DATA_FROM_WWW \
 BREVO_API_KEY="nope" \
 TURNSTILE_SITE_KEY="nope" \
 TURNSTILE_SECRET_KEY="nope" \
@@ -304,7 +302,6 @@ docker build --tag musiclistings_latest .
 docker run -it -p 4000:4000 \
   --env SECRET_KEY_BASE=$(mix phx.gen.secret) \
   --env DATABASE_URL=postgres://nick:postgres@host.docker.internal:5432/music_listings_dev \
-  --env PULL_DATA_FROM_WWW=$PULL_DATA_FROM_WWW \
   --env PHX_SERVER=$PHX_SERVER \
   --env DB_SSL=false \
   --env LOG_LEVEL=debug \

@@ -21,9 +21,6 @@ defmodule MusicListings.Parsing.VenueParsers.SoundGarageParser do
   end
 
   @impl true
-  def example_data_file_location, do: "test/data/sound_garage/index.html"
-
-  @impl true
   def events(body) do
     body
     |> Selectors.all_matches(css("script[type=\"application/ld+json\"]"))

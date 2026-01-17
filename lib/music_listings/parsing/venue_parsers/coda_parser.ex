@@ -21,9 +21,6 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParser do
   end
 
   @impl true
-  def example_data_file_location, do: "test/data/coda/index.html"
-
-  @impl true
   def events(body) do
     Selectors.all_matches(body, css(".schedule-event"))
   end

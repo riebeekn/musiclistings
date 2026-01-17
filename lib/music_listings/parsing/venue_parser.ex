@@ -14,10 +14,6 @@ defmodule MusicListings.Parsing.VenueParser do
   """
   @callback retrieve_events_fun() :: fun()
   @doc """
-  The location of the local data file used for local testing
-  """
-  @callback example_data_file_location() :: String.t()
-  @doc """
   A list of all the events
   """
   @callback events(body :: String.t()) :: [Meeseeks.Result.t()] | {:error, Meeseeks.Error.t()}

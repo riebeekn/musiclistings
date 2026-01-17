@@ -21,9 +21,6 @@ defmodule MusicListings.Parsing.VenueParsers.HandlebarParser do
   end
 
   @impl true
-  def example_data_file_location, do: "test/data/handlebar/index.json"
-
-  @impl true
   def events(body) do
     body = ParseHelpers.maybe_decode!(body)
 

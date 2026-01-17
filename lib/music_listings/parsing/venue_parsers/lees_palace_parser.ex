@@ -23,9 +23,6 @@ defmodule MusicListings.Parsing.VenueParsers.LeesPalaceParser do
   end
 
   @impl true
-  def example_data_file_location, do: "test/data/lees_palace/index.html"
-
-  @impl true
   def events(body) do
     Selectors.all_matches(body, css(".schedule-event"))
   end
