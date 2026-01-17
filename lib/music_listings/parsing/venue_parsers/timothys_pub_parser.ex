@@ -8,6 +8,7 @@ defmodule MusicListings.Parsing.VenueParsers.TimothysPubParser do
 
   @venue_name "timothys_pub"
   @calendar_name "robinbrem"
+  @max_events 100
 
   @impl true
   def source_url do
@@ -24,6 +25,7 @@ defmodule MusicListings.Parsing.VenueParsers.TimothysPubParser do
   def events(body) do
     TockifyParser.events(body)
     |> Enum.filter(&has_live_music_tag?/1)
+    |> Enum.take(@max_events)
   end
 
   defp has_live_music_tag?(event) do
