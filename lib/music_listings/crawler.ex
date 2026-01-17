@@ -53,19 +53,21 @@ defmodule MusicListings.Crawler do
     |> Stream.flat_map(fn venue ->
       Logger.info("Processing events for #{venue.name}")
 
-      parser =
-        String.to_existing_atom(
-          "Elixir.MusicListings.Parsing.VenueParsers.#{venue.parser_module_name}"
-        )
+      case get_parser(venue) do
+        {:ok, parser} ->
+          parser
+          |> DataSource.retrieve_events(parser.source_url(), pull_data_from_www?)
+          |> maybe_insert_no_events_error(venue, crawl_summary)
+          |> EventParser.parse_events(parser, venue, crawl_summary)
+          |> Enum.reject(&(no_date?(&1) || event_in_the_past?(&1)))
+          |> EventStorage.save_events(crawl_summary)
+          |> List.flatten()
+          |> insert_venue_summary(venue, crawl_summary)
 
-      parser
-      |> DataSource.retrieve_events(parser.source_url(), pull_data_from_www?)
-      |> maybe_insert_no_events_error(venue, crawl_summary)
-      |> EventParser.parse_events(parser, venue, crawl_summary)
-      |> Enum.reject(&(no_date?(&1) || event_in_the_past?(&1)))
-      |> EventStorage.save_events(crawl_summary)
-      |> List.flatten()
-      |> insert_venue_summary(venue, crawl_summary)
+        {:error, :invalid_parser} ->
+          insert_invalid_parser_error(venue, crawl_summary)
+          []
+      end
     end)
     |> CrawlStats.new()
     |> update_crawl_summary_with_stats(crawl_summary)
@@ -109,6 +111,23 @@ defmodule MusicListings.Crawler do
     end
 
     payloads
+  end
+
+  defp get_parser(venue) do
+    module_name = "Elixir.MusicListings.Parsing.VenueParsers.#{venue.parser_module_name}"
+    {:ok, String.to_existing_atom(module_name)}
+  rescue
+    ArgumentError -> {:error, :invalid_parser}
+  end
+
+  defp insert_invalid_parser_error(venue, crawl_summary) do
+    %CrawlError{
+      crawl_summary_id: crawl_summary.id,
+      venue_id: venue.id,
+      type: :invalid_parser_error,
+      error: "Invalid parser module: #{venue.parser_module_name}"
+    }
+    |> Repo.insert!()
   end
 
   defp insert_venue_summary(payloads, venue, crawl_summary) do

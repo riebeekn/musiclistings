@@ -3,6 +3,7 @@ defmodule MusicListings.CrawlerTest do
 
   alias MusicListings.Crawler
   alias MusicListings.Repo
+  alias MusicListingsSchema.CrawlError
   alias MusicListingsSchema.CrawlSummary
   alias MusicListingsSchema.Event
 
@@ -20,6 +21,44 @@ defmodule MusicListings.CrawlerTest do
               }} = Crawler.crawl([venue_1])
 
       assert 71 = Repo.aggregate(Event, :count)
+    end
+
+    test "creates invalid_parser_error when parser module does not exist" do
+      venue = insert(:venue, parser_module_name: "NonExistentParser")
+
+      # Note: errors count in CrawlSummary only tracks payload-level errors (parse_error, save_error)
+      # Venue-level errors like invalid_parser_error are tracked in crawl_errors table
+      assert {:ok,
+              %CrawlSummary{
+                new: 0,
+                updated: 0,
+                duplicate: 0,
+                errors: 0
+              }} = Crawler.crawl([venue])
+
+      assert [crawl_error] = Repo.all(CrawlError)
+      assert crawl_error.type == :invalid_parser_error
+      assert crawl_error.error == "Invalid parser module: NonExistentParser"
+      assert crawl_error.venue_id == venue.id
+    end
+
+    test "creates no_events_error when parser returns empty events" do
+      venue = insert(:venue, parser_module_name: "EmptyEventsParser")
+
+      # Note: errors count in CrawlSummary only tracks payload-level errors (parse_error, save_error)
+      # Venue-level errors like no_events_error are tracked in crawl_errors table
+      assert {:ok,
+              %CrawlSummary{
+                new: 0,
+                updated: 0,
+                duplicate: 0,
+                errors: 0
+              }} = Crawler.crawl([venue])
+
+      assert [crawl_error] = Repo.all(CrawlError)
+      assert crawl_error.type == :no_events_error
+      assert crawl_error.error == "No events found for #{venue.name}"
+      assert crawl_error.venue_id == venue.id
     end
   end
 
