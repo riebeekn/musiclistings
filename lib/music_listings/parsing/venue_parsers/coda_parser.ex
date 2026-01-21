@@ -1,6 +1,10 @@
 defmodule MusicListings.Parsing.VenueParsers.CodaParser do
   @moduledoc """
-  Parser for extracing events from https://www.codatoronto.com/
+  Parser for extracing events from https://codatoronto.com/
+
+  Note: Coda migrated from Webflow to WordPress/Elementor in late 2024.
+  The new site structure only displays dates for some events. This parser
+  filters to only return events that have dates displayed.
   """
   @behaviour MusicListings.Parsing.VenueParser
 
@@ -13,7 +17,7 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParser do
   alias MusicListings.Parsing.Selectors
 
   @impl true
-  def source_url, do: "https://www.codatoronto.com/events"
+  def source_url, do: "https://codatoronto.com/events/"
 
   @impl true
   def retrieve_events_fun do
@@ -22,12 +26,13 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParser do
 
   @impl true
   def events(body) do
-    Selectors.all_matches(body, css(".schedule-event"))
+    body
+    |> Selectors.all_matches(css(".e-loop-item.type-events"))
+    |> Enum.filter(&has_date?/1)
   end
 
   @impl true
   def next_page_url(_body, _current_url) do
-    # no next page
     nil
   end
 
@@ -45,23 +50,31 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParser do
 
   @impl true
   def event_title(event) do
-    Selectors.text(event, css(".event-name"))
+    headings = Selectors.all_matches(event, css(".elementor-heading-title"))
+
+    # Second heading is the title (first is the date)
+    headings
+    |> Enum.at(1)
+    |> Selectors.text()
   end
 
   @impl true
   def performers(event) do
     event
-    |> Selectors.all_matches(css(".event-name"))
-    |> Selectors.text()
+    |> event_title()
+    |> List.wrap()
     |> Performers.new()
   end
 
   @impl true
   def event_date(event) do
-    full_date_string = Selectors.text(event, css(".event-date"))
-    [month_string, day_string, year_string] = String.split(full_date_string)
+    headings = Selectors.all_matches(event, css(".elementor-heading-title"))
 
-    ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
+    # First heading contains the date in format like "Saturday, April 25"
+    headings
+    |> Enum.at(0)
+    |> Selectors.text()
+    |> ParseHelpers.parse_day_month_day_string()
   end
 
   @impl true
@@ -85,13 +98,35 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParser do
   end
 
   @impl true
-  def ticket_url(_event) do
-    nil
+  def ticket_url(event) do
+    Selectors.url(event, css("a.elementor-button[href*='ticketweb']"))
   end
 
   @impl true
   def details_url(event) do
-    slug = Selectors.url(event, css(".link-block"))
-    "https://www.codatoronto.com#{slug}"
+    ticket_url(event)
+  end
+
+  # Private helpers
+
+  defp has_date?(event) do
+    headings = Selectors.all_matches(event, css(".elementor-heading-title"))
+
+    # Events with dates have 2 headings: date and title
+    # Events without dates have only 1 heading: title
+    if length(headings) >= 2 do
+      first_heading = headings |> Enum.at(0) |> Selectors.text()
+      date_string?(first_heading)
+    else
+      false
+    end
+  end
+
+  defp date_string?(text) do
+    # Match patterns like "Saturday, April 25" or "Friday, May 22"
+    Regex.match?(
+      ~r/^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),\s+(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2}$/i,
+      String.trim(text)
+    )
   end
 end

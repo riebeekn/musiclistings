@@ -66,20 +66,9 @@ defmodule MusicListings.Parsing.VenueParsers.DprtmntParser do
 
   @impl true
   def event_date(event) do
-    date_string =
-      event
-      |> Selectors.text(css("div.elementor-heading-title"))
-      |> String.trim()
-
-    parse_date(date_string)
-  end
-
-  defp parse_date(date_string) do
-    # Format: "Friday, January 16" or "Saturday, January 17"
-    [_day_of_week, month_day] = String.split(date_string, ", ")
-    [month_string, day_string] = String.split(month_day)
-
-    ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
+    event
+    |> Selectors.text(css("div.elementor-heading-title"))
+    |> ParseHelpers.parse_day_month_day_string()
   end
 
   @impl true
