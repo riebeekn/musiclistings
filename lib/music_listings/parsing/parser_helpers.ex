@@ -149,6 +149,18 @@ defmodule MusicListings.Parsing.ParseHelpers do
     maybe_increment_year(candidate_date, today)
   end
 
+  @doc """
+  Parses a date string in "Day, Month DD" format (e.g., "Friday, January 23")
+  and returns a Date. The year is determined by build_date_from_month_day_strings.
+  """
+  @spec parse_day_month_day_string(String.t()) :: Date.t()
+  def parse_day_month_day_string(date_string) do
+    [_day_of_week, month_day] = date_string |> String.trim() |> String.split(", ")
+    [month_string, day_string] = String.split(month_day)
+
+    build_date_from_month_day_strings(month_string, day_string)
+  end
+
   defp maybe_increment_year(candidate_date, today) do
     # There is no year provided... so subtract a few days from today
     # then compare the dates if candidate event date < today increment

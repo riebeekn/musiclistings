@@ -5,6 +5,10 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParserTest do
   alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.VenueParsers.CodaParser
 
+  # Mock date in tests is Aug 1, 2024. April 25 is >35 days before that,
+  # so build_date_from_month_day_strings will return April 25, 2025.
+  @expected_date ~D[2025-04-25]
+
   setup do
     index_file_path = Path.expand("#{File.cwd!()}/test/data/coda/index.html")
 
@@ -24,15 +28,16 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParserTest do
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://www.codatoronto.com/events" == CodaParser.source_url()
+      assert "https://codatoronto.com/events/" == CodaParser.source_url()
     end
   end
 
   describe "events/1" do
-    test "returns expected events", %{index_html: index_html} do
+    test "returns only events with dates", %{index_html: index_html} do
       events = CodaParser.events(index_html)
 
-      assert 15 = Enum.count(events)
+      # index.html has 4 events total, but only 2 have dates
+      assert 2 = Enum.count(events)
     end
   end
 
@@ -44,26 +49,26 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "coda_2024_07_13" == CodaParser.event_id(event)
+      assert "coda_2025_04_25" == CodaParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "coda_2024_07_13" == CodaParser.ignored_event_id(event)
+      assert "coda_2025_04_25" == CodaParser.ignored_event_id(event)
     end
   end
 
   describe "event_title/1" do
     test "returns event title", %{event: event} do
-      assert "LEE FOSS" == CodaParser.event_title(event)
+      assert "OMAR+" == CodaParser.event_title(event)
     end
   end
 
   describe "performers/1" do
     test "returns the event performers", %{event: event} do
       assert %Performers{
-               headliner: "LEE FOSS",
+               headliner: "OMAR+",
                openers: []
              } == CodaParser.performers(event)
     end
@@ -71,7 +76,7 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParserTest do
 
   describe "event_date/1" do
     test "returns the event date", %{event: event} do
-      assert ~D[2024-07-13] == CodaParser.event_date(event)
+      assert @expected_date == CodaParser.event_date(event)
     end
   end
 
@@ -102,13 +107,15 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParserTest do
 
   describe "ticket_url/1" do
     test "returns the event ticket url", %{event: event} do
-      assert nil == CodaParser.ticket_url(event)
+      assert "https://www.ticketweb.ca/event/omar-coda-tickets/14053944?pl=CODA" ==
+               CodaParser.ticket_url(event)
     end
   end
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert "https://www.codatoronto.com/events/lee-foss" == CodaParser.details_url(event)
+      assert "https://www.ticketweb.ca/event/omar-coda-tickets/14053944?pl=CODA" ==
+               CodaParser.details_url(event)
     end
   end
 end
