@@ -10,6 +10,12 @@ defmodule MusicListings.Application do
   @impl true
   def start(_type, _args) do
     if Application.get_env(:music_listings, :crawl_and_exit?) == true do
+      # Set up OpenTelemetry instrumentation
+      OpentelemetryBandit.setup()
+
+      OpentelemetryPhoenix.setup(adapter: :bandit)
+      OpentelemetryEcto.setup([:music_listings, :repo], db_statement: :enabled)
+
       children = [
         MusicListingsWeb.Telemetry,
         MusicListings.Repo,
@@ -23,14 +29,23 @@ defmodule MusicListings.Application do
          }}
       ]
 
+      Logger.add_handlers(:music_listings)
+
       # See https://hexdocs.pm/elixir/Supervisor.html
       # for other strategies and supported options
       opts = [strategy: :one_for_one, name: MusicListings.Supervisor]
       Supervisor.start_link(children, opts)
+
       DataRetrievalWorker.perform(%{})
 
       System.stop(0)
     else
+      # Set up OpenTelemetry instrumentation
+      OpentelemetryBandit.setup()
+
+      OpentelemetryPhoenix.setup(adapter: :bandit)
+      OpentelemetryEcto.setup([:music_listings, :repo], db_statement: :enabled)
+
       {:ok, _migrated} = EctoBootMigration.migrate(:music_listings)
 
       children = [
@@ -52,6 +67,8 @@ defmodule MusicListings.Application do
         # Start to serve requests, typically the last entry
         MusicListingsWeb.Endpoint
       ]
+
+      Logger.add_handlers(:music_listings)
 
       # See https://hexdocs.pm/elixir/Supervisor.html
       # for other strategies and supported options

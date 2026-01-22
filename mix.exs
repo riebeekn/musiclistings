@@ -93,6 +93,19 @@ defmodule MusicListings.MixProject do
        git: "https://github.com/mwhitworth/ecto_boot_migration", branch: "elixir-1.17-fix"},
       {:nimble_csv, "~> 1.2"},
       {:honeybadger, "~>0.23"},
+      {:sentry, "~> 11.0.4"},
+      # OpenTelemetry core packages
+      {:opentelemetry, "~> 1.5"},
+      {:opentelemetry_api, "~> 1.4"},
+      {:opentelemetry_exporter, "~> 1.0"},
+      {:opentelemetry_semantic_conventions, "~> 1.27"},
+      # Instrumentation libraries (choose what you need)
+      # for Phoenix
+      {:opentelemetry_phoenix, "~> 2.0"},
+      # for Bandit (Phoenix 1.7+)
+      {:opentelemetry_bandit, "~> 0.1"},
+      # for Ecto
+      {:opentelemetry_ecto, "~> 1.2"},
       # build / dev / test related deps
       {:swoosh_gallery, "~> 0.2.0"},
       {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},

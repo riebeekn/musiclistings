@@ -10,6 +10,7 @@ defmodule MusicListingsWeb.EventLive.Index do
       get_selected_date_in_local_storage(socket) || Date.to_iso8601(Date.utc_today())
 
     venues = MusicListings.list_venues(restrict_to_pulled_venues?: false)
+    Sentry.capture_message("Just a test!!!")
 
     socket
     |> assign(:venues, venues)

@@ -17,5 +17,30 @@ config :swoosh, local: false
 # Do not print debug messages in production
 config :logger, level: :info
 
+config :sentry,
+  dsn:
+    "https://8c7ceb60f5020b593d1e040668028796@o4510755347824640.ingest.us.sentry.io/4510755351035904",
+  environment_name: Mix.env(),
+  enable_source_code_context: true,
+  root_source_code_paths: [File.cwd!()],
+  release: System.get_env("SENTRY_RELEASE") || System.get_env("RENDER_GIT_COMMIT"),
+  traces_sample_rate: 1.0,
+  integrations: [
+    telemetry: [
+      report_handler_failures: true
+    ]
+  ]
+
+config :music_listings, :logger, [
+  {:handler, :my_sentry_handler, Sentry.LoggerHandler,
+   %{
+     config: %{
+       metadata: [:file, :line],
+       rate_limiting: [max_events: 10, interval: _1_second = 1_000],
+       capture_log_messages: true
+     }
+   }}
+]
+
 # Runtime production configuration, including reading
 # of environment variables, is done on config/runtime.exs.

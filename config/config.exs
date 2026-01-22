@@ -90,6 +90,9 @@ config :music_listings, env: Mix.env()
 
 config :music_listings, :http_client, MusicListings.HttpClient.Req
 
+config :opentelemetry, span_processor: {Sentry.OpenTelemetry.SpanProcessor, []}
+config :opentelemetry, sampler: {Sentry.OpenTelemetry.Sampler, []}
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"

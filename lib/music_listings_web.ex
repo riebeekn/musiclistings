@@ -55,6 +55,8 @@ defmodule MusicListingsWeb do
       use Phoenix.LiveView,
         layout: {MusicListingsWeb.Layouts, :app}
 
+      on_mount Sentry.LiveViewHook
+
       unquote(html_helpers())
 
       def ok(socket), do: {:ok, socket}
