@@ -69,7 +69,10 @@ defmodule MusicListings.Parsing.VenueParsers.SneakyDeesParser do
     [month_string, day_year_string] = String.split(date_string, " ", parts: 2)
     [day_string, year_string] = String.split(day_year_string, ", ")
 
-    ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
+    {:ok, date} =
+      ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
+
+    date
   end
 
   @impl true
@@ -79,9 +82,12 @@ defmodule MusicListings.Parsing.VenueParsers.SneakyDeesParser do
 
   @impl true
   def event_time(event) do
-    event
-    |> Selectors.text(css(".time"))
-    |> ParseHelpers.build_time_from_time_string()
+    case event
+         |> Selectors.text(css(".time"))
+         |> ParseHelpers.build_time_from_time_string() do
+      {:ok, time} -> time
+      {:error, _reason} -> nil
+    end
   end
 
   @impl true

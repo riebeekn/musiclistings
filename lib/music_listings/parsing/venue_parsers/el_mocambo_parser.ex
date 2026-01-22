@@ -60,11 +60,14 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
     %{"year" => year_string, "month" => month_string, "day" => day_string, "time" => _time_string} =
       parse_out_full_date_time_string(event)
 
-    if year_string == "" do
-      ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
-    else
-      ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
-    end
+    {:ok, date} =
+      if year_string == "" do
+        ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
+      else
+        ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
+      end
+
+    date
   end
 
   defp parse_out_full_date_time_string(event) do
@@ -94,7 +97,10 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
     } =
       parse_out_full_date_time_string(event)
 
-    ParseHelpers.build_time_from_time_string(time_string)
+    case ParseHelpers.build_time_from_time_string(time_string) do
+      {:ok, time} -> time
+      {:error, _reason} -> nil
+    end
   end
 
   @impl true

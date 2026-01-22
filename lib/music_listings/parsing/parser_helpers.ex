@@ -122,13 +122,16 @@ defmodule MusicListings.Parsing.ParseHelpers do
           year_string :: String.t(),
           month_string :: String.t(),
           day_string :: String.t()
-        ) :: Date.t()
+        ) :: {:ok, Date.t()} | {:error, :invalid_date}
   def build_date_from_year_month_day_strings(year_string, month_string, day_string) do
-    day = day_string_to_integer(day_string)
-    month = month_string |> clean_month_string() |> month_string_to_integer()
-    year = year_string |> String.replace(",", "") |> String.trim() |> String.to_integer()
-
-    Date.new!(year, month, day)
+    with {:ok, day} <- day_string_to_integer(day_string),
+         {:ok, month} <- month_string |> clean_month_string() |> month_string_to_integer(),
+         {:ok, year} <- year_string_to_integer(year_string),
+         {:ok, date} <- Date.new(year, month, day) do
+      {:ok, date}
+    else
+      _error -> {:error, :invalid_date}
+    end
   end
 
   @doc """
@@ -138,27 +141,31 @@ defmodule MusicListings.Parsing.ParseHelpers do
   @spec build_date_from_month_day_strings(
           month_string :: String.t(),
           day_string :: String.t()
-        ) ::
-          Date.t()
+        ) :: {:ok, Date.t()} | {:error, :invalid_date}
   def build_date_from_month_day_strings(month_string, day_string) do
     today = DateHelpers.today()
-    day = day_string_to_integer(day_string)
-    month = month_string |> clean_month_string() |> month_string_to_integer()
 
-    candidate_date = Date.new!(today.year, month, day)
-    maybe_increment_year(candidate_date, today)
+    with {:ok, day} <- day_string_to_integer(day_string),
+         {:ok, month} <- month_string |> clean_month_string() |> month_string_to_integer(),
+         {:ok, candidate_date} <- Date.new(today.year, month, day) do
+      {:ok, maybe_increment_year(candidate_date, today)}
+    else
+      _error -> {:error, :invalid_date}
+    end
   end
 
   @doc """
   Parses a date string in "Day, Month DD" format (e.g., "Friday, January 23")
   and returns a Date. The year is determined by build_date_from_month_day_strings.
   """
-  @spec parse_day_month_day_string(String.t()) :: Date.t()
+  @spec parse_day_month_day_string(String.t()) :: {:ok, Date.t()} | {:error, :invalid_date}
   def parse_day_month_day_string(date_string) do
-    [_day_of_week, month_day] = date_string |> String.trim() |> String.split(", ")
-    [month_string, day_string] = String.split(month_day)
-
-    build_date_from_month_day_strings(month_string, day_string)
+    with [_day_of_week, month_day] <- date_string |> String.trim() |> String.split(", "),
+         [month_string, day_string] <- String.split(month_day) do
+      build_date_from_month_day_strings(month_string, day_string)
+    else
+      _error -> {:error, :invalid_date}
+    end
   end
 
   defp maybe_increment_year(candidate_date, today) do
@@ -181,110 +188,128 @@ defmodule MusicListings.Parsing.ParseHelpers do
     |> String.trim()
   end
 
-  defp month_string_to_integer("january"), do: 1
-  defp month_string_to_integer("jan"), do: 1
-  defp month_string_to_integer("01"), do: 1
-  defp month_string_to_integer("february"), do: 2
-  defp month_string_to_integer("feb"), do: 2
-  defp month_string_to_integer("02"), do: 2
-  defp month_string_to_integer("march"), do: 3
-  defp month_string_to_integer("mar"), do: 3
-  defp month_string_to_integer("03"), do: 3
-  defp month_string_to_integer("april"), do: 4
-  defp month_string_to_integer("apr"), do: 4
-  defp month_string_to_integer("04"), do: 4
-  defp month_string_to_integer("may"), do: 5
-  defp month_string_to_integer("05"), do: 5
-  defp month_string_to_integer("june"), do: 6
-  defp month_string_to_integer("jun"), do: 6
-  defp month_string_to_integer("06"), do: 6
-  defp month_string_to_integer("july"), do: 7
-  defp month_string_to_integer("jul"), do: 7
-  defp month_string_to_integer("07"), do: 7
-  defp month_string_to_integer("august"), do: 8
-  defp month_string_to_integer("aug"), do: 8
-  defp month_string_to_integer("08"), do: 8
-  defp month_string_to_integer("september"), do: 9
-  defp month_string_to_integer("sep"), do: 9
-  defp month_string_to_integer("09"), do: 9
-  defp month_string_to_integer("october"), do: 10
-  defp month_string_to_integer("oct"), do: 10
-  defp month_string_to_integer("10"), do: 10
-  defp month_string_to_integer("november"), do: 11
-  defp month_string_to_integer("nov"), do: 11
-  defp month_string_to_integer("11"), do: 11
-  defp month_string_to_integer("december"), do: 12
-  defp month_string_to_integer("dec"), do: 12
-  defp month_string_to_integer("12"), do: 12
+  defp month_string_to_integer("january"), do: {:ok, 1}
+  defp month_string_to_integer("jan"), do: {:ok, 1}
+  defp month_string_to_integer("01"), do: {:ok, 1}
+  defp month_string_to_integer("february"), do: {:ok, 2}
+  defp month_string_to_integer("feb"), do: {:ok, 2}
+  defp month_string_to_integer("02"), do: {:ok, 2}
+  defp month_string_to_integer("march"), do: {:ok, 3}
+  defp month_string_to_integer("mar"), do: {:ok, 3}
+  defp month_string_to_integer("03"), do: {:ok, 3}
+  defp month_string_to_integer("april"), do: {:ok, 4}
+  defp month_string_to_integer("apr"), do: {:ok, 4}
+  defp month_string_to_integer("04"), do: {:ok, 4}
+  defp month_string_to_integer("may"), do: {:ok, 5}
+  defp month_string_to_integer("05"), do: {:ok, 5}
+  defp month_string_to_integer("june"), do: {:ok, 6}
+  defp month_string_to_integer("jun"), do: {:ok, 6}
+  defp month_string_to_integer("06"), do: {:ok, 6}
+  defp month_string_to_integer("july"), do: {:ok, 7}
+  defp month_string_to_integer("jul"), do: {:ok, 7}
+  defp month_string_to_integer("07"), do: {:ok, 7}
+  defp month_string_to_integer("august"), do: {:ok, 8}
+  defp month_string_to_integer("aug"), do: {:ok, 8}
+  defp month_string_to_integer("08"), do: {:ok, 8}
+  defp month_string_to_integer("september"), do: {:ok, 9}
+  defp month_string_to_integer("sep"), do: {:ok, 9}
+  defp month_string_to_integer("09"), do: {:ok, 9}
+  defp month_string_to_integer("october"), do: {:ok, 10}
+  defp month_string_to_integer("oct"), do: {:ok, 10}
+  defp month_string_to_integer("10"), do: {:ok, 10}
+  defp month_string_to_integer("november"), do: {:ok, 11}
+  defp month_string_to_integer("nov"), do: {:ok, 11}
+  defp month_string_to_integer("11"), do: {:ok, 11}
+  defp month_string_to_integer("december"), do: {:ok, 12}
+  defp month_string_to_integer("dec"), do: {:ok, 12}
+  defp month_string_to_integer("12"), do: {:ok, 12}
+  defp month_string_to_integer(_month_string), do: {:error, :invalid_month}
 
   defp day_string_to_integer(day_string) do
-    day_string
-    |> String.replace(",", "")
-    |> String.replace(".", "")
-    |> String.replace("st", "")
-    |> String.replace("nd", "")
-    |> String.replace("rd", "")
-    |> String.replace("th", "")
-    |> String.replace("o", "")
-    |> String.trim()
-    |> String.to_integer()
+    result =
+      day_string
+      |> String.replace(",", "")
+      |> String.replace(".", "")
+      |> String.replace("st", "")
+      |> String.replace("nd", "")
+      |> String.replace("rd", "")
+      |> String.replace("th", "")
+      |> String.replace("o", "")
+      |> String.trim()
+      |> Integer.parse()
+
+    case result do
+      {day, _remainder} -> {:ok, day}
+      :error -> {:error, :invalid_day}
+    end
+  end
+
+  defp year_string_to_integer(year_string) do
+    result =
+      year_string
+      |> String.replace(",", "")
+      |> String.trim()
+      |> Integer.parse()
+
+    case result do
+      {year, _remainder} -> {:ok, year}
+      :error -> {:error, :invalid_year}
+    end
   end
 
   # ===========================================================================
   # Time helpers
   # ===========================================================================
-  @spec build_time_from_time_string(String.t()) :: Time.t()
-  def build_time_from_time_string(time_string) do
-    (time_string || "")
-    |> String.replace("EST", "")
-    |> String.replace("EDT", "")
-    |> String.replace(":PM", " pm")
-    |> String.replace("p.m.", "pm")
-    |> String.trim()
-    |> String.downcase()
-    |> String.split(":")
-    |> case do
-      [hour_string, minute_string] ->
-        hour =
-          hour_string
-          |> String.to_integer()
-          |> maybe_adjust_for_pm(minute_string)
+  @spec build_time_from_time_string(String.t() | nil) :: {:ok, Time.t()} | {:error, :invalid_time}
+  def build_time_from_time_string(nil), do: {:error, :invalid_time}
 
-        minute =
-          minute_string
+  def build_time_from_time_string(time_string) do
+    result =
+      time_string
+      |> String.replace("EST", "")
+      |> String.replace("EDT", "")
+      |> String.replace(":PM", " pm")
+      |> String.replace("p.m.", "pm")
+      |> String.trim()
+      |> String.downcase()
+      |> String.split(":")
+      |> case do
+        [hour_string, minute_string] ->
+          with {hour, _remainder} <- Integer.parse(hour_string),
+               minute_cleaned =
+                 minute_string
+                 |> String.replace("pm", "")
+                 |> String.replace("am", "")
+                 |> String.trim(),
+               {minute, _remainder} <- Integer.parse(minute_cleaned) do
+            hour = maybe_adjust_for_pm(hour, minute_string)
+            Time.new(hour, minute, 0)
+          else
+            _error -> {:error, :invalid_time}
+          end
+
+        [hour_string] ->
+          hour_string
           |> String.replace("pm", "")
           |> String.replace("am", "")
           |> String.trim()
-          |> String.to_integer()
+          |> Integer.parse()
+          |> case do
+            {hour, _remainder} ->
+              hour = maybe_adjust_for_pm(hour, hour_string)
+              Time.new(hour, 0, 0)
 
-        to_time(hour, minute)
+            :error ->
+              {:error, :invalid_time}
+          end
 
-      [hour_string] ->
-        hour_string
-        |> String.replace("pm", "")
-        |> String.replace("am", "")
-        |> String.trim()
-        |> Integer.parse()
-        |> case do
-          {hour, _remainder} ->
-            hour = maybe_adjust_for_pm(hour, hour_string)
-            to_time(hour, 0)
+        _other ->
+          {:error, :invalid_time}
+      end
 
-          :error ->
-            nil
-        end
-
-      _tbd ->
-        nil
-    end
-  end
-
-  defp to_time(hour, minute) do
-    hour
-    |> Time.new(minute, 0)
-    |> case do
-      {:ok, time} -> time
-      _error -> nil
+    case result do
+      {:ok, time} -> {:ok, time}
+      _error -> {:error, :invalid_time}
     end
   end
 

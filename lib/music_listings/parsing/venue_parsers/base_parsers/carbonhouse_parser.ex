@@ -73,7 +73,10 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.CarbonhouseParser do
     month_string = Selectors.text(event, css(".m-date__month"))
     year_string = Selectors.text(event, css(".m-date__year"))
 
-    ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
+    {:ok, date} =
+      ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
+
+    date
   end
 
   def additional_dates(event) do
@@ -88,15 +91,26 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.CarbonhouseParser do
       additional_dates
       |> Enum.map(fn additional_date ->
         day_string = additional_date |> Selectors.text(css(".m-date__day"))
-        ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
+
+        {:ok, date} =
+          ParseHelpers.build_date_from_year_month_day_strings(
+            year_string,
+            month_string,
+            day_string
+          )
+
+        date
       end)
     end
   end
 
   def event_time(event) do
-    event
-    |> Selectors.text(css(".start"))
-    |> ParseHelpers.build_time_from_time_string()
+    case event
+         |> Selectors.text(css(".start"))
+         |> ParseHelpers.build_time_from_time_string() do
+      {:ok, time} -> time
+      {:error, _reason} -> nil
+    end
   end
 
   def price(_event) do

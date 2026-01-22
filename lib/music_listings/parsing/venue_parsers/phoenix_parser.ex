@@ -63,7 +63,8 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParser do
 
     [month_string, day_string] = String.split(month_day_string)
 
-    ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
+    {:ok, date} = ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
+    date
   end
 
   @impl true
@@ -78,9 +79,12 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParser do
       |> Selectors.text(css(".event-date"))
       |> String.split(", ")
 
-    doors_string
-    |> String.replace("Doors: ", "")
-    |> ParseHelpers.build_time_from_time_string()
+    case doors_string
+         |> String.replace("Doors: ", "")
+         |> ParseHelpers.build_time_from_time_string() do
+      {:ok, time} -> time
+      {:error, _reason} -> nil
+    end
   end
 
   @impl true

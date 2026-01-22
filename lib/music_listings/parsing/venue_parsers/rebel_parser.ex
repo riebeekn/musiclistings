@@ -66,9 +66,12 @@ defmodule MusicListings.Parsing.VenueParsers.RebelParser do
 
   @impl true
   def event_date(event) do
-    event
-    |> Selectors.text(css("div.elementor-heading-title"))
-    |> ParseHelpers.parse_day_month_day_string()
+    {:ok, date} =
+      event
+      |> Selectors.text(css("div.elementor-heading-title"))
+      |> ParseHelpers.parse_day_month_day_string()
+
+    date
   end
 
   @impl true

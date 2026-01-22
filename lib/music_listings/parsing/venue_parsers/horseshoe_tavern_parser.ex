@@ -64,7 +64,10 @@ defmodule MusicListings.Parsing.VenueParsers.HorseshoeTavernParser do
     [_day_of_week, day_month_string, year_string] = String.split(full_date_string, ", ")
     [month_string, day_string] = String.split(day_month_string)
 
-    ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
+    {:ok, date} =
+      ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
+
+    date
   end
 
   @impl true
@@ -74,11 +77,14 @@ defmodule MusicListings.Parsing.VenueParsers.HorseshoeTavernParser do
 
   @impl true
   def event_time(event) do
-    event
-    |> Selectors.all_matches(css(".schedule-event-time"))
-    |> Selectors.text()
-    |> Enum.find(fn element -> element |> String.contains?("pm") end)
-    |> ParseHelpers.build_time_from_time_string()
+    case event
+         |> Selectors.all_matches(css(".schedule-event-time"))
+         |> Selectors.text()
+         |> Enum.find(fn element -> element |> String.contains?("pm") end)
+         |> ParseHelpers.build_time_from_time_string() do
+      {:ok, time} -> time
+      {:error, _reason} -> nil
+    end
   end
 
   @impl true

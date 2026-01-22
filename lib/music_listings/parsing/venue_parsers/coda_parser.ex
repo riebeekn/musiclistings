@@ -71,10 +71,13 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParser do
     headings = Selectors.all_matches(event, css(".elementor-heading-title"))
 
     # First heading contains the date in format like "Saturday, April 25"
-    headings
-    |> Enum.at(0)
-    |> Selectors.text()
-    |> ParseHelpers.parse_day_month_day_string()
+    {:ok, date} =
+      headings
+      |> Enum.at(0)
+      |> Selectors.text()
+      |> ParseHelpers.parse_day_month_day_string()
+
+    date
   end
 
   @impl true
@@ -116,17 +119,9 @@ defmodule MusicListings.Parsing.VenueParsers.CodaParser do
     # Events without dates have only 1 heading: title
     if length(headings) >= 2 do
       first_heading = headings |> Enum.at(0) |> Selectors.text()
-      date_string?(first_heading)
+      match?({:ok, _}, ParseHelpers.parse_day_month_day_string(first_heading))
     else
       false
     end
-  end
-
-  defp date_string?(text) do
-    # Match patterns like "Saturday, April 25" or "Friday, May 22"
-    Regex.match?(
-      ~r/^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),\s+(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2}$/i,
-      String.trim(text)
-    )
   end
 end

@@ -63,7 +63,10 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.ElfsightParser do
     if is_map(event["start"]) do
       [year_string, month_string, day_string] = event["start"]["date"] |> String.split("-")
 
-      ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
+      {:ok, date} =
+        ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
+
+      date
     else
       nil
     end
@@ -79,7 +82,10 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.ElfsightParser do
 
   def event_time(event) do
     if is_map(event["start"]) do
-      ParseHelpers.build_time_from_time_string(event["start"]["time"])
+      case ParseHelpers.build_time_from_time_string(event["start"]["time"]) do
+        {:ok, time} -> time
+        {:error, _reason} -> nil
+      end
     else
       nil
     end

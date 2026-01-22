@@ -64,7 +64,8 @@ defmodule MusicListings.Parsing.VenueParsers.CneParser do
       |> List.first()
       |> String.split()
 
-    ParseHelpers.build_date_from_year_month_day_strings(year, month, day)
+    {:ok, date} = ParseHelpers.build_date_from_year_month_day_strings(year, month, day)
+    date
   end
 
   @impl true
@@ -73,7 +74,8 @@ defmodule MusicListings.Parsing.VenueParsers.CneParser do
 
     Enum.map(remaining_dates, fn date_string ->
       [month, day, year] = String.split(date_string)
-      ParseHelpers.build_date_from_year_month_day_strings(year, month, day)
+      {:ok, date} = ParseHelpers.build_date_from_year_month_day_strings(year, month, day)
+      date
     end)
   end
 

@@ -56,18 +56,25 @@ defmodule MusicListings.Parsing.VenueParsers.EmmetRayParser do
 
   @impl true
   def event_date(event) do
-    event
-    |> Selectors.text(css(".tribe-event-date-start"))
-    |> String.split("/")
-    |> Enum.at(0)
-    |> String.split()
-    |> case do
-      [month_string, day_string] ->
-        ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
+    {:ok, date} =
+      event
+      |> Selectors.text(css(".tribe-event-date-start"))
+      |> String.split("/")
+      |> Enum.at(0)
+      |> String.split()
+      |> case do
+        [month_string, day_string] ->
+          ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
 
-      [month_string, day_string, year_string] ->
-        ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
-    end
+        [month_string, day_string, year_string] ->
+          ParseHelpers.build_date_from_year_month_day_strings(
+            year_string,
+            month_string,
+            day_string
+          )
+      end
+
+    date
   end
 
   @impl true
@@ -77,11 +84,14 @@ defmodule MusicListings.Parsing.VenueParsers.EmmetRayParser do
 
   @impl true
   def event_time(event) do
-    event
-    |> Selectors.text(css(".tribe-event-date-start"))
-    |> String.split("/")
-    |> Enum.at(1)
-    |> ParseHelpers.build_time_from_time_string()
+    case event
+         |> Selectors.text(css(".tribe-event-date-start"))
+         |> String.split("/")
+         |> Enum.at(1)
+         |> ParseHelpers.build_time_from_time_string() do
+      {:ok, time} -> time
+      {:error, _reason} -> nil
+    end
   end
 
   @impl true

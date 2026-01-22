@@ -54,7 +54,7 @@ defmodule MusicListings.Parsing.VenueParsers.ArraymusicParser.DateParser do
       Enum.reduce(date_strings, {year_1, []}, fn date_string, {current_year, acc} ->
         [month, day] = String.split(date_string)
         year = if month == "Jan", do: year_2, else: current_year
-        date = ParseHelpers.build_date_from_year_month_day_strings("#{year}", month, day)
+        {:ok, date} = ParseHelpers.build_date_from_year_month_day_strings("#{year}", month, day)
         {year, [date | acc]}
       end)
       |> elem(1)
@@ -74,12 +74,12 @@ defmodule MusicListings.Parsing.VenueParsers.ArraymusicParser.DateParser do
 
     [month, day, year] = String.split(first_date_string)
 
-    first_date = ParseHelpers.build_date_from_year_month_day_strings(year, month, day)
+    {:ok, first_date} = ParseHelpers.build_date_from_year_month_day_strings(year, month, day)
 
     additional_dates =
       Enum.reduce(rest, [], fn month_day_string, acc ->
         [month, day] = String.split(month_day_string)
-        date = ParseHelpers.build_date_from_year_month_day_strings(year, month, day)
+        {:ok, date} = ParseHelpers.build_date_from_year_month_day_strings(year, month, day)
         [date | acc]
       end)
       |> Enum.reverse()
@@ -90,8 +90,10 @@ defmodule MusicListings.Parsing.VenueParsers.ArraymusicParser.DateParser do
   def parse_single_date_format(raw_date_time_string) do
     [month, day, year | _rest] = String.split(raw_date_time_string)
 
+    {:ok, date} = ParseHelpers.build_date_from_year_month_day_strings(year, month, day)
+
     %__MODULE__{
-      date: ParseHelpers.build_date_from_year_month_day_strings(year, month, day),
+      date: date,
       additional_dates: []
     }
   end
