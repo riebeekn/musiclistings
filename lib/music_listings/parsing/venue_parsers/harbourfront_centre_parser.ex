@@ -59,18 +59,23 @@ defmodule MusicListings.Parsing.VenueParsers.HarbourfrontCentreParser do
   def event_date(event) do
     date_time_string = Selectors.text(event, css(".card-body-date"))
 
-    if multi_day_event?(date_time_string) do
-      [start_date_string, end_date_string] = String.split(date_time_string, ~r/\s*↑\s*/, parts: 2)
-      [_weekday, month_and_day] = String.split(start_date_string, ",")
-      [month, day] = month_and_day |> String.trim() |> String.split(" ")
-      [_weekday, _month_and_day, year] = String.split(end_date_string, ",")
-      ParseHelpers.build_date_from_year_month_day_strings(year, month, day)
-    else
-      [date_string, _time_string] = String.split(date_time_string, "•")
-      [_weekday, month_and_day, year] = String.split(date_string, ",")
-      [month, day] = month_and_day |> String.trim() |> String.split(" ")
-      ParseHelpers.build_date_from_year_month_day_strings(year, month, day)
-    end
+    {:ok, date} =
+      if multi_day_event?(date_time_string) do
+        [start_date_string, end_date_string] =
+          String.split(date_time_string, ~r/\s*↑\s*/, parts: 2)
+
+        [_weekday, month_and_day] = String.split(start_date_string, ",")
+        [month, day] = month_and_day |> String.trim() |> String.split(" ")
+        [_weekday, _month_and_day, year] = String.split(end_date_string, ",")
+        ParseHelpers.build_date_from_year_month_day_strings(year, month, day)
+      else
+        [date_string, _time_string] = String.split(date_time_string, "•")
+        [_weekday, month_and_day, year] = String.split(date_string, ",")
+        [month, day] = month_and_day |> String.trim() |> String.split(" ")
+        ParseHelpers.build_date_from_year_month_day_strings(year, month, day)
+      end
+
+    date
   end
 
   defp multi_day_event?(date_string), do: String.contains?(date_string, "↑")
@@ -85,7 +90,7 @@ defmodule MusicListings.Parsing.VenueParsers.HarbourfrontCentreParser do
 
       [_weekday, month_and_day, year] = String.split(end_date_string, ",")
       [month, day] = month_and_day |> String.trim() |> String.split(" ")
-      end_date = ParseHelpers.build_date_from_year_month_day_strings(year, month, day)
+      {:ok, end_date} = ParseHelpers.build_date_from_year_month_day_strings(year, month, day)
       start_date = event_date(event)
 
       Date.range(start_date, end_date)
@@ -105,7 +110,11 @@ defmodule MusicListings.Parsing.VenueParsers.HarbourfrontCentreParser do
       nil
     else
       [_date_string, time_string] = String.split(date_time_string, "•")
-      ParseHelpers.build_time_from_time_string(time_string)
+
+      case ParseHelpers.build_time_from_time_string(time_string) do
+        {:ok, time} -> time
+        {:error, _reason} -> nil
+      end
     end
   end
 

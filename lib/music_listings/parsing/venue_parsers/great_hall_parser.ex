@@ -65,7 +65,10 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParser do
       |> Selectors.text(css(".tgh-e-date"))
       |> String.split()
 
-    ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
+    {:ok, date} =
+      ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
+
+    date
   end
 
   @impl true
@@ -75,9 +78,12 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParser do
 
   @impl true
   def event_time(event) do
-    event
-    |> Selectors.text(css(".tgh-e-time"))
-    |> ParseHelpers.build_time_from_time_string()
+    case event
+         |> Selectors.text(css(".tgh-e-time"))
+         |> ParseHelpers.build_time_from_time_string() do
+      {:ok, time} -> time
+      {:error, _reason} -> nil
+    end
   end
 
   @impl true

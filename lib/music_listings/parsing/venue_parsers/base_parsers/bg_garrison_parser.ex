@@ -49,20 +49,23 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.BgGarrisonParser do
   def event_date(event) do
     date_parts = split_event_date_into_parts(event)
 
-    cond do
-      # Range: THURSDAY OCTOBER 02 - SATURDAY OCTOBER 04
-      date_range?(date_parts) ->
-        [_ignore_1, month1, day1, _ignore_2, _ignore_3, _ignore_4, _ignore_5] = date_parts
-        ParseHelpers.build_date_from_month_day_strings(month1, day1)
+    {:ok, date} =
+      cond do
+        # Range: THURSDAY OCTOBER 02 - SATURDAY OCTOBER 04
+        date_range?(date_parts) ->
+          [_ignore_1, month1, day1, _ignore_2, _ignore_3, _ignore_4, _ignore_5] = date_parts
+          ParseHelpers.build_date_from_month_day_strings(month1, day1)
 
-      # Standard: THURSDAY OCTOBER 02
-      single_date?(date_parts) ->
-        [_weekday, month, day] = date_parts
-        ParseHelpers.build_date_from_month_day_strings(month, day)
+        # Standard: THURSDAY OCTOBER 02
+        single_date?(date_parts) ->
+          [_weekday, month, day] = date_parts
+          ParseHelpers.build_date_from_month_day_strings(month, day)
 
-      true ->
-        raise "Unrecognized date format: #{inspect(date_parts)}"
-    end
+        true ->
+          raise "Unrecognized date format: #{inspect(date_parts)}"
+      end
+
+    date
   end
 
   def additional_dates(event) do
@@ -86,7 +89,8 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.BgGarrisonParser do
     |> Enum.drop(1)
     |> Enum.map(fn day ->
       m = if month1 != month2, do: month2, else: month1
-      ParseHelpers.build_date_from_month_day_strings(m, Integer.to_string(day))
+      {:ok, date} = ParseHelpers.build_date_from_month_day_strings(m, Integer.to_string(day))
+      date
     end)
   end
 

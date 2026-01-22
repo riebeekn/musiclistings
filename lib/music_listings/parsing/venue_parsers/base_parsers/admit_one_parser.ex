@@ -41,7 +41,10 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.AdmitOneParser do
   def event_date(event) do
     [month_string, day_string, year_string] = event["event_date"] |> String.split()
 
-    ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
+    {:ok, date} =
+      ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
+
+    date
   end
 
   def additional_dates(_event) do
@@ -49,8 +52,11 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.AdmitOneParser do
   end
 
   def event_time(event) do
-    event["doors"]
-    |> ParseHelpers.build_time_from_time_string()
+    case event["doors"]
+         |> ParseHelpers.build_time_from_time_string() do
+      {:ok, time} -> time
+      {:error, _reason} -> nil
+    end
   end
 
   def price(_event) do

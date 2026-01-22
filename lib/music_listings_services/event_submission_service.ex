@@ -70,7 +70,7 @@ defmodule MusicListingsServices.EventSubmissionService do
           headliner: submitted_event.title,
           openers: [],
           date: submitted_event.date,
-          time: ParseHelpers.build_time_from_time_string(submitted_event.time),
+          time: parse_time_or_nil(submitted_event.time),
           price_format: price.format,
           price_lo: price.lo,
           price_hi: price.hi,
@@ -90,5 +90,12 @@ defmodule MusicListingsServices.EventSubmissionService do
     Price.new(price_string)
   rescue
     _parse_error -> Price.unknown()
+  end
+
+  defp parse_time_or_nil(time_string) do
+    case ParseHelpers.build_time_from_time_string(time_string) do
+      {:ok, time} -> time
+      {:error, _reason} -> nil
+    end
   end
 end

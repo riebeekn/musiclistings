@@ -58,7 +58,8 @@ defmodule MusicListings.Parsing.VenueParsers.Bsmt254Parser do
   def event_date(event) do
     [month, day, year, _time, _ampm] = Selectors.text(event, css(".datePull")) |> String.split()
 
-    ParseHelpers.build_date_from_year_month_day_strings(year, month, day)
+    {:ok, date} = ParseHelpers.build_date_from_year_month_day_strings(year, month, day)
+    date
   end
 
   @impl true

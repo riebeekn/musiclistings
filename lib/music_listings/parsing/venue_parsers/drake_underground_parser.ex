@@ -75,11 +75,14 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
           [date_part, _rest] = String.split(post_date_string, "T")
           [year_string, month_string, day_string] = String.split(date_part, "-")
 
-          ParseHelpers.build_date_from_year_month_day_strings(
-            year_string,
-            month_string,
-            day_string
-          )
+          {:ok, date} =
+            ParseHelpers.build_date_from_year_month_day_strings(
+              year_string,
+              month_string,
+              day_string
+            )
+
+          date
       end
     end
   end
@@ -91,7 +94,8 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
     case Regex.run(date_regex, body) do
       [_ign, month_string, day_string, _time_string] ->
         # If date is found, parse it (year is assumed to be current or next year)
-        ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
+        {:ok, date} = ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
+        date
 
       _fallback ->
         # If we can't find the date pattern, look for date in image URL or title
@@ -101,11 +105,14 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
 
         case Regex.run(image_date_regex, body) do
           [_ign, month_string, day_string, year_string] ->
-            ParseHelpers.build_date_from_year_month_day_strings(
-              year_string,
-              month_string,
-              day_string
-            )
+            {:ok, date} =
+              ParseHelpers.build_date_from_year_month_day_strings(
+                year_string,
+                month_string,
+                day_string
+              )
+
+            date
 
           _fallback ->
             # Default to today if we can't find any date information

@@ -66,7 +66,10 @@ defmodule MusicListings.Parsing.VenueParsers.LeesPalaceParser do
       |> Selectors.text(css(".schedule-event-time"))
       |> String.split()
 
-    ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
+    {:ok, date} =
+      ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
+
+    date
   end
 
   @impl true

@@ -111,7 +111,10 @@ defmodule MusicListings.Parsing.VenueParsers.HughsRoomParser do
       |> if_nil_try_alternate_date_selector(event)
       |> String.split()
 
-    ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
+    {:ok, date} =
+      ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
+
+    date
   end
 
   defp if_nil_try_alternate_date_selector(nil = _captured_value, event) do
@@ -127,10 +130,13 @@ defmodule MusicListings.Parsing.VenueParsers.HughsRoomParser do
 
   @impl true
   def event_time(event) do
-    event
-    |> Selectors.text(css(".showpass-detail-event-date .start-date .time"))
-    |> if_nil_try_alternate_time_selector(event)
-    |> ParseHelpers.build_time_from_time_string()
+    case event
+         |> Selectors.text(css(".showpass-detail-event-date .start-date .time"))
+         |> if_nil_try_alternate_time_selector(event)
+         |> ParseHelpers.build_time_from_time_string() do
+      {:ok, time} -> time
+      {:error, _reason} -> nil
+    end
   end
 
   defp if_nil_try_alternate_time_selector(nil = _captured_value, event) do
