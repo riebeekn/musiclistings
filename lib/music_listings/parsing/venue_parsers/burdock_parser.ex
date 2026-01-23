@@ -1,6 +1,6 @@
 defmodule MusicListings.Parsing.VenueParsers.BurdockParser do
   @moduledoc """
-  Parser for extracing events from https://burdockbrewery.com
+  Parser for extracing events from https://burdockbrewery.com via Showpass API
   """
   @behaviour MusicListings.Parsing.VenueParser
 
@@ -10,15 +10,19 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParser do
   alias MusicListings.Parsing.Price
   alias MusicListingsUtilities.DateHelpers
 
+  @venue_id 17_330
+
   @impl true
   def source_url do
-    now_ms = DateHelpers.now() |> DateTime.to_unix(:millisecond)
+    now_iso = DateHelpers.now() |> DateTime.to_iso8601()
 
-    "https://broker.eventscalendar.co/api/eventbrite/next" <>
-      "?count=20" <>
-      "&from=#{now_ms}" <>
-      "&project=proj_T8vacNv8cWWeEQAQwLKHb" <>
-      "&calendar=103809367271"
+    "https://www.showpass.com/api/public/events/" <>
+      "?ends_on__gte=#{now_iso}" <>
+      "&only_parents=true" <>
+      "&ordering=starts_on,id" <>
+      "&page=1" <>
+      "&page_size=50" <>
+      "&venue__in=#{@venue_id}"
   end
 
   @impl true
@@ -30,17 +34,20 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParser do
   def events(body) do
     body = ParseHelpers.maybe_decode!(body)
 
-    body["events"]
+    body["results"]
   end
 
   @impl true
-  def next_page_url(_body, _current_url) do
-    nil
+  def next_page_url(body, _current_url) do
+    body = ParseHelpers.maybe_decode!(body)
+
+    body["next"]
   end
 
   @impl true
   def event_id(event) do
     event["id"]
+    |> to_string()
   end
 
   @impl true
@@ -50,7 +57,7 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParser do
 
   @impl true
   def event_title(event) do
-    event["title"]
+    event["name"]
   end
 
   @impl true
@@ -62,7 +69,7 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParser do
   @impl true
   def event_date(event) do
     {:ok, utc_datetime, _offset} =
-      event["start_time"]
+      event["starts_on"]
       |> DateTime.from_iso8601()
 
     DateHelpers.to_eastern_date(utc_datetime)
@@ -74,13 +81,35 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParser do
   end
 
   @impl true
-  def event_time(_event) do
-    nil
+  def event_time(event) do
+    case event["local_starts_on"] do
+      nil ->
+        nil
+
+      local_starts_on ->
+        # Parse just the time portion from the ISO8601 string to preserve local time
+        # e.g. "2026-02-04T20:30:00-05:00" -> "20:30:00"
+        local_starts_on
+        |> String.split("T")
+        |> List.last()
+        |> String.split("-")
+        |> List.first()
+        |> String.split("+")
+        |> List.first()
+        |> Time.from_iso8601!()
+    end
   end
 
   @impl true
-  def price(_event) do
-    Price.unknown()
+  def price(event) do
+    case event["ticket_types"] do
+      [first_ticket | _rest] ->
+        first_ticket["price"]
+        |> Price.new()
+
+      _other ->
+        Price.unknown()
+    end
   end
 
   @impl true
@@ -90,11 +119,11 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParser do
 
   @impl true
   def ticket_url(event) do
-    event["tickets_link"]
+    event["frontend_details_url"]
   end
 
   @impl true
   def details_url(event) do
-    event["event_link"]
+    event["frontend_details_url"]
   end
 end
