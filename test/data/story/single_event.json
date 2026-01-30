@@ -1,0 +1,172 @@
+{
+  "events": [
+    {
+      "id": "0c037406-7546-418e-a9e5-7aa99bcea37a",
+      "location": {
+        "name": "Story Toronto",
+        "coordinates": {
+          "lat": 43.6485937,
+          "lng": -79.3876025
+        },
+        "address": "214 Adelaide St W, Toronto, ON M5H 1W7, Canada",
+        "type": 0,
+        "fullAddress": {
+          "country": "CA",
+          "subdivision": "ON",
+          "city": "Toronto",
+          "postalCode": "M5H 1W7",
+          "streetAddress": {
+            "number": "214",
+            "name": "Adelaide Street West",
+            "apt": ""
+          },
+          "formattedAddress": "214 Adelaide St W, Toronto, ON M5H 1W7, Canada",
+          "geocode": {
+            "latitude": 43.6485937,
+            "longitude": -79.3876025
+          },
+          "countryFullname": "Canada",
+          "subdivisions": [
+            {
+              "code": "ON",
+              "name": "Ontario",
+              "type": 1
+            },
+            {
+              "code": "Toronto",
+              "name": "Toronto",
+              "type": 2
+            },
+            {
+              "code": "Toronto",
+              "name": "Toronto",
+              "type": 3
+            },
+            {
+              "code": "CA",
+              "name": "Canada",
+              "type": 6
+            }
+          ]
+        },
+        "tbd": false
+      },
+      "scheduling": {
+        "config": {
+          "scheduleTbd": false,
+          "startDate": "2026-01-31T03:00:00.000Z",
+          "endDate": "2026-01-31T09:00:00.000Z",
+          "timeZoneId": "America/Toronto",
+          "endDateHidden": false,
+          "showTimeZone": false,
+          "recurrences": {
+            "occurrences": [],
+            "status": 0
+          }
+        },
+        "formatted": "January 30, 2026 at 10:00 p.m.\u2013January 31, 2026 at 4:00 a.m.",
+        "startDateFormatted": "January 30, 2026",
+        "startTimeFormatted": "10:00 p.m.",
+        "endDateFormatted": "January 31, 2026",
+        "endTimeFormatted": "4:00 a.m."
+      },
+      "title": "MATTHIAS MEYER",
+      "description": "",
+      "about": "",
+      "mainImage": {
+        "id": "d5fa3f_0c6e6b89eb2b4e5dbfa12703f3a7d645~mv2.jpg",
+        "url": "https://static.wixstatic.com/media/d5fa3f_0c6e6b89eb2b4e5dbfa12703f3a7d645~mv2.jpg",
+        "height": 1080,
+        "width": 2160
+      },
+      "slug": "matthias-meyer",
+      "language": "en",
+      "created": "2026-01-15T17:26:15.823Z",
+      "modified": "2026-01-19T20:02:19.000Z",
+      "status": 0,
+      "registration": {
+        "type": 2,
+        "status": 5,
+        "rsvpCollection": {
+          "config": {
+            "rsvpStatusOptions": 0,
+            "waitlist": false,
+            "confirmationMessages": {
+              "positiveConfirmation": {
+                "title": "Thank you!",
+                "message": "An email with all the event info was sent to you.",
+                "addToCalendarActionLabel": "Add to Calendar",
+                "shareActionLabel": "Share"
+              },
+              "waitlistMessages": {
+                "title": "Thanks! You've been added to the waitlist.",
+                "message": "We'll update you if additional spots become available.",
+                "addToCalendarActionLabel": "Add to Calendar",
+                "shareActionLabel": "Share"
+              },
+              "negativeMessages": {
+                "title": "Sorry You Can't Make It",
+                "shareActionLabel": "Share"
+              }
+            }
+          }
+        },
+        "ticketing": {
+          "lowestPrice": "$25.63",
+          "highestPrice": "$71.75",
+          "currency": "CAD",
+          "config": {
+            "guestAssignedTickets": false,
+            "ticketLimitPerOrder": 50,
+            "reservationDurationInMinutes": 20,
+            "gracePeriodInMinutes": 120,
+            "confirmationMessages": {
+              "title": "Thank you, {Guest Name}",
+              "message": "You\u2019re all set for {Event Name}. A confirmation email was sent to {Guest Email}.",
+              "downloadTicketsLabel": "Download Tickets",
+              "addToCalendarActionLabel": "Add to Calendar",
+              "shareActionLabel": "Share"
+            },
+            "checkoutType": 1
+          },
+          "lowestTicketPrice": {
+            "amount": "25.63",
+            "currency": "CAD",
+            "value": "25.63"
+          },
+          "highestTicketPrice": {
+            "amount": "71.75",
+            "currency": "CAD",
+            "value": "71.75"
+          },
+          "lowestTicketPriceFormatted": "$25.63",
+          "highestTicketPriceFormatted": "$71.75",
+          "soldOut": false
+        },
+        "restrictedTo": 0,
+        "initialType": 2
+      },
+      "calendarLinks": {
+        "google": "http://calendar.google.com/calendar/render?action=TEMPLATE&text=MATTHIAS+MEYER&dates=20260131T030000Z%2F20260131T090000Z&location=214+Adelaide+St+W%2C+Toronto%2C+ON+M5H+1W7%2C+Canada&details=MATTHIAS+MEYER%0AJanuary+30%2C+2026+at+10%3A00+p.m.%E2%80%93January+31%2C+2026+at+4%3A00+a.m.%0AStory+Toronto%2C+214+Adelaide+St+W%2C+Toronto%2C+ON+M5H+1W7%2C+Canada",
+        "ics": "https://www.wixevents.com/media/v2/calendar?token=JWS.eyJraWQiOiJpb21iOUJ0eSIsImFsZyI6IkhTMjU2In0.eyJkYXRhIjoie1wiaW5zdGFuY2VJZFwiOlwiZTE5MTZhNTgtZTQ2Ny00ODJjLTgwYzYtOTc5ZDYwN2I0MWU5XCIsXCJldmVudElkXCI6e1widmFsdWVcIjpcIjBjMDM3NDA2LTc1NDYtNDE4ZS1hOWU1LTdhYTk5YmNlYTM3YVwifSxcIm9jTGlua1wiOm51bGx9IiwiaWF0IjoxNzY5ODA1ODExfQ.cTEp2fqTCyijy96iaUN2N1fTU72yCLyi9PMdGkfRYVU"
+      },
+      "instanceId": "e1916a58-e467-482c-80c6-979d607b41e9",
+      "guestListConfig": {
+        "publicGuestList": true
+      },
+      "userId": "d5fa3fbd-ff1e-4ef6-8486-efd219311ac1",
+      "onlineConferencing": {
+        "providerName": ""
+      },
+      "categories": [],
+      "eventDisplaySettings": {},
+      "labellingSettings": {
+        "assignedContactsLabelDeleted": false
+      },
+      "publishedDate": "2026-01-15T17:28:20.677Z",
+      "badges": [],
+      "members": [],
+      "totalGuests": 1
+    }
+  ]
+}
