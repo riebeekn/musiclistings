@@ -111,7 +111,7 @@ defmodule MusicListings.Parsing.VenueParsers.MasseyHallParserTest do
 
   describe "event_time/1" do
     test "returns the event start time", %{event: event} do
-      assert nil == MasseyHallParser.event_time(event)
+      assert ~T[20:00:00] == MasseyHallParser.event_time(event)
     end
   end
 

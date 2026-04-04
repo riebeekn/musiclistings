@@ -134,13 +134,9 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   end
 
   defp do_fetch_instances(event, details_path, base_url) do
-    if Application.get_env(:music_listings, :env) == :test do
-      :error
-    else
-      case fetch_instances_from_api(details_path, base_url) do
-        {:ok, instances} -> {:ok, filter_instances(instances, event)}
-        :error -> :error
-      end
+    case fetch_instances_from_api(details_path, base_url) do
+      {:ok, instances} -> {:ok, filter_instances(instances, event)}
+      :error -> :error
     end
   end
 

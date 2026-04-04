@@ -107,14 +107,14 @@ defmodule MusicListings.Parsing.VenueParsers.RoyThomsonHallParserTest do
 
   describe "additional_dates/1" do
     test "returns a list of additional dates", %{event: event} do
-      assert [~D[2025-09-19], ~D[2025-09-20], ~D[2025-09-21]] ==
+      assert [~D[2025-09-20], ~D[2025-09-21]] ==
                RoyThomsonHallParser.additional_dates(event)
     end
   end
 
   describe "event_time/1" do
     test "returns the event start time", %{event: event} do
-      assert nil == RoyThomsonHallParser.event_time(event)
+      assert ~T[19:30:00] == RoyThomsonHallParser.event_time(event)
     end
   end
 

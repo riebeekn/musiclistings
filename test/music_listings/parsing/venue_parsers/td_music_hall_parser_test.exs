@@ -112,7 +112,7 @@ defmodule MusicListings.Parsing.VenueParsers.TDMusicHallParserTest do
 
   describe "event_time/1" do
     test "returns the event start time", %{event: event} do
-      assert nil == TDMusicHallParser.event_time(event)
+      assert ~T[20:00:00] == TDMusicHallParser.event_time(event)
     end
   end
 

@@ -1,0 +1,29 @@
+{
+  "meta": {
+    "total_count": 2
+  },
+  "items": [
+    {
+      "id": 201,
+      "meta": {
+        "type": "pages.InstancePage",
+        "detail_url": "https://masseyhall.mhrth.com/api/attendable/v1/instances/201/",
+        "html_url": "https://masseyhall.mhrth.com/tickets/jessie-reyez/2025-12-05-2000-pk201/",
+        "slug": "2025-12-05-2000-pk201",
+        "first_published_at": "2025-07-10T10:35:00.957822-04:00"
+      },
+      "title": "2025-12-05, 20:00 (pk=201)"
+    },
+    {
+      "id": 202,
+      "meta": {
+        "type": "pages.InstancePage",
+        "detail_url": "https://masseyhall.mhrth.com/api/attendable/v1/instances/202/",
+        "html_url": "https://masseyhall.mhrth.com/tickets/jessie-reyez/2025-12-06-2000-pk202/",
+        "slug": "2025-12-06-2000-pk202",
+        "first_published_at": "2025-07-10T10:35:58.015436-04:00"
+      },
+      "title": "2025-12-06, 20:00 (pk=202)"
+    }
+  ]
+}

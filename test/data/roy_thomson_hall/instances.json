@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "total_count": 3
+  },
+  "items": [
+    {
+      "id": 101,
+      "meta": {
+        "type": "pages.InstancePage",
+        "detail_url": "https://roythomsonhall.mhrth.com/api/attendable/v1/instances/101/",
+        "html_url": "https://roythomsonhall.mhrth.com/tickets/tso-carmina-burana/2025-09-18-1930-pk101/",
+        "slug": "2025-09-18-1930-pk101",
+        "first_published_at": "2025-07-10T10:35:00.957822-04:00"
+      },
+      "title": "2025-09-18, 19:30 (pk=101)"
+    },
+    {
+      "id": 102,
+      "meta": {
+        "type": "pages.InstancePage",
+        "detail_url": "https://roythomsonhall.mhrth.com/api/attendable/v1/instances/102/",
+        "html_url": "https://roythomsonhall.mhrth.com/tickets/tso-carmina-burana/2025-09-20-1930-pk102/",
+        "slug": "2025-09-20-1930-pk102",
+        "first_published_at": "2025-07-10T10:35:58.015436-04:00"
+      },
+      "title": "2025-09-20, 19:30 (pk=102)"
+    },
+    {
+      "id": 103,
+      "meta": {
+        "type": "pages.InstancePage",
+        "detail_url": "https://roythomsonhall.mhrth.com/api/attendable/v1/instances/103/",
+        "html_url": "https://roythomsonhall.mhrth.com/tickets/tso-carmina-burana/2025-09-21-1500-pk103/",
+        "slug": "2025-09-21-1500-pk103",
+        "first_published_at": "2025-07-10T10:36:49.096666-04:00"
+      },
+      "title": "2025-09-21, 15:00 (pk=103)"
+    }
+  ]
+}
