@@ -1,6 +1,6 @@
 defmodule MusicListings.Parsing.VenueParsers.SoundGarageParser do
   @moduledoc """
-  Parser for extracting events from https://dice.fm/venue/the-sound-garage-xeval
+  Parser for extracting events from https://www.bloodbrothersbrewing.com/pages/the-sound-garage-165-geary-ave
   """
   @behaviour MusicListings.Parsing.VenueParser
 
@@ -10,10 +10,12 @@ defmodule MusicListings.Parsing.VenueParsers.SoundGarageParser do
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
-  alias MusicListings.Parsing.Selectors
+
+  @date_regex ~r/\b(january|february|march|april|may|june|july|august|september|october|november|december)\s+(\d{1,2})\b/i
 
   @impl true
-  def source_url, do: "https://dice.fm/venue/the-sound-garage-xeval"
+  def source_url,
+    do: "https://www.bloodbrothersbrewing.com/pages/the-sound-garage-165-geary-ave"
 
   @impl true
   def retrieve_events_fun do
@@ -23,21 +25,112 @@ defmodule MusicListings.Parsing.VenueParsers.SoundGarageParser do
   @impl true
   def events(body) do
     body
-    |> Selectors.all_matches(css("script[type=\"application/ld+json\"]"))
-    |> Enum.map(&Selectors.data/1)
-    |> Enum.reject(&is_nil/1)
-    |> Enum.flat_map(&extract_music_events/1)
+    |> normalize_html()
+    |> split_into_chunks()
+    |> build_events()
   end
 
-  defp extract_music_events(json_string) do
-    json_string
-    |> Jason.decode!()
-    |> Map.get("event", [])
-    |> Enum.filter(&music_event?/1)
+  defp normalize_html(body) do
+    body
+    |> String.replace(~r/<br\s*\/?>/, "\n")
   end
 
-  defp music_event?(%{"@type" => "MusicEvent"}), do: true
-  defp music_event?(_non_music_event), do: false
+  defp split_into_chunks(html) do
+    Regex.split(~r/(?=<h1[\s>])/i, html)
+    |> Enum.filter(&String.contains?(&1, "<h1"))
+  end
+
+  defp build_events(chunks) do
+    {events, _buffer} =
+      Enum.reduce(chunks, {[], []}, fn chunk, {events, buffer} ->
+        h1_text = extract_h1_text(chunk)
+        process_chunk(h1_text, chunk, events, buffer)
+      end)
+
+    Enum.reverse(events)
+  end
+
+  defp process_chunk(h1_text, chunk, events, buffer) do
+    case Regex.run(@date_regex, h1_text) do
+      [_match, month, day] ->
+        event = build_event(h1_text, month, day, chunk, buffer)
+        {[event | events], []}
+
+      nil ->
+        accumulate_title(h1_text, events, buffer)
+    end
+  end
+
+  defp build_event(h1_text, month, day, chunk, buffer) do
+    title_text = remove_date(h1_text)
+    title = buffer |> Enum.reverse() |> Kernel.++([title_text]) |> build_title()
+
+    %{
+      "title" => title,
+      "month" => month,
+      "day" => day,
+      "ticket_url" => extract_ticket_url(chunk)
+    }
+  end
+
+  defp accumulate_title(h1_text, events, buffer) do
+    if page_title?(h1_text) do
+      {events, buffer}
+    else
+      {events, [clean_text(h1_text) | buffer]}
+    end
+  end
+
+  defp extract_h1_text(chunk) do
+    chunk
+    |> Meeseeks.parse()
+    |> Meeseeks.one(css("h1"))
+    |> case do
+      nil -> ""
+      result -> Meeseeks.text(result)
+    end
+  end
+
+  defp extract_ticket_url(chunk) do
+    chunk
+    |> Meeseeks.parse()
+    |> Meeseeks.all(css("a[href]"))
+    |> Enum.map(&Meeseeks.Result.attr(&1, "href"))
+    |> Enum.find(&ticket_link?/1)
+  end
+
+  defp ticket_link?(url) do
+    String.contains?(url, "ticketweb") or
+      String.contains?(url, "tixr.com") or
+      String.contains?(url, "eventbrite") or
+      String.contains?(url, "dice.fm")
+  end
+
+  defp remove_date(text) do
+    Regex.replace(@date_regex, text, "")
+  end
+
+  defp clean_text(text) do
+    text
+    |> String.replace(~r/\s+/, " ")
+    |> String.trim()
+  end
+
+  defp build_title(parts) do
+    parts
+    |> Enum.map(&clean_text/1)
+    |> Enum.reject(&(&1 == ""))
+    |> Enum.join(" ")
+    |> String.replace(~r/\s+/, " ")
+    |> String.trim()
+  end
+
+  defp page_title?(text) do
+    text
+    |> clean_text()
+    |> String.upcase()
+    |> String.contains?("SOUND GARAGE")
+  end
 
   @impl true
   def next_page_url(_body, _current_url), do: nil
@@ -45,9 +138,7 @@ defmodule MusicListings.Parsing.VenueParsers.SoundGarageParser do
   @impl true
   def event_id(event) do
     date = event_date(event)
-    time = event_time(event)
-
-    ParseHelpers.build_id_from_venue_and_datetime("sound_garage", date, time)
+    ParseHelpers.build_id_from_venue_and_date("sound_garage", date)
   end
 
   @impl true
@@ -57,7 +148,7 @@ defmodule MusicListings.Parsing.VenueParsers.SoundGarageParser do
 
   @impl true
   def event_title(event) do
-    event["name"]
+    event["title"]
     |> ParseHelpers.fix_encoding()
   end
 
@@ -69,9 +160,8 @@ defmodule MusicListings.Parsing.VenueParsers.SoundGarageParser do
 
   @impl true
   def event_date(event) do
-    event["startDate"]
-    |> NaiveDateTime.from_iso8601!()
-    |> NaiveDateTime.to_date()
+    {:ok, date} = ParseHelpers.build_date_from_month_day_strings(event["month"], event["day"])
+    date
   end
 
   @impl true
@@ -80,10 +170,8 @@ defmodule MusicListings.Parsing.VenueParsers.SoundGarageParser do
   end
 
   @impl true
-  def event_time(event) do
-    event["startDate"]
-    |> NaiveDateTime.from_iso8601!()
-    |> NaiveDateTime.to_time()
+  def event_time(_event) do
+    nil
   end
 
   @impl true
@@ -98,7 +186,7 @@ defmodule MusicListings.Parsing.VenueParsers.SoundGarageParser do
 
   @impl true
   def ticket_url(event) do
-    event["url"]
+    event["ticket_url"]
   end
 
   @impl true

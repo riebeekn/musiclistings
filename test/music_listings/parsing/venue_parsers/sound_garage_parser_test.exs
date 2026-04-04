@@ -24,7 +24,8 @@ defmodule MusicListings.Parsing.VenueParsers.SoundGarageParserTest do
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://dice.fm/venue/the-sound-garage-xeval" == SoundGarageParser.source_url()
+      assert "https://www.bloodbrothersbrewing.com/pages/the-sound-garage-165-geary-ave" ==
+               SoundGarageParser.source_url()
     end
   end
 
@@ -32,7 +33,7 @@ defmodule MusicListings.Parsing.VenueParsers.SoundGarageParserTest do
     test "returns expected events", %{index_html: index_html} do
       events = SoundGarageParser.events(index_html)
 
-      assert 18 = Enum.count(events)
+      assert 12 = Enum.count(events)
     end
   end
 
@@ -41,14 +42,14 @@ defmodule MusicListings.Parsing.VenueParsers.SoundGarageParserTest do
       assert nil ==
                SoundGarageParser.next_page_url(
                  index_html,
-                 "https://dice.fm/venue/the-sound-garage-xeval"
+                 "https://www.bloodbrothersbrewing.com/pages/the-sound-garage-165-geary-ave"
                )
     end
   end
 
   describe "event_id/1" do
     test "returns expected value", %{event: event} do
-      assert "sound_garage_2025_08_16_19_00_00" == SoundGarageParser.event_id(event)
+      assert "sound_garage_2025_05_14" == SoundGarageParser.event_id(event)
     end
   end
 
@@ -60,19 +61,21 @@ defmodule MusicListings.Parsing.VenueParsers.SoundGarageParserTest do
 
   describe "event_title/1" do
     test "returns expected value", %{event: event} do
-      assert "Yuno" == SoundGarageParser.event_title(event)
+      assert "Kerosene Heights w/ Hi, Low & Heavy Sweater" ==
+               SoundGarageParser.event_title(event)
     end
   end
 
   describe "performers/1" do
     test "returns expected value", %{event: event} do
-      assert Performers.new(["Yuno"]) == SoundGarageParser.performers(event)
+      assert Performers.new(["Kerosene Heights w/ Hi, Low & Heavy Sweater"]) ==
+               SoundGarageParser.performers(event)
     end
   end
 
   describe "event_date/1" do
     test "returns expected value", %{event: event} do
-      assert ~D[2025-08-16] == SoundGarageParser.event_date(event)
+      assert ~D[2025-05-14] == SoundGarageParser.event_date(event)
     end
   end
 
@@ -83,8 +86,8 @@ defmodule MusicListings.Parsing.VenueParsers.SoundGarageParserTest do
   end
 
   describe "event_time/1" do
-    test "returns expected value", %{event: event} do
-      assert ~T[19:00:00] == SoundGarageParser.event_time(event)
+    test "returns nil", %{event: event} do
+      assert nil == SoundGarageParser.event_time(event)
     end
   end
 
@@ -102,7 +105,7 @@ defmodule MusicListings.Parsing.VenueParsers.SoundGarageParserTest do
 
   describe "ticket_url/1" do
     test "returns expected value", %{event: event} do
-      assert "https://dice.fm/event/bbdv7v-yuno-16th-aug-the-sound-garage-toronto-tickets" ==
+      assert "https://www.tixr.com/groups/noisemakerpresents/events/kerosene-heights-171874" ==
                SoundGarageParser.ticket_url(event)
     end
   end
