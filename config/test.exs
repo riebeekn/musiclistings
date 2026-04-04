@@ -39,6 +39,9 @@ config :phoenix, :plug_init_mode, :runtime
 config :phoenix_live_view,
   enable_expensive_runtime_checks: true
 
+# Use test HTTP client that returns errors, so parsers hit fallback paths
+config :music_listings, :http_client, MusicListings.HttpClient.Test
+
 # Oban test config
 config :music_listings, Oban, testing: :inline
 

@@ -58,32 +58,28 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
 
   @impl true
   def event_date(event) do
-    if Application.get_env(:music_listings, :env) == :test do
-      ~D[2024-07-26]
-    else
-      # The event date is not directly available in the API response
-      # We need to fetch the event page to get the date information
-      event_page_url = event["link"]
+    # The event date is not directly available in the API response
+    # We need to fetch the event page to get the date information
+    event_page_url = event["link"]
 
-      case HttpClient.get(event_page_url) do
-        {:ok, %{body: body}} ->
-          extract_date_from_event_page(body)
+    case HttpClient.get(event_page_url) do
+      {:ok, %{body: body}} ->
+        extract_date_from_event_page(body)
 
-        _fallback ->
-          # Fall back to post date if we can't get the event page
-          post_date_string = event["date"]
-          [date_part, _rest] = String.split(post_date_string, "T")
-          [year_string, month_string, day_string] = String.split(date_part, "-")
+      _fallback ->
+        # Fall back to post date if we can't get the event page
+        post_date_string = event["date"]
+        [date_part, _rest] = String.split(post_date_string, "T")
+        [year_string, month_string, day_string] = String.split(date_part, "-")
 
-          {:ok, date} =
-            ParseHelpers.build_date_from_year_month_day_strings(
-              year_string,
-              month_string,
-              day_string
-            )
+        {:ok, date} =
+          ParseHelpers.build_date_from_year_month_day_strings(
+            year_string,
+            month_string,
+            day_string
+          )
 
-          date
-      end
+        date
     end
   end
 
