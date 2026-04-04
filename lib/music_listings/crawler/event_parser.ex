@@ -14,6 +14,9 @@ defmodule MusicListings.Crawler.EventParser do
 
   require Logger
 
+  @max_concurrency 8
+  @task_timeout 120_000
+
   @spec parse_events(
           payloads :: list(Payload),
           parser :: VenueParser,
@@ -23,28 +26,31 @@ defmodule MusicListings.Crawler.EventParser do
           list()
   def parse_events(payloads, parser, venue, crawl_summary) do
     payloads
-    |> Enum.map(
-      &Task.async(fn ->
+    |> Task.async_stream(
+      fn payload ->
         try do
-          {:ok, parse_event(&1, parser, venue), &1}
+          {:ok, parse_event(payload, parser, venue), payload}
         rescue
           error ->
-            if ignored_event?(&1, parser, venue) do
-              {:ignore, &1}
+            if ignored_event?(payload, parser, venue) do
+              {:ignore, payload}
             else
               %CrawlError{
                 crawl_summary_id: crawl_summary.id,
                 venue_id: venue.id,
                 type: :parse_error,
                 error: Exception.format(:error, error, __STACKTRACE__),
-                raw_event: inspect(&1.raw_event, limit: :infinity)
+                raw_event: inspect(payload.raw_event, limit: :infinity)
               }
               |> Repo.insert!()
 
-              {:error, Exception.format(:error, error, __STACKTRACE__), &1}
+              {:error, Exception.format(:error, error, __STACKTRACE__), payload}
             end
         end
-      end)
+      end,
+      max_concurrency: @max_concurrency,
+      timeout: @task_timeout,
+      ordered: false
     )
     |> collect_results()
   end
@@ -107,33 +113,20 @@ defmodule MusicListings.Crawler.EventParser do
     end
   end
 
-  defp collect_results(tasks, acc \\ [])
-  defp collect_results([], acc), do: acc
+  defp collect_results(stream) do
+    Enum.reduce(stream, [], fn
+      {:ok, {:ignore, payload}}, acc ->
+        [Payload.set_ignored(payload) | acc]
 
-  defp collect_results(tasks, acc) do
-    receive do
-      {ref, result} ->
-        acc =
-          case result do
-            {:ignore, payload} ->
-              [Payload.set_ignored(payload) | acc]
+      {:ok, {:error, error, payload}}, acc ->
+        [Payload.set_parse_error(payload, error) | acc]
 
-            {:error, error, payload} ->
-              [Payload.set_parse_error(payload, error) | acc]
+      {:ok, {:ok, parsed_event, payload}}, acc ->
+        [Payload.set_parsed_event(payload, parsed_event) | acc]
 
-            {:ok, parsed_event, payload} ->
-              [Payload.set_parsed_event(payload, parsed_event) | acc]
-          end
-
-        remaining_tasks = Enum.reject(tasks, fn task -> task.ref == ref end)
-
-        collect_results(
-          remaining_tasks,
-          acc
-        )
-
-      nil ->
-        collect_results(tasks, acc)
-    end
+      {:exit, reason}, acc ->
+        Logger.warning("Event parsing task exited: #{inspect(reason)}")
+        acc
+    end)
   end
 end
