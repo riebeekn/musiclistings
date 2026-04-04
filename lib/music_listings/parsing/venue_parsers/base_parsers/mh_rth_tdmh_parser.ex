@@ -11,6 +11,8 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.Selectors
 
+  require Logger
+
   def retrieve_events_fun do
     fn url -> HttpClient.get(url) end
   end
@@ -94,6 +96,117 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   def event_time(_event) do
     nil
   end
+
+  def event_date(event, base_url) do
+    case fetch_instances(event, base_url) do
+      {:ok, [{first_date, _first_time} | _rest]} -> first_date
+      :error -> event_date(event)
+    end
+  end
+
+  def additional_dates(event, base_url) do
+    case fetch_instances(event, base_url) do
+      {:ok, [_first | rest]} -> Enum.map(rest, fn {date, _time} -> date end)
+      :error -> additional_dates(event)
+    end
+  end
+
+  def event_time(event, base_url) do
+    case fetch_instances(event, base_url) do
+      {:ok, [{_first_date, time} | _rest]} -> time
+      :error -> nil
+    end
+  end
+
+  defp fetch_instances(event, base_url) do
+    details_path = details_url(event)
+    cache_key = {:mh_rth_tdmh_instances, details_path}
+
+    case Process.get(cache_key) do
+      nil ->
+        result = do_fetch_instances(event, details_path, base_url)
+        Process.put(cache_key, result)
+        result
+
+      cached ->
+        cached
+    end
+  end
+
+  defp do_fetch_instances(event, details_path, base_url) do
+    if Application.get_env(:music_listings, :env) == :test do
+      :error
+    else
+      if has_date_range?(event) do
+        fetch_instances_from_api(details_path, base_url)
+      else
+        :error
+      end
+    end
+  end
+
+  defp has_date_range?(event) do
+    event
+    |> event_dates()
+    |> String.contains?(" - ")
+  end
+
+  defp fetch_instances_from_api(details_path, base_url) do
+    with {:ok, %HttpClient.Response{status: 200, body: detail_body}} <-
+           HttpClient.get("#{base_url}#{details_path}"),
+         {:ok, event_id} <- extract_event_id(detail_body),
+         {:ok, %HttpClient.Response{status: 200, body: api_body}} <-
+           HttpClient.get("#{base_url}/api/attendable/v1/instances/?child_of=#{event_id}"),
+         {:ok, instances} <- parse_instances(api_body) do
+      {:ok, instances}
+    else
+      error ->
+        Logger.warning("Failed to fetch instances for #{details_path}: #{inspect(error)}")
+        :error
+    end
+  end
+
+  defp extract_event_id(html_body) do
+    case Regex.run(~r/instance-list[^>]*event-id="(\d+)"/, html_body) do
+      [_full_match, event_id] -> {:ok, event_id}
+      _no_match -> :error
+    end
+  end
+
+  defp parse_instances(body) do
+    json = ParseHelpers.maybe_decode!(body)
+
+    case json do
+      %{"items" => items} when is_list(items) ->
+        instances =
+          items
+          |> Enum.map(&parse_instance_title/1)
+          |> Enum.reject(&is_nil/1)
+          |> Enum.sort()
+
+        if instances == [], do: :error, else: {:ok, instances}
+
+      _unexpected ->
+        :error
+    end
+  end
+
+  defp parse_instance_title(%{"title" => title}) when is_binary(title) do
+    case Regex.run(~r/^(\d{4}-\d{2}-\d{2}),\s*(\d{2}:\d{2})/, title) do
+      [_full_match, date_str, time_str] ->
+        with {:ok, date} <- Date.from_iso8601(date_str),
+             {:ok, time} <- Time.from_iso8601("#{time_str}:00") do
+          {date, time}
+        else
+          _error -> nil
+        end
+
+      _no_match ->
+        nil
+    end
+  end
+
+  defp parse_instance_title(_item), do: nil
 
   def price(_event) do
     Price.unknown()

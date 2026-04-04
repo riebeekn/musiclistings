@@ -32,13 +32,13 @@ defmodule MusicListings.Parsing.VenueParsers.TDMusicHallParser do
   defdelegate performers(event), to: MhRthTdmhParser
 
   @impl true
-  defdelegate event_date(event), to: MhRthTdmhParser
+  def event_date(event), do: MhRthTdmhParser.event_date(event, @base_url)
 
   @impl true
-  defdelegate additional_dates(event), to: MhRthTdmhParser
+  def additional_dates(event), do: MhRthTdmhParser.additional_dates(event, @base_url)
 
   @impl true
-  defdelegate event_time(event), to: MhRthTdmhParser
+  def event_time(event), do: MhRthTdmhParser.event_time(event, @base_url)
 
   @impl true
   defdelegate price(event), to: MhRthTdmhParser
