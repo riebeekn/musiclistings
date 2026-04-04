@@ -133,22 +133,12 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
     end
   end
 
-  defp do_fetch_instances(event, details_path, base_url) do
+  defp do_fetch_instances(_event, details_path, base_url) do
     if Application.get_env(:music_listings, :env) == :test do
       :error
     else
-      if has_date_range?(event) do
-        fetch_instances_from_api(details_path, base_url)
-      else
-        :error
-      end
+      fetch_instances_from_api(details_path, base_url)
     end
-  end
-
-  defp has_date_range?(event) do
-    event
-    |> event_dates()
-    |> String.contains?(" - ")
   end
 
   defp fetch_instances_from_api(details_path, base_url) do
