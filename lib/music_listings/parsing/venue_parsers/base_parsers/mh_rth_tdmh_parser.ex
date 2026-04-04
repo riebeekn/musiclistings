@@ -133,11 +133,14 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
     end
   end
 
-  defp do_fetch_instances(_event, details_path, base_url) do
+  defp do_fetch_instances(event, details_path, base_url) do
     if Application.get_env(:music_listings, :env) == :test do
       :error
     else
-      fetch_instances_from_api(details_path, base_url)
+      case fetch_instances_from_api(details_path, base_url) do
+        {:ok, instances} -> {:ok, filter_instances(instances, event)}
+        :error -> :error
+      end
     end
   end
 
@@ -153,6 +156,30 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
       error ->
         Logger.warning("Failed to fetch instances for #{details_path}: #{inspect(error)}")
         :error
+    end
+  end
+
+  defp filter_instances(instances, event) do
+    {start_date, end_date} = index_date_range(event)
+
+    instances
+    |> Enum.filter(fn {date, _time} ->
+      Date.compare(date, start_date) != :lt and Date.compare(date, end_date) != :gt
+    end)
+    |> Enum.uniq_by(fn {date, _time} -> date end)
+  end
+
+  defp index_date_range(event) do
+    event
+    |> event_dates()
+    |> String.split(" - ", trim: true)
+    |> case do
+      [single_date] ->
+        date = Date.from_iso8601!(single_date)
+        {date, date}
+
+      [start_date_string, end_date_string] ->
+        {Date.from_iso8601!(start_date_string), Date.from_iso8601!(end_date_string)}
     end
   end
 
