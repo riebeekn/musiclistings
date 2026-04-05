@@ -231,17 +231,14 @@ defmodule MusicListingsWeb.EventLive.Index do
   def render(assigns) do
     ~H"""
     <div
-      class="flex flex-wrap gap-2 justify-between mb-8 sm:mb-4 -mt-2"
+      class="flex flex-wrap items-center gap-3 mb-6"
       data-venue-filter-restore="true"
       data-storage-key="venue_ids"
       data-date-filter-restore="true"
       data-date-storage-key="selected_date"
     >
-      <div class="flex flex-wrap gap-2">
-        <.venue_filter for={@venue_filtering_form} venues={@venues} venue_ids={@venue_ids} />
-        <.date_filter for={@date_filtering_form} selected_date={@selected_date} />
-      </div>
-      <.button_link label="Submit an event" url={~p"/events/new"} icon_name="hero-arrow-right" />
+      <.venue_filter for={@venue_filtering_form} venues={@venues} venue_ids={@venue_ids} />
+      <.date_filter for={@date_filtering_form} selected_date={@selected_date} />
     </div>
 
     <.venue_filter_status venue_ids={@venue_ids} />
@@ -253,7 +250,7 @@ defmodule MusicListingsWeb.EventLive.Index do
 
     <.events_list events={@events} current_user={@current_user} />
 
-    <div class="mt-6 pt-6 border-t border-zinc-700">
+    <div class="mt-8 pt-6 border-t border-neutral-800">
       <.pager current_page={@current_page} total_pages={@total_pages} path={~p"/events"} />
     </div>
     """

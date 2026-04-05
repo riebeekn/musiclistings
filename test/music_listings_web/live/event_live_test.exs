@@ -70,7 +70,7 @@ defmodule MusicListingsWeb.EventLiveTest do
 
       view
       |> element("#date-filter-form")
-      |> render_change(%{"date" => Date.to_iso8601(filter_date)})
+      |> render_submit(%{"date" => Date.to_iso8601(filter_date)})
 
       # Only e2 and e3 should be visible
       refute has_element?(view, "#event-#{e1_id}")
@@ -95,7 +95,7 @@ defmodule MusicListingsWeb.EventLiveTest do
 
       view
       |> element("#date-filter-form")
-      |> render_change(%{"date" => Date.to_iso8601(filter_date)})
+      |> render_submit(%{"date" => Date.to_iso8601(filter_date)})
 
       # Only e3 should be visible
       refute has_element?(view, "#event-#{e1_id}")
@@ -140,7 +140,7 @@ defmodule MusicListingsWeb.EventLiveTest do
 
       view
       |> element("#date-filter-form")
-      |> render_change(%{"date" => Date.to_iso8601(filter_date)})
+      |> render_submit(%{"date" => Date.to_iso8601(filter_date)})
 
       # Should show only events from first venue starting from the filter date
       refute has_element?(view, "#event-#{e4.id}")
@@ -165,7 +165,7 @@ defmodule MusicListingsWeb.EventLiveTest do
 
       view
       |> element("#date-filter-form")
-      |> render_change(%{"date" => Date.to_iso8601(filter_date)})
+      |> render_submit(%{"date" => Date.to_iso8601(filter_date)})
 
       # Should show e2, e3, and e4 (all events from filter_date onwards)
       refute has_element?(view, "#event-#{e1_id}")

@@ -59,43 +59,88 @@ defmodule MusicListingsWeb.ContactLive.New do
   @impl true
   def render(assigns) do
     ~H"""
-    <div class="relative isolate">
-      <div class="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
-        <.cta header="About">
-          <p>
-            Toronto Music Listings came about as a fun side project to help me keep track of live shows happening in Toronto.
-          </p>
-          <p>
-            The code is open source so if you're interested in seeing how the sausage is made, check out the
-            <a
-              href="https://github.com/riebeekn/musiclistings"
-              class="text-emerald-400 hover:text-emerald-500"
-              target="_blank"
-            >
-              GitHub
-            </a>
-            repo.
-          </p>
-          <p>
-            Have a question, suggestion, or want to share an upcoming event?
-          </p>
-          <p>
-            Drop me a message, and I’ll get back to you as soon as possible!
-          </p>
-        </.cta>
+    <div class="max-w-5xl mx-auto">
+      <div class="mb-12 sm:mb-16">
+        <h1 class="font-display text-4xl sm:text-5xl font-bold tracking-tight text-neutral-50">
+          About
+        </h1>
+        <p class="mt-4 text-lg text-neutral-400 max-w-2xl leading-relaxed">
+          Toronto Music Listings came about as a fun side project to help keep track of
+          live shows happening in Toronto.
+        </p>
+      </div>
 
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-16">
+        <div class="bg-neutral-900 rounded-xl border border-neutral-800 p-6">
+          <div class="rounded-lg bg-rose-500/10 p-2.5 w-fit mb-4">
+            <MusicListingsWeb.CoreComponents.icon
+              name="hero-musical-note"
+              class="size-5 text-rose-400"
+            />
+          </div>
+          <h3 class="text-sm font-semibold text-neutral-50 mb-1">Daily updates</h3>
+          <p class="text-sm text-neutral-500 leading-relaxed">
+            Events are refreshed daily so you always see what's coming up.
+          </p>
+        </div>
+        <div class="bg-neutral-900 rounded-xl border border-neutral-800 p-6">
+          <div class="rounded-lg bg-rose-500/10 p-2.5 w-fit mb-4">
+            <MusicListingsWeb.CoreComponents.icon
+              name="hero-building-storefront"
+              class="size-5 text-rose-400"
+            />
+          </div>
+          <h3 class="text-sm font-semibold text-neutral-50 mb-1">Dozens of venues</h3>
+          <p class="text-sm text-neutral-500 leading-relaxed">
+            From small clubs to concert halls, we track shows across the city.
+          </p>
+        </div>
+        <div class="bg-neutral-900 rounded-xl border border-neutral-800 p-6">
+          <div class="rounded-lg bg-rose-500/10 p-2.5 w-fit mb-4">
+            <MusicListingsWeb.CoreComponents.icon
+              name="hero-code-bracket"
+              class="size-5 text-rose-400"
+            />
+          </div>
+          <h3 class="text-sm font-semibold text-neutral-50 mb-1">Open source</h3>
+          <p class="text-sm text-neutral-500 leading-relaxed">
+            Curious how it works? Check out the <a
+              href="https://github.com/riebeekn/musiclistings"
+              class="text-rose-400 hover:text-rose-300"
+              target="_blank"
+            >code on GitHub</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4 mb-10">
+        <h2 class="font-display text-2xl sm:text-3xl font-bold text-neutral-50 whitespace-nowrap">
+          Get in touch
+        </h2>
+        <div class="flex-1 h-px bg-neutral-800"></div>
+      </div>
+
+      <p class="text-sm text-neutral-400 mb-8 max-w-xl">
+        Have a question, suggestion, or want to share an upcoming event?
+        Drop a message and I'll get back to you as soon as possible.
+      </p>
+
+      <div class="max-w-xl">
         <.simple_form
           for={@form}
           id="contact-form"
           phx-submit="save"
-          action_layout="justify-start"
-          class="px-6 pb-24 sm:pt-20 sm:pb-32 lg:px-8 lg:py-36"
+          action_layout="justify-end"
         >
-          <.input field={@form[:name]} type="text" label="Name" />
-          <.input field={@form[:email]} type="email" label="Email" />
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6">
+            <.input field={@form[:name]} type="text" label="Name" />
+            <.input field={@form[:email]} type="email" label="Email" />
+          </div>
           <.input field={@form[:subject]} type="text" label="Subject" />
           <.input field={@form[:message]} type="textarea" label="Message" />
-          <Turnstile.widget theme="dark" />
+          <div class="flex justify-end">
+            <Turnstile.widget theme="dark" />
+          </div>
           <:actions>
             <.submit_button phx-disable-with="Sending...">Send message</.submit_button>
           </:actions>
