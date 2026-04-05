@@ -15,7 +15,10 @@ defmodule MusicListingsWeb.UserLoginLive do
           <label class="text-white">Keep me logged in</label>
         </div>
         <:actions>
-          <.button phx-disable-with="Logging in..." class="w-full bg-zinc-600">
+          <.button
+            phx-disable-with="Logging in..."
+            class="w-full bg-rose-500 hover:bg-rose-400 text-neutral-950"
+          >
             Log in <span aria-hidden="true">→</span>
           </.button>
         </:actions>

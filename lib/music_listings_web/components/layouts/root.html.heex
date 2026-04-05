@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="[scrollbar-gutter:stable] h-full bg-white antialiased">
+<html lang="en" class="[scrollbar-gutter:stable] h-full bg-neutral-950 antialiased">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -12,7 +12,7 @@
       content="Discover Toronto’s vibrant music scene with daily updated event listings. From local bands to international acts, find live shows, concerts, and music festivals happening in and around Toronto."
     />
     <link phx-track-static rel="stylesheet" href={~p"/fonts/InterWeb/inter.css"} />
-    <link phx-track-static rel="stylesheet" href={~p"/fonts/Lobster/lobster.css"} />
+    <link phx-track-static rel="stylesheet" href={~p"/fonts/SpaceGrotesk/space-grotesk.css"} />
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
     </script>
@@ -20,7 +20,7 @@
     </script>
     <Turnstile.script />
   </head>
-  <body class="min-h-full antialiased bg-zinc-900">
+  <body class="min-h-full antialiased bg-neutral-950">
     <MusicListingsWeb.NavbarComponents.navbar current_user={@current_user} />
     {@inner_content}
   </body>

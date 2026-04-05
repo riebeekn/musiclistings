@@ -93,7 +93,7 @@ defmodule MusicListingsWeb.SubmittedEventLive.Index do
       <.submitted_events submitted_events={@submitted_events} />
     </div>
 
-    <div class="mt-6 pt-6 border-t border-zinc-700">
+    <div class="mt-6 pt-6 border-t border-neutral-800">
       <.pager current_page={@current_page} total_pages={@total_pages} path={~p"/submitted_events"} />
     </div>
     """
