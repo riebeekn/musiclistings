@@ -2,12 +2,14 @@ defmodule MusicListingsWeb.EventLive.Index do
   use MusicListingsWeb, :live_view
   use Goal
 
+  alias MusicListingsUtilities.DateHelpers
+
   @impl true
   def mount(_params, _session, socket) do
     venue_ids = get_venue_ids_in_local_storage(socket)
 
     selected_date =
-      get_selected_date_in_local_storage(socket) || Date.to_iso8601(Date.utc_today())
+      get_selected_date_in_local_storage(socket) || Date.to_iso8601(DateHelpers.today_eastern())
 
     venues = MusicListings.list_venues(restrict_to_pulled_venues?: false)
 
@@ -44,7 +46,7 @@ defmodule MusicListingsWeb.EventLive.Index do
   end
 
   defp get_selected_date_in_local_storage(socket) do
-    today = Date.utc_today()
+    today = DateHelpers.today_eastern()
 
     with %{"selected_date" => selected_date} when is_binary(selected_date) <-
            get_connect_params(socket),
@@ -162,7 +164,7 @@ defmodule MusicListingsWeb.EventLive.Index do
 
   @impl true
   def handle_event("clear-date-filter", _params, socket) do
-    today = Date.to_iso8601(Date.utc_today())
+    today = Date.to_iso8601(DateHelpers.today_eastern())
     selected_date = parse_selected_date(today)
 
     paged_events =

@@ -280,7 +280,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp today?(date_string) when is_binary(date_string) do
     case Date.from_iso8601(date_string) do
-      {:ok, date} -> Date.compare(date, Date.utc_today()) == :eq
+      {:ok, date} -> Date.compare(date, DateHelpers.today_eastern()) == :eq
       _error -> false
     end
   end

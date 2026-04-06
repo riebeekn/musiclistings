@@ -3,9 +3,11 @@ defmodule MusicListingsWeb.EventLiveTest do
 
   import Phoenix.LiveViewTest
 
+  alias MusicListingsUtilities.DateHelpers
+
   describe "index" do
     setup do
-      today = Date.utc_today()
+      today = DateHelpers.today_eastern()
       yesterday = Date.add(today, -1)
       tomorrow = Date.add(today, 1)
 
@@ -42,7 +44,7 @@ defmodule MusicListingsWeb.EventLiveTest do
 
   describe "date filtering" do
     setup do
-      today = Date.utc_today()
+      today = DateHelpers.today_eastern()
       venue = insert(:venue)
       e1 = insert(:event, venue: venue, date: today, title: "ev1")
       e2 = insert(:event, venue: venue, date: Date.add(today, 4), title: "ev2")
@@ -214,7 +216,7 @@ defmodule MusicListingsWeb.EventLiveTest do
     setup :register_and_log_in_user
 
     setup do
-      today = Date.utc_today()
+      today = DateHelpers.today_eastern()
       event = insert(:event, date: today)
       %{event_id: event.id}
     end
