@@ -759,6 +759,7 @@ defmodule MusicListingsWeb.CustomComponents do
             href={@venue.website}
             class="inline-flex items-center gap-1.5 mt-4 text-sm font-medium text-rose-400 hover:text-rose-300 transition-colors"
             target="_blank"
+            rel="noopener"
           >
             <MusicListingsWeb.CoreComponents.icon
               name="hero-arrow-top-right-on-square"
@@ -915,6 +916,7 @@ defmodule MusicListingsWeb.CustomComponents do
           <a
             href={@url}
             target="_blank"
+            rel="noopener"
             class="mt-1 text-rose-400 hover:text-rose-300 break-all"
           >
             {@url}
@@ -1171,9 +1173,10 @@ defmodule MusicListingsWeb.CustomComponents do
     ~H"""
     <%= if @ticket_url do %>
       <a
-        href={@ticket_url}
+        href={MusicListings.Affiliate.maybe_wrap_affiliate_link(@ticket_url)}
         class="inline-flex items-center gap-1 text-xs font-medium text-rose-400 hover:text-rose-300 bg-rose-500/10 px-3 py-1 rounded-full transition-colors"
         target="_blank"
+        rel="noopener sponsored"
       >
         <MusicListingsWeb.CoreComponents.icon
           name="hero-ticket-solid"
@@ -1198,6 +1201,7 @@ defmodule MusicListingsWeb.CustomComponents do
       href={@details_url}
       class="inline-flex items-center gap-1 text-xs font-medium text-neutral-400 hover:text-neutral-300 bg-neutral-800 px-3 py-1 rounded-full transition-colors"
       target="_blank"
+      rel="noopener"
     >
       <MusicListingsWeb.CoreComponents.icon
         name="hero-information-circle-solid"

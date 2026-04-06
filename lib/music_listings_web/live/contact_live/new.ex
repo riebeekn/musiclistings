@@ -108,6 +108,7 @@ defmodule MusicListingsWeb.ContactLive.New do
               href="https://github.com/riebeekn/musiclistings"
               class="text-rose-400 hover:text-rose-300"
               target="_blank"
+              rel="noopener"
             >code on GitHub</a>.
           </p>
         </div>
