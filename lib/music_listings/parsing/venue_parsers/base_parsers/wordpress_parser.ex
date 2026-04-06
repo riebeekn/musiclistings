@@ -1,6 +1,6 @@
 defmodule MusicListings.Parsing.VenueParsers.BaseParsers.WordpressParser do
   @moduledoc """
-  Base parser for wix sites
+  Base parser for WP sites
   """
   import Meeseeks.CSS
 
