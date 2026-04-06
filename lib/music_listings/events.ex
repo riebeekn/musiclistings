@@ -32,7 +32,7 @@ defmodule MusicListings.Events do
     from_date = Keyword.get(opts, :from_date, nil)
     order_by_fields = Keyword.get(opts, :order_by, [:date, :title])
 
-    today = DateHelpers.now() |> DateHelpers.to_eastern_date()
+    today = DateHelpers.effective_today_eastern()
     start_date = from_date || today
 
     pagination_result =

@@ -9,7 +9,8 @@ defmodule MusicListingsWeb.EventLive.Index do
     venue_ids = get_venue_ids_in_local_storage(socket)
 
     selected_date =
-      get_selected_date_in_local_storage(socket) || Date.to_iso8601(DateHelpers.today_eastern())
+      get_selected_date_in_local_storage(socket) ||
+        Date.to_iso8601(DateHelpers.effective_today_eastern())
 
     venues = MusicListings.list_venues(restrict_to_pulled_venues?: false)
 
@@ -46,12 +47,12 @@ defmodule MusicListingsWeb.EventLive.Index do
   end
 
   defp get_selected_date_in_local_storage(socket) do
-    today = DateHelpers.today_eastern()
+    effective_today = DateHelpers.effective_today_eastern()
 
     with %{"selected_date" => selected_date} when is_binary(selected_date) <-
            get_connect_params(socket),
          {:ok, date} <- Date.from_iso8601(selected_date),
-         comparison when comparison in [:gt, :eq] <- Date.compare(date, today) do
+         comparison when comparison in [:gt, :eq] <- Date.compare(date, effective_today) do
       selected_date
     else
       _invalid_or_past_date -> nil
@@ -164,7 +165,7 @@ defmodule MusicListingsWeb.EventLive.Index do
 
   @impl true
   def handle_event("clear-date-filter", _params, socket) do
-    today = Date.to_iso8601(DateHelpers.today_eastern())
+    today = Date.to_iso8601(DateHelpers.effective_today_eastern())
     selected_date = parse_selected_date(today)
 
     paged_events =

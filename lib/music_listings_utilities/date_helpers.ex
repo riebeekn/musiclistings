@@ -69,6 +69,25 @@ defmodule MusicListingsUtilities.DateHelpers do
     now() |> to_eastern_date()
   end
 
+  @late_night_cutoff_hour 3
+
+  @doc """
+  Returns the effective "today" date in Eastern time.
+
+  Before #{@late_night_cutoff_hour}am Eastern, returns yesterday's date so that
+  late-night users can still see the current day's events.
+  """
+  @spec effective_today_eastern() :: Date.t()
+  def effective_today_eastern do
+    eastern_datetime = now() |> to_eastern_datetime()
+
+    if eastern_datetime.hour < @late_night_cutoff_hour do
+      eastern_datetime |> DateTime.to_date() |> Date.add(-1)
+    else
+      eastern_datetime |> DateTime.to_date()
+    end
+  end
+
   def format_datetime(%DateTime{} = datetime) do
     Calendar.strftime(datetime, "%b %d %Y")
   end
