@@ -65,6 +65,7 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.CarbonhouseParser do
     event
     |> Selectors.all_matches(css(".title"))
     |> Selectors.text()
+    |> Enum.map(&ParseHelpers.fix_encoding/1)
     |> Performers.new()
   end
 

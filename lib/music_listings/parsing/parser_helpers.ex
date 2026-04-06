@@ -64,12 +64,18 @@ defmodule MusicListings.Parsing.ParseHelpers do
     |> String.replace("&#8220;", "\"")
     |> String.replace("&#8221;", "\"")
     |> String.replace("&#038;", "&")
-    |> String.replace("\\u2018", "'")
-    |> String.replace("\\u2019", "'")
     |> String.replace("&amp;", "&")
     |> String.replace("&#8211;", "-")
-    |> String.replace("\\u00e9", "é")
-    |> String.replace("\\u00e1", "á")
+    |> decode_unicode_escapes()
+  end
+
+  defp decode_unicode_escapes(content) do
+    Regex.replace(~r/\\u([0-9a-fA-F]{4})/, content, fn _match, hex ->
+      hex
+      |> String.to_integer(16)
+      |> List.wrap()
+      |> List.to_string()
+    end)
   end
 
   # ===========================================================================
