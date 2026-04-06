@@ -478,10 +478,10 @@ defmodule MusicListingsWeb.CustomComponents do
         >
           <div class="flex items-start justify-between gap-3">
             <div class="min-w-0 flex-1">
-              <h3 class="text-base font-semibold text-neutral-50 group-hover:text-rose-400 transition-colors truncate">
+              <h3 class="text-base font-semibold text-neutral-50 group-hover:text-rose-400 transition-colors">
                 {venue.name}
               </h3>
-              <p class="text-sm text-neutral-500 mt-1 truncate">{venue.street}</p>
+              <p class="text-sm text-neutral-500 mt-1">{venue.street}</p>
             </div>
             <span class="flex-shrink-0 text-xs font-medium text-rose-400 bg-rose-500/10 px-3 py-1 rounded-full">
               {venue.upcoming_event_count} Upcoming Events
