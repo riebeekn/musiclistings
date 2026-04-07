@@ -17,13 +17,14 @@ defmodule MusicListings.Parsing.VenueParsers.RockpileParserTest do
       single_event_file_path
       |> File.read!()
       |> RockpileParser.events()
+      |> List.first()
 
     %{index_html: index_html, event: event}
   end
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://therockpile.ca/event-directory/" == RockpileParser.source_url()
+      assert "https://rockpilerockbar.com/" == RockpileParser.source_url()
     end
   end
 
@@ -31,7 +32,7 @@ defmodule MusicListings.Parsing.VenueParsers.RockpileParserTest do
     test "returns expected events", %{index_html: index_html} do
       events = RockpileParser.events(index_html)
 
-      assert 14 = Enum.count(events)
+      assert 32 = Enum.count(events)
     end
   end
 
@@ -43,21 +44,21 @@ defmodule MusicListings.Parsing.VenueParsers.RockpileParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "rockpile_2025_02_28_19_00_00" ==
+      assert "rockpile_2026_04_10_19_00_00" ==
                RockpileParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "rockpile_2025_02_28_19_00_00" ==
+      assert "rockpile_2026_04_10_19_00_00" ==
                RockpileParser.ignored_event_id(event)
     end
   end
 
   describe "event_title/1" do
     test "returns event title", %{event: event} do
-      assert "The Blushing Brides / Tribute to The Rolling Stones, Led X Zeppelin - Led Zeppelin Tribute" ==
+      assert "Roses Reloaded, Every Rose-Tribute To Poison" ==
                RockpileParser.event_title(event)
     end
   end
@@ -65,8 +66,7 @@ defmodule MusicListings.Parsing.VenueParsers.RockpileParserTest do
   describe "performers/1" do
     test "returns the event performers", %{event: event} do
       assert %Performers{
-               headliner:
-                 "The Blushing Brides / Tribute to The Rolling Stones, Led X Zeppelin - Led Zeppelin Tribute",
+               headliner: "Roses Reloaded, Every Rose-Tribute To Poison",
                openers: []
              } == RockpileParser.performers(event)
     end
@@ -74,7 +74,7 @@ defmodule MusicListings.Parsing.VenueParsers.RockpileParserTest do
 
   describe "event_date/1" do
     test "returns the event date", %{event: event} do
-      assert ~D[2025-02-28] == RockpileParser.event_date(event)
+      assert ~D[2026-04-10] == RockpileParser.event_date(event)
     end
   end
 
@@ -99,19 +99,20 @@ defmodule MusicListings.Parsing.VenueParsers.RockpileParserTest do
 
   describe "age_restriction/1" do
     test "returns the event age restriction", %{event: event} do
-      assert :unknown == RockpileParser.age_restriction(event)
+      assert :all_ages == RockpileParser.age_restriction(event)
     end
   end
 
   describe "ticket_url/1" do
     test "returns the event ticket url", %{event: event} do
-      assert nil == RockpileParser.ticket_url(event)
+      assert "https://www.ticketweb.ca/event/roses-reloaded-every-rose-tribute-rockpile-rock-bar-tickets/14189614?REFID=clientsitewp" ==
+               RockpileParser.ticket_url(event)
     end
   end
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert "https://therockpile.ca/event/the-blushing-brides-tribute-to-the-rolling-stones-led-x-zeppelin-led-zeppelin-tribute-2/" ==
+      assert "https://rockpilerockbar.com/14189614/roses-reloaded-every-rose-tribute-to-poison" ==
                RockpileParser.details_url(event)
     end
   end
