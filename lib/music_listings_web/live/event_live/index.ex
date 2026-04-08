@@ -12,12 +12,14 @@ defmodule MusicListingsWeb.EventLive.Index do
       get_selected_date_in_local_storage(socket) ||
         Date.to_iso8601(DateHelpers.effective_today_eastern())
 
+    sort_by = get_sort_by_in_local_storage(socket)
     venues = MusicListings.list_venues(restrict_to_pulled_venues?: false)
 
     socket
     |> assign(:venues, venues)
     |> assign(:venue_ids, venue_ids)
     |> assign(:selected_date, selected_date)
+    |> assign(:sort_by, sort_by)
     |> assign(:venue_filtering_form, to_form(%{}))
     |> assign(:date_filtering_form, to_form(%{}))
     |> ok()
@@ -59,6 +61,13 @@ defmodule MusicListingsWeb.EventLive.Index do
     end
   end
 
+  defp get_sort_by_in_local_storage(socket) do
+    case get_connect_params(socket) do
+      %{"sort_by" => sort_by} when sort_by in ["title", "venue"] -> sort_by
+      _default -> "title"
+    end
+  end
+
   @impl true
   def handle_params(params, _uri, socket) do
     if connected?(socket) do
@@ -73,7 +82,8 @@ defmodule MusicListingsWeb.EventLive.Index do
             MusicListings.list_events(
               page: normalized_params[:page],
               venue_ids: venue_ids,
-              from_date: from_date
+              from_date: from_date,
+              sort_by: sort_by_atom(socket.assigns[:sort_by])
             )
 
           socket
@@ -91,6 +101,7 @@ defmodule MusicListingsWeb.EventLive.Index do
       |> assign(:events, [])
       |> assign(:current_page, 1)
       |> assign(:total_pages, 0)
+      |> assign(:sort_by, "title")
       |> assign(:loading, true)
       |> noreply()
     end
@@ -114,7 +125,8 @@ defmodule MusicListingsWeb.EventLive.Index do
       MusicListings.list_events(
         page: socket.assigns[:current_page],
         venue_ids: venue_ids,
-        from_date: from_date
+        from_date: from_date,
+        sort_by: sort_by_atom(socket.assigns[:sort_by])
       )
 
     socket
@@ -133,12 +145,33 @@ defmodule MusicListingsWeb.EventLive.Index do
       MusicListings.list_events(
         page: socket.assigns[:current_page],
         venue_ids: venue_ids,
-        from_date: from_date
+        from_date: from_date,
+        sort_by: sort_by_atom(socket.assigns[:sort_by])
       )
 
     socket
     |> update_socket_assigns(paged_events, venue_ids)
     |> push_event("clearVenueFilterIdsFromLocalStorage", %{})
+    |> noreply()
+  end
+
+  @impl true
+  def handle_event("sort-changed", %{"sort-by" => sort_by}, socket) do
+    sort_by = if sort_by in ["title", "venue"], do: sort_by, else: "title"
+    from_date = parse_selected_date(socket.assigns[:selected_date])
+
+    paged_events =
+      MusicListings.list_events(
+        page: socket.assigns[:current_page],
+        venue_ids: socket.assigns[:venue_ids],
+        from_date: from_date,
+        sort_by: sort_by_atom(sort_by)
+      )
+
+    socket
+    |> update_socket_assigns(paged_events)
+    |> assign(:sort_by, sort_by)
+    |> push_event("saveSortByToLocalStorage", %{sort_by: sort_by})
     |> noreply()
   end
 
@@ -150,7 +183,8 @@ defmodule MusicListingsWeb.EventLive.Index do
       MusicListings.list_events(
         page: 1,
         venue_ids: socket.assigns[:venue_ids],
-        from_date: selected_date
+        from_date: selected_date,
+        sort_by: sort_by_atom(socket.assigns[:sort_by])
       )
 
     selected_date_string = if selected_date, do: Date.to_iso8601(selected_date), else: ""
@@ -172,7 +206,8 @@ defmodule MusicListingsWeb.EventLive.Index do
       MusicListings.list_events(
         page: 1,
         venue_ids: socket.assigns[:venue_ids],
-        from_date: selected_date
+        from_date: selected_date,
+        sort_by: sort_by_atom(socket.assigns[:sort_by])
       )
 
     socket
@@ -194,7 +229,8 @@ defmodule MusicListingsWeb.EventLive.Index do
     paged_events =
       MusicListings.list_events(
         page: socket.assigns[:current_page],
-        venue_ids: socket.assigns[:venue_ids]
+        venue_ids: socket.assigns[:venue_ids],
+        sort_by: sort_by_atom(socket.assigns[:sort_by])
       )
 
     socket
@@ -214,6 +250,9 @@ defmodule MusicListingsWeb.EventLive.Index do
     |> update_socket_assigns(paged_events)
     |> assign(:venue_ids, venue_ids)
   end
+
+  defp sort_by_atom("venue"), do: :venue
+  defp sort_by_atom(_title), do: :title
 
   defp parse_selected_date(nil), do: nil
 
@@ -242,6 +281,7 @@ defmodule MusicListingsWeb.EventLive.Index do
     >
       <.venue_filter for={@venue_filtering_form} venues={@venues} venue_ids={@venue_ids} />
       <.date_filter for={@date_filtering_form} selected_date={@selected_date} />
+      <.sort_toggle sort_by={@sort_by} />
     </div>
 
     <.venue_filter_status venue_ids={@venue_ids} />
@@ -251,7 +291,7 @@ defmodule MusicListingsWeb.EventLive.Index do
       <.loading_indicator />
     <% end %>
 
-    <.events_list events={@events} current_user={@current_user} />
+    <.events_list events={@events} current_user={@current_user} sort_by={@sort_by} />
 
     <div class="mt-8 pt-6 border-t border-neutral-800">
       <.pager current_page={@current_page} total_pages={@total_pages} path={~p"/events"} />
