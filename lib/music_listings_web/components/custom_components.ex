@@ -297,6 +297,53 @@ defmodule MusicListingsWeb.CustomComponents do
   defp format_filter_date(_other), do: ""
 
   @doc """
+  Renders the sort toggle
+
+  ## Example
+
+  <.sort_toggle sort_by={@sort_by} />
+  """
+
+  attr :sort_by, :string, default: "title"
+
+  def sort_toggle(assigns) do
+    ~H"""
+    <div id="sort-by-component" phx-hook="SortBy" class="flex items-center">
+      <div class="inline-flex rounded-lg border border-neutral-700 bg-neutral-900 p-0.5">
+        <button
+          type="button"
+          phx-click="sort-changed"
+          phx-value-sort-by="title"
+          class={[
+            "px-3 py-1.5 text-sm rounded-md transition-colors",
+            if(@sort_by == "title",
+              do: "bg-rose-500/10 text-rose-400 ring-1 ring-inset ring-rose-500/20",
+              else: "text-neutral-400 hover:text-neutral-300"
+            )
+          ]}
+        >
+          By Title
+        </button>
+        <button
+          type="button"
+          phx-click="sort-changed"
+          phx-value-sort-by="venue"
+          class={[
+            "px-3 py-1.5 text-sm rounded-md transition-colors",
+            if(@sort_by == "venue",
+              do: "bg-rose-500/10 text-rose-400 ring-1 ring-inset ring-rose-500/20",
+              else: "text-neutral-400 hover:text-neutral-300"
+            )
+          ]}
+        >
+          By Venue
+        </button>
+      </div>
+    </div>
+    """
+  end
+
+  @doc """
   Renders the venue filter
 
   ## Example
@@ -498,10 +545,11 @@ defmodule MusicListingsWeb.CustomComponents do
 
   ## Example
 
-  <.events_list events={@events} current_user={current_user} />
+  <.events_list events={@events} current_user={current_user} sort_by="title" />
   """
   attr :events, :list, required: true
   attr :current_user, :any, required: true
+  attr :sort_by, :string, default: "title"
 
   def events_list(assigns) do
     ~H"""
@@ -509,13 +557,34 @@ defmodule MusicListingsWeb.CustomComponents do
       <%= for {date, events} <- @events do %>
         <.events_date_header date={date} />
         <div class="space-y-3 mb-12">
-          <%= for event <- events do %>
-            <.event_card event={event} current_user={@current_user} />
+          <%= if @sort_by == "venue" do %>
+            <%= for {venue, venue_events} <- group_events_by_venue(events) do %>
+              <.venue_grouped_card venue={venue} events={venue_events} current_user={@current_user} />
+            <% end %>
+          <% else %>
+            <%= for event <- events do %>
+              <.event_card event={event} current_user={@current_user} />
+            <% end %>
           <% end %>
         </div>
       <% end %>
     </div>
     """
+  end
+
+  defp group_events_by_venue(events) do
+    events
+    |> Enum.group_by(& &1.venue)
+    |> Enum.map(fn {venue, venue_events} ->
+      sorted =
+        Enum.sort_by(venue_events, fn event ->
+          first_time = event.showtimes |> List.first() |> then(& &1.time)
+          {first_time || ~T[23:59:59], event.title}
+        end)
+
+      {venue, sorted}
+    end)
+    |> Enum.sort_by(fn {venue, _events} -> venue.name end)
   end
 
   attr :submitted_events, :list, required: true
@@ -717,6 +786,54 @@ defmodule MusicListingsWeb.CustomComponents do
           />
           <.event_details_url details_url={showtime.details_url} />
           <.delete_event_link current_user={@current_user} event_id={showtime.event_id} />
+        </div>
+      <% end %>
+    </div>
+    """
+  end
+
+  defp venue_grouped_card(assigns) do
+    ~H"""
+    <div class="bg-neutral-900 rounded-xl p-4 sm:p-5 border border-neutral-800 hover:border-neutral-700 transition-all duration-200">
+      <div class="flex items-center gap-2 mb-3">
+        <.event_venue venue={@venue} />
+      </div>
+      <%= for event <- @events do %>
+        <div class={[
+          "pt-3 first:pt-0",
+          length(@events) > 1 && "border-t border-neutral-800 first:border-t-0"
+        ]}>
+          <div class="flex items-start justify-between gap-4">
+            <div class="min-w-0 flex-1">
+              <div class="flex items-center gap-2 mb-1">
+                <h3 class="text-base sm:text-lg font-semibold text-neutral-50 leading-snug">
+                  {event.title}
+                  <%= if event.openers != [] do %>
+                    <span class="font-normal text-neutral-400">
+                      with {event.openers |> Enum.join(", ")}
+                    </span>
+                  <% end %>
+                </h3>
+                <.event_age_restriction age_restriction={event.age_restriction} />
+              </div>
+            </div>
+          </div>
+          <%= for showtime <- event.showtimes do %>
+            <div
+              id={"event-#{showtime.event_id}"}
+              class="mt-2 flex flex-wrap items-center gap-2"
+            >
+              <.event_time time={showtime.time} />
+              <.event_ticket_url
+                ticket_url={showtime.ticket_url}
+                price_format={event.price_format}
+                price_lo={event.price_lo}
+                price_hi={event.price_hi}
+              />
+              <.event_details_url details_url={showtime.details_url} />
+              <.delete_event_link current_user={@current_user} event_id={showtime.event_id} />
+            </div>
+          <% end %>
         </div>
       <% end %>
     </div>

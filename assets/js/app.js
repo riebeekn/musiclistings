@@ -52,6 +52,13 @@ Hooks.DateFilter = {
     });
   },
 };
+Hooks.SortBy = {
+  mounted() {
+    this.handleEvent("saveSortByToLocalStorage", ({ sort_by }) => {
+      localStorage.setItem("sort_by", sort_by);
+    });
+  },
+};
 
 let params = (node) => {
   var venueRestoreNode =
@@ -61,6 +68,7 @@ let params = (node) => {
 
   var venue_ids = null;
   var selected_date = null;
+  var sort_by = localStorage.getItem("sort_by");
 
   if (venueRestoreNode) {
     var venueKey = venueRestoreNode.getAttribute("data-storage-key");
@@ -76,6 +84,7 @@ let params = (node) => {
     _csrf_token: csrfToken,
     venue_ids: venue_ids,
     selected_date: selected_date,
+    sort_by: sort_by,
   };
 };
 

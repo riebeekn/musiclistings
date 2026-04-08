@@ -24,9 +24,10 @@ defmodule MusicListings do
   @type list_events_opts ::
           {:page, pos_integer()}
           | {:page_size, pos_integer()}
-          | {:venue_ids,
-             list(pos_integer())
-             | {:order_by, list(atom())}}
+          | {:venue_ids, list(pos_integer())}
+          | {:order_by, list(atom())}
+          | {:from_date, Date.t()}
+          | {:sort_by, :title | :venue}
   @spec list_events(list(list_events_opts)) :: PagedEvents.t()
   defdelegate list_events(opts \\ []), to: Events
 

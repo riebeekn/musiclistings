@@ -20,10 +20,10 @@ defmodule MusicListings.Events do
   @type list_events_opts ::
           {:page, pos_integer()}
           | {:page_size, pos_integer()}
-          | {:venue_ids,
-             list(pos_integer())
-             | {:order_by, list(atom())}
-             | {:from_date, Date.t()}}
+          | {:venue_ids, list(pos_integer())}
+          | {:order_by, list(atom())}
+          | {:from_date, Date.t()}
+          | {:sort_by, :title | :venue}
   @spec list_events(list(list_events_opts)) :: PagedEvents.t()
   def list_events(opts \\ []) do
     page = Keyword.get(opts, :page, @default_page)
@@ -31,6 +31,7 @@ defmodule MusicListings.Events do
     venue_ids = Keyword.get(opts, :venue_ids, [])
     from_date = Keyword.get(opts, :from_date, nil)
     order_by_fields = Keyword.get(opts, :order_by, [:date, :title])
+    sort_by = Keyword.get(opts, :sort_by, :title)
 
     today = DateHelpers.effective_today_eastern()
     start_date = from_date || today
@@ -77,7 +78,7 @@ defmodule MusicListings.Events do
       end)
       |> Enum.group_by(& &1.date)
       |> Enum.map(fn {date, events} ->
-        sorted_events = Enum.sort_by(events, & &1.title)
+        sorted_events = Enum.sort_by(events, &sort_key(&1, sort_by))
         {date, sorted_events}
       end)
       |> Enum.sort_by(fn {date, _events} -> date end, Date)
@@ -88,6 +89,9 @@ defmodule MusicListings.Events do
       total_pages: pagination_result.total_pages
     }
   end
+
+  defp sort_key(event, :venue), do: event.venue.name
+  defp sort_key(event, _title), do: event.title
 
   defp maybe_filter_by_venues(query, []), do: query
 
