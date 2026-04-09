@@ -272,8 +272,9 @@ defmodule MusicListingsWeb.EventLive.Index do
   @impl true
   def render(assigns) do
     ~H"""
+    <%!-- Desktop filter row: hidden on mobile --%>
     <div
-      class="flex flex-wrap items-center gap-3 mb-6"
+      class="hidden md:flex flex-wrap items-center gap-3 mb-6"
       data-venue-filter-restore="true"
       data-storage-key="venue_ids"
       data-date-filter-restore="true"
@@ -284,8 +285,30 @@ defmodule MusicListingsWeb.EventLive.Index do
       <.sort_toggle sort_by={@sort_by} />
     </div>
 
-    <.venue_filter_status venue_ids={@venue_ids} />
-    <.date_filter_status selected_date={@selected_date} />
+    <div class="hidden md:block">
+      <.venue_filter_status venue_ids={@venue_ids} />
+      <.date_filter_status selected_date={@selected_date} />
+    </div>
+
+    <%!-- Mobile filter button + chips: hidden on desktop --%>
+    <div class="md:hidden mb-4 flex items-start justify-between gap-3">
+      <.mobile_filter_button />
+      <.mobile_filter_chips
+        venue_ids={@venue_ids}
+        selected_date={@selected_date}
+      />
+    </div>
+
+    <%!-- Mobile bottom sheet --%>
+    <.bottom_sheet id="mobile-filters">
+      <.mobile_venue_filter
+        for={@venue_filtering_form}
+        venues={@venues}
+        venue_ids={@venue_ids}
+      />
+      <.mobile_date_filter for={@date_filtering_form} selected_date={@selected_date} />
+      <.mobile_sort_toggle sort_by={@sort_by} />
+    </.bottom_sheet>
 
     <%= if @loading do %>
       <.loading_indicator />
