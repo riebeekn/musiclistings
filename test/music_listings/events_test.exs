@@ -162,6 +162,47 @@ defmodule MusicListings.EventsTest do
 
       assert result_with_nil.events == result_without.events
     end
+
+    test "sorts events by title by default within a date group" do
+      Repo.delete_all(Event)
+      venue = insert(:venue, name: "Zebra Lounge")
+      insert(:event, venue: venue, date: ~D[2024-08-01], title: "Charlie Band")
+      insert(:event, venue: venue, date: ~D[2024-08-01], title: "Alpha Band")
+      insert(:event, venue: venue, date: ~D[2024-08-01], title: "Bravo Band")
+
+      assert %PagedEvents{
+               events: [
+                 {~D[2024-08-01],
+                  [
+                    %EventInfo{title: "Alpha Band"},
+                    %EventInfo{title: "Bravo Band"},
+                    %EventInfo{title: "Charlie Band"}
+                  ]}
+               ]
+             } = Events.list_events()
+    end
+
+    test "sorts events by venue name when sort_by is :venue" do
+      Repo.delete_all(Event)
+      venue_z = insert(:venue, name: "Zebra Lounge")
+      venue_a = insert(:venue, name: "Alpha Bar")
+      venue_m = insert(:venue, name: "Mango Room")
+
+      insert(:event, venue: venue_z, date: ~D[2024-08-01], title: "ev1")
+      insert(:event, venue: venue_a, date: ~D[2024-08-01], title: "ev2")
+      insert(:event, venue: venue_m, date: ~D[2024-08-01], title: "ev3")
+
+      assert %PagedEvents{
+               events: [
+                 {~D[2024-08-01],
+                  [
+                    %EventInfo{title: "ev2", venue: %Venue{name: "Alpha Bar"}},
+                    %EventInfo{title: "ev3", venue: %Venue{name: "Mango Room"}},
+                    %EventInfo{title: "ev1", venue: %Venue{name: "Zebra Lounge"}}
+                  ]}
+               ]
+             } = Events.list_events(sort_by: :venue)
+    end
   end
 
   describe "list_submitted_events/1" do
