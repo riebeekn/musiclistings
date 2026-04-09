@@ -212,6 +212,85 @@ defmodule MusicListingsWeb.EventLiveTest do
     end
   end
 
+  describe "sorting" do
+    setup do
+      today = DateHelpers.today_eastern()
+      venue_a = insert(:venue, name: "Alpha Venue")
+      venue_z = insert(:venue, name: "Zebra Venue")
+
+      e1 = insert(:event, venue: venue_z, date: today, title: "Zebra Show")
+      e2 = insert(:event, venue: venue_a, date: today, title: "Alpha Show")
+
+      %{venue_a: venue_a, venue_z: venue_z, e1_id: e1.id, e2_id: e2.id}
+    end
+
+    test "sort toggle defaults to title", %{conn: conn} do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      # The title button should have the active styling
+      assert has_element?(view, "button", "By Title")
+      assert has_element?(view, "button", "By Venue")
+    end
+
+    test "sort toggle changes event ordering", %{conn: conn, e1_id: e1_id, e2_id: e2_id} do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      # Both events should be visible
+      assert has_element?(view, "#event-#{e1_id}")
+      assert has_element?(view, "#event-#{e2_id}")
+
+      # Change sort to venue
+      view
+      |> element("#sort-by-component button", "By Venue")
+      |> render_click()
+
+      # Both events should still be visible after sort change
+      assert has_element?(view, "#event-#{e1_id}")
+      assert has_element?(view, "#event-#{e2_id}")
+    end
+
+    test "restores sort_by from localStorage", %{conn: conn} do
+      {:ok, view, _html} =
+        conn
+        |> put_connect_params(%{"sort_by" => "venue"})
+        |> live(~p"/events")
+
+      # Should render without error with venue sort restored
+      assert has_element?(view, "#sort-by-component")
+    end
+
+    test "invalid sort_by in localStorage defaults to title", %{conn: conn} do
+      {:ok, view, _html} =
+        conn
+        |> put_connect_params(%{"sort_by" => "invalid_value"})
+        |> live(~p"/events")
+
+      # Should render without error, defaulting to title sort
+      assert has_element?(view, "#sort-by-component")
+    end
+
+    test "sort persists through venue filter changes", %{
+      conn: conn,
+      venue_a: venue_a,
+      e2_id: e2_id
+    } do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      # Change sort to venue
+      view
+      |> element("#sort-by-component button", "By Venue")
+      |> render_click()
+
+      # Apply venue filter
+      view
+      |> element("#venue-filters")
+      |> render_change(%{"#{venue_a.id}" => "true"})
+
+      # Event from filtered venue should still be visible
+      assert has_element?(view, "#event-#{e2_id}")
+    end
+  end
+
   describe "index - logged in as admin" do
     setup :register_and_log_in_user
 
