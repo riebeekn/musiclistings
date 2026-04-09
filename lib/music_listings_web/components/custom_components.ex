@@ -452,6 +452,290 @@ defmodule MusicListingsWeb.CustomComponents do
   end
 
   @doc """
+  Renders a bottom sheet overlay for mobile filter/sort controls.
+
+  ## Example
+
+  <.bottom_sheet id="mobile-filters">
+    <p>Filter content here</p>
+  </.bottom_sheet>
+  """
+
+  attr :id, :string, required: true
+  slot :inner_block, required: true
+
+  def bottom_sheet(assigns) do
+    ~H"""
+    <div id={@id} class="relative z-50 hidden md:hidden" phx-remove={hide_bottom_sheet(@id)}>
+      <div
+        id={"#{@id}-backdrop"}
+        class="fixed inset-0 bg-neutral-950/80 transition-opacity"
+        aria-hidden="true"
+        phx-click={hide_bottom_sheet(@id)}
+      />
+      <div class="fixed inset-0 overflow-hidden">
+        <div class="absolute inset-0" aria-labelledby={"#{@id}-title"} role="dialog" aria-modal="true">
+          <.focus_wrap
+            id={"#{@id}-panel"}
+            phx-window-keydown={hide_bottom_sheet(@id)}
+            phx-key="escape"
+            class="fixed inset-x-0 bottom-0 max-h-[85vh] overflow-y-auto rounded-t-2xl bg-neutral-900 border-t border-neutral-800 shadow-2xl shadow-black/50 transform transition-transform"
+          >
+            <div class="sticky top-0 bg-neutral-900 z-10 px-5 pt-3 pb-4 border-b border-neutral-800">
+              <div class="w-10 h-1 rounded-full bg-neutral-700 mx-auto mb-4" />
+              <div class="flex items-center justify-between">
+                <h2 id={"#{@id}-title"} class="text-lg font-semibold text-neutral-50">Filters</h2>
+                <button
+                  type="button"
+                  phx-click={hide_bottom_sheet(@id)}
+                  class="p-1.5 rounded-lg text-neutral-400 hover:text-neutral-300 hover:bg-neutral-800 transition-colors"
+                  aria-label="Close filters"
+                >
+                  <MusicListingsWeb.CoreComponents.icon name="hero-x-mark" class="size-5" />
+                </button>
+              </div>
+            </div>
+            <div class="px-5 py-5 space-y-6">
+              {render_slot(@inner_block)}
+            </div>
+          </.focus_wrap>
+        </div>
+      </div>
+    </div>
+    """
+  end
+
+  def show_bottom_sheet(js \\ %JS{}, id) do
+    js
+    |> JS.show(to: "##{id}")
+    |> JS.show(
+      to: "##{id}-backdrop",
+      time: 300,
+      transition: {"transition-all ease-out duration-300", "opacity-0", "opacity-100"}
+    )
+    |> JS.show(
+      to: "##{id}-panel",
+      time: 300,
+      transition: {"transition-all ease-out duration-300", "translate-y-full", "translate-y-0"}
+    )
+    |> JS.add_class("overflow-hidden", to: "body")
+    |> JS.focus_first(to: "##{id}-panel")
+  end
+
+  defp hide_bottom_sheet(js \\ %JS{}, id) do
+    js
+    |> JS.hide(
+      to: "##{id}-backdrop",
+      transition: {"transition-all ease-in duration-200", "opacity-100", "opacity-0"}
+    )
+    |> JS.hide(
+      to: "##{id}-panel",
+      transition: {"transition-all ease-in duration-200", "translate-y-0", "translate-y-full"}
+    )
+    |> JS.hide(to: "##{id}", transition: {"block", "block", "hidden"})
+    |> JS.remove_class("overflow-hidden", to: "body")
+    |> JS.pop_focus()
+  end
+
+  @doc """
+  Renders the mobile filter button that opens the bottom sheet.
+
+  ## Example
+
+  <.mobile_filter_button />
+  """
+
+  def mobile_filter_button(assigns) do
+    ~H"""
+    <button
+      type="button"
+      phx-click={show_bottom_sheet("mobile-filters")}
+      class="inline-flex items-center gap-2 px-4 py-2.5 bg-neutral-900 border border-neutral-700 rounded-lg text-sm text-neutral-300 hover:border-neutral-600 transition-colors"
+    >
+      <MusicListingsWeb.CoreComponents.icon
+        name="hero-adjustments-horizontal"
+        class="size-4 text-neutral-500"
+      />
+      <span>Filters</span>
+    </button>
+    """
+  end
+
+  @doc """
+  Renders dismissible chips showing active filter state on mobile.
+
+  ## Example
+
+  <.mobile_filter_chips venue_ids={@venue_ids} selected_date={@selected_date} />
+  """
+
+  attr :venue_ids, :list, required: true
+  attr :selected_date, :string, default: nil
+
+  def mobile_filter_chips(assigns) do
+    has_date_filter =
+      assigns.selected_date != nil && assigns.selected_date != "" &&
+        !today?(assigns.selected_date)
+
+    assigns = assign(assigns, :has_date_filter, has_date_filter)
+
+    ~H"""
+    <div
+      :if={@venue_ids != [] || @has_date_filter}
+      class="flex flex-wrap justify-end gap-2"
+    >
+      <span
+        :if={@venue_ids != []}
+        class="inline-flex items-center gap-1 text-xs font-medium bg-rose-500/10 text-rose-400 ring-1 ring-inset ring-rose-500/20 px-2.5 py-1 rounded-full"
+      >
+        {Enum.count(@venue_ids)} venue(s)
+        <button type="button" phx-click="clear-venue-filtering" class="hover:text-rose-300">
+          <MusicListingsWeb.CoreComponents.icon name="hero-x-mark" class="size-3" />
+        </button>
+      </span>
+      <span
+        :if={@has_date_filter}
+        class="inline-flex items-center gap-1 text-xs font-medium bg-rose-500/10 text-rose-400 ring-1 ring-inset ring-rose-500/20 px-2.5 py-1 rounded-full"
+      >
+        From {format_filter_date(@selected_date)}
+        <button type="button" phx-click="clear-date-filter" class="hover:text-rose-300">
+          <MusicListingsWeb.CoreComponents.icon name="hero-x-mark" class="size-3" />
+        </button>
+      </span>
+    </div>
+    """
+  end
+
+  @doc """
+  Renders the venue filter inline (not dropdown) for the mobile bottom sheet.
+
+  ## Example
+
+  <.mobile_venue_filter for={@form} venues={@venues} venue_ids={@venue_ids} />
+  """
+
+  attr :for, :any, required: true
+  attr :venues, :list, required: true
+  attr :venue_ids, :list, required: true
+
+  def mobile_venue_filter(assigns) do
+    ~H"""
+    <div>
+      <h3 class="text-sm font-semibold text-neutral-300 uppercase tracking-wider mb-3">Venues</h3>
+      <.form for={@for} as={:for} id="mobile-venue-filters" phx-change="venue-filter-selected">
+        <ul class="max-h-60 overflow-y-auto space-y-1 -mx-1">
+          <%= for venue <- @venues do %>
+            <li class="relative cursor-pointer select-none py-2 pl-10 pr-4 text-neutral-200 hover:bg-neutral-800 rounded-lg transition-colors">
+              <label for={"mobile-#{venue.id}"} class="block truncate cursor-pointer text-sm">
+                {venue.name}
+              </label>
+              <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                <input
+                  id={"mobile-#{venue.id}"}
+                  name={venue.id}
+                  value="true"
+                  type="checkbox"
+                  checked={Integer.to_string(venue.id) in @venue_ids}
+                  class="rounded border-neutral-600 bg-neutral-800 text-rose-500 focus:ring-0 focus:ring-offset-0 cursor-pointer"
+                />
+              </span>
+            </li>
+          <% end %>
+        </ul>
+      </.form>
+    </div>
+    """
+  end
+
+  @doc """
+  Renders the date filter inline for the mobile bottom sheet.
+
+  ## Example
+
+  <.mobile_date_filter for={@form} selected_date={@selected_date} />
+  """
+
+  attr :for, :any, required: true
+  attr :selected_date, :string, default: nil
+
+  def mobile_date_filter(assigns) do
+    ~H"""
+    <div>
+      <h3 class="text-sm font-semibold text-neutral-300 uppercase tracking-wider mb-3">Date</h3>
+      <.form
+        for={@for}
+        id="mobile-date-filter-form"
+        phx-submit={JS.push("date-filter-changed") |> hide_bottom_sheet("mobile-filters")}
+      >
+        <div class="flex items-center gap-3">
+          <input
+            type="date"
+            id="mobile-filter-date"
+            name="date"
+            value={@selected_date}
+            class="flex-1 rounded-lg border-neutral-700 bg-neutral-800 text-neutral-50 text-sm focus:border-rose-400 focus:ring-rose-400"
+          />
+          <button
+            type="submit"
+            class="text-sm font-medium text-neutral-950 bg-rose-500 hover:bg-rose-400 rounded-lg px-4 py-2 transition-colors"
+          >
+            Go
+          </button>
+        </div>
+      </.form>
+    </div>
+    """
+  end
+
+  @doc """
+  Renders the sort toggle for the mobile bottom sheet.
+
+  ## Example
+
+  <.mobile_sort_toggle sort_by={@sort_by} />
+  """
+
+  attr :sort_by, :string, default: "title"
+
+  def mobile_sort_toggle(assigns) do
+    ~H"""
+    <div>
+      <h3 class="text-sm font-semibold text-neutral-300 uppercase tracking-wider mb-3">Sort by</h3>
+      <div class="inline-flex rounded-lg border border-neutral-700 bg-neutral-800 p-0.5">
+        <button
+          type="button"
+          phx-click="sort-changed"
+          phx-value-sort-by="title"
+          class={[
+            "px-4 py-2 text-sm rounded-md transition-colors",
+            if(@sort_by == "title",
+              do: "bg-rose-500/10 text-rose-400 ring-1 ring-inset ring-rose-500/20",
+              else: "text-neutral-400 hover:text-neutral-300"
+            )
+          ]}
+        >
+          By Title
+        </button>
+        <button
+          type="button"
+          phx-click="sort-changed"
+          phx-value-sort-by="venue"
+          class={[
+            "px-4 py-2 text-sm rounded-md transition-colors",
+            if(@sort_by == "venue",
+              do: "bg-rose-500/10 text-rose-400 ring-1 ring-inset ring-rose-500/20",
+              else: "text-neutral-400 hover:text-neutral-300"
+            )
+          ]}
+        >
+          By Venue
+        </button>
+      </div>
+    </div>
+    """
+  end
+
+  @doc """
   Renders information about a venue
 
   ## Example
