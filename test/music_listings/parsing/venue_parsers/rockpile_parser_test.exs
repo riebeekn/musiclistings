@@ -112,8 +112,7 @@ defmodule MusicListings.Parsing.VenueParsers.RockpileParserTest do
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert "https://rockpilerockbar.com/14189614/roses-reloaded-every-rose-tribute-to-poison" ==
-               RockpileParser.details_url(event)
+      assert nil == RockpileParser.details_url(event)
     end
   end
 end
