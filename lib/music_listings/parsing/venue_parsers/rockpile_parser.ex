@@ -100,7 +100,7 @@ defmodule MusicListings.Parsing.VenueParsers.RockpileParser do
   end
 
   @impl true
-  def details_url(event) do
-    Selectors.url(event, css(".tw-name a"))
+  def details_url(_event) do
+    nil
   end
 end
