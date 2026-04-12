@@ -20,10 +20,7 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
           )
 
         socket
-        |> assign(
-          :events,
-          paged_events.events |> Enum.flat_map(fn {_date, events} -> events end)
-        )
+        |> assign(:events, paged_events.events)
         |> assign(:page_title, venue.name)
         |> assign(:venue, venue)
         |> assign(:current_page, paged_events.current_page)
@@ -54,10 +51,7 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
           )
 
         socket
-        |> assign(
-          :events,
-          paged_events.events |> Enum.flat_map(fn {_date, events} -> events end)
-        )
+        |> assign(:events, paged_events.events)
         |> noreply()
 
       _no_change ->
@@ -77,7 +71,7 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
       <.venue_card venue={@venue} />
     </div>
 
-    <div class="mb-2">
+    <div class="mb-6">
       <.page_header header="Upcoming Events" />
     </div>
 
