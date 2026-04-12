@@ -1,0 +1,188 @@
+{
+  "data": [
+    {
+      "detailed_artists": [
+        {
+          "headliner": false,
+          "id": 132137,
+          "name": "Jump Source",
+          "url": "https://dice.fm/artist/jump-source-r5w5q"
+        },
+        {
+          "headliner": false,
+          "id": 66938,
+          "name": "Priori",
+          "url": "https://dice.fm/artist/priori-2952o"
+        },
+        {
+          "headliner": false,
+          "id": 26445,
+          "name": "Patrick Holland",
+          "url": "https://dice.fm/artist/patrick-holland-eo666"
+        }
+      ],
+      "date_end": "2026-04-18T06:00:00Z",
+      "artists": [
+        "Jump Source",
+        "Priori",
+        "Patrick Holland"
+      ],
+      "timezone": "America/Toronto",
+      "presented_by": "Presented by Standard Time.",
+      "all_ttys_code_locked": false,
+      "raw_description": "Standard Time is excited to welcome Jump Source into our space with a very special open to close set!\n\nJump Source – composed of Priori and Patrick Holland – venture through various strains of dance music in the studio, focusing on intuitive long-form recordings full of quirks. Though their independent work differs, the through-line of influence can be heard across the JS catalogue, and through their choice of records in the club.\n\nJoin us for a very special evening!",
+      "external_url": null,
+      "show_price_breakdown": false,
+      "type": "event",
+      "sold_out": false,
+      "checksum": "940F0EAE8ABFCC994F6D727807E975B7",
+      "ticket_types": [
+        {
+          "id": 1228432,
+          "name": "First release",
+          "price": {
+            "total": 3109,
+            "fees": 982,
+            "face_value": 2127
+          },
+          "sold_out": true
+        },
+        {
+          "id": 1228433,
+          "name": "Second release",
+          "price": {
+            "total": 3390,
+            "fees": 778,
+            "face_value": 2612
+          },
+          "sold_out": false
+        },
+        {
+          "id": 1228434,
+          "name": "Final release",
+          "price": {
+            "total": 4520,
+            "fees": 937,
+            "face_value": 3583
+          },
+          "sold_out": false
+        }
+      ],
+      "lineup": [
+        {
+          "details": "Doors open",
+          "time": "10:00 PM"
+        },
+        {
+          "details": "Priori",
+          "time": ""
+        },
+        {
+          "details": "Patrick Holland",
+          "time": ""
+        },
+        {
+          "details": "Jump Source",
+          "time": ""
+        }
+      ],
+      "age_limit": "This is an 19+ event",
+      "venue": "Standard Time",
+      "genre_tags": [
+        "dj:deephouse",
+        "dj:house"
+      ],
+      "spotify_tracks": [
+        {
+          "title": "Jump Source - Shattered",
+          "open_url": "https://open.spotify.com/track/00wXAYLSualHDbHXFtf1uG",
+          "preview_url": "https://p.scdn.co/mp3-preview/2adfe532c82fcfe1af6b8e2926eb222bfd98f549?cid=921526b9c2da4b7b96e197790a02347e"
+        }
+      ],
+      "bundles": [],
+      "price": null,
+      "address": "165 Geary Avenue, Toronto, Ontario M6H 2B8, Canada",
+      "url": "https://link.dice.fm/b063c65e33c3",
+      "name": "Jump Source - Open to Close",
+      "event_images": {
+        "brand": null,
+        "landscape": "https://dice-media.imgix.net/attachments/2026-03-19/8b468c4a-2c2b-41dc-b067-f1ec2ae8d6fc.jpg?rect=0%2C367%2C1170%2C702",
+        "portrait": "https://dice-media.imgix.net/attachments/2026-03-19/8b468c4a-2c2b-41dc-b067-f1ec2ae8d6fc.jpg?rect=191%2C0%2C789%2C1435",
+        "square": "https://dice-media.imgix.net/attachments/2026-03-19/8b468c4a-2c2b-41dc-b067-f1ec2ae8d6fc.jpg?rect=0%2C265%2C1170%2C1170"
+      },
+      "cities": [
+        {
+          "code": "TR",
+          "country_alpha3": "CAN",
+          "country_id": "5dfb2c537d9fd902f7ecdd5c",
+          "country_name": "Canada",
+          "id": "5dfb2d3d7d9fd902f7ecdd5d",
+          "name": "Toronto"
+        }
+      ],
+      "type_tags": [
+        "music:dj"
+      ],
+      "date": "2026-04-18T02:00:00Z",
+      "location": {
+        "state": "Ontario",
+        "zip": "M6H 2B8",
+        "country": "Canada",
+        "city": "Toronto",
+        "region": "",
+        "lat": 43.669848,
+        "lng": -79.436222,
+        "accuracy": 0,
+        "place": "America/Toronto",
+        "street": "165 Geary Avenue"
+      },
+      "linkout_type": null,
+      "hash": "8eg2w7",
+      "announcement_date": "2026-03-18T04:00:00Z",
+      "description": "Standard Time is excited to welcome Jump Source into our space with a very special open to close set!\n\nJump Source – composed of Priori and Patrick Holland – venture through various strains of dance music in the studio, focusing on intuitive long-form recordings full of quirks. Though their independent work differs, the through-line of influence can be heard across the JS catalogue, and through their choice of records in the club.\n\nJoin us for a very special evening!\n\nPresented by Standard Time.\n\nThis is an 19+ event",
+      "perm_name": "jump-source-open-to-close-17th-apr-standard-time-toronto-tickets",
+      "tags": [],
+      "int_id": 572710,
+      "venues": [
+        {
+          "city": {
+            "code": "TR",
+            "country_alpha3": "CAN",
+            "country_id": "5dfb2c537d9fd902f7ecdd5c",
+            "country_name": "Canada",
+            "id": "5dfb2d3d7d9fd902f7ecdd5d",
+            "name": "Toronto"
+          },
+          "id": 12554,
+          "name": "Standard Time",
+          "url": "https://dice.fm/venue/standard-time-5m6w"
+        }
+      ],
+      "destination_event_perm_name": null,
+      "is_multi_days_event": false,
+      "id": "69bca2edd233680001d499a9",
+      "flags": [
+        "qr-code",
+        "cooling-off-period",
+        "going_ahead"
+      ],
+      "sale_end_date": "2026-04-18T06:00:00Z",
+      "currency": "CAD",
+      "sale_start_date": "2026-03-18T04:00:00Z",
+      "status": "on-sale",
+      "featured": false,
+      "links": [],
+      "apple_music_tracks": [],
+      "promoters": [
+        {
+          "id": 145256,
+          "name": "2747236 ONTARIO LIMITED (o/a) Standard Time"
+        }
+      ],
+      "images": [
+        "https://dice-media.imgix.net/attachments/2026-03-19/8b468c4a-2c2b-41dc-b067-f1ec2ae8d6fc.jpg"
+      ],
+      "destination_event_id": null
+    }
+  ]
+}
