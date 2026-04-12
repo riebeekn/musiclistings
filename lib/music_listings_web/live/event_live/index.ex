@@ -3,6 +3,7 @@ defmodule MusicListingsWeb.EventLive.Index do
   use Goal
 
   alias MusicListingsUtilities.DateHelpers
+  alias MusicListingsWeb.SEO
 
   @impl true
   def mount(_params, _session, socket) do
@@ -22,6 +23,12 @@ defmodule MusicListingsWeb.EventLive.Index do
     |> assign(:sort_by, sort_by)
     |> assign(:venue_filtering_form, to_form(%{}))
     |> assign(:date_filtering_form, to_form(%{}))
+    |> assign(:page_title, "Toronto Live Music Events")
+    |> assign(
+      :meta_description,
+      "Browse upcoming live music events in Toronto — concerts, club shows, and festivals from dozens of venues, updated daily."
+    )
+    |> assign(:canonical_url, SEO.canonical_url("/events"))
     |> ok()
   end
 
@@ -70,41 +77,47 @@ defmodule MusicListingsWeb.EventLive.Index do
 
   @impl true
   def handle_params(params, _uri, socket) do
-    if connected?(socket) do
-      venue_ids = socket.assigns[:venue_ids] || []
-      selected_date = socket.assigns[:selected_date]
+    venue_ids = socket.assigns[:venue_ids] || []
+    selected_date = socket.assigns[:selected_date]
 
-      case validate(:index, params) do
-        {:ok, normalized_params} ->
-          from_date = parse_selected_date(selected_date)
+    case validate(:index, params) do
+      {:ok, normalized_params} ->
+        from_date = parse_selected_date(selected_date)
 
-          paged_events =
-            MusicListings.list_events(
-              page: normalized_params[:page],
-              venue_ids: venue_ids,
-              from_date: from_date,
-              sort_by: sort_by_atom(socket.assigns[:sort_by])
-            )
+        paged_events =
+          MusicListings.list_events(
+            page: normalized_params[:page],
+            venue_ids: venue_ids,
+            from_date: from_date,
+            sort_by: sort_by_atom(socket.assigns[:sort_by])
+          )
 
+        if connected?(socket) do
           socket
           |> update_socket_assigns(paged_events, venue_ids)
           |> assign(:loading, false)
           |> noreply()
-
-        _error ->
+        else
           socket
-          |> push_navigate(to: ~p"/events")
+          |> assign(:events, [])
+          |> assign(:current_page, 1)
+          |> assign(:total_pages, 0)
+          |> assign(:loading, true)
+          |> assign(:json_ld, json_ld_for(paged_events))
           |> noreply()
-      end
-    else
-      socket
-      |> assign(:events, [])
-      |> assign(:current_page, 1)
-      |> assign(:total_pages, 0)
-      |> assign(:sort_by, "title")
-      |> assign(:loading, true)
-      |> noreply()
+        end
+
+      _error ->
+        socket
+        |> push_navigate(to: ~p"/events")
+        |> noreply()
     end
+  end
+
+  defp json_ld_for(paged_events) do
+    paged_events.events
+    |> SEO.grouped_events_to_list_items()
+    |> SEO.event_list_json_ld()
   end
 
   @impl true

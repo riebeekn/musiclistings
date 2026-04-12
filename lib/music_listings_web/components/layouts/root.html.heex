@@ -9,9 +9,59 @@
     </.live_title>
     <meta
       name="description"
-      content="Discover Toronto’s vibrant music scene with daily updated event listings. From local bands to international acts, find live shows, concerts, and music festivals happening in and around Toronto."
+      content={assigns[:meta_description] || MusicListingsWeb.SEO.default_description()}
+    />
+    <link :if={assigns[:canonical_url]} rel="canonical" href={@canonical_url} />
+    <meta property="og:site_name" content={MusicListingsWeb.SEO.site_name()} />
+    <meta property="og:type" content={assigns[:og_type] || "website"} />
+    <meta
+      property="og:title"
+      content={assigns[:og_title] || assigns[:page_title] || MusicListingsWeb.SEO.site_name()}
+    />
+    <meta
+      property="og:description"
+      content={
+        assigns[:og_description] || assigns[:meta_description] ||
+          MusicListingsWeb.SEO.default_description()
+      }
+    />
+    <meta
+      property="og:image"
+      content={
+        MusicListingsWeb.SEO.canonical_url(
+          assigns[:og_image] || MusicListingsWeb.SEO.default_og_image()
+        )
+      }
+    />
+    <meta :if={assigns[:canonical_url]} property="og:url" content={@canonical_url} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content={assigns[:og_title] || assigns[:page_title] || MusicListingsWeb.SEO.site_name()}
+    />
+    <meta
+      name="twitter:description"
+      content={
+        assigns[:og_description] || assigns[:meta_description] ||
+          MusicListingsWeb.SEO.default_description()
+      }
+    />
+    <meta
+      name="twitter:image"
+      content={
+        MusicListingsWeb.SEO.canonical_url(
+          assigns[:og_image] || MusicListingsWeb.SEO.default_og_image()
+        )
+      }
     />
     <meta name="impact-site-verification" value="6bcb7f59-720d-4a05-8996-55f38754e508" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={MusicListingsWeb.SEO.site_name() <> " — Upcoming Events"}
+      href={MusicListingsWeb.SEO.canonical_url("/feed.xml")}
+    />
+    <link rel="icon" href={~p"/favicon.ico"} sizes="any" />
     <link phx-track-static rel="stylesheet" href={~p"/fonts/InterWeb/inter.css"} />
     <link phx-track-static rel="stylesheet" href={~p"/fonts/SpaceGrotesk/space-grotesk.css"} />
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
@@ -20,6 +70,17 @@
     <script defer data-domain="torontomusiclistings.com" src="https://plausible.io/js/script.js">
     </script>
     <Turnstile.script />
+    <script type="application/ld+json">
+      <%= Phoenix.HTML.raw(MusicListingsWeb.SEO.encode_json_ld(MusicListingsWeb.SEO.website_json_ld())) %>
+    </script>
+    <script type="application/ld+json">
+      <%= Phoenix.HTML.raw(MusicListingsWeb.SEO.encode_json_ld(MusicListingsWeb.SEO.organization_json_ld())) %>
+    </script>
+    <%= for payload <- List.wrap(assigns[:json_ld]) do %>
+      <script type="application/ld+json">
+        <%= Phoenix.HTML.raw(MusicListingsWeb.SEO.encode_json_ld(payload)) %>
+      </script>
+    <% end %>
   </head>
   <body class="min-h-full antialiased bg-neutral-950">
     <MusicListingsWeb.NavbarComponents.navbar current_user={@current_user} />

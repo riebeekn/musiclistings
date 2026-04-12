@@ -12,6 +12,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   alias MusicListings.Accounts.User
   alias MusicListingsUtilities.DateHelpers
+  alias MusicListingsWeb.SEO
   alias Phoenix.LiveView.JS
 
   @doc """
@@ -997,6 +998,151 @@ defmodule MusicListingsWeb.CustomComponents do
     """
   end
 
+  @doc """
+  Renders the breadcrumb navigation for an event show page.
+
+  ## Example
+
+  <.event_breadcrumb event={@event} />
+  """
+  attr :event, :any, required: true
+
+  def event_breadcrumb(assigns) do
+    ~H"""
+    <nav aria-label="Breadcrumb" class="mb-4 text-xs sm:text-sm text-neutral-500">
+      <ol class="flex flex-wrap items-center gap-1.5">
+        <li>
+          <.link navigate={~p"/events"} class="hover:text-rose-400 transition-colors">Events</.link>
+        </li>
+        <li aria-hidden="true">/</li>
+        <li :if={@event.venue}>
+          <.link
+            navigate={~p"/events/venue/#{@event.venue.id}"}
+            class="hover:text-rose-400 transition-colors"
+          >
+            {@event.venue.name}
+          </.link>
+        </li>
+        <li :if={@event.venue} aria-hidden="true">/</li>
+        <li class="text-neutral-300 truncate max-w-[50vw]">{@event.title}</li>
+      </ol>
+    </nav>
+    """
+  end
+
+  @doc """
+  Renders the event show page header: venue badge, title, and openers line.
+
+  ## Example
+
+  <.event_header event={@event} />
+  """
+  attr :event, :any, required: true
+
+  def event_header(assigns) do
+    ~H"""
+    <p :if={@event.venue} class="text-xs font-semibold uppercase tracking-wider text-rose-400">
+      <.link navigate={~p"/events/venue/#{@event.venue.id}"} class="hover:text-rose-300">
+        {@event.venue.name}
+      </.link>
+    </p>
+
+    <h1 class="mt-2 font-display text-3xl sm:text-4xl font-bold text-neutral-50">
+      {@event.title}
+    </h1>
+    <p :if={@event.openers != []} class="mt-2 text-base sm:text-lg text-neutral-400">
+      with {Enum.join(@event.openers, ", ")}
+    </p>
+    """
+  end
+
+  @doc """
+  Renders the event metadata definition list (date, showtime, venue, age, price).
+
+  ## Example
+
+  <.event_details_list event={@event} />
+  """
+  attr :event, :any, required: true
+
+  def event_details_list(assigns) do
+    ~H"""
+    <dl class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+      <div>
+        <dt class="text-neutral-500 uppercase tracking-wider text-xs">Date</dt>
+        <dd class="mt-1 text-neutral-100">
+          <time datetime={Date.to_iso8601(@event.date)}>
+            {DateHelpers.format_date(@event.date)}
+          </time>
+        </dd>
+      </div>
+      <div :if={@event.time}>
+        <dt class="text-neutral-500 uppercase tracking-wider text-xs">Showtime</dt>
+        <dd class="mt-1 text-neutral-100">{DateHelpers.format_time(@event.time)}</dd>
+      </div>
+      <div :if={@event.venue}>
+        <dt class="text-neutral-500 uppercase tracking-wider text-xs">Venue</dt>
+        <dd class="mt-1 text-neutral-100">
+          <.link
+            navigate={~p"/events/venue/#{@event.venue.id}"}
+            class="text-rose-400 hover:text-rose-300"
+          >
+            {@event.venue.name}
+          </.link>
+          <div class="text-neutral-400 text-sm mt-0.5">
+            {@event.venue.street}, {@event.venue.city} {@event.venue.province}
+          </div>
+        </dd>
+      </div>
+      <div :if={@event.age_restriction != :unknown}>
+        <dt class="text-neutral-500 uppercase tracking-wider text-xs">Age restriction</dt>
+        <dd class="mt-1 text-neutral-100">{format_age_restriction(@event.age_restriction)}</dd>
+      </div>
+      <div :if={@event.price_format != :unknown}>
+        <dt class="text-neutral-500 uppercase tracking-wider text-xs">Price</dt>
+        <dd class="mt-1 text-neutral-100">{format_price(@event, :long)}</dd>
+      </div>
+    </dl>
+    """
+  end
+
+  @doc """
+  Renders the ticket + details action buttons for an event show page.
+
+  ## Example
+
+  <.event_actions event={@event} />
+  """
+  attr :event, :any, required: true
+
+  def event_actions(assigns) do
+    ~H"""
+    <div class="mt-8 flex flex-wrap items-center gap-3">
+      <a
+        :if={@event.ticket_url}
+        href={MusicListings.Affiliate.maybe_wrap_affiliate_link(@event.ticket_url)}
+        class="inline-flex items-center gap-2 text-sm font-medium text-neutral-50 bg-rose-500 hover:bg-rose-400 px-4 py-2 rounded-full transition-colors"
+        target="_blank"
+        rel="noopener sponsored"
+      >
+        <MusicListingsWeb.CoreComponents.icon name="hero-ticket-solid" class="size-4" /> Get Tickets
+      </a>
+      <a
+        :if={@event.details_url}
+        href={@event.details_url}
+        class="inline-flex items-center gap-2 text-sm font-medium text-neutral-300 hover:text-neutral-100 bg-neutral-800 hover:bg-neutral-700 px-4 py-2 rounded-full transition-colors"
+        target="_blank"
+        rel="noopener"
+      >
+        <MusicListingsWeb.CoreComponents.icon
+          name="hero-information-circle-solid"
+          class="size-4"
+        /> More Details
+      </a>
+    </div>
+    """
+  end
+
   defp events_date_header(assigns) do
     ~H"""
     <div
@@ -1013,7 +1159,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_card(assigns) do
     ~H"""
-    <div class="bg-neutral-900 rounded-xl p-4 sm:p-5 border border-neutral-800 hover:border-neutral-700 transition-all duration-200">
+    <article class="bg-neutral-900 rounded-xl p-4 sm:p-5 border border-neutral-800 hover:border-neutral-700 transition-all duration-200">
       <div class="flex items-start justify-between gap-4">
         <div class="min-w-0 flex-1">
           <div class="flex items-center gap-2 mb-1">
@@ -1021,7 +1167,9 @@ defmodule MusicListingsWeb.CustomComponents do
             <.event_age_restriction age_restriction={@event.age_restriction} />
           </div>
           <h3 class="text-base sm:text-lg font-semibold text-neutral-50 leading-snug">
-            {@event.title}
+            <.event_title_link event_info={@event}>
+              {@event.title}
+            </.event_title_link>
             <%= if @event.openers != [] do %>
               <span class="font-normal text-neutral-400">
                 with {@event.openers |> Enum.join(", ")}
@@ -1046,13 +1194,13 @@ defmodule MusicListingsWeb.CustomComponents do
           <.delete_event_link current_user={@current_user} event_id={showtime.event_id} />
         </div>
       <% end %>
-    </div>
+    </article>
     """
   end
 
   defp venue_grouped_card(assigns) do
     ~H"""
-    <div class="bg-neutral-900 rounded-xl p-4 sm:p-5 border border-neutral-800 hover:border-neutral-700 transition-all duration-200">
+    <article class="bg-neutral-900 rounded-xl p-4 sm:p-5 border border-neutral-800 hover:border-neutral-700 transition-all duration-200">
       <div class="flex items-center gap-2 mb-3">
         <.event_venue venue={@venue} />
       </div>
@@ -1065,7 +1213,9 @@ defmodule MusicListingsWeb.CustomComponents do
             <div class="min-w-0 flex-1">
               <div class="flex items-center gap-2 mb-1">
                 <h3 class="text-base sm:text-lg font-semibold text-neutral-50 leading-snug">
-                  {event.title}
+                  <.event_title_link event_info={event}>
+                    {event.title}
+                  </.event_title_link>
                   <%= if event.openers != [] do %>
                     <span class="font-normal text-neutral-400">
                       with {event.openers |> Enum.join(", ")}
@@ -1094,13 +1244,13 @@ defmodule MusicListingsWeb.CustomComponents do
           <% end %>
         </div>
       <% end %>
-    </div>
+    </article>
     """
   end
 
   defp venue_date_grouped_card(assigns) do
     ~H"""
-    <div class="bg-neutral-900 rounded-xl p-4 sm:p-5 border border-neutral-800 hover:border-neutral-700 transition-all duration-200">
+    <article class="bg-neutral-900 rounded-xl p-4 sm:p-5 border border-neutral-800 hover:border-neutral-700 transition-all duration-200">
       <h3 class="font-display text-lg sm:text-xl font-bold text-yellow-500 mb-3">
         <time datetime={@date}>{DateHelpers.format_date(@date)}</time>
       </h3>
@@ -1110,7 +1260,9 @@ defmodule MusicListingsWeb.CustomComponents do
             <div class="min-w-0 flex-1">
               <div class="flex items-center gap-2 mb-1">
                 <h3 class="text-base sm:text-lg font-semibold text-neutral-50 leading-snug">
-                  {event.title}
+                  <.event_title_link event_info={event}>
+                    {event.title}
+                  </.event_title_link>
                   <%= if event.openers != [] do %>
                     <span class="font-normal text-neutral-400">
                       with {event.openers |> Enum.join(", ")}
@@ -1139,7 +1291,27 @@ defmodule MusicListingsWeb.CustomComponents do
           <% end %>
         </div>
       <% end %>
-    </div>
+    </article>
+    """
+  end
+
+  attr :event_info, :any, required: true
+  slot :inner_block, required: true
+
+  defp event_title_link(assigns) do
+    first_show = List.first(assigns.event_info.showtimes)
+    slug = SEO.slugify(assigns.event_info.title || "event")
+    assigns = assign(assigns, event_id: first_show && first_show.event_id, slug: slug)
+
+    ~H"""
+    <.link
+      :if={@event_id}
+      navigate={~p"/events/#{@event_id}/#{@slug}"}
+      class="hover:text-rose-300 transition-colors"
+    >
+      {render_slot(@inner_block)}
+    </.link>
+    <span :if={!@event_id}>{render_slot(@inner_block)}</span>
     """
   end
 
@@ -1172,7 +1344,10 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_time(assigns) do
     ~H"""
-    <time class="text-xs text-neutral-500 font-sans [font-variant-numeric:tabular-nums]">
+    <time
+      datetime={Time.to_iso8601(@time)}
+      class="text-xs text-neutral-500 font-sans [font-variant-numeric:tabular-nums]"
+    >
       {DateHelpers.format_time(@time)}
     </time>
     """
@@ -1222,35 +1397,23 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_price(%{price_format: :unknown} = assigns), do: ~H""
 
-  defp event_price(%{price_format: :free} = assigns) do
+  defp event_price(assigns) do
     ~H"""
-    FREE
+    {format_price(assigns, :short)}
     """
   end
 
-  defp event_price(%{price_format: :pwyc} = assigns) do
-    ~H"""
-    PWYC
-    """
-  end
+  defp format_price(%{price_format: :free}, :short), do: "FREE"
+  defp format_price(%{price_format: :free}, :long), do: "Free"
+  defp format_price(%{price_format: :pwyc}, :short), do: "PWYC"
+  defp format_price(%{price_format: :pwyc}, :long), do: "Pay what you can"
+  defp format_price(%{price_format: :fixed, price_lo: lo}, _style), do: "$#{lo}"
+  defp format_price(%{price_format: :variable, price_lo: lo}, _style), do: "$#{lo}+"
 
-  defp event_price(%{price_format: :fixed} = assigns) do
-    ~H"""
-    ${@price_lo}
-    """
-  end
+  defp format_price(%{price_format: :range, price_lo: lo, price_hi: hi}, _style),
+    do: "$#{lo} – $#{hi}"
 
-  defp event_price(%{price_format: :range} = assigns) do
-    ~H"""
-    ${@price_lo} - ${@price_hi}
-    """
-  end
-
-  defp event_price(%{price_format: :variable} = assigns) do
-    ~H"""
-    ${@price_lo}+
-    """
-  end
+  defp format_price(_event, _style), do: ""
 
   defp delete_event_link(assigns) do
     ~H"""

@@ -6,7 +6,7 @@ defmodule MusicListingsWeb.ErrorHTMLTest do
 
   test "renders 404.html" do
     assert render_to_string(MusicListingsWeb.ErrorHTML, "404", "html", []) =~
-             "It seems like this page doesn't exist"
+             "Sorry, we couldn't find the page you're looking for"
   end
 
   test "renders 500.html" do

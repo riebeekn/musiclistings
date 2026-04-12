@@ -1,0 +1,13 @@
+# Toronto Music Listings
+
+> Discover Toronto's vibrant music scene with daily updated event listings. From local bands to international acts, find live shows, concerts, and music festivals happening in and around Toronto.
+
+## Main pages
+
+- [All upcoming events](https://torontomusiclistings.com/events): Full calendar of upcoming live music events in Toronto, filterable by venue and date.
+- [Venues](https://torontomusiclistings.com/venues): Directory of Toronto music venues we track.
+
+## Machine-readable feeds
+
+- [Sitemap](https://torontomusiclistings.com/sitemap.xml): XML sitemap of every indexable page.
+- [RSS feed](https://torontomusiclistings.com/feed.xml): RSS 2.0 feed of upcoming events.
