@@ -1,117 +1,53 @@
 defmodule MusicListings.Parsing.VenueParsers.StandardTimeParser do
   @moduledoc """
   Parser for extracting events from https://standardtime.to/club
-
-  Standard Time's public site embeds events via Dice's DiceEventListWidget,
-  so we hit Dice's partner API directly (the same one the widget calls) and
-  filter to `venue=Standard Time`.
   """
   @behaviour MusicListings.Parsing.VenueParser
 
-  alias MusicListings.HttpClient
-  alias MusicListings.Parsing.ParseHelpers
-  alias MusicListings.Parsing.Performers
-  alias MusicListings.Parsing.Price
-  alias MusicListingsUtilities.DateHelpers
-
-  @api_key "fQbYDR8nbsDkL63coCh1M5wZOWuc1_mIRJF8G2QAfBfxs2qa"
-
-  @source_url "https://partners-endpoint.dice.fm/api/v2/events?page%5Bsize%5D=24&types=linkout%2Cevent&filter%5Bvenues%5D%5B%5D=Standard+Time&filter%5Bflags%5D%5B%5D=going_ahead&filter%5Bflags%5D%5B%5D=rescheduled"
+  alias MusicListings.Parsing.VenueParsers.BaseParsers.DiceParser
 
   @impl true
-  def source_url, do: @source_url
+  def source_url, do: DiceParser.build_source_url("Standard Time")
 
   @impl true
-  def retrieve_events_fun do
-    fn url ->
-      HttpClient.get(url, [
-        {"x-api-key", @api_key},
-        {"origin", "https://standardtime.to"},
-        {"referer", "https://standardtime.to/"}
-      ])
-    end
-  end
+  defdelegate retrieve_events_fun, to: DiceParser
 
   @impl true
-  def events(body) do
-    body
-    |> ParseHelpers.maybe_decode!()
-    |> Map.get("data", [])
-  end
+  defdelegate events(body), to: DiceParser
 
   @impl true
-  def next_page_url(_body, _current_url), do: nil
+  defdelegate next_page_url(body, current_url), to: DiceParser
 
   @impl true
-  def event_id(event), do: "standard_time_" <> event["id"]
+  def event_id(event), do: DiceParser.event_id(event, "standard_time")
 
   @impl true
   def ignored_event_id(event), do: event_id(event)
 
   @impl true
-  def event_title(event), do: event["name"]
+  defdelegate event_title(event), to: DiceParser
 
   @impl true
-  def performers(event) do
-    (event["artists"] || [])
-    |> Performers.new()
-  end
+  defdelegate performers(event), to: DiceParser
 
   @impl true
-  def event_date(event) do
-    event
-    |> parse_event_datetime()
-    |> DateHelpers.to_eastern_date()
-  end
+  defdelegate event_date(event), to: DiceParser
 
   @impl true
-  def additional_dates(_event), do: []
+  defdelegate additional_dates(event), to: DiceParser
 
   @impl true
-  def event_time(event) do
-    event
-    |> parse_event_datetime()
-    |> DateHelpers.to_eastern_time()
-  end
+  defdelegate event_time(event), to: DiceParser
 
   @impl true
-  def price(event) do
-    face_values =
-      event
-      |> Map.get("ticket_types", [])
-      |> Enum.map(& &1["price"])
-      |> Enum.reject(&is_nil/1)
-      |> Enum.map(& &1["face_value"])
-      |> Enum.reject(&is_nil/1)
-
-    case face_values do
-      [] ->
-        Price.unknown()
-
-      values ->
-        lo = values |> Enum.min() |> cents_to_dollars()
-        hi = values |> Enum.max() |> cents_to_dollars()
-        Price.new("$#{lo}-$#{hi}")
-    end
-  end
+  defdelegate price(event), to: DiceParser
 
   @impl true
-  def age_restriction(event) do
-    ParseHelpers.age_restriction_string_to_enum(event["age_limit"])
-  end
+  defdelegate age_restriction(event), to: DiceParser
 
   @impl true
-  def ticket_url(event), do: event["url"]
+  defdelegate ticket_url(event), to: DiceParser
 
   @impl true
-  def details_url(event), do: event["url"]
-
-  defp parse_event_datetime(event) do
-    {:ok, datetime, _offset} = DateTime.from_iso8601(event["date"])
-    datetime
-  end
-
-  defp cents_to_dollars(cents) do
-    :erlang.float_to_binary(cents / 100, decimals: 2)
-  end
+  defdelegate details_url(event), to: DiceParser
 end
