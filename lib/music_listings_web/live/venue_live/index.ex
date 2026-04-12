@@ -1,12 +1,21 @@
 defmodule MusicListingsWeb.VenueLive.Index do
   use MusicListingsWeb, :live_view
 
+  alias MusicListingsWeb.SEO
+
   @impl true
   def mount(_params, _session, socket) do
     venues = MusicListings.list_venues()
 
     socket
-    |> assign(page_title: "Venues", venues: venues, venue_count: Enum.count(venues))
+    |> assign(
+      page_title: "Venues",
+      venues: venues,
+      venue_count: Enum.count(venues),
+      meta_description:
+        "Browse every Toronto music venue we track — from small clubs to concert halls. Find upcoming shows, addresses, and venue details.",
+      canonical_url: SEO.canonical_url("/venues")
+    )
     |> ok()
   end
 

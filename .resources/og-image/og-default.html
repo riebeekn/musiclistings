@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>OG default banner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #0a0a0a;
+  }
+  .card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1200px;
+    height: 630px;
+    background:
+      radial-gradient(ellipse 700px 500px at 85% 15%, rgba(251, 113, 133, 0.18), transparent 70%),
+      radial-gradient(ellipse 600px 400px at 10% 90%, rgba(234, 179, 8, 0.12), transparent 70%),
+      radial-gradient(ellipse 900px 600px at 50% 50%, rgba(20, 20, 22, 1), rgba(10, 10, 10, 1));
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow: hidden;
+  }
+  .grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.08;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    pointer-events: none;
+  }
+  .border-glow {
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+  }
+  .content {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+  .top-row {
+    position: absolute;
+    top: 60px;
+    left: 88px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .middle-block {
+    position: absolute;
+    top: 220px;
+    left: 88px;
+    right: 88px;
+  }
+  .bottom-row {
+    position: absolute;
+    bottom: 56px;
+    left: 88px;
+    right: 88px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 9999px;
+    background: #fb7185;
+    box-shadow: 0 0 24px rgba(251, 113, 133, 0.6);
+  }
+  .eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #fb7185;
+  }
+  .title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 108px;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: #fafafa;
+  }
+  .title .accent {
+    color: #fb7185;
+  }
+  .tagline {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: 30px;
+    letter-spacing: -0.01em;
+    color: #a3a3a3;
+    margin-top: 24px;
+  }
+  .url {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: 0.01em;
+    color: #737373;
+  }
+  .bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    height: 44px;
+  }
+  .bars span {
+    display: block;
+    width: 6px;
+    background: linear-gradient(to top, #fb7185, rgba(251, 113, 133, 0.4));
+    border-radius: 2px;
+  }
+  .bars span:nth-child(1) { height: 40%; }
+  .bars span:nth-child(2) { height: 70%; }
+  .bars span:nth-child(3) { height: 100%; }
+  .bars span:nth-child(4) { height: 55%; }
+  .bars span:nth-child(5) { height: 85%; }
+  .bars span:nth-child(6) { height: 30%; }
+  .bars span:nth-child(7) { height: 65%; }
+  .bars span:nth-child(8) { height: 45%; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="grain"></div>
+  <div class="border-glow"></div>
+  <div class="content">
+    <div class="top-row">
+      <div class="dot"></div>
+      <div class="eyebrow">Live in Toronto</div>
+    </div>
+    <div class="middle-block">
+      <div class="title">Toronto<br>Music Listings</div>
+      <div class="tagline">Live music in Toronto, updated daily.</div>
+    </div>
+    <div class="bottom-row">
+      <div class="url">torontomusiclistings.com</div>
+      <div class="bars">
+        <span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

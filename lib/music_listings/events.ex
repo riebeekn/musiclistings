@@ -90,6 +90,30 @@ defmodule MusicListings.Events do
     }
   end
 
+  @spec list_upcoming_events() :: [Event.t()]
+  def list_upcoming_events do
+    today = DateHelpers.effective_today_eastern()
+
+    Event
+    |> where([event], event.date >= ^today)
+    |> where([event], is_nil(event.deleted_at))
+    |> order_by(asc: :date, asc: :title)
+    |> preload(:venue)
+    |> Repo.all()
+  end
+
+  @spec fetch_event(pos_integer()) :: {:ok, Event.t()} | {:error, :not_found}
+  def fetch_event(event_id) do
+    Event
+    |> where([event], is_nil(event.deleted_at))
+    |> Repo.get(event_id)
+    |> Repo.preload(:venue)
+    |> case do
+      nil -> {:error, :not_found}
+      event -> {:ok, event}
+    end
+  end
+
   defp sort_key(event, :venue), do: event.venue.name
   defp sort_key(event, _title), do: event.title
 

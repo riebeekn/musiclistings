@@ -31,8 +31,14 @@ defmodule MusicListings do
   @spec list_events(list(list_events_opts)) :: PagedEvents.t()
   defdelegate list_events(opts \\ []), to: Events
 
+  @spec list_upcoming_events() :: [Event.t()]
+  defdelegate list_upcoming_events, to: Events
+
   @spec list_submitted_events(User, list(list_events_opts)) :: PagedEvents.t()
   defdelegate list_submitted_events(user, opts \\ []), to: Events
+
+  @spec fetch_event(pos_integer()) :: {:ok, Event.t()} | {:error, :not_found}
+  defdelegate fetch_event(event_id), to: Events
 
   @spec submit_event(
           attrs :: %{
@@ -57,7 +63,7 @@ defmodule MusicListings do
   @spec list_venues(list(list_venue_opts)) :: list(VenueSummary)
   defdelegate list_venues(opts \\ []), to: Venues
 
-  @spec get_venue!(pos_integer()) :: Venue
+  @spec get_venue!(pos_integer()) :: Venue.t()
   defdelegate get_venue!(venue_id), to: Venues
 
   @spec create_venue(

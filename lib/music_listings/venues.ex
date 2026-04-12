@@ -41,7 +41,7 @@ defmodule MusicListings.Venues do
     |> where([venue], venue.pull_events?)
   end
 
-  @spec get_venue!(pos_integer()) :: Venue
+  @spec get_venue!(pos_integer()) :: Venue.t()
   def get_venue!(venue_id), do: Repo.get!(Venue, venue_id)
 
   @spec fetch_venue_by_name(String.t()) :: {:ok, Venue} | {:error, :venue_not_found}

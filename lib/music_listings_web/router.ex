@@ -39,11 +39,16 @@ defmodule MusicListingsWeb.Router do
   scope "/", MusicListingsWeb do
     pipe_through :browser
 
+    get "/sitemap.xml", SitemapController, :index
+    get "/feed.xml", FeedController, :index
+
     live_session :current_user,
       on_mount: [{MusicListingsWeb.UserAuth, :mount_current_user}] do
       live "/events", EventLive.Index, :index
       live "/events/new", EventLive.New, :new
       live "/events/venue/:venue_id", VenueEventLive.Index, :index
+      live "/events/:id", EventLive.Show, :show
+      live "/events/:id/:slug", EventLive.Show, :show
       live "/venues", VenueLive.Index, :index
       live "/contact", ContactLive.New, :new
     end

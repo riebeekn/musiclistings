@@ -2,6 +2,8 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
   use MusicListingsWeb, :live_view
   use Goal
 
+  alias MusicListingsWeb.SEO
+
   @impl true
   def mount(_params, _session, socket) do
     ok(socket)
@@ -19,12 +21,25 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
             venue_ids: [normalized_params.venue_id]
           )
 
+        meta_description =
+          "Upcoming live music events at #{venue.name} in Toronto. View showtimes, prices, and ticket links — updated daily."
+
+        json_ld = [
+          SEO.venue_json_ld(venue),
+          paged_events.events
+          |> SEO.grouped_events_to_list_items()
+          |> SEO.event_list_json_ld()
+        ]
+
         socket
         |> assign(:events, paged_events.events)
         |> assign(:page_title, venue.name)
         |> assign(:venue, venue)
         |> assign(:current_page, paged_events.current_page)
         |> assign(:total_pages, paged_events.total_pages)
+        |> assign(:meta_description, meta_description)
+        |> assign(:canonical_url, SEO.canonical_url("/events/venue/#{venue.id}"))
+        |> assign(:json_ld, json_ld)
         |> noreply()
 
       {:error, _changeset} ->

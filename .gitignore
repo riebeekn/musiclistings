@@ -50,7 +50,7 @@ notes.txt
 *.tfstate
 *.tfstate.*
 *.tfvars
-*.txt
+*/.txt
 *.csv
 
 .claude
