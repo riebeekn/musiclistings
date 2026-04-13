@@ -4,16 +4,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>404 - Page Not Found</title>
     <link phx-track-static rel="stylesheet" href={~p"/fonts/InterWeb/inter.css"} />
+    <link phx-track-static rel="stylesheet" href={~p"/fonts/SpaceGrotesk/space-grotesk.css"} />
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
   </head>
   <body class="min-h-full">
-    <main class="grid min-h-full place-items-center">
+    <main class="grid min-h-full place-items-center px-5 sm:px-8">
       <div class="text-center">
-        <p class="my-6 text-pretty text-lg font-medium text-neutral-400">
-          Oops! It seems like this page doesn't exist. <br /> Try going back to the
-          <a href="/" class="text-rose-400 hover:text-rose-300">homepage.</a>
+        <p class="font-display text-6xl font-semibold uppercase tracking-widest text-rose-400">
+          404
         </p>
-        <img src={~p"/images/404.jpg"} alt="404" />
+        <h1 class="mt-4 font-display text-3xl font-bold tracking-tight text-neutral-50 sm:text-4xl">
+          Page not found
+        </h1>
+        <p class="mt-4 text-pretty text-base text-neutral-400">
+          Sorry, we couldn't find the page you're looking for.
+        </p>
+        <div class="mt-8">
+          <a
+            href="/"
+            class="inline-flex items-center justify-center gap-1 rounded-full bg-rose-500/10 px-4 py-1.5 text-sm font-medium text-rose-400 ring-1 ring-inset ring-rose-500/20 transition-colors hover:text-rose-300 hover:ring-rose-300"
+          >
+            Back to homepage
+          </a>
+        </div>
       </div>
     </main>
   </body>
