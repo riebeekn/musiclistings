@@ -1137,7 +1137,7 @@ defmodule MusicListingsWeb.CustomComponents do
         <MusicListingsWeb.CoreComponents.icon
           name="hero-information-circle-solid"
           class="size-4"
-        /> More Details
+        /> Venue page
       </a>
     </div>
     """
@@ -1390,7 +1390,7 @@ defmodule MusicListingsWeb.CustomComponents do
       <MusicListingsWeb.CoreComponents.icon
         name="hero-information-circle-solid"
         class="size-3.5"
-      /> Details
+      /> Venue page
     </a>
     """
   end
