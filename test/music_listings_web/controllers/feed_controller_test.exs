@@ -48,5 +48,36 @@ defmodule MusicListingsWeb.FeedControllerTest do
 
       refute body =~ "/events/#{deleted_event.id}/"
     end
+
+    test "decodes HTML entities in titles and uses hex char refs for ampersands", %{conn: conn} do
+      today = DateHelpers.today_eastern()
+      insert(:event, date: today, title: "Jazz &#8216;n&#8217; Laughs &amp; Friends")
+
+      conn = get(conn, ~p"/feed.xml")
+      body = response(conn, 200)
+
+      assert body =~ "<title>Jazz ‘n’ Laughs &#x26; Friends</title>"
+      refute body =~ "&amp;#8216;"
+    end
+
+    test "uses hex char refs for angle brackets in titles", %{conn: conn} do
+      today = DateHelpers.today_eastern()
+      insert(:event, date: today, title: "IVE WORLD TOUR <SHOW WHAT I AM>")
+
+      conn = get(conn, ~p"/feed.xml")
+      body = response(conn, 200)
+
+      assert body =~ "<title>IVE WORLD TOUR &#x3C;SHOW WHAT I AM&#x3E;</title>"
+    end
+
+    test "wraps descriptions in CDATA with HTML-escaped ampersands", %{conn: conn} do
+      today = DateHelpers.today_eastern()
+      insert(:event, date: today, title: "Red Karavan, Jinn&Juice")
+
+      conn = get(conn, ~p"/feed.xml")
+      body = response(conn, 200)
+
+      assert body =~ "<![CDATA[Red Karavan, Jinn&amp;Juice"
+    end
   end
 end
