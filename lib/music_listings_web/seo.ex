@@ -137,6 +137,7 @@ defmodule MusicListingsWeb.SEO do
       "@type" => "MusicEvent",
       "name" => event.title || event.headliner,
       "url" => event_url(event),
+      "image" => canonical_url(@default_og_image),
       "startDate" => iso8601_start(event.date, event.time),
       "eventAttendanceMode" => "https://schema.org/OfflineEventAttendanceMode",
       "eventStatus" => "https://schema.org/EventScheduled",
@@ -274,6 +275,8 @@ defmodule MusicListingsWeb.SEO do
   end
 
   defp price_fields(%Event{price_format: :free}), do: %{"price" => "0"}
+
+  defp price_fields(%Event{price_format: :pwyc}), do: %{"price" => "0"}
 
   defp price_fields(%Event{price_format: :fixed, price_lo: %Decimal{} = lo}),
     do: %{"price" => Decimal.to_string(lo)}

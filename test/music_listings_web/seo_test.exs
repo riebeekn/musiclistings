@@ -67,6 +67,8 @@ defmodule MusicListingsWeb.SEOTest do
       assert json["@type"] == "MusicEvent"
       assert json["name"] == "Great Show"
       assert json["url"] =~ "/events/#{event.id}/great-show"
+      assert json["image"] =~ "/images/og-default.png"
+      assert json["image"] == SEO.canonical_url(SEO.default_og_image())
       assert json["startDate"] =~ "2026-05-01T20:00:00"
       assert json["eventAttendanceMode"] == "https://schema.org/OfflineEventAttendanceMode"
       assert json["location"]["@type"] == "MusicVenue"
@@ -84,6 +86,22 @@ defmodule MusicListingsWeb.SEOTest do
       event = insert(:event, ticket_url: nil, price_format: :fixed)
       json = SEO.event_json_ld(event)
       refute Map.has_key?(json, "offers")
+    end
+
+    test "emits price 0 for pay-what-you-can events" do
+      event =
+        insert(:event,
+          price_format: :pwyc,
+          price_lo: nil,
+          price_hi: nil,
+          ticket_url: "https://tickets.example.com/pwyc"
+        )
+
+      json = SEO.event_json_ld(event)
+
+      assert [offer] = json["offers"]
+      assert offer["price"] == "0"
+      assert offer["priceCurrency"] == "CAD"
     end
   end
 
