@@ -94,9 +94,9 @@ defmodule MusicListingsWeb.FeedController do
 
   defp decode_numeric_entities(value) do
     value
-    |> then(&Regex.replace(~r/&#(\d+);/, &1, fn _, num -> codepoint(String.to_integer(num)) end))
+    |> then(&Regex.replace(~r/&#(\d+);/, &1, fn _d, num -> codepoint(String.to_integer(num)) end))
     |> then(
-      &Regex.replace(~r/&#x([0-9a-fA-F]+);/, &1, fn _, hex ->
+      &Regex.replace(~r/&#x([0-9a-fA-F]+);/, &1, fn _d, hex ->
         codepoint(String.to_integer(hex, 16))
       end)
     )
@@ -113,5 +113,5 @@ defmodule MusicListingsWeb.FeedController do
   end
 
   defp codepoint(n) when n in 0..0x10FFFF, do: <<n::utf8>>
-  defp codepoint(_), do: ""
+  defp codepoint(_n), do: ""
 end
