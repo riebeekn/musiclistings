@@ -6,38 +6,23 @@ defmodule MusicListingsWeb.SitemapController do
   def index(conn, _params) do
     venues = MusicListings.list_venues(restrict_to_pulled_venues?: false)
     events = MusicListings.list_upcoming_events()
-    today_iso = Date.utc_today() |> Date.to_iso8601()
+    events_by_venue = Enum.group_by(events, & &1.venue_id)
 
     urls =
       [
-        %{
-          loc: SEO.canonical_url("/events"),
-          changefreq: "hourly",
-          priority: "1.0",
-          lastmod: today_iso
-        },
-        %{
-          loc: SEO.canonical_url("/venues"),
-          changefreq: "weekly",
-          priority: "0.7",
-          lastmod: today_iso
-        }
+        %{loc: SEO.canonical_url("/events"), lastmod: latest_lastmod(events)},
+        %{loc: SEO.canonical_url("/venues"), lastmod: nil}
       ] ++
         Enum.map(venues, fn venue ->
+          venue_events = Map.get(events_by_venue, venue.id, [])
+
           %{
             loc: SEO.canonical_url("/events/venue/#{venue.id}"),
-            changefreq: "daily",
-            priority: "0.8",
-            lastmod: today_iso
+            lastmod: latest_lastmod(venue_events)
           }
         end) ++
         Enum.map(events, fn event ->
-          %{
-            loc: SEO.event_url(event),
-            changefreq: "weekly",
-            priority: "0.6",
-            lastmod: event_lastmod(event)
-          }
+          %{loc: SEO.event_url(event), lastmod: DateTime.to_iso8601(event.updated_at)}
         end)
 
     conn
@@ -46,26 +31,40 @@ defmodule MusicListingsWeb.SitemapController do
     |> send_resp(200, render_sitemap(urls))
   end
 
-  defp event_lastmod(%{updated_at: %DateTime{} = dt}), do: DateTime.to_iso8601(dt)
+  defp latest_lastmod([]), do: nil
+
+  defp latest_lastmod(events) do
+    events
+    |> Enum.map(& &1.updated_at)
+    |> Enum.max(DateTime)
+    |> DateTime.to_iso8601()
+  end
 
   defp render_sitemap(urls) do
-    entries =
-      Enum.map_join(urls, "\n", fn url ->
-        """
-          <url>
-            <loc>#{escape(url.loc)}</loc>
-            <lastmod>#{escape(url.lastmod)}</lastmod>
-            <changefreq>#{url.changefreq}</changefreq>
-            <priority>#{url.priority}</priority>
-          </url>\
-        """
-      end)
+    entries = Enum.map_join(urls, "\n", &render_url/1)
 
     """
     <?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     #{entries}
     </urlset>
+    """
+  end
+
+  defp render_url(%{loc: loc, lastmod: nil}) do
+    """
+      <url>
+        <loc>#{escape(loc)}</loc>
+      </url>\
+    """
+  end
+
+  defp render_url(%{loc: loc, lastmod: lastmod}) do
+    """
+      <url>
+        <loc>#{escape(loc)}</loc>
+        <lastmod>#{escape(lastmod)}</lastmod>
+      </url>\
     """
   end
 
