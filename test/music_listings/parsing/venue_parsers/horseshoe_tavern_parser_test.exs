@@ -92,6 +92,18 @@ defmodule MusicListings.Parsing.VenueParsers.HorseshoeTavernParserTest do
       assert %Price{format: :fixed, lo: Decimal.new("30.00"), hi: Decimal.new("30.00")} ==
                HorseshoeTavernParser.price(event)
     end
+
+    test "returns unknown when the price div has no number" do
+      no_price_event =
+        "#{File.cwd!()}/test/data/horseshoe_tavern/single_event_no_price.html"
+        |> Path.expand()
+        |> File.read!()
+        |> HorseshoeTavernParser.events()
+        |> List.first()
+
+      assert %Price{format: :unknown, lo: nil, hi: nil} ==
+               HorseshoeTavernParser.price(no_price_event)
+    end
   end
 
   describe "age_restriction/1" do
