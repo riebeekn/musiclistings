@@ -18,29 +18,32 @@ defmodule MusicListings.Parsing.Price do
   def new(price_string) do
     price_string = clean_price_string(price_string)
 
-    variable_price? =
-      String.contains?(price_string, "+") || String.contains?(price_string, "from")
+    cond do
+      price_string == "" ->
+        unknown()
 
-    free? = String.contains?(price_string, "free")
+      String.contains?(price_string, "free") ->
+        %__MODULE__{format: :free, lo: nil, hi: nil}
 
-    if free? do
-      %__MODULE__{format: :free, lo: nil, hi: nil}
-    else
-      [lo_string, hi_string] =
-        price_string
-        |> String.replace("+", "")
-        |> String.replace("from", "")
-        |> String.split("-")
-        |> case do
-          [lo, hi] -> [lo, hi]
-          [single_price] -> [single_price, single_price]
-        end
+      true ->
+        variable_price? =
+          String.contains?(price_string, "+") || String.contains?(price_string, "from")
 
-      %__MODULE__{
-        lo: lo_string |> String.trim() |> String.replace("$", "") |> Decimal.new(),
-        hi: hi_string |> String.trim() |> String.replace("$", "") |> Decimal.new(),
-        format: price_format(lo_string, hi_string, variable_price?)
-      }
+        [lo_string, hi_string] =
+          price_string
+          |> String.replace("+", "")
+          |> String.replace("from", "")
+          |> String.split("-")
+          |> case do
+            [lo, hi] -> [lo, hi]
+            [single_price] -> [single_price, single_price]
+          end
+
+        %__MODULE__{
+          lo: lo_string |> String.trim() |> String.replace("$", "") |> Decimal.new(),
+          hi: hi_string |> String.trim() |> String.replace("$", "") |> Decimal.new(),
+          format: price_format(lo_string, hi_string, variable_price?)
+        }
     end
   end
 

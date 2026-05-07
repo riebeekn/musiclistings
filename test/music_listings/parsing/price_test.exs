@@ -16,6 +16,11 @@ defmodule MusicListings.Parsing.PriceTest do
       assert %Price{lo: nil, hi: nil, format: :unknown} == Price.new("")
     end
 
+    test "handles price strings that clean to empty" do
+      assert %Price{lo: nil, hi: nil, format: :unknown} == Price.new("$")
+      assert %Price{lo: nil, hi: nil, format: :unknown} == Price.new(" $ ")
+    end
+
     test "handles free price" do
       assert %Price{lo: nil, hi: nil, format: :free} == Price.new("This event is Free!")
     end
