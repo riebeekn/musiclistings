@@ -133,7 +133,7 @@ defmodule MusicListings.Parsing.VenueParsers.RoyThomsonHallParserTest do
 
   describe "ticket_url/1" do
     test "returns the event ticket url", %{event: event} do
-      assert nil == RoyThomsonHallParser.ticket_url(event)
+      assert "https://tickets.mhrth.com/100/101/" == RoyThomsonHallParser.ticket_url(event)
     end
   end
 

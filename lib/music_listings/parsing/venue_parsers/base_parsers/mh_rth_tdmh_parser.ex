@@ -99,21 +99,21 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
 
   def event_date(event, base_url) do
     case fetch_instances(event, base_url) do
-      {:ok, [{first_date, _first_time} | _rest]} -> first_date
+      {:ok, [{first_date, _first_time, _detail_url} | _rest]} -> first_date
       :error -> event_date(event)
     end
   end
 
   def additional_dates(event, base_url) do
     case fetch_instances(event, base_url) do
-      {:ok, [_first | rest]} -> Enum.map(rest, fn {date, _time} -> date end)
+      {:ok, [_first | rest]} -> Enum.map(rest, fn {date, _time, _detail_url} -> date end)
       :error -> additional_dates(event)
     end
   end
 
   def event_time(event, base_url) do
     case fetch_instances(event, base_url) do
-      {:ok, [{_first_date, time} | _rest]} -> time
+      {:ok, [{_first_date, time, _detail_url} | _rest]} -> time
       :error -> nil
     end
   end
@@ -159,10 +159,10 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
     {start_date, end_date} = index_date_range(event)
 
     instances
-    |> Enum.filter(fn {date, _time} ->
+    |> Enum.filter(fn {date, _time, _detail_url} ->
       Date.compare(date, start_date) != :lt and Date.compare(date, end_date) != :gt
     end)
-    |> Enum.uniq_by(fn {date, _time} -> date end)
+    |> Enum.uniq_by(fn {date, _time, _detail_url} -> date end)
   end
 
   defp index_date_range(event) do
@@ -187,15 +187,13 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   end
 
   defp parse_instances(body) do
-    json = ParseHelpers.maybe_decode!(body)
-
-    case json do
+    case ParseHelpers.maybe_decode!(body) do
       %{"items" => items} when is_list(items) ->
         instances =
           items
-          |> Enum.map(&parse_instance_title/1)
+          |> Enum.map(&parse_instance/1)
           |> Enum.reject(&is_nil/1)
-          |> Enum.sort()
+          |> Enum.sort_by(fn {date, time, _detail_url} -> {date, time} end)
 
         if instances == [], do: :error, else: {:ok, instances}
 
@@ -204,12 +202,13 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
     end
   end
 
-  defp parse_instance_title(%{"title" => title}) when is_binary(title) do
+  defp parse_instance(%{"title" => title, "meta" => %{"detail_url" => detail_url}})
+       when is_binary(title) and is_binary(detail_url) do
     case Regex.run(~r/^(\d{4}-\d{2}-\d{2}),\s*(\d{2}:\d{2})/, title) do
       [_full_match, date_str, time_str] ->
         with {:ok, date} <- Date.from_iso8601(date_str),
              {:ok, time} <- Time.from_iso8601("#{time_str}:00") do
-          {date, time}
+          {date, time, detail_url}
         else
           _error -> nil
         end
@@ -219,7 +218,7 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
     end
   end
 
-  defp parse_instance_title(_item), do: nil
+  defp parse_instance(_item), do: nil
 
   def price(_event) do
     Price.unknown()
@@ -229,8 +228,63 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
     :unknown
   end
 
-  def ticket_url(_event) do
-    nil
+  def ticket_url(event, base_url) do
+    with {:ok, [{_date, _time, instance_detail_url} | _rest]} <-
+           fetch_instances(event, base_url),
+         {:ok, booking_url} <- fetch_booking_url(instance_detail_url) do
+      booking_url
+    else
+      _error -> nil
+    end
+  end
+
+  def ticket_url(event, base_url, date) do
+    with {:ok, instances} <- fetch_instances(event, base_url),
+         {:ok, instance_detail_url} <- find_instance_detail_url(instances, date),
+         {:ok, booking_url} <- fetch_booking_url(instance_detail_url) do
+      booking_url
+    else
+      _error -> nil
+    end
+  end
+
+  defp find_instance_detail_url(instances, date) do
+    case Enum.find(instances, fn {instance_date, _time, _detail_url} ->
+           Date.compare(instance_date, date) == :eq
+         end) do
+      {_date, _time, detail_url} -> {:ok, detail_url}
+      nil -> :error
+    end
+  end
+
+  defp fetch_booking_url(instance_detail_url) do
+    cache_key = {:mh_rth_tdmh_booking_url, instance_detail_url}
+
+    case Process.get(cache_key) do
+      nil ->
+        result = do_fetch_booking_url(instance_detail_url)
+        Process.put(cache_key, result)
+        result
+
+      cached ->
+        cached
+    end
+  end
+
+  defp do_fetch_booking_url(instance_detail_url) do
+    with {:ok, %HttpClient.Response{status: 200, body: body}} <-
+           HttpClient.get(instance_detail_url),
+         %{"booking_url" => url} when is_binary(url) and url != "" <-
+           ParseHelpers.maybe_decode!(body) do
+      {:ok, url}
+    else
+      error ->
+        Logger.warning(
+          "Failed to fetch booking_url for #{instance_detail_url}: #{inspect(error)}"
+        )
+
+        :error
+    end
   end
 
   def details_url(event) do

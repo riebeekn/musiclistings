@@ -87,7 +87,7 @@ defmodule MusicListings.Crawler.EventParser do
         price_lo: price_info.lo,
         price_hi: price_info.hi,
         age_restriction: parser.age_restriction(payload.raw_event),
-        ticket_url: parser.ticket_url(payload.raw_event),
+        ticket_url: ticket_url_for(parser, payload.raw_event, event_start_date),
         details_url: parser.details_url(payload.raw_event),
         venue_id: venue.id
       }
@@ -105,11 +105,19 @@ defmodule MusicListings.Crawler.EventParser do
           price_lo: price_info.lo,
           price_hi: price_info.hi,
           age_restriction: parser.age_restriction(payload.raw_event),
-          ticket_url: parser.ticket_url(payload.raw_event),
+          ticket_url: ticket_url_for(parser, payload.raw_event, date),
           details_url: parser.details_url(payload.raw_event),
           venue_id: venue.id
         }
       end)
+    end
+  end
+
+  defp ticket_url_for(parser, raw_event, date) do
+    if function_exported?(parser, :ticket_url, 2) do
+      parser.ticket_url(raw_event, date)
+    else
+      parser.ticket_url(raw_event)
     end
   end
 

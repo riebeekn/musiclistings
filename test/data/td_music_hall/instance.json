@@ -1,0 +1,14 @@
+{
+  "id": 301,
+  "meta": {
+    "type": "pages.InstancePage",
+    "detail_url": "https://tdmusichall.mhrth.com/api/attendable/v1/instances/301/",
+    "html_url": "https://tdmusichall.mhrth.com/tickets/four-chords-and-the-truth-nov/2025-11-13-2000-pk301/",
+    "slug": "2025-11-13-2000-pk301"
+  },
+  "title": "2025-11-13, 20:00 (pk=301)",
+  "remote_id": "301",
+  "start_datetime": "2025-11-13T20:00:00-04:00",
+  "booking_url": "https://tickets.mhrth.com/300/301/",
+  "generated_booking_url": "https://tickets.mhrth.com/300/301/"
+}

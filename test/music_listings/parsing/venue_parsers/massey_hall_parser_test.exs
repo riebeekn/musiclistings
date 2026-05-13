@@ -72,26 +72,26 @@ defmodule MusicListings.Parsing.VenueParsers.MasseyHallParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "jessie_reyez_2025_12_05" == MasseyHallParser.event_id(event)
+      assert "belle_and_sebastian_2026_05_25" == MasseyHallParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "jessie_reyez_2025_12_05" == MasseyHallParser.ignored_event_id(event)
+      assert "belle_and_sebastian_2026_05_25" == MasseyHallParser.ignored_event_id(event)
     end
   end
 
   describe "event_title/1" do
     test "returns event title", %{event: event} do
-      assert "Jessie Reyez" == MasseyHallParser.event_title(event)
+      assert "Belle and Sebastian" == MasseyHallParser.event_title(event)
     end
   end
 
   describe "performers/1" do
     test "returns the event performers", %{event: event} do
       assert %Performers{
-               headliner: "Jessie Reyez",
+               headliner: "Belle and Sebastian",
                openers: []
              } == MasseyHallParser.performers(event)
     end
@@ -99,13 +99,13 @@ defmodule MusicListings.Parsing.VenueParsers.MasseyHallParserTest do
 
   describe "event_date/1" do
     test "returns the event date", %{event: event} do
-      assert ~D[2025-12-05] == MasseyHallParser.event_date(event)
+      assert ~D[2026-05-25] == MasseyHallParser.event_date(event)
     end
   end
 
   describe "additional_dates/1" do
     test "returns a list of additional dates", %{event: event} do
-      assert [~D[2025-12-06]] == MasseyHallParser.additional_dates(event)
+      assert [~D[2026-05-26]] == MasseyHallParser.additional_dates(event)
     end
   end
 
@@ -130,13 +130,29 @@ defmodule MusicListings.Parsing.VenueParsers.MasseyHallParserTest do
 
   describe "ticket_url/1" do
     test "returns the event ticket url", %{event: event} do
-      assert nil == MasseyHallParser.ticket_url(event)
+      assert "https://tickets.mhrth.com/7047/7048/" == MasseyHallParser.ticket_url(event)
+    end
+  end
+
+  describe "ticket_url/2" do
+    test "returns the booking url for the primary date", %{event: event} do
+      assert "https://tickets.mhrth.com/7047/7048/" ==
+               MasseyHallParser.ticket_url(event, ~D[2026-05-25])
+    end
+
+    test "returns the booking url for the additional date", %{event: event} do
+      assert "https://tickets.mhrth.com/7047/7049/" ==
+               MasseyHallParser.ticket_url(event, ~D[2026-05-26])
+    end
+
+    test "returns nil for a date that doesn't match any instance", %{event: event} do
+      assert nil == MasseyHallParser.ticket_url(event, ~D[2099-01-01])
     end
   end
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert "https://masseyhall.mhrth.com/tickets/jessie-reyez/" ==
+      assert "https://masseyhall.mhrth.com/tickets/belle-and-sebastian/" ==
                MasseyHallParser.details_url(event)
     end
   end

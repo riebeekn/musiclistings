@@ -131,7 +131,7 @@ defmodule MusicListings.Parsing.VenueParsers.TDMusicHallParserTest do
 
   describe "ticket_url/1" do
     test "returns the event ticket url", %{event: event} do
-      assert nil == TDMusicHallParser.ticket_url(event)
+      assert "https://tickets.mhrth.com/300/301/" == TDMusicHallParser.ticket_url(event)
     end
   end
 
