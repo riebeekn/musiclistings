@@ -1,0 +1,17 @@
+{
+  "id": 4261,
+  "meta": {
+    "type": "pages.InstancePage",
+    "detail_url": "https://masseyhall.mhrth.com/api/attendable/v1/instances/4261/",
+    "html_url": "https://masseyhall.mhrth.com/tickets/belle-and-sebastian/2026-05-25-2000-7048/",
+    "slug": "2026-05-25-2000-7048"
+  },
+  "title": "2026-05-25, 20:00  (7048)",
+  "remote_id": "7048",
+  "status": "ONS",
+  "start_datetime": "2026-05-25T20:00:00-04:00",
+  "end_datetime": null,
+  "doors_time": "19:00:00",
+  "booking_url": "https://tickets.mhrth.com/7047/7048/",
+  "generated_booking_url": "https://tickets.mhrth.com/7047/7048/"
+}

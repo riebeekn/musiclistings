@@ -66,7 +66,14 @@ defmodule MusicListings.Parsing.VenueParser do
   """
   @callback ticket_url(event :: Meeseeks.Result.t()) :: String.t() | nil
   @doc """
+  Per-date ticket URL.  Implement when a multi-date event has a distinct
+  booking URL per date.  Falls back to `ticket_url/1` when not implemented.
+  """
+  @callback ticket_url(event :: Meeseeks.Result.t(), date :: Date.t()) :: String.t() | nil
+  @doc """
   The details URL for the event
   """
   @callback details_url(event :: Meeseeks.Result.t()) :: String.t() | nil
+
+  @optional_callbacks ticket_url: 2
 end

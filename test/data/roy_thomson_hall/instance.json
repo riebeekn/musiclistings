@@ -1,0 +1,14 @@
+{
+  "id": 101,
+  "meta": {
+    "type": "pages.InstancePage",
+    "detail_url": "https://roythomsonhall.mhrth.com/api/attendable/v1/instances/101/",
+    "html_url": "https://roythomsonhall.mhrth.com/tickets/tso-carmina-burana/2025-09-18-1930-pk101/",
+    "slug": "2025-09-18-1930-pk101"
+  },
+  "title": "2025-09-18, 19:30 (pk=101)",
+  "remote_id": "101",
+  "start_datetime": "2025-09-18T19:30:00-04:00",
+  "booking_url": "https://tickets.mhrth.com/100/101/",
+  "generated_booking_url": "https://tickets.mhrth.com/100/101/"
+}

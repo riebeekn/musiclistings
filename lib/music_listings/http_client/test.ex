@@ -48,14 +48,21 @@ defmodule MusicListings.HttpClient.Test do
 
   defp fixtures do
     [
-      # Roy Thomson Hall
-      {"roythomsonhall.mhrth.com/api/attendable", "roy_thomson_hall/instances.json"},
+      # Roy Thomson Hall — list endpoint must match before singular instance endpoint
+      {"roythomsonhall.mhrth.com/api/attendable/v1/instances/?child_of",
+       "roy_thomson_hall/instances.json"},
+      {"roythomsonhall.mhrth.com/api/attendable/v1/instances/", "roy_thomson_hall/instance.json"},
       {"roythomsonhall.mhrth.com/tickets/", "roy_thomson_hall/detail.html"},
-      # Massey Hall
-      {"masseyhall.mhrth.com/api/attendable", "massey_hall/instances.json"},
+      # Massey Hall — per-instance routes match before the generic list pattern
+      {"masseyhall.mhrth.com/api/attendable/v1/instances/?child_of",
+       "massey_hall/instances.json"},
+      {"masseyhall.mhrth.com/api/attendable/v1/instances/4261", "massey_hall/instance_4261.json"},
+      {"masseyhall.mhrth.com/api/attendable/v1/instances/4294", "massey_hall/instance_4294.json"},
       {"masseyhall.mhrth.com/tickets/", "massey_hall/detail.html"},
       # TD Music Hall
-      {"tdmusichall.mhrth.com/api/attendable", "td_music_hall/instances.json"},
+      {"tdmusichall.mhrth.com/api/attendable/v1/instances/?child_of",
+       "td_music_hall/instances.json"},
+      {"tdmusichall.mhrth.com/api/attendable/v1/instances/", "td_music_hall/instance.json"},
       {"tdmusichall.mhrth.com/tickets/", "td_music_hall/detail.html"},
       # Drake Underground
       {"thedrake.ca/event/", "drake_underground/detail.html"}

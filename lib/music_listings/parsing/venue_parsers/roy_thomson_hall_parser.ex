@@ -55,7 +55,10 @@ defmodule MusicListings.Parsing.VenueParsers.RoyThomsonHallParser do
   defdelegate age_restriction(event), to: MhRthTdmhParser
 
   @impl true
-  defdelegate ticket_url(event), to: MhRthTdmhParser
+  def ticket_url(event), do: MhRthTdmhParser.ticket_url(event, @base_url)
+
+  @impl true
+  def ticket_url(event, date), do: MhRthTdmhParser.ticket_url(event, @base_url, date)
 
   @impl true
   def details_url(event) do
