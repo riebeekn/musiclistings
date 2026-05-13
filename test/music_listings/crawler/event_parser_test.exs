@@ -15,7 +15,7 @@ defmodule MusicListings.Crawler.EventParserTest do
     @impl true
     def source_url, do: "https://example.com"
     @impl true
-    def retrieve_events_fun, do: fn _ -> {:error, :not_used} end
+    def retrieve_events_fun, do: fn _e -> {:error, :not_used} end
     @impl true
     def events(_body), do: []
     @impl true
@@ -54,7 +54,7 @@ defmodule MusicListings.Crawler.EventParserTest do
     @impl true
     def source_url, do: "https://example.com"
     @impl true
-    def retrieve_events_fun, do: fn _ -> {:error, :not_used} end
+    def retrieve_events_fun, do: fn _e -> {:error, :not_used} end
     @impl true
     def events(_body), do: []
     @impl true
