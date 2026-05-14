@@ -82,6 +82,17 @@ defmodule MusicListings.Crawler.EventStorage do
       |> Payload.set_operation(:noop)
   end
 
+  defp maybe_update_event(
+         payload,
+         _parsed_event,
+         %Event{locked_from_updates?: true},
+         _crawl_summary
+       ) do
+    payload
+    |> Payload.set_persisted_event(payload)
+    |> Payload.set_operation(:noop)
+  end
+
   defp maybe_update_event(payload, parsed_event, existing_event, crawl_summary) do
     %{
       title: parsed_event.title,

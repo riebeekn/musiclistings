@@ -108,6 +108,28 @@ defmodule MusicListings.Crawler.EventStorageTest do
       assert :updated == payload.operation
     end
 
+    test "does not update an existing event that is locked from updates", %{
+      payloads: payloads,
+      crawl_summary: crawl_summary
+    } do
+      EventStorage.save_events(payloads, crawl_summary)
+
+      Event
+      |> last()
+      |> Repo.one()
+      |> Ecto.Changeset.change(%{
+        title: "Manually corrected title",
+        locked_from_updates?: true
+      })
+      |> Repo.update!()
+
+      [payload] = EventStorage.save_events(payloads, crawl_summary)
+      assert :noop == payload.operation
+
+      persisted_event = Event |> last() |> Repo.one()
+      assert persisted_event.title == "Manually corrected title"
+    end
+
     test "on an invalid update returns save_error and inserts a crawl error", %{
       payloads: payloads,
       crawl_summary: crawl_summary
