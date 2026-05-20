@@ -1,0 +1,8 @@
+# Suppressed mix_audit advisories. One advisory ID per line.
+# Lines starting with "#" are comments. Inline comments are NOT supported —
+# the parser treats the whole line (minus surrounding whitespace) as an ID.
+
+# No patched version exists upstream (vulnerable range covers all releases
+# through 2.16.1 as of 2026-05-18).
+# Revisit: 2026-08-18 (or sooner when a fixed cowlib is published).
+GHSA-g2wm-735q-3f56
