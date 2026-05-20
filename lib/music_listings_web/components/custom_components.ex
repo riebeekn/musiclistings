@@ -404,7 +404,7 @@ defmodule MusicListingsWeb.CustomComponents do
                     value="true"
                     type="checkbox"
                     checked={Integer.to_string(venue.id) in @venue_ids}
-                    class="rounded border-neutral-600 bg-neutral-800 text-rose-500 focus:ring-0 focus:ring-offset-0 cursor-pointer"
+                    class="rounded-sm border-neutral-600 bg-neutral-800 text-rose-500 focus:ring-0 focus:ring-offset-0 cursor-pointer"
                   />
                 </span>
               </li>
@@ -637,7 +637,7 @@ defmodule MusicListingsWeb.CustomComponents do
                   value="true"
                   type="checkbox"
                   checked={Integer.to_string(venue.id) in @venue_ids}
-                  class="rounded border-neutral-600 bg-neutral-800 text-rose-500 focus:ring-0 focus:ring-offset-0 cursor-pointer"
+                  class="rounded-sm border-neutral-600 bg-neutral-800 text-rose-500 focus:ring-0 focus:ring-offset-0 cursor-pointer"
                 />
               </span>
             </li>
@@ -816,7 +816,7 @@ defmodule MusicListingsWeb.CustomComponents do
               </h3>
               <p class="text-sm text-neutral-500 mt-1">{venue.street}</p>
             </div>
-            <span class="flex-shrink-0 text-xs font-medium text-rose-400 bg-rose-500/10 px-3 py-1 rounded-full">
+            <span class="shrink-0 text-xs font-medium text-rose-400 bg-rose-500/10 px-3 py-1 rounded-full">
               {venue.upcoming_event_count} Upcoming Events
             </span>
           </div>

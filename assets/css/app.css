@@ -1,6 +1,54 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import "tailwindcss" source(none);
+
+/* Scan paths for class names (replaces the v3 `content` array) */
+@source "../css";
+@source "../js";
+@source "../../lib/music_listings_web";
+@source "../../lib/music_listings_web.ex";
+
+/* Plugins (bundled in / loadable by the standalone v4 binary — no npm) */
+@plugin "@tailwindcss/forms";
+@plugin "../vendor/heroicons";
+
+/* LiveView loading-state variants (were tailwind.config.js plugins).
+   Match when the element itself has the class or an ancestor does. */
+@custom-variant phx-click-loading {
+  &.phx-click-loading,
+  .phx-click-loading & {
+    @slot;
+  }
+}
+@custom-variant phx-submit-loading {
+  &.phx-submit-loading,
+  .phx-submit-loading & {
+    @slot;
+  }
+}
+@custom-variant phx-change-loading {
+  &.phx-change-loading,
+  .phx-change-loading & {
+    @slot;
+  }
+}
+
+/* Custom fonts (were theme.extend.fontFamily) */
+@theme {
+  --font-sans: "Inter var", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+/* Restore Tailwind v3's default border color (gray-200) across all borders */
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
 
 /* This file is for your main application CSS */
 input {
