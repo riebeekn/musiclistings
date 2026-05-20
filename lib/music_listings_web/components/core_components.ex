@@ -358,7 +358,7 @@ defmodule MusicListingsWeb.CoreComponents do
           name={@name}
           value="true"
           checked={@checked}
-          class="rounded border-neutral-600 bg-neutral-800 text-rose-500 focus:ring-0"
+          class="rounded-sm border-neutral-600 bg-neutral-800 text-rose-500 focus:ring-0"
           {@rest}
         />
         {@label}
@@ -375,7 +375,7 @@ defmodule MusicListingsWeb.CoreComponents do
       <select
         id={@id}
         name={@name}
-        class="mt-2 block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-rose-500 sm:text-sm sm:leading-6"
+        class="mt-2 block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-xs ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-rose-500 sm:text-sm sm:leading-6"
         multiple={@multiple}
         {@rest}
       >
@@ -395,7 +395,7 @@ defmodule MusicListingsWeb.CoreComponents do
         id={@id}
         name={@name}
         class={[
-          "mt-2 block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-rose-500 sm:text-sm sm:leading-6 min-h-[6rem]",
+          "mt-2 block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-xs ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-rose-500 sm:text-sm sm:leading-6 min-h-[6rem]",
           @errors == [] && "ring-white/10 focus:ring-rose-500",
           @errors != [] && "ring-amber-400 focus:ring-amber-400"
         ]}
@@ -417,7 +417,7 @@ defmodule MusicListingsWeb.CoreComponents do
         id={@id}
         value={Phoenix.HTML.Form.normalize_value(@type, @value)}
         class={[
-          "mt-2 block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-rose-500 sm:text-sm sm:leading-6",
+          "mt-2 block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-xs ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-rose-500 sm:text-sm sm:leading-6",
           @errors == [] && "ring-white/10 focus:ring-rose-500",
           @errors != [] && "ring-amber-400 focus:ring-amber-400"
         ]}

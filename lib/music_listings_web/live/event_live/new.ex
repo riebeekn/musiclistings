@@ -73,7 +73,7 @@ defmodule MusicListingsWeb.EventLive.New do
           </p>
           <div class="mt-4 space-y-4">
             <div class="flex items-start gap-3">
-              <div class="mt-1 flex-shrink-0 rounded-lg bg-rose-500/10 p-2">
+              <div class="mt-1 shrink-0 rounded-lg bg-rose-500/10 p-2">
                 <MusicListingsWeb.CoreComponents.icon
                   name="hero-clock"
                   class="size-5 text-rose-400"
@@ -87,7 +87,7 @@ defmodule MusicListingsWeb.EventLive.New do
               </div>
             </div>
             <div class="flex items-start gap-3">
-              <div class="mt-1 flex-shrink-0 rounded-lg bg-rose-500/10 p-2">
+              <div class="mt-1 shrink-0 rounded-lg bg-rose-500/10 p-2">
                 <MusicListingsWeb.CoreComponents.icon
                   name="hero-musical-note"
                   class="size-5 text-rose-400"
@@ -101,7 +101,7 @@ defmodule MusicListingsWeb.EventLive.New do
               </div>
             </div>
             <div class="flex items-start gap-3">
-              <div class="mt-1 flex-shrink-0 rounded-lg bg-rose-500/10 p-2">
+              <div class="mt-1 shrink-0 rounded-lg bg-rose-500/10 p-2">
                 <MusicListingsWeb.CoreComponents.icon
                   name="hero-information-circle"
                   class="size-5 text-rose-400"

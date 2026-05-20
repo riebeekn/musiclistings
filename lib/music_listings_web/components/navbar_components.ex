@@ -87,7 +87,7 @@ defmodule MusicListingsWeb.NavbarComponents do
         phx-click-away={hide_mobile_menu()}
         phx-click={toggle_mobile_menu()}
         type="button"
-        class="inline-flex items-center justify-center rounded-md p-2 text-neutral-400 hover:bg-neutral-800 hover:text-neutral-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-rose-500 transition-colors"
+        class="inline-flex items-center justify-center rounded-md p-2 text-neutral-400 hover:bg-neutral-800 hover:text-neutral-50 focus:outline-hidden focus:ring-2 focus:ring-inset focus:ring-rose-500 transition-colors"
         aria-controls="mobile-menu"
         aria-expanded="false"
       >
@@ -157,7 +157,7 @@ defmodule MusicListingsWeb.NavbarComponents do
 
   defp logo(assigns) do
     ~H"""
-    <div class="flex flex-shrink-0 items-center">
+    <div class="flex shrink-0 items-center">
       <a
         href="/"
         class="text-2xl font-display font-bold tracking-tight text-neutral-50 hover:text-rose-400 transition-colors"
