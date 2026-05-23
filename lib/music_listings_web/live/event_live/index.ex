@@ -301,7 +301,7 @@ defmodule MusicListingsWeb.EventLive.Index do
 
     <%!-- Desktop filter bar --%>
     <div
-      class="mb-2 hidden md:block"
+      class="mb-8 hidden md:block"
       data-venue-filter-restore="true"
       data-storage-key="venue_ids"
       data-date-filter-restore="true"
