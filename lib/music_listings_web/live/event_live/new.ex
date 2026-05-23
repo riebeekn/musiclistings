@@ -73,43 +73,43 @@ defmodule MusicListingsWeb.EventLive.New do
           </p>
           <div class="mt-4 space-y-4">
             <div class="flex items-start gap-3">
-              <div class="mt-1 shrink-0 rounded-lg bg-rose-500/10 p-2">
+              <div class="mt-1 shrink-0 rounded-lg bg-spotlight/10 p-2">
                 <MusicListingsWeb.CoreComponents.icon
                   name="hero-clock"
-                  class="size-5 text-rose-400"
+                  class="size-5 text-spotlight"
                 />
               </div>
               <div>
-                <p class="text-sm font-semibold text-neutral-50">Quick review</p>
-                <p class="text-sm text-neutral-400">
+                <p class="text-sm font-semibold text-paper">Quick review</p>
+                <p class="text-sm text-paper-dim">
                   Submissions are usually reviewed and approved within 24 hours.
                 </p>
               </div>
             </div>
             <div class="flex items-start gap-3">
-              <div class="mt-1 shrink-0 rounded-lg bg-rose-500/10 p-2">
+              <div class="mt-1 shrink-0 rounded-lg bg-spotlight/10 p-2">
                 <MusicListingsWeb.CoreComponents.icon
                   name="hero-musical-note"
-                  class="size-5 text-rose-400"
+                  class="size-5 text-spotlight"
                 />
               </div>
               <div>
-                <p class="text-sm font-semibold text-neutral-50">All genres welcome</p>
-                <p class="text-sm text-neutral-400">
+                <p class="text-sm font-semibold text-paper">All genres welcome</p>
+                <p class="text-sm text-paper-dim">
                   From jazz to punk, electronic to folk - if it's live music in Toronto, we want to list it.
                 </p>
               </div>
             </div>
             <div class="flex items-start gap-3">
-              <div class="mt-1 shrink-0 rounded-lg bg-rose-500/10 p-2">
+              <div class="mt-1 shrink-0 rounded-lg bg-spotlight/10 p-2">
                 <MusicListingsWeb.CoreComponents.icon
                   name="hero-information-circle"
-                  class="size-5 text-rose-400"
+                  class="size-5 text-spotlight"
                 />
               </div>
               <div>
-                <p class="text-sm font-semibold text-neutral-50">Just the basics</p>
-                <p class="text-sm text-neutral-400">
+                <p class="text-sm font-semibold text-paper">Just the basics</p>
+                <p class="text-sm text-paper-dim">
                   Only the event title, venue, and date are required. Everything else is optional.
                 </p>
               </div>
@@ -133,13 +133,7 @@ defmodule MusicListingsWeb.EventLive.New do
             <Turnstile.widget theme="dark" />
           </div>
           <:actions>
-            <.button
-              phx-click="cancel"
-              type="button"
-              class="border border-neutral-700 hover:bg-neutral-800 transition-colors"
-            >
-              Cancel
-            </.button>
+            <.button type="button" phx-click="cancel">Cancel</.button>
             <.submit_button phx-disable-with="Submitting...">Submit Event</.submit_button>
           </:actions>
         </.simple_form>

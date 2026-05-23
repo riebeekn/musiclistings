@@ -13,6 +13,8 @@ defmodule MusicListingsWeb.NavbarComponents do
   import MusicListingsWeb.CustomComponents, only: [when_admin: 1]
   alias Phoenix.LiveView.JS
 
+  @ticker_phrase "Toronto Live Music ◆ Concerts ◆ Club Shows ◆ DIY ◆ Jazz ◆ Punk ◆ Electronic ◆ Folk ◆ Updated Daily ◆ "
+
   @doc """
   Renders the navbar
 
@@ -22,11 +24,34 @@ defmodule MusicListingsWeb.NavbarComponents do
   """
   def navbar(assigns) do
     ~H"""
-    <nav class="sticky top-0 z-50 bg-neutral-950/80 backdrop-blur-xl border-b border-neutral-800">
-      <.mobile_updated_banner current_user={@current_user} />
-      <.main_menu current_user={@current_user} />
-      <.mobile_menu current_user={@current_user} />
-    </nav>
+    <header class="sticky top-0 z-50">
+      <.ticker />
+      <nav class="bg-ink/85 backdrop-blur-xl border-b border-hairline">
+        <.mobile_updated_banner current_user={@current_user} />
+        <.main_menu current_user={@current_user} />
+        <.mobile_menu current_user={@current_user} />
+      </nav>
+    </header>
+    """
+  end
+
+  defp ticker(assigns) do
+    assigns = assign(assigns, :phrase, String.duplicate(@ticker_phrase, 4))
+
+    ~H"""
+    <div class="overflow-hidden border-b border-hairline bg-spotlight text-ink">
+      <div class="flex w-max animate-marquee will-change-transform">
+        <span class="whitespace-nowrap py-1 font-mono text-[0.7rem] font-bold uppercase tracking-[0.2em]">
+          {@phrase}
+        </span>
+        <span
+          aria-hidden="true"
+          class="whitespace-nowrap py-1 font-mono text-[0.7rem] font-bold uppercase tracking-[0.2em]"
+        >
+          {@phrase}
+        </span>
+      </div>
+    </div>
     """
   end
 
@@ -36,19 +61,19 @@ defmodule MusicListingsWeb.NavbarComponents do
       <div class="relative flex h-16 items-center justify-between">
         <.mobile_menu_button />
         <.main_menu_links current_user={@current_user} />
-        <div class="hidden md:flex items-center gap-4">
-          <.last_updated_label />
+        <div class="hidden md:flex items-center gap-5">
+          <.live_label />
           <a
             href={~p"/events/new"}
-            class="bg-rose-500 hover:bg-rose-400 text-neutral-950 font-semibold text-sm px-4 py-2 rounded-lg transition-colors"
+            class="inline-flex h-8 items-center justify-center gap-x-1.5 rounded bg-spotlight px-3.5 font-mono text-xs font-medium uppercase tracking-widest text-ink transition-colors hover:bg-spotlight-deep"
           >
-            + Submit Event
+            Submit Event
           </a>
           <.when_admin current_user={@current_user}>
             <.link
               href={~p"/users/log_out"}
               method="delete"
-              class="text-sm text-rose-400 font-semibold hover:text-rose-300 transition-colors"
+              class="kicker hover:text-spotlight transition-colors"
             >
               Log out
             </.link>
@@ -61,15 +86,15 @@ defmodule MusicListingsWeb.NavbarComponents do
 
   defp mobile_updated_banner(assigns) do
     ~H"""
-    <div class="block md:hidden border-b border-neutral-800 py-2.5">
+    <div class="block md:hidden border-b border-hairline py-2.5">
       <div class="mx-auto flex flex-col items-center px-4">
-        <.last_updated_label />
+        <.live_label />
         <.when_admin current_user={@current_user}>
           <div class="mt-1">
             <.link
               href={~p"/users/log_out"}
               method="delete"
-              class="text-xs text-rose-400 font-semibold hover:text-rose-300"
+              class="kicker hover:text-spotlight"
             >
               Log out
             </.link>
@@ -87,7 +112,7 @@ defmodule MusicListingsWeb.NavbarComponents do
         phx-click-away={hide_mobile_menu()}
         phx-click={toggle_mobile_menu()}
         type="button"
-        class="inline-flex items-center justify-center rounded-md p-2 text-neutral-400 hover:bg-neutral-800 hover:text-neutral-50 focus:outline-hidden focus:ring-2 focus:ring-inset focus:ring-rose-500 transition-colors"
+        class="inline-flex items-center justify-center rounded-md p-2 text-paper-dim hover:bg-ink-3 hover:text-paper focus:outline-hidden focus:ring-2 focus:ring-inset focus:ring-spotlight transition-colors"
         aria-controls="mobile-menu"
         aria-expanded="false"
       >
@@ -124,19 +149,19 @@ defmodule MusicListingsWeb.NavbarComponents do
   defp mobile_menu(assigns) do
     ~H"""
     <div class="hidden md:hidden" id="mobile-menu">
-      <div class="space-y-1 px-4 pt-2 pb-4 border-t border-neutral-800">
+      <div class="space-y-1 px-4 pt-2 pb-4 border-t border-hairline">
         <.mobile_menu_link link_text="Events" href={~p"/"} />
         <.mobile_menu_link link_text="Venues" href={~p"/venues"} />
         <.mobile_menu_link link_text="About" href={~p"/contact"} />
         <.when_admin current_user={@current_user}>
           <.mobile_menu_link link_text="Submitted" href={~p"/submitted_events"} />
         </.when_admin>
-        <div class="pt-3 mt-3 border-t border-neutral-800">
+        <div class="pt-3 mt-3 border-t border-hairline">
           <a
             href={~p"/events/new"}
-            class="block w-full text-center bg-rose-500 hover:bg-rose-400 text-neutral-950 font-semibold text-sm px-4 py-2.5 rounded-lg transition-colors"
+            class="inline-flex h-9 w-full items-center justify-center gap-x-2 rounded bg-spotlight px-4 font-mono text-sm font-medium uppercase tracking-widest text-ink transition-colors hover:bg-spotlight-deep"
           >
-            + Submit Event
+            Submit Event
           </a>
         </div>
         <.when_admin current_user={@current_user}>
@@ -144,7 +169,7 @@ defmodule MusicListingsWeb.NavbarComponents do
             <.link
               href={~p"/users/log_out"}
               method="delete"
-              class="text-sm text-rose-400 font-semibold hover:text-rose-300"
+              class="kicker hover:text-spotlight"
             >
               Log out
             </.link>
@@ -157,21 +182,26 @@ defmodule MusicListingsWeb.NavbarComponents do
 
   defp logo(assigns) do
     ~H"""
-    <div class="flex shrink-0 items-center">
-      <a
-        href="/"
-        class="text-2xl font-display font-bold tracking-tight text-neutral-50 hover:text-rose-400 transition-colors"
-      >
-        TML
-      </a>
-    </div>
+    <a href="/" class="group flex shrink-0 items-center gap-2.5">
+      <span class="grid size-8 place-items-center bg-spotlight font-display text-xl font-black leading-none text-ink">
+        T
+      </span>
+      <span class="headline hidden text-xl text-paper transition-colors group-hover:text-spotlight sm:block">
+        Toronto Music Listings
+      </span>
+    </a>
     """
   end
 
-  defp last_updated_label(assigns) do
+  defp live_label(assigns) do
     ~H"""
-    <div class="text-xs text-neutral-500 font-mono flex items-center gap-2">
-      <span>Updated {MusicListings.data_last_updated_on()}</span>
+    <div class="kicker flex items-center gap-2">
+      <span class="relative flex size-2">
+        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-spotlight opacity-70">
+        </span>
+        <span class="relative inline-flex size-2 rounded-full bg-spotlight"></span>
+      </span>
+      Updated {MusicListings.data_last_updated_on()}
     </div>
     """
   end
@@ -184,7 +214,7 @@ defmodule MusicListingsWeb.NavbarComponents do
     ~H"""
     <.link
       href={@href}
-      class="text-neutral-400 hover:text-neutral-50 hover:bg-neutral-800 block px-3 py-2.5 rounded-lg text-base font-medium transition-colors"
+      class="text-paper-dim hover:text-paper hover:bg-ink-3 block px-3 py-2.5 rounded-lg text-base font-medium transition-colors"
       {@rest}
     >
       {@link_text}
@@ -199,7 +229,7 @@ defmodule MusicListingsWeb.NavbarComponents do
     ~H"""
     <a
       href={@href}
-      class="text-sm font-medium uppercase tracking-wider text-neutral-400 hover:text-neutral-50 px-3 py-2 rounded-lg transition-colors"
+      class="kicker px-3 py-2 text-paper-dim hover:text-spotlight transition-colors"
     >
       {@link_text}
     </a>

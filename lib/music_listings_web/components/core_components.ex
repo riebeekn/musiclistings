@@ -53,7 +53,7 @@ defmodule MusicListingsWeb.CoreComponents do
     >
       <div
         id={"#{@id}-bg"}
-        class="bg-neutral-950/90 fixed inset-0 transition-opacity"
+        class="bg-ink/90 fixed inset-0 transition-opacity"
         aria-hidden="true"
       />
       <div
@@ -71,7 +71,7 @@ defmodule MusicListingsWeb.CoreComponents do
               phx-window-keydown={JS.exec("data-cancel", to: "##{@id}")}
               phx-key="escape"
               phx-click-away={JS.exec("data-cancel", to: "##{@id}")}
-              class="shadow-black/20 ring-neutral-800 relative hidden rounded-2xl bg-neutral-900 p-14 shadow-lg ring-1 transition"
+              class="shadow-black/40 ring-hairline relative hidden rounded-2xl bg-ink-2 p-14 shadow-lg ring-1 transition"
             >
               <div class="absolute top-6 right-5">
                 <button
@@ -125,9 +125,9 @@ defmodule MusicListingsWeb.CoreComponents do
       phx-click={JS.push("lv:clear-flash", value: %{key: @kind}) |> hide("##{@id}")}
       role="alert"
       class={[
-        "fixed top-2 right-2 mr-2 w-80 sm:w-96 z-50 rounded-lg p-3 ring-1",
-        @kind == :info && "bg-emerald-50 text-emerald-800 ring-emerald-500 fill-cyan-900",
-        @kind == :error && "bg-rose-50 text-rose-900 shadow-md ring-rose-500 fill-rose-900",
+        "fixed top-2 right-2 mr-2 w-80 sm:w-96 z-50 rounded-lg p-3 ring-1 shadow-lg shadow-black/40",
+        @kind == :info && "bg-ink-2 text-paper ring-spotlight fill-spotlight",
+        @kind == :error && "bg-ink-2 text-paper ring-ember fill-ember",
         @extra_classes
       ]}
       {@rest}
@@ -246,8 +246,7 @@ defmodule MusicListingsWeb.CoreComponents do
     <button
       type={@type}
       class={[
-        "phx-submit-loading:opacity-75 rounded-lg py-2 px-3",
-        "text-sm font-semibold leading-6 text-white active:text-white/80",
+        "phx-submit-loading:opacity-75 inline-flex h-9 items-center justify-center gap-x-2 rounded border border-hairline bg-ink px-4 text-sm font-medium text-paper transition-colors hover:bg-ink-3",
         @class
       ]}
       {@rest}
@@ -266,6 +265,7 @@ defmodule MusicListingsWeb.CoreComponents do
       <.submit_button phx-click="go" class="ml-2">Send!</.submit_button>
   """
   attr :type, :string, default: nil
+  attr :class, :string, default: nil
   attr :rest, :global, include: ~w(disabled form name value)
 
   slot :inner_block, required: true
@@ -274,7 +274,11 @@ defmodule MusicListingsWeb.CoreComponents do
     ~H"""
     <button
       type={@type}
-      class="phx-submit-loading:opacity-75 rounded-md bg-rose-500/10 px-3 py-2 text-sm font-semibold text-rose-400 ring-1 ring-inset ring-rose-500/20 hover:text-rose-300 hover:ring-rose-300"
+      class={[
+        "phx-submit-loading:opacity-75 inline-flex h-9 items-center justify-center gap-x-2 rounded bg-spotlight px-4 text-sm font-medium text-ink transition-colors hover:bg-spotlight-deep",
+        @class
+      ]}
+      {@rest}
     >
       {render_slot(@inner_block)}
     </button>
@@ -350,7 +354,7 @@ defmodule MusicListingsWeb.CoreComponents do
 
     ~H"""
     <div>
-      <label class="flex items-center gap-4 text-sm leading-6 text-neutral-400">
+      <label class="flex items-center gap-4 text-sm leading-6 text-paper-dim">
         <input type="hidden" name={@name} value="false" disabled={@rest[:disabled]} />
         <input
           type="checkbox"
@@ -358,7 +362,7 @@ defmodule MusicListingsWeb.CoreComponents do
           name={@name}
           value="true"
           checked={@checked}
-          class="rounded-sm border-neutral-600 bg-neutral-800 text-rose-500 focus:ring-0"
+          class="rounded-sm border-hairline bg-ink-3 text-spotlight focus:ring-0"
           {@rest}
         />
         {@label}
@@ -375,7 +379,7 @@ defmodule MusicListingsWeb.CoreComponents do
       <select
         id={@id}
         name={@name}
-        class="mt-2 block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-xs ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-rose-500 sm:text-sm sm:leading-6"
+        class="mt-2 block w-full rounded-md border-0 bg-ink-2 py-1.5 text-paper shadow-xs ring-1 ring-inset ring-hairline focus:ring-2 focus:ring-inset focus:ring-spotlight sm:text-sm sm:leading-6"
         multiple={@multiple}
         {@rest}
       >
@@ -395,9 +399,9 @@ defmodule MusicListingsWeb.CoreComponents do
         id={@id}
         name={@name}
         class={[
-          "mt-2 block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-xs ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-rose-500 sm:text-sm sm:leading-6 min-h-[6rem]",
-          @errors == [] && "ring-white/10 focus:ring-rose-500",
-          @errors != [] && "ring-amber-400 focus:ring-amber-400"
+          "mt-2 block w-full rounded-md border-0 bg-ink-2 py-1.5 text-paper shadow-xs ring-1 ring-inset ring-hairline focus:ring-2 focus:ring-inset focus:ring-spotlight sm:text-sm sm:leading-6 min-h-[6rem]",
+          @errors == [] && "ring-hairline focus:ring-spotlight",
+          @errors != [] && "ring-ember focus:ring-ember"
         ]}
         {@rest}
       ><%= Phoenix.HTML.Form.normalize_value("textarea", @value) %></textarea>
@@ -417,9 +421,9 @@ defmodule MusicListingsWeb.CoreComponents do
         id={@id}
         value={Phoenix.HTML.Form.normalize_value(@type, @value)}
         class={[
-          "mt-2 block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-xs ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-rose-500 sm:text-sm sm:leading-6",
-          @errors == [] && "ring-white/10 focus:ring-rose-500",
-          @errors != [] && "ring-amber-400 focus:ring-amber-400"
+          "mt-2 block w-full rounded-md border-0 bg-ink-2 py-1.5 text-paper shadow-xs ring-1 ring-inset ring-hairline focus:ring-2 focus:ring-inset focus:ring-spotlight sm:text-sm sm:leading-6",
+          @errors == [] && "ring-hairline focus:ring-spotlight",
+          @errors != [] && "ring-ember focus:ring-ember"
         ]}
         {@rest}
       />
@@ -436,7 +440,7 @@ defmodule MusicListingsWeb.CoreComponents do
 
   def label(assigns) do
     ~H"""
-    <label for={@for} class="block text-sm font-medium leading-6 text-white">
+    <label for={@for} class="block text-sm font-medium leading-6 text-paper">
       {render_slot(@inner_block)}
     </label>
     """
@@ -449,7 +453,7 @@ defmodule MusicListingsWeb.CoreComponents do
 
   def error(assigns) do
     ~H"""
-    <p class="mt-3 flex gap-3 text-sm leading-6 text-amber-400">
+    <p class="mt-3 flex gap-3 text-sm leading-6 text-ember">
       <.icon name="hero-exclamation-circle-mini" class="mt-0.5 h-5 w-5 flex-none" />
       {render_slot(@inner_block)}
     </p>
@@ -469,10 +473,10 @@ defmodule MusicListingsWeb.CoreComponents do
     ~H"""
     <header class={[@actions != [] && "flex items-center justify-between gap-6", @class]}>
       <div>
-        <h1 class="text-lg font-semibold leading-8 text-neutral-50">
+        <h1 class="text-lg font-semibold leading-8 text-paper">
           {render_slot(@inner_block)}
         </h1>
-        <p :if={@subtitle != []} class="mt-2 text-sm leading-6 text-neutral-400">
+        <p :if={@subtitle != []} class="mt-2 text-sm leading-6 text-paper-dim">
           {render_slot(@subtitle)}
         </p>
       </div>
@@ -515,7 +519,7 @@ defmodule MusicListingsWeb.CoreComponents do
     ~H"""
     <div class="overflow-y-auto px-4 sm:overflow-visible sm:px-0">
       <table class="w-[40rem] mt-11 sm:w-full">
-        <thead class="text-sm text-left leading-6 text-neutral-500">
+        <thead class="text-sm text-left leading-6 text-paper-dim">
           <tr>
             <th :for={col <- @col} class="p-0 pb-4 pr-6 font-normal">{col[:label]}</th>
             <th :if={@action != []} class="relative p-0 pb-4">
@@ -526,27 +530,27 @@ defmodule MusicListingsWeb.CoreComponents do
         <tbody
           id={@id}
           phx-update={match?(%Phoenix.LiveView.LiveStream{}, @rows) && "stream"}
-          class="relative divide-y divide-neutral-800 border-t border-neutral-700 text-sm leading-6 text-neutral-300"
+          class="relative divide-y divide-hairline border-t border-hairline text-sm leading-6 text-paper"
         >
-          <tr :for={row <- @rows} id={@row_id && @row_id.(row)} class="group hover:bg-neutral-900">
+          <tr :for={row <- @rows} id={@row_id && @row_id.(row)} class="group hover:bg-ink-2">
             <td
               :for={{col, i} <- Enum.with_index(@col)}
               phx-click={@row_click && @row_click.(row)}
               class={["relative p-0", @row_click && "hover:cursor-pointer"]}
             >
               <div class="block py-4 pr-6">
-                <span class="absolute -inset-y-px right-0 -left-4 group-hover:bg-neutral-900 sm:rounded-l-xl" />
-                <span class={["relative", i == 0 && "font-semibold text-neutral-50"]}>
+                <span class="absolute -inset-y-px right-0 -left-4 group-hover:bg-ink-2 sm:rounded-l-xl" />
+                <span class={["relative", i == 0 && "font-semibold text-paper"]}>
                   {render_slot(col, @row_item.(row))}
                 </span>
               </div>
             </td>
             <td :if={@action != []} class="relative w-14 p-0">
               <div class="relative whitespace-nowrap py-4 text-right text-sm font-medium">
-                <span class="absolute -inset-y-px -right-4 left-0 group-hover:bg-neutral-900 sm:rounded-r-xl" />
+                <span class="absolute -inset-y-px -right-4 left-0 group-hover:bg-ink-2 sm:rounded-r-xl" />
                 <span
                   :for={action <- @action}
-                  class="relative ml-4 font-semibold leading-6 text-neutral-50 hover:text-neutral-300"
+                  class="relative ml-4 font-semibold leading-6 text-paper hover:text-spotlight"
                 >
                   {render_slot(action, @row_item.(row))}
                 </span>
@@ -576,10 +580,10 @@ defmodule MusicListingsWeb.CoreComponents do
   def list(assigns) do
     ~H"""
     <div class="mt-14">
-      <dl class="-my-4 divide-y divide-neutral-800">
+      <dl class="-my-4 divide-y divide-hairline">
         <div :for={item <- @item} class="flex gap-4 py-4 text-sm leading-6 sm:gap-8">
-          <dt class="w-1/4 flex-none text-neutral-500">{item.title}</dt>
-          <dd class="text-neutral-300">{render_slot(item)}</dd>
+          <dt class="w-1/4 flex-none text-paper-dim">{item.title}</dt>
+          <dd class="text-paper">{render_slot(item)}</dd>
         </div>
       </dl>
     </div>
@@ -601,7 +605,7 @@ defmodule MusicListingsWeb.CoreComponents do
     <div class="mt-16">
       <.link
         navigate={@navigate}
-        class="text-sm font-semibold leading-6 text-neutral-50 hover:text-neutral-300"
+        class="text-sm font-semibold leading-6 text-paper hover:text-spotlight"
       >
         <.icon name="hero-arrow-left-solid" class="h-3 w-3" />
         {render_slot(@inner_block)}

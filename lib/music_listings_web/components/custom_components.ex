@@ -52,11 +52,14 @@ defmodule MusicListingsWeb.CustomComponents do
 
   def page_header(assigns) do
     ~H"""
-    <div class="min-w-0 flex-1">
-      <h1 class="font-display text-3xl font-bold leading-7 text-neutral-50 sm:truncate sm:text-4xl sm:tracking-tight">
+    <div class="mb-8 border-b border-hairline pb-6">
+      <p class="kicker flex items-center gap-2">
+        <span class="inline-block h-2 w-8 bg-spotlight"></span> Toronto Music Listings
+      </p>
+      <h1 class="headline mt-4 text-5xl text-paper sm:text-6xl">
         {@header}
       </h1>
-      <p :if={@description} class="mt-2 text-sm text-neutral-400">
+      <p :if={@description} class="mt-3 max-w-xl text-sm leading-relaxed text-paper-dim">
         {@description}
       </p>
     </div>
@@ -78,12 +81,15 @@ defmodule MusicListingsWeb.CustomComponents do
 
   def cta(assigns) do
     ~H"""
-    <div class="relative px-6 pt-6 pb-8 lg:static lg:px-8 lg:py-48">
+    <div class="relative px-6 pt-10 pb-8 lg:static lg:px-8 lg:py-32">
       <div class="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
-        <h1 class="font-display text-pretty text-4xl font-bold tracking-tight text-neutral-50 sm:text-5xl">
+        <p class="kicker flex items-center gap-2">
+          <span class="inline-block h-2 w-8 bg-spotlight"></span> Got a show?
+        </p>
+        <h1 class="headline mt-4 text-6xl text-paper sm:text-7xl">
           {@header}
         </h1>
-        <div class="text-lg/8 text-neutral-400 mt-6 space-y-6">
+        <div class="mt-6 space-y-6 text-base leading-relaxed text-paper-dim lg:text-lg">
           {render_slot(@inner_block)}
         </div>
       </div>
@@ -108,7 +114,7 @@ defmodule MusicListingsWeb.CustomComponents do
     <.link
       patch={@url}
       data-scroll="top"
-      class="inline-flex gap-1 items-center justify-center text-sm font-medium transition-colors rounded-full py-1.5 px-4 bg-rose-500/10 text-rose-400 ring-1 ring-inset ring-rose-500/20 hover:text-rose-300 hover:ring-rose-300"
+      class="inline-flex gap-1 items-center justify-center rounded-full py-1.5 px-4 font-mono text-xs uppercase tracking-wider transition-colors bg-spotlight/10 text-spotlight ring-1 ring-inset ring-spotlight/30 hover:bg-spotlight hover:text-ink"
     >
       <%= if @icon_name && @icon_position == :left do %>
         <MusicListingsWeb.CoreComponents.icon name={@icon_name} class="size-3" />
@@ -130,7 +136,7 @@ defmodule MusicListingsWeb.CustomComponents do
   """
   def loading_indicator(assigns) do
     ~H"""
-    <div class="flex justify-center mt-36 text-rose-400">
+    <div class="flex justify-center mt-36 text-spotlight">
       <MusicListingsWeb.CoreComponents.icon name="hero-cog-6-tooth" class="animate-spin size-24" />
     </div>
     """
@@ -191,9 +197,9 @@ defmodule MusicListingsWeb.CustomComponents do
       <button
         phx-click={toggle_date_filtering()}
         type="button"
-        class="flex items-center justify-between gap-2 px-4 py-2.5 bg-neutral-900 border border-neutral-700 rounded-lg text-sm text-neutral-300 hover:border-neutral-600 transition-colors"
+        class="flex items-center justify-between gap-2 px-4 py-2.5 bg-ink-2 border border-hairline rounded-lg text-sm text-paper-dim hover:border-paper-dim transition-colors"
       >
-        <MusicListingsWeb.CoreComponents.icon name="hero-calendar" class="size-4 text-neutral-500" />
+        <MusicListingsWeb.CoreComponents.icon name="hero-calendar" class="size-4 text-paper-dim" />
         <span>
           <%= if @selected_date && !today?(@selected_date) do %>
             {format_filter_date(@selected_date)}
@@ -204,7 +210,7 @@ defmodule MusicListingsWeb.CustomComponents do
         <span id="date-filter-chevron" class="inline-block transition duration-200">
           <MusicListingsWeb.CoreComponents.icon
             name="hero-chevron-down"
-            class="size-4 text-neutral-500"
+            class="size-4 text-paper-dim"
           />
         </span>
       </button>
@@ -216,9 +222,9 @@ defmodule MusicListingsWeb.CustomComponents do
         phx-submit={JS.push("date-filter-changed") |> toggle_date_filtering()}
       >
         <div class="relative" phx-click-away={toggle_date_filtering()}>
-          <div class="absolute z-10 mt-2 rounded-xl bg-neutral-900 py-4 px-4 shadow-2xl shadow-black/50 border border-neutral-700">
+          <div class="absolute z-10 mt-2 rounded-xl bg-ink-2 py-4 px-4 shadow-2xl shadow-black/50 border border-hairline">
             <div class="flex flex-col gap-3">
-              <label for="filter_date" class="text-sm font-medium text-neutral-300">
+              <label for="filter_date" class="text-sm font-medium text-paper-dim">
                 Select date:
               </label>
               <input
@@ -226,11 +232,11 @@ defmodule MusicListingsWeb.CustomComponents do
                 id="filter_date"
                 name="date"
                 value={@selected_date}
-                class="rounded-lg border-neutral-700 bg-neutral-800 text-neutral-50 text-sm focus:border-rose-400 focus:ring-rose-400"
+                class="rounded-lg border-hairline bg-ink-3 text-paper text-sm focus:border-spotlight focus:ring-spotlight"
               />
               <button
                 type="submit"
-                class="w-full text-sm font-medium text-neutral-950 bg-rose-500 hover:bg-rose-400 rounded-lg px-3 py-1.5 transition-colors"
+                class="w-full text-sm font-medium text-ink bg-spotlight hover:bg-spotlight-deep rounded-lg px-3 py-1.5 transition-colors"
               >
                 Go
               </button>
@@ -264,13 +270,13 @@ defmodule MusicListingsWeb.CustomComponents do
   def date_filter_status(assigns) do
     ~H"""
     <%= if @selected_date && !today?(@selected_date) do %>
-      <div class="flex items-center gap-2 text-sm text-neutral-400 -mt-2 mb-4">
+      <div class="flex items-center gap-2 text-sm text-paper-dim -mt-2 mb-4">
         <span>Showing events from {format_filter_date(@selected_date)} onwards.</span>
         <a
           id="clear-date-filter"
           href="#"
           phx-click="clear-date-filter"
-          class="text-rose-400 hover:text-rose-300 underline underline-offset-2"
+          class="text-spotlight hover:text-spotlight-deep underline underline-offset-2"
         >
           Clear
         </a>
@@ -310,7 +316,7 @@ defmodule MusicListingsWeb.CustomComponents do
   def sort_toggle(assigns) do
     ~H"""
     <div id="sort-by-component" phx-hook="SortBy" class="flex items-center">
-      <div class="inline-flex rounded-lg border border-neutral-700 bg-neutral-900 p-0.5">
+      <div class="inline-flex rounded-lg border border-hairline bg-ink-2 p-0.5">
         <button
           type="button"
           phx-click="sort-changed"
@@ -318,8 +324,8 @@ defmodule MusicListingsWeb.CustomComponents do
           class={[
             "px-3 py-1.5 text-sm rounded-md transition-colors",
             if(@sort_by == "title",
-              do: "bg-rose-500/10 text-rose-400 ring-1 ring-inset ring-rose-500/20",
-              else: "text-neutral-400 hover:text-neutral-300"
+              do: "bg-spotlight/10 text-spotlight ring-1 ring-inset ring-spotlight/30",
+              else: "text-paper-dim hover:text-paper"
             )
           ]}
         >
@@ -332,8 +338,8 @@ defmodule MusicListingsWeb.CustomComponents do
           class={[
             "px-3 py-1.5 text-sm rounded-md transition-colors",
             if(@sort_by == "venue",
-              do: "bg-rose-500/10 text-rose-400 ring-1 ring-inset ring-rose-500/20",
-              else: "text-neutral-400 hover:text-neutral-300"
+              do: "bg-spotlight/10 text-spotlight ring-1 ring-inset ring-spotlight/30",
+              else: "text-paper-dim hover:text-paper"
             )
           ]}
         >
@@ -362,11 +368,11 @@ defmodule MusicListingsWeb.CustomComponents do
       <button
         phx-click={toggle_venue_filtering()}
         type="button"
-        class="flex items-center justify-between gap-2 min-w-48 px-4 py-2.5 bg-neutral-900 border border-neutral-700 rounded-lg text-sm text-neutral-300 hover:border-neutral-600 transition-colors"
+        class="flex items-center justify-between gap-2 min-w-48 px-4 py-2.5 bg-ink-2 border border-hairline rounded-lg text-sm text-paper-dim hover:border-paper-dim transition-colors"
       >
         <MusicListingsWeb.CoreComponents.icon
           name="hero-building-storefront"
-          class="size-4 text-neutral-500"
+          class="size-4 text-paper-dim"
         />
         <span>
           <%= if @venue_ids == [] do %>
@@ -378,7 +384,7 @@ defmodule MusicListingsWeb.CustomComponents do
         <span id="venue-filter-chevron" class="inline-block transition duration-200">
           <MusicListingsWeb.CoreComponents.icon
             name="hero-chevron-down"
-            class="size-4 text-neutral-500"
+            class="size-4 text-paper-dim"
           />
         </span>
       </button>
@@ -386,12 +392,12 @@ defmodule MusicListingsWeb.CustomComponents do
       <.form for={@for} as={:for} id="venue-filters" class="hidden" phx-change="venue-filter-selected">
         <div class="relative" phx-click-away={toggle_venue_filtering()}>
           <ul
-            class="absolute z-20 mt-2 max-h-72 w-80 overflow-auto rounded-xl bg-neutral-900 py-2 text-sm shadow-2xl shadow-black/50 border border-neutral-700"
+            class="absolute z-20 mt-2 max-h-72 w-80 overflow-auto rounded-xl bg-ink-2 py-2 text-sm shadow-2xl shadow-black/50 border border-hairline"
             tabindex="-1"
           >
             <%= for venue <- @venues do %>
               <li
-                class="relative cursor-pointer select-none py-2 pl-10 pr-4 text-neutral-200 hover:bg-neutral-800 transition-colors"
+                class="relative cursor-pointer select-none py-2 pl-10 pr-4 text-paper hover:bg-ink-3 transition-colors"
                 role="option"
               >
                 <label for={"#{venue.id}"} class="block truncate cursor-pointer">
@@ -404,7 +410,7 @@ defmodule MusicListingsWeb.CustomComponents do
                     value="true"
                     type="checkbox"
                     checked={Integer.to_string(venue.id) in @venue_ids}
-                    class="rounded-sm border-neutral-600 bg-neutral-800 text-rose-500 focus:ring-0 focus:ring-offset-0 cursor-pointer"
+                    class="rounded-sm border-hairline bg-ink-3 text-spotlight focus:ring-0 focus:ring-offset-0 cursor-pointer"
                   />
                 </span>
               </li>
@@ -438,12 +444,12 @@ defmodule MusicListingsWeb.CustomComponents do
   def venue_filter_status(assigns) do
     ~H"""
     <%= if @venue_ids != [] do %>
-      <div class="flex items-center gap-2 text-sm text-neutral-400 -mt-2 mb-4">
+      <div class="flex items-center gap-2 text-sm text-paper-dim -mt-2 mb-4">
         <span>Filtering by {Enum.count(@venue_ids)} venue(s).</span>
         <a
           href="#"
           phx-click="clear-venue-filtering"
-          class="text-rose-400 hover:text-rose-300 underline underline-offset-2"
+          class="text-spotlight hover:text-spotlight-deep underline underline-offset-2"
         >
           Clear
         </a>
@@ -470,7 +476,7 @@ defmodule MusicListingsWeb.CustomComponents do
     <div id={@id} class="relative z-50 hidden md:hidden" phx-remove={hide_bottom_sheet(@id)}>
       <div
         id={"#{@id}-backdrop"}
-        class="fixed inset-0 bg-neutral-950/80 transition-opacity"
+        class="fixed inset-0 bg-ink/80 transition-opacity"
         aria-hidden="true"
         phx-click={hide_bottom_sheet(@id)}
       />
@@ -480,16 +486,16 @@ defmodule MusicListingsWeb.CustomComponents do
             id={"#{@id}-panel"}
             phx-window-keydown={hide_bottom_sheet(@id)}
             phx-key="escape"
-            class="fixed inset-x-0 bottom-0 max-h-[85vh] overflow-y-auto rounded-t-2xl bg-neutral-900 border-t border-neutral-800 shadow-2xl shadow-black/50 transform transition-transform"
+            class="fixed inset-x-0 bottom-0 max-h-[85vh] overflow-y-auto rounded-t-2xl bg-ink-2 border-t border-hairline shadow-2xl shadow-black/50 transform transition-transform"
           >
-            <div class="sticky top-0 bg-neutral-900 z-10 px-5 pt-3 pb-4 border-b border-neutral-800">
-              <div class="w-10 h-1 rounded-full bg-neutral-700 mx-auto mb-4" />
+            <div class="sticky top-0 bg-ink-2 z-10 px-5 pt-3 pb-4 border-b border-hairline">
+              <div class="w-10 h-1 rounded-full bg-hairline mx-auto mb-4" />
               <div class="flex items-center justify-between">
-                <h2 id={"#{@id}-title"} class="text-lg font-semibold text-neutral-50">Filters</h2>
+                <h2 id={"#{@id}-title"} class="text-lg font-semibold text-paper">Filters</h2>
                 <button
                   type="button"
                   phx-click={hide_bottom_sheet(@id)}
-                  class="p-1.5 rounded-lg text-neutral-400 hover:text-neutral-300 hover:bg-neutral-800 transition-colors"
+                  class="p-1.5 rounded-lg text-paper-dim hover:text-paper hover:bg-ink-3 transition-colors"
                   aria-label="Close filters"
                 >
                   <MusicListingsWeb.CoreComponents.icon name="hero-x-mark" class="size-5" />
@@ -551,11 +557,11 @@ defmodule MusicListingsWeb.CustomComponents do
     <button
       type="button"
       phx-click={show_bottom_sheet("mobile-filters")}
-      class="inline-flex items-center gap-2 px-4 py-2.5 bg-neutral-900 border border-neutral-700 rounded-lg text-sm text-neutral-300 hover:border-neutral-600 transition-colors"
+      class="inline-flex items-center gap-2 px-4 py-2.5 bg-ink-2 border border-hairline rounded-lg text-sm text-paper-dim hover:border-paper-dim transition-colors"
     >
       <MusicListingsWeb.CoreComponents.icon
         name="hero-adjustments-horizontal"
-        class="size-4 text-neutral-500"
+        class="size-4 text-paper-dim"
       />
       <span>Filters</span>
     </button>
@@ -587,19 +593,19 @@ defmodule MusicListingsWeb.CustomComponents do
     >
       <span
         :if={@venue_ids != []}
-        class="inline-flex items-center gap-1 text-xs font-medium bg-rose-500/10 text-rose-400 ring-1 ring-inset ring-rose-500/20 px-2.5 py-1 rounded-full"
+        class="inline-flex items-center gap-1 text-xs font-medium bg-spotlight/10 text-spotlight ring-1 ring-inset ring-spotlight/30 px-2.5 py-1 rounded-full"
       >
         {Enum.count(@venue_ids)} venue(s)
-        <button type="button" phx-click="clear-venue-filtering" class="hover:text-rose-300">
+        <button type="button" phx-click="clear-venue-filtering" class="hover:text-spotlight-deep">
           <MusicListingsWeb.CoreComponents.icon name="hero-x-mark" class="size-3" />
         </button>
       </span>
       <span
         :if={@has_date_filter}
-        class="inline-flex items-center gap-1 text-xs font-medium bg-rose-500/10 text-rose-400 ring-1 ring-inset ring-rose-500/20 px-2.5 py-1 rounded-full"
+        class="inline-flex items-center gap-1 text-xs font-medium bg-spotlight/10 text-spotlight ring-1 ring-inset ring-spotlight/30 px-2.5 py-1 rounded-full"
       >
         From {format_filter_date(@selected_date)}
-        <button type="button" phx-click="clear-date-filter" class="hover:text-rose-300">
+        <button type="button" phx-click="clear-date-filter" class="hover:text-spotlight-deep">
           <MusicListingsWeb.CoreComponents.icon name="hero-x-mark" class="size-3" />
         </button>
       </span>
@@ -622,11 +628,11 @@ defmodule MusicListingsWeb.CustomComponents do
   def mobile_venue_filter(assigns) do
     ~H"""
     <div>
-      <h3 class="text-sm font-semibold text-neutral-300 uppercase tracking-wider mb-3">Venues</h3>
+      <h3 class="kicker mb-3">Venues</h3>
       <.form for={@for} as={:for} id="mobile-venue-filters" phx-change="venue-filter-selected">
         <ul class="max-h-60 overflow-y-auto space-y-1 -mx-1">
           <%= for venue <- @venues do %>
-            <li class="relative cursor-pointer select-none py-2 pl-10 pr-4 text-neutral-200 hover:bg-neutral-800 rounded-lg transition-colors">
+            <li class="relative cursor-pointer select-none py-2 pl-10 pr-4 text-paper hover:bg-ink-3 rounded-lg transition-colors">
               <label for={"mobile-#{venue.id}"} class="block truncate cursor-pointer text-sm">
                 {venue.name}
               </label>
@@ -637,7 +643,7 @@ defmodule MusicListingsWeb.CustomComponents do
                   value="true"
                   type="checkbox"
                   checked={Integer.to_string(venue.id) in @venue_ids}
-                  class="rounded-sm border-neutral-600 bg-neutral-800 text-rose-500 focus:ring-0 focus:ring-offset-0 cursor-pointer"
+                  class="rounded-sm border-hairline bg-ink-3 text-spotlight focus:ring-0 focus:ring-offset-0 cursor-pointer"
                 />
               </span>
             </li>
@@ -662,7 +668,7 @@ defmodule MusicListingsWeb.CustomComponents do
   def mobile_date_filter(assigns) do
     ~H"""
     <div>
-      <h3 class="text-sm font-semibold text-neutral-300 uppercase tracking-wider mb-3">Date</h3>
+      <h3 class="kicker mb-3">Date</h3>
       <.form
         for={@for}
         id="mobile-date-filter-form"
@@ -674,11 +680,11 @@ defmodule MusicListingsWeb.CustomComponents do
             id="mobile-filter-date"
             name="date"
             value={@selected_date}
-            class="flex-1 rounded-lg border-neutral-700 bg-neutral-800 text-neutral-50 text-sm focus:border-rose-400 focus:ring-rose-400"
+            class="flex-1 rounded-lg border-hairline bg-ink-3 text-paper text-sm focus:border-spotlight focus:ring-spotlight"
           />
           <button
             type="submit"
-            class="text-sm font-medium text-neutral-950 bg-rose-500 hover:bg-rose-400 rounded-lg px-4 py-2 transition-colors"
+            class="text-sm font-medium text-ink bg-spotlight hover:bg-spotlight-deep rounded-lg px-4 py-2 transition-colors"
           >
             Go
           </button>
@@ -701,8 +707,8 @@ defmodule MusicListingsWeb.CustomComponents do
   def mobile_sort_toggle(assigns) do
     ~H"""
     <div>
-      <h3 class="text-sm font-semibold text-neutral-300 uppercase tracking-wider mb-3">Sort by</h3>
-      <div class="inline-flex rounded-lg border border-neutral-700 bg-neutral-800 p-0.5">
+      <h3 class="kicker mb-3">Sort by</h3>
+      <div class="inline-flex rounded-lg border border-hairline bg-ink-3 p-0.5">
         <button
           type="button"
           phx-click="sort-changed"
@@ -710,8 +716,8 @@ defmodule MusicListingsWeb.CustomComponents do
           class={[
             "px-4 py-2 text-sm rounded-md transition-colors",
             if(@sort_by == "title",
-              do: "bg-rose-500/10 text-rose-400 ring-1 ring-inset ring-rose-500/20",
-              else: "text-neutral-400 hover:text-neutral-300"
+              do: "bg-spotlight/10 text-spotlight ring-1 ring-inset ring-spotlight/30",
+              else: "text-paper-dim hover:text-paper"
             )
           ]}
         >
@@ -724,8 +730,8 @@ defmodule MusicListingsWeb.CustomComponents do
           class={[
             "px-4 py-2 text-sm rounded-md transition-colors",
             if(@sort_by == "venue",
-              do: "bg-rose-500/10 text-rose-400 ring-1 ring-inset ring-rose-500/20",
-              else: "text-neutral-400 hover:text-neutral-300"
+              do: "bg-spotlight/10 text-spotlight ring-1 ring-inset ring-spotlight/30",
+              else: "text-paper-dim hover:text-paper"
             )
           ]}
         >
@@ -745,22 +751,24 @@ defmodule MusicListingsWeb.CustomComponents do
   """
   def venue_card(assigns) do
     ~H"""
-    <div class="bg-neutral-900 rounded-2xl p-6 sm:p-8 border border-neutral-800">
-      <div class="flex flex-col lg:flex-row lg:items-start gap-6">
+    <div class="border-b border-hairline pb-8">
+      <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
         <div class="flex-1">
-          <h1 class="font-display text-3xl sm:text-4xl font-bold text-neutral-50">
+          <p class="kicker flex items-center gap-2">
+            <span class="inline-block h-2 w-8 bg-spotlight"></span> Venue
+          </p>
+          <h1 class="headline mt-3 text-5xl text-paper sm:text-6xl lg:text-7xl">
             {@venue.name}
           </h1>
-          <div class="mt-3 space-y-0.5 text-sm text-neutral-400">
+          <div class="mt-4 space-y-0.5 font-mono text-sm text-paper-dim">
             <p>{@venue.street}</p>
-            <p>{"#{@venue.city} #{@venue.province}"}</p>
-            <p>{"#{@venue.country} #{@venue.postal_code}"}</p>
+            <p>{"#{@venue.city} #{@venue.province} · #{@venue.country} #{@venue.postal_code}"}</p>
           </div>
           <a
             href={@venue.website}
-            class="inline-flex items-center gap-1.5 mt-4 text-sm font-medium text-rose-400 hover:text-rose-300 transition-colors"
             target="_blank"
             rel="noopener"
+            class="mt-4 inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-spotlight transition-colors hover:text-spotlight-deep"
           >
             <MusicListingsWeb.CoreComponents.icon
               name="hero-arrow-top-right-on-square"
@@ -769,7 +777,7 @@ defmodule MusicListingsWeb.CustomComponents do
           </a>
         </div>
 
-        <div class="w-full lg:w-80 h-48 rounded-xl overflow-hidden border border-neutral-800">
+        <div class="h-48 w-full overflow-hidden border border-hairline grayscale transition-all duration-300 hover:grayscale-0 lg:w-96">
           <iframe
             id={"venue-map-#{@venue.id}"}
             class="w-full h-full"
@@ -802,24 +810,22 @@ defmodule MusicListingsWeb.CustomComponents do
 
   def venue_summary(assigns) do
     ~H"""
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+    <div class="mt-8 grid grid-cols-1 border-t border-hairline sm:grid-cols-2">
       <%= for venue <- @venues do %>
         <a
           href={~p"/events/venue/#{venue.id}"}
           id={"venue-#{venue.id}"}
-          class="block bg-neutral-900 rounded-xl p-5 border border-neutral-800 hover:border-rose-500/50 hover:bg-neutral-900/80 transition-all duration-200 group"
+          class="group flex items-center justify-between gap-4 border-b border-hairline py-5 transition-colors hover:bg-ink-2/60 sm:px-5 sm:[&:nth-child(odd)]:border-r"
         >
-          <div class="flex items-start justify-between gap-3">
-            <div class="min-w-0 flex-1">
-              <h3 class="text-base font-semibold text-neutral-50 group-hover:text-rose-400 transition-colors">
-                {venue.name}
-              </h3>
-              <p class="text-sm text-neutral-500 mt-1">{venue.street}</p>
-            </div>
-            <span class="shrink-0 text-xs font-medium text-rose-400 bg-rose-500/10 px-3 py-1 rounded-full">
-              {venue.upcoming_event_count} Upcoming Events
-            </span>
+          <div class="min-w-0 flex-1">
+            <h3 class="font-display text-2xl font-bold leading-none text-paper transition-colors group-hover:text-spotlight">
+              {venue.name}
+            </h3>
+            <p class="kicker mt-1.5">{venue.street}</p>
           </div>
+          <span class="shrink-0 bg-spotlight/10 text-spotlight px-3 py-1 font-mono text-xs tabular-nums uppercase tracking-wider">
+            {venue.upcoming_event_count} Upcoming Events
+          </span>
         </a>
       <% end %>
     </div>
@@ -842,7 +848,7 @@ defmodule MusicListingsWeb.CustomComponents do
     <div>
       <%= for {date, events} <- @events do %>
         <.events_date_header date={date} />
-        <div class="space-y-3 mb-12">
+        <div class="mb-14">
           <%= if @sort_by == "venue" do %>
             <%= for {venue, venue_events} <- group_events_by_venue(events) do %>
               <.venue_grouped_card venue={venue} events={venue_events} current_user={@current_user} />
@@ -878,7 +884,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   def submitted_events(assigns) do
     ~H"""
-    <table class="min-w-full divide-y divide-neutral-700">
+    <table class="min-w-full divide-y divide-hairline">
       <thead>
         <tr>
           <.submitted_event_column_header label="Title / URL" first_col={true} />
@@ -889,7 +895,7 @@ defmodule MusicListingsWeb.CustomComponents do
           <.submitted_event_column_header label="Status" sr_only={true} />
         </tr>
       </thead>
-      <tbody class="divide-y divide-neutral-800">
+      <tbody class="divide-y divide-hairline">
         <%= for submitted_event <- @submitted_events do %>
           <tr id={"event-#{submitted_event.id}"}>
             <.submitted_event_title title={submitted_event.title} url={submitted_event.url} />
@@ -911,7 +917,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp submitted_event_title(assigns) do
     ~H"""
-    <td class="py-5 pl-4 pr-3 text-sm sm:pl-0 text-neutral-50 w-1/2">
+    <td class="py-5 pl-4 pr-3 text-sm sm:pl-0 text-paper w-1/2">
       <div class="flex items-center">
         <div class="break-words">
           <div class="font-medium">{@title}</div>
@@ -919,7 +925,7 @@ defmodule MusicListingsWeb.CustomComponents do
             href={@url}
             target="_blank"
             rel="noopener"
-            class="mt-1 text-rose-400 hover:text-rose-300 break-all"
+            class="mt-1 text-spotlight hover:text-spotlight-deep break-all"
           >
             {@url}
           </a>
@@ -931,7 +937,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp submitted_event_column_value(assigns) do
     ~H"""
-    <td class="whitespace-nowrap px-2 py-4 text-sm text-neutral-400">
+    <td class="whitespace-nowrap px-2 py-4 text-sm text-paper-dim">
       {@value}
     </td>
     """
@@ -946,7 +952,7 @@ defmodule MusicListingsWeb.CustomComponents do
         phx-click="approve-submitted-event"
         phx-value-id={@submitted_event.id}
         data-confirm="Are you sure?"
-        class="inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition-colors rounded-full py-1 px-3 bg-rose-500/10 text-rose-400 ring-1 ring-inset ring-rose-500/20 hover:text-rose-300 hover:ring-rose-300"
+        class="inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition-colors rounded-full py-1 px-3 bg-spotlight/10 text-spotlight ring-1 ring-inset ring-spotlight/30 hover:bg-spotlight hover:text-ink"
       >
         Approve
       </button>
@@ -957,8 +963,8 @@ defmodule MusicListingsWeb.CustomComponents do
   defp submitted_event_column_header(assigns) do
     th_class =
       if assigns[:first_col],
-        do: "py-3.5 pl-4 pr-3 text-left text-md font-semibold text-neutral-50 sm:pl-0 w-1/2",
-        else: "px-2 py-3.5 text-left text-md font-semibold text-neutral-50"
+        do: "py-3.5 pl-4 pr-3 text-left text-md font-semibold text-paper sm:pl-0 w-1/2",
+        else: "px-2 py-3.5 text-left text-md font-semibold text-paper"
 
     span_class = if assigns[:sr_only], do: "sr-only", else: ""
 
@@ -1009,22 +1015,22 @@ defmodule MusicListingsWeb.CustomComponents do
 
   def event_breadcrumb(assigns) do
     ~H"""
-    <nav aria-label="Breadcrumb" class="mb-4 text-xs sm:text-sm text-neutral-500">
-      <ol class="flex flex-wrap items-center gap-1.5">
+    <nav aria-label="Breadcrumb" class="kicker mb-6">
+      <ol class="flex flex-wrap items-center gap-2">
         <li>
-          <.link navigate={~p"/events"} class="hover:text-rose-400 transition-colors">Events</.link>
+          <.link navigate={~p"/events"} class="transition-colors hover:text-spotlight">Events</.link>
         </li>
-        <li aria-hidden="true">/</li>
+        <li aria-hidden="true" class="text-spotlight">/</li>
         <li :if={@event.venue}>
           <.link
             navigate={~p"/events/venue/#{@event.venue.id}"}
-            class="hover:text-rose-400 transition-colors"
+            class="transition-colors hover:text-spotlight"
           >
             {@event.venue.name}
           </.link>
         </li>
-        <li :if={@event.venue} aria-hidden="true">/</li>
-        <li class="text-neutral-300 truncate max-w-[50vw]">{@event.title}</li>
+        <li :if={@event.venue} aria-hidden="true" class="text-spotlight">/</li>
+        <li class="max-w-[50vw] truncate text-paper">{@event.title}</li>
       </ol>
     </nav>
     """
@@ -1041,16 +1047,16 @@ defmodule MusicListingsWeb.CustomComponents do
 
   def event_header(assigns) do
     ~H"""
-    <p :if={@event.venue} class="text-xs font-semibold uppercase tracking-wider text-rose-400">
-      <.link navigate={~p"/events/venue/#{@event.venue.id}"} class="hover:text-rose-300">
+    <p :if={@event.venue} class="kicker text-spotlight-deep">
+      <.link navigate={~p"/events/venue/#{@event.venue.id}"} class="hover:text-spotlight">
         {@event.venue.name}
       </.link>
     </p>
 
-    <h1 class="mt-2 font-display text-3xl sm:text-4xl font-bold text-neutral-50">
+    <h1 class="mt-3 font-display text-5xl font-bold leading-[0.9] text-paper sm:text-6xl lg:text-7xl">
       {@event.title}
     </h1>
-    <p :if={@event.openers != []} class="mt-2 text-base sm:text-lg text-neutral-400">
+    <p :if={@event.openers != []} class="mt-3 font-display text-2xl font-medium text-paper-dim">
       with {Enum.join(@event.openers, ", ")}
     </p>
     """
@@ -1067,40 +1073,51 @@ defmodule MusicListingsWeb.CustomComponents do
 
   def event_details_list(assigns) do
     ~H"""
-    <dl class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-      <div>
-        <dt class="text-neutral-500 uppercase tracking-wider text-xs">Date</dt>
-        <dd class="mt-1 text-neutral-100">
+    <dl class="mt-8 grid grid-cols-2 border-t border-hairline sm:grid-cols-4">
+      <div class="border-b border-hairline py-4 pr-4 sm:[&:not(:nth-child(4n))]:border-r">
+        <dt class="kicker">Date</dt>
+        <dd class="mt-1.5 font-display text-xl font-bold text-paper">
           <time datetime={Date.to_iso8601(@event.date)}>
             {DateHelpers.format_date(@event.date)}
           </time>
         </dd>
       </div>
-      <div :if={@event.time}>
-        <dt class="text-neutral-500 uppercase tracking-wider text-xs">Showtime</dt>
-        <dd class="mt-1 text-neutral-100">{DateHelpers.format_time(@event.time)}</dd>
+      <div
+        :if={@event.time}
+        class="border-b border-hairline py-4 pr-4 sm:[&:not(:nth-child(4n))]:border-r"
+      >
+        <dt class="kicker">Showtime</dt>
+        <dd class="mt-1.5 font-mono text-lg text-paper">{DateHelpers.format_time(@event.time)}</dd>
       </div>
-      <div :if={@event.venue}>
-        <dt class="text-neutral-500 uppercase tracking-wider text-xs">Venue</dt>
-        <dd class="mt-1 text-neutral-100">
+      <div
+        :if={@event.price_format != :unknown}
+        class="border-b border-hairline py-4 pr-4 sm:[&:not(:nth-child(4n))]:border-r"
+      >
+        <dt class="kicker">Price</dt>
+        <dd class="mt-1.5 font-mono text-lg text-spotlight">{format_price(@event, :long)}</dd>
+      </div>
+      <div
+        :if={@event.age_restriction != :unknown}
+        class="border-b border-hairline py-4 pr-4 sm:[&:not(:nth-child(4n))]:border-r"
+      >
+        <dt class="kicker">Age</dt>
+        <dd class="mt-1.5 font-mono text-lg text-paper">
+          {format_age_restriction(@event.age_restriction)}
+        </dd>
+      </div>
+      <div :if={@event.venue} class="col-span-2 border-b border-hairline py-4 sm:col-span-4">
+        <dt class="kicker">Venue</dt>
+        <dd class="mt-1.5">
           <.link
             navigate={~p"/events/venue/#{@event.venue.id}"}
-            class="text-rose-400 hover:text-rose-300"
+            class="font-display text-xl font-bold text-paper transition-colors hover:text-spotlight"
           >
             {@event.venue.name}
           </.link>
-          <div class="text-neutral-400 text-sm mt-0.5">
+          <div class="mt-0.5 font-mono text-sm text-paper-dim">
             {@event.venue.street}, {@event.venue.city} {@event.venue.province}
           </div>
         </dd>
-      </div>
-      <div :if={@event.age_restriction != :unknown}>
-        <dt class="text-neutral-500 uppercase tracking-wider text-xs">Age restriction</dt>
-        <dd class="mt-1 text-neutral-100">{format_age_restriction(@event.age_restriction)}</dd>
-      </div>
-      <div :if={@event.price_format != :unknown}>
-        <dt class="text-neutral-500 uppercase tracking-wider text-xs">Price</dt>
-        <dd class="mt-1 text-neutral-100">{format_price(@event, :long)}</dd>
       </div>
     </dl>
     """
@@ -1121,7 +1138,7 @@ defmodule MusicListingsWeb.CustomComponents do
       <a
         :if={@event.ticket_url}
         href={MusicListings.Affiliate.maybe_wrap_affiliate_link(@event.ticket_url)}
-        class="inline-flex items-center gap-2 text-sm font-medium text-neutral-50 bg-rose-500 hover:bg-rose-400 px-4 py-2 rounded-full transition-colors"
+        class="inline-flex h-9 items-center justify-center gap-x-2 rounded bg-spotlight px-4 font-mono text-xs font-medium uppercase tracking-widest text-ink transition-colors hover:bg-spotlight-deep"
         target="_blank"
         rel="noopener sponsored"
       >
@@ -1130,7 +1147,7 @@ defmodule MusicListingsWeb.CustomComponents do
       <a
         :if={@event.details_url}
         href={@event.details_url}
-        class="inline-flex items-center gap-2 text-sm font-medium text-neutral-300 hover:text-neutral-100 bg-neutral-800 hover:bg-neutral-700 px-4 py-2 rounded-full transition-colors"
+        class="inline-flex h-9 items-center justify-center gap-x-2 rounded border border-hairline bg-ink px-4 font-mono text-xs font-medium uppercase tracking-widest text-paper transition-colors hover:bg-ink-3"
         target="_blank"
         rel="noopener"
       >
@@ -1145,104 +1162,66 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp events_date_header(assigns) do
     ~H"""
-    <div
-      id={"date-#{@date}"}
-      class="flex items-center gap-4 pt-10 pb-4 first:pt-0 scroll-mt-20"
-    >
-      <h2 class="font-display text-2xl sm:text-3xl font-bold text-neutral-50 whitespace-nowrap">
+    <div id={"date-#{@date}"} class="flex items-end gap-5 pt-16 pb-5 first:pt-0 scroll-mt-28">
+      <span class="mb-2 hidden h-2.5 w-2.5 shrink-0 bg-spotlight sm:block"></span>
+      <h2 class="headline text-4xl whitespace-nowrap text-paper sm:text-5xl">
         <time datetime={@date}>{DateHelpers.format_date(@date)}</time>
       </h2>
-      <div class="flex-1 h-px bg-neutral-800"></div>
+      <div class="mb-3 h-px flex-1 bg-hairline"></div>
     </div>
     """
   end
 
   defp event_card(assigns) do
     ~H"""
-    <article class="bg-neutral-900 rounded-xl p-4 sm:p-5 border border-neutral-800 hover:border-neutral-700 transition-all duration-200">
-      <div class="flex items-start justify-between gap-4">
-        <div class="min-w-0 flex-1">
-          <div class="flex items-center gap-2 mb-1">
+    <article class="group border-b border-hairline transition-colors duration-200 hover:bg-ink-2/60">
+      <div class="grid grid-cols-1 gap-x-8 gap-y-3 px-1 py-6 sm:grid-cols-[1fr_auto] sm:items-start sm:px-3">
+        <div class="min-w-0">
+          <div class="mb-2 flex flex-wrap items-center gap-2.5">
             <.event_venue venue={@event.venue} />
             <.event_age_restriction age_restriction={@event.age_restriction} />
           </div>
-          <h3 class="text-base sm:text-lg font-semibold text-neutral-50 leading-snug">
+          <h3 class="font-display text-2xl font-bold leading-[0.95] text-paper transition-colors group-hover:text-spotlight sm:text-3xl">
             <.event_title_link event_info={@event}>
               {@event.title}
             </.event_title_link>
-            <%= if @event.openers != [] do %>
-              <span class="font-normal text-neutral-400">
-                with {@event.openers |> Enum.join(", ")}
-              </span>
-            <% end %>
           </h3>
+          <p :if={@event.openers != []} class="mt-1.5 font-display text-lg font-medium text-paper-dim">
+            with {@event.openers |> Enum.join(", ")}
+          </p>
         </div>
-      </div>
-      <%= for showtime <- @event.showtimes do %>
-        <div
-          id={"event-#{showtime.event_id}"}
-          class="mt-3 flex flex-wrap items-center gap-2"
-        >
-          <.event_time time={showtime.time} />
-          <.event_ticket_url
-            ticket_url={showtime.ticket_url}
-            price_format={@event.price_format}
-            price_lo={@event.price_lo}
-            price_hi={@event.price_hi}
-          />
-          <.event_details_url details_url={showtime.details_url} />
-          <.delete_event_link current_user={@current_user} event_id={showtime.event_id} />
-        </div>
-      <% end %>
-    </article>
-    """
-  end
-
-  defp venue_grouped_card(assigns) do
-    ~H"""
-    <article class="bg-neutral-900 rounded-xl p-4 sm:p-5 border border-neutral-800 hover:border-neutral-700 transition-all duration-200">
-      <div class="flex items-center gap-2 mb-3">
-        <.event_venue venue={@venue} />
-      </div>
-      <%= for event <- @events do %>
-        <div class={[
-          "pt-3 first:pt-0",
-          length(@events) > 1 && "border-t border-neutral-800 first:border-t-0"
-        ]}>
-          <div class="flex items-start justify-between gap-4">
-            <div class="min-w-0 flex-1">
-              <div class="flex items-center gap-2 mb-1">
-                <h3 class="text-base sm:text-lg font-semibold text-neutral-50 leading-snug">
-                  <.event_title_link event_info={event}>
-                    {event.title}
-                  </.event_title_link>
-                  <%= if event.openers != [] do %>
-                    <span class="font-normal text-neutral-400">
-                      with {event.openers |> Enum.join(", ")}
-                    </span>
-                  <% end %>
-                </h3>
-                <.event_age_restriction age_restriction={event.age_restriction} />
-              </div>
-            </div>
-          </div>
-          <%= for showtime <- event.showtimes do %>
+        <div class="flex flex-col gap-2 sm:items-end">
+          <%= for showtime <- @event.showtimes do %>
             <div
               id={"event-#{showtime.event_id}"}
-              class="mt-2 flex flex-wrap items-center gap-2"
+              class="flex flex-wrap items-center gap-2 sm:justify-end"
             >
               <.event_time time={showtime.time} />
               <.event_ticket_url
                 ticket_url={showtime.ticket_url}
-                price_format={event.price_format}
-                price_lo={event.price_lo}
-                price_hi={event.price_hi}
+                price_format={@event.price_format}
+                price_lo={@event.price_lo}
+                price_hi={@event.price_hi}
               />
               <.event_details_url details_url={showtime.details_url} />
               <.delete_event_link current_user={@current_user} event_id={showtime.event_id} />
             </div>
           <% end %>
         </div>
+      </div>
+    </article>
+    """
+  end
+
+  defp venue_grouped_card(assigns) do
+    ~H"""
+    <article class="border-b border-hairline py-6">
+      <div class="mb-3 flex items-center gap-3 px-1 sm:px-3">
+        <.event_venue venue={@venue} />
+        <div class="h-px flex-1 bg-hairline"></div>
+      </div>
+      <%= for event <- @events do %>
+        <.grouped_event_row event={event} current_user={@current_user} />
       <% end %>
     </article>
     """
@@ -1250,48 +1229,55 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp venue_date_grouped_card(assigns) do
     ~H"""
-    <article class="bg-neutral-900 rounded-xl p-4 sm:p-5 border border-neutral-800 hover:border-neutral-700 transition-all duration-200">
-      <h3 class="font-display text-lg sm:text-xl font-bold text-yellow-500 mb-3">
+    <article class="border-b border-hairline py-6">
+      <h3 class="mb-3 px-1 font-display text-2xl font-bold text-spotlight sm:px-3">
         <time datetime={@date}>{DateHelpers.format_date(@date)}</time>
       </h3>
       <%= for event <- @events do %>
-        <div class="pt-3 border-t border-neutral-800">
-          <div class="flex items-start justify-between gap-4">
-            <div class="min-w-0 flex-1">
-              <div class="flex items-center gap-2 mb-1">
-                <h3 class="text-base sm:text-lg font-semibold text-neutral-50 leading-snug">
-                  <.event_title_link event_info={event}>
-                    {event.title}
-                  </.event_title_link>
-                  <%= if event.openers != [] do %>
-                    <span class="font-normal text-neutral-400">
-                      with {event.openers |> Enum.join(", ")}
-                    </span>
-                  <% end %>
-                </h3>
-                <.event_age_restriction age_restriction={event.age_restriction} />
-              </div>
-            </div>
-          </div>
-          <%= for showtime <- event.showtimes do %>
-            <div
-              id={"event-#{showtime.event_id}"}
-              class="mt-2 flex flex-wrap items-center gap-2"
-            >
-              <.event_time time={showtime.time} />
-              <.event_ticket_url
-                ticket_url={showtime.ticket_url}
-                price_format={event.price_format}
-                price_lo={event.price_lo}
-                price_hi={event.price_hi}
-              />
-              <.event_details_url details_url={showtime.details_url} />
-              <.delete_event_link current_user={@current_user} event_id={showtime.event_id} />
-            </div>
-          <% end %>
-        </div>
+        <.grouped_event_row event={event} current_user={@current_user} />
       <% end %>
     </article>
+    """
+  end
+
+  attr :event, :any, required: true
+  attr :current_user, :any, required: true
+
+  defp grouped_event_row(assigns) do
+    ~H"""
+    <div class="grid grid-cols-1 gap-x-8 gap-y-2 px-1 py-3 sm:grid-cols-[1fr_auto] sm:items-start sm:px-3">
+      <div class="min-w-0">
+        <div class="flex flex-wrap items-center gap-2.5">
+          <h4 class="group inline font-display text-xl font-bold leading-tight text-paper sm:text-2xl">
+            <.event_title_link event_info={@event}>
+              <span class="transition-colors group-hover:text-spotlight">{@event.title}</span>
+            </.event_title_link>
+          </h4>
+          <.event_age_restriction age_restriction={@event.age_restriction} />
+        </div>
+        <p :if={@event.openers != []} class="mt-1 font-display text-base font-medium text-paper-dim">
+          with {@event.openers |> Enum.join(", ")}
+        </p>
+      </div>
+      <div class="flex flex-col gap-2 sm:items-end">
+        <%= for showtime <- @event.showtimes do %>
+          <div
+            id={"event-#{showtime.event_id}"}
+            class="flex flex-wrap items-center gap-2 sm:justify-end"
+          >
+            <.event_time time={showtime.time} />
+            <.event_ticket_url
+              ticket_url={showtime.ticket_url}
+              price_format={@event.price_format}
+              price_lo={@event.price_lo}
+              price_hi={@event.price_hi}
+            />
+            <.event_details_url details_url={showtime.details_url} />
+            <.delete_event_link current_user={@current_user} event_id={showtime.event_id} />
+          </div>
+        <% end %>
+      </div>
+    </div>
     """
   end
 
@@ -1304,11 +1290,7 @@ defmodule MusicListingsWeb.CustomComponents do
     assigns = assign(assigns, event_id: first_show && first_show.event_id, slug: slug)
 
     ~H"""
-    <.link
-      :if={@event_id}
-      navigate={~p"/events/#{@event_id}/#{@slug}"}
-      class="hover:text-rose-300 transition-colors"
-    >
+    <.link :if={@event_id} navigate={~p"/events/#{@event_id}/#{@slug}"} class="transition-colors">
       {render_slot(@inner_block)}
     </.link>
     <span :if={!@event_id}>{render_slot(@inner_block)}</span>
@@ -1319,7 +1301,7 @@ defmodule MusicListingsWeb.CustomComponents do
     ~H"""
     <a
       href={~p"/events/venue/#{@venue.id}"}
-      class="text-xs font-semibold uppercase tracking-wider text-rose-400 hover:text-rose-300 transition-colors"
+      class="kicker text-spotlight-deep transition-colors hover:text-spotlight"
     >
       {@venue.name}
     </a>
@@ -1330,7 +1312,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp event_age_restriction(assigns) do
     ~H"""
-    <span class="bg-amber-400/10 text-amber-400 text-xs font-medium px-2 py-0.5 rounded-full">
+    <span class="inline-flex items-center border border-amber-400/50 text-amber-400 px-2 py-0.5 font-mono text-xs uppercase tracking-wider">
       {format_age_restriction(@age_restriction)}
     </span>
     """
@@ -1346,7 +1328,7 @@ defmodule MusicListingsWeb.CustomComponents do
     ~H"""
     <time
       datetime={Time.to_iso8601(@time)}
-      class="text-xs text-neutral-500 font-sans [font-variant-numeric:tabular-nums]"
+      class="font-mono text-xs text-paper-dim [font-variant-numeric:tabular-nums]"
     >
       {DateHelpers.format_time(@time)}
     </time>
@@ -1358,7 +1340,7 @@ defmodule MusicListingsWeb.CustomComponents do
     <%= if @ticket_url do %>
       <a
         href={MusicListings.Affiliate.maybe_wrap_affiliate_link(@ticket_url)}
-        class="inline-flex items-center gap-1 text-xs font-medium text-rose-400 hover:text-rose-300 bg-rose-500/10 px-3 py-1 rounded-full transition-colors"
+        class="inline-flex items-center gap-1 font-mono text-[0.7rem] uppercase tracking-wider text-spotlight bg-spotlight/10 ring-1 ring-inset ring-spotlight/30 px-3 py-1 transition-colors hover:bg-spotlight hover:text-ink"
         target="_blank"
         rel="noopener sponsored"
       >
@@ -1370,7 +1352,7 @@ defmodule MusicListingsWeb.CustomComponents do
       </a>
     <% end %>
     <%= if @price_format != :unknown && !@ticket_url do %>
-      <span class="inline-flex items-center text-xs font-medium text-rose-400 bg-rose-500/10 px-3 py-1 rounded-full">
+      <span class="inline-flex items-center font-mono text-[0.7rem] uppercase tracking-wider text-spotlight border border-spotlight/40 px-3 py-1">
         <.event_price price_format={@price_format} price_lo={@price_lo} price_hi={@price_hi} />
       </span>
     <% end %>
@@ -1383,14 +1365,14 @@ defmodule MusicListingsWeb.CustomComponents do
     ~H"""
     <a
       href={@details_url}
-      class="inline-flex items-center gap-1 text-xs font-medium text-neutral-400 hover:text-neutral-300 bg-neutral-800 px-3 py-1 rounded-full transition-colors"
+      class="inline-flex items-center gap-1 font-mono text-[0.7rem] uppercase tracking-wider text-paper-dim ring-1 ring-inset ring-hairline px-3 py-1 transition-colors hover:text-paper hover:ring-paper-dim"
       target="_blank"
       rel="noopener"
     >
       <MusicListingsWeb.CoreComponents.icon
         name="hero-information-circle-solid"
         class="size-3.5"
-      /> Venue page
+      /> Info
     </a>
     """
   end
@@ -1422,7 +1404,7 @@ defmodule MusicListingsWeb.CustomComponents do
         phx-click="delete-event"
         phx-value-id={@event_id}
         data-confirm="Are you sure?"
-        class="text-xs text-neutral-500 hover:text-red-400 transition-colors"
+        class="font-mono text-[0.7rem] uppercase tracking-wider text-paper-dim transition-colors hover:text-ember"
       >
         Delete
       </button>

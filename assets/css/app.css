@@ -31,34 +31,139 @@
   }
 }
 
-/* Custom fonts (were theme.extend.fontFamily) */
+/* ============================================================================
+   AFTER DARK — Toronto gig-listings broadsheet
+   Nocturnal newsprint: warm near-black paper, film grain, hairline rules,
+   one searing acid-lime spotlight, oversized condensed display type.
+   ========================================================================== */
+
 @theme {
-  --font-sans: "Inter var", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  /* Type — condensed poster display, humanist body, ticket-stub mono */
+  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji";
+  --font-display: "Big Shoulders Display", "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  /* Palette */
+  --color-ink: #0b0b0c;
+  --color-ink-2: #141415;
+  --color-ink-3: #1c1c1d;
+  --color-paper: #ece9e0;
+  --color-paper-dim: #a8a49a;
+  --color-spotlight: #d8ff3e;
+  --color-spotlight-deep: #b6e21f;
+  --color-ember: #ff5a36;
+  --color-hairline: #2b2b27;
 }
 
-/* Restore Tailwind v3's default border color (gray-200) across all borders */
+/* Force dark mode so native controls (date picker, checkboxes) render dark. */
+:root {
+  color-scheme: dark;
+}
+
+/* Default border colour → hairline, so any unstyled border reads correctly. */
 @layer base {
   *,
   ::after,
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
+    border-color: var(--color-hairline);
   }
 }
 
-/* This file is for your main application CSS */
-input {
-  color-scheme: dark;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+    /* faint stage-light wash from the top */
+    background-image:
+      radial-gradient(120% 60% at 50% -10%, color-mix(in oklab, var(--color-spotlight) 7%, transparent), transparent 60%);
+    background-attachment: fixed;
+  }
+
+  /* Film grain over everything (cheap, GPU-friendly, pointer-transparent). */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 160px 160px;
+  }
+
+  input,
+  textarea,
+  select {
+    color-scheme: dark;
+  }
+
+  ::selection {
+    background-color: var(--color-spotlight);
+    color: var(--color-ink);
+  }
 }
 
-html {
-  scroll-behavior: smooth;
+@layer components {
+  /* Hairline rules like a printed listings page. */
+  .rule {
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  /* Uppercase mono "kicker" / eyebrow / ticket-stub label. */
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-paper-dim);
+  }
+
+  /* Big condensed poster headline. */
+  .headline {
+    font-family: var(--font-display);
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+  }
+
+  /* Lime spotlight glow for hero accents. */
+  .glow {
+    text-shadow: 0 0 28px color-mix(in oklab, var(--color-spotlight) 55%, transparent);
+  }
+
+  /* Diagonal hazard/marquee stripe used on accent strips. */
+  .stripe {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      var(--color-ink) 0 10px,
+      var(--color-spotlight) 10px 20px
+    );
+  }
 }
 
-::selection {
-  background-color: rgb(244 63 94 / 0.3);
+@layer utilities {
+  .animate-marquee {
+    animation: marquee 38s linear infinite;
+  }
+  .animate-marquee-fast {
+    animation: marquee 22s linear infinite;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }

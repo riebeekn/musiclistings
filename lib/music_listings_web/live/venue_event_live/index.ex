@@ -82,12 +82,13 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
   @impl true
   def render(assigns) do
     ~H"""
-    <div class="mb-6 sm:mb-12">
+    <div class="mb-10">
       <.venue_card venue={@venue} />
     </div>
 
-    <div class="mb-6">
-      <.page_header header="Upcoming Events" />
+    <div class="mb-2 flex items-end gap-5">
+      <h2 class="headline text-3xl whitespace-nowrap text-paper sm:text-4xl">Upcoming Events</h2>
+      <div class="mb-2 h-px flex-1 bg-hairline"></div>
     </div>
 
     <.venue_events_list events={@events} current_user={@current_user} />

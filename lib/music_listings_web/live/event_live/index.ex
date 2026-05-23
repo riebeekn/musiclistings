@@ -285,17 +285,39 @@ defmodule MusicListingsWeb.EventLive.Index do
   @impl true
   def render(assigns) do
     ~H"""
-    <%!-- Desktop filter row: hidden on mobile --%>
+    <%!-- MASTHEAD --%>
+    <section class="mb-10">
+      <p class="kicker flex items-center gap-2">
+        <span class="inline-block h-2 w-8 bg-spotlight"></span> Toronto · Live Music Listings
+      </p>
+      <h1 class="headline mt-4 text-[3.25rem] leading-[0.86] text-paper sm:text-7xl lg:text-8xl">
+        What's <span class="text-spotlight glow">On</span> <br class="hidden sm:block" />Tonight
+      </h1>
+      <p class="mt-5 max-w-xl text-sm leading-relaxed text-paper-dim sm:text-base">
+        Every show worth leaving the house for — concerts, club nights and DIY gigs
+        from dozens of venues across the city, refreshed daily.
+      </p>
+    </section>
+
+    <%!-- Desktop filter bar --%>
     <div
-      class="hidden md:flex flex-wrap items-center gap-3 mb-6"
+      class="mb-2 hidden md:block"
       data-venue-filter-restore="true"
       data-storage-key="venue_ids"
       data-date-filter-restore="true"
       data-date-storage-key="selected_date"
     >
-      <.venue_filter for={@venue_filtering_form} venues={@venues} venue_ids={@venue_ids} />
-      <.date_filter for={@date_filtering_form} selected_date={@selected_date} />
-      <.sort_toggle sort_by={@sort_by} />
+      <div class="flex flex-wrap items-end gap-5 border-t border-hairline pt-5">
+        <.filter_field label="Venues">
+          <.venue_filter for={@venue_filtering_form} venues={@venues} venue_ids={@venue_ids} />
+        </.filter_field>
+        <.filter_field label="When">
+          <.date_filter for={@date_filtering_form} selected_date={@selected_date} />
+        </.filter_field>
+        <.filter_field label="Sort by">
+          <.sort_toggle sort_by={@sort_by} />
+        </.filter_field>
+      </div>
     </div>
 
     <div class="hidden md:block">
@@ -304,7 +326,7 @@ defmodule MusicListingsWeb.EventLive.Index do
     </div>
 
     <%!-- Mobile filter button + chips: hidden on desktop --%>
-    <div class="md:hidden mb-4 flex items-start justify-between gap-3">
+    <div class="md:hidden mb-4 flex items-start justify-between gap-3 border-t border-hairline pt-5">
       <.mobile_filter_button />
       <.mobile_filter_chips
         venue_ids={@venue_ids}
@@ -329,8 +351,20 @@ defmodule MusicListingsWeb.EventLive.Index do
 
     <.events_list events={@events} current_user={@current_user} sort_by={@sort_by} />
 
-    <div class="mt-8 pt-6 border-t border-neutral-800">
+    <div class="mt-10 border-t border-hairline pt-6">
       <.pager current_page={@current_page} total_pages={@total_pages} path={~p"/events"} />
+    </div>
+    """
+  end
+
+  attr :label, :string, required: true
+  slot :inner_block, required: true
+
+  defp filter_field(assigns) do
+    ~H"""
+    <div class="flex flex-col gap-1.5">
+      <span class="kicker">{@label}</span>
+      {render_slot(@inner_block)}
     </div>
     """
   end

@@ -79,7 +79,7 @@ defmodule MusicListingsWeb.VenueLive.New do
       <.input field={@form[:pull_events?]} type="select" options={[true, false]} label="Pull Events" />
 
       <:actions>
-        <.button phx-click="cancel" type="button">Cancel</.button>
+        <.button type="button" phx-click="cancel">Cancel</.button>
         <.submit_button phx-disable-with="Submitting...">Submit</.submit_button>
       </:actions>
     </.simple_form>

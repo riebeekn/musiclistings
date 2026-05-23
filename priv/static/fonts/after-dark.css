@@ -1,0 +1,37 @@
+/* After Dark — self-hosted fonts (latin subset) */
+
+/* big-shoulders-display - latin (variable 400-900) */
+@font-face {
+  font-family: "Big Shoulders Display";
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("BigShouldersDisplay/big-shoulders-display.woff2") format("woff2");
+}
+
+/* hanken-grotesk - latin (variable 400-800) */
+@font-face {
+  font-family: "Hanken Grotesk";
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("HankenGrotesk/hanken-grotesk.woff2") format("woff2");
+}
+
+/* space-mono-400 - latin */
+@font-face {
+  font-family: "Space Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("SpaceMono/space-mono-400.woff2") format("woff2");
+}
+
+/* space-mono-700 - latin */
+@font-face {
+  font-family: "Space Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("SpaceMono/space-mono-700.woff2") format("woff2");
+}
