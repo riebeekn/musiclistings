@@ -12,15 +12,12 @@ defmodule MusicListingsWeb.UserLoginLive do
 
         <div class="flex justify-start space-x-4 items-center">
           <.input field={@form[:remember_me]} type="checkbox" />
-          <label class="text-white">Keep me logged in</label>
+          <label class="text-paper">Keep me logged in</label>
         </div>
         <:actions>
-          <.button
-            phx-disable-with="Logging in..."
-            class="w-full bg-rose-500 hover:bg-rose-400 text-neutral-950"
-          >
+          <.submit_button phx-disable-with="Logging in..." class="w-full">
             Log in <span aria-hidden="true">→</span>
-          </.button>
+          </.submit_button>
         </:actions>
       </.simple_form>
     </div>

@@ -60,68 +60,44 @@ defmodule MusicListingsWeb.ContactLive.New do
   def render(assigns) do
     ~H"""
     <div class="max-w-5xl mx-auto">
-      <div class="mb-12 sm:mb-16">
-        <h1 class="font-display text-4xl sm:text-5xl font-bold tracking-tight text-neutral-50">
-          About
+      <div class="mb-14 border-b border-hairline pb-10">
+        <p class="kicker flex items-center gap-2">
+          <span class="inline-block h-2 w-8 bg-spotlight"></span> Toronto Music Listings
+        </p>
+        <h1 class="headline mt-4 text-6xl text-paper sm:text-7xl">
+          A field guide<br />to the city's stages
         </h1>
-        <p class="mt-4 text-lg text-neutral-400 max-w-2xl leading-relaxed">
+        <p class="mt-5 max-w-2xl text-base leading-relaxed text-paper-dim sm:text-lg">
           Toronto Music Listings came about as a fun side project to help keep track of
           live shows happening in Toronto.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-16">
-        <div class="bg-neutral-900 rounded-xl border border-neutral-800 p-6">
-          <div class="rounded-lg bg-rose-500/10 p-2.5 w-fit mb-4">
-            <MusicListingsWeb.CoreComponents.icon
-              name="hero-musical-note"
-              class="size-5 text-rose-400"
-            />
-          </div>
-          <h3 class="text-sm font-semibold text-neutral-50 mb-1">Daily updates</h3>
-          <p class="text-sm text-neutral-500 leading-relaxed">
-            Events are refreshed daily so you always see what's coming up.
-          </p>
-        </div>
-        <div class="bg-neutral-900 rounded-xl border border-neutral-800 p-6">
-          <div class="rounded-lg bg-rose-500/10 p-2.5 w-fit mb-4">
-            <MusicListingsWeb.CoreComponents.icon
-              name="hero-building-storefront"
-              class="size-5 text-rose-400"
-            />
-          </div>
-          <h3 class="text-sm font-semibold text-neutral-50 mb-1">Dozens of venues</h3>
-          <p class="text-sm text-neutral-500 leading-relaxed">
-            From small clubs to concert halls, we track shows across the city.
-          </p>
-        </div>
-        <div class="bg-neutral-900 rounded-xl border border-neutral-800 p-6">
-          <div class="rounded-lg bg-rose-500/10 p-2.5 w-fit mb-4">
-            <MusicListingsWeb.CoreComponents.icon
-              name="hero-code-bracket"
-              class="size-5 text-rose-400"
-            />
-          </div>
-          <h3 class="text-sm font-semibold text-neutral-50 mb-1">Open source</h3>
-          <p class="text-sm text-neutral-500 leading-relaxed">
-            Curious how it works? Check out the <a
-              href="https://github.com/riebeekn/musiclistings"
-              class="text-rose-400 hover:text-rose-300"
-              target="_blank"
-              rel="noopener"
-            >code on GitHub</a>.
-          </p>
-        </div>
+      <div class="mb-16 grid grid-cols-1 border-t border-hairline sm:grid-cols-3">
+        <.about_card icon="hero-musical-note" title="Daily updates">
+          Events are refreshed daily so you always see what's coming up.
+        </.about_card>
+        <.about_card icon="hero-building-storefront" title="Dozens of venues">
+          From small clubs to concert halls, we track shows across the city.
+        </.about_card>
+        <.about_card icon="hero-code-bracket" title="Open source">
+          Curious how it works? Check out the <a
+            href="https://github.com/riebeekn/musiclistings"
+            class="text-spotlight underline-offset-2 hover:underline"
+            target="_blank"
+            rel="noopener"
+          >code on GitHub</a>.
+        </.about_card>
       </div>
 
-      <div class="flex items-center gap-4 mb-10">
-        <h2 class="font-display text-2xl sm:text-3xl font-bold text-neutral-50 whitespace-nowrap">
+      <div class="flex items-end gap-5 mb-10">
+        <h2 class="headline text-4xl sm:text-5xl text-paper whitespace-nowrap">
           Get in touch
         </h2>
-        <div class="flex-1 h-px bg-neutral-800"></div>
+        <div class="mb-2.5 flex-1 h-px bg-hairline"></div>
       </div>
 
-      <p class="text-sm text-neutral-400 mb-8 max-w-xl">
+      <p class="text-sm text-paper-dim mb-8 max-w-xl">
         Have a question, suggestion, or want to share an upcoming event?
         Drop a message and I'll get back to you as soon as possible.
       </p>
@@ -147,6 +123,24 @@ defmodule MusicListingsWeb.ContactLive.New do
           </:actions>
         </.simple_form>
       </div>
+    </div>
+    """
+  end
+
+  attr :icon, :string, required: true
+  attr :title, :string, required: true
+  slot :inner_block, required: true
+
+  defp about_card(assigns) do
+    ~H"""
+    <div class="border-b border-hairline px-1 py-7 sm:px-6 sm:[&:not(:nth-child(3n))]:border-r">
+      <div class="mb-4 grid size-9 place-items-center bg-spotlight">
+        <MusicListingsWeb.CoreComponents.icon name={@icon} class="size-5 text-ink" />
+      </div>
+      <h3 class="font-display text-xl font-bold text-paper">{@title}</h3>
+      <p class="mt-1 text-sm leading-relaxed text-paper-dim">
+        {render_slot(@inner_block)}
+      </p>
     </div>
     """
   end

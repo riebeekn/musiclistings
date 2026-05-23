@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="[scrollbar-gutter:stable] h-full bg-neutral-950 antialiased">
+<html lang="en" class="[scrollbar-gutter:stable] h-full bg-ink antialiased">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -62,8 +62,7 @@
       href={MusicListingsWeb.SEO.canonical_url("/feed.xml")}
     />
     <link rel="icon" href={~p"/favicon.ico"} sizes="any" />
-    <link phx-track-static rel="stylesheet" href={~p"/fonts/InterWeb/inter.css"} />
-    <link phx-track-static rel="stylesheet" href={~p"/fonts/SpaceGrotesk/space-grotesk.css"} />
+    <link phx-track-static rel="stylesheet" href={~p"/fonts/after-dark.css"} />
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
     </script>
@@ -82,7 +81,7 @@
       </script>
     <% end %>
   </head>
-  <body class="min-h-full antialiased bg-neutral-950">
+  <body class="min-h-full antialiased bg-ink text-paper font-sans selection:bg-spotlight">
     <MusicListingsWeb.NavbarComponents.navbar current_user={@current_user} />
     {@inner_content}
   </body>

@@ -45,7 +45,7 @@ defmodule MusicListingsWeb.EventLive.Show do
   @impl true
   def render(assigns) do
     ~H"""
-    <article class="bg-neutral-900 rounded-2xl p-6 sm:p-8 border border-neutral-800">
+    <article class="mx-auto max-w-3xl">
       <.event_breadcrumb event={@event} />
       <.event_header event={@event} />
       <.event_details_list event={@event} />
