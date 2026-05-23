@@ -1162,7 +1162,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   defp events_date_header(assigns) do
     ~H"""
-    <div id={"date-#{@date}"} class="flex items-end gap-5 pt-16 pb-5 first:pt-0 scroll-mt-28">
+    <div id={"date-#{@date}"} class="flex items-end gap-5 pt-16 pb-5 first:pt-4 scroll-mt-28">
       <span class="mb-2 hidden h-2.5 w-2.5 shrink-0 bg-spotlight sm:block"></span>
       <h2 class="headline text-4xl whitespace-nowrap text-paper sm:text-5xl">
         <time datetime={@date}>{DateHelpers.format_date(@date)}</time>
