@@ -30,7 +30,12 @@ defmodule MusicListingsWeb.Endpoint do
     at: "/",
     from: :music_listings,
     gzip: false,
-    only: MusicListingsWeb.static_paths()
+    only: MusicListingsWeb.static_paths(),
+    # Root-level files (favicon.ico, favicon.svg, apple-touch-icon.png) get
+    # digested to hashed names in prod (e.g. favicon-<hash>.svg). Those hashed
+    # names don't match the exact entries in :only, so without prefix matching
+    # they 404. See Plug.Static :only_matching docs.
+    only_matching: ~w(favicon apple-touch-icon)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
