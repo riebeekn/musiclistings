@@ -32,6 +32,71 @@
 }
 
 /* ============================================================================
+   Self-hosted fonts (latin subset). Each real face is paired with a
+   metric-matched fallback so the swap from fallback → web font causes no
+   layout shift. Override %s computed from the woff2 metrics vs. Arial /
+   Courier New (capsize/Fontaine formula). Preloaded in the layout <head>.
+   ========================================================================== */
+
+/* big-shoulders-display - latin (variable 400-900) */
+@font-face {
+  font-family: "Big Shoulders Display";
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("../fonts/BigShouldersDisplay/big-shoulders-display.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Big Shoulders Display Fallback";
+  src: local("Arial");
+  size-adjust: 54.9542%;
+  ascent-override: 179.0581%;
+  descent-override: 38.7595%;
+  line-gap-override: 0%;
+}
+
+/* hanken-grotesk - latin (variable 400-800) */
+@font-face {
+  font-family: "Hanken Grotesk";
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("../fonts/HankenGrotesk/hanken-grotesk.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Hanken Grotesk Fallback";
+  src: local("Arial");
+  size-adjust: 101.519%;
+  ascent-override: 98.5037%;
+  descent-override: 29.8466%;
+  line-gap-override: 0%;
+}
+
+/* space-mono - latin (400 + 700) */
+@font-face {
+  font-family: "Space Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/SpaceMono/space-mono-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Space Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/SpaceMono/space-mono-700.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Space Mono Fallback";
+  src: local("Courier New");
+  size-adjust: 101.9834%;
+  ascent-override: 109.8218%;
+  descent-override: 35.3979%;
+  line-gap-override: 0%;
+}
+
+/* ============================================================================
    AFTER DARK — Toronto gig-listings broadsheet
    Nocturnal newsprint: warm near-black paper, film grain, hairline rules,
    one searing acid-lime spotlight, oversized condensed display type.
@@ -39,10 +104,11 @@
 
 @theme {
   /* Type — condensed poster display, humanist body, ticket-stub mono */
-  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji";
-  --font-display: "Big Shoulders Display", "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Space Mono", ui-monospace, "SFMono-Regular", monospace;
+  --font-sans: "Hanken Grotesk", "Hanken Grotesk Fallback", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  --font-display: "Big Shoulders Display", "Big Shoulders Display Fallback", "Hanken Grotesk",
+    "Hanken Grotesk Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Space Mono", "Space Mono Fallback", ui-monospace, "SFMono-Regular", monospace;
 
   /* Palette */
   --color-ink: #0b0b0c;

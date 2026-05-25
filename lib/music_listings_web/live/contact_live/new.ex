@@ -8,7 +8,13 @@ defmodule MusicListingsWeb.ContactLive.New do
   @impl true
   def mount(_params, _session, socket) do
     changeset = changeset(:new, %{})
-    socket = assign(socket, page_title: "Contact", form: to_form(changeset, as: :contact))
+
+    socket =
+      assign(socket,
+        page_title: "Contact",
+        form: to_form(changeset, as: :contact),
+        show_turnstile: true
+      )
 
     {:ok, socket}
   end

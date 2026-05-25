@@ -7,7 +7,11 @@ defmodule MusicListingsWeb.EventLive.New do
     changeset = changeset(:new, %{})
 
     socket
-    |> assign(page_title: "Submit an Event", form: to_form(changeset, as: :event))
+    |> assign(
+      page_title: "Submit an Event",
+      form: to_form(changeset, as: :event),
+      show_turnstile: true
+    )
     |> ok()
   end
 

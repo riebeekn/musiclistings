@@ -29,7 +29,7 @@ defmodule MusicListingsWeb.Endpoint do
   plug Plug.Static,
     at: "/",
     from: :music_listings,
-    gzip: false,
+    gzip: true,
     only: MusicListingsWeb.static_paths(),
     # Root-level files (favicon.ico, favicon.svg, apple-touch-icon.png) get
     # digested to hashed names in prod (e.g. favicon-<hash>.svg). Those hashed
