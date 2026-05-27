@@ -62,6 +62,14 @@ config :honeybadger,
   use_logger: true,
   insights_enabled: true
 
+# AppSignal (APM) base config — activated for prod in runtime.exs.
+# otp_app enables automatic Ecto / Oban / Finch (HTTP) instrumentation.
+config :appsignal, :config,
+  otp_app: :music_listings,
+  name: "Toronto Music Listings",
+  env: Mix.env(),
+  active: false
+
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 

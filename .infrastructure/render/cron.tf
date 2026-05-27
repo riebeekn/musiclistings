@@ -39,6 +39,12 @@ resource "render_cron_job" "this" {
     },
     "HONEYBADGER_ENV" = {
       value = var.environment
+    },
+    "APPSIGNAL_PUSH_API_KEY" = {
+      value = var.app_appsignal_push_api_key
+    },
+    "APPSIGNAL_APP_ENV" = {
+      value = var.environment
     }
   }
 }

@@ -212,4 +212,16 @@ if config_env() == :prod do
   config :honeybadger,
     api_key: honeybadger_api_key,
     environment_name: honeybadger_env
+
+  # AppSignal — only report when a real push API key is present (skip the
+  # Terraform placeholder), so deploys are unaffected until the key is set.
+  appsignal_push_api_key = System.get_env("APPSIGNAL_PUSH_API_KEY")
+
+  if appsignal_push_api_key not in [nil, ""] do
+    config :appsignal, :config,
+      active: true,
+      push_api_key: appsignal_push_api_key,
+      env: System.get_env("APPSIGNAL_APP_ENV", "prod"),
+      revision: System.get_env("APP_REVISION") || System.get_env("RENDER_GIT_COMMIT")
+  end
 end

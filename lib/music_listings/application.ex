@@ -5,10 +5,15 @@ defmodule MusicListings.Application do
 
   use Application
 
+  alias Appsignal.CheckIn
+  alias Appsignal.Logger.Handler, as: AppsignalLogHandler
+  alias Appsignal.Phoenix.LiveView, as: AppsignalLiveView
   alias MusicListings.Workers.DataRetrievalWorker
 
   @impl true
   def start(_type, _args) do
+    appsignal_active? = Application.get_env(:appsignal, :config, [])[:active] == true
+
     if Application.get_env(:music_listings, :crawl_and_exit?) == true do
       children = [
         MusicListingsWeb.Telemetry,
@@ -27,7 +32,17 @@ defmodule MusicListings.Application do
       # for other strategies and supported options
       opts = [strategy: :one_for_one, name: MusicListings.Supervisor]
       Supervisor.start_link(children, opts)
-      DataRetrievalWorker.perform(%{})
+
+      if appsignal_active?, do: AppsignalLogHandler.add("crawler")
+
+      # Wrap the crawl in an AppSignal cron check-in (start + finish) so a
+      # missed or failed nightly run alerts. Falls back to a plain call when
+      # AppSignal is inactive (dev/test, or before the push key is set).
+      if appsignal_active? do
+        CheckIn.cron("daily_crawl", fn -> DataRetrievalWorker.perform(%{}) end)
+      else
+        DataRetrievalWorker.perform(%{})
+      end
 
       System.stop(0)
     else
@@ -56,7 +71,16 @@ defmodule MusicListings.Application do
       # See https://hexdocs.pm/elixir/Supervisor.html
       # for other strategies and supported options
       opts = [strategy: :one_for_one, name: MusicListings.Supervisor]
-      Supervisor.start_link(children, opts)
+      result = Supervisor.start_link(children, opts)
+
+      # HTTP requests, Ecto, Oban and Finch are auto-instrumented via the
+      # configured otp_app; LiveView and log forwarding must be attached here.
+      if appsignal_active? do
+        AppsignalLiveView.attach()
+        AppsignalLogHandler.add("phoenix")
+      end
+
+      result
     end
   end
 
