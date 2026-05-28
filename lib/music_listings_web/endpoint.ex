@@ -24,12 +24,13 @@ defmodule MusicListingsWeb.Endpoint do
 
   # Serve at "/" the static files from "priv/static" directory.
   #
-  # You should set gzip to true if you are running phx.digest
-  # when deploying your static files in production.
+  # gzip is enabled only in prod, where `mix phx.digest` generates fresh `.gz`
+  # files at build time. In dev the watchers rewrite only the uncompressed
+  # assets, so serving stale leftover `.gz` files would mask CSS/JS changes.
   plug Plug.Static,
     at: "/",
     from: :music_listings,
-    gzip: true,
+    gzip: Mix.env() == :prod,
     only: MusicListingsWeb.static_paths(),
     # Root-level files (favicon.ico, favicon.svg, apple-touch-icon.png) get
     # digested to hashed names in prod (e.g. favicon-<hash>.svg). Those hashed
