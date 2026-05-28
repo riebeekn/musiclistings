@@ -45,6 +45,7 @@ defmodule MusicListings.Factory do
     %Venue{
       name: Faker.Lorem.sentence(),
       pull_events?: true,
+      include_in_recently_added_feed?: true,
       parser_module_name: "DanforthMusicHallParser",
       street: Faker.Address.street_address(),
       city: Faker.Address.city(),

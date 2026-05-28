@@ -205,6 +205,83 @@ defmodule MusicListings.EventsTest do
     end
   end
 
+  describe "list_recently_added_events/1" do
+    test "returns recently added upcoming events as EventInfo structs" do
+      venue = insert(:venue)
+      insert(:event, venue: venue, date: ~D[2024-08-10], title: "Recent Show")
+
+      assert [%EventInfo{title: "Recent Show", venue: %Venue{}}] =
+               Events.list_recently_added_events()
+    end
+
+    test "excludes events whose date has passed" do
+      venue = insert(:venue)
+      insert(:event, venue: venue, date: ~D[2024-07-15], title: "Past")
+      insert(:event, venue: venue, date: ~D[2024-08-10], title: "Upcoming")
+
+      titles = Events.list_recently_added_events() |> Enum.map(& &1.title)
+      assert titles == ["Upcoming"]
+    end
+
+    test "excludes soft-deleted events" do
+      venue = insert(:venue)
+
+      insert(:event,
+        venue: venue,
+        date: ~D[2024-08-10],
+        title: "Deleted",
+        deleted_at: DateTime.utc_now()
+      )
+
+      insert(:event, venue: venue, date: ~D[2024-08-10], title: "Live")
+
+      titles = Events.list_recently_added_events() |> Enum.map(& &1.title)
+      assert titles == ["Live"]
+    end
+
+    test "excludes events inserted before the lookback window" do
+      venue = insert(:venue)
+      old = insert(:event, venue: venue, date: ~D[2024-08-10], title: "Old")
+      insert(:event, venue: venue, date: ~D[2024-08-10], title: "New")
+
+      # The factory inserts at the mocked "now" (2024-08-01); push "Old" out of the window.
+      from(e in Event, where: e.id == ^old.id)
+      |> Repo.update_all(set: [inserted_at: ~U[2024-07-01 12:00:00Z]])
+
+      titles = Events.list_recently_added_events(lookback_days: 14) |> Enum.map(& &1.title)
+      assert titles == ["New"]
+    end
+
+    test "only includes events from venues opted into the recently added feed" do
+      included_venue = insert(:venue, include_in_recently_added_feed?: true)
+      excluded_venue = insert(:venue, include_in_recently_added_feed?: false)
+
+      insert(:event, venue: included_venue, date: ~D[2024-08-10], title: "Included")
+      insert(:event, venue: excluded_venue, date: ~D[2024-08-10], title: "Excluded")
+
+      titles = Events.list_recently_added_events() |> Enum.map(& &1.title)
+      assert titles == ["Included"]
+    end
+
+    test "caps a single venue so it cannot dominate the feed" do
+      busy_venue = insert(:venue)
+      other_venue = insert(:venue)
+
+      for i <- 1..10 do
+        insert(:event, venue: busy_venue, date: ~D[2024-08-10], title: "Busy #{i}")
+      end
+
+      insert(:event, venue: other_venue, date: ~D[2024-08-10], title: "Other")
+
+      results = Events.list_recently_added_events(max_per_venue: 3)
+      busy_count = Enum.count(results, &(&1.venue.id == busy_venue.id))
+      other_count = Enum.count(results, &(&1.venue.id == other_venue.id))
+
+      assert busy_count == 3
+      assert other_count == 1
+    end
+  end
+
   describe "list_submitted_events/1" do
     setup do
       insert(:submitted_event, date: ~D[2024-07-30], title: "ev0")
