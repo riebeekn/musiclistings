@@ -59,7 +59,9 @@ defmodule MusicListings do
           {:ok, Event} | {:error, :not_allowed | :venue_not_found | :submitted_event_not_found}
   defdelegate approve_submitted_event(user, submitted_event_id), to: EventSubmissionService
 
-  @type list_venue_opts :: {:restrict_to_pulled_venues?, boolean()}
+  @type list_venue_opts ::
+          {:restrict_to_pulled_venues?, boolean()}
+          | {:only_with_upcoming_events?, boolean()}
   @spec list_venues(list(list_venue_opts)) :: list(VenueSummary)
   defdelegate list_venues(opts \\ []), to: Venues
 

@@ -15,6 +15,7 @@ defmodule MusicListings.Venues do
   @spec list_venues :: list(VenueSummary)
   def list_venues(opts \\ []) do
     restrict_to_pulled_venues? = Keyword.get(opts, :restrict_to_pulled_venues?, true)
+    only_with_upcoming_events? = Keyword.get(opts, :only_with_upcoming_events?, false)
     today = DateHelpers.now() |> DateHelpers.to_eastern_date()
 
     Venue
@@ -22,6 +23,7 @@ defmodule MusicListings.Venues do
       on: event.venue_id == venue.id and event.date >= ^today
     )
     |> maybe_restrict_to_pulled_venues(restrict_to_pulled_venues?)
+    |> maybe_restrict_to_venues_with_upcoming_events(only_with_upcoming_events?)
     |> group_by([venue], [venue.id, venue.name, venue.street])
     |> order_by([venue], venue.name)
     |> select([venue, event], %{
@@ -39,6 +41,13 @@ defmodule MusicListings.Venues do
   defp maybe_restrict_to_pulled_venues(query, true) do
     query
     |> where([venue], venue.pull_events?)
+  end
+
+  defp maybe_restrict_to_venues_with_upcoming_events(query, false), do: query
+
+  defp maybe_restrict_to_venues_with_upcoming_events(query, true) do
+    query
+    |> having([_venue, event], count(event.id) > 0)
   end
 
   @spec get_venue!(pos_integer()) :: Venue.t()

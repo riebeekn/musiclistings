@@ -4,6 +4,7 @@ defmodule MusicListings.VenuesTest do
   alias MusicListings.Accounts.User
   alias MusicListings.Venues
   alias MusicListings.Venues.VenueSummary
+  alias MusicListingsSchema.Event
   alias MusicListingsSchema.Venue
 
   describe "list_venues/0" do
@@ -39,6 +40,28 @@ defmodule MusicListings.VenuesTest do
                }
              ] ==
                Venues.list_venues()
+    end
+
+    test "with only_with_upcoming_events?: true excludes venues without upcoming events" do
+      Repo.delete_all(Event)
+      Repo.delete_all(Venue)
+      venue_with_upcoming = insert(:venue, name: "has upcoming", street: "a street")
+      venue_with_only_past = insert(:venue, name: "only past", street: "b street")
+      _venue_with_no_events = insert(:venue, name: "no events", street: "c street")
+
+      # mocked date of today is 2024-08-01
+      insert(:event, venue: venue_with_upcoming, date: ~D[2024-08-01], title: "ev1")
+      insert(:event, venue: venue_with_only_past, date: ~D[2024-07-30], title: "ev0")
+
+      venue_with_upcoming_id = venue_with_upcoming.id
+
+      assert [
+               %VenueSummary{
+                 id: ^venue_with_upcoming_id,
+                 name: "has upcoming",
+                 upcoming_event_count: 1
+               }
+             ] = Venues.list_venues(only_with_upcoming_events?: true)
     end
   end
 

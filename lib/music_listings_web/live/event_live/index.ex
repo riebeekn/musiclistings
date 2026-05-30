@@ -14,7 +14,12 @@ defmodule MusicListingsWeb.EventLive.Index do
         Date.to_iso8601(DateHelpers.effective_today_eastern())
 
     sort_by = get_sort_by_in_local_storage(socket)
-    venues = MusicListings.list_venues(restrict_to_pulled_venues?: false)
+
+    venues =
+      MusicListings.list_venues(
+        restrict_to_pulled_venues?: false,
+        only_with_upcoming_events?: true
+      )
 
     socket
     |> assign(:venues, venues)
