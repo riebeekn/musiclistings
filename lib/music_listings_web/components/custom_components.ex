@@ -1095,7 +1095,7 @@ defmodule MusicListingsWeb.CustomComponents do
   def event_details_list(assigns) do
     ~H"""
     <dl class="mt-8 grid grid-cols-2 border-t border-hairline sm:grid-cols-4">
-      <div class="border-b border-hairline py-4 pr-4 sm:[&:not(:nth-child(4n))]:border-r">
+      <div class="border-b border-hairline py-4 pr-4 sm:[&:not(:nth-child(4n))]:border-r sm:[&:not(:nth-child(4n+1))]:pl-4">
         <dt class="kicker">Date</dt>
         <dd class="mt-1.5 font-display text-xl font-bold text-paper">
           <time datetime={Date.to_iso8601(@event.date)}>
@@ -1105,21 +1105,21 @@ defmodule MusicListingsWeb.CustomComponents do
       </div>
       <div
         :if={@event.time}
-        class="border-b border-hairline py-4 pr-4 sm:[&:not(:nth-child(4n))]:border-r"
+        class="border-b border-hairline py-4 pr-4 sm:[&:not(:nth-child(4n))]:border-r sm:[&:not(:nth-child(4n+1))]:pl-4"
       >
         <dt class="kicker">Showtime</dt>
         <dd class="mt-1.5 font-mono text-lg text-paper">{DateHelpers.format_time(@event.time)}</dd>
       </div>
       <div
         :if={@event.price_format != :unknown}
-        class="border-b border-hairline py-4 pr-4 sm:[&:not(:nth-child(4n))]:border-r"
+        class="border-b border-hairline py-4 pr-4 sm:[&:not(:nth-child(4n))]:border-r sm:[&:not(:nth-child(4n+1))]:pl-4"
       >
         <dt class="kicker">Price</dt>
         <dd class="mt-1.5 font-mono text-lg text-spotlight">{format_price(@event, :long)}</dd>
       </div>
       <div
         :if={@event.age_restriction != :unknown}
-        class="border-b border-hairline py-4 pr-4 sm:[&:not(:nth-child(4n))]:border-r"
+        class="border-b border-hairline py-4 pr-4 sm:[&:not(:nth-child(4n))]:border-r sm:[&:not(:nth-child(4n+1))]:pl-4"
       >
         <dt class="kicker">Age</dt>
         <dd class="mt-1.5 font-mono text-lg text-paper">
