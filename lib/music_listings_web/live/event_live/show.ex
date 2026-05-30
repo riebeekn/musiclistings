@@ -2,6 +2,7 @@ defmodule MusicListingsWeb.EventLive.Show do
   use MusicListingsWeb, :live_view
   use Goal
 
+  alias MusicListingsUtilities.DateHelpers
   alias MusicListingsWeb.SEO
 
   @impl true
@@ -33,6 +34,7 @@ defmodule MusicListingsWeb.EventLive.Show do
 
     socket
     |> assign(:event, event)
+    |> assign(:notice, notice_for_event(event))
     |> assign(:page_title, page_title)
     |> assign(:og_type, "article")
     |> assign(:og_title, page_title)
@@ -47,10 +49,24 @@ defmodule MusicListingsWeb.EventLive.Show do
     ~H"""
     <article class="mx-auto max-w-3xl">
       <.event_breadcrumb event={@event} />
+      <.event_notice :if={@notice} message={@notice} />
       <.event_header event={@event} />
       <.event_details_list event={@event} />
       <.event_actions event={@event} />
     </article>
     """
+  end
+
+  defp notice_for_event(event) do
+    cond do
+      Date.before?(event.date, DateHelpers.effective_today_eastern()) ->
+        "This event has already taken place."
+
+      event.deleted_at ->
+        "This event is no longer listed and may have been cancelled or rescheduled."
+
+      true ->
+        nil
+    end
   end
 end

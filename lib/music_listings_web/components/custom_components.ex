@@ -1005,6 +1005,27 @@ defmodule MusicListingsWeb.CustomComponents do
   end
 
   @doc """
+  Renders a notice banner for events that are no longer current (past,
+  cancelled, or otherwise removed from listings).
+
+  ## Example
+
+  <.event_notice message="This event has already taken place." />
+  """
+  attr :message, :string, required: true
+
+  def event_notice(assigns) do
+    ~H"""
+    <div
+      role="status"
+      class="mb-6 rounded border border-amber-400/50 bg-amber-400/10 px-4 py-3 font-mono text-sm text-amber-300"
+    >
+      {@message}
+    </div>
+    """
+  end
+
+  @doc """
   Renders the breadcrumb navigation for an event show page.
 
   ## Example

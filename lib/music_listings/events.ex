@@ -105,7 +105,6 @@ defmodule MusicListings.Events do
   @spec fetch_event(pos_integer()) :: {:ok, Event.t()} | {:error, :not_found}
   def fetch_event(event_id) do
     Event
-    |> where([event], is_nil(event.deleted_at))
     |> Repo.get(event_id)
     |> Repo.preload(:venue)
     |> case do

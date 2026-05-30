@@ -56,16 +56,27 @@ defmodule MusicListingsWeb.EventLive.ShowTest do
       end
     end
 
-    test "returns 404 for soft-deleted event", %{conn: conn, event: event} do
+    test "renders a past event with a notice", %{conn: conn, venue: venue} do
+      # mock "today" in test env is 2024-08-01, so this date is in the past
+      event = insert(:event, venue: venue, title: "Past Show", date: ~D[2024-07-01])
+
+      {:ok, _view, html} = live(conn, ~p"/events/#{event.id}/past-show")
+
+      assert html =~ "Past Show"
+      assert html =~ "This event has already taken place."
+    end
+
+    test "renders a soft-deleted upcoming event with a notice", %{conn: conn, event: event} do
       {:ok, _deleted} =
         MusicListingsSchema.Event
         |> MusicListings.Repo.get!(event.id)
         |> Ecto.Changeset.change(%{deleted_at: DateTime.utc_now() |> DateTime.truncate(:second)})
         |> MusicListings.Repo.update()
 
-      assert_raise Ecto.NoResultsError, fn ->
-        live(conn, ~p"/events/#{event.id}/dream-theater-live")
-      end
+      {:ok, _view, html} = live(conn, ~p"/events/#{event.id}/dream-theater-live")
+
+      assert html =~ "Dream Theater Live"
+      assert html =~ "This event is no longer listed"
     end
   end
 end
