@@ -95,6 +95,7 @@ defmodule MusicListings.MixProject do
       {:ecto_boot_migration,
        git: "https://github.com/mwhitworth/ecto_boot_migration", branch: "elixir-1.17-fix"},
       {:nimble_csv, "~> 1.2"},
+      {:fun_with_flags, "~> 1.13"},
       {:honeybadger, "~>0.23"},
       {:appsignal_phoenix, "~> 2.0"},
       # build / dev / test related deps

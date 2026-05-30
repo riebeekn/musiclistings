@@ -189,6 +189,12 @@ MusicListings.Accounts.register_user(%{
 - Infrastructure managed via Terraform (`.infrastructure/` directory)
 - Uses CloudFlare as reverse proxy
 
+## Feature Flags
+
+Feature flags use [FunWithFlags](https://github.com/tompave/fun_with_flags), persisted via Ecto
+(table `feature_flags`) with the in-memory cache **disabled** (config in `config/config.exs`).
+Check a flag once per request and reuse the boolean — don't call `FunWithFlags.enabled?/1` in a loop.
+
 ## Important Patterns
 
 1. **Error Handling**: Parse errors are captured in `crawl_errors` table and included in admin emails

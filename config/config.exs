@@ -89,6 +89,21 @@ config :music_listings, Oban,
      ]}
   ]
 
+# FunWithFlags - feature flags persisted via Ecto (no Redis).
+config :fun_with_flags, :persistence,
+  adapter: FunWithFlags.Store.Persistent.Ecto,
+  repo: MusicListings.Repo,
+  ecto_table_name: "feature_flags"
+
+# Cache disabled: flags are used sparingly (toggling UI features on/off), so the
+# extra indexed DB lookup per check is negligible and not worth a caching layer.
+# This also means toggles take effect immediately with no staleness, and removes
+# the need for cross-node cache-bust notifications.
+# NOTE: with the cache off, a flag check hits the DB every time, so check a flag
+# once per request and reuse the boolean - don't call enabled?/1 inside a loop.
+config :fun_with_flags, :cache, enabled: false
+config :fun_with_flags, :cache_bust_notifications, enabled: false
+
 # TZ config
 config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase
 
