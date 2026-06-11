@@ -24,7 +24,7 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParserTest do
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://www.historytoronto.com/events/events_ajax/0?per_page=60" ==
+      assert "https://www.historytoronto.com/events/events_ajax/0?per_page=200" ==
                HistoryParser.source_url()
     end
   end
