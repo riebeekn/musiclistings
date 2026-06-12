@@ -42,15 +42,13 @@ _dialyzer
 
 .envrc
 
-notes.txt
-
 *.xlsx
 
 **/.terraform/*
 *.tfstate
 *.tfstate.*
 *.tfvars
-*/.txt
+/*.txt
 *.csv
 *.sql
 
