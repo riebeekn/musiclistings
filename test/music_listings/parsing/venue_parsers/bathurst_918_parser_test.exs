@@ -24,7 +24,7 @@ defmodule MusicListings.Parsing.VenueParsers.Bathurst918ParserTest do
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://partners-endpoint.dice.fm/api/v2/events?page%5Bsize%5D=24&types=linkout%2Cevent&filter%5Bvenues%5D%5B%5D=918+Bathurst+Centre&filter%5Bflags%5D%5B%5D=going_ahead&filter%5Bflags%5D%5B%5D=rescheduled" ==
+      assert "https://partners-endpoint.dice.fm/api/v2/events?page%5Bsize%5D=100&types=linkout%2Cevent&filter%5Bvenues%5D%5B%5D=918+Bathurst+Centre&filter%5Bflags%5D%5B%5D=going_ahead&filter%5Bflags%5D%5B%5D=rescheduled" ==
                Bathurst918Parser.source_url()
     end
   end

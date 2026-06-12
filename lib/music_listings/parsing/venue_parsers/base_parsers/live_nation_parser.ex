@@ -21,7 +21,7 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.LiveNationParser do
       query EVENTS_PAGE($venue_id: String!, $include_genres: String, $start_date_time: String, $end_date_time: String) {
         getEvents(
           filter: {exclude_status_codes: ["cancelled", "postponed"], venue_id: $venue_id, start_date_time: $start_date_time, end_date_time: $end_date_time, include_genres: $include_genres}
-          limit: 72
+          limit: 200
           offset: 0
           order: "ascending"
           sort_by: "start_date"

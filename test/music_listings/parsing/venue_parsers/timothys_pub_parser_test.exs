@@ -25,7 +25,7 @@ defmodule MusicListings.Parsing.VenueParsers.TimothysPubParserTest do
     test "returns expected value" do
       assert String.starts_with?(
                TimothysPubParser.source_url(),
-               "https://tockify.com/api/ngevent?max=48&view=agenda&calname=robinbrem&start-inclusive=true&longForm=false&showAll=false&startms="
+               "https://tockify.com/api/ngevent?max=200&view=agenda&calname=robinbrem&start-inclusive=true&longForm=false&showAll=false&startms="
              )
     end
   end

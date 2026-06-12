@@ -9,7 +9,7 @@ defmodule MusicListings.Parsing.VenueParsers.CocaColaColiseumParser do
   @impl true
   def source_url,
     do:
-      "https://www.coca-colacoliseum.com/events/events_ajax/0?category=0&venue=0&team=0&per_page=63&came_from_page=event-list-page"
+      "https://www.coca-colacoliseum.com/events/events_ajax/0?category=0&venue=0&team=0&per_page=200&came_from_page=event-list-page"
 
   @impl true
   defdelegate retrieve_events_fun, to: CarbonhouseParser

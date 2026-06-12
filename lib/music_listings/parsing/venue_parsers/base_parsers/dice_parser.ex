@@ -19,7 +19,7 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.DiceParser do
   def build_source_url(venue_name) do
     query =
       URI.encode_query([
-        {"page[size]", "24"},
+        {"page[size]", "100"},
         {"types", "linkout,event"},
         {"filter[venues][]", venue_name},
         {"filter[flags][]", "going_ahead"},

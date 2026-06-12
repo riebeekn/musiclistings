@@ -15,7 +15,7 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.TockifyParser do
     unix_today_in_milliseconds =
       (DateHelpers.today() |> DateTime.new!(~T[00:00:00]) |> DateTime.to_unix()) * 1_000
 
-    "https://tockify.com/api/ngevent?max=48&view=agenda&calname=#{calendar_name}&start-inclusive=true&longForm=false&showAll=false&startms=#{unix_today_in_milliseconds}"
+    "https://tockify.com/api/ngevent?max=200&view=agenda&calname=#{calendar_name}&start-inclusive=true&longForm=false&showAll=false&startms=#{unix_today_in_milliseconds}"
   end
 
   def retrieve_events_fun do
