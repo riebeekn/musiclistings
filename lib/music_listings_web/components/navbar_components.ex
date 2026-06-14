@@ -197,8 +197,7 @@ defmodule MusicListingsWeb.NavbarComponents do
     ~H"""
     <div class="kicker flex items-center gap-2">
       <span class="relative flex size-2">
-        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-spotlight opacity-70">
-        </span>
+        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-spotlight opacity-70"></span>
         <span class="relative inline-flex size-2 rounded-full bg-spotlight"></span>
       </span>
       Updated {MusicListings.data_last_updated_on()}

@@ -791,8 +791,7 @@ defmodule MusicListingsWeb.CustomComponents do
             referrerpolicy="no-referrer-when-downgrade"
             sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
             phx-update="ignore"
-          >
-          </iframe>
+          ></iframe>
         </div>
       </div>
     </div>
