@@ -4,6 +4,7 @@ defmodule MusicListings do
   """
   alias MusicListings.Crawler
   alias MusicListings.Events
+  alias MusicListings.Events.EventInfo
   alias MusicListings.Events.PagedEvents
   alias MusicListings.Venues
   alias MusicListings.Venues.VenueSummary
@@ -30,6 +31,9 @@ defmodule MusicListings do
           | {:sort_by, :title | :venue}
   @spec list_events(list(list_events_opts)) :: PagedEvents.t()
   defdelegate list_events(opts \\ []), to: Events
+
+  @spec list_recently_added_events(keyword()) :: [EventInfo.t()]
+  defdelegate list_recently_added_events(opts \\ []), to: Events
 
   @spec list_upcoming_events() :: [Event.t()]
   defdelegate list_upcoming_events, to: Events

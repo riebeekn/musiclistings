@@ -15,7 +15,8 @@ defmodule MusicListings.Events.EventInfo do
           price_lo: Decimal.t(),
           price_hi: Decimal.t(),
           showtimes: list(ShowTimeInfo.t()),
-          has_multiple_showtimes?: boolean()
+          has_multiple_showtimes?: boolean(),
+          added_at: DateTime.t() | nil
         }
 
   defstruct [
@@ -28,6 +29,7 @@ defmodule MusicListings.Events.EventInfo do
     :price_lo,
     :price_hi,
     :showtimes,
-    :has_multiple_showtimes?
+    :has_multiple_showtimes?,
+    :added_at
   ]
 end

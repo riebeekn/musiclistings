@@ -311,6 +311,28 @@ defmodule MusicListingsWeb.EventLiveTest do
     end
   end
 
+  describe "newly added rail (feature flag)" do
+    setup do
+      today = DateHelpers.today_eastern()
+      event = insert(:event, date: today, title: "Freshly Added Show")
+      %{event_id: event.id}
+    end
+
+    test "rail is hidden by default (flag off)", %{conn: conn} do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      refute render(view) =~ "New This Week"
+    end
+
+    test "rail is shown when the flag is enabled", %{conn: conn} do
+      FunWithFlags.enable(:show_recently_added)
+
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      assert render(view) =~ "New This Week"
+    end
+  end
+
   describe "new" do
     test "saves submitted event with valid parameters", %{conn: conn} do
       {:ok, view, _html} = live(conn, ~p"/events/new")
