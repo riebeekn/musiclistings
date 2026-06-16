@@ -162,7 +162,8 @@ defmodule MusicListings.Events do
       price_format: first_show.price_format,
       age_restriction: first_show.age_restriction,
       showtimes: shows,
-      has_multiple_showtimes?: Enum.count(shows) > 1
+      has_multiple_showtimes?: Enum.count(shows) > 1,
+      added_at: events |> Enum.map(& &1.inserted_at) |> Enum.min(DateTime)
     }
   end
 

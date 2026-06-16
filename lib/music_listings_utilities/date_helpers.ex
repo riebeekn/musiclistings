@@ -88,6 +88,14 @@ defmodule MusicListingsUtilities.DateHelpers do
     end
   end
 
+  def added_ago_in_words(%DateTime{} = added_at) do
+    case Date.diff(effective_today_eastern(), to_eastern_date(added_at)) do
+      days when days <= 0 -> "Added today"
+      1 -> "Added yesterday"
+      days -> "Added #{days}d ago"
+    end
+  end
+
   def format_datetime(%DateTime{} = datetime) do
     Calendar.strftime(datetime, "%b %d %Y")
   end

@@ -26,6 +26,7 @@ defmodule MusicListingsWeb.EventLive.Index do
     |> assign(:venue_ids, venue_ids)
     |> assign(:selected_date, selected_date)
     |> assign(:sort_by, sort_by)
+    |> assign(:just_added_enabled, FunWithFlags.enabled?(:show_recently_added))
     |> assign(:venue_filtering_form, to_form(%{}))
     |> assign(:date_filtering_form, to_form(%{}))
     |> assign(:page_title, "Toronto Live Music Events")
@@ -100,11 +101,13 @@ defmodule MusicListingsWeb.EventLive.Index do
         if connected?(socket) do
           socket
           |> update_socket_assigns(paged_events, venue_ids)
+          |> assign(:recently_added, recently_added_events(socket))
           |> assign(:loading, false)
           |> noreply()
         else
           socket
           |> assign(:events, [])
+          |> assign(:recently_added, [])
           |> assign(:current_page, 1)
           |> assign(:total_pages, 0)
           |> assign(:loading, true)
@@ -253,7 +256,16 @@ defmodule MusicListingsWeb.EventLive.Index do
 
     socket
     |> update_socket_assigns(paged_events)
+    |> assign(:recently_added, recently_added_events(socket))
     |> noreply()
+  end
+
+  defp recently_added_events(socket) do
+    if socket.assigns.just_added_enabled do
+      MusicListings.list_recently_added_events(limit: 12)
+    else
+      []
+    end
   end
 
   defp update_socket_assigns(socket, paged_events) do
@@ -291,28 +303,41 @@ defmodule MusicListingsWeb.EventLive.Index do
   def render(assigns) do
     ~H"""
     <%!-- MASTHEAD --%>
-    <section class="mb-10">
+    <section class={if @just_added_enabled, do: "mb-6", else: "mb-10"}>
       <p class="kicker flex items-center gap-2">
         <span class="inline-block h-2 w-8 bg-spotlight"></span> Toronto · Live Music Listings
       </p>
       <h1 class="headline mt-4 text-[3.25rem] leading-[0.86] text-paper sm:text-7xl lg:text-8xl">
         What's <span class="text-spotlight glow">On</span> <br class="hidden sm:block" />Tonight
       </h1>
-      <p class="mt-5 max-w-xl text-sm leading-relaxed text-paper-dim sm:text-base">
+      <p class={[
+        "max-w-xl text-sm leading-relaxed text-paper-dim sm:text-base",
+        if(@just_added_enabled, do: "mt-4", else: "mt-5")
+      ]}>
         Every show worth leaving the house for — concerts, club nights and DIY gigs
         from dozens of venues across the city, refreshed daily.
       </p>
     </section>
 
+    <%!-- Just Added rail (feature-flagged) --%>
+    <.recently_added_peek_rail_tight
+      :if={@just_added_enabled}
+      events={@recently_added}
+      current_user={@current_user}
+    />
+
     <%!-- Desktop filter bar --%>
     <div
-      class="mb-8 hidden md:block"
+      class={["hidden md:block", if(@just_added_enabled, do: "mb-4", else: "mb-8")]}
       data-venue-filter-restore="true"
       data-storage-key="venue_ids"
       data-date-filter-restore="true"
       data-date-storage-key="selected_date"
     >
-      <div class="flex flex-wrap items-end gap-5 border-t border-hairline pt-5">
+      <div class={[
+        "flex flex-wrap items-end gap-5 border-t border-hairline",
+        if(@just_added_enabled, do: "pt-4", else: "pt-5")
+      ]}>
         <.filter_field label="Venues">
           <.venue_filter for={@venue_filtering_form} venues={@venues} venue_ids={@venue_ids} />
         </.filter_field>
@@ -331,7 +356,10 @@ defmodule MusicListingsWeb.EventLive.Index do
     </div>
 
     <%!-- Mobile filter button + chips: hidden on desktop --%>
-    <div class="md:hidden mb-4 flex items-start justify-between gap-3 border-t border-hairline pt-5">
+    <div class={[
+      "md:hidden flex items-start justify-between gap-3 border-t border-hairline",
+      if(@just_added_enabled, do: "mb-3 pt-4", else: "mb-4 pt-5")
+    ]}>
       <.mobile_filter_button />
       <.mobile_filter_chips
         venue_ids={@venue_ids}
@@ -356,7 +384,10 @@ defmodule MusicListingsWeb.EventLive.Index do
 
     <.events_list events={@events} current_user={@current_user} sort_by={@sort_by} />
 
-    <div class="mt-10 border-t border-hairline pt-6">
+    <div class={[
+      "border-t border-hairline",
+      if(@just_added_enabled, do: "mt-8 pt-5", else: "mt-10 pt-6")
+    ]}>
       <.pager current_page={@current_page} total_pages={@total_pages} path={~p"/events"} />
     </div>
     """
