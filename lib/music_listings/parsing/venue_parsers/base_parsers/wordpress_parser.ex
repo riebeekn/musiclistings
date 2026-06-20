@@ -31,7 +31,7 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.WordpressParser do
       current_page == nil ->
         "#{current_url}list/page/2/"
 
-      current_page && current_page <= 3 ->
+      current_page <= 3 ->
         next_page = current_page + 1
         String.replace(current_url, "page/#{current_page}", "page/#{next_page}")
 

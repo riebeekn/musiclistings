@@ -43,16 +43,16 @@ defmodule MusicListings.Factory do
 
   def venue_factory do
     %Venue{
-      name: Faker.Lorem.sentence(),
+      name: sequence(:venue_name, &"Test Venue #{&1}"),
       pull_events?: true,
       include_in_recently_added_feed?: true,
       parser_module_name: "DanforthMusicHallParser",
-      street: Faker.Address.street_address(),
-      city: Faker.Address.city(),
+      street: sequence(:venue_street, &"#{&1} Main Street"),
+      city: "Toronto",
       province: "Ontario",
       country: "Canada",
-      postal_code: Faker.Address.postcode(),
-      google_map_url: Faker.Internet.image_url()
+      postal_code: "M5V 2T6",
+      google_map_url: "https://maps.google.com/?q=43.6532,-79.3832"
     }
   end
 end

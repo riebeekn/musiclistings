@@ -14,8 +14,6 @@ defmodule MusicListings do
   alias MusicListingsSchema.Venue
   alias MusicListingsServices.EventSubmissionService
 
-  require Logger
-
   @spec data_last_updated_on :: String.t()
   defdelegate data_last_updated_on, to: Crawler
 
