@@ -8,6 +8,7 @@ defmodule MusicListings.Application do
   alias Appsignal.CheckIn
   alias Appsignal.Logger.Handler, as: AppsignalLogHandler
   alias Appsignal.Phoenix.LiveView, as: AppsignalLiveView
+  alias MusicListings.Analytics.TelemetryHandler
   alias MusicListings.Workers.DataRetrievalWorker
 
   @impl true
@@ -72,6 +73,9 @@ defmodule MusicListings.Application do
       # for other strategies and supported options
       opts = [strategy: :one_for_one, name: MusicListings.Supervisor]
       result = Supervisor.start_link(children, opts)
+
+      # Persist first-party product-analytics telemetry events to the database.
+      TelemetryHandler.attach()
 
       # HTTP requests, Ecto, Oban and Finch are auto-instrumented via the
       # configured otp_app; LiveView and log forwarding must be attached here.
