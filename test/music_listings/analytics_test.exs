@@ -35,15 +35,15 @@ defmodule MusicListings.AnalyticsTest do
   end
 
   describe "telemetry handler persists rows" do
-    test "shown event stores the count" do
+    test "shown event records an impression row" do
       TelemetryHandler.handle_event(
         [:music_listings, :new_this_week, :shown],
-        %{count: 7},
+        %{},
         %{},
         nil
       )
 
-      assert [%AnalyticsEvent{name: "new_this_week.shown", metadata: %{"count" => 7}}] =
+      assert [%AnalyticsEvent{name: "new_this_week.shown", metadata: %{}}] =
                Repo.all(AnalyticsEvent)
     end
 

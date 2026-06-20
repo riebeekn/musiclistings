@@ -38,7 +38,7 @@ defmodule MusicListingsWeb.RecentlyAddedAnalyticsTest do
       assert html =~ "New This Week"
 
       assert [shown] = rows("new_this_week.shown")
-      assert shown.metadata["count"] == 1
+      assert shown.metadata == %{}
 
       # Re-running handle_params (e.g. a filter/pagination patch) must not re-count.
       render_patch(view, ~p"/events")

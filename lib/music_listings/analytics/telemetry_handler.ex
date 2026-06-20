@@ -30,8 +30,8 @@ defmodule MusicListings.Analytics.TelemetryHandler do
   end
 
   @doc false
-  def handle_event([:music_listings, :new_this_week, :shown], measurements, _metadata, _config) do
-    record("new_this_week.shown", %{"count" => measurements[:count]})
+  def handle_event([:music_listings, :new_this_week, :shown], _measurements, _metadata, _config) do
+    record("new_this_week.shown", %{})
   end
 
   def handle_event(

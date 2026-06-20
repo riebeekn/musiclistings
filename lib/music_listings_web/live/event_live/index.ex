@@ -289,7 +289,7 @@ defmodule MusicListingsWeb.EventLive.Index do
          not socket.assigns.new_this_week_tracked do
       :telemetry.execute(
         [:music_listings, :new_this_week, :shown],
-        %{count: length(recently_added)},
+        %{},
         %{}
       )
 
