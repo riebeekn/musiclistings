@@ -358,29 +358,52 @@ jobs:
           echo "ENV_NAME=$ENV_NAME" >> $GITHUB_ENV
           echo "SRV_ID=$SRV_ID" >> $GITHUB_ENV
 
-      - name: Set deploy hook secret
-        id: set_deploy_hook
-        run: |
-          # Construct the secret name dynamically
-          SECRET_NAME="${ENV_NAME^^}_DEPLOY_HOOK"
-          echo "SECRET_NAME=$SECRET_NAME" >> $GITHUB_ENV
-
       - name: Skip non-main branch for prod
         if: env.ENV_NAME == 'prod' && github.ref_name != 'main'
         run: echo "Skipping prod deployment because the branch is not main."
         continue-on-error: true
 
       - name: Deploy to Render
-        uses: bankfliptech/deploy-to-render@609adbd930fc47f6569be8b8a883cb5b70e85e4c # v2.0.0
         if: env.ENV_NAME != 'prod' || github.ref_name == 'main'
-        with:
-          serviceId: ${{ env.SRV_ID }}
-          apiKey: ${{ secrets.RENDER_API_KEY }}
-          # The dynamic lookup injects the whole secrets context into this step.
-          # Accepted: the action is SHA-pinned (see uses: above) and per-env deploy
-          # hooks are managed dynamically via the RENDER_ENVIRONMENTS variable, so
-          # adding an environment stays zero-touch here. Re-evaluate if ever unpinned.
-          deployHookURL: ${{ secrets[env.SECRET_NAME] }} # zizmor: ignore[overprovisioned-secrets]
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+        run: |
+          set -euo pipefail
+
+          # Trigger a deploy of the latest commit
+          deploy_id=$(curl --fail --silent --show-error \
+            --request POST \
+            --header "Authorization: Bearer $RENDER_API_KEY" \
+            --header "Accept: application/json" \
+            "https://api.render.com/v1/services/$SRV_ID/deploys" | jq -r '.id')
+
+          if [ -z "$deploy_id" ] || [ "$deploy_id" = "null" ]; then
+            echo "Failed to trigger deploy for service $SRV_ID"
+            exit 1
+          fi
+          echo "Triggered deploy $deploy_id for service $SRV_ID"
+
+          # Poll until terminal state (mirrors render-deploy-action wait-for-success)
+          while true; do
+            status=$(curl --silent --show-error \
+              --header "Authorization: Bearer $RENDER_API_KEY" \
+              --header "Accept: application/json" \
+              "https://api.render.com/v1/services/$SRV_ID/deploys/$deploy_id" \
+              | jq -r '.status // empty' || true)
+
+            if [ -z "$status" ]; then
+              echo "Could not read deploy status, retrying..."
+              sleep 10
+              continue
+            fi
+            echo "Deploy status: $status"
+
+            case "$status" in
+              live) echo "Deploy succeeded."; exit 0 ;;
+              *failed | canceled | deactivated) echo "Deploy failed: $status"; exit 1 ;;
+            esac
+            sleep 10
+          done
 
   deploy_cron_service_to_render:
     runs-on: ubuntu-latest
@@ -412,13 +435,47 @@ jobs:
         run: echo "Skipping prod deployment because the branch is not main."
         continue-on-error: true
 
-      - name: Deploy
-        uses: johnbeynon/render-deploy-action@a63fe3b2c1d880fad347a6ec2923b97e700755fe # v0.0.9
+      - name: Deploy to Render
         if: env.ENV_NAME != 'prod' || github.ref_name == 'main'
-        with:
-          service-id: ${{ env.SRV_ID }}
-          api-key: ${{ secrets.RENDER_API_KEY }}
-          wait-for-success: true
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+        run: |
+          set -euo pipefail
+
+          # Trigger a deploy of the latest commit
+          deploy_id=$(curl --fail --silent --show-error \
+            --request POST \
+            --header "Authorization: Bearer $RENDER_API_KEY" \
+            --header "Accept: application/json" \
+            "https://api.render.com/v1/services/$SRV_ID/deploys" | jq -r '.id')
+
+          if [ -z "$deploy_id" ] || [ "$deploy_id" = "null" ]; then
+            echo "Failed to trigger deploy for service $SRV_ID"
+            exit 1
+          fi
+          echo "Triggered deploy $deploy_id for service $SRV_ID"
+
+          # Poll until terminal state (mirrors render-deploy-action wait-for-success)
+          while true; do
+            status=$(curl --silent --show-error \
+              --header "Authorization: Bearer $RENDER_API_KEY" \
+              --header "Accept: application/json" \
+              "https://api.render.com/v1/services/$SRV_ID/deploys/$deploy_id" \
+              | jq -r '.status // empty' || true)
+
+            if [ -z "$status" ]; then
+              echo "Could not read deploy status, retrying..."
+              sleep 10
+              continue
+            fi
+            echo "Deploy status: $status"
+
+            case "$status" in
+              live) echo "Deploy succeeded."; exit 0 ;;
+              *failed | canceled | deactivated) echo "Deploy failed: $status"; exit 1 ;;
+            esac
+            sleep 10
+          done
 
   # AWS specific steps
   build_and_push_to_ecr:
