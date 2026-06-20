@@ -1215,7 +1215,7 @@ defmodule MusicListingsWeb.CustomComponents do
       class="mb-6 md:hidden"
     >
       <div class="mb-2 flex items-baseline gap-3">
-        <p class="kicker flex items-center gap-2">
+        <p class="kicker flex items-center gap-2 tracking-widest">
           <span class="inline-block h-2 w-2 bg-spotlight"></span>
           New This Week <span class="text-paper-dim">· Highlights</span>
         </p>
@@ -1223,10 +1223,9 @@ defmodule MusicListingsWeb.CustomComponents do
           type="button"
           data-rail-next
           aria-label="Show more"
-          class="kicker ml-auto flex items-center gap-1.5 text-spotlight transition-opacity active:opacity-60 disabled:opacity-30"
+          class="kicker ml-auto flex shrink-0 items-center gap-1.5 whitespace-nowrap tracking-widest text-spotlight transition-opacity active:opacity-60 disabled:opacity-30"
         >
-          Swipe for more
-          <MusicListingsWeb.CoreComponents.icon name="hero-arrow-long-right" class="size-4" />
+          More <MusicListingsWeb.CoreComponents.icon name="hero-arrow-long-right" class="size-4" />
         </button>
       </div>
       <div class="relative">
@@ -1267,7 +1266,7 @@ defmodule MusicListingsWeb.CustomComponents do
       class="mb-6 hidden md:block"
     >
       <div class="mb-3 flex items-end gap-4 border-t border-hairline pt-4">
-        <p class="kicker flex items-center gap-2">
+        <p class="kicker flex items-center gap-2 tracking-widest">
           <span class="inline-block h-2 w-2 bg-spotlight"></span>
           New This Week <span class="text-paper-dim">· Highlights</span>
         </p>
