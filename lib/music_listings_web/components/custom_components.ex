@@ -1229,7 +1229,7 @@ defmodule MusicListingsWeb.CustomComponents do
         </button>
       </div>
       <div class="relative">
-        <div data-rail-scroll class="overflow-x-auto pb-2 [scrollbar-width:thin]">
+        <div data-rail-scroll class="overflow-x-auto pb-2 rail-scroll">
           <div class="flex w-max snap-x snap-mandatory gap-2">
             <.link
               :for={event <- @events}
@@ -1290,7 +1290,7 @@ defmodule MusicListingsWeb.CustomComponents do
         </div>
       </div>
       <div class="relative">
-        <div data-rail-scroll class="overflow-x-auto pb-2 [scrollbar-width:thin]">
+        <div data-rail-scroll class="overflow-x-auto pb-2 rail-scroll">
           <div class="flex w-max snap-x snap-mandatory gap-3">
             <.recently_added_card :for={event <- @events} event={event} />
           </div>

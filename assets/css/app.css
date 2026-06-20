@@ -223,6 +223,25 @@
   .animate-marquee-fast {
     animation: marquee 22s linear infinite;
   }
+
+  /* Always-visible slim scrollbar for horizontal rails. On touch devices the
+     native bar stays hidden until you scroll, so we render a persistent styled
+     one to signal the rail is scrollable. (iOS Safari ignores these and keeps
+     its overlay bar.) */
+  .rail-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklab, var(--color-paper) 20%, transparent) transparent;
+  }
+  .rail-scroll::-webkit-scrollbar {
+    height: 4px;
+  }
+  .rail-scroll::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  .rail-scroll::-webkit-scrollbar-thumb {
+    background-color: color-mix(in oklab, var(--color-paper) 20%, transparent);
+    border-radius: 9999px;
+  }
 }
 
 @keyframes marquee {
