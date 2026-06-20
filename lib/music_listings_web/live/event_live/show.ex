@@ -7,6 +7,8 @@ defmodule MusicListingsWeb.EventLive.Show do
 
   @impl true
   def mount(%{"id" => _id} = params, _session, socket) do
+    maybe_track_recently_added_click(socket, params)
+
     with {:ok, %{id: id}} <- validate(:show, params),
          {:ok, event} <- MusicListings.fetch_event(id) do
       canonical_slug = SEO.event_slug(event)
@@ -26,6 +28,23 @@ defmodule MusicListingsWeb.EventLive.Show do
   defparams :show do
     required(:id, :integer)
   end
+
+  # Emitted when a visitor arrives via a "New This Week" rail card (the rail
+  # links carry ?ref=new_this_week). Guarded on connected?/1 so it counts once
+  # per arrival, and fired before any slug-canonicalisation redirect.
+  defp maybe_track_recently_added_click(socket, %{"ref" => "new_this_week", "id" => event_id}) do
+    if connected?(socket) do
+      :telemetry.execute(
+        [:music_listings, :recently_added, :card_click],
+        %{},
+        %{event_id: event_id}
+      )
+    end
+
+    :ok
+  end
+
+  defp maybe_track_recently_added_click(_socket, _params), do: :ok
 
   defp assign_event_seo(socket, event) do
     canonical_path = SEO.event_path(event)

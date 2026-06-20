@@ -35,6 +35,7 @@ defmodule MusicListingsWeb.EventLive.Index do
       "Browse upcoming live music events in Toronto — concerts, club shows, and festivals from dozens of venues, updated daily."
     )
     |> assign(:canonical_url, SEO.canonical_url("/events"))
+    |> assign(:recently_added_tracked, false)
     |> ok()
   end
 
@@ -99,10 +100,13 @@ defmodule MusicListingsWeb.EventLive.Index do
           )
 
         if connected?(socket) do
+          recently_added = recently_added_events(socket)
+
           socket
           |> update_socket_assigns(paged_events, venue_ids)
-          |> assign(:recently_added, recently_added_events(socket))
+          |> assign(:recently_added, recently_added)
           |> assign(:loading, false)
+          |> maybe_track_recently_added_shown(recently_added)
           |> noreply()
         else
           socket
@@ -240,6 +244,16 @@ defmodule MusicListingsWeb.EventLive.Index do
   end
 
   @impl true
+  def handle_event("recently_added_ticket_click", %{"id" => event_id}, socket) do
+    :telemetry.execute(
+      [:music_listings, :recently_added, :ticket_click],
+      %{},
+      %{event_id: event_id}
+    )
+
+    noreply(socket)
+  end
+
   def handle_event(
         "delete-event",
         %{"id" => event_id},
@@ -265,6 +279,23 @@ defmodule MusicListingsWeb.EventLive.Index do
       MusicListings.list_recently_added_events(limit: 12)
     else
       []
+    end
+  end
+
+  # Records a single "rail shown" impression per connected session — guarded so
+  # pagination/filter patches (which re-run handle_params) don't re-count it.
+  defp maybe_track_recently_added_shown(socket, recently_added) do
+    if socket.assigns.just_added_enabled and recently_added != [] and
+         not socket.assigns.recently_added_tracked do
+      :telemetry.execute(
+        [:music_listings, :recently_added, :shown],
+        %{count: length(recently_added)},
+        %{}
+      )
+
+      assign(socket, :recently_added_tracked, true)
+    else
+      socket
     end
   end
 

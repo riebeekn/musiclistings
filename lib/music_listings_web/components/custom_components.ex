@@ -1220,7 +1220,7 @@ defmodule MusicListingsWeb.CustomComponents do
           <.link
             :for={event <- @events}
             navigate={
-              ~p"/events/#{List.first(event.showtimes).event_id}/#{SEO.slugify(event.title || "event")}"
+              ~p"/events/#{List.first(event.showtimes).event_id}/#{SEO.slugify(event.title || "event")}?ref=new_this_week"
             }
             class="group w-44 shrink-0 snap-start border border-hairline bg-ink-2/40 px-3 py-2 transition-colors hover:border-paper-dim hover:bg-ink-2"
           >
@@ -1229,7 +1229,10 @@ defmodule MusicListingsWeb.CustomComponents do
               {event.title}
             </p>
             <p class="mt-1 flex items-center gap-1 font-mono text-xs font-semibold text-spotlight-deep [font-variant-numeric:tabular-nums]">
-              <MusicListingsWeb.CoreComponents.icon name="hero-calendar-days-solid" class="size-3 text-spotlight" />
+              <MusicListingsWeb.CoreComponents.icon
+                name="hero-calendar-days-solid"
+                class="size-3 text-spotlight"
+              />
               {DateHelpers.format_date(event.date)}
             </p>
           </.link>
@@ -1265,12 +1268,15 @@ defmodule MusicListingsWeb.CustomComponents do
     <article class="group w-60 shrink-0 snap-start border border-hairline bg-ink-2/40 p-4 transition-colors hover:border-paper-dim hover:bg-ink-2 sm:w-64">
       <p class="kicker truncate text-paper-dim">{@event.venue.name}</p>
       <h3 class="mt-2 line-clamp-2 min-h-[2lh] font-display text-xl font-bold leading-[0.95] text-paper transition-colors group-hover:text-spotlight sm:text-2xl">
-        <.event_title_link event_info={@event}>
+        <.event_title_link event_info={@event} ref="new_this_week">
           {@event.title}
         </.event_title_link>
       </h3>
       <p class="mt-2 flex items-center gap-1.5 font-mono text-sm font-semibold text-spotlight-deep [font-variant-numeric:tabular-nums]">
-        <MusicListingsWeb.CoreComponents.icon name="hero-calendar-days-solid" class="size-3.5 text-spotlight" />
+        <MusicListingsWeb.CoreComponents.icon
+          name="hero-calendar-days-solid"
+          class="size-3.5 text-spotlight"
+        />
         {DateHelpers.format_date(@event.date)}
       </p>
       <div class="mt-3 flex items-center justify-between gap-2">
@@ -1282,6 +1288,8 @@ defmodule MusicListingsWeb.CustomComponents do
           href={MusicListings.Affiliate.maybe_wrap_affiliate_link(@ticket_url)}
           target="_blank"
           rel="noopener sponsored"
+          phx-click="recently_added_ticket_click"
+          phx-value-id={List.first(@event.showtimes).event_id}
           class="inline-flex items-center gap-1 font-mono text-[0.7rem] uppercase tracking-wider text-spotlight bg-spotlight/10 ring-1 ring-inset ring-spotlight/30 px-2.5 py-0.5 transition-colors hover:bg-spotlight/20"
         >
           <MusicListingsWeb.CoreComponents.icon name="hero-ticket-solid" class="size-3" /> Tickets
@@ -1412,15 +1420,25 @@ defmodule MusicListingsWeb.CustomComponents do
   end
 
   attr :event_info, :any, required: true
+  attr :ref, :string, default: nil
   slot :inner_block, required: true
 
   defp event_title_link(assigns) do
     first_show = List.first(assigns.event_info.showtimes)
     slug = SEO.slugify(assigns.event_info.title || "event")
-    assigns = assign(assigns, event_id: first_show && first_show.event_id, slug: slug)
+    event_id = first_show && first_show.event_id
+
+    navigate =
+      cond do
+        is_nil(event_id) -> nil
+        assigns.ref -> ~p"/events/#{event_id}/#{slug}?#{[ref: assigns.ref]}"
+        true -> ~p"/events/#{event_id}/#{slug}"
+      end
+
+    assigns = assign(assigns, event_id: event_id, navigate: navigate)
 
     ~H"""
-    <.link :if={@event_id} navigate={~p"/events/#{@event_id}/#{@slug}"} class="transition-colors">
+    <.link :if={@event_id} navigate={@navigate} class="transition-colors">
       {render_slot(@inner_block)}
     </.link>
     <span :if={!@event_id}>{render_slot(@inner_block)}</span>
