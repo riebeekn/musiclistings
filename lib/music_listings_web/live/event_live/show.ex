@@ -35,7 +35,7 @@ defmodule MusicListingsWeb.EventLive.Show do
   defp maybe_track_recently_added_click(socket, %{"ref" => "new_this_week", "id" => event_id}) do
     if connected?(socket) do
       :telemetry.execute(
-        [:music_listings, :recently_added, :card_click],
+        [:music_listings, :new_this_week, :card_click],
         %{},
         %{event_id: event_id}
       )

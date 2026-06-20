@@ -35,7 +35,7 @@ defmodule MusicListingsWeb.EventLive.Index do
       "Browse upcoming live music events in Toronto — concerts, club shows, and festivals from dozens of venues, updated daily."
     )
     |> assign(:canonical_url, SEO.canonical_url("/events"))
-    |> assign(:recently_added_tracked, false)
+    |> assign(:new_this_week_tracked, false)
     |> ok()
   end
 
@@ -104,14 +104,14 @@ defmodule MusicListingsWeb.EventLive.Index do
 
           socket
           |> update_socket_assigns(paged_events, venue_ids)
-          |> assign(:recently_added, recently_added)
+          |> assign(:new_this_week, recently_added)
           |> assign(:loading, false)
           |> maybe_track_recently_added_shown(recently_added)
           |> noreply()
         else
           socket
           |> assign(:events, [])
-          |> assign(:recently_added, [])
+          |> assign(:new_this_week, [])
           |> assign(:current_page, 1)
           |> assign(:total_pages, 0)
           |> assign(:loading, true)
@@ -246,7 +246,7 @@ defmodule MusicListingsWeb.EventLive.Index do
   @impl true
   def handle_event("recently_added_ticket_click", %{"id" => event_id}, socket) do
     :telemetry.execute(
-      [:music_listings, :recently_added, :ticket_click],
+      [:music_listings, :new_this_week, :ticket_click],
       %{},
       %{event_id: event_id}
     )
@@ -270,7 +270,7 @@ defmodule MusicListingsWeb.EventLive.Index do
 
     socket
     |> update_socket_assigns(paged_events)
-    |> assign(:recently_added, recently_added_events(socket))
+    |> assign(:new_this_week, recently_added_events(socket))
     |> noreply()
   end
 
@@ -288,12 +288,12 @@ defmodule MusicListingsWeb.EventLive.Index do
     if socket.assigns.just_added_enabled and recently_added != [] and
          not socket.assigns.recently_added_tracked do
       :telemetry.execute(
-        [:music_listings, :recently_added, :shown],
+        [:music_listings, :new_this_week, :shown],
         %{count: length(recently_added)},
         %{}
       )
 
-      assign(socket, :recently_added_tracked, true)
+      assign(socket, :new_this_week_tracked, true)
     else
       socket
     end

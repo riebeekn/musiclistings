@@ -37,31 +37,31 @@ defmodule MusicListings.AnalyticsTest do
   describe "telemetry handler persists rows" do
     test "shown event stores the count" do
       TelemetryHandler.handle_event(
-        [:music_listings, :recently_added, :shown],
+        [:music_listings, :new_this_week, :shown],
         %{count: 7},
         %{},
         nil
       )
 
-      assert [%AnalyticsEvent{name: "recently_added.shown", metadata: %{"count" => 7}}] =
+      assert [%AnalyticsEvent{name: "new_this_week.shown", metadata: %{"count" => 7}}] =
                Repo.all(AnalyticsEvent)
     end
 
     test "card_click event stores the event id" do
       TelemetryHandler.handle_event(
-        [:music_listings, :recently_added, :card_click],
+        [:music_listings, :new_this_week, :card_click],
         %{},
         %{event_id: "42"},
         nil
       )
 
-      assert [%AnalyticsEvent{name: "recently_added.card_click", metadata: %{"event_id" => "42"}}] =
+      assert [%AnalyticsEvent{name: "new_this_week.card_click", metadata: %{"event_id" => "42"}}] =
                Repo.all(AnalyticsEvent)
     end
 
     test "ticket_click event stores the event id" do
       TelemetryHandler.handle_event(
-        [:music_listings, :recently_added, :ticket_click],
+        [:music_listings, :new_this_week, :ticket_click],
         %{},
         %{event_id: "42"},
         nil
@@ -69,7 +69,7 @@ defmodule MusicListings.AnalyticsTest do
 
       assert [
                %AnalyticsEvent{
-                 name: "recently_added.ticket_click",
+                 name: "new_this_week.ticket_click",
                  metadata: %{"event_id" => "42"}
                }
              ] = Repo.all(AnalyticsEvent)
