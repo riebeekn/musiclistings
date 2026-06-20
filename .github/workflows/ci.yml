@@ -371,7 +371,7 @@ jobs:
         continue-on-error: true
 
       - name: Deploy to Render
-        uses: bankfliptech/deploy-to-render@cb8b1f45da1a5e8efba0a58aa42715af0628214a # v1.0.3
+        uses: bankfliptech/deploy-to-render@609adbd930fc47f6569be8b8a883cb5b70e85e4c # v2.0.0
         if: env.ENV_NAME != 'prod' || github.ref_name == 'main'
         with:
           serviceId: ${{ env.SRV_ID }}
