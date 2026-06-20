@@ -371,7 +371,7 @@ jobs:
         continue-on-error: true
 
       - name: Deploy to Render
-        uses: bankfliptech/deploy-to-render@cb8b1f45da1a5e8efba0a58aa42715af0628214a # v1.0.3
+        uses: bankfliptech/deploy-to-render@609adbd930fc47f6569be8b8a883cb5b70e85e4c # v2.0.0
         if: env.ENV_NAME != 'prod' || github.ref_name == 'main'
         with:
           serviceId: ${{ env.SRV_ID }}
@@ -439,7 +439,7 @@ jobs:
           persist-credentials: false
 
       - name: Setup AWS credentials
-        uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4.3.1
+        uses: aws-actions/configure-aws-credentials@e7f100cf4c008499ea8adda475de1042d6975c7b # v6.2.0
         with:
           role-to-assume: ${{ vars.AWS_BUILD_ROLE }}
           aws-region: ${{ vars.AWS_REGION }}
@@ -452,11 +452,11 @@ jobs:
 
       - name: Get branch name
         id: branch-name
-        uses: tj-actions/branch-names@dde14ac574a8b9b1cedc59a1cf312788af43d8d8 # v8.2.1
+        uses: tj-actions/branch-names@5250492686b253f06fa55861556d1027b067aeb5 # v9.0.2
 
       - name: Build image metadata
         id: meta
-        uses: docker/metadata-action@c299e40c65443455700f0fdfc63efafe5b349051 # v5.10.0
+        uses: docker/metadata-action@80c7e94dd9b9319bd5eb7a0e0fe9291e23a2a2e9 # v6.1.0
         with:
           images: ${{ steps.ecr-login.outputs.registry }}/${{ vars.AWS_ECR_REPO }}
           # The release will be tagged with the branch and the short git sha (and latest if on main)
@@ -466,7 +466,7 @@ jobs:
 
       - name: Build, tag, and push to ECR
         id: docker-build
-        uses: docker/build-push-action@ca052bb54ab0790a636c9b5f226502c73d547a25 # v5.4.0
+        uses: docker/build-push-action@f9f3042f7e2789586610d6e8b85c8f03e5195baf # v7.2.0
         with:
           context: .
           # Replace this if the dockerfile is at a different path
@@ -505,7 +505,7 @@ jobs:
       contents: read
     steps:
       - name: Setup AWS credentials
-        uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4.3.1
+        uses: aws-actions/configure-aws-credentials@e7f100cf4c008499ea8adda475de1042d6975c7b # v6.2.0
         with:
           role-to-assume: "arn:aws:iam::${{ vars.AWS_ACCOUNT_ID }}:role/github-actions-ecs-${{vars.AWS_SERVICE_NAME_PREFIX}}-${{ matrix.environment }}"
           aws-region: ${{ vars.AWS_REGION }}
