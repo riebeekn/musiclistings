@@ -1208,50 +1208,95 @@ defmodule MusicListingsWeb.CustomComponents do
   def recently_added_peek_rail_tight(assigns) do
     ~H"""
     <%!-- Mobile: slim one-line peek — identical to recently_added_peek_rail. --%>
-    <section :if={@events != []} class="mb-6 md:hidden">
+    <section
+      :if={@events != []}
+      id="new-this-week-mobile"
+      phx-hook="ScrollRail"
+      class="mb-6 md:hidden"
+    >
       <div class="mb-2 flex items-baseline gap-3">
         <p class="kicker flex items-center gap-2">
           <span class="inline-block h-2 w-2 bg-spotlight"></span>
           New This Week <span class="text-paper-dim">· Highlights</span>
         </p>
+        <button
+          type="button"
+          data-rail-next
+          aria-label="Show more"
+          class="kicker ml-auto flex items-center gap-1.5 text-spotlight transition-opacity active:opacity-60 disabled:opacity-30"
+        >
+          Swipe for more
+          <MusicListingsWeb.CoreComponents.icon name="hero-arrow-long-right" class="size-4" />
+        </button>
       </div>
-      <div class="overflow-x-auto pb-2 [scrollbar-width:thin]">
-        <div class="flex w-max snap-x snap-mandatory gap-2">
-          <.link
-            :for={event <- @events}
-            navigate={
-              ~p"/events/#{List.first(event.showtimes).event_id}/#{SEO.slugify(event.title || "event")}?ref=new_this_week"
-            }
-            class="group w-44 shrink-0 snap-start border border-hairline bg-ink-2/40 px-3 py-2 transition-colors hover:border-paper-dim hover:bg-ink-2"
-          >
-            <p class="kicker truncate text-paper-dim">{event.venue.name}</p>
-            <p class="mt-0.5 truncate font-display text-base font-bold leading-tight text-paper transition-colors group-hover:text-spotlight">
-              {event.title}
-            </p>
-            <p class="mt-1 flex items-center gap-1 font-mono text-xs font-semibold text-spotlight-deep [font-variant-numeric:tabular-nums]">
-              <MusicListingsWeb.CoreComponents.icon
-                name="hero-calendar-days-solid"
-                class="size-3 text-spotlight"
-              />
-              {DateHelpers.format_date(event.date)}
-            </p>
-          </.link>
+      <div class="relative">
+        <div data-rail-scroll class="overflow-x-auto pb-2 [scrollbar-width:thin]">
+          <div class="flex w-max snap-x snap-mandatory gap-2">
+            <.link
+              :for={event <- @events}
+              navigate={
+                ~p"/events/#{List.first(event.showtimes).event_id}/#{SEO.slugify(event.title || "event")}?ref=new_this_week"
+              }
+              class="group w-[44vw] max-w-44 shrink-0 snap-start border border-hairline bg-ink-2/40 px-3 py-2 transition-colors hover:border-paper-dim hover:bg-ink-2"
+            >
+              <p class="kicker truncate text-paper-dim">{event.venue.name}</p>
+              <p class="mt-0.5 truncate font-display text-base font-bold leading-tight text-paper transition-colors group-hover:text-spotlight">
+                {event.title}
+              </p>
+              <p class="mt-1 flex items-center gap-1 font-mono text-xs font-semibold text-spotlight-deep [font-variant-numeric:tabular-nums]">
+                <MusicListingsWeb.CoreComponents.icon
+                  name="hero-calendar-days-solid"
+                  class="size-3 text-spotlight"
+                />
+                {DateHelpers.format_date(event.date)}
+              </p>
+            </.link>
+          </div>
+        </div>
+        <div class="pointer-events-none absolute top-0 bottom-2 right-0 w-10 bg-gradient-to-l from-ink to-transparent">
         </div>
       </div>
     </section>
 
     <%!-- Desktop: the full-size cards, but with tighter section/header margins than
           recently_added_rail (mb-10 -> mb-6, header mb-4/pt-5 -> mb-3/pt-4, pb-3 -> pb-2). --%>
-    <section :if={@events != []} class="mb-6 hidden md:block">
+    <section
+      :if={@events != []}
+      id="new-this-week-desktop"
+      phx-hook="ScrollRail"
+      class="mb-6 hidden md:block"
+    >
       <div class="mb-3 flex items-end gap-4 border-t border-hairline pt-4">
         <p class="kicker flex items-center gap-2">
           <span class="inline-block h-2 w-2 bg-spotlight"></span>
           New This Week <span class="text-paper-dim">· Highlights</span>
         </p>
+        <div class="ml-auto flex items-center gap-2">
+          <button
+            type="button"
+            data-rail-prev
+            aria-label="Scroll left"
+            class="flex h-8 w-8 items-center justify-center border border-spotlight/40 text-spotlight transition-colors hover:border-spotlight hover:bg-spotlight hover:text-ink disabled:opacity-30 disabled:hover:border-spotlight/40 disabled:hover:bg-transparent disabled:hover:text-spotlight"
+          >
+            <MusicListingsWeb.CoreComponents.icon name="hero-chevron-left" class="size-4" />
+          </button>
+          <button
+            type="button"
+            data-rail-next
+            aria-label="Scroll right"
+            class="flex h-8 w-8 items-center justify-center border border-spotlight/40 text-spotlight transition-colors hover:border-spotlight hover:bg-spotlight hover:text-ink disabled:opacity-30 disabled:hover:border-spotlight/40 disabled:hover:bg-transparent disabled:hover:text-spotlight"
+          >
+            <MusicListingsWeb.CoreComponents.icon name="hero-chevron-right" class="size-4" />
+          </button>
+        </div>
       </div>
-      <div class="overflow-x-auto pb-2 [scrollbar-width:thin]">
-        <div class="flex w-max snap-x snap-mandatory gap-3">
-          <.recently_added_card :for={event <- @events} event={event} />
+      <div class="relative">
+        <div data-rail-scroll class="overflow-x-auto pb-2 [scrollbar-width:thin]">
+          <div class="flex w-max snap-x snap-mandatory gap-3">
+            <.recently_added_card :for={event <- @events} event={event} />
+          </div>
+        </div>
+        <div class="pointer-events-none absolute top-0 bottom-2 right-0 w-16 bg-gradient-to-l from-ink to-transparent">
         </div>
       </div>
     </section>

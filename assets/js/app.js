@@ -59,6 +59,73 @@ Hooks.SortBy = {
     });
   },
 };
+// Horizontally-scrolling rail: arrow controls + a one-time "nudge" on load to
+// signal that there's more content off-screen.
+Hooks.ScrollRail = {
+  mounted() {
+    this.scroller = this.el.querySelector("[data-rail-scroll]");
+    if (!this.scroller) return;
+
+    this.prevBtn = this.el.querySelector("[data-rail-prev]");
+    this.nextBtn = this.el.querySelector("[data-rail-next]");
+
+    this.onScroll = () => this.updateArrows();
+    this.scroller.addEventListener("scroll", this.onScroll, { passive: true });
+    window.addEventListener("resize", this.onScroll);
+
+    if (this.prevBtn)
+      this.prevBtn.addEventListener("click", () => this.scrollByPage(-1));
+    if (this.nextBtn)
+      this.nextBtn.addEventListener("click", () => this.scrollByPage(1));
+
+    this.updateArrows();
+    this.maybeNudge();
+  },
+  destroyed() {
+    if (this.scroller)
+      this.scroller.removeEventListener("scroll", this.onScroll);
+    window.removeEventListener("resize", this.onScroll);
+  },
+  scrollByPage(dir) {
+    this.scroller.scrollBy({
+      left: dir * this.scroller.clientWidth * 0.8,
+      behavior: "smooth",
+    });
+  },
+  updateArrows() {
+    if (!this.prevBtn && !this.nextBtn) return;
+    const { scrollLeft, scrollWidth, clientWidth } = this.scroller;
+    const scrollable = scrollWidth > clientWidth + 1;
+    const atStart = scrollLeft <= 1;
+    const atEnd = scrollLeft + clientWidth >= scrollWidth - 1;
+    if (this.prevBtn) this.prevBtn.disabled = !scrollable || atStart;
+    if (this.nextBtn) this.nextBtn.disabled = !scrollable || atEnd;
+  },
+  maybeNudge() {
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    const scrollable =
+      this.scroller.scrollWidth > this.scroller.clientWidth + 1;
+    if (reduceMotion || !scrollable) return;
+
+    // Fire once per full page load (re-fires on refresh, but not on in-page
+    // LiveView navigation, where `window` persists).
+    window.__railNudged = window.__railNudged || {};
+    if (window.__railNudged[this.el.id]) return;
+    window.__railNudged[this.el.id] = true;
+
+    setTimeout(() => {
+      this.scroller.scrollTo({
+        left: this.scroller.clientWidth * 0.35,
+        behavior: "smooth",
+      });
+      setTimeout(() => {
+        this.scroller.scrollTo({ left: 0, behavior: "smooth" });
+      }, 550);
+    }, 450);
+  },
+};
 
 let params = (node) => {
   var venueRestoreNode =
