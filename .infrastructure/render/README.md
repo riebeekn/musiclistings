@@ -1,6 +1,21 @@
 # MusicListings - .infrastructure - render
 This folder contains the Terraform code for performing Render deployments.
 
+## Prerequisites
+
+1. **Environment (`.envrc`)** — copy `.example.envrc` to `.envrc`, fill in the
+   values, and `source .envrc` (or use [direnv](https://direnv.net/)).  This exports
+   the AWS credentials (the Terraform state lives in an S3 backend,
+   `terraform-render-musiclistings-state`) plus `OP_ACCOUNT` and `OP_VAULT`, which
+   tell the scripts which 1Password account and vault to read the variables from.
+2. **1Password CLI** — the environment-specific Terraform variables are stored in
+   1Password, not in local files.  Install the CLI (`brew install 1password-cli`)
+   and enable desktop-app integration (1Password app → Settings → Developer →
+   "Integrate with 1Password CLI").  In the account/vault configured via `.envrc`,
+   create a Secure Note item per workspace named `<workspace>.tfvars` (e.g.
+   `staging.tfvars`, `prod.tfvars`) whose note body holds the `.tfvars` contents.
+   See `variables.tf` for the full list of variables.
+
 ## Executing the Terraform code
 It is expected that the deployments will be executed against a particular
 Terraform workspace, so the first step is to switch to or create the workspace.
@@ -15,19 +30,22 @@ Or if the workspace already exists:
 terraform workspace select staging
 ```
 
-Now create or update the environment specific `terraform.tfvars` file.  As per
-the workspace we've selected above (staging) you would create or update the
-`staging.tfvars` file.  See `staging.tfvars.example` for an example.
+The environment-specific variables are stored in 1Password (the vault configured
+via `OP_VAULT` in `.envrc`) as a Secure Note named `<workspace>.tfvars`.  As per
+the workspace we've selected above (staging) the variables come from the
+`staging.tfvars` item.  To update them, edit that item's note body in 1Password.
+See `variables.tf` for the full list of variables.
 
 Access to the deployed application can be restricted via basic auth.  To enable
 this enter values for the `basic_auth_username` and `basic_auth_password` in the
-`.tfvars` file.  This will result in a CloudFlare worker being deployed which
+1Password note.  This will result in a CloudFlare worker being deployed which
 will prompt for the username and password before allowing access to the site.
 
 Instead of natively running terraform apply, plan, and destroy commands use the
 `tf_apply.sh`, `tf_plan.sh`, and `tf_destroy.sh` scripts respectively.  These
-automatically pick up the environment specific `.tfvars` based on the
-current workspace.
+fetch the environment-specific variables live from the 1Password `<workspace>.tfvars`
+item (into a temp file that is deleted on exit) based on the current workspace, so
+nothing sensitive is written to disk.
 
 ### To bring up the infrastructure
 

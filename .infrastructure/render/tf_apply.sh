@@ -1,10 +1,12 @@
 #!/bin/bash
 
-# This script is used to run a terraform apply command with the appropriate variables file based on the current workspace.
+# Runs `terraform apply` for the current workspace, pulling that environment's
+# variables live from 1Password (never written to git, only a temp file that is
+# deleted on exit).
 
-echo "************************"
-echo "* CURRENT WORKSPACE: "
-echo "*   $(terraform workspace show)"
-echo "************************"
+set -euo pipefail
+cd "$(dirname "$0")"
 
-terraform apply -var-file=$(terraform workspace show).tfvars
+source ./tf_common.sh
+
+terraform apply -var-file="$VARS_FILE"

@@ -1,10 +1,12 @@
 #!/bin/bash
 
-# This script is used to run a terraform destroy command with the appropriate variables file based on the current workspace.
+# Runs `terraform destroy` for the current workspace, pulling that environment's
+# variables live from 1Password (never written to git, only a temp file that is
+# deleted on exit).
 
-echo "************************"
-echo "* CURRENT WORKSPACE: "
-echo "*   $(terraform workspace show)"
-echo "************************"
+set -euo pipefail
+cd "$(dirname "$0")"
 
-terraform destroy -var-file=$(terraform workspace show).tfvars
+source ./tf_common.sh
+
+terraform destroy -var-file="$VARS_FILE"

@@ -189,6 +189,19 @@ MusicListings.Accounts.register_user(%{
 - Infrastructure managed via Terraform (`.infrastructure/` directory)
 - Uses CloudFlare as reverse proxy
 
+### Terraform Variables (1Password)
+
+- The Render module's per-workspace Terraform variables are stored in 1Password as
+  Secure Note items named `<workspace>.tfvars` (e.g. `staging.tfvars`, `prod.tfvars`).
+  The `.infrastructure/render/tf_plan.sh`, `tf_apply.sh`, and `tf_destroy.sh` scripts
+  pull them at runtime (via `tf_common.sh`) into a temp file that is deleted on exit —
+  they are never written to git or kept on disk. The 1Password account and vault are
+  supplied via `OP_ACCOUNT`/`OP_VAULT` exported from the gitignored `.envrc` (see
+  `.infrastructure/render/.example.envrc`), so they stay out of this public repo.
+- **IMPORTANT: Claude must NEVER execute any Terraform commands** — not
+  `terraform plan/apply/destroy`, nor the `tf_*.sh` wrappers, nor any other command
+  that runs Terraform.
+
 ## Feature Flags
 
 Feature flags use [FunWithFlags](https://github.com/tompave/fun_with_flags), persisted via Ecto
