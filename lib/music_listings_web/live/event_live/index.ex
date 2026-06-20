@@ -286,7 +286,7 @@ defmodule MusicListingsWeb.EventLive.Index do
   # pagination/filter patches (which re-run handle_params) don't re-count it.
   defp maybe_track_recently_added_shown(socket, recently_added) do
     if socket.assigns.just_added_enabled and recently_added != [] and
-         not socket.assigns.recently_added_tracked do
+         not socket.assigns.new_this_week_tracked do
       :telemetry.execute(
         [:music_listings, :new_this_week, :shown],
         %{count: length(recently_added)},
@@ -353,7 +353,7 @@ defmodule MusicListingsWeb.EventLive.Index do
     <%!-- Just Added rail (feature-flagged) --%>
     <.recently_added_peek_rail_tight
       :if={@just_added_enabled}
-      events={@recently_added}
+      events={@new_this_week}
       current_user={@current_user}
     />
 

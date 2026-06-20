@@ -1200,7 +1200,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   ## Example
 
-  <.recently_added_peek_rail_tight events={@recently_added} current_user={@current_user} />
+  <.recently_added_peek_rail_tight events={@new_this_week} current_user={@current_user} />
   """
   attr :events, :list, required: true
   attr :current_user, :any, required: true
