@@ -89,6 +89,16 @@ defmodule MusicListings.Events.RecentlyAddedRankerTest do
       assert length(result) == 2
     end
 
+    test "collapses a recurring show across dates into one slot showing the soonest date" do
+      # Same venue/title on two dates - one event to the reader, not two.
+      early = event(venue_id: 1, title: "Recurring", date: ~D[2024-08-10], inserted_at: @now)
+      late = event(venue_id: 1, title: "Recurring", date: ~D[2024-08-17], inserted_at: @now)
+
+      result = RecentlyAddedRanker.rank([late, early], @now)
+
+      assert [%Event{title: "Recurring", date: ~D[2024-08-10]}] = result
+    end
+
     test "respects the overall limit" do
       events = for i <- 1..6, do: event(venue_id: i, title: "Show #{i}")
 

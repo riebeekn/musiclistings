@@ -50,11 +50,12 @@ defmodule MusicListings.Events.RecentlyAddedRanker do
 
   Pure function - `now` is supplied by the caller so the result is deterministic.
 
-  Multiple showtimes of the same show (same venue/date/title) are collapsed into a
-  single ranked slot. The returned list is the underlying events of the selected shows,
-  in ranked order, with each show's events kept contiguous (the caller relies on this to
-  rebuild one item per show). The `:venue` association is expected to be preloaded and is
-  preserved on the returned events.
+  A show (same venue/title) is collapsed into a single ranked slot even when it recurs on
+  multiple dates - only the soonest upcoming occurrence's events are returned, so each show
+  appears once. The returned list is the underlying events of the selected shows, in ranked
+  order, with each show's events kept contiguous (the caller relies on this to rebuild one
+  item per show). The `:venue` association is expected to be preloaded and is preserved on
+  the returned events.
   """
   @spec rank([Event.t()], DateTime.t(), [rank_opt]) :: [Event.t()]
   def rank(events, now, opts \\ [])
@@ -77,20 +78,26 @@ defmodule MusicListings.Events.RecentlyAddedRanker do
     |> Enum.flat_map(& &1.events)
   end
 
-  # Collapse events into shows keyed by {venue_id, date, title} so a show with multiple
-  # showtimes occupies a single slot. A show is "first discovered" at the earliest
-  # inserted_at of its showtimes, and counts as ticketed if any showtime has a ticket url.
+  # Collapse events into shows keyed by {venue_id, title} so a recurring show that runs on
+  # several dates occupies a single slot in the feed (it is "one event" to the reader). The
+  # slot represents the soonest upcoming occurrence: only that date's events are carried
+  # forward, so the card shows a single date and its showtimes. A show is "first discovered"
+  # at the earliest inserted_at across all of its occurrences, and counts as ticketed if the
+  # displayed occurrence has a ticket url.
   @spec collapse_to_shows([Event.t()]) :: [show]
   defp collapse_to_shows(events) do
     events
-    |> Enum.group_by(&{&1.venue_id, &1.date, &1.title})
-    |> Enum.map(fn {{venue_id, _date, _title}, grouped_events} ->
+    |> Enum.group_by(&{&1.venue_id, &1.title})
+    |> Enum.map(fn {{venue_id, _title}, grouped_events} ->
+      next_date = grouped_events |> Enum.map(& &1.date) |> Enum.min(Date)
+      next_date_events = Enum.filter(grouped_events, &(&1.date == next_date))
+
       %{
         venue_id: venue_id,
-        id: grouped_events |> Enum.map(& &1.id) |> Enum.min(),
+        id: next_date_events |> Enum.map(& &1.id) |> Enum.min(),
         inserted_at: grouped_events |> Enum.map(& &1.inserted_at) |> Enum.min(DateTime),
-        has_ticket?: Enum.any?(grouped_events, &(&1.ticket_url not in [nil, ""])),
-        events: grouped_events
+        has_ticket?: Enum.any?(next_date_events, &(&1.ticket_url not in [nil, ""])),
+        events: next_date_events
       }
     end)
   end
