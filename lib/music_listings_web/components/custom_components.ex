@@ -1255,6 +1255,13 @@ defmodule MusicListingsWeb.CustomComponents do
         <div class="pointer-events-none absolute top-0 bottom-2 right-0 w-10 bg-gradient-to-l from-ink to-transparent">
         </div>
       </div>
+      <div
+        data-rail-indicator
+        aria-hidden="true"
+        class="relative mt-1.5 hidden h-[3px] w-full rounded-full bg-paper/10"
+      >
+        <div data-rail-thumb class="absolute top-0 left-0 h-full rounded-full bg-paper/30"></div>
+      </div>
     </section>
 
     <%!-- Desktop: the full-size cards, but with tighter section/header margins than
@@ -1297,6 +1304,13 @@ defmodule MusicListingsWeb.CustomComponents do
         </div>
         <div class="pointer-events-none absolute top-0 bottom-2 right-0 w-16 bg-gradient-to-l from-ink to-transparent">
         </div>
+      </div>
+      <div
+        data-rail-indicator
+        aria-hidden="true"
+        class="relative mt-1.5 hidden h-[3px] w-full rounded-full bg-paper/10"
+      >
+        <div data-rail-thumb class="absolute top-0 left-0 h-full rounded-full bg-paper/30"></div>
       </div>
     </section>
     """

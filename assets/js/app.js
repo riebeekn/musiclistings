@@ -68,8 +68,10 @@ Hooks.ScrollRail = {
 
     this.prevBtn = this.el.querySelector("[data-rail-prev]");
     this.nextBtn = this.el.querySelector("[data-rail-next]");
+    this.indicator = this.el.querySelector("[data-rail-indicator]");
+    this.thumb = this.el.querySelector("[data-rail-thumb]");
 
-    this.onScroll = () => this.updateArrows();
+    this.onScroll = () => this.update();
     this.scroller.addEventListener("scroll", this.onScroll, { passive: true });
     window.addEventListener("resize", this.onScroll);
 
@@ -78,7 +80,7 @@ Hooks.ScrollRail = {
     if (this.nextBtn)
       this.nextBtn.addEventListener("click", () => this.scrollByPage(1));
 
-    this.updateArrows();
+    this.update();
     this.maybeNudge();
   },
   destroyed() {
@@ -92,6 +94,10 @@ Hooks.ScrollRail = {
       behavior: "smooth",
     });
   },
+  update() {
+    this.updateArrows();
+    this.updateIndicator();
+  },
   updateArrows() {
     if (!this.prevBtn && !this.nextBtn) return;
     const { scrollLeft, scrollWidth, clientWidth } = this.scroller;
@@ -100,6 +106,19 @@ Hooks.ScrollRail = {
     const atEnd = scrollLeft + clientWidth >= scrollWidth - 1;
     if (this.prevBtn) this.prevBtn.disabled = !scrollable || atStart;
     if (this.nextBtn) this.nextBtn.disabled = !scrollable || atEnd;
+  },
+  // Position a JS-drawn scroll indicator (works on iOS, unlike native scrollbars).
+  updateIndicator() {
+    if (!this.indicator || !this.thumb) return;
+    const { scrollWidth, clientWidth, scrollLeft } = this.scroller;
+    const scrollable = scrollWidth > clientWidth + 1;
+    this.indicator.classList.toggle("hidden", !scrollable);
+    if (!scrollable) return;
+    const trackW = this.indicator.clientWidth;
+    const thumbW = Math.max(trackW * (clientWidth / scrollWidth), 24);
+    const progress = scrollLeft / (scrollWidth - clientWidth);
+    this.thumb.style.width = `${thumbW}px`;
+    this.thumb.style.transform = `translateX(${progress * (trackW - thumbW)}px)`;
   },
   maybeNudge() {
     const reduceMotion = window.matchMedia(

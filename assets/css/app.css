@@ -224,23 +224,15 @@
     animation: marquee 22s linear infinite;
   }
 
-  /* Always-visible slim scrollbar for horizontal rails. On touch devices the
-     native bar stays hidden until you scroll, so we render a persistent styled
-     one to signal the rail is scrollable. (iOS Safari ignores these and keeps
-     its overlay bar.) */
+  /* Hide the native scrollbar on horizontal rails — a JS-drawn indicator
+     (data-rail-indicator, positioned by the ScrollRail hook) replaces it so the
+     bar renders identically across iOS / Android / desktop. iOS Safari ignores
+     native scrollbar styling entirely, which is why we don't rely on it. */
   .rail-scroll {
-    scrollbar-width: thin;
-    scrollbar-color: color-mix(in oklab, var(--color-paper) 20%, transparent) transparent;
+    scrollbar-width: none;
   }
   .rail-scroll::-webkit-scrollbar {
-    height: 4px;
-  }
-  .rail-scroll::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-  .rail-scroll::-webkit-scrollbar-thumb {
-    background-color: color-mix(in oklab, var(--color-paper) 20%, transparent);
-    border-radius: 9999px;
+    display: none;
   }
 }
 
