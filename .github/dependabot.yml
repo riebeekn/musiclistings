@@ -8,3 +8,7 @@ updates:
     # ignore heroicons as for some reason it errors out
     ignore:
       - dependency-name: "heroicons"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: weekly

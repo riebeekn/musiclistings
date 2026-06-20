@@ -14,12 +14,28 @@ env:
   ADMIN_EMAIL: "some_email@example.com"
   CRAWL_AND_EXIT: false
 
+# Default least-privilege permissions for all jobs. Jobs that need more
+# (e.g. OIDC for AWS) grant it at the job level.
 permissions:
-  # This is necessary for Github Actions OIDC
-  id-token: write
   contents: read
 
 jobs:
+  zizmor:
+    name: Run zizmor 🌈
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write # Required for upload-sarif (used by zizmor-action) to upload SARIF files.
+      contents: read         # Only needed for private repos. Needed to clone the repo.
+      actions: read          # Only needed for private repos. Needed for upload-sarif to read workflow run info.
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Run zizmor 🌈
+        uses: zizmorcore/zizmor-action@5f14fd08f7cf1cb1609c1e344975f152c7ee938d # v0.5.6
+
   # Build the code
   build:
     runs-on: ubuntu-latest
@@ -27,11 +43,13 @@ jobs:
     steps:
       # Step: Check out the code.
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          persist-credentials: false
 
       # Step: Setup Elixir + Erlang image as the base.
       - name: Set up Elixir
-        uses: erlef/setup-beam@v1
+        uses: erlef/setup-beam@fc68ffb90438ef2936bbb3251622353b3dcb2f93 # v1.24.0
         with:
           version-file: .tool-versions
           version-type: strict
@@ -39,7 +57,7 @@ jobs:
       # Step: Define how to cache deps. Restores existing cache if present.
       - name: Cache deps
         id: cache-deps
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         env:
           cache-name: cache-elixir-deps
         with:
@@ -53,7 +71,7 @@ jobs:
       # project's downloaded deps every run.
       - name: Cache compiled build
         id: cache-build
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         env:
           cache-name: cache-compiled-build
         with:
@@ -83,11 +101,13 @@ jobs:
     steps:
       # Step: Check out the code.
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          persist-credentials: false
 
       # Step: Setup Elixir + Erlang image as the base.
       - name: Set up Elixir
-        uses: erlef/setup-beam@v1
+        uses: erlef/setup-beam@fc68ffb90438ef2936bbb3251622353b3dcb2f93 # v1.24.0
         with:
           version-file: .tool-versions
           version-type: strict
@@ -95,7 +115,7 @@ jobs:
       # Step: Grab deps from cache (as the deps cache is populated in the "build" job)
       - name: Cache deps
         id: cache-deps
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         env:
           cache-name: cache-elixir-deps
         with:
@@ -107,7 +127,7 @@ jobs:
       # Step: Grab the compiled build from the cache (as the build cache is populated in the "build" job)
       - name: Cache compiled build
         id: cache-build
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         env:
           cache-name: cache-compiled-build
         with:
@@ -120,7 +140,7 @@ jobs:
       # Step: Grab the compiled build from the cache (as the build cache is populated in the "build" job)
       - name: Cache compiled build
         id: cache-dialyzer
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         env:
           cache-name: cache-dialyzer
         with:
@@ -141,11 +161,13 @@ jobs:
     steps:
       # Step: Check out the code.
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          persist-credentials: false
 
       # Step: Setup Elixir + Erlang image as the base.
       - name: Set up Elixir
-        uses: erlef/setup-beam@v1
+        uses: erlef/setup-beam@fc68ffb90438ef2936bbb3251622353b3dcb2f93 # v1.24.0
         with:
           version-file: .tool-versions
           version-type: strict
@@ -153,7 +175,7 @@ jobs:
       # Step: Grab deps from cache (as the deps cache is populated in the "build" job)
       - name: Cache deps
         id: cache-deps
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         env:
           cache-name: cache-elixir-deps
         with:
@@ -165,7 +187,7 @@ jobs:
       # Step: Grab the compiled build from the cache (as the build cache is populated in the "build" job)
       - name: Cache compiled build
         id: cache-build
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         env:
           cache-name: cache-compiled-build
         with:
@@ -224,11 +246,13 @@ jobs:
     steps:
       # Step: Check out the code.
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          persist-credentials: false
 
       # Step: Setup Elixir + Erlang image as the base.
       - name: Set up Elixir
-        uses: erlef/setup-beam@v1
+        uses: erlef/setup-beam@fc68ffb90438ef2936bbb3251622353b3dcb2f93 # v1.24.0
         with:
           version-file: .tool-versions
           version-type: strict
@@ -236,7 +260,7 @@ jobs:
       # Step: Grab deps from cache (as the deps cache is populated in the "build" job)
       - name: Cache deps
         id: cache-deps
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         env:
           cache-name: cache-elixir-deps
         with:
@@ -248,7 +272,7 @@ jobs:
       # Step: Grab the compiled build from the cache (as the build cache is populated in the "build" job)
       - name: Cache compiled build
         id: cache-build
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         env:
           cache-name: cache-compiled-build
         with:
@@ -273,8 +297,10 @@ jobs:
     if: github.ref == 'refs/heads/main' && vars.DEPLOY_TO_FLY == 'true'
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          persist-credentials: false
+      - uses: superfly/flyctl-actions/setup-flyctl@ed8efb33836e8b2096c7fd3ba1c8afe303ebbff1 # 1.6
       - run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
@@ -290,7 +316,7 @@ jobs:
       matrix: ${{ steps.setup_render_ws_deploy_matrix.outputs.matrix_output }}
     steps:
       - id: setup_render_ws_deploy_matrix
-        uses: cschadewitz/dynamic-matrix-input@v1.0.0
+        uses: cschadewitz/dynamic-matrix-input@11ef22d593b07df75ad67ad270090b4cef96a0dc # v1.0.0
         with:
           matrix_input: ${{ vars.RENDER_ENVIRONMENTS }}
 
@@ -303,7 +329,7 @@ jobs:
       matrix: ${{ steps.setup_render_cron_deploy_matrix.outputs.matrix_output }}
     steps:
       - id: setup_render_cron_deploy_matrix
-        uses: cschadewitz/dynamic-matrix-input@v1.0.0
+        uses: cschadewitz/dynamic-matrix-input@11ef22d593b07df75ad67ad270090b4cef96a0dc # v1.0.0
         with:
           matrix_input: ${{ vars.RENDER_CRON_ENVIRONMENTS }}
 
@@ -320,9 +346,11 @@ jobs:
     steps:
       - name: Extract service id
         id: extract
+        env:
+          ENVIRONMENT: ${{ matrix.environment }}
         run: |
           # Replace colon with a space, split into parts, and store as JSON
-          PARTS=$(echo ${{matrix.environment}} | sed 's/:/ /' | jq -R -s 'split(" ")')
+          PARTS=$(echo "$ENVIRONMENT" | sed 's/:/ /' | jq -R -s 'split(" ")')
           ENV_NAME=$(echo $PARTS | jq -r '.[0]')
           SRV_ID=$(echo $PARTS | jq -r '.[1]')
 
@@ -343,12 +371,16 @@ jobs:
         continue-on-error: true
 
       - name: Deploy to Render
-        uses: bankfliptech/deploy-to-render@v1
+        uses: bankfliptech/deploy-to-render@cb8b1f45da1a5e8efba0a58aa42715af0628214a # v1.0.3
         if: env.ENV_NAME != 'prod' || github.ref_name == 'main'
         with:
           serviceId: ${{ env.SRV_ID }}
           apiKey: ${{ secrets.RENDER_API_KEY }}
-          deployHookURL: ${{ secrets[env.SECRET_NAME] }}
+          # The dynamic lookup injects the whole secrets context into this step.
+          # Accepted: the action is SHA-pinned (see uses: above) and per-env deploy
+          # hooks are managed dynamically via the RENDER_ENVIRONMENTS variable, so
+          # adding an environment stays zero-touch here. Re-evaluate if ever unpinned.
+          deployHookURL: ${{ secrets[env.SECRET_NAME] }} # zizmor: ignore[overprovisioned-secrets]
 
   deploy_cron_service_to_render:
     runs-on: ubuntu-latest
@@ -363,9 +395,11 @@ jobs:
     steps:
       - name: Extract service id
         id: extract
+        env:
+          ENVIRONMENT: ${{ matrix.environment }}
         run: |
           # Replace colon with a space, split into parts, and store as JSON
-          PARTS=$(echo ${{matrix.environment}} | sed 's/:/ /' | jq -R -s 'split(" ")')
+          PARTS=$(echo "$ENVIRONMENT" | sed 's/:/ /' | jq -R -s 'split(" ")')
           ENV_NAME=$(echo $PARTS | jq -r '.[0]')
           SRV_ID=$(echo $PARTS | jq -r '.[1]')
 
@@ -379,7 +413,7 @@ jobs:
         continue-on-error: true
 
       - name: Deploy
-        uses: johnbeynon/render-deploy-action@v0.0.9
+        uses: johnbeynon/render-deploy-action@a63fe3b2c1d880fad347a6ec2923b97e700755fe # v0.0.9
         if: env.ENV_NAME != 'prod' || github.ref_name == 'main'
         with:
           service-id: ${{ env.SRV_ID }}
@@ -392,42 +426,47 @@ jobs:
     needs: [audit, test]
     name: "Build and Push Image to ECR"
     if: vars.DEPLOY_TO_AWS == 'true'
+    permissions:
+      id-token: write # Required for AWS OIDC role assumption
+      contents: read
     outputs:
       aws_region: ${{ vars.AWS_REGION }}
       docker_image: ${{ steps.ecr-login.outputs.registry }}/${{ vars.AWS_ECR_REPO }}@${{ steps.docker-build.outputs.digest }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          persist-credentials: false
 
       - name: Setup AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4.3.1
         with:
           role-to-assume: ${{ vars.AWS_BUILD_ROLE }}
           aws-region: ${{ vars.AWS_REGION }}
 
       - name: Login to AWS repository
         id: ecr-login
-        uses: aws-actions/amazon-ecr-login@v2
+        uses: aws-actions/amazon-ecr-login@d539f0932e70871a027e9d5a9d8fc38589180a64 # v2.1.6
         with:
           mask-password: "true"
 
       - name: Get branch name
         id: branch-name
-        uses: tj-actions/branch-names@v8
+        uses: tj-actions/branch-names@dde14ac574a8b9b1cedc59a1cf312788af43d8d8 # v8.2.1
 
       - name: Build image metadata
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@c299e40c65443455700f0fdfc63efafe5b349051 # v5.10.0
         with:
           images: ${{ steps.ecr-login.outputs.registry }}/${{ vars.AWS_ECR_REPO }}
           # The release will be tagged with the branch and the short git sha (and latest if on main)
           tags: |
             type=sha,prefix=${{steps.branch-name.outputs.current_branch}}-
-            type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
 
       - name: Build, tag, and push to ECR
         id: docker-build
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@ca052bb54ab0790a636c9b5f226502c73d547a25 # v5.4.0
         with:
           context: .
           # Replace this if the dockerfile is at a different path
@@ -445,7 +484,7 @@ jobs:
       matrix: ${{ steps.setup_matrix.outputs.matrix_output }}
     steps:
       - id: setup_matrix
-        uses: cschadewitz/dynamic-matrix-input@v1.0.0
+        uses: cschadewitz/dynamic-matrix-input@11ef22d593b07df75ad67ad270090b4cef96a0dc # v1.0.0
         with:
           matrix_input: ${{ vars.AWS_ENVIRONMENTS }}
 
@@ -461,9 +500,12 @@ jobs:
       - build_and_push_to_ecr
     name: "Deploy to ECS"
     if: vars.DEPLOY_TO_AWS == 'true'
+    permissions:
+      id-token: write # Required for AWS OIDC role assumption
+      contents: read
     steps:
       - name: Setup AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4.3.1
         with:
           role-to-assume: "arn:aws:iam::${{ vars.AWS_ACCOUNT_ID }}:role/github-actions-ecs-${{vars.AWS_SERVICE_NAME_PREFIX}}-${{ matrix.environment }}"
           aws-region: ${{ vars.AWS_REGION }}
@@ -477,12 +519,21 @@ jobs:
       # and modify the family and image attributes.
       - name: Build ECS task definition
         if: matrix.environment != 'prod' || github.ref_name == 'main'
+        env:
+          SERVICE_PREFIX: ${{ vars.AWS_SERVICE_NAME_PREFIX }}
+          ENVIRONMENT: ${{ matrix.environment }}
         run: |
-          aws ecs describe-task-definition --task-definition ${{vars.AWS_SERVICE_NAME_PREFIX}}-${{ matrix.environment }}-template --query taskDefinition > task-definition.json
-          echo "`jq '.family="${{vars.AWS_SERVICE_NAME_PREFIX}}-${{ matrix.environment }}" | .containerDefinitions[0].image="${{ env.DOCKER_IMAGE }}"' task-definition.json`" > task-definition.json
+          aws ecs describe-task-definition --task-definition "${SERVICE_PREFIX}-${ENVIRONMENT}-template" --query taskDefinition > task-definition.json
+          jq --arg family "${SERVICE_PREFIX}-${ENVIRONMENT}" --arg image "$DOCKER_IMAGE" \
+            '.family=$family | .containerDefinitions[0].image=$image' \
+            task-definition.json > task-definition.tmp.json
+          mv task-definition.tmp.json task-definition.json
 
       - name: Build CodeDeploy app spec
         if: matrix.environment != 'prod' || github.ref_name == 'main'
+        env:
+          SERVICE_PREFIX: ${{ vars.AWS_SERVICE_NAME_PREFIX }}
+          ENVIRONMENT: ${{ matrix.environment }}
         run: |
           cat <<SPEC >> apps-spec.yaml
 
@@ -494,13 +545,13 @@ jobs:
                 Properties:
                   TaskDefinition: "Placeholder: GitHub Actions will fill this in"
                   LoadBalancerInfo:
-                    ContainerName: "${{vars.AWS_SERVICE_NAME_PREFIX}}-${{ matrix.environment }}"
+                    ContainerName: "${SERVICE_PREFIX}-${ENVIRONMENT}"
                     ContainerPort: 4000
           SPEC
 
       - name: Deploy container
         if: matrix.environment != 'prod' || github.ref_name == 'main'
-        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+        uses: aws-actions/amazon-ecs-deploy-task-definition@a310a830f5c14e583e35d84e4e1ec7dd177c3c9c # v2.6.2
         with:
           task-definition: task-definition.json
           cluster: ${{vars.AWS_SERVICE_NAME_PREFIX}}-${{ matrix.environment }}
