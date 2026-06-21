@@ -85,7 +85,9 @@ config :music_listings, Oban,
        # ... switched to no longer run via Oban but via Render Cron Job
        # {"0 6 * * *", MusicListings.Workers.DataRetrievalWorker, max_attempts: 1}
        # run at 7am UTC
-       {"0 7 * * *", MusicListings.Workers.PurgeEventsWorker, max_attempts: 1}
+       {"0 7 * * *", MusicListings.Workers.PurgeEventsWorker, max_attempts: 1},
+       # run Mondays at 13:00 UTC (~9am Eastern) - weekly rail traction digest
+       {"0 13 * * 1", MusicListings.Workers.NewThisWeekAnalyticsWorker, max_attempts: 1}
      ]}
   ]
 
