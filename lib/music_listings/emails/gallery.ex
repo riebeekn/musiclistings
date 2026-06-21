@@ -9,5 +9,6 @@ defmodule MusicListings.Emails.Gallery do
     preview("/latest_crawl_results", MusicListings.Emails.LatestCrawlResults)
     preview("/new_submitted_event", MusicListings.Emails.NewSubmittedEvent)
     preview("/new_this_week_analytics", MusicListings.Emails.NewThisWeekAnalytics)
+    preview("/parser_pullback", MusicListings.Emails.ParserPullback)
   end
 end
