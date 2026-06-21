@@ -25,7 +25,7 @@ defmodule MusicListingsServices.EventSubmissionServiceTest do
                  date: ~D[2024-01-17]
                })
 
-      assert_email_sent(subject: "New Submitted Event")
+      assert_email_sent(subject: "New Submitted Event: Event title")
     end
 
     test "returns a changeset with invalid attributes" do
