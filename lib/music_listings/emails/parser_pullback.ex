@@ -28,7 +28,7 @@ defmodule MusicListings.Emails.ParserPullback do
   defp mjml(assigns) do
     ~H"""
     <.h1>Parser Health Check</.h1>
-    <.muted>{formatted_date(@report.reference)}</.muted>
+    <.muted>{DateHelpers.format_eastern_datetime(@report.reference)}</.muted>
 
     <.stat_band>
       <:stat label="Flagged" accent={if @report.flagged != [], do: "ember", else: "spotlight"}>
@@ -66,7 +66,7 @@ defmodule MusicListings.Emails.ParserPullback do
           <% end %>
         </:col>
         <:col :let={v} label="Last crawl">
-          <span style="color:#a8a49a;">{formatted_short_date(v.last_crawled_at)}</span>
+          <span style="color:#a8a49a;">{DateHelpers.format_eastern_day(v.last_crawled_at)}</span>
         </:col>
       </.table>
       <.muted>
@@ -82,21 +82,6 @@ defmodule MusicListings.Emails.ParserPullback do
   defp round_count(value), do: round(value)
 
   defp percent(ratio), do: "#{round(ratio * 100)}%"
-
-  defp formatted_date(datetime) do
-    datetime
-    |> DateHelpers.to_eastern_datetime()
-    |> Calendar.strftime("%A · %b %-d, %Y")
-  end
-
-  defp formatted_short_date(datetime) do
-    datetime
-    |> DateHelpers.to_eastern_datetime()
-    |> Calendar.strftime("%b %-d")
-  end
-
-  defp pluralize(1, word), do: word
-  defp pluralize(_count, word), do: word <> "s"
 
   def preview do
     %{
