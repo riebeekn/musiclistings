@@ -107,4 +107,37 @@ defmodule MusicListingsUtilities.DateHelpers do
   def format_time(%Time{} = time) do
     Calendar.strftime(time, "%-I:%M%p")
   end
+
+  @doc """
+  Formats a UTC datetime for display in Eastern time as a full timestamp, e.g.
+  "Thursday · Aug 1, 2024 · 12:00 PM EDT". Used for "as of" headers in emails.
+  """
+  @spec format_eastern_datetime(DateTime.t()) :: String.t()
+  def format_eastern_datetime(%DateTime{} = utc_datetime) do
+    utc_datetime
+    |> to_eastern_datetime()
+    |> Calendar.strftime("%A · %b %-d, %Y · %-I:%M %p %Z")
+  end
+
+  @doc """
+  Formats a UTC datetime for display in Eastern time as a date with year, e.g.
+  "Aug 1, 2024".
+  """
+  @spec format_eastern_date(DateTime.t()) :: String.t()
+  def format_eastern_date(%DateTime{} = utc_datetime) do
+    utc_datetime
+    |> to_eastern_datetime()
+    |> Calendar.strftime("%b %-d, %Y")
+  end
+
+  @doc """
+  Formats a UTC datetime for display in Eastern time as a month and day with no
+  year, e.g. "Aug 1". Handy for compact ranges and table cells.
+  """
+  @spec format_eastern_day(DateTime.t()) :: String.t()
+  def format_eastern_day(%DateTime{} = utc_datetime) do
+    utc_datetime
+    |> to_eastern_datetime()
+    |> Calendar.strftime("%b %-d")
+  end
 end

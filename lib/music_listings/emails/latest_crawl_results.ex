@@ -38,7 +38,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
 
     ~H"""
     <.h1>Nightly Crawl Report</.h1>
-    <.muted>{formatted_crawl_date(@crawl_summary.inserted_at)}</.muted>
+    <.muted>{DateHelpers.format_eastern_datetime(@crawl_summary.inserted_at)}</.muted>
 
     <.stat_band>
       <:stat label="New" accent="spotlight">{@crawl_summary.new}</:stat>
@@ -135,15 +135,6 @@ defmodule MusicListings.Emails.LatestCrawlResults do
   defp venues_with_new(venue_rows) do
     Enum.count(venue_rows, &(&1.new > 0))
   end
-
-  defp formatted_crawl_date(datetime) do
-    datetime
-    |> DateHelpers.to_eastern_datetime()
-    |> Calendar.strftime("%A · %b %-d, %Y · %-I:%M %p %Z")
-  end
-
-  defp pluralize(1, word), do: word
-  defp pluralize(_count, word), do: word <> "s"
 
   def preview do
     # venues

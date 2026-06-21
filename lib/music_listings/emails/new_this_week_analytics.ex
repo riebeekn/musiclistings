@@ -41,7 +41,11 @@ defmodule MusicListings.Emails.NewThisWeekAnalytics do
 
     ~H"""
     <.h1>New This Week — Rail Traction</.h1>
-    <.muted>{formatted_range(@report.this_week_start, @report.period_end)}</.muted>
+    <.muted>
+      {DateHelpers.format_eastern_day(@report.this_week_start)} – {DateHelpers.format_eastern_date(
+        @report.period_end
+      )}
+    </.muted>
 
     <.stat_band>
       <:stat label="Views" accent="spotlight">{@this_shown}</:stat>
@@ -109,23 +113,6 @@ defmodule MusicListings.Emails.NewThisWeekAnalytics do
     sign = if pct > 0, do: "+", else: ""
     "#{sign}#{trunc(pct)}%"
   end
-
-  defp formatted_range(start_datetime, end_datetime) do
-    start_str =
-      start_datetime
-      |> DateHelpers.to_eastern_datetime()
-      |> Calendar.strftime("%b %-d")
-
-    end_str =
-      end_datetime
-      |> DateHelpers.to_eastern_datetime()
-      |> Calendar.strftime("%b %-d, %Y")
-
-    "#{start_str} – #{end_str}"
-  end
-
-  defp pluralize(1, word), do: word
-  defp pluralize(_count, word), do: word <> "s"
 
   def preview do
     %{

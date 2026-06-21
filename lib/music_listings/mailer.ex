@@ -50,6 +50,10 @@ defmodule MusicListings.Mailer do
         |> html_body(html_body)
         |> text_body(text_body)
       end
+
+      @spec pluralize(integer(), String.t()) :: String.t()
+      def pluralize(1, word), do: word
+      def pluralize(_count, word), do: word <> "s"
     end
   end
 end
