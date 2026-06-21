@@ -9,6 +9,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
   alias MusicListingsSchema.CrawlSummary
   alias MusicListingsSchema.Venue
   alias MusicListingsSchema.VenueCrawlSummary
+  alias MusicListingsUtilities.DateHelpers
 
   def new_email(crawl_summary) do
     crawl_summary =
@@ -17,74 +18,138 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     new()
     |> to_site_admin()
     |> from_noreply()
-    |> subject("Latest Crawl Results")
+    |> subject(subject_line(crawl_summary))
     |> body(mjml(%{crawl_summary: crawl_summary}))
   end
 
+  defp subject_line(%{new: new, errors: errors}) when errors > 0 do
+    "Crawl Report — #{new} new, #{errors} #{pluralize(errors, "error")}"
+  end
+
+  defp subject_line(%{new: new}) do
+    "Crawl Report — #{new} new #{pluralize(new, "event")}"
+  end
+
   defp mjml(assigns) do
+    assigns =
+      assigns
+      |> Map.put(:venue_rows, sort_venues(assigns.crawl_summary.venue_crawl_summaries))
+      |> Map.put(:error_count, Enum.count(assigns.crawl_summary.crawl_errors))
+
     ~H"""
-    <.h1>
-      Latest Crawl Results - {DateTime.to_string(@crawl_summary.inserted_at)}
-    </.h1>
-    <.h2>Summary</.h2>
-    <.table
-      rows={@crawl_summary.venue_crawl_summaries |> Enum.sort_by(& &1.venue.name)}
-      include_footer?={true}
-    >
-      <:col :let={venue_crawl_summary} label="Venue">
-        {venue_crawl_summary.venue.name}
-      </:col>
-      <:col :let={venue_crawl_summary} label="New">
-        {venue_crawl_summary.new}
-      </:col>
-      <:col :let={venue_crawl_summary} label="Updated">
-        {venue_crawl_summary.updated}
-      </:col>
-      <:col :let={venue_crawl_summary} label="Duplicates">
-        {venue_crawl_summary.duplicate}
-      </:col>
-      <:col :let={venue_crawl_summary} label="Ignored">
-        {venue_crawl_summary.ignored}
-      </:col>
-      <:col :let={venue_crawl_summary} label="Errors">
-        {venue_crawl_summary.errors}
-      </:col>
-      <:footer_col>
-        Total
-      </:footer_col>
-      <:footer_col>
-        {@crawl_summary.new}
-      </:footer_col>
-      <:footer_col>
-        {@crawl_summary.updated}
-      </:footer_col>
-      <:footer_col>
-        {@crawl_summary.duplicate}
-      </:footer_col>
-      <:footer_col>
-        {@crawl_summary.ignored}
-      </:footer_col>
-      <:footer_col>
+    <.h1>Nightly Crawl Report</.h1>
+    <.muted>{formatted_crawl_date(@crawl_summary.inserted_at)}</.muted>
+
+    <.stat_band>
+      <:stat label="New" accent="spotlight">{@crawl_summary.new}</:stat>
+      <:stat label="Updated">{@crawl_summary.updated}</:stat>
+      <:stat label="Errors" accent={if @crawl_summary.errors > 0, do: "ember"}>
         {@crawl_summary.errors}
+      </:stat>
+    </.stat_band>
+
+    <%= if @crawl_summary.new > 0 do %>
+      <.muted>
+        {@crawl_summary.new} new {pluralize(@crawl_summary.new, "event")} across {venues_with_new(
+          @venue_rows
+        )} {pluralize(venues_with_new(@venue_rows), "venue")} · {@crawl_summary.duplicate} unchanged · {@crawl_summary.ignored} ignored
+      </.muted>
+    <% else %>
+      <.muted>
+        No new events were found tonight · {@crawl_summary.updated} updated · {@crawl_summary.duplicate} unchanged
+      </.muted>
+    <% end %>
+
+    <.h2>By venue</.h2>
+    <.table rows={@venue_rows} include_footer?={true}>
+      <:col :let={vcs} label="Venue">
+        <%= if vcs.new > 0 do %>
+          <span style="color:#d8ff3e;">●</span>
+          <span style="color:#ece9e0;font-weight:700;">{vcs.venue.name}</span>
+        <% else %>
+          <span style="color:#a8a49a;">{vcs.venue.name}</span>
+        <% end %>
+      </:col>
+      <:col :let={vcs} label="New">
+        <%= if vcs.new > 0 do %>
+          <span style="color:#d8ff3e;font-weight:700;">{vcs.new}</span>
+        <% else %>
+          <span style="color:#a8a49a;">—</span>
+        <% end %>
+      </:col>
+      <:col :let={vcs} label="Updated">{vcs.updated}</:col>
+      <:col :let={vcs} label="Dupes">
+        <span style="color:#a8a49a;">{vcs.duplicate}</span>
+      </:col>
+      <:col :let={vcs} label="Ignored">
+        <span style="color:#a8a49a;">{vcs.ignored}</span>
+      </:col>
+      <:col :let={vcs} label="Errors">
+        <%= if vcs.errors > 0 do %>
+          <span style="color:#ff5a36;font-weight:700;">{vcs.errors}</span>
+        <% else %>
+          <span style="color:#a8a49a;">0</span>
+        <% end %>
+      </:col>
+      <:footer_col>Total</:footer_col>
+      <:footer_col><span style="color:#d8ff3e;">{@crawl_summary.new}</span></:footer_col>
+      <:footer_col>{@crawl_summary.updated}</:footer_col>
+      <:footer_col>{@crawl_summary.duplicate}</:footer_col>
+      <:footer_col>{@crawl_summary.ignored}</:footer_col>
+      <:footer_col>
+        <span style={if @crawl_summary.errors > 0, do: "color:#ff5a36;"}>{@crawl_summary.errors}</span>
       </:footer_col>
     </.table>
-    <%= if Enum.count(@crawl_summary.crawl_errors) > 0 do %>
-      <.h2>Errors</.h2>
-      <%= for crawl_error <- @crawl_summary.crawl_errors |> Enum.sort_by(& &1.venue.name) do %>
-        <.text><b>Crawl Error Id: </b>{crawl_error.id}</.text>
-        <.text><b>Venue: </b>{crawl_error.venue.name}</.text>
-        <.text><b>Error: </b>{crawl_error.error}</.text>
-        <.text><b>Raw Event: </b>{crawl_error.raw_event}</.text>
-        <mj-divider border-width="1px" border-style="dashed" border-color="lightgrey" />
+
+    <%= if @error_count > 0 do %>
+      <.h2>Errors ({@error_count})</.h2>
+      <%= for crawl_error <- Enum.sort_by(@crawl_summary.crawl_errors, & &1.venue.name) do %>
+        <mj-text padding="6px 0">
+          <div style="border-left:3px solid #ff5a36;background-color:#1c1c1d;border-radius:6px;padding:12px 14px;">
+            <div style="font-family:'Big Shoulders Display','Hanken Grotesk',Helvetica,Arial,sans-serif;font-size:15px;font-weight:700;color:#ff5a36;">
+              {crawl_error.venue.name}
+              <span style="color:#a8a49a;font-weight:400;font-size:12px;">· error #{crawl_error.id}</span>
+            </div>
+            <div style="color:#ece9e0;font-size:12px;line-height:1.5;padding-top:8px;white-space:pre-wrap;font-family:'Space Mono','SFMono-Regular',monospace;">
+              {crawl_error.error}
+            </div>
+            <div style="color:#a8a49a;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding-top:10px;">
+              Raw event
+            </div>
+            <div style="color:#a8a49a;font-size:11px;line-height:1.45;padding-top:4px;word-break:break-word;font-family:'Space Mono','SFMono-Regular',monospace;">
+              {crawl_error.raw_event}
+            </div>
+          </div>
+        </mj-text>
       <% end %>
     <% end %>
     """
   end
 
+  defp sort_venues(venue_crawl_summaries) do
+    Enum.sort_by(venue_crawl_summaries, fn vcs ->
+      {if(vcs.new > 0, do: 0, else: 1), vcs.venue.name}
+    end)
+  end
+
+  defp venues_with_new(venue_rows) do
+    Enum.count(venue_rows, &(&1.new > 0))
+  end
+
+  defp formatted_crawl_date(datetime) do
+    datetime
+    |> DateHelpers.to_eastern_datetime()
+    |> Calendar.strftime("%A · %b %-d, %Y · %-I:%M %p %Z")
+  end
+
+  defp pluralize(1, word), do: word
+  defp pluralize(_count, word), do: word <> "s"
+
   def preview do
     # venues
-    v1 = build_venue("First Venue")
-    v2 = build_venue("Second Venue")
+    v1 = build_venue(1, "First Venue")
+    v2 = build_venue(2, "Second Venue")
+    v3 = build_venue(3, "Quiet Venue")
 
     # venue summaries
     vcs1 =
@@ -105,6 +170,15 @@ defmodule MusicListings.Emails.LatestCrawlResults do
         errors: 2
       })
 
+    vcs3 =
+      build_venue_crawl_summary(v3, %{
+        duplicate: 5,
+        ignored: 0,
+        new: 0,
+        updated: 0,
+        errors: 0
+      })
+
     # errors
     ce1 = build_crawl_error(1, v1)
     ce2 = build_crawl_error(2, v2)
@@ -112,7 +186,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
 
     build_crawl_summary()
     |> Map.put(:crawl_errors, [ce1, ce2, ce3])
-    |> Map.put(:venue_crawl_summaries, [vcs1, vcs2])
+    |> Map.put(:venue_crawl_summaries, [vcs1, vcs2, vcs3])
     |> new_email()
   end
 
@@ -124,8 +198,9 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     ]
   end
 
-  defp build_venue(name) do
+  defp build_venue(id, name) do
     %Venue{
+      id: id,
       name: name,
       parser_module_name: "#{name}parser"
     }
@@ -133,7 +208,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
 
   defp build_crawl_summary do
     %CrawlSummary{
-      duplicate: 8,
+      duplicate: 13,
       ignored: 6,
       new: 12,
       updated: 24,
@@ -151,6 +226,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
        }) do
     %VenueCrawlSummary{
       venue: venue,
+      venue_id: venue.id,
       duplicate: duplicate,
       ignored: ignored,
       new: new,
@@ -163,6 +239,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     %CrawlError{
       id: id,
       venue: venue,
+      venue_id: venue.id,
       type: :parse_error,
       error: example_error(),
       raw_event: example_raw_event()

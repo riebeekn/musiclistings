@@ -24,11 +24,12 @@ defmodule MusicListingsWeb.ContactLiveTest do
 
       assert html =~ "Thank you for contacting us"
 
-      assert_email_sent(
-        from: {"Bob Mintzer", "bob@example.com"},
-        subject: "Hi there!",
-        text_body: "Hello, I have a question about..."
-      )
+      assert_email_sent(fn email ->
+        assert email.from == {"Bob Mintzer", "bob@example.com"}
+        assert email.reply_to == {"Bob Mintzer", "bob@example.com"}
+        assert email.subject == "Hi there!"
+        assert email.html_body =~ "Hello, I have a question about..."
+      end)
     end
 
     test "displays errors with invalid attributes", %{conn: conn} do
