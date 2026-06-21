@@ -12,6 +12,7 @@ defmodule MusicListingsSchema.SubmittedEvent do
           price: String.t(),
           url: String.t(),
           approved?: boolean(),
+          deleted_at: DateTime.t() | nil,
           inserted_at: DateTime.t()
         }
 
@@ -23,6 +24,7 @@ defmodule MusicListingsSchema.SubmittedEvent do
     field :price, :string
     field :url, :string
     field :approved?, :boolean, source: :is_approved
+    field :deleted_at, :utc_datetime
 
     timestamps(updated_at: false)
   end

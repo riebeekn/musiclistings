@@ -186,6 +186,7 @@ defmodule MusicListings.Events do
 
     pagination_result =
       SubmittedEvent
+      |> where([submitted_event], is_nil(submitted_event.deleted_at))
       |> order_by(desc: :inserted_at, asc: :title)
       |> Repo.paginate(page: page, page_size: page_size)
 
@@ -209,6 +210,21 @@ defmodule MusicListings.Events do
   end
 
   def delete_event(_user, _event_id) do
+    {:error, :not_allowed}
+  end
+
+  @spec delete_submitted_events(User, list()) ::
+          {:ok, non_neg_integer()} | {:error, :not_allowed}
+  def delete_submitted_events(%User{role: :admin}, submitted_event_ids) do
+    {count, _result} =
+      SubmittedEvent
+      |> where([submitted_event], submitted_event.id in ^submitted_event_ids)
+      |> Repo.update_all(set: [deleted_at: DateHelpers.now()])
+
+    {:ok, count}
+  end
+
+  def delete_submitted_events(_user, _submitted_event_ids) do
     {:error, :not_allowed}
   end
 
