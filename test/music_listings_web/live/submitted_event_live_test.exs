@@ -64,5 +64,51 @@ defmodule MusicListingsWeb.SubmittedEventLiveTest do
 
       assert render(view) =~ "Venue not found"
     end
+
+    test "renders a checkbox for each submitted event and a select-all", %{
+      conn: conn,
+      e0_id: e0_id,
+      e1_id: e1_id
+    } do
+      {:ok, view, _html} = live(conn, ~p"/submitted_events")
+
+      assert has_element?(view, "[phx-click=\"toggle-select-all\"]")
+      assert has_element?(view, "[phx-click='toggle-select'][phx-value-id='#{e0_id}']")
+      assert has_element?(view, "[phx-click='toggle-select'][phx-value-id='#{e1_id}']")
+    end
+
+    test "can select and delete submitted events", %{conn: conn, e0_id: e0_id, e1_id: e1_id} do
+      {:ok, view, _html} = live(conn, ~p"/submitted_events")
+
+      view
+      |> element("[phx-click='toggle-select'][phx-value-id='#{e0_id}']")
+      |> render_click()
+
+      assert view
+             |> element("[phx-click=\"delete-selected\"]")
+             |> render_click() =~ "Deleted 1 submitted event"
+
+      refute has_element?(view, "#event-#{e0_id}")
+      assert has_element?(view, "#event-#{e1_id}")
+    end
+
+    test "select-all selects every submitted event for deletion", %{
+      conn: conn,
+      e0_id: e0_id,
+      e1_id: e1_id
+    } do
+      {:ok, view, _html} = live(conn, ~p"/submitted_events")
+
+      view
+      |> element("[phx-click=\"toggle-select-all\"]")
+      |> render_click()
+
+      assert view
+             |> element("[phx-click=\"delete-selected\"]")
+             |> render_click() =~ "Deleted 2 submitted events"
+
+      refute has_element?(view, "#event-#{e0_id}")
+      refute has_element?(view, "#event-#{e1_id}")
+    end
   end
 end

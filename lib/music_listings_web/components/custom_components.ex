@@ -880,12 +880,28 @@ defmodule MusicListingsWeb.CustomComponents do
   end
 
   attr :submitted_events, :list, required: true
+  attr :selected_ids, :any, required: true
 
   def submitted_events(assigns) do
+    all_selected =
+      assigns.submitted_events != [] and
+        Enum.all?(assigns.submitted_events, &MapSet.member?(assigns.selected_ids, &1.id))
+
+    assigns = assign(assigns, :all_selected, all_selected)
+
     ~H"""
     <table class="min-w-full divide-y divide-hairline">
       <thead>
         <tr>
+          <th scope="col" class="py-3.5 pl-4 pr-3 sm:pl-0">
+            <input
+              type="checkbox"
+              checked={@all_selected}
+              phx-click="toggle-select-all"
+              aria-label="Select all"
+              class="h-4 w-4 rounded border-paper-dim bg-ink-2 text-spotlight focus:ring-spotlight cursor-pointer"
+            />
+          </th>
           <.submitted_event_column_header label="Title / URL" first_col={true} />
           <.submitted_event_column_header label="Venue" />
           <.submitted_event_column_header label="Date" />
@@ -897,6 +913,16 @@ defmodule MusicListingsWeb.CustomComponents do
       <tbody class="divide-y divide-hairline">
         <%= for submitted_event <- @submitted_events do %>
           <tr id={"event-#{submitted_event.id}"}>
+            <td class="py-4 pl-4 pr-3 sm:pl-0">
+              <input
+                type="checkbox"
+                checked={MapSet.member?(@selected_ids, submitted_event.id)}
+                phx-click="toggle-select"
+                phx-value-id={submitted_event.id}
+                aria-label="Select submitted event"
+                class="h-4 w-4 rounded border-paper-dim bg-ink-2 text-spotlight focus:ring-spotlight cursor-pointer"
+              />
+            </td>
             <.submitted_event_title title={submitted_event.title} url={submitted_event.url} />
             <.submitted_event_column_value value={submitted_event.venue} />
             <.submitted_event_column_value value={submitted_event.date} />

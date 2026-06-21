@@ -324,6 +324,41 @@ defmodule MusicListings.EventsTest do
                ]
              } = Events.list_submitted_events(%User{role: :admin})
     end
+
+    test "excludes soft-deleted submitted events" do
+      insert(:submitted_event, title: "deleted", deleted_at: DateHelpers.now())
+
+      assert %PagedEvents{events: events} = Events.list_submitted_events(%User{role: :admin})
+
+      refute Enum.any?(events, &(&1.title == "deleted"))
+      assert length(events) == 4
+    end
+  end
+
+  describe "delete_submitted_events/2" do
+    setup do
+      e0 = insert(:submitted_event, title: "ev0")
+      e1 = insert(:submitted_event, title: "ev1")
+      e2 = insert(:submitted_event, title: "ev2")
+      %{e0: e0, e1: e1, e2: e2}
+    end
+
+    test "returns error when no user", %{e0: e0} do
+      assert {:error, :not_allowed} == Events.delete_submitted_events(nil, [e0.id])
+    end
+
+    test "returns error when user not an admin", %{e0: e0} do
+      assert {:error, :not_allowed} ==
+               Events.delete_submitted_events(%User{role: :regular_user}, [e0.id])
+    end
+
+    test "soft-deletes the given submitted events", %{e0: e0, e1: e1, e2: e2} do
+      assert {:ok, 2} = Events.delete_submitted_events(%User{role: :admin}, [e0.id, e1.id])
+
+      assert Repo.get!(SubmittedEvent, e0.id).deleted_at == DateHelpers.now()
+      assert Repo.get!(SubmittedEvent, e1.id).deleted_at == DateHelpers.now()
+      assert Repo.get!(SubmittedEvent, e2.id).deleted_at == nil
+    end
   end
 
   describe "delete_event/2" do

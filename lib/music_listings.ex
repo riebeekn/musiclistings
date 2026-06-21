@@ -57,6 +57,10 @@ defmodule MusicListings do
   @spec delete_event(User | nil, pos_integer()) :: {:ok, Event} | {:error, :not_allowed}
   defdelegate delete_event(user, event_id), to: Events
 
+  @spec delete_submitted_events(User, list()) ::
+          {:ok, non_neg_integer()} | {:error, :not_allowed}
+  defdelegate delete_submitted_events(user, submitted_event_ids), to: Events
+
   @spec approve_submitted_event(User, pos_integer()) ::
           {:ok, Event} | {:error, :not_allowed | :venue_not_found | :submitted_event_not_found}
   defdelegate approve_submitted_event(user, submitted_event_id), to: EventSubmissionService
