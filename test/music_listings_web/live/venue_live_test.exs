@@ -30,6 +30,29 @@ defmodule MusicListingsWeb.VenueLiveTest do
       assert html =~ "2 Street"
       assert html =~ "1 Upcoming Events"
     end
+
+    test "does not show crawl buttons to anonymous visitors", %{conn: conn} do
+      {:ok, view, _html} = live(conn, ~p"/venues")
+
+      refute has_element?(view, "button[phx-click='crawl-all-venues']")
+      refute has_element?(view, "button[phx-click='crawl-venue']")
+    end
+  end
+
+  describe "index - logged in as admin" do
+    setup :register_and_log_in_user
+
+    setup do
+      insert(:venue, name: "Venue 1", street: "1 Street")
+      :ok
+    end
+
+    test "shows crawl all and per-venue crawl buttons", %{conn: conn} do
+      {:ok, view, _html} = live(conn, ~p"/venues")
+
+      assert has_element?(view, "button[phx-click='crawl-all-venues']")
+      assert has_element?(view, "button[phx-click='crawl-venue']")
+    end
   end
 
   describe "new - when not logged in" do

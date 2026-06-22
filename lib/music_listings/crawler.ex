@@ -4,6 +4,7 @@ defmodule MusicListings.Crawler do
   """
   import Ecto.Query
 
+  alias MusicListings.Accounts.User
   alias MusicListings.Crawler.CrawlStats
   alias MusicListings.Crawler.DataSource
   alias MusicListings.Crawler.EventParser
@@ -62,6 +63,31 @@ defmodule MusicListings.Crawler do
     |> CrawlStats.new()
     |> update_crawl_summary_with_stats(crawl_summary)
   end
+
+  @doc """
+  Crawls all venues with `pull_events?` enabled. Admin only.
+  """
+  @spec crawl_all(User | nil) ::
+          {:ok, CrawlSummary.t()} | {:error, :not_allowed | Ecto.Changeset.t()}
+  def crawl_all(%User{role: :admin}) do
+    Venue
+    |> where([venue], venue.pull_events?)
+    |> Repo.all()
+    |> crawl()
+  end
+
+  def crawl_all(_user), do: {:error, :not_allowed}
+
+  @doc """
+  Crawls a single venue by id. Admin only.
+  """
+  @spec crawl_venue(User | nil, pos_integer()) ::
+          {:ok, CrawlSummary.t()} | {:error, :not_allowed | Ecto.Changeset.t()}
+  def crawl_venue(%User{role: :admin}, venue_id) do
+    crawl([Repo.get!(Venue, venue_id)])
+  end
+
+  def crawl_venue(_user, _venue_id), do: {:error, :not_allowed}
 
   defp no_date?(payload) do
     if payload.status == :ok do

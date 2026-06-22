@@ -42,6 +42,15 @@ defmodule MusicListingsWeb.VenueEventLiveTest do
       refute has_element?(view, "#event-#{e1_id} button")
       refute has_element?(view, "#event-#{e2_id} button")
     end
+
+    test "does not show the crawl button to anonymous visitors", %{
+      conn: conn,
+      venue_id: venue_id
+    } do
+      {:ok, view, _html} = live(conn, ~p"/events/venue/#{venue_id}")
+
+      refute has_element?(view, "button[phx-click='crawl-venue']")
+    end
   end
 
   describe "index - logged in as admin" do
@@ -62,6 +71,12 @@ defmodule MusicListingsWeb.VenueEventLiveTest do
       |> render_click()
 
       refute has_element?(view, "#event-#{event_id}")
+    end
+
+    test "shows the crawl button", %{conn: conn, venue_id: venue_id} do
+      {:ok, view, _html} = live(conn, ~p"/events/venue/#{venue_id}")
+
+      assert has_element?(view, "button[phx-click='crawl-venue']")
     end
   end
 end

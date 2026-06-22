@@ -2,6 +2,7 @@ defmodule MusicListings do
   @moduledoc """
   Main API for the application
   """
+  alias MusicListings.Accounts.User
   alias MusicListings.Crawler
   alias MusicListings.Events
   alias MusicListings.Events.EventInfo
@@ -9,6 +10,7 @@ defmodule MusicListings do
   alias MusicListings.FeatureFlags
   alias MusicListings.Venues
   alias MusicListings.Venues.VenueSummary
+  alias MusicListingsSchema.CrawlSummary
   alias MusicListingsSchema.Event
   alias MusicListingsSchema.IgnoredEvent
   alias MusicListingsSchema.SubmittedEvent
@@ -20,6 +22,14 @@ defmodule MusicListings do
 
   @spec ignore_crawl_error(pos_integer()) :: IgnoredEvent
   defdelegate ignore_crawl_error(crawl_error_id), to: Crawler
+
+  @spec crawl_all_venues(User | nil) ::
+          {:ok, CrawlSummary.t()} | {:error, :not_allowed | Ecto.Changeset.t()}
+  defdelegate crawl_all_venues(user), to: Crawler, as: :crawl_all
+
+  @spec crawl_venue(User | nil, pos_integer()) ::
+          {:ok, CrawlSummary.t()} | {:error, :not_allowed | Ecto.Changeset.t()}
+  defdelegate crawl_venue(user, venue_id), to: Crawler
 
   @type list_events_opts ::
           {:page, pos_integer()}
