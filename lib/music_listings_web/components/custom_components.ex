@@ -890,30 +890,39 @@ defmodule MusicListingsWeb.CustomComponents do
     assigns = assign(assigns, :all_selected, all_selected)
 
     ~H"""
-    <table class="min-w-full divide-y divide-hairline">
-      <thead>
-        <tr>
-          <th scope="col" class="py-3.5 pl-4 pr-3 sm:pl-0">
-            <input
-              type="checkbox"
-              checked={@all_selected}
-              phx-click="toggle-select-all"
-              aria-label="Select all"
-              class="h-4 w-4 rounded border-paper-dim bg-ink-2 text-spotlight focus:ring-spotlight cursor-pointer"
-            />
-          </th>
-          <.submitted_event_column_header label="Title / URL" first_col={true} />
-          <.submitted_event_column_header label="Venue" />
-          <.submitted_event_column_header label="Date" />
-          <.submitted_event_column_header label="Time" />
-          <.submitted_event_column_header label="Price" />
-          <.submitted_event_column_header label="Status" sr_only={true} />
-        </tr>
-      </thead>
-      <tbody class="divide-y divide-hairline">
-        <%= for submitted_event <- @submitted_events do %>
-          <tr id={"event-#{submitted_event.id}"}>
-            <td class="py-4 pl-4 pr-3 sm:pl-0">
+    <div>
+      <div class="flex items-center justify-between gap-4 border-b border-hairline pb-3">
+        <label class="inline-flex items-center gap-2 text-sm text-paper-dim cursor-pointer">
+          <input
+            type="checkbox"
+            checked={@all_selected}
+            phx-click="toggle-select-all"
+            aria-label="Select all"
+            class="h-4 w-4 rounded border-paper-dim bg-ink-2 text-spotlight focus:ring-spotlight cursor-pointer"
+          /> Select all
+        </label>
+        <button
+          phx-click="delete-selected"
+          data-confirm="Are you sure?"
+          disabled={MapSet.size(@selected_ids) == 0}
+          class="inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition-colors rounded-full py-1 px-3 bg-ember/10 text-ember ring-1 ring-inset ring-ember/30 hover:bg-ember hover:text-ink disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-ember/10 disabled:hover:text-ember"
+        >
+          Delete selected ({MapSet.size(@selected_ids)})
+        </button>
+      </div>
+
+      <p :if={@submitted_events == []} class="py-10 text-center text-sm text-paper-dim">
+        No submitted events.
+      </p>
+
+      <ul role="list" class="divide-y divide-hairline">
+        <li
+          :for={submitted_event <- @submitted_events}
+          id={"event-#{submitted_event.id}"}
+          class="py-5"
+        >
+          <div class="grid grid-cols-[auto_1fr] gap-x-3 gap-y-3 sm:grid-cols-[auto_1fr_auto] sm:items-start sm:gap-x-6">
+            <div class="pt-1">
               <input
                 type="checkbox"
                 checked={MapSet.member?(@selected_ids, submitted_event.id)}
@@ -922,95 +931,70 @@ defmodule MusicListingsWeb.CustomComponents do
                 aria-label="Select submitted event"
                 class="h-4 w-4 rounded border-paper-dim bg-ink-2 text-spotlight focus:ring-spotlight cursor-pointer"
               />
-            </td>
-            <.submitted_event_title title={submitted_event.title} url={submitted_event.url} />
-            <.submitted_event_column_value value={submitted_event.venue} />
-            <.submitted_event_column_value value={submitted_event.date} />
-            <.submitted_event_column_value value={
-              format_submitted_event_optional_field(submitted_event.time)
-            } />
-            <.submitted_event_column_value value={
-              format_submitted_event_optional_field(submitted_event.price)
-            } />
-            <.submitted_event_approval_status submitted_event={submitted_event} />
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+            </div>
+
+            <div class="min-w-0">
+              <div class="font-display text-xl font-bold leading-tight text-paper">
+                {submitted_event.title}
+              </div>
+              <a
+                :if={submitted_event.url}
+                href={submitted_event.url}
+                target="_blank"
+                rel="noopener"
+                class="mt-0.5 block text-sm text-spotlight hover:text-spotlight-deep break-all"
+              >
+                {submitted_event.url}
+              </a>
+              <div class="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-paper-dim">
+                <span class="inline-flex items-center gap-1">
+                  <MusicListingsWeb.CoreComponents.icon name="hero-map-pin" class="size-3.5" />
+                  {submitted_event.venue}
+                </span>
+                <span aria-hidden="true">·</span>
+                <span>{DateHelpers.format_date(submitted_event.date)}</span>
+                <span :if={submitted_event.time} aria-hidden="true">·</span>
+                <span :if={submitted_event.time}>{submitted_event.time}</span>
+                <span :if={submitted_event.price} aria-hidden="true">·</span>
+                <span :if={submitted_event.price}>{submitted_event.price}</span>
+              </div>
+            </div>
+
+            <div class="col-span-2 sm:col-span-1">
+              <.submitted_event_actions submitted_event={submitted_event} />
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
     """
   end
 
-  defp submitted_event_title(assigns) do
+  defp submitted_event_actions(assigns) do
     ~H"""
-    <td class="py-5 pl-4 pr-3 text-sm sm:pl-0 text-paper w-1/2">
-      <div class="flex items-center">
-        <div class="break-words">
-          <div class="font-medium">{@title}</div>
-          <a
-            href={@url}
-            target="_blank"
-            rel="noopener"
-            class="mt-1 text-spotlight hover:text-spotlight-deep break-all"
-          >
-            {@url}
-          </a>
-        </div>
-      </div>
-    </td>
+    <div class="flex items-center gap-2 sm:justify-end">
+      <span :if={@submitted_event.approved?} class="text-sm font-medium text-amber-400">
+        Approved
+      </span>
+      <.link
+        :if={!@submitted_event.approved?}
+        navigate={~p"/submitted_events/#{@submitted_event.id}/edit"}
+        class="inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition-colors rounded-full py-1 px-3 text-paper-dim ring-1 ring-inset ring-hairline hover:text-paper hover:ring-paper-dim"
+      >
+        Edit
+      </.link>
+      <button
+        :if={!@submitted_event.approved?}
+        phx-click="approve-submitted-event"
+        phx-value-id={@submitted_event.id}
+        data-confirm="Are you sure?"
+        class="inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition-colors rounded-full py-1 px-3 bg-spotlight/10 text-spotlight ring-1 ring-inset ring-spotlight/30 hover:bg-spotlight hover:text-ink"
+      >
+        Approve
+      </button>
+    </div>
     """
   end
-
-  defp submitted_event_column_value(assigns) do
-    ~H"""
-    <td class="whitespace-nowrap px-2 py-4 text-sm text-paper-dim">
-      {@value}
-    </td>
-    """
-  end
-
-  defp submitted_event_approval_status(assigns) do
-    ~H"""
-    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-      <span :if={@submitted_event.approved?} class="text-amber-400">Approved</span>
-      <div :if={!@submitted_event.approved?} class="flex justify-end gap-2">
-        <.link
-          navigate={~p"/submitted_events/#{@submitted_event.id}/edit"}
-          class="inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition-colors rounded-full py-1 px-3 text-paper-dim ring-1 ring-inset ring-hairline hover:text-paper hover:ring-paper-dim"
-        >
-          Edit
-        </.link>
-        <button
-          phx-click="approve-submitted-event"
-          phx-value-id={@submitted_event.id}
-          data-confirm="Are you sure?"
-          class="inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition-colors rounded-full py-1 px-3 bg-spotlight/10 text-spotlight ring-1 ring-inset ring-spotlight/30 hover:bg-spotlight hover:text-ink"
-        >
-          Approve
-        </button>
-      </div>
-    </td>
-    """
-  end
-
-  defp submitted_event_column_header(assigns) do
-    th_class =
-      if assigns[:first_col],
-        do: "py-3.5 pl-4 pr-3 text-left text-md font-semibold text-paper sm:pl-0 w-1/2",
-        else: "px-2 py-3.5 text-left text-md font-semibold text-paper"
-
-    span_class = if assigns[:sr_only], do: "sr-only", else: ""
-
-    assigns = assign(assigns, th_class: th_class, span_class: span_class)
-
-    ~H"""
-    <th scope="col" class={@th_class}>
-      <span class={@span_class}>{@label}</span>
-    </th>
-    """
-  end
-
-  defp format_submitted_event_optional_field(nil), do: "- - -"
-  defp format_submitted_event_optional_field(string), do: string
 
   @doc """
   Renders a list of events for the passed in events, specific to a single venue
