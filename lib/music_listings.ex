@@ -6,6 +6,7 @@ defmodule MusicListings do
   alias MusicListings.Events
   alias MusicListings.Events.EventInfo
   alias MusicListings.Events.PagedEvents
+  alias MusicListings.FeatureFlags
   alias MusicListings.Venues
   alias MusicListings.Venues.VenueSummary
   alias MusicListingsSchema.Event
@@ -41,6 +42,14 @@ defmodule MusicListings do
 
   @spec fetch_event(pos_integer()) :: {:ok, Event.t()} | {:error, :not_found}
   defdelegate fetch_event(event_id), to: Events
+
+  @spec list_feature_flags(User | nil) ::
+          {:ok, list(FeatureFlags.feature_flag())} | {:error, :not_allowed}
+  defdelegate list_feature_flags(user), to: FeatureFlags
+
+  @spec set_feature_flag(User | nil, atom(), boolean()) ::
+          {:ok, boolean()} | {:error, :not_allowed}
+  defdelegate set_feature_flag(user, flag_name, enabled?), to: FeatureFlags
 
   @spec submit_event(
           attrs :: %{

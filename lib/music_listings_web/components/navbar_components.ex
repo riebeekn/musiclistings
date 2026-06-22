@@ -138,7 +138,7 @@ defmodule MusicListingsWeb.NavbarComponents do
           <.main_menu_link link_text="Venues" href={~p"/venues"} />
           <.main_menu_link link_text="About" href={~p"/contact"} />
           <.when_admin current_user={@current_user}>
-            <.main_menu_link link_text="Submitted" href={~p"/submitted_events"} />
+            <.admin_menu />
           </.when_admin>
         </div>
       </div>
@@ -154,7 +154,9 @@ defmodule MusicListingsWeb.NavbarComponents do
         <.mobile_menu_link link_text="Venues" href={~p"/venues"} />
         <.mobile_menu_link link_text="About" href={~p"/contact"} />
         <.when_admin current_user={@current_user}>
+          <p class="kicker px-3 pt-3 pb-1 text-paper-dim/70">Admin</p>
           <.mobile_menu_link link_text="Submitted" href={~p"/submitted_events"} />
+          <.mobile_menu_link link_text="Feature Flags" href={~p"/feature_flags"} />
         </.when_admin>
         <div class="pt-3 mt-3 border-t border-hairline">
           <a
@@ -233,6 +235,55 @@ defmodule MusicListingsWeb.NavbarComponents do
       {@link_text}
     </a>
     """
+  end
+
+  defp admin_menu(assigns) do
+    ~H"""
+    <div class="relative">
+      <button
+        phx-click-away={hide_admin_menu()}
+        phx-click={toggle_admin_menu()}
+        type="button"
+        class="kicker flex items-center gap-1 px-3 py-2 text-paper-dim hover:text-spotlight transition-colors"
+        aria-controls="admin-menu"
+        aria-expanded="false"
+      >
+        Admin
+        <span id="admin_menu_chevron" class="transition-transform duration-200">
+          <.icon name="hero-chevron-down" class="h-4 w-4" />
+        </span>
+      </button>
+      <div
+        id="admin-menu"
+        class="hidden absolute left-0 z-10 mt-2 w-44 rounded-md border border-hairline bg-ink py-1 shadow-lg"
+      >
+        <.link
+          href={~p"/submitted_events"}
+          class="block px-4 py-2 text-sm text-paper-dim hover:bg-ink-3 hover:text-paper transition-colors"
+        >
+          Submitted
+        </.link>
+        <.link
+          href={~p"/feature_flags"}
+          class="block px-4 py-2 text-sm text-paper-dim hover:bg-ink-3 hover:text-paper transition-colors"
+        >
+          Feature Flags
+        </.link>
+      </div>
+    </div>
+    """
+  end
+
+  defp toggle_admin_menu(js \\ %JS{}) do
+    js
+    |> JS.toggle(to: "#admin-menu", in: "ease-out duration-100", out: "ease-in duration-75")
+    |> JS.toggle_class("rotate-180", to: "#admin_menu_chevron")
+  end
+
+  defp hide_admin_menu(js \\ %JS{}) do
+    js
+    |> JS.hide(to: "#admin-menu", transition: "ease-in duration-75")
+    |> JS.remove_class("rotate-180", to: "#admin_menu_chevron")
   end
 
   defp toggle_mobile_menu(js \\ %JS{}) do

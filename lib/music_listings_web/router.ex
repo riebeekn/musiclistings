@@ -62,6 +62,7 @@ defmodule MusicListingsWeb.Router do
       on_mount: [{MusicListingsWeb.UserAuth, :mount_current_user}] do
       live "/submitted_events", SubmittedEventLive.Index, :index
       live "/submitted_events/:id/edit", SubmittedEventLive.Edit, :edit
+      live "/feature_flags", FeatureFlagLive.Index, :index
       live "/venues/new", VenueLive.New, :new
     end
   end
