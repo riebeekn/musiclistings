@@ -148,17 +148,6 @@ defmodule MusicListingsWeb.SubmittedEventLive.Index do
 
     <.page_header header="Submitted Events" />
 
-    <div class="mt-4 flex justify-end">
-      <button
-        phx-click="delete-selected"
-        data-confirm="Are you sure?"
-        disabled={MapSet.size(@selected_ids) == 0}
-        class="inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition-colors rounded-full py-1 px-3 bg-ember/10 text-ember ring-1 ring-inset ring-ember/30 hover:bg-ember hover:text-ink disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-ember/10 disabled:hover:text-ember"
-      >
-        Delete selected ({MapSet.size(@selected_ids)})
-      </button>
-    </div>
-
     <div class="mt-4">
       <.submitted_events submitted_events={@submitted_events} selected_ids={@selected_ids} />
     </div>
