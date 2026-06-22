@@ -42,6 +42,17 @@ defmodule MusicListingsWeb.SubmittedEventLiveTest do
              )
     end
 
+    test "shows an edit link for each unapproved submitted event", %{
+      conn: conn,
+      e0_id: e0_id,
+      e1_id: e1_id
+    } do
+      {:ok, view, _html} = live(conn, ~p"/submitted_events")
+
+      assert has_element?(view, "a[href='/submitted_events/#{e0_id}/edit']")
+      assert has_element?(view, "a[href='/submitted_events/#{e1_id}/edit']")
+    end
+
     test "can approve a submitted event", %{conn: conn, e0_id: e0_id} do
       {:ok, view, _html} = live(conn, ~p"/submitted_events")
 

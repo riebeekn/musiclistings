@@ -65,6 +65,15 @@ defmodule MusicListings do
           {:ok, Event} | {:error, :not_allowed | :venue_not_found | :submitted_event_not_found}
   defdelegate approve_submitted_event(user, submitted_event_id), to: EventSubmissionService
 
+  @spec update_submitted_event(User, pos_integer(), map()) ::
+          {:ok, SubmittedEvent.t()}
+          | {:error, Ecto.Changeset.t() | :not_allowed | :submitted_event_not_found}
+  defdelegate update_submitted_event(user, submitted_event_id, attrs), to: Events
+
+  @spec fetch_submitted_event(User, pos_integer()) ::
+          {:ok, SubmittedEvent.t()} | {:error, :not_allowed | :submitted_event_not_found}
+  defdelegate fetch_submitted_event(user, submitted_event_id), to: Events
+
   @type list_venue_opts ::
           {:restrict_to_pulled_venues?, boolean()}
           | {:only_with_upcoming_events?, boolean()}

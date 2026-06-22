@@ -29,8 +29,7 @@ defmodule MusicListingsServices.EventSubmissionService do
         ) :: {:ok, SubmittedEvent.t()} | {:error, Ecto.Changeset.t()}
   def process_submitted_event(attrs) do
     %SubmittedEvent{}
-    |> Changeset.cast(attrs, [:title, :venue, :date, :time, :price, :url])
-    |> Changeset.validate_required([:title, :venue, :date])
+    |> SubmittedEvent.changeset(attrs)
     |> Repo.insert()
     |> case do
       {:ok, submitted_event} ->
@@ -50,8 +49,8 @@ defmodule MusicListingsServices.EventSubmissionService do
   """
   @spec approve_submitted_event(User, pos_integer()) ::
           {:ok, Event} | {:error, :not_allowed | :venue_not_found | :submitted_event_not_found}
-  def approve_submitted_event(%User{role: :admin}, submitted_event_id) do
-    with {:ok, submitted_event} <- Events.fetch_submitted_event(submitted_event_id),
+  def approve_submitted_event(%User{role: :admin} = user, submitted_event_id) do
+    with {:ok, submitted_event} <- Events.fetch_submitted_event(user, submitted_event_id),
          {:ok, venue} <- Venues.fetch_venue_by_name(submitted_event.venue) do
       external_id =
         "#{submitted_event.id}_#{ParseHelpers.build_id_from_title_and_date(submitted_event.title, submitted_event.date)}"
