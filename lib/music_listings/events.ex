@@ -228,12 +228,35 @@ defmodule MusicListings.Events do
     {:error, :not_allowed}
   end
 
-  def fetch_submitted_event(submitted_event_id) do
+  @doc """
+  Updates an existing submitted event (admin only). Lets an admin fix details such as a
+  misspelled venue name or an invalid time/price before approving the submission.
+  """
+  @spec update_submitted_event(User, pos_integer(), map()) ::
+          {:ok, SubmittedEvent.t()}
+          | {:error, Ecto.Changeset.t() | :not_allowed | :submitted_event_not_found}
+  def update_submitted_event(%User{role: :admin} = user, submitted_event_id, attrs) do
+    with {:ok, submitted_event} <- fetch_submitted_event(user, submitted_event_id) do
+      submitted_event
+      |> SubmittedEvent.changeset(attrs)
+      |> Repo.update()
+    end
+  end
+
+  def update_submitted_event(_user, _submitted_event_id, _attrs) do
+    {:error, :not_allowed}
+  end
+
+  def fetch_submitted_event(%User{role: :admin}, submitted_event_id) do
     SubmittedEvent
     |> Repo.get(submitted_event_id)
     |> case do
       nil -> {:error, :submitted_event_not_found}
       submitted_event -> {:ok, submitted_event}
     end
+  end
+
+  def fetch_submitted_event(_user, _submitted_event_id) do
+    {:error, :not_allowed}
   end
 end

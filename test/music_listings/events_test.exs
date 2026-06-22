@@ -361,6 +361,86 @@ defmodule MusicListings.EventsTest do
     end
   end
 
+  describe "update_submitted_event/3" do
+    setup do
+      submitted_event = insert(:submitted_event, venue: "Misspeld Venue")
+      %{submitted_event: submitted_event}
+    end
+
+    test "admin can update fields", %{submitted_event: submitted_event} do
+      assert {:ok, updated} =
+               Events.update_submitted_event(
+                 %User{role: :admin},
+                 submitted_event.id,
+                 %{venue: "Corrected Venue", time: "8:00 PM"}
+               )
+
+      assert updated.venue == "Corrected Venue"
+      assert updated.time == "8:00 PM"
+
+      reloaded = Repo.reload(submitted_event)
+      assert reloaded.venue == "Corrected Venue"
+      assert reloaded.time == "8:00 PM"
+    end
+
+    test "returns error when no user", %{submitted_event: submitted_event} do
+      assert {:error, :not_allowed} ==
+               Events.update_submitted_event(nil, submitted_event.id, %{venue: "Corrected Venue"})
+    end
+
+    test "returns error when user not an admin", %{submitted_event: submitted_event} do
+      assert {:error, :not_allowed} ==
+               Events.update_submitted_event(
+                 %User{role: :regular_user},
+                 submitted_event.id,
+                 %{venue: "Corrected Venue"}
+               )
+    end
+
+    test "returns error when submitted event not found" do
+      assert {:error, :submitted_event_not_found} ==
+               Events.update_submitted_event(%User{role: :admin}, -1, %{venue: "Corrected Venue"})
+    end
+
+    test "returns a changeset when a required field is blanked", %{
+      submitted_event: submitted_event
+    } do
+      assert {:error, changeset} =
+               Events.update_submitted_event(%User{role: :admin}, submitted_event.id, %{venue: ""})
+
+      assert errors_on(changeset) == %{venue: ["can't be blank"]}
+    end
+  end
+
+  describe "fetch_submitted_event/2" do
+    setup do
+      submitted_event = insert(:submitted_event)
+      %{submitted_event: submitted_event}
+    end
+
+    test "admin fetches the submitted event", %{submitted_event: submitted_event} do
+      assert {:ok, fetched} =
+               Events.fetch_submitted_event(%User{role: :admin}, submitted_event.id)
+
+      assert fetched.id == submitted_event.id
+    end
+
+    test "returns error when no user", %{submitted_event: submitted_event} do
+      assert {:error, :not_allowed} ==
+               Events.fetch_submitted_event(nil, submitted_event.id)
+    end
+
+    test "returns error when user not an admin", %{submitted_event: submitted_event} do
+      assert {:error, :not_allowed} ==
+               Events.fetch_submitted_event(%User{role: :regular_user}, submitted_event.id)
+    end
+
+    test "returns error when submitted event not found" do
+      assert {:error, :submitted_event_not_found} ==
+               Events.fetch_submitted_event(%User{role: :admin}, -1)
+    end
+  end
+
   describe "delete_event/2" do
     setup do
       venue = insert(:venue)

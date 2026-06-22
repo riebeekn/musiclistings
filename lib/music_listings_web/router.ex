@@ -61,6 +61,7 @@ defmodule MusicListingsWeb.Router do
     live_session :require_authenticated_user,
       on_mount: [{MusicListingsWeb.UserAuth, :mount_current_user}] do
       live "/submitted_events", SubmittedEventLive.Index, :index
+      live "/submitted_events/:id/edit", SubmittedEventLive.Edit, :edit
       live "/venues/new", VenueLive.New, :new
     end
   end

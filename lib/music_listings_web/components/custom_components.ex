@@ -972,15 +972,22 @@ defmodule MusicListingsWeb.CustomComponents do
     ~H"""
     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
       <span :if={@submitted_event.approved?} class="text-amber-400">Approved</span>
-      <button
-        :if={!@submitted_event.approved?}
-        phx-click="approve-submitted-event"
-        phx-value-id={@submitted_event.id}
-        data-confirm="Are you sure?"
-        class="inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition-colors rounded-full py-1 px-3 bg-spotlight/10 text-spotlight ring-1 ring-inset ring-spotlight/30 hover:bg-spotlight hover:text-ink"
-      >
-        Approve
-      </button>
+      <div :if={!@submitted_event.approved?} class="flex justify-end gap-2">
+        <.link
+          navigate={~p"/submitted_events/#{@submitted_event.id}/edit"}
+          class="inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition-colors rounded-full py-1 px-3 text-paper-dim ring-1 ring-inset ring-hairline hover:text-paper hover:ring-paper-dim"
+        >
+          Edit
+        </.link>
+        <button
+          phx-click="approve-submitted-event"
+          phx-value-id={@submitted_event.id}
+          data-confirm="Are you sure?"
+          class="inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition-colors rounded-full py-1 px-3 bg-spotlight/10 text-spotlight ring-1 ring-inset ring-spotlight/30 hover:bg-spotlight hover:text-ink"
+        >
+          Approve
+        </button>
+      </div>
     </td>
     """
   end
