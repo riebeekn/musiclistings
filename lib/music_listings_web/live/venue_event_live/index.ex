@@ -6,7 +6,9 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    ok(socket)
+    socket
+    |> assign(:crawling?, false)
+    |> ok()
   end
 
   @impl true
@@ -74,6 +76,54 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
     end
   end
 
+  @impl true
+  def handle_event("crawl-venue", _params, socket) do
+    if socket.assigns.crawling? do
+      noreply(socket)
+    else
+      current_user = socket.assigns.current_user
+      venue_id = socket.assigns.venue.id
+
+      socket
+      |> assign(:crawling?, true)
+      |> start_async(:crawl, fn -> MusicListings.crawl_venue(current_user, venue_id) end)
+      |> noreply()
+    end
+  end
+
+  @impl true
+  def handle_async(:crawl, {:ok, result}, socket) do
+    paged_events =
+      MusicListings.list_events(
+        page: socket.assigns[:current_page],
+        venue_ids: [socket.assigns[:venue].id]
+      )
+
+    socket
+    |> assign(:crawling?, false)
+    |> assign(:events, paged_events.events)
+    |> crawl_flash(result)
+    |> noreply()
+  end
+
+  def handle_async(:crawl, {:exit, _reason}, socket) do
+    socket
+    |> assign(:crawling?, false)
+    |> put_flash(:error, "Crawl failed.")
+    |> noreply()
+  end
+
+  defp crawl_flash(socket, {:ok, summary}) do
+    put_flash(
+      socket,
+      :info,
+      "Crawl complete: #{summary.new} new, #{summary.updated} updated, #{summary.errors} error(s)"
+    )
+  end
+
+  defp crawl_flash(socket, {:error, :not_allowed}), do: put_flash(socket, :error, "Not allowed.")
+  defp crawl_flash(socket, _result), do: put_flash(socket, :error, "Crawl failed.")
+
   defparams :index do
     required(:venue_id, :integer, min: 1)
     optional(:page, :integer, min: 1, default: 1)
@@ -84,6 +134,14 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
     ~H"""
     <div class="mb-10">
       <.venue_card venue={@venue} />
+      <.when_admin current_user={@current_user}>
+        <div class="mt-4">
+          <.button phx-click="crawl-venue" disabled={@crawling?}>
+            <.icon name="hero-arrow-path" class={"size-4 #{if @crawling?, do: "animate-spin"}"} />
+            {if @crawling?, do: "Crawling…", else: "Crawl this venue"}
+          </.button>
+        </div>
+      </.when_admin>
     </div>
 
     <div class="mb-2 flex items-end gap-5">
