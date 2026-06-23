@@ -20,7 +20,7 @@ defmodule MusicListings.Venues do
 
     Venue
     |> join(:left, [venue], event in Event,
-      on: event.venue_id == venue.id and event.date >= ^today
+      on: event.venue_id == venue.id and event.date >= ^today and is_nil(event.deleted_at)
     )
     |> maybe_restrict_to_pulled_venues(restrict_to_pulled_venues?)
     |> maybe_restrict_to_venues_with_upcoming_events(only_with_upcoming_events?)
