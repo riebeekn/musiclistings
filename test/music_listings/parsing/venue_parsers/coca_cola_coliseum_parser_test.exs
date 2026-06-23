@@ -11,7 +11,11 @@ defmodule MusicListings.Parsing.VenueParsers.CocaColaColiseumParserTest do
     single_event_file_path =
       Path.expand("#{File.cwd!()}/test/data/coca_cola_coliseum/single_event.html")
 
+    no_events_file_path =
+      Path.expand("#{File.cwd!()}/test/data/coca_cola_coliseum/no_events.html")
+
     index_html = File.read!(index_file_path)
+    no_events_html = File.read!(no_events_file_path)
 
     event =
       single_event_file_path
@@ -19,12 +23,12 @@ defmodule MusicListings.Parsing.VenueParsers.CocaColaColiseumParserTest do
       |> CocaColaColiseumParser.events()
       |> List.first()
 
-    %{index_html: index_html, event: event}
+    %{index_html: index_html, no_events_html: no_events_html, event: event}
   end
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://www.coca-colacoliseum.com/events/events_ajax/0?category=0&venue=0&team=0&per_page=200&came_from_page=event-list-page" ==
+      assert "https://www.coca-colacoliseum.com/events/events_ajax/0" ==
                CocaColaColiseumParser.source_url()
     end
   end
@@ -38,8 +42,22 @@ defmodule MusicListings.Parsing.VenueParsers.CocaColaColiseumParserTest do
   end
 
   describe "next_page_url/2" do
-    test "returns the next page url", %{index_html: index_html} do
-      assert nil == CocaColaColiseumParser.next_page_url(index_html, nil)
+    test "returns the next page url advanced by the page's event count (incl. team rows)", %{
+      index_html: index_html
+    } do
+      assert "https://www.coca-colacoliseum.com/events/events_ajax/10" ==
+               CocaColaColiseumParser.next_page_url(
+                 index_html,
+                 "https://www.coca-colacoliseum.com/events/events_ajax/0"
+               )
+    end
+
+    test "returns nil when the page has no events", %{no_events_html: no_events_html} do
+      assert nil ==
+               CocaColaColiseumParser.next_page_url(
+                 no_events_html,
+                 "https://www.coca-colacoliseum.com/events/events_ajax/10"
+               )
     end
   end
 

@@ -7,7 +7,7 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParser do
   alias MusicListings.Parsing.VenueParsers.BaseParsers.CarbonhouseParser
 
   @impl true
-  def source_url, do: "https://www.historytoronto.com/events/events_ajax/0?per_page=200"
+  def source_url, do: "https://www.historytoronto.com/events/events_ajax/0"
 
   @impl true
   defdelegate retrieve_events_fun, to: CarbonhouseParser
@@ -16,7 +16,8 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParser do
   defdelegate events(body), to: CarbonhouseParser
 
   @impl true
-  defdelegate next_page_url(body, current_url), to: CarbonhouseParser
+  def next_page_url(body, current_url),
+    do: CarbonhouseParser.next_page_url_by_offset(body, current_url)
 
   @impl true
   defdelegate event_id(event), to: CarbonhouseParser

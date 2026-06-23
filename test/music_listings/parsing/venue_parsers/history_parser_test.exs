@@ -11,7 +11,10 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParserTest do
     single_event_file_path =
       Path.expand("#{File.cwd!()}/test/data/history/single_event.html")
 
+    no_events_file_path = Path.expand("#{File.cwd!()}/test/data/history/no_events.html")
+
     index_html = File.read!(index_file_path)
+    no_events_html = File.read!(no_events_file_path)
 
     event =
       single_event_file_path
@@ -19,12 +22,12 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParserTest do
       |> HistoryParser.events()
       |> List.first()
 
-    %{index_html: index_html, event: event}
+    %{index_html: index_html, no_events_html: no_events_html, event: event}
   end
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://www.historytoronto.com/events/events_ajax/0?per_page=200" ==
+      assert "https://www.historytoronto.com/events/events_ajax/0" ==
                HistoryParser.source_url()
     end
   end
@@ -38,8 +41,22 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParserTest do
   end
 
   describe "next_page_url/2" do
-    test "returns the next page url", %{index_html: index_html} do
-      assert nil == HistoryParser.next_page_url(index_html, nil)
+    test "returns the next page url advanced by the page's event count", %{
+      index_html: index_html
+    } do
+      assert "https://www.historytoronto.com/events/events_ajax/6" ==
+               HistoryParser.next_page_url(
+                 index_html,
+                 "https://www.historytoronto.com/events/events_ajax/0"
+               )
+    end
+
+    test "returns nil when the page has no events", %{no_events_html: no_events_html} do
+      assert nil ==
+               HistoryParser.next_page_url(
+                 no_events_html,
+                 "https://www.historytoronto.com/events/events_ajax/6"
+               )
     end
   end
 

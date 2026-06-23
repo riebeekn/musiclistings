@@ -39,6 +39,33 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.CarbonhouseParser do
     nil
   end
 
+  @doc """
+  Offset-based pagination for Carbonhouse `events_ajax/<offset>` endpoints.
+
+  The trailing path number is a row offset; an out-of-range offset returns an
+  empty page. We advance the offset by the actual number of `.eventItem` rows on
+  the current page and stop once a page comes back with no events.
+  """
+  def next_page_url_by_offset(body, current_url) do
+    event_count =
+      body
+      |> ParseHelpers.clean_html()
+      |> Selectors.all_matches(css(".eventItem"))
+      |> Enum.count()
+
+    if event_count == 0 do
+      nil
+    else
+      next_offset = current_offset(current_url) + event_count
+      String.replace(current_url, ~r{/events_ajax/\d+}, "/events_ajax/#{next_offset}")
+    end
+  end
+
+  defp current_offset(current_url) do
+    [_match, offset_string] = Regex.run(~r{/events_ajax/(\d+)}, current_url)
+    String.to_integer(offset_string)
+  end
+
   def event_id(event) do
     title = event_title(event)
     date = event_date(event)
