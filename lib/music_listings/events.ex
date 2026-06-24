@@ -22,7 +22,6 @@ defmodule MusicListings.Events do
           {:page, pos_integer()}
           | {:page_size, pos_integer()}
           | {:venue_ids, list(pos_integer())}
-          | {:order_by, list(atom())}
           | {:from_date, Date.t()}
           | {:sort_by, :title | :venue}
   @spec list_events(list(list_events_opts)) :: PagedEvents.t()
@@ -31,24 +30,48 @@ defmodule MusicListings.Events do
     page_size = Keyword.get(opts, :page_size, @default_page_size)
     venue_ids = Keyword.get(opts, :venue_ids, [])
     from_date = Keyword.get(opts, :from_date, nil)
-    order_by_fields = Keyword.get(opts, :order_by, [:date, :title])
     sort_by = Keyword.get(opts, :sort_by, :title)
 
     today = DateHelpers.effective_today_eastern()
     start_date = from_date || today
+    night_cutoff = DateHelpers.night_cutoff_time()
 
+    # Late-night shows (before the cutoff) belong to the previous night out, so
+    # we filter/order/group by that "night date".  Stored date/time stay true -
+    # see MusicListingsUtilities.DateHelpers.night_date/2.
     pagination_result =
       Event
-      |> where([event], event.date >= ^start_date)
+      |> where(
+        [event],
+        fragment(
+          "(? - (CASE WHEN ? IS NOT NULL AND ? < ? THEN 1 ELSE 0 END)) >= ?",
+          event.date,
+          event.time,
+          event.time,
+          ^night_cutoff,
+          ^start_date
+        )
+      )
       |> where([event], is_nil(event.deleted_at))
       |> maybe_filter_by_venues(venue_ids)
-      |> order_by(^order_by_fields)
+      |> order_by(
+        [event],
+        asc:
+          fragment(
+            "(? - (CASE WHEN ? IS NOT NULL AND ? < ? THEN 1 ELSE 0 END))",
+            event.date,
+            event.time,
+            event.time,
+            ^night_cutoff
+          ),
+        asc: event.title
+      )
       |> preload(:venue)
       |> Repo.paginate(page: page, page_size: page_size)
 
     grouped_events =
       pagination_result.entries
-      |> Enum.group_by(&{&1.date, &1.title})
+      |> Enum.group_by(&{night_date(&1), &1.title})
       |> Enum.map(fn {_key, events} -> build_event_info(events) end)
       |> Enum.group_by(& &1.date)
       |> Enum.map(fn {date, events} ->
@@ -150,10 +173,10 @@ defmodule MusicListings.Events do
           details_url: event.details_url
         }
       end)
-      |> Enum.sort_by(& &1.time)
+      |> Enum.sort_by(&DateHelpers.night_ordered_time_key(&1.time))
 
     %EventInfo{
-      date: first_show.date,
+      date: night_date(first_show),
       title: first_show.title,
       openers: first_show.openers,
       venue: first_show.venue,
@@ -166,6 +189,8 @@ defmodule MusicListings.Events do
       added_at: events |> Enum.map(& &1.inserted_at) |> Enum.min(DateTime)
     }
   end
+
+  defp night_date(event), do: DateHelpers.night_date(event.date, event.time)
 
   defp sort_key(event, :venue), do: event.venue.name
   defp sort_key(event, _title), do: event.title

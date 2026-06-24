@@ -96,6 +96,28 @@ defmodule MusicListings.EventsTest do
              } = Events.list_events()
     end
 
+    test "groups a pre-dawn show under the previous night, leaving stored dates untouched" do
+      Repo.delete_all(Event)
+      venue = insert(:venue)
+      insert(:event, venue: venue, date: ~D[2024-08-01], title: "Evening Set", time: ~T[22:00:00])
+      # 2:30am on Aug 2 is the tail end of the Aug 1 night out
+      late =
+        insert(:event, venue: venue, date: ~D[2024-08-02], title: "Late Set", time: ~T[02:30:00])
+
+      assert %PagedEvents{
+               events: [
+                 {~D[2024-08-01],
+                  [
+                    %EventInfo{title: "Evening Set", date: ~D[2024-08-01]},
+                    %EventInfo{title: "Late Set", date: ~D[2024-08-01]}
+                  ]}
+               ]
+             } = Events.list_events()
+
+      # the stored record keeps its true calendar date
+      assert ~D[2024-08-02] == Repo.reload(late).date
+    end
+
     test "can filter by venue", %{venue_1_id: venue_1_id} do
       assert %PagedEvents{
                current_page: 1,

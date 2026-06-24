@@ -3,7 +3,7 @@ defmodule MusicListings.Parsing.Price do
   Struct and functions to represent / parse an event prices
   """
   @type t :: %__MODULE__{
-          format: :fixed | :free | :range | :unknown | :variable,
+          format: :fixed | :free | :pwyc | :range | :unknown | :variable,
           lo: Decimal.t() | nil,
           hi: Decimal.t() | nil
         }
@@ -24,6 +24,9 @@ defmodule MusicListings.Parsing.Price do
 
       String.contains?(price_string, "free") ->
         %__MODULE__{format: :free, lo: nil, hi: nil}
+
+      String.contains?(price_string, "pwyc") ->
+        %__MODULE__{format: :pwyc, lo: nil, hi: nil}
 
       true ->
         variable_price? =
