@@ -134,6 +134,7 @@ defmodule MusicListingsWeb.SubmittedEventLive.Edit do
   end
 
   defp format_price_hint(%Price{format: :free}), do: "Free"
+  defp format_price_hint(%Price{format: :pwyc}), do: "Pay what you can"
   defp format_price_hint(%Price{format: :fixed, lo: lo}), do: "$#{lo}"
   defp format_price_hint(%Price{format: :variable, lo: lo}), do: "$#{lo}+"
   defp format_price_hint(%Price{format: :range, lo: lo, hi: hi}), do: "$#{lo} – $#{hi}"

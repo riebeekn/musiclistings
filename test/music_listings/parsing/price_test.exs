@@ -25,6 +25,11 @@ defmodule MusicListings.Parsing.PriceTest do
       assert %Price{lo: nil, hi: nil, format: :free} == Price.new("This event is Free!")
     end
 
+    test "handles pay what you can price" do
+      assert %Price{lo: nil, hi: nil, format: :pwyc} == Price.new("pwyc")
+      assert %Price{lo: nil, hi: nil, format: :pwyc} == Price.new("PWYC")
+    end
+
     test "cleans and parses price strings" do
       assert %Price{lo: Decimal.new("30.00"), hi: Decimal.new("50.00"), format: :range} ==
                Price.new("$30.00-$50.00 (plus service fees)")

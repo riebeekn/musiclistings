@@ -8,6 +8,10 @@ defmodule MusicListings.Crawler.EventParserTest do
   alias MusicListings.Parsing.VenueParsers.HistoryParser
   alias MusicListingsSchema.Venue
 
+  # Parse-error and ignored-event paths log expected warnings/errors. Capture
+  # them so they only surface when a test actually fails.
+  @moduletag :capture_log
+
   defmodule TestParserPerDate do
     @moduledoc false
     @behaviour MusicListings.Parsing.VenueParser

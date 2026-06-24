@@ -6,25 +6,24 @@ defmodule MusicListings.Parsing.VenueParsers.DromTabernaParserTest do
   alias MusicListings.Parsing.VenueParsers.DromTabernaParser
 
   setup do
-    index_file_path = Path.expand("#{File.cwd!()}/test/data/drom_taberna/index.json")
-
-    single_event_file_path =
-      Path.expand("#{File.cwd!()}/test/data/drom_taberna/single_event.json")
-
-    index_html = index_file_path |> File.read!() |> Jason.decode!()
+    index_html =
+      "#{File.cwd!()}/test/data/drom_taberna/index.html"
+      |> Path.expand()
+      |> File.read!()
 
     event =
-      single_event_file_path
+      "#{File.cwd!()}/test/data/drom_taberna/single_event.html"
+      |> Path.expand()
       |> File.read!()
-      |> Jason.decode!()
+      |> DromTabernaParser.events()
+      |> List.first()
 
     %{index_html: index_html, event: event}
   end
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://www.dromtaberna.com/api/open/GetItemsByMonth?month=8-2024&collectionId=62c7b220c14f6e5949312039&crumb=BQ4mS5WCnRzZOTgxYWRjMGUxZTk0Y2MzNjhkYTQ0NGU0ZDA2MGUy" ==
-               DromTabernaParser.source_url()
+      assert "https://www.dromtaberna.com/" == DromTabernaParser.source_url()
     end
   end
 
@@ -32,46 +31,31 @@ defmodule MusicListings.Parsing.VenueParsers.DromTabernaParserTest do
     test "returns expected events", %{index_html: index_html} do
       events = DromTabernaParser.events(index_html)
 
-      assert 30 = Enum.count(events)
+      assert 28 = Enum.count(events)
     end
   end
 
   describe "next_page_url/2" do
-    setup do
-      %{
-        next_page_url:
-          "https://www.dromtaberna.com/api/open/GetItemsByMonth?month=9-2024&collectionId=62c7b220c14f6e5949312039&crumb=BQ4mS5WCnRzZOTgxYWRjMGUxZTk0Y2MzNjhkYTQ0NGU0ZDA2MGUy"
-      }
-    end
-
-    test "returns the next page url", %{index_html: index_html, next_page_url: next_page_url} do
-      assert next_page_url == DromTabernaParser.next_page_url(index_html, nil)
-    end
-
-    test "returns nil when already processed the next page", %{
-      index_html: index_html,
-      next_page_url: next_page_url
-    } do
-      assert nil == DromTabernaParser.next_page_url(index_html, next_page_url)
+    test "returns nil", %{index_html: index_html} do
+      assert nil == DromTabernaParser.next_page_url(index_html, nil)
     end
   end
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "66b139dee8a36e6e382dbe0c" == DromTabernaParser.event_id(event)
+      assert "_events_james_margolis" == DromTabernaParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "66b139dee8a36e6e382dbe0c" == DromTabernaParser.ignored_event_id(event)
+      assert "_events_james_margolis" == DromTabernaParser.ignored_event_id(event)
     end
   end
 
   describe "event_title/1" do
     test "returns event title", %{event: event} do
-      assert "Polskatonic, Don Scott Trio, Dimitra Kahrimanidis, Sonic Sancocho" ==
-               DromTabernaParser.event_title(event)
+      assert "James Margolis" == DromTabernaParser.event_title(event)
     end
   end
 
@@ -86,7 +70,20 @@ defmodule MusicListings.Parsing.VenueParsers.DromTabernaParserTest do
 
   describe "event_date/1" do
     test "returns the event date", %{event: event} do
-      assert ~D[2024-09-01] == DromTabernaParser.event_date(event)
+      assert ~D[2025-06-23] == DromTabernaParser.event_date(event)
+    end
+
+    test "returns the true calendar date for a pre-dawn event", %{index_html: index_html} do
+      # Tamar Ilana is listed on Fri Jun 26 at 2:30am.  The parser records the
+      # true calendar date - grouping it under the previous night is a listing
+      # concern handled in MusicListings.Events.list_events/1.
+      tamar_ilana =
+        index_html
+        |> DromTabernaParser.events()
+        |> Enum.find(&(DromTabernaParser.event_title(&1) == "Tamar Ilana"))
+
+      assert ~T[02:30:00] == DromTabernaParser.event_time(tamar_ilana)
+      assert ~D[2025-06-26] == DromTabernaParser.event_date(tamar_ilana)
     end
   end
 
@@ -98,13 +95,13 @@ defmodule MusicListings.Parsing.VenueParsers.DromTabernaParserTest do
 
   describe "event_time/1" do
     test "returns the event start time", %{event: event} do
-      assert nil == DromTabernaParser.event_time(event)
+      assert ~T[17:30:00] == DromTabernaParser.event_time(event)
     end
   end
 
   describe "price/1" do
     test "returns the event price", %{event: event} do
-      assert %Price{format: :unknown, hi: nil, lo: nil} ==
+      assert %Price{format: :pwyc, lo: nil, hi: nil} ==
                DromTabernaParser.price(event)
     end
   end
@@ -123,7 +120,7 @@ defmodule MusicListings.Parsing.VenueParsers.DromTabernaParserTest do
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert "https://www.dromtaberna.com/events-9O8Cm/y65czs68393fz5y-h99yk-ykcj8" ==
+      assert "https://www.dromtaberna.com/events/james-margolis" ==
                DromTabernaParser.details_url(event)
     end
   end

@@ -6,53 +6,47 @@ defmodule MusicListings.Parsing.VenueParsers.DromTabernaParser do
 
   import Meeseeks.CSS
 
+  alias MusicListings.HttpClient
+  alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
+  alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.Selectors
-  alias MusicListings.Parsing.VenueParsers.BaseParsers.SquareSpaceJsonParser
 
   @base_url "https://www.dromtaberna.com"
-  @collection_id "62c7b220c14f6e5949312039"
-  @crumb "BQ4mS5WCnRzZOTgxYWRjMGUxZTk0Y2MzNjhkYTQ0NGU0ZDA2MGUy"
 
   @impl true
-  def source_url do
-    SquareSpaceJsonParser.source_url(@base_url, @collection_id, @crumb)
+  def source_url, do: "#{@base_url}/"
+
+  @impl true
+  def retrieve_events_fun do
+    fn url -> HttpClient.get(url) end
   end
-
-  @impl true
-  defdelegate retrieve_events_fun, to: SquareSpaceJsonParser
 
   @impl true
   def events(body) do
-    body
-    |> SquareSpaceJsonParser.events()
-    |> Enum.reject(fn content -> content["systemDataId"] == "PLACEHOLDER" end)
+    Selectors.all_matches(body, css(".home_events-list_item"))
   end
 
   @impl true
-  def next_page_url(_body, current_url) do
-    SquareSpaceJsonParser.next_page_url(current_url, @base_url, @collection_id, @crumb)
+  def next_page_url(_body, _current_url) do
+    nil
   end
 
   @impl true
-  defdelegate event_id(event), to: SquareSpaceJsonParser
+  def event_id(event) do
+    event
+    |> event_href()
+    |> ParseHelpers.replace_punctuation_and_spaces()
+  end
 
   @impl true
-  defdelegate ignored_event_id(event), to: SquareSpaceJsonParser
+  def ignored_event_id(event) do
+    event_id(event)
+  end
 
   @impl true
   def event_title(event) do
-    full_title =
-      event["excerpt"]
-      |> Selectors.all_matches(css("p"))
-      |> Selectors.text()
-      |> Enum.map_join(", ", & &1)
-
-    # strip out times from the title
-    time_regex = ~r/\b\d{1,2}\.\d{2}(?:\s*to\s*\d{1,2}\.\d{2})?\s*-\s*/
-
-    full_title
-    |> String.replace(time_regex, "")
+    Selectors.text(event, css(".home-events-list-artist"))
   end
 
   @impl true
@@ -61,27 +55,54 @@ defmodule MusicListings.Parsing.VenueParsers.DromTabernaParser do
   end
 
   @impl true
-  defdelegate event_date(event), to: SquareSpaceJsonParser
+  def event_date(event) do
+    month_string = Selectors.text(event, css(".all-events_month"))
+    day_string = Selectors.text(event, css(".date-large"))
+
+    {:ok, date} = ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
+
+    date
+  end
 
   @impl true
-  defdelegate additional_dates(event), to: SquareSpaceJsonParser
+  def additional_dates(_event) do
+    []
+  end
 
   @impl true
-  def event_time(_event) do
+  def event_time(event) do
+    case event
+         |> Selectors.text(css(".home-events_time"))
+         |> ParseHelpers.build_time_from_time_string() do
+      {:ok, time} -> time
+      {:error, _reason} -> nil
+    end
+  end
+
+  @impl true
+  def price(event) do
+    case Selectors.match_one(event, css(".text-block-16")) do
+      nil -> Price.unknown()
+      node -> node |> Selectors.text() |> Price.new()
+    end
+  end
+
+  @impl true
+  def age_restriction(_event) do
+    :unknown
+  end
+
+  @impl true
+  def ticket_url(_event) do
     nil
   end
 
   @impl true
-  defdelegate price(event), to: SquareSpaceJsonParser
-
-  @impl true
-  defdelegate age_restriction(event), to: SquareSpaceJsonParser
-
-  @impl true
-  defdelegate ticket_url(event), to: SquareSpaceJsonParser
-
-  @impl true
   def details_url(event) do
-    "https://www.dromtaberna.com#{event["fullUrl"]}"
+    "#{@base_url}#{event_href(event)}"
+  end
+
+  defp event_href(event) do
+    Selectors.url(event, css("a.link-block"))
   end
 end

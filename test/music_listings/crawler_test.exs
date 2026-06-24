@@ -7,6 +7,11 @@ defmodule MusicListings.CrawlerTest do
   alias MusicListingsSchema.CrawlError
   alias MusicListingsSchema.CrawlSummary
 
+  # Crawling unfixtured venue URLs through the test HTTP client logs expected
+  # errors/warnings (the stub returns {:error, :test_env}). Capture them so they
+  # only surface when a test actually fails.
+  @moduletag :capture_log
+
   describe "crawl_all/1" do
     test "returns :not_allowed for a non-admin user" do
       assert {:error, :not_allowed} == Crawler.crawl_all(%User{role: :regular_user})

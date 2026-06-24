@@ -893,7 +893,7 @@ defmodule MusicListingsWeb.CustomComponents do
   defp sort_events_by_time(events) do
     Enum.sort_by(events, fn event ->
       first_time = event.showtimes |> List.first() |> then(& &1.time)
-      {first_time || ~T[23:59:59], event.title}
+      {DateHelpers.night_ordered_time_key(first_time), event.title}
     end)
   end
 
