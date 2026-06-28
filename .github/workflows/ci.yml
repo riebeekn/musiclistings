@@ -496,7 +496,7 @@ jobs:
           persist-credentials: false
 
       - name: Setup AWS credentials
-        uses: aws-actions/configure-aws-credentials@e7f100cf4c008499ea8adda475de1042d6975c7b # v6.2.0
+        uses: aws-actions/configure-aws-credentials@254c19bd240aabef8777f48595e9d2d7b972184b # v6.2.1
         with:
           role-to-assume: ${{ vars.AWS_BUILD_ROLE }}
           aws-region: ${{ vars.AWS_REGION }}
@@ -562,7 +562,7 @@ jobs:
       contents: read
     steps:
       - name: Setup AWS credentials
-        uses: aws-actions/configure-aws-credentials@e7f100cf4c008499ea8adda475de1042d6975c7b # v6.2.0
+        uses: aws-actions/configure-aws-credentials@254c19bd240aabef8777f48595e9d2d7b972184b # v6.2.1
         with:
           role-to-assume: "arn:aws:iam::${{ vars.AWS_ACCOUNT_ID }}:role/github-actions-ecs-${{vars.AWS_SERVICE_NAME_PREFIX}}-${{ matrix.environment }}"
           aws-region: ${{ vars.AWS_REGION }}
