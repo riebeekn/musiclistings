@@ -57,7 +57,7 @@ jobs:
       # Step: Define how to cache deps. Restores existing cache if present.
       - name: Cache deps
         id: cache-deps
-        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         env:
           cache-name: cache-elixir-deps
         with:
@@ -71,7 +71,7 @@ jobs:
       # project's downloaded deps every run.
       - name: Cache compiled build
         id: cache-build
-        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         env:
           cache-name: cache-compiled-build
         with:
@@ -115,7 +115,7 @@ jobs:
       # Step: Grab deps from cache (as the deps cache is populated in the "build" job)
       - name: Cache deps
         id: cache-deps
-        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         env:
           cache-name: cache-elixir-deps
         with:
@@ -127,7 +127,7 @@ jobs:
       # Step: Grab the compiled build from the cache (as the build cache is populated in the "build" job)
       - name: Cache compiled build
         id: cache-build
-        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         env:
           cache-name: cache-compiled-build
         with:
@@ -140,7 +140,7 @@ jobs:
       # Step: Grab the compiled build from the cache (as the build cache is populated in the "build" job)
       - name: Cache compiled build
         id: cache-dialyzer
-        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         env:
           cache-name: cache-dialyzer
         with:
@@ -175,7 +175,7 @@ jobs:
       # Step: Grab deps from cache (as the deps cache is populated in the "build" job)
       - name: Cache deps
         id: cache-deps
-        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         env:
           cache-name: cache-elixir-deps
         with:
@@ -187,7 +187,7 @@ jobs:
       # Step: Grab the compiled build from the cache (as the build cache is populated in the "build" job)
       - name: Cache compiled build
         id: cache-build
-        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         env:
           cache-name: cache-compiled-build
         with:
@@ -265,7 +265,7 @@ jobs:
       # Step: Grab deps from cache (as the deps cache is populated in the "build" job)
       - name: Cache deps
         id: cache-deps
-        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         env:
           cache-name: cache-elixir-deps
         with:
@@ -277,7 +277,7 @@ jobs:
       # Step: Grab the compiled build from the cache (as the build cache is populated in the "build" job)
       - name: Cache compiled build
         id: cache-build
-        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         env:
           cache-name: cache-compiled-build
         with:
