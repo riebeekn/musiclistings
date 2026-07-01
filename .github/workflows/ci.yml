@@ -15,7 +15,7 @@ env:
   CRAWL_AND_EXIT: false
 
 # Default least-privilege permissions for all jobs. Jobs that need more
-# (e.g. OIDC for AWS) grant it at the job level.
+# grant it at the job level.
 permissions:
   contents: read
 
@@ -294,29 +294,11 @@ jobs:
           mix ecto.migrate
           mix coveralls
 
-  # Deploy to Fly
-  deploy_to_fly:
-    runs-on: ubuntu-latest
-    needs: [audit, test]
-    name: Deploy to Fly
-    if: github.ref == 'refs/heads/main' && vars.DEPLOY_TO_FLY == 'true'
-
-    steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          persist-credentials: false
-      - uses: superfly/flyctl-actions/setup-flyctl@ed8efb33836e8b2096c7fd3ba1c8afe303ebbff1 # 1.6
-      - run: flyctl deploy --remote-only
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-          HOSTING_PLATFORM: "fly"
-
   # Deploy to Render
   setup_render_ws_deploy_matrix:
     runs-on: ubuntu-latest
     name: "Setup Render WS Matrix"
     needs: [audit, test]
-    if: vars.DEPLOY_TO_RENDER == 'true'
     outputs:
       matrix: ${{ steps.setup_render_ws_deploy_matrix.outputs.matrix_output }}
     steps:
@@ -329,7 +311,6 @@ jobs:
     runs-on: ubuntu-latest
     name: "Setup Render CRON Matrix"
     needs: [audit, test]
-    if: vars.DEPLOY_TO_RENDER == 'true'
     outputs:
       matrix: ${{ steps.setup_render_cron_deploy_matrix.outputs.matrix_output }}
     steps:
@@ -346,7 +327,6 @@ jobs:
     needs:
       - setup_render_ws_deploy_matrix
     name: "Deploy WS to Render"
-    if: vars.DEPLOY_TO_RENDER == 'true'
 
     steps:
       - name: Extract service id
@@ -418,7 +398,6 @@ jobs:
     needs:
       - setup_render_cron_deploy_matrix
     name: "Deploy CRON to Render"
-    if: vars.DEPLOY_TO_RENDER == 'true'
 
     steps:
       - name: Extract service id
@@ -481,144 +460,3 @@ jobs:
             esac
             sleep 10
           done
-
-  # AWS specific steps
-  build_and_push_to_ecr:
-    runs-on: ubuntu-latest
-    needs: [audit, test]
-    name: "Build and Push Image to ECR"
-    if: vars.DEPLOY_TO_AWS == 'true'
-    permissions:
-      id-token: write # Required for AWS OIDC role assumption
-      contents: read
-    outputs:
-      aws_region: ${{ vars.AWS_REGION }}
-      docker_image: ${{ steps.ecr-login.outputs.registry }}/${{ vars.AWS_ECR_REPO }}@${{ steps.docker-build.outputs.digest }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          persist-credentials: false
-
-      - name: Setup AWS credentials
-        uses: aws-actions/configure-aws-credentials@e7f100cf4c008499ea8adda475de1042d6975c7b # v6.2.0
-        with:
-          role-to-assume: ${{ vars.AWS_BUILD_ROLE }}
-          aws-region: ${{ vars.AWS_REGION }}
-
-      - name: Login to AWS repository
-        id: ecr-login
-        uses: aws-actions/amazon-ecr-login@d539f0932e70871a027e9d5a9d8fc38589180a64 # v2.1.6
-        with:
-          mask-password: "true"
-
-      - name: Get branch name
-        id: branch-name
-        uses: tj-actions/branch-names@5250492686b253f06fa55861556d1027b067aeb5 # v9.0.2
-
-      - name: Build image metadata
-        id: meta
-        uses: docker/metadata-action@80c7e94dd9b9319bd5eb7a0e0fe9291e23a2a2e9 # v6.1.0
-        with:
-          images: ${{ steps.ecr-login.outputs.registry }}/${{ vars.AWS_ECR_REPO }}
-          # The release will be tagged with the branch and the short git sha (and latest if on main)
-          tags: |
-            type=sha,prefix=${{steps.branch-name.outputs.current_branch}}-
-            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
-
-      - name: Build, tag, and push to ECR
-        id: docker-build
-        uses: docker/build-push-action@f9f3042f7e2789586610d6e8b85c8f03e5195baf # v7.2.0
-        with:
-          context: .
-          # Replace this if the dockerfile is at a different path
-          file: Dockerfile
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-
-  setup_matrix:
-    runs-on: ubuntu-latest
-    name: "Setup AWS Matrix"
-    needs: [audit, test, build_and_push_to_ecr]
-    if: vars.DEPLOY_TO_AWS == 'true'
-    outputs:
-      matrix: ${{ steps.setup_matrix.outputs.matrix_output }}
-    steps:
-      - id: setup_matrix
-        uses: cschadewitz/dynamic-matrix-input@11ef22d593b07df75ad67ad270090b4cef96a0dc # v1.0.0
-        with:
-          matrix_input: ${{ vars.AWS_ENVIRONMENTS }}
-
-  deploy_to_aws:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        environment: ${{ fromJson(needs.setup_matrix.outputs.matrix) }}
-    env:
-      DOCKER_IMAGE: ${{ needs.build_and_push_to_ecr.outputs.docker_image }}
-    needs:
-      - setup_matrix
-      - build_and_push_to_ecr
-    name: "Deploy to ECS"
-    if: vars.DEPLOY_TO_AWS == 'true'
-    permissions:
-      id-token: write # Required for AWS OIDC role assumption
-      contents: read
-    steps:
-      - name: Setup AWS credentials
-        uses: aws-actions/configure-aws-credentials@e7f100cf4c008499ea8adda475de1042d6975c7b # v6.2.0
-        with:
-          role-to-assume: "arn:aws:iam::${{ vars.AWS_ACCOUNT_ID }}:role/github-actions-ecs-${{vars.AWS_SERVICE_NAME_PREFIX}}-${{ matrix.environment }}"
-          aws-region: ${{ vars.AWS_REGION }}
-
-      - name: Skip non-main branch for prod
-        if: matrix.environment == 'prod' && github.ref_name != 'main'
-        run: echo "Skipping prod deployment because the branch is not main."
-        continue-on-error: true
-
-      # This will download the task definition template managed by Terraform
-      # and modify the family and image attributes.
-      - name: Build ECS task definition
-        if: matrix.environment != 'prod' || github.ref_name == 'main'
-        env:
-          SERVICE_PREFIX: ${{ vars.AWS_SERVICE_NAME_PREFIX }}
-          ENVIRONMENT: ${{ matrix.environment }}
-        run: |
-          aws ecs describe-task-definition --task-definition "${SERVICE_PREFIX}-${ENVIRONMENT}-template" --query taskDefinition > task-definition.json
-          jq --arg family "${SERVICE_PREFIX}-${ENVIRONMENT}" --arg image "$DOCKER_IMAGE" \
-            '.family=$family | .containerDefinitions[0].image=$image' \
-            task-definition.json > task-definition.tmp.json
-          mv task-definition.tmp.json task-definition.json
-
-      - name: Build CodeDeploy app spec
-        if: matrix.environment != 'prod' || github.ref_name == 'main'
-        env:
-          SERVICE_PREFIX: ${{ vars.AWS_SERVICE_NAME_PREFIX }}
-          ENVIRONMENT: ${{ matrix.environment }}
-        run: |
-          cat <<SPEC >> apps-spec.yaml
-
-          version: 1
-
-          Resources:
-            - TargetService:
-                Type: AWS::ECS::Service
-                Properties:
-                  TaskDefinition: "Placeholder: GitHub Actions will fill this in"
-                  LoadBalancerInfo:
-                    ContainerName: "${SERVICE_PREFIX}-${ENVIRONMENT}"
-                    ContainerPort: 4000
-          SPEC
-
-      - name: Deploy container
-        if: matrix.environment != 'prod' || github.ref_name == 'main'
-        uses: aws-actions/amazon-ecs-deploy-task-definition@a310a830f5c14e583e35d84e4e1ec7dd177c3c9c # v2.6.2
-        with:
-          task-definition: task-definition.json
-          cluster: ${{vars.AWS_SERVICE_NAME_PREFIX}}-${{ matrix.environment }}
-          service: ${{vars.AWS_SERVICE_NAME_PREFIX}}-${{ matrix.environment }}
-          codedeploy-appspec: apps-spec.yaml
-          codedeploy-application: ${{vars.AWS_SERVICE_NAME_PREFIX}}-${{ matrix.environment }}
-          codedeploy-deployment-group: ${{vars.AWS_SERVICE_NAME_PREFIX}}-${{ matrix.environment }}
-          wait-for-service-stability: true
