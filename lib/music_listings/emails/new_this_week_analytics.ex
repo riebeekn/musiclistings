@@ -10,7 +10,9 @@ defmodule MusicListings.Emails.NewThisWeekAnalytics do
 
   @shown "new_this_week.shown"
   @card_click "new_this_week.card_click"
-  @ticket_click "new_this_week.ticket_click"
+  @detail_ticket_click "event.ticket_click"
+  @detail_ticket_shown "event.ticket_link_shown"
+  @rail_ref "new_this_week"
 
   def new_email(report) do
     new()
@@ -30,14 +32,22 @@ defmodule MusicListings.Emails.NewThisWeekAnalytics do
   defp mjml(assigns) do
     report = assigns.report
 
+    this_conversions = Map.get(report, :this_week_conversions, %{})
+    prior_conversions = Map.get(report, :prior_week_conversions, %{})
+
     assigns =
       assigns
       |> Map.put(:this_shown, count(report.this_week, @shown))
       |> Map.put(:this_card, count(report.this_week, @card_click))
-      |> Map.put(:this_ticket, count(report.this_week, @ticket_click))
       |> Map.put(:prior_shown, count(report.prior_week, @shown))
       |> Map.put(:prior_card, count(report.prior_week, @card_click))
-      |> Map.put(:prior_ticket, count(report.prior_week, @ticket_click))
+      # Rail conversion funnel: card click on the rail → ticket click on the
+      # detail page (attributed via ?ref=new_this_week).
+      |> Map.put(:this_rail_conv, count(this_conversions, @rail_ref))
+      |> Map.put(:prior_rail_conv, count(prior_conversions, @rail_ref))
+      # Overall detail-page ticket engagement (all referrers).
+      |> Map.put(:this_detail_ticket, count(report.this_week, @detail_ticket_click))
+      |> Map.put(:this_detail_shown, count(report.this_week, @detail_ticket_shown))
 
     ~H"""
     <.h1>New This Week — Rail Traction</.h1>
@@ -50,11 +60,10 @@ defmodule MusicListings.Emails.NewThisWeekAnalytics do
     <.stat_band>
       <:stat label="Views" accent="spotlight">{@this_shown}</:stat>
       <:stat label="Card clicks">{@this_card}</:stat>
-      <:stat label="Ticket clicks">{@this_ticket}</:stat>
     </.stat_band>
 
     <.muted>
-      Card CTR {ctr(@this_card, @this_shown)} · Ticket CTR {ctr(@this_ticket, @this_shown)} · vs prior 7 days below
+      Card CTR {ctr(@this_card, @this_shown)} · vs prior 7 days below
     </.muted>
 
     <.h2>This week vs prior week</.h2>
@@ -70,14 +79,29 @@ defmodule MusicListings.Emails.NewThisWeekAnalytics do
       </:col>
       <:col :let={row} label="Change">{change_cell(row.this, row.prior)}</:col>
     </.table>
+
+    <.h2>Rail conversions</.h2>
+    <.muted>
+      Full funnel: Rail card click → Ticket click on the event details page
+    </.muted>
+
+    <.stat_band>
+      <:stat label="Card clicks">{@this_card}</:stat>
+      <:stat label="Ticket clicks" accent="spotlight">{@this_rail_conv}</:stat>
+      <:stat label="Conversion">{ctr(@this_rail_conv, @this_card)}</:stat>
+    </.stat_band>
+
+    <.muted>
+      Rail conversions {change_cell(@this_rail_conv, @prior_rail_conv)} vs prior 7 days · Overall
+      event-page ticket CTR {ctr(@this_detail_ticket, @this_detail_shown)} ({@this_detail_ticket} of {@this_detail_shown} pages where a ticket link was shown)
+    </.muted>
     """
   end
 
   defp metric_rows(assigns) do
     [
       %{label: "Views", this: assigns.this_shown, prior: assigns.prior_shown},
-      %{label: "Card clicks", this: assigns.this_card, prior: assigns.prior_card},
-      %{label: "Ticket clicks", this: assigns.this_ticket, prior: assigns.prior_ticket}
+      %{label: "Card clicks", this: assigns.this_card, prior: assigns.prior_card}
     ]
   end
 
@@ -122,13 +146,17 @@ defmodule MusicListings.Emails.NewThisWeekAnalytics do
       this_week: %{
         @shown => 412,
         @card_click => 63,
-        @ticket_click => 21
+        @detail_ticket_click => 74,
+        @detail_ticket_shown => 190
       },
       prior_week: %{
         @shown => 349,
         @card_click => 58,
-        @ticket_click => 22
-      }
+        @detail_ticket_click => 61,
+        @detail_ticket_shown => 170
+      },
+      this_week_conversions: %{@rail_ref => 18, nil => 56},
+      prior_week_conversions: %{@rail_ref => 14, nil => 47}
     }
     |> new_email()
   end

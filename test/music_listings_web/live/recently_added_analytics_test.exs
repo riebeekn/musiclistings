@@ -69,18 +69,49 @@ defmodule MusicListingsWeb.RecentlyAddedAnalyticsTest do
     end
   end
 
-  describe "ticket click" do
-    test "is recorded when the rail Tickets link is clicked", %{conn: conn, event: event} do
-      FunWithFlags.enable(:show_recently_added)
+  describe "detail-page ticket link shown impression" do
+    test "records an impression carrying the ref when the event has a ticket link",
+         %{conn: conn, event: event} do
+      {:ok, _view, _html} =
+        live(conn, "/events/#{event.id}/freshly-added-show?ref=new_this_week")
 
-      {:ok, view, _html} = live(conn, ~p"/events")
+      assert [shown] = rows("event.ticket_link_shown")
+      assert shown.metadata["event_id"] == to_string(event.id)
+      assert shown.metadata["ref"] == "new_this_week"
+    end
+
+    test "records no impression when the event has no ticket link", %{conn: conn} do
+      event = insert(:event, ticket_url: nil, title: "No Tickets Show")
+
+      {:ok, _view, _html} = live(conn, ~p"/events/#{event.id}/no-tickets-show")
+
+      assert rows("event.ticket_link_shown") == []
+    end
+  end
+
+  describe "detail-page ticket click" do
+    test "records a click attributed to the rail referrer", %{conn: conn, event: event} do
+      {:ok, view, _html} =
+        live(conn, "/events/#{event.id}/freshly-added-show?ref=new_this_week")
 
       view
-      |> element("a[phx-click='recently_added_ticket_click']")
+      |> element("a[phx-click='event_ticket_click']")
       |> render_click()
 
-      assert [click] = rows("new_this_week.ticket_click")
+      assert [click] = rows("event.ticket_click")
       assert click.metadata["event_id"] == to_string(event.id)
+      assert click.metadata["ref"] == "new_this_week"
+    end
+
+    test "records a nil ref for a direct (non-rail) visit", %{conn: conn, event: event} do
+      {:ok, view, _html} = live(conn, ~p"/events/#{event.id}/freshly-added-show")
+
+      view
+      |> element("a[phx-click='event_ticket_click']")
+      |> render_click()
+
+      assert [click] = rows("event.ticket_click")
+      assert click.metadata["ref"] == nil
     end
   end
 end

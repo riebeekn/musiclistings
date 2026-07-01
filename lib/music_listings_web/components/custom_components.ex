@@ -1196,6 +1196,8 @@ defmodule MusicListingsWeb.CustomComponents do
         class="inline-flex h-9 items-center justify-center gap-x-2 rounded bg-spotlight px-4 font-mono text-xs font-medium uppercase tracking-widest text-ink transition-colors hover:bg-spotlight-deep"
         target="_blank"
         rel="noopener sponsored"
+        phx-click="event_ticket_click"
+        phx-value-id={@event.id}
       >
         <MusicListingsWeb.CoreComponents.icon name="hero-ticket-solid" class="size-4" /> Get Tickets
       </a>
@@ -1354,9 +1356,6 @@ defmodule MusicListingsWeb.CustomComponents do
   attr :event, :any, required: true
 
   defp recently_added_card(assigns) do
-    assigns =
-      assign(assigns, :ticket_url, Enum.find_value(assigns.event.showtimes, & &1.ticket_url))
-
     ~H"""
     <article class="group w-60 shrink-0 snap-start border border-hairline bg-ink-2/40 p-4 transition-colors hover:border-paper-dim hover:bg-ink-2 sm:w-64">
       <p class="kicker truncate text-paper-dim">{@event.venue.name}</p>
@@ -1376,17 +1375,6 @@ defmodule MusicListingsWeb.CustomComponents do
         <span :if={@event.added_at} class="kicker text-paper-dim">
           {DateHelpers.added_ago_in_words(@event.added_at)}
         </span>
-        <a
-          :if={@ticket_url}
-          href={MusicListings.Affiliate.maybe_wrap_affiliate_link(@ticket_url)}
-          target="_blank"
-          rel="noopener sponsored"
-          phx-click="recently_added_ticket_click"
-          phx-value-id={List.first(@event.showtimes).event_id}
-          class="inline-flex items-center gap-1 font-mono text-[0.7rem] uppercase tracking-wider text-spotlight bg-spotlight/10 ring-1 ring-inset ring-spotlight/30 px-2.5 py-0.5 transition-colors hover:bg-spotlight/20"
-        >
-          <MusicListingsWeb.CoreComponents.icon name="hero-ticket-solid" class="size-3" /> Tickets
-        </a>
       </div>
     </article>
     """

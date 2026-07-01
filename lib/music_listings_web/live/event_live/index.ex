@@ -244,16 +244,6 @@ defmodule MusicListingsWeb.EventLive.Index do
   end
 
   @impl true
-  def handle_event("recently_added_ticket_click", %{"id" => event_id}, socket) do
-    :telemetry.execute(
-      [:music_listings, :new_this_week, :ticket_click],
-      %{},
-      %{event_id: event_id}
-    )
-
-    noreply(socket)
-  end
-
   def handle_event(
         "delete-event",
         %{"id" => event_id},

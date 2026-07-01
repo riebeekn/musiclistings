@@ -58,6 +58,27 @@ defmodule MusicListings.AnalyticsTest do
     end
   end
 
+  describe "ref_counts_between/3" do
+    test "counts a single event name split by its metadata ref within the window" do
+      record_at("event.ticket_click", ~U[2024-07-28 12:00:00Z], %{"ref" => "new_this_week"})
+      record_at("event.ticket_click", ~U[2024-07-29 12:00:00Z], %{"ref" => "new_this_week"})
+      record_at("event.ticket_click", ~U[2024-07-30 12:00:00Z], %{"ref" => nil})
+      # different event name — ignored
+      record_at("new_this_week.card_click", ~U[2024-07-30 12:00:00Z], %{})
+      # outside the window — ignored
+      record_at("event.ticket_click", ~U[2024-07-01 12:00:00Z], %{"ref" => "new_this_week"})
+
+      counts =
+        Analytics.ref_counts_between(
+          "event.ticket_click",
+          ~U[2024-07-25 00:00:00Z],
+          ~U[2024-08-01 00:00:00Z]
+        )
+
+      assert counts == %{"new_this_week" => 2, nil => 1}
+    end
+  end
+
   describe "weekly_rail_traction/1" do
     test "buckets events into trailing and prior 7-day windows" do
       reference = ~U[2024-08-01 12:00:00Z]
@@ -66,9 +87,12 @@ defmodule MusicListings.AnalyticsTest do
       record_at("new_this_week.shown", ~U[2024-07-26 12:00:00Z])
       record_at("new_this_week.shown", ~U[2024-07-30 12:00:00Z])
       record_at("new_this_week.card_click", ~U[2024-07-30 12:00:00Z])
+      record_at("event.ticket_click", ~U[2024-07-30 12:00:00Z], %{"ref" => "new_this_week"})
+      record_at("event.ticket_click", ~U[2024-07-31 12:00:00Z], %{"ref" => nil})
 
       # prior week: [2024-07-18 12:00, 2024-07-25 12:00)
       record_at("new_this_week.shown", ~U[2024-07-20 12:00:00Z])
+      record_at("event.ticket_click", ~U[2024-07-20 12:00:00Z], %{"ref" => "new_this_week"})
 
       # outside both windows
       record_at("new_this_week.shown", ~U[2024-07-10 12:00:00Z])
@@ -78,8 +102,16 @@ defmodule MusicListings.AnalyticsTest do
       assert report.period_end == reference
       assert report.this_week_start == ~U[2024-07-25 12:00:00Z]
       assert report.prior_week_start == ~U[2024-07-18 12:00:00Z]
-      assert report.this_week == %{"new_this_week.shown" => 2, "new_this_week.card_click" => 1}
-      assert report.prior_week == %{"new_this_week.shown" => 1}
+
+      assert report.this_week == %{
+               "new_this_week.shown" => 2,
+               "new_this_week.card_click" => 1,
+               "event.ticket_click" => 2
+             }
+
+      assert report.prior_week == %{"new_this_week.shown" => 1, "event.ticket_click" => 1}
+      assert report.this_week_conversions == %{"new_this_week" => 1, nil => 1}
+      assert report.prior_week_conversions == %{"new_this_week" => 1}
     end
   end
 
@@ -108,18 +140,34 @@ defmodule MusicListings.AnalyticsTest do
                Repo.all(AnalyticsEvent)
     end
 
-    test "ticket_click event stores the event id" do
+    test "detail-page ticket_link_shown event stores the event id and ref" do
       TelemetryHandler.handle_event(
-        [:music_listings, :new_this_week, :ticket_click],
+        [:music_listings, :event, :ticket_link_shown],
         %{},
-        %{event_id: "42"},
+        %{event_id: "42", ref: "new_this_week"},
         nil
       )
 
       assert [
                %AnalyticsEvent{
-                 name: "new_this_week.ticket_click",
-                 metadata: %{"event_id" => "42"}
+                 name: "event.ticket_link_shown",
+                 metadata: %{"event_id" => "42", "ref" => "new_this_week"}
+               }
+             ] = Repo.all(AnalyticsEvent)
+    end
+
+    test "detail-page ticket_click event stores the event id and a nil ref for direct visits" do
+      TelemetryHandler.handle_event(
+        [:music_listings, :event, :ticket_click],
+        %{},
+        %{event_id: "42", ref: nil},
+        nil
+      )
+
+      assert [
+               %AnalyticsEvent{
+                 name: "event.ticket_click",
+                 metadata: %{"event_id" => "42", "ref" => nil}
                }
              ] = Repo.all(AnalyticsEvent)
     end
@@ -127,7 +175,7 @@ defmodule MusicListings.AnalyticsTest do
 
   # Inserts an analytics event stamped at a specific `inserted_at` (record_event/2
   # always stamps "now", so we set the timestamp explicitly for window tests).
-  defp record_at(name, %DateTime{} = inserted_at) do
-    Repo.insert!(%AnalyticsEvent{name: name, metadata: %{}, inserted_at: inserted_at})
+  defp record_at(name, %DateTime{} = inserted_at, metadata \\ %{}) do
+    Repo.insert!(%AnalyticsEvent{name: name, metadata: metadata, inserted_at: inserted_at})
   end
 end

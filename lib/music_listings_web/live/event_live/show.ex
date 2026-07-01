@@ -14,7 +14,10 @@ defmodule MusicListingsWeb.EventLive.Show do
       canonical_slug = SEO.event_slug(event)
 
       if params["slug"] == canonical_slug do
+        maybe_track_ticket_link_shown(socket, event, params)
+
         socket
+        |> assign(:ref, params["ref"])
         |> assign_event_seo(event)
         |> ok()
       else
@@ -23,6 +26,21 @@ defmodule MusicListingsWeb.EventLive.Show do
     else
       _error -> raise Ecto.NoResultsError, queryable: MusicListingsSchema.Event
     end
+  end
+
+  # Fired when the "Get Tickets" button on the detail page is clicked. The `ref`
+  # assign (captured in mount from ?ref=) distinguishes rail-referred visits
+  # ("new_this_week") from direct ones, letting us measure the rail conversion
+  # funnel: card_click (arrival) → ticket_click (this event).
+  @impl true
+  def handle_event("event_ticket_click", %{"id" => event_id}, socket) do
+    :telemetry.execute(
+      [:music_listings, :event, :ticket_click],
+      %{},
+      %{event_id: event_id, ref: socket.assigns[:ref]}
+    )
+
+    noreply(socket)
   end
 
   defparams :show do
@@ -45,6 +63,23 @@ defmodule MusicListingsWeb.EventLive.Show do
   end
 
   defp maybe_track_recently_added_click(_socket, _params), do: :ok
+
+  # Records that a ticket link was actually presented on the detail page (fires
+  # only when the event has a ticket_url). Paired with the event.ticket_click
+  # event, this gives an overall detail-page ticket CTR; the `ref` also lets us
+  # split rail-referred impressions from direct ones. Guarded on connected?/1 so
+  # it counts once per page view, mirroring maybe_track_recently_added_click/2.
+  defp maybe_track_ticket_link_shown(socket, event, params) do
+    if connected?(socket) and is_binary(event.ticket_url) do
+      :telemetry.execute(
+        [:music_listings, :event, :ticket_link_shown],
+        %{},
+        %{event_id: to_string(event.id), ref: params["ref"]}
+      )
+    end
+
+    :ok
+  end
 
   defp assign_event_seo(socket, event) do
     canonical_path = SEO.event_path(event)

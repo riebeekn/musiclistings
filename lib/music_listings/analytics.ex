@@ -54,17 +54,42 @@ defmodule MusicListings.Analytics do
   end
 
   @doc """
+  Like `counts_between/2`, but for a single event `name`, split by the value of
+  the `ref` key in each event's `metadata`. Returns a map of `ref => count`
+  (events with no `ref` are grouped under the `nil` key). Used to attribute
+  `event.ticket_click`s to their referrer — e.g. how many came from the
+  "New This Week" rail (`ref == "new_this_week"`) versus direct visits.
+  """
+  @spec ref_counts_between(String.t(), DateTime.t(), DateTime.t()) ::
+          %{optional(String.t() | nil) => non_neg_integer()}
+  def ref_counts_between(name, %DateTime{} = from, %DateTime{} = to) when is_binary(name) do
+    AnalyticsEvent
+    |> where([event], event.name == ^name)
+    |> where([event], event.inserted_at >= ^from and event.inserted_at < ^to)
+    |> group_by([event], fragment("?->>'ref'", event.metadata))
+    |> select([event], {fragment("?->>'ref'", event.metadata), count(event.id)})
+    |> Repo.all()
+    |> Map.new()
+  end
+
+  @doc """
   Builds the data for the weekly "New This Week" rail traction email: event
   counts for the trailing 7 days (`this_week`) alongside the preceding 7 days
   (`prior_week`) for a period-over-period comparison. Windows are rolling
   (relative to `reference`), not calendar-aligned.
+
+  `*_conversions` hold `event.ticket_click` counts split by referrer (see
+  `ref_counts_between/3`) so the email can report the rail conversion funnel
+  (card click on the rail → ticket click on the detail page).
   """
   @spec weekly_rail_traction(DateTime.t()) :: %{
           period_end: DateTime.t(),
           this_week_start: DateTime.t(),
           prior_week_start: DateTime.t(),
           this_week: %{optional(String.t()) => non_neg_integer()},
-          prior_week: %{optional(String.t()) => non_neg_integer()}
+          prior_week: %{optional(String.t()) => non_neg_integer()},
+          this_week_conversions: %{optional(String.t() | nil) => non_neg_integer()},
+          prior_week_conversions: %{optional(String.t() | nil) => non_neg_integer()}
         }
   def weekly_rail_traction(reference \\ DateHelpers.now()) do
     this_week_start = DateTime.add(reference, -7, :day)
@@ -75,7 +100,10 @@ defmodule MusicListings.Analytics do
       this_week_start: this_week_start,
       prior_week_start: prior_week_start,
       this_week: counts_between(this_week_start, reference),
-      prior_week: counts_between(prior_week_start, this_week_start)
+      prior_week: counts_between(prior_week_start, this_week_start),
+      this_week_conversions: ref_counts_between("event.ticket_click", this_week_start, reference),
+      prior_week_conversions:
+        ref_counts_between("event.ticket_click", prior_week_start, this_week_start)
     }
   end
 end
