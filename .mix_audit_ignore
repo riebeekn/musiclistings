@@ -6,3 +6,14 @@
 # through 2.16.1 as of 2026-05-18).
 # Revisit: 2026-08-18 (or sooner when a fixed cowlib is published).
 GHSA-g2wm-735q-3f56
+
+# hackney 1.25.0 pulled in transitively; patched in 4.0.1 but capped below 2.0
+# by httpoison (~> 1.21) and tzdata (~> 1.17). Only used to fetch known,
+# non-user-controlled URLs (venue pages, tz database, email/error reporting),
+# so the CRLF-injection / SSRF-bypass vectors aren't reachable and the SSL
+# post-handshake timeout is a low-severity DoS.
+# Revisit: 2026-10-01 (or when httpoison/tzdata allow hackney 4.x).
+GHSA-gp9c-pm5m-5cxr
+GHSA-j9wq-vxxc-94wf
+GHSA-mp55-p8c9-rfw2
+GHSA-pj7v-xfvx-wmjq
