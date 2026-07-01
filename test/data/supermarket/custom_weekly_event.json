@@ -1,0 +1,37 @@
+{
+  "id": "custom-weekly-active-0001",
+  "name": "Drinkin' & Thinkin' Trivia",
+  "start": {
+    "type": "datetime",
+    "date": "2024-06-03",
+    "time": "19:30"
+  },
+  "end": {
+    "type": "datetime",
+    "date": "2024-06-03",
+    "time": "22:00"
+  },
+  "timeZone": "US/Eastern",
+  "repeatPeriod": "custom",
+  "repeatFrequency": "weekly",
+  "repeatInterval": 1,
+  "repeatWeeklyOnDays": [
+    "mo"
+  ],
+  "repeatEnds": "never",
+  "repeatEndsDate": {
+    "type": "datetime",
+    "date": "2024-06-10",
+    "time": "19:30"
+  },
+  "repeatEndsOccurrences": 50,
+  "repeatMonthlyOnDay": "sameDay",
+  "description": "Weekly trivia night.",
+  "location": null,
+  "host": "abc123",
+  "tags": [],
+  "buttonVisible": false,
+  "buttonText": "Get Tickets",
+  "buttonCaption": "",
+  "video": null
+}

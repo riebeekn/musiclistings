@@ -11,6 +11,12 @@ defmodule MusicListings.Parsing.VenueParsers.SupermarketParserTest do
     single_event_file_path =
       Path.expand("#{File.cwd!()}/test/data/supermarket/single_event.json")
 
+    custom_weekly_event_file_path =
+      Path.expand("#{File.cwd!()}/test/data/supermarket/custom_weekly_event.json")
+
+    ended_recurring_event_file_path =
+      Path.expand("#{File.cwd!()}/test/data/supermarket/ended_recurring_event.json")
+
     index_html = index_file_path |> File.read!() |> Jason.decode!()
 
     event =
@@ -18,7 +24,22 @@ defmodule MusicListings.Parsing.VenueParsers.SupermarketParserTest do
       |> File.read!()
       |> Jason.decode!()
 
-    %{index_html: index_html, event: event}
+    custom_weekly_event =
+      custom_weekly_event_file_path
+      |> File.read!()
+      |> Jason.decode!()
+
+    ended_recurring_event =
+      ended_recurring_event_file_path
+      |> File.read!()
+      |> Jason.decode!()
+
+    %{
+      index_html: index_html,
+      event: event,
+      custom_weekly_event: custom_weekly_event,
+      ended_recurring_event: ended_recurring_event
+    }
   end
 
   describe "source_url/0" do
@@ -32,7 +53,7 @@ defmodule MusicListings.Parsing.VenueParsers.SupermarketParserTest do
     test "returns expected events", %{index_html: index_html} do
       events = SupermarketParser.events(index_html)
 
-      assert 286 = Enum.count(events)
+      assert 345 = Enum.count(events)
     end
   end
 
@@ -73,6 +94,36 @@ defmodule MusicListings.Parsing.VenueParsers.SupermarketParserTest do
   describe "event_date/1" do
     test "returns the event date", %{event: event} do
       assert ~D[2024-08-06] == SupermarketParser.event_date(event)
+    end
+
+    test "returns the next occurrence for a custom weekly recurring event", %{
+      custom_weekly_event: custom_weekly_event
+    } do
+      # Mock date is Thursday Aug 1st, 2024; the series recurs on Mondays,
+      # so the next occurrence is Monday Aug 5th, 2024.
+      assert ~D[2024-08-05] == SupermarketParser.event_date(custom_weekly_event)
+    end
+
+    test "does not resurrect a recurring series that has already ended", %{
+      ended_recurring_event: ended_recurring_event
+    } do
+      # The series ended on 2024-07-01 (before the mock date), so it should fall
+      # back to its (past) start date and be filtered out by the crawler.
+      assert ~D[2024-05-06] == SupermarketParser.event_date(ended_recurring_event)
+    end
+
+    test "keeps the reported recurring events out of the past", %{index_html: index_html} do
+      events = SupermarketParser.events(index_html)
+
+      for name <- ["Drinkin' & Thinkin' Trivia", "Kensington Unplugged"] do
+        event = Enum.find(events, &(&1["name"] == name && &1["repeatEnds"] == "never"))
+        assert event, "expected to find an active recurring event named #{name}"
+
+        event_date = SupermarketParser.event_date(event)
+
+        assert Date.compare(event_date, ~D[2024-08-01]) != :lt,
+               "expected #{name} to resolve to a non-past date"
+      end
     end
   end
 

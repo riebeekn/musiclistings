@@ -1,0 +1,37 @@
+{
+  "id": "custom-weekly-ended-0001",
+  "name": "Kensington Unplugged (ended series)",
+  "start": {
+    "type": "datetime",
+    "date": "2024-05-06",
+    "time": "19:00"
+  },
+  "end": {
+    "type": "datetime",
+    "date": "2024-05-06",
+    "time": "22:00"
+  },
+  "timeZone": "US/Eastern",
+  "repeatPeriod": "custom",
+  "repeatFrequency": "weekly",
+  "repeatInterval": 1,
+  "repeatWeeklyOnDays": [
+    "mo"
+  ],
+  "repeatEnds": "onDate",
+  "repeatEndsDate": {
+    "type": "datetime",
+    "date": "2024-07-01",
+    "time": "19:00"
+  },
+  "repeatEndsOccurrences": 8,
+  "repeatMonthlyOnDay": "sameDay",
+  "description": "A recurring series that has already ended.",
+  "location": null,
+  "host": "def456",
+  "tags": [],
+  "buttonVisible": false,
+  "buttonText": "Get Tickets",
+  "buttonCaption": "",
+  "video": null
+}

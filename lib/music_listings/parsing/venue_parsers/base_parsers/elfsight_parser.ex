@@ -38,24 +38,37 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.ElfsightParser do
   def event_date(event) do
     candidate_date = start_date(event)
 
-    if weekly_event?(event) do
-      today = DateHelpers.today()
+    cond do
+      is_nil(candidate_date) ->
+        nil
 
+      weekly_recurring?(event) and not recurrence_ended?(event) ->
+        next_weekly_occurrence(candidate_date)
+
+      true ->
+        candidate_date
+    end
+  end
+
+  defp next_weekly_occurrence(start_date) do
+    today = DateHelpers.today()
+
+    if Date.compare(start_date, today) != :lt do
+      # The series starts today or in the future - the first occurrence is the start date
+      start_date
+    else
       # Calculate how many days have passed since the initial date
-      days_since_initial = Date.diff(today, candidate_date)
+      days_since_initial = Date.diff(today, start_date)
 
       # Determine the next upcoming occurrence (add days to reach the next week)
       days_until_next =
-        if rem(days_since_initial, 7) == 0 do
-          0
-        else
-          7 - rem(days_since_initial, 7)
+        case rem(days_since_initial, 7) do
+          0 -> 0
+          remainder -> 7 - remainder
         end
 
-      # Calculate the next occurrences
+      # Calculate the next occurrence
       Date.add(today, days_until_next)
-    else
-      candidate_date
     end
   end
 
@@ -72,8 +85,31 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.ElfsightParser do
     end
   end
 
-  defp weekly_event?(event) do
-    event["repeatPeriod"] == "weeklyOn"
+  # Elfsight represents weekly recurrence two ways: the legacy "weeklyOn"
+  # repeatPeriod, and the newer "custom" repeatPeriod with a weekly frequency.
+  defp weekly_recurring?(event) do
+    event["repeatPeriod"] == "weeklyOn" or
+      (event["repeatPeriod"] == "custom" and event["repeatFrequency"] == "weekly" and
+         event["repeatInterval"] in [nil, 1])
+  end
+
+  # A recurring series that ended in the past should not produce future
+  # occurrences - falling through to the raw (past) start date lets the crawler
+  # filter it out.
+  defp recurrence_ended?(event) do
+    with "onDate" <- event["repeatEnds"],
+         %{"date" => date_string} when is_binary(date_string) <- event["repeatEndsDate"],
+         [year_string, month_string, day_string] <- String.split(date_string, "-"),
+         {:ok, end_date} <-
+           ParseHelpers.build_date_from_year_month_day_strings(
+             year_string,
+             month_string,
+             day_string
+           ) do
+      Date.compare(end_date, DateHelpers.today()) == :lt
+    else
+      _no_end_date -> false
+    end
   end
 
   def additional_dates(_event) do
