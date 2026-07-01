@@ -15,10 +15,6 @@ written in [Elixir](https://elixir-lang.org/) and [Phoenix LiveView](https://hex
 - [Hosting and Infrastructure](#hosting-and-infrastructure)
   - [GitHub Actions](#github-actions)
   - [Terraform](#terraform)
-  - [AWS Remote access](#aws-remote-access)
-    - [Database](#database)
-    - [IEX](#iex)
-    - [Trouble shooting](#trouble-shooting)
   - [Render Remote access](#render-remote-access)
     - [Database](#render-database-access)
     - [IEX](#render-iex-access)
@@ -91,146 +87,19 @@ Any errors encountered during parsing will be inserted into the `crawl_errors` d
 In order to track events for a new venue, a new parser for the venue needs to be created at `lib/music_listings/parsing/venue_parsers`.  The venue also needs to be added to the `venues` database table.  Example data files should be added to `test/data` and a test file for the new parser should be added to `test/music_listings/parsing/venue_parsers`.
 
 ## Hosting and Infrastructure
-The application is currently hosted ~~on [fly.io](https://fly.io/)~~ on [Render](https://render.com/).  Initially deployed to `fly`, having a Terraform provider available for Render made me decide to switch to Render.  The `fly` specific deployment files are still part of the project in case I decide I ever want to move back to `fly`.
+The application is hosted on [Render](https://render.com/).  It was initially deployed to [fly.io](https://fly.io/), but having a Terraform provider available for Render made me decide to switch.  The application uses CloudFlare as a reverse proxy.
 
-There is also an [AWS](https://aws.amazon.com) implementation.  This was more of a learning exercise, and it isn't very cost effective for a hobby application.  I'm sure I could reduce costs by re-architecting the application and / or infrastructure set-up.  As things stand, approximate daily costs for `AWS` would be:
-
-| Service                      | Cost      |
-| ---------------------------- | --------- |
-| VPC                          |   $2.28   |
-| Elastic Load Balancing       |   $0.54   |
-| Relational Database Service  |   $0.45   |
-| Elastic Container Service    |   $0.35   |
-| EC2-Instances                |   $0.20   |
-| Secrets Manager              |   $0.06   |
-| EC2-Other                    |   $0.02   |
-| **Total**                    | **$3.90** |
-
-
-The `fly.io`, `Render` and `AWS` solutions use CloudFlare as a reverse proxy.
-
-Deployment and infrastructure setup is handled by a combination of Terraform and GitHub Actions.  Unfortunately `fly.io` does not have a Terraform provider so the initial `fly` infrastructure was set up manually.
+Deployment and infrastructure setup is handled by a combination of Terraform and GitHub Actions.
 
 ### GitHub Actions
-GitHub actions control deployments and are located in `.github/workflows/ci.yml`.  Since we have the ability to deploy to multiple hosts (fly, Render and AWS) the deployment actions are dependent on 3 corresponding GitHub Action variables:
-
-- `DEPLOY_TO_AWS`: if set to true GHA will attempt to deploy to AWS
-- `DEPLOY_TO_FLY`: if set to true GHA will attempt to deploy to Fly
-- `DEPLOY_TO_RENDER`: if set to true GHA will attempt to deploy to Render
-
-All (or none) of these variables can be set, they are not mutually exclusive.
+GitHub actions control deployments and are located in `.github/workflows/ci.yml`.  On a successful build the application is deployed to Render (which environments are deployed is driven by the `RENDER_ENVIRONMENTS` and `RENDER_CRON_ENVIRONMENTS` GitHub Action variables; `prod` only deploys from `main`).
 
 ### Terraform
-There are 4 Terraform projects which serve the following purposes:
-- `.infrastructure/aws/core` - Contains the core AWS infrastructure which is shared across different environments (i.e. staging, prod etc.).
-- `.infrastructure/aws/deployments` - Contains environment specific AWS infrastructure, for example `qa`, `staging`, or `prod` infrastructure.
-- `.infrastructure/production` - Represents initial production infrastructure that was set up manually and has since been imported into Terraform, currently just contains some email related DNS settings.
+There are 2 Terraform projects which serve the following purposes:
+- `.infrastructure/production` - Represents initial production infrastructure that was set up manually and has since been imported into Terraform, currently just contains some CloudFlare DNS and Turnstile settings.
 - `.infrastructure/render` - Contains Render specific infrastructure files.
 
-See the `README.md` files located in each of the projects for specific information on running the Terraform deployments.  In general the `production` project should never need to be run.  With AWS, the `core` project needs to be run once to bring up the shared infrastructure, and then the `deployments` project can be run as needed.
-
-The AWS Terraform setup is largely based on this excellent example Repo: [https://github.com/danschultzer/elixir-terraform-aws-ecs-example](https://github.com/danschultzer/elixir-terraform-aws-ecs-example).
-
-### AWS Remote access
-Remote access to the database and local `iex` sessions are accomplished via `ssm` and `aws ecs execute-command`.  Helper scripts are available to make it easy to connect.
-
-#### Database
-To access the database for an environment run the `.db_tunnel.sh` script passing in the name of environment you would like to connect to, for example:
-
-```
-./db_tunnel.sh staging
-```
-
-This will result in output similar to:
-```
-Starting session with SessionId: terraform-user-2ft5jzhcckusb5zeo29gdarfke
-Port 5433 opened for sessionId terraform-user-2ft5jzhcckusb5zeo29gdarfke.
-Waiting for connections..
-```
-
-You can now connect with your local database client.  You will need to retrieve the database password.  This can be done from the `.infrastructure/deployments` directory.  Make sure you are in the correct workspace and then run:
-
-```
-terraform output -raw db_instance_password
-```
-
-This will output the database password.  I.e. something similar to:
-
-```
-➜  deployments git:(main) ✗ terraform output -raw db_instance_password
-%5jw#1Lz$of}D)>th0dMmtlhlo3ZZM>O%
-```
-
-**Note:** exclude the `%` at the end of the string, not sure why that is added to the output on the terminal.  Piping to a text file, i.e. `terraform output -raw db_instance_password > db_pass.txt` does not add the extra `%`.
-
-Now connect with the following parameters:
-
-```
-Host: 127.0.0.1
-Port: 5433
-User: the user you set up in the Terraform deployment
-Password: the password output from above
-```
-
-#### IEX
-To run an `iex` session against a deployed environment run the `aiex.sh` script passing in the name of the environment you would like to connect to, for example:
-
-```
-./aiex.sh staging
-```
-
-You'll now have an `iex` session on the environment.
-
-See the details of the `aiex.sh` script if wanting to do something other than open an `iex` session.  For instance if just wanting to run a shell, change the `Execute the command on the ECS container` command, i.e. instead of this:
-
-```
-# Execute the command on the ECS container
-aws ecs execute-command \
-  --cluster "${ECS_CLUSTER_NAME}" \
-  --task "${AWS_TASK_ID}" \
-  --container "${CONTAINER_NAME}" \
-  --interactive \
-  --command "/bin/sh -c 'bin/music_listings remote'"
-```
-
-Do this:
-
-```
-# Execute the command on the ECS container
-aws ecs execute-command \
-  --cluster "${ECS_CLUSTER_NAME}" \
-  --task "${AWS_TASK_ID}" \
-  --container "${CONTAINER_NAME}" \
-  --interactive \
-  --command "/bin/sh
-```
-
-#### Trouble shooting
-Remote access requires specific settings both locally (you need the AWS CLI installed along with AWS SSM) and on the server (a NAT gateway and enable_remote_execution enabled on the ECS service).
-
-There is handy check command available.  First determine the task id of the AWS task you are attempting to connect to, i.e.
-
-```
-aws ecs list-tasks --cluster "musiclistings-staging"
-```
-
-This will output something similar to:
-
-```
-{
-    "taskArns": [
-        "arn:aws:ecs:<region>:<aws account id>:task/musiclistings-staging/<task id>"
-    ]
-}
-```
-
-Now run:
-
-```
-bash <( curl -Ls https://raw.githubusercontent.com/aws-containers/amazon-ecs-exec-checker/main/check-ecs-exec.sh ) musiclistings-staging <task id>
-```
-
-This will present information regarding whether you have remote access.
+See the `README.md` files located in each of the projects for specific information on running the Terraform deployments.  In general the `production` project should never need to be run.
 
 ### Render Remote access
 Remote access is available to both the database and console in Render.

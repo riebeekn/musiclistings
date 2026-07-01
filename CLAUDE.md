@@ -14,7 +14,7 @@ This is **MusicListings**, a Phoenix LiveView application that aggregates music 
 - **PostgreSQL** database with Ecto
 - **Tailwind CSS** for styling
 - **Oban** for background jobs (though crawling now uses Render Cron)
-- **Deployment**: Render (previously Fly.io, with AWS infrastructure also available)
+- **Deployment**: Render
 
 ## Common Development Commands
 
@@ -181,11 +181,7 @@ MusicListings.Accounts.register_user(%{
 
 ## Deployment Notes
 
-- Application deploys automatically via GitHub Actions
-- Deployment targets controlled by GitHub Action variables:
-  - `DEPLOY_TO_RENDER`
-  - `DEPLOY_TO_FLY`
-  - `DEPLOY_TO_AWS`
+- Application deploys automatically to Render via GitHub Actions
 - Infrastructure managed via Terraform (`.infrastructure/` directory)
 - Uses CloudFlare as reverse proxy
 

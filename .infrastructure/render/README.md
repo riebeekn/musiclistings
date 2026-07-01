@@ -1,6 +1,26 @@
 # MusicListings - .infrastructure - render
 This folder contains the Terraform code for performing Render deployments.
 
+## Bringing up a new environment
+A quick checklist for standing up a new environment (e.g. a fresh `staging`).  Each
+step is expanded on in the sections below.
+
+1. Complete the [Prerequisites](#prerequisites) (`.envrc`, 1Password CLI, and a
+   `<workspace>.tfvars` note for the new environment).
+2. Create/select the Terraform workspace for the environment, e.g.
+   `terraform workspace new staging`.
+3. Run `./tf_apply.sh` to provision the Render web service, cron job, database, and
+   CloudFlare records.
+4. From the apply outputs, append the new environment to the `RENDER_ENVIRONMENTS`
+   (`<env>:srv-…`) and `RENDER_CRON_ENVIRONMENTS` (`<env>:crn-…`) GitHub Actions
+   **variables** — comma-separated.  These service IDs are what tell CI which
+   services to deploy to; the deploy matrix fans out one job per entry.
+5. Ensure the account-level `RENDER_API_KEY` GitHub Actions **secret** is set (one
+   time, shared across all environments — no per-environment secret is needed).
+
+That's it — CI will now deploy the new environment via the Render REST API.  `prod`
+only deploys from `main`; other environments deploy from any branch.
+
 ## Prerequisites
 
 1. **Environment (`.envrc`)** — copy `.example.envrc` to `.envrc`, fill in the
@@ -55,7 +75,7 @@ nothing sensitive is written to disk.
 
 After apply is run, some outputs will be displayed.  Included in these are two items
 to add to the GitHub repository action variables.  They are prefixed with
-`github_actions_variable_setting-`.  Likewise there is an item to add to the GitHub repository action secrets.  It is prefixed with `github_actions_secret_setting-`.
+`github_actions_variable_setting-`.
 
 The following outputs are expected:
 ```
@@ -63,23 +83,25 @@ application_url = "<the url of the application, i.e. https://staging.torontomusi
 
 db_connection_info = "<the connection information for the database>"
 
-github_actions_secret_setting-ENV_DEPLOY_HOOK = "include a deploy hook secret for the current environment, name the secret <ENV>_DEPLOY_HOOK and set it to the deploy hook url in the service settings See https://dashboard.render.com/web/srv-cu5ut6l6l47c73bt7vog/settings, the hook is not available programmatically thus why this has to be done manually"
-
 github_actions_variable_setting-RENDER_ENVIRONMENTS = "include the current environment which is: <something like staging:src-123343>"
 
 github_actions_variable_setting-RENDER_CRON_ENVIRONMENTS = "include the current environment which is: <something like staging:crn-123343>"
 ```
 
-As per the above a `<ENV>_DEPLOY_HOOK` secret needs to be set in GitHub where `<ENV>` is replaced by the current environment (for example `STAGING_DEPLOY_HOOK`, `PROD_DEPLOY_HOOK` etc.).  The value of this needs to be retrieved manually from the Render Dashboard for the created web service as the value is not available from Terraform.
+Deploys are triggered from GitHub Actions via the Render REST API, which authenticates
+with a `RENDER_API_KEY` GitHub Actions secret.  This is an account-level key (not per
+environment) and is not produced by Terraform - create it once from the Render dashboard
+(Account Settings → API Keys) and add it as a repository secret.
 
-Likewise each environment should be added to a RENDER_ENVIRONMENTS GitHub actions variable and they are comma separated.
+Each environment should be added to a RENDER_ENVIRONMENTS GitHub actions variable and they are comma separated.
 So for example the value of this variable could be `staging:src-123343,qa:src-123344,production:src-123345`.
 
 Do the same and add each environment to a RENDER_CRON_ENVIRONMENTS GitHub actions variable, again they are comma separated.
 So for example the value of this variable could be `staging:crn-123343,qa:crn-123344,production:crn-123345`.
 
-Add the GitHub repository action variable and the secret at the following URL:
-https://the_github_repo_url/settings/variables/actions.
+Add the GitHub repository action variables at the following URL:
+https://the_github_repo_url/settings/variables/actions.  Add the `RENDER_API_KEY`
+secret at https://the_github_repo_url/settings/secrets/actions.
 
 ### To destroy the infrastructure
 
