@@ -213,9 +213,14 @@ jobs:
         # Step: Check for any packages with known security issues
       - name: Check for dependency security vulnerabilities
         run: mix deps.audit --ignore-file .mix_audit_ignore
-      # Step: Check for any retired packages
+      # Step: Check for any retired packages.
+      # Non-fatal: newer Hex versions also report security advisories here, but
+      # hex.audit has no ignore mechanism (hexpm/hex#1194). Advisory triage +
+      # suppression lives in the `mix deps.audit` step above via .mix_audit_ignore,
+      # so we keep this for its retired-package report without failing the build.
+      # Revisit once hex.audit supports an ignore list.
       - name: Check for retired packages
-        run: mix hex.audit
+        run: mix hex.audit || true
       # Step: Check for un-used packages
       - name: Check for un-used packages
         run: mix deps.unlock --check-unused
