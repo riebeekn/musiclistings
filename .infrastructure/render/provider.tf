@@ -3,7 +3,7 @@ terraform {
     # AWS is used for Terraform state storage
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 5.0"
+      version = "~> 6.0"
     }
     cloudflare = {
       source  = "cloudflare/cloudflare"
@@ -15,7 +15,7 @@ terraform {
     }
     render = {
       source  = "render-oss/render"
-      version = "1.3.6"
+      version = "1.8.0"
     }
   }
 }
