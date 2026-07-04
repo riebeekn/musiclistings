@@ -1,0 +1,221 @@
+{
+    "data": {
+        "events": {
+            "items": [
+                {
+                    "id": "69c2f40e3982cf9507cfe964",
+                    "title": "Taene Live in Toronto (An Intimate Live Band Experience)",
+                    "timezone": "America/Toronto",
+                    "startDate": "2026-07-25T22:00:00Z",
+                    "status": "Published",
+                    "address": {
+                        "formattedAddress": "250 Adelaide Street West, Toronto, ON, Canada",
+                        "city": "Toronto",
+                        "businessName": null
+                    },
+                    "presentedBy": false,
+                    "presentedByName": "Demalytics Records",
+                    "eventImage": "ab58610011884d5aa156b28c1d45a400"
+                },
+                {
+                    "id": "69fa1b71d95a5d3b56af35bf",
+                    "title": "Dance & Go Home",
+                    "timezone": "America/Toronto",
+                    "startDate": "2026-08-01T01:00:00Z",
+                    "status": "Published",
+                    "address": {
+                        "formattedAddress": "250 Adelaide Street West, Toronto, ON, Canada",
+                        "city": "Toronto",
+                        "businessName": null
+                    },
+                    "presentedBy": false,
+                    "presentedByName": "Dance & Go Home",
+                    "eventImage": "7fd952dd24684460a1adfb6897a76ec3"
+                },
+                {
+                    "id": "6a038063bfe82576ae1fac22",
+                    "title": "True Fidelity: The Godfather of Soul",
+                    "timezone": "America/Toronto",
+                    "startDate": "2026-07-11T02:00:00Z",
+                    "status": "Published",
+                    "address": {
+                        "formattedAddress": "250 Adelaide Street West, Toronto, ON, Canada",
+                        "city": "Toronto",
+                        "businessName": null
+                    },
+                    "presentedBy": false,
+                    "presentedByName": "True Fidelity x MRG Venues",
+                    "eventImage": "06148adb410f4c62a1fce1c3164b653b"
+                },
+                {
+                    "id": "6a1dec0f0e97cc9b0d862463",
+                    "title": "JAMAPIANO",
+                    "timezone": "America/Toronto",
+                    "startDate": "2026-08-02T02:00:00Z",
+                    "status": "Published",
+                    "address": {
+                        "formattedAddress": "250 Adelaide Street West, Toronto, ON, Canada",
+                        "city": "Toronto",
+                        "businessName": null
+                    },
+                    "presentedBy": false,
+                    "presentedByName": "JAMAPIANO",
+                    "eventImage": "c6d7672f4bbd4e5d9870f571737f1ed7"
+                },
+                {
+                    "id": "6a27205b9e38f778953620cb",
+                    "title": "Mhmmm",
+                    "timezone": "America/Toronto",
+                    "startDate": "2026-07-12T02:00:00Z",
+                    "status": "Published",
+                    "address": {
+                        "formattedAddress": "250 Adelaide Street West, Toronto, ON, Canada",
+                        "city": "Toronto",
+                        "businessName": null
+                    },
+                    "presentedBy": false,
+                    "presentedByName": "Hanga\u00eblle",
+                    "eventImage": "c297a73aec5c4ecd96c34c95faa417f2"
+                },
+                {
+                    "id": "6a32eba54a8da88ed9ec0f13",
+                    "title": "words can\u2019t describe",
+                    "timezone": "America/Toronto",
+                    "startDate": "2026-07-04T02:00:00Z",
+                    "status": "Published",
+                    "address": {
+                        "formattedAddress": "250 Adelaide Street West, Toronto, ON, Canada",
+                        "city": "Toronto",
+                        "businessName": null
+                    },
+                    "presentedBy": false,
+                    "presentedByName": "fly tenshi",
+                    "eventImage": "b0c9e769adc34dcf940cd9db910776ed"
+                },
+                {
+                    "id": "6a32fe03577c6bbd876ab7d7",
+                    "title": "Dance Around The World",
+                    "timezone": "America/Toronto",
+                    "startDate": "2026-07-05T02:00:00Z",
+                    "status": "Published",
+                    "address": {
+                        "formattedAddress": "250 Adelaide Street West, Toronto, ON, Canada",
+                        "city": "Toronto",
+                        "businessName": null
+                    },
+                    "presentedBy": false,
+                    "presentedByName": "Mangrove Studios",
+                    "eventImage": "8bef44a5197e4295884f4a0734aad400"
+                },
+                {
+                    "id": "6a43fb592ff098b4ccb48849",
+                    "title": "888 Fan House - Quarter-Final Parties",
+                    "timezone": "America/Toronto",
+                    "startDate": "2026-07-09T20:00:00Z",
+                    "status": "Published",
+                    "address": {
+                        "formattedAddress": "250 Adelaide Street West, Toronto, ON, Canada",
+                        "city": "Toronto",
+                        "businessName": null
+                    },
+                    "presentedBy": false,
+                    "presentedByName": "",
+                    "eventImage": "6c0deb7afddf4470bf9cc3f588756b76"
+                },
+                {
+                    "id": "6a43fceaa69e7d303eeb5064",
+                    "title": "888 Fan House - Quarter-Final Parties",
+                    "timezone": "America/Toronto",
+                    "startDate": "2026-07-10T19:00:00Z",
+                    "status": "Published",
+                    "address": {
+                        "formattedAddress": "250 Adelaide Street West, Toronto, ON, Canada",
+                        "city": "Toronto",
+                        "businessName": null
+                    },
+                    "presentedBy": false,
+                    "presentedByName": "",
+                    "eventImage": "4b73db52571142f4bb8969cb41c1f52b"
+                },
+                {
+                    "id": "6a43fe237d21c40b76d453a4",
+                    "title": "888 Fan House - Quarter-Final Parties",
+                    "timezone": "America/Toronto",
+                    "startDate": "2026-07-11T21:00:00Z",
+                    "status": "Published",
+                    "address": {
+                        "formattedAddress": "250 Adelaide Street West, Toronto, ON, Canada",
+                        "city": "Toronto",
+                        "businessName": null
+                    },
+                    "presentedBy": false,
+                    "presentedByName": "",
+                    "eventImage": "84a128f7362540ac935d5a6924bdd6af"
+                },
+                {
+                    "id": "6a44023ea9bdc3c28bc054ab",
+                    "title": "888 Fan House - Semi-Final Parties",
+                    "timezone": "America/Toronto",
+                    "startDate": "2026-07-14T19:00:00Z",
+                    "status": "Published",
+                    "address": {
+                        "formattedAddress": "250 Adelaide Street West, Toronto, ON, Canada",
+                        "city": "Toronto",
+                        "businessName": null
+                    },
+                    "presentedBy": false,
+                    "presentedByName": "",
+                    "eventImage": "e5411ccb7ea14f3bb3b806289f2ddaa3"
+                },
+                {
+                    "id": "6a440347ea81be35d7c2ccf8",
+                    "title": "888 Fan House - Semi-Final Parties",
+                    "timezone": "America/Toronto",
+                    "startDate": "2026-07-15T19:00:00Z",
+                    "status": "Published",
+                    "address": {
+                        "formattedAddress": "250 Adelaide Street West, Toronto, ON, Canada",
+                        "city": "Toronto",
+                        "businessName": null
+                    },
+                    "presentedBy": false,
+                    "presentedByName": "",
+                    "eventImage": "4fa495b31ac049f9b2030f6765e5e945"
+                },
+                {
+                    "id": "6a4403b47d21c40b76d453b3",
+                    "title": "888 Fan House - The Final",
+                    "timezone": "America/Toronto",
+                    "startDate": "2026-07-19T19:00:00Z",
+                    "status": "Published",
+                    "address": {
+                        "formattedAddress": "250 Adelaide Street West, Toronto, ON, Canada",
+                        "city": "Toronto",
+                        "businessName": null
+                    },
+                    "presentedBy": false,
+                    "presentedByName": "",
+                    "eventImage": "eaba2b2ba9134d6890b2040cc1c20d6d"
+                },
+                {
+                    "id": "6a468ad6ebfd3c6cc80f9419",
+                    "title": "888 Fan House - Canada vs. Morocco Round of 16",
+                    "timezone": "America/Toronto",
+                    "startDate": "2026-07-04T17:00:00Z",
+                    "status": "Published",
+                    "address": {
+                        "formattedAddress": "250 Adelaide Street West, Toronto, ON, Canada",
+                        "city": "Toronto",
+                        "businessName": null
+                    },
+                    "presentedBy": false,
+                    "presentedByName": "",
+                    "eventImage": "70ec0ca4001b4f74ab12d881868cc52e"
+                }
+            ],
+            "skip": 0,
+            "take": 9999,
+            "total": 14
+        }
+    }
+}

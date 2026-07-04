@@ -9,10 +9,10 @@ defmodule MusicListings.Parsing.VenueParsers.AnnabelsParser do
   @impl true
   def source_url,
     do:
-      "https://gateway.admitone.com/embed/live-events?venueId=644bf7abee86fe5385227413&order=asc"
+      "https://gateway.admitone.com/embed/live-events?venueId=67bdd885e7d4e2b9e7b858b6,644bf7abee86fe5385227413&order=asc"
 
   @impl true
-  defdelegate retrieve_events_fun, to: AdmitOneParser
+  def retrieve_events_fun, do: AdmitOneParser.retrieve_events_fun("annabels")
 
   @impl true
   defdelegate events(body), to: AdmitOneParser

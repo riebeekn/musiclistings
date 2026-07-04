@@ -9,13 +9,17 @@ defmodule MusicListings.Parsing.VenueParsers.AdelaideHallParser do
   @impl true
   def source_url,
     do:
-      "https://gateway.admitone.com/embed/live-events?venueId=5f2c38d9b49c224648301825,6182ec572490d0ef56a4adbe,6201607c4ece4990eeeb6a3c&order=asc"
+      "https://gateway.admitone.com/embed/live-events?venueId=64a4349ec147b8570f9e83fc,5f2c38d9b49c224648301825,6182ec572490d0ef56a4adbe,6201607c4ece4990eeeb6a3c&order=asc"
 
   @impl true
-  defdelegate retrieve_events_fun, to: AdmitOneParser
+  def retrieve_events_fun, do: AdmitOneParser.retrieve_events_fun("adelaide")
 
   @impl true
-  defdelegate events(body), to: AdmitOneParser
+  def events(body) do
+    body
+    |> AdmitOneParser.events
+    |> Enum.reject(&(event_title(&1) |> String.contains?("888 Fan House")))
+  end
 
   @impl true
   defdelegate next_page_url(body, current_url), to: AdmitOneParser

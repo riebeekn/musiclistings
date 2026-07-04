@@ -1,0 +1,116 @@
+{
+    "data": {
+        "events": {
+            "items": [
+                {
+                    "id": "69f02923643c5fa029135c06",
+                    "title": "WeTouchGrass presents: TORONTO Emo Rave",
+                    "timezone": "America/Toronto",
+                    "startDate": "2026-07-25T01:00:00Z",
+                    "status": "Published",
+                    "address": {
+                        "formattedAddress": "Annabel's Music Hall, Princes' Boulevard, Toronto, ON, Canada",
+                        "city": "Toronto",
+                        "businessName": "Annabel's Music Hall"
+                    },
+                    "presentedBy": false,
+                    "presentedByName": "#WeTouchGrass",
+                    "eventImage": "0c210f5a43e141aa9fddcc27c11a696c"
+                },
+                {
+                    "id": "69f8f3dbefaf694c82a32df7",
+                    "title": "Bingo Loco Toronto @ Annabel's Early Show (5:30PM)",
+                    "timezone": "America/Toronto",
+                    "startDate": "2026-07-25T21:30:00Z",
+                    "status": "Published",
+                    "address": {
+                        "formattedAddress": "200 Princes' Blvd, Toronto, ON M6K 3C3, Canada",
+                        "city": "Toronto",
+                        "businessName": null
+                    },
+                    "presentedBy": false,
+                    "presentedByName": "Bingo Loco",
+                    "eventImage": "de538e08cb0c43568000dbd206476ed7"
+                },
+                {
+                    "id": "69f8f69daa9dd65684468fb2",
+                    "title": "Bingo Loco Toronto @ Annabel's Late Show (9:30PM)",
+                    "timezone": "America/Toronto",
+                    "startDate": "2026-07-26T01:30:00Z",
+                    "status": "Published",
+                    "address": {
+                        "formattedAddress": "200 Princes' Blvd, Toronto, ON M6K 3C3, Canada",
+                        "city": "Toronto",
+                        "businessName": null
+                    },
+                    "presentedBy": false,
+                    "presentedByName": "Bingo Loco",
+                    "eventImage": "75d62857b2ab423fb48137bb72634eb5"
+                },
+                {
+                    "id": "6a206a37bf462a44f2cc1c93",
+                    "title": "Bingo Loco Toronto @ Annabel's Early Show (5:30PM)",
+                    "timezone": "America/Toronto",
+                    "startDate": "2026-08-15T21:30:00Z",
+                    "status": "Published",
+                    "address": {
+                        "formattedAddress": "200 Princes' Blvd, Toronto, ON M6K 3C3, Canada",
+                        "city": "Toronto",
+                        "businessName": null
+                    },
+                    "presentedBy": false,
+                    "presentedByName": "Bingo Loco",
+                    "eventImage": "967d38cf6cd542e59b782175902aad62"
+                },
+                {
+                    "id": "6a2078cfa4c1138626571014",
+                    "title": "Bingo Loco Toronto @ Annabel's Late Show (9:30PM)",
+                    "timezone": "America/Toronto",
+                    "startDate": "2026-08-16T01:30:00Z",
+                    "status": "Published",
+                    "address": {
+                        "formattedAddress": "200 Princes' Blvd, Toronto, ON M6K 3C3, Canada",
+                        "city": "Toronto",
+                        "businessName": null
+                    },
+                    "presentedBy": false,
+                    "presentedByName": "Bingo Loco",
+                    "eventImage": "2d30d2b9d16647dc85540bbfaa693456"
+                },
+                {
+                    "id": "6a344e31a50b637a1941a811",
+                    "title": "Oil It Down: Friday Night Mas",
+                    "timezone": "America/Toronto",
+                    "startDate": "2026-08-01T02:00:00Z",
+                    "status": "Published",
+                    "address": {
+                        "formattedAddress": "Annabel's Music Hall, 200 Princes' Boulevard, Toronto, ON, Canada",
+                        "city": "Toronto",
+                        "businessName": "Annabel's Music Hall"
+                    },
+                    "presentedBy": false,
+                    "presentedByName": "Oil It Down",
+                    "eventImage": "36989023254b49a1bd933142cfa36acd"
+                },
+                {
+                    "id": "6a393aeff8bb4b7b337e41d8",
+                    "title": "RYAL [Toronto Debut] at FORBIDDEN CITY",
+                    "timezone": "America/Toronto",
+                    "startDate": "2026-07-19T02:30:00Z",
+                    "status": "Published",
+                    "address": {
+                        "formattedAddress": "Forbidden City, 200 Princes' Boulevard, Toronto, ON, Canada",
+                        "city": "Toronto",
+                        "businessName": "Forbidden City"
+                    },
+                    "presentedBy": false,
+                    "presentedByName": "Electric Escape x Intok Events",
+                    "eventImage": "7773505b656a4d7ba3ab1d5c8344321d"
+                }
+            ],
+            "skip": 0,
+            "take": 9999,
+            "total": 7
+        }
+    }
+}
