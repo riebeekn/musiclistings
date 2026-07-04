@@ -17,7 +17,7 @@ defmodule MusicListings.Parsing.VenueParsers.AdelaideHallParser do
   @impl true
   def events(body) do
     body
-    |> AdmitOneParser.events
+    |> AdmitOneParser.events()
     |> Enum.reject(&(event_title(&1) |> String.contains?("888 Fan House")))
   end
 
