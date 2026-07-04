@@ -12,19 +12,34 @@ defmodule MusicListings.HttpClient.HTTPoison do
     |> HTTPoison.get(headers)
     |> case do
       {:ok, response} ->
-        response.headers
-        |> Enum.find(&(&1 == {"Content-Encoding", "br"}))
-        |> case do
-          nil ->
-            {:ok, Response.new(response)}
-
-          _needs_decoding ->
-            {:ok, body} = :brotli.decode(response.body)
-            {:ok, Response.new(response.status_code, body)}
+        case decode_body(response) do
+          {:ok, body} -> {:ok, Response.new(response.status_code, body)}
+          :passthrough -> {:ok, Response.new(response)}
         end
 
       {:error, error} ->
         {:error, error}
+    end
+  end
+
+  # Decodes the response body based on its Content-Encoding header (matched
+  # case-insensitively). Returns `{:ok, decoded_body}` when decompression was
+  # applied, or `:passthrough` to use the response body as-is.
+  defp decode_body(response) do
+    response.headers
+    |> Enum.find_value(fn {name, value} ->
+      if String.downcase(name) == "content-encoding", do: String.downcase(value)
+    end)
+    |> case do
+      "br" ->
+        {:ok, body} = :brotli.decode(response.body)
+        {:ok, body}
+
+      gzip when gzip in ["gzip", "x-gzip"] ->
+        {:ok, :zlib.gunzip(response.body)}
+
+      _other ->
+        :passthrough
     end
   end
 

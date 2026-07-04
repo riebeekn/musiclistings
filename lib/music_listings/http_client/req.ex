@@ -19,6 +19,7 @@ defmodule MusicListings.HttpClient.Req do
     url
     |> Req.get(
       headers: headers,
+      compressed: true,
       finch: MusicListings.ReqFinch,
       receive_timeout: 30_000,
       retry: &retry?/2,
@@ -35,6 +36,7 @@ defmodule MusicListings.HttpClient.Req do
     url
     |> Req.post(
       headers: headers,
+      compressed: true,
       json: body,
       finch: MusicListings.ReqFinch,
       receive_timeout: 30_000,
