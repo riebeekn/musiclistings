@@ -4,12 +4,16 @@ defmodule MusicListings.Parsing.VenueParsers.AnnabelsParserTest do
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.VenueParsers.AnnabelsParser
+  alias MusicListings.Parsing.VenueParsers.BaseParsers.AdmitOneParser
 
   setup do
     index_file_path = Path.expand("#{File.cwd!()}/test/data/annabels/index.json")
 
     single_event_file_path =
       Path.expand("#{File.cwd!()}/test/data/annabels/single_event.json")
+
+    community_event_file_path =
+      Path.expand("#{File.cwd!()}/test/data/annabels/community_single_event.json")
 
     index_html = index_file_path |> File.read!() |> Jason.decode!()
 
@@ -18,12 +22,18 @@ defmodule MusicListings.Parsing.VenueParsers.AnnabelsParserTest do
       |> File.read!()
       |> Jason.decode!()
 
-    %{index_html: index_html, event: event}
+    community_event =
+      community_event_file_path
+      |> File.read!()
+      |> Jason.decode!()
+      |> AdmitOneParser.normalize_community_event()
+
+    %{index_html: index_html, event: event, community_event: community_event}
   end
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://gateway.admitone.com/embed/live-events?venueId=644bf7abee86fe5385227413&order=asc" ==
+      assert "https://gateway.admitone.com/embed/live-events?venueId=67bdd885e7d4e2b9e7b858b6,644bf7abee86fe5385227413&order=asc" ==
                AnnabelsParser.source_url()
     end
   end
@@ -110,6 +120,40 @@ defmodule MusicListings.Parsing.VenueParsers.AnnabelsParserTest do
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
       assert nil == AnnabelsParser.details_url(event)
+    end
+  end
+
+  describe "community (graphql) events" do
+    test "event_title/1 returns the title", %{community_event: community_event} do
+      assert "RYAL [Toronto Debut] at FORBIDDEN CITY" ==
+               AnnabelsParser.event_title(community_event)
+    end
+
+    test "event_date/1 converts the UTC startDate to eastern date", %{
+      community_event: community_event
+    } do
+      assert ~D[2026-07-18] == AnnabelsParser.event_date(community_event)
+    end
+
+    test "event_time/1 converts the UTC startDate to eastern time", %{
+      community_event: community_event
+    } do
+      assert ~T[22:30:00] == AnnabelsParser.event_time(community_event)
+    end
+
+    test "event_id/1 is built from venue and eastern datetime", %{
+      community_event: community_event
+    } do
+      assert "annabels_2026_07_18_22_30_00" == AnnabelsParser.event_id(community_event)
+    end
+
+    test "ticket_url/1 points at the community event", %{community_event: community_event} do
+      assert "https://community.admitone.com/events/6a393aeff8bb4b7b337e41d8" ==
+               AnnabelsParser.ticket_url(community_event)
+    end
+
+    test "age_restriction/1 is unknown", %{community_event: community_event} do
+      assert :unknown == AnnabelsParser.age_restriction(community_event)
     end
   end
 end
