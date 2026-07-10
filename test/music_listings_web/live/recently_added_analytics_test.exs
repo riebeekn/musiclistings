@@ -67,6 +67,16 @@ defmodule MusicListingsWeb.RecentlyAddedAnalyticsTest do
 
       assert rows("new_this_week.card_click") == []
     end
+
+    test "survives a non-canonical slug redirect (?ref is preserved)", %{conn: conn, event: event} do
+      # A rail link whose slug isn't canonical must redirect to the canonical
+      # slug *keeping* ?ref, otherwise the referrer is lost before any ticket
+      # click and the conversion can never be attributed to the rail.
+      conn = get(conn, "/events/#{event.id}/stale-slug?ref=new_this_week")
+
+      assert redirected_to(conn) ==
+               "/events/#{event.id}/freshly-added-show?ref=new_this_week"
+    end
   end
 
   describe "detail-page ticket link shown impression" do

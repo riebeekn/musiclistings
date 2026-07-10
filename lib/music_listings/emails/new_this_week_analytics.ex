@@ -34,6 +34,7 @@ defmodule MusicListings.Emails.NewThisWeekAnalytics do
 
     this_conversions = Map.get(report, :this_week_conversions, %{})
     prior_conversions = Map.get(report, :prior_week_conversions, %{})
+    this_ticket_shown = Map.get(report, :this_week_ticket_shown, %{})
 
     assigns =
       assigns
@@ -41,10 +42,15 @@ defmodule MusicListings.Emails.NewThisWeekAnalytics do
       |> Map.put(:this_card, count(report.this_week, @card_click))
       |> Map.put(:prior_shown, count(report.prior_week, @shown))
       |> Map.put(:prior_card, count(report.prior_week, @card_click))
-      # Rail conversion funnel: card click on the rail → ticket click on the
-      # detail page (attributed via ?ref=new_this_week).
+      # Rail conversion funnel: card click on the rail → an event page that
+      # actually showed a ticket link → ticket click (all attributed via
+      # ?ref=new_this_week). Conversion is measured against the rail's
+      # ticket-eligible views, not raw card clicks, so cards landing on events
+      # with no ticket link (which can never convert) don't depress the rate —
+      # mirroring the overall event-page CTR denominator below.
       |> Map.put(:this_rail_conv, count(this_conversions, @rail_ref))
       |> Map.put(:prior_rail_conv, count(prior_conversions, @rail_ref))
+      |> Map.put(:this_rail_shown, count(this_ticket_shown, @rail_ref))
       # Overall detail-page ticket engagement (all referrers).
       |> Map.put(:this_detail_ticket, count(report.this_week, @detail_ticket_click))
       |> Map.put(:this_detail_shown, count(report.this_week, @detail_ticket_shown))
@@ -82,17 +88,19 @@ defmodule MusicListings.Emails.NewThisWeekAnalytics do
 
     <.h2>Rail conversions</.h2>
     <.muted>
-      Full funnel: Rail card click → Ticket click on the event details page
+      Full funnel: Rail card click → Event page with a ticket link → Ticket click
     </.muted>
 
     <.stat_band>
       <:stat label="Card clicks">{@this_card}</:stat>
+      <:stat label="Ticket-eligible views">{@this_rail_shown}</:stat>
       <:stat label="Ticket clicks" accent="spotlight">{@this_rail_conv}</:stat>
-      <:stat label="Conversion">{ctr(@this_rail_conv, @this_card)}</:stat>
+      <:stat label="Conversion">{ctr(@this_rail_conv, @this_rail_shown)}</:stat>
     </.stat_band>
 
     <.muted>
-      Rail conversions {change_cell(@this_rail_conv, @prior_rail_conv)} vs prior 7 days · Overall
+      Conversion is ticket clicks ÷ ticket-eligible views (rail cards that reached
+      an event with a ticket link). Rail conversions {change_cell(@this_rail_conv, @prior_rail_conv)} vs prior 7 days · Overall
       event-page ticket CTR {ctr(@this_detail_ticket, @this_detail_shown)} ({@this_detail_ticket} of {@this_detail_shown} pages where a ticket link was shown)
     </.muted>
     """
@@ -156,7 +164,9 @@ defmodule MusicListings.Emails.NewThisWeekAnalytics do
         @detail_ticket_shown => 170
       },
       this_week_conversions: %{@rail_ref => 18, nil => 56},
-      prior_week_conversions: %{@rail_ref => 14, nil => 47}
+      prior_week_conversions: %{@rail_ref => 14, nil => 47},
+      this_week_ticket_shown: %{@rail_ref => 47, nil => 143},
+      prior_week_ticket_shown: %{@rail_ref => 39, nil => 131}
     }
     |> new_email()
   end

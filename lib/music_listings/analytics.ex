@@ -80,7 +80,10 @@ defmodule MusicListings.Analytics do
 
   `*_conversions` hold `event.ticket_click` counts split by referrer (see
   `ref_counts_between/3`) so the email can report the rail conversion funnel
-  (card click on the rail → ticket click on the detail page).
+  (card click on the rail → ticket click on the detail page). `*_ticket_shown`
+  hold `event.ticket_link_shown` counts split by referrer, giving the fair
+  conversion denominator: rail visits that actually had a ticket link to click
+  (a card click on an event with no ticket link can never convert).
   """
   @spec weekly_rail_traction(DateTime.t()) :: %{
           period_end: DateTime.t(),
@@ -89,7 +92,9 @@ defmodule MusicListings.Analytics do
           this_week: %{optional(String.t()) => non_neg_integer()},
           prior_week: %{optional(String.t()) => non_neg_integer()},
           this_week_conversions: %{optional(String.t() | nil) => non_neg_integer()},
-          prior_week_conversions: %{optional(String.t() | nil) => non_neg_integer()}
+          prior_week_conversions: %{optional(String.t() | nil) => non_neg_integer()},
+          this_week_ticket_shown: %{optional(String.t() | nil) => non_neg_integer()},
+          prior_week_ticket_shown: %{optional(String.t() | nil) => non_neg_integer()}
         }
   def weekly_rail_traction(reference \\ DateHelpers.now()) do
     this_week_start = DateTime.add(reference, -7, :day)
@@ -103,7 +108,11 @@ defmodule MusicListings.Analytics do
       prior_week: counts_between(prior_week_start, this_week_start),
       this_week_conversions: ref_counts_between("event.ticket_click", this_week_start, reference),
       prior_week_conversions:
-        ref_counts_between("event.ticket_click", prior_week_start, this_week_start)
+        ref_counts_between("event.ticket_click", prior_week_start, this_week_start),
+      this_week_ticket_shown:
+        ref_counts_between("event.ticket_link_shown", this_week_start, reference),
+      prior_week_ticket_shown:
+        ref_counts_between("event.ticket_link_shown", prior_week_start, this_week_start)
     }
   end
 end

@@ -7,13 +7,12 @@ defmodule MusicListingsWeb.EventLive.Show do
 
   @impl true
   def mount(%{"id" => _id} = params, _session, socket) do
-    maybe_track_recently_added_click(socket, params)
-
     with {:ok, %{id: id}} <- validate(:show, params),
          {:ok, event} <- MusicListings.fetch_event(id) do
       canonical_slug = SEO.event_slug(event)
 
       if params["slug"] == canonical_slug do
+        maybe_track_recently_added_click(socket, params)
         maybe_track_ticket_link_shown(socket, event, params)
 
         socket
@@ -21,12 +20,19 @@ defmodule MusicListingsWeb.EventLive.Show do
         |> assign_event_seo(event)
         |> ok()
       else
-        {:ok, push_navigate(socket, to: ~p"/events/#{event.id}/#{canonical_slug}", replace: true)}
+        path = redirect_path(event.id, canonical_slug, params["ref"])
+        {:ok, push_navigate(socket, to: path, replace: true)}
       end
     else
       _error -> raise Ecto.NoResultsError, queryable: MusicListingsSchema.Event
     end
   end
+
+  # Carries the ?ref referrer through the slug-canonicalisation redirect so rail
+  # attribution survives to the re-mounted (canonical) page. Only appends the
+  # param when present, keeping direct visits on a clean canonical URL.
+  defp redirect_path(id, slug, nil), do: ~p"/events/#{id}/#{slug}"
+  defp redirect_path(id, slug, ref), do: ~p"/events/#{id}/#{slug}?#{[ref: ref]}"
 
   # Fired when the "Get Tickets" button on the detail page is clicked. The `ref`
   # assign (captured in mount from ?ref=) distinguishes rail-referred visits
@@ -49,7 +55,10 @@ defmodule MusicListingsWeb.EventLive.Show do
 
   # Emitted when a visitor arrives via a "New This Week" rail card (the rail
   # links carry ?ref=new_this_week). Guarded on connected?/1 so it counts once
-  # per arrival, and fired before any slug-canonicalisation redirect.
+  # per arrival. Fired only from the canonical-slug branch of mount/3: the ref is
+  # preserved across the canonicalisation redirect (see redirect_path/3), so
+  # counting here attributes card_click, ticket_link_shown and ticket_click all
+  # to the same canonical mount and avoids double-counting a redirected arrival.
   defp maybe_track_recently_added_click(socket, %{"ref" => "new_this_week", "id" => event_id}) do
     if connected?(socket) do
       :telemetry.execute(

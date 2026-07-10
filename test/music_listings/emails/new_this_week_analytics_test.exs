@@ -11,7 +11,9 @@ defmodule MusicListings.Emails.NewThisWeekAnalyticsTest do
       this_week: this_week,
       prior_week: prior_week,
       this_week_conversions: Keyword.get(opts, :this_week_conversions, %{}),
-      prior_week_conversions: Keyword.get(opts, :prior_week_conversions, %{})
+      prior_week_conversions: Keyword.get(opts, :prior_week_conversions, %{}),
+      this_week_ticket_shown: Keyword.get(opts, :this_week_ticket_shown, %{}),
+      prior_week_ticket_shown: Keyword.get(opts, :prior_week_ticket_shown, %{})
     }
   end
 
@@ -62,34 +64,45 @@ defmodule MusicListings.Emails.NewThisWeekAnalyticsTest do
       assert email.html_body =~ "n/a"
     end
 
-    test "renders the rail conversions section from ref-split ticket clicks" do
+    test "measures rail conversion against ticket-eligible views, not raw card clicks" do
       email =
         %{
           "new_this_week.card_click" => 50,
-          "event.ticket_click" => 40,
+          "event.ticket_click" => 44,
           "event.ticket_link_shown" => 200
         }
         |> report(
           %{"new_this_week.card_click" => 30},
-          this_week_conversions: %{"new_this_week" => 10, nil => 30},
-          prior_week_conversions: %{"new_this_week" => 6}
+          this_week_conversions: %{"new_this_week" => 10, nil => 34},
+          prior_week_conversions: %{"new_this_week" => 6},
+          # Only 40 of the 50 rail card clicks reached an event with a ticket link;
+          # the other 10 can never convert and must not dilute the denominator.
+          this_week_ticket_shown: %{"new_this_week" => 40, nil => 160}
         )
         |> NewThisWeekAnalytics.new_email()
 
       assert email.html_body =~ "Rail conversions"
-      # Conversion rate = rail ticket clicks (10) / rail card clicks (50) = 20.0%
-      assert email.html_body =~ "20.0%"
-      # Overall event-page ticket CTR = 40 / 200 = 20.0% (same string, but section present)
+      # Conversion = rail ticket clicks (10) / rail ticket-eligible views (40) = 25.0%,
+      # NOT the misleading 10/50 = 20.0% against raw card clicks.
+      assert email.html_body =~ "25.0%"
+      refute email.html_body =~ "20.0%"
+      # Overall event-page ticket CTR = 44 / 200 = 22.0% is a separate figure.
       assert email.html_body =~ "event-page ticket CTR"
+      assert email.html_body =~ "22.0%"
     end
 
-    test "renders the conversions section without raising when conversion keys are absent" do
-      # Reports built before this field existed (or with no conversion activity)
-      # should still render — the email defaults the maps to empty.
+    test "renders the conversions section without raising when new fields are absent" do
+      # Reports built before these fields existed (or with no activity) should
+      # still render — the email defaults the maps to empty.
       email =
         %{"new_this_week.shown" => 5}
         |> report(%{})
-        |> Map.drop([:this_week_conversions, :prior_week_conversions])
+        |> Map.drop([
+          :this_week_conversions,
+          :prior_week_conversions,
+          :this_week_ticket_shown,
+          :prior_week_ticket_shown
+        ])
         |> NewThisWeekAnalytics.new_email()
 
       assert email.html_body =~ "Rail conversions"

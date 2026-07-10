@@ -87,11 +87,14 @@ defmodule MusicListings.AnalyticsTest do
       record_at("new_this_week.shown", ~U[2024-07-26 12:00:00Z])
       record_at("new_this_week.shown", ~U[2024-07-30 12:00:00Z])
       record_at("new_this_week.card_click", ~U[2024-07-30 12:00:00Z])
+      record_at("event.ticket_link_shown", ~U[2024-07-30 12:00:00Z], %{"ref" => "new_this_week"})
+      record_at("event.ticket_link_shown", ~U[2024-07-31 12:00:00Z], %{"ref" => nil})
       record_at("event.ticket_click", ~U[2024-07-30 12:00:00Z], %{"ref" => "new_this_week"})
       record_at("event.ticket_click", ~U[2024-07-31 12:00:00Z], %{"ref" => nil})
 
       # prior week: [2024-07-18 12:00, 2024-07-25 12:00)
       record_at("new_this_week.shown", ~U[2024-07-20 12:00:00Z])
+      record_at("event.ticket_link_shown", ~U[2024-07-20 12:00:00Z], %{"ref" => "new_this_week"})
       record_at("event.ticket_click", ~U[2024-07-20 12:00:00Z], %{"ref" => "new_this_week"})
 
       # outside both windows
@@ -106,12 +109,20 @@ defmodule MusicListings.AnalyticsTest do
       assert report.this_week == %{
                "new_this_week.shown" => 2,
                "new_this_week.card_click" => 1,
+               "event.ticket_link_shown" => 2,
                "event.ticket_click" => 2
              }
 
-      assert report.prior_week == %{"new_this_week.shown" => 1, "event.ticket_click" => 1}
+      assert report.prior_week == %{
+               "new_this_week.shown" => 1,
+               "event.ticket_link_shown" => 1,
+               "event.ticket_click" => 1
+             }
+
       assert report.this_week_conversions == %{"new_this_week" => 1, nil => 1}
       assert report.prior_week_conversions == %{"new_this_week" => 1}
+      assert report.this_week_ticket_shown == %{"new_this_week" => 1, nil => 1}
+      assert report.prior_week_ticket_shown == %{"new_this_week" => 1}
     end
   end
 
