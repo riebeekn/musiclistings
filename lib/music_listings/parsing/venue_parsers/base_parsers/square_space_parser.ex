@@ -55,10 +55,23 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.SquareSpaceParser do
 
   def event_time(event) do
     case event
-         |> Selectors.text(css("li.eventlist-meta-item time.event-time-12hr"))
+         |> event_time_string()
          |> ParseHelpers.build_time_from_time_string() do
       {:ok, time} -> time
       {:error, _reason} -> nil
+    end
+  end
+
+  # SquareSpace themes render the start time in one of two ways: a plain 12hr
+  # string, or a localized time element. Sites using the latter have no
+  # `event-time-12hr` element at all, so fall back to it.
+  defp event_time_string(event) do
+    case Selectors.text(event, css("li.eventlist-meta-item time.event-time-12hr")) do
+      nil ->
+        Selectors.text(event, css("li.eventlist-meta-item time.event-time-localized-start"))
+
+      time_string ->
+        time_string
     end
   end
 
