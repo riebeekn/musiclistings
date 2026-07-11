@@ -1,0 +1,63 @@
+{
+  "id": "6a089fe2c054f434c6bccd83",
+  "collectionId": "69cc145c7359594a10c2710c",
+  "recordType": 12,
+  "addedOn": 1778950258524,
+  "updatedOn": 1778950708050,
+  "starred": false,
+  "passthrough": false,
+  "tags": [],
+  "categories": [],
+  "workflowState": 1,
+  "publishOn": 1778950258524,
+  "authorId": "5c86f3257e697d6b4ede4afc",
+  "systemDataId": "1778950313843-85GH71GHHVHQLB03OOC8",
+  "systemDataVariants": "959x1244",
+  "systemDataSourceType": "JPG",
+  "filename": "IMG_9476.jpg",
+  "mediaFocalPoint": {
+    "x": 0.47688035735844503,
+    "y": 0.8363873128081108,
+    "source": 3
+  },
+  "colorData": {
+    "topLeftAverage": "c58a55",
+    "topRightAverage": "b86d56",
+    "bottomLeftAverage": "cc654b",
+    "bottomRightAverage": "c86841",
+    "centerAverage": "e08e4d",
+    "suggestedBgColor": "b69875"
+  },
+  "urlId": "zjxsxq37dvy0xw4m9u5lien1zkylb3",
+  "title": "Rising JRock 2026",
+  "body": null,
+  "excerpt": "<p style=\"white-space:pre-wrap;\" data-rte-preserve-empty=\"true\">The Piston presents Rising JRock w/</p><p style=\"white-space:pre-wrap;\" data-rte-preserve-empty=\"true\">‍ Rising Ronin ‍<a href=\"https://www.instagram.com/risingroninband/\">https://www.instagram.com/risingroninband/</a></p><p style=\"white-space:pre-wrap;\" data-rte-preserve-empty=\"true\">Camo Kimono <a href=\"https://www.instagram.com/camokimono/\">https://www.instagram.com/camokimono/</a></p><p style=\"white-space:pre-wrap;\" data-rte-preserve-empty=\"true\">Tokuiten <a href=\"https://www.instagram.com/tokuiten_band/\">https://www.instagram.com/tokuiten_band/</a></p><p style=\"white-space:pre-wrap;\" data-rte-preserve-empty=\"true\">Doors 8pm 19+ $16 </p>",
+  "location": {
+    "mapZoom": 12.0,
+    "mapLat": 40.7207559,
+    "mapLng": -74.0007613,
+    "markerLat": 40.7207559,
+    "markerLng": -74.0007613
+  },
+  "customContent": null,
+  "likeCount": 0,
+  "commentCount": 0,
+  "publicCommentCount": 0,
+  "commentState": 2,
+  "unsaved": false,
+  "fullUrl": "/calendar/zjxsxq37dvy0xw4m9u5lien1zkylb3",
+  "assetUrl": "https://images.squarespace-cdn.com/content/v1/69b87645e86dde6c4270ebc5/1778950313843-85GH71GHHVHQLB03OOC8/IMG_9476.jpg",
+  "contentType": "image/jpeg",
+  "structuredContent": {
+    "_type": "CalendarEvent",
+    "startDate": 1784505600262,
+    "endDate": 1784527200262
+  },
+  "startDate": 1784505600262,
+  "endDate": 1784527200262,
+  "items": [],
+  "pushedServices": {},
+  "pendingPushedServices": {},
+  "originalSize": "959x1244",
+  "recordTypeLabel": "event"
+}
