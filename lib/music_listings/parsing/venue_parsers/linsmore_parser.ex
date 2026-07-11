@@ -6,7 +6,7 @@ defmodule MusicListings.Parsing.VenueParsers.LinsmoreParser do
 
   import Meeseeks.CSS
 
-  alias MusicListings.HttpClient.SiteGroundChallenge
+  alias MusicListings.HttpClient
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
@@ -17,9 +17,7 @@ defmodule MusicListings.Parsing.VenueParsers.LinsmoreParser do
 
   @impl true
   def retrieve_events_fun do
-    # linsmoretavern.com sits behind SiteGround's sgcaptcha bot challenge, which
-    # 202s our datacenter IP; SiteGroundChallenge solves it and returns the page.
-    fn url -> SiteGroundChallenge.get(url) end
+    fn url -> HttpClient.get(url) end
   end
 
   @impl true

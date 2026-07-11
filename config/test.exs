@@ -42,10 +42,6 @@ config :phoenix_live_view,
 # Use test HTTP client that returns errors, so parsers hit fallback paths
 config :music_listings, :http_client, MusicListings.HttpClient.Test
 
-# Route the real Req client at a Req.Test stub instead of the network, so
-# MusicListings.HttpClient.Req itself can be tested (see req_test.exs).
-config :music_listings, :req_options, plug: {Req.Test, MusicListings.HttpClient.Req}
-
 # Oban test config
 config :music_listings, Oban, testing: :inline
 
