@@ -23,6 +23,14 @@ defmodule MusicListings.HttpClient.Req do
     {"accept-language", "en-CA,en;q=0.9"}
   ]
 
+  @doc """
+  Browser-like default request headers. Exposed so multi-step flows built
+  directly on Req (e.g. `MusicListings.HttpClient.SiteGroundChallenge`) present
+  the same fingerprint as the normal client.
+  """
+  @spec default_headers() :: [{String.t(), String.t()}]
+  def default_headers, do: @default_headers
+
   @impl true
   def get(url, headers \\ []) do
     url
