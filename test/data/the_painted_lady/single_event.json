@@ -1,0 +1,63 @@
+{
+  "id": "6a050e9b322a5531c2321cd7",
+  "collectionId": "67affe3e599d21317b5b23d8",
+  "recordType": 12,
+  "addedOn": 1778716524437,
+  "updatedOn": 1778716554568,
+  "starred": false,
+  "passthrough": false,
+  "tags": [],
+  "categories": [],
+  "workflowState": 1,
+  "publishOn": 1778716524437,
+  "authorId": "67af8e85735c4b5a9709e680",
+  "systemDataId": "1778716546935-M3MIR1HKA5YO6YIJSWN9",
+  "systemDataVariants": "1080x1080",
+  "systemDataSourceType": "JPG",
+  "filename": "Album Release Poster (1080 x 1080 px).jpg",
+  "mediaFocalPoint": {
+    "x": 0.5,
+    "y": 0.5,
+    "source": 3
+  },
+  "colorData": {
+    "topLeftAverage": "020202",
+    "topRightAverage": "020202",
+    "bottomLeftAverage": "090909",
+    "bottomRightAverage": "030303",
+    "centerAverage": "030a0c",
+    "suggestedBgColor": "121617"
+  },
+  "urlId": "makenzy-williamson-album-release",
+  "title": "Makenzy Williamson Album Release",
+  "body": null,
+  "excerpt": "<p style=\"white-space:pre-wrap;\" data-rte-preserve-empty=\"true\">Makenzy Williamson brings her powerful alt/rock sound to Toronto this July for the release of her debut 12-track album!</p><p style=\"white-space:pre-wrap;\" data-rte-preserve-empty=\"true\"><strong>7:00pm | $15</strong></p><p style=\"white-space:pre-wrap;\" data-rte-preserve-empty=\"true\"><a target=\"_blank\" href=\"https://www.eventbrite.com/e/1989430549327?aff=oddtdtcreator\">BUY TICKETS HERE</a></p>",
+  "location": {
+    "mapZoom": 12.0,
+    "mapLat": 40.7207559,
+    "mapLng": -74.0007613,
+    "markerLat": 40.7207559,
+    "markerLng": -74.0007613
+  },
+  "customContent": null,
+  "likeCount": 0,
+  "commentCount": 0,
+  "publicCommentCount": 0,
+  "commentState": 2,
+  "unsaved": false,
+  "fullUrl": "/shows-1/makenzy-williamson-album-release",
+  "assetUrl": "https://images.squarespace-cdn.com/content/v1/67af93d703feb47bac525fd5/1778716546935-M3MIR1HKA5YO6YIJSWN9/Album+Release+Poster+%281080+x+1080+px%29.jpg",
+  "contentType": "image/jpeg",
+  "structuredContent": {
+    "_type": "CalendarEvent",
+    "startDate": 1784242800324,
+    "endDate": 1784251800324
+  },
+  "startDate": 1784242800324,
+  "endDate": 1784251800324,
+  "items": [],
+  "pushedServices": {},
+  "pendingPushedServices": {},
+  "originalSize": "1080x1080",
+  "recordTypeLabel": "event"
+}
