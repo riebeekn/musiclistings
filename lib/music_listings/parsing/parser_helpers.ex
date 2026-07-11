@@ -354,4 +354,47 @@ defmodule MusicListings.Parsing.ParseHelpers do
       hour
     end
   end
+
+  # ===========================================================================
+  # Ticket url helpers
+  # ===========================================================================
+  @tracking_params ~w(gclid fbclid msclkid mc_cid mc_eid)
+  @tracking_param_prefixes ~w(_ga _gl utm_)
+
+  @doc """
+  Strips analytics tracking params (ie. the `_gl` / `_ga` params a Google
+  Analytics cross domain linker appends) from a ticket url, leaving any params
+  the ticket vendor actually needs.
+
+  We store the cleaned url so the outbound link we build from it - including
+  the affiliate redirect it gets wrapped in - carries only meaningful params.
+  """
+  @spec sanitize_ticket_url(String.t() | nil) :: String.t() | nil
+  def sanitize_ticket_url(nil), do: nil
+
+  def sanitize_ticket_url(url) do
+    uri = URI.parse(url)
+
+    %{uri | query: sanitized_query(uri.query)}
+    |> URI.to_string()
+  end
+
+  defp sanitized_query(nil), do: nil
+
+  defp sanitized_query(query) do
+    query
+    |> URI.decode_query()
+    |> Enum.reject(fn {param, _value} -> tracking_param?(param) end)
+    |> case do
+      [] -> nil
+      params -> params |> Enum.sort() |> URI.encode_query()
+    end
+  end
+
+  defp tracking_param?(param) do
+    normalized = String.downcase(param)
+
+    normalized in @tracking_params or
+      Enum.any?(@tracking_param_prefixes, &String.starts_with?(normalized, &1))
+  end
 end
