@@ -93,4 +93,37 @@ defmodule MusicListings.Parsing.ParserHelpersTest do
       assert {:ok, ~T[19:30:00]} == ParseHelpers.build_time_from_time_string("7:30pm")
     end
   end
+
+  describe "sanitize_ticket_url/1" do
+    test "returns nil for nil" do
+      assert nil == ParseHelpers.sanitize_ticket_url(nil)
+    end
+
+    test "leaves a url with no query params alone" do
+      url = "https://www.ticketmaster.ca/event/10006481D41C232F"
+
+      assert url == ParseHelpers.sanitize_ticket_url(url)
+    end
+
+    test "strips google analytics cross domain linker params" do
+      url =
+        "https://www.ticketmaster.ca/interpol-toronto-ontario-10-02-2026/event/1000649B81805BD2?_gl=1*18g11vq*_gcl_au*MTMxOTQ5MzE3Ni4xNzgzNzgzNzgz*_ga*NjE1OTM5NzY1LjE3ODM3ODM3ODM.*_ga_J0R9TBXM89*czE3ODM3ODM3ODMkbzEkZzEkdDE3ODM3ODM4MTIkajMxJGwwJGgw"
+
+      assert "https://www.ticketmaster.ca/interpol-toronto-ontario-10-02-2026/event/1000649B81805BD2" ==
+               ParseHelpers.sanitize_ticket_url(url)
+    end
+
+    test "strips utm and click id params" do
+      url = "https://www.ticketweb.ca/event/some-show?utm_source=venue&gclid=abc123&fbclid=xyz"
+
+      assert "https://www.ticketweb.ca/event/some-show" == ParseHelpers.sanitize_ticket_url(url)
+    end
+
+    test "keeps params the ticket vendor needs" do
+      url = "https://www.ticketweb.ca/event/some-show?pl=Rebel&utm_medium=web"
+
+      assert "https://www.ticketweb.ca/event/some-show?pl=Rebel" ==
+               ParseHelpers.sanitize_ticket_url(url)
+    end
+  end
 end

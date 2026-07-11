@@ -65,7 +65,15 @@ defmodule MusicListings.HttpClient.Test do
       {"tdmusichall.mhrth.com/api/attendable/v1/instances/", "td_music_hall/instance.json"},
       {"tdmusichall.mhrth.com/tickets/", "td_music_hall/detail.html"},
       # Drake Underground
-      {"thedrake.ca/event/", "drake_underground/detail.html"}
+      {"thedrake.ca/event/", "drake_underground/detail.html"},
+      # The Bowl at Sobeys Stadium - each show has its own page holding the
+      # ticket vendor link and the show time.  Only the shows the tests care
+      # about have a fixture; the rest are left unmatched on purpose so the
+      # parser's "no show page" fallbacks are exercised too.
+      {"liveatthebowl.com/howard-jones", "bowl/howard-jones.html"},
+      {"liveatthebowl.com/heroes-a-video-game-symphony",
+       "bowl/heroes-a-video-game-symphony.html"},
+      {"liveatthebowl.com/interpol", "bowl/interpol.html"}
     ]
   end
 end
