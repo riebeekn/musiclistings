@@ -42,8 +42,11 @@ defmodule MusicListings.Crawler.DataSource do
             payloads ++ events_from_current_body
           end
 
-        {:ok, %Response{status: status}} ->
-          Logger.warning("Failed to get data from #{url}, status code: #{status}")
+        {:ok, %Response{status: status, body: body}} ->
+          Logger.warning(
+            "Failed to get data from #{url}, status code: #{status}, body: #{body_snippet(body)}"
+          )
+
           []
 
         {:error, error} ->
@@ -56,4 +59,10 @@ defmodule MusicListings.Crawler.DataSource do
         []
     end
   end
+
+  # Without the body we can't tell a bot-mitigation challenge page from an empty
+  # block, and the crawl only runs nightly - so log enough to diagnose it the
+  # first time. `inspect/2` because the body is a decoded map for the JSON-API
+  # venues, not always a binary.
+  defp body_snippet(body), do: inspect(body, printable_limit: 500, limit: 20)
 end
