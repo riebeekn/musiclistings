@@ -102,6 +102,9 @@ defmodule MusicListings do
   @spec get_venue!(pos_integer()) :: Venue.t()
   defdelegate get_venue!(venue_id), to: Venues
 
+  @spec fetch_venue_by_name(String.t()) :: {:ok, Venue} | {:error, :venue_not_found}
+  defdelegate fetch_venue_by_name(venue_name), to: Venues
+
   @spec create_venue(
           User,
           attrs :: %{
