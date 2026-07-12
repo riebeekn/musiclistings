@@ -4,22 +4,32 @@ defmodule MusicListings.Emails.LatestCrawlResults do
   """
   use MusicListings.Mailer
 
+  alias MusicListings.Events
   alias MusicListings.Repo
   alias MusicListingsSchema.CrawlError
   alias MusicListingsSchema.CrawlSummary
+  alias MusicListingsSchema.Event
   alias MusicListingsSchema.Venue
   alias MusicListingsSchema.VenueCrawlSummary
   alias MusicListingsUtilities.DateHelpers
 
-  def new_email(crawl_summary) do
+  @doc """
+  Builds the crawl summary email.
+
+  The events the crawl added are looked up from its time window unless passed in -
+  `preview/0` supplies its own so it can render without touching the database.
+  """
+  def new_email(crawl_summary, added_events \\ nil) do
     crawl_summary =
       Repo.preload(crawl_summary, crawl_errors: [:venue], venue_crawl_summaries: [:venue])
+
+    added_events = added_events || Events.list_events_added_during_crawl(crawl_summary)
 
     new()
     |> to_site_admin()
     |> from_noreply()
     |> subject(subject_line(crawl_summary))
-    |> body(mjml(%{crawl_summary: crawl_summary}))
+    |> body(mjml(%{crawl_summary: crawl_summary, added_events: added_events}))
   end
 
   defp subject_line(%{new: new, errors: errors}) when errors > 0 do
@@ -35,6 +45,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       assigns
       |> Map.put(:venue_rows, sort_venues(assigns.crawl_summary.venue_crawl_summaries))
       |> Map.put(:error_count, Enum.count(assigns.crawl_summary.crawl_errors))
+      |> Map.put(:added_event_count, Enum.count(assigns.added_events))
 
     ~H"""
     <.h1>Nightly Crawl Report</.h1>
@@ -113,17 +124,52 @@ defmodule MusicListings.Emails.LatestCrawlResults do
             <div style="color:#ece9e0;font-size:12px;line-height:1.5;padding-top:8px;white-space:pre-wrap;font-family:'Space Mono','SFMono-Regular',monospace;">
               {crawl_error.error}
             </div>
-            <div style="color:#a8a49a;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding-top:10px;">
-              Raw event
-            </div>
-            <div style="color:#a8a49a;font-size:11px;line-height:1.45;padding-top:4px;word-break:break-word;font-family:'Space Mono','SFMono-Regular',monospace;">
-              {crawl_error.raw_event}
-            </div>
+            <%= if crawl_error.type == :no_events_error do %>
+              <div style="color:#a8a49a;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding-top:10px;">
+                Crawl locally
+              </div>
+              <div style="color:#d8ff3e;font-size:12px;line-height:1.45;padding-top:4px;word-break:break-word;font-family:'Space Mono','SFMono-Regular',monospace;">
+                {local_crawl_command(crawl_error.venue)}
+              </div>
+            <% else %>
+              <div style="color:#a8a49a;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding-top:10px;">
+                Raw event
+              </div>
+              <div style="color:#a8a49a;font-size:11px;line-height:1.45;padding-top:4px;word-break:break-word;font-family:'Space Mono','SFMono-Regular',monospace;">
+                {crawl_error.raw_event}
+              </div>
+            <% end %>
           </div>
         </mj-text>
       <% end %>
     <% end %>
+
+    <%= if @added_event_count > 0 do %>
+      <.h2>New events ({@added_event_count})</.h2>
+      <.table rows={@added_events}>
+        <:col :let={event} label="Venue">
+          <span style="color:#a8a49a;">{event.venue.name}</span>
+        </:col>
+        <:col :let={event} label="Date">
+          <span style="white-space:nowrap;">{DateHelpers.format_date(event.date)}</span>
+        </:col>
+        <:col :let={event} label="Event">
+          <span style="color:#ece9e0;font-weight:700;">{event.title}</span>
+        </:col>
+      </.table>
+    <% end %>
     """
+  end
+
+  # A venue reports no events either because its parser has silently broken, or
+  # because its origin blocks Render's egress IP and the crawl never reaches it.
+  # Either way the fix starts by crawling it from a machine that can reach it, so
+  # hand over the exact command to run.
+  #
+  # Identify the venue by parser_module_name, not id: this command is written by
+  # prod but pasted into a local shell, and venue ids differ between the two.
+  defp local_crawl_command(venue) do
+    "bin/crawl-venue.sh #{venue.parser_module_name}    # #{venue.name}"
   end
 
   defp sort_venues(venue_crawl_summaries) do
@@ -138,9 +184,9 @@ defmodule MusicListings.Emails.LatestCrawlResults do
 
   def preview do
     # venues
-    v1 = build_venue(1, "First Venue")
-    v2 = build_venue(2, "Second Venue")
-    v3 = build_venue(3, "Quiet Venue")
+    v1 = build_venue(1, "First Venue", "FirstVenueParser")
+    v2 = build_venue(2, "Second Venue", "SecondVenueParser")
+    v3 = build_venue(3, "Quiet Venue", "QuietVenueParser")
 
     # venue summaries
     vcs1 =
@@ -174,11 +220,19 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     ce1 = build_crawl_error(1, v1)
     ce2 = build_crawl_error(2, v2)
     ce3 = build_crawl_error(3, v2)
+    ce4 = build_no_events_error(4, v3)
+
+    # events added by this crawl
+    added_events = [
+      build_event(v1, "Sunset Rubdown", ~D[2026-08-14]),
+      build_event(v1, "The Weather Station", ~D[2026-09-02]),
+      build_event(v2, "Badge Époque Ensemble", ~D[2026-08-21])
+    ]
 
     build_crawl_summary()
-    |> Map.put(:crawl_errors, [ce1, ce2, ce3])
+    |> Map.put(:crawl_errors, [ce1, ce2, ce3, ce4])
     |> Map.put(:venue_crawl_summaries, [vcs1, vcs2, vcs3])
-    |> new_email()
+    |> new_email(added_events)
   end
 
   def preview_details do
@@ -189,11 +243,11 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     ]
   end
 
-  defp build_venue(id, name) do
+  defp build_venue(id, name, parser_module_name) do
     %Venue{
       id: id,
       name: name,
-      parser_module_name: "#{name}parser"
+      parser_module_name: parser_module_name
     }
   end
 
@@ -234,6 +288,25 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       type: :parse_error,
       error: example_error(),
       raw_event: example_raw_event()
+    }
+  end
+
+  defp build_event(venue, title, date) do
+    %Event{
+      venue: venue,
+      venue_id: venue.id,
+      title: title,
+      date: date
+    }
+  end
+
+  defp build_no_events_error(id, venue) do
+    %CrawlError{
+      id: id,
+      venue: venue,
+      venue_id: venue.id,
+      type: :no_events_error,
+      error: "No events found for #{venue.name}"
     }
   end
 

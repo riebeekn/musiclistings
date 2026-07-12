@@ -63,6 +63,19 @@ defmodule MusicListings.Venues do
     end
   end
 
+  @spec fetch_venue_by_parser_module_name(String.t()) ::
+          {:ok, Venue} | {:error, :venue_not_found}
+  def fetch_venue_by_parser_module_name(parser_module_name) do
+    from(venue in Venue,
+      where: fragment("lower(?) = lower(?)", venue.parser_module_name, ^parser_module_name)
+    )
+    |> Repo.one()
+    |> case do
+      nil -> {:error, :venue_not_found}
+      venue -> {:ok, venue}
+    end
+  end
+
   @create_attrs [
     :name,
     :street,

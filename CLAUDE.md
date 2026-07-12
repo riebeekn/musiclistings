@@ -146,6 +146,31 @@ To add support for a new venue:
 3. When browsing a venue's site be mindful of rate limits and do not hammer the site with requests!
 4. `MusicListings.Crawler.crawl` can be called passing in a list just containing the new venue to check that the crawler executes correctly.
 
+## Venues Render Can't Reach
+
+Some venues' origin servers silently drop Render's egress IP at the TCP layer, so the nightly
+crawl can never reach them — the connection times out before a single HTTP byte is sent
+(`%Req.TransportError{reason: :timeout}`). This is **not** fixable in a parser: no header,
+user-agent, or retry helps, because the origin never completes the TCP handshake. Confirmed from
+an IEx session on Render, where `:gen_tcp.connect` to the origin hangs on IPv4 while a reachable
+host connects instantly.
+
+Currently affected: **Wiggle Room** and **Junction Underground** (both on the same Hostinger box,
+`195.35.15.150`).
+
+These sites *are* reachable from a home/residential connection, so crawl them locally instead.
+Venues are identified by their `parser_module_name`, not their id — ids are assigned per
+environment, so a command written by prod would point at the wrong venue locally:
+
+```bash
+./bin/crawl-venue.sh WiggleRoomParser
+./bin/crawl-venue.sh WiggleRoomParser JunctionUndergroundParser
+```
+
+This runs `mix crawl_venue` with `USE_PROD_DB=true`, which points the dev app at the production
+database via `$PROD_DB_URL` (see `config/dev.exs`) so the results land in prod. The nightly crawl
+summary email prints the exact command for any venue that reported "No events found".
+
 ## Database Operations
 
 ### Common Ecto Commands

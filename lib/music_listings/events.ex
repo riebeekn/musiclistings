@@ -11,6 +11,7 @@ defmodule MusicListings.Events do
   alias MusicListings.Events.RecentlyAddedRanker
   alias MusicListings.Events.ShowTimeInfo
   alias MusicListings.Repo
+  alias MusicListingsSchema.CrawlSummary
   alias MusicListingsSchema.Event
   alias MusicListingsSchema.SubmittedEvent
   alias MusicListingsUtilities.DateHelpers
@@ -144,6 +145,24 @@ defmodule MusicListings.Events do
     |> where([event], is_nil(event.deleted_at))
     |> order_by(asc: :date, asc: :title)
     |> preload(:venue)
+    |> Repo.all()
+  end
+
+  @doc """
+  Lists the events created by a given crawl, sorted by venue.
+
+  The crawl summary row is inserted when the crawl starts, so any event inserted
+  at or after that point was created by that crawl - events carry no reference to
+  the crawl that created them.
+  """
+  @spec list_events_added_during_crawl(CrawlSummary.t()) :: [Event.t()]
+  def list_events_added_during_crawl(%CrawlSummary{inserted_at: crawl_started_at}) do
+    Event
+    |> where([event], event.inserted_at >= ^crawl_started_at)
+    |> where([event], is_nil(event.deleted_at))
+    |> join(:inner, [event], venue in assoc(event, :venue))
+    |> order_by([event, venue], asc: venue.name, asc: event.date, asc: event.title)
+    |> preload([event, venue], venue: venue)
     |> Repo.all()
   end
 
