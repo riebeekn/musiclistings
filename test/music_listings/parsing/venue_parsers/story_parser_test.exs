@@ -1,6 +1,7 @@
 defmodule MusicListings.Parsing.VenueParsers.StoryParserTest do
   use ExUnit.Case, async: true
 
+  alias MusicListings.HttpClient.Response
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.VenueParsers.StoryParser
@@ -23,6 +24,15 @@ defmodule MusicListings.Parsing.VenueParsers.StoryParserTest do
   describe "source_url/0" do
     test "returns expected value" do
       assert "https://www.storytoronto.ca/" == StoryParser.source_url()
+    end
+  end
+
+  describe "retrieve_events_fun/0" do
+    test "fetches an instance token and uses it to pull the events" do
+      assert {:ok, %Response{status: 200, body: body}} =
+               StoryParser.retrieve_events_fun().(StoryParser.source_url())
+
+      assert 18 = body |> StoryParser.events() |> Enum.count()
     end
   end
 

@@ -1,0 +1,14 @@
+{
+  "apps": {
+    "140603ad-af8d-84a5-2c80-a0f60cb47351": {
+      "instance": "test-instance-token.eyJpbnN0YW5jZUlkIjoiZTE5MTZhNTgtZTQ2Ny00ODJjLTgwYzYtOTc5ZDYwN2I0MWU5In0",
+      "intId": 0,
+      "accessToken": "test-access-token"
+    },
+    "14271d6f-ba62-d045-549b-ab972ae1f70e": {
+      "instance": "some-other-app-token",
+      "intId": 1,
+      "accessToken": "some-other-access-token"
+    }
+  }
+}

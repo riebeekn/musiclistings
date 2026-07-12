@@ -73,7 +73,11 @@ defmodule MusicListings.HttpClient.Test do
       {"liveatthebowl.com/howard-jones", "bowl/howard-jones.html"},
       {"liveatthebowl.com/heroes-a-video-game-symphony",
        "bowl/heroes-a-video-game-symphony.html"},
-      {"liveatthebowl.com/interpol", "bowl/interpol.html"}
+      {"liveatthebowl.com/interpol", "bowl/interpol.html"},
+      # Story — token endpoint is fetched first, then the events API is called
+      # with the token it yields.
+      {"storytoronto.ca/_api/v1/access-tokens", "story/access_tokens.json"},
+      {"storytoronto.ca/_api/wix-one-events-server", "story/index.json"}
     ]
   end
 end
