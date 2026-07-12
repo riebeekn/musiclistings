@@ -13,7 +13,7 @@ defmodule MusicListings.Parsing.VenueParsers.BambisParser do
   def source_url, do: ResidentAdvisorParser.build_source_url(@club_id)
 
   @impl true
-  defdelegate retrieve_events_fun, to: ResidentAdvisorParser
+  def retrieve_events_fun, do: ResidentAdvisorParser.retrieve_events_fun(@club_id)
 
   @impl true
   def events(body), do: ResidentAdvisorParser.events(body, @club_id)

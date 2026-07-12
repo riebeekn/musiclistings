@@ -6,16 +6,16 @@ defmodule MusicListings.Parsing.VenueParsers.BambisParserTest do
   alias MusicListings.Parsing.VenueParsers.BambisParser
 
   setup do
-    index_file_path = Path.expand("#{File.cwd!()}/test/data/bambis/index.html")
+    index_file_path = Path.expand("#{File.cwd!()}/test/data/bambis/index.json")
 
-    index_html = File.read!(index_file_path)
+    index_json = File.read!(index_file_path)
 
     event =
-      index_html
+      index_json
       |> BambisParser.events()
-      |> Enum.find(&(&1["id"] == "2482363"))
+      |> Enum.find(&(&1["id"] == "2474831"))
 
-    %{index_html: index_html, event: event}
+    %{index_json: index_json, event: event}
   end
 
   describe "source_url/0" do
@@ -25,41 +25,41 @@ defmodule MusicListings.Parsing.VenueParsers.BambisParserTest do
   end
 
   describe "events/1" do
-    test "returns expected events", %{index_html: index_html} do
-      events = BambisParser.events(index_html)
+    test "returns expected events", %{index_json: index_json} do
+      events = BambisParser.events(index_json)
 
-      assert 7 == Enum.count(events)
+      assert 6 == Enum.count(events)
     end
   end
 
   describe "next_page_url/2" do
-    test "returns nil", %{index_html: index_html} do
-      assert nil == BambisParser.next_page_url(index_html, "https://ra.co/clubs/69282")
+    test "returns nil", %{index_json: index_json} do
+      assert nil == BambisParser.next_page_url(index_json, "https://ra.co/clubs/69282")
     end
   end
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "bambis_2482363" == BambisParser.event_id(event)
+      assert "bambis_2474831" == BambisParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "bambis_2482363" == BambisParser.ignored_event_id(event)
+      assert "bambis_2474831" == BambisParser.ignored_event_id(event)
     end
   end
 
   describe "event_title/1" do
     test "returns event title", %{event: event} do
-      assert "HYMZ, Yao Yao, Prince Josh, Thanks for the Tears" == BambisParser.event_title(event)
+      assert "Disco Portal: PARADISO" == BambisParser.event_title(event)
     end
   end
 
   describe "performers/1" do
     test "returns the event performers", %{event: event} do
       assert %Performers{
-               headliner: "HYMZ, Yao Yao, Prince Josh, Thanks for the Tears",
+               headliner: "Disco Portal: PARADISO",
                openers: []
              } == BambisParser.performers(event)
     end
@@ -67,7 +67,7 @@ defmodule MusicListings.Parsing.VenueParsers.BambisParserTest do
 
   describe "event_date/1" do
     test "returns the event date", %{event: event} do
-      assert ~D[2026-07-10] == BambisParser.event_date(event)
+      assert ~D[2026-07-17] == BambisParser.event_date(event)
     end
   end
 
@@ -103,7 +103,7 @@ defmodule MusicListings.Parsing.VenueParsers.BambisParserTest do
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert "https://ra.co/events/2482363" == BambisParser.details_url(event)
+      assert "https://ra.co/events/2474831" == BambisParser.details_url(event)
     end
   end
 end

@@ -1,0 +1,75 @@
+{
+  "data": {
+    "listing": {
+      "data": [
+        {
+          "id": "2474831",
+          "title": "Disco Portal: PARADISO",
+          "date": "2026-07-17T00:00:00.000",
+          "startTime": "2026-07-17T22:00:00.000",
+          "contentUrl": "/events/2474831",
+          "venue": {
+            "id": "69282",
+            "name": "Bambi's"
+          }
+        },
+        {
+          "id": "2481872",
+          "title": "Hot Take (Chicago), Florasystem, & dj miss",
+          "date": "2026-07-18T00:00:00.000",
+          "startTime": "2026-07-18T22:00:00.000",
+          "contentUrl": "/events/2481872",
+          "venue": {
+            "id": "69282",
+            "name": "Bambi's"
+          }
+        },
+        {
+          "id": "2483783",
+          "title": "Sem Forma presents: Scott Zacharias (Detroit) with Invisible City & Justin La Rose",
+          "date": "2026-07-24T00:00:00.000",
+          "startTime": "2026-07-24T22:00:00.000",
+          "contentUrl": "/events/2483783",
+          "venue": {
+            "id": "69282",
+            "name": "Bambi's"
+          }
+        },
+        {
+          "id": "2480061",
+          "title": "Critter b2b Lather Rinse Repeat all night",
+          "date": "2026-07-25T00:00:00.000",
+          "startTime": "2026-07-25T22:00:00.000",
+          "contentUrl": "/events/2480061",
+          "venue": {
+            "id": "69282",
+            "name": "Bambi's"
+          }
+        },
+        {
+          "id": "2488063",
+          "title": "Milch & Hasa",
+          "date": "2026-08-01T00:00:00.000",
+          "startTime": "2026-08-01T22:00:00.000",
+          "contentUrl": "/events/2488063",
+          "venue": {
+            "id": "69282",
+            "name": "Bambi's"
+          }
+        },
+        {
+          "id": "2461849",
+          "title": "SIGNAL: AKWA & TESFAY (All Night Long)",
+          "date": "2026-08-15T00:00:00.000",
+          "startTime": "2026-08-15T22:00:00.000",
+          "contentUrl": "/events/2461849",
+          "venue": {
+            "id": "69282",
+            "name": "Bambi's"
+          }
+        }
+      ],
+      "totalResults": 6
+    }
+  }
+}
