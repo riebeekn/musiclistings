@@ -77,7 +77,6 @@ defmodule MusicListings.MixProject do
       {:bandit, "~> 1.5"},
       {:req, "~> 0.6.1"},
       {:brotli, "~> 0.3.0"},
-      {:httpoison, "~> 2.0"},
       {:meeseeks, "~> 0.18.0"},
       {:oban, "~> 2.17"},
       {:premailex, "~> 1.0"},

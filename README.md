@@ -50,13 +50,13 @@ Now you can login at `/users/log_in`.  When logged in, delete links will be avai
 ## HTTP Client config
 The http client is configurable via the following setting in `config/config.exs`:
 ```
-config :music_listings, :http_client, MusicListings.HttpClient.HTTPoison
+config :music_listings, :http_client, MusicListings.HttpClient.Req
 ```
-Modules currently exist for [Req](https://github.com/wojtekmach/req) and [HTTPoison](https://github.com/edgurgel/httpoison) (see `lib/music_listings/http_client/req.ex` and `lib/music_listings/http_client/httpoison.ex`).
+[Req](https://github.com/wojtekmach/req) is what the app uses everywhere outside of tests (see `lib/music_listings/http_client/req.ex`), where it handles `brotli`/`gzip` decoding, timeouts and retries.  The test environment swaps in `MusicListings.HttpClient.Test`, which serves the HTML fixtures under `test/data/` instead of making real requests.
 
 To add a new http client add a module at `lib/music_listings/http_client/` and implement the `lib/music_listings/http_client.ex` behaviour.
 
-Initially the http client was not configurable but I ran into some issues with  `brotli` decoding and `Req` (the underlying brotli module was failing on the decoding of some sites) so for now have swapped it out with `HTTPoison`.
+There used to be an `HTTPoison` implementation as well, added as a workaround when `Req`'s `brotli` decoding was failing on some sites.  `Req` handles those sites fine now, so both the module and the dependency have been removed.
 
 ## UI
 The UI is a standard Phoenix LiveView application.

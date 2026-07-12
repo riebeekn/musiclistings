@@ -1,11 +1,9 @@
 defmodule MusicListings.HttpClient do
   @moduledoc """
-  Specification for the HttpClient, currently have implementations for
-  Req and HTTPoison.  Req is preferred but needed to swap out temporarily
-  due to some :brotli decoding issues.
+  Specification for the HttpClient.  MusicListings.HttpClient.Req makes the
+  real requests, MusicListings.HttpClient.Test serves local fixtures.
 
   Configured in config.exs by:
-    config :music_listings, :http_client, MusicListings.HttpClient.HTTPoison
     config :music_listings, :http_client, MusicListings.HttpClient.Req
   """
   defmodule Response do
@@ -14,11 +12,6 @@ defmodule MusicListings.HttpClient do
     """
     @type t() :: %__MODULE__{status: non_neg_integer(), body: binary()}
     defstruct [:status, :body]
-
-    @spec new(HTTPoison.Response.t()) :: t()
-    def new(%HTTPoison.Response{status_code: status, body: body}) do
-      %__MODULE__{status: status, body: body}
-    end
 
     @spec new(Req.Response.t()) :: t()
     def new(%{status: status, body: body}) do
