@@ -4,7 +4,6 @@ defmodule MusicListingsWeb.SubmittedEventLive.Edit do
 
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Price
-  alias MusicListings.Venues
 
   @impl true
   def mount(_params, _session, socket) do
@@ -101,7 +100,7 @@ defmodule MusicListingsWeb.SubmittedEventLive.Edit do
   defp venue_hint(venue) when venue in [nil, ""], do: nil
 
   defp venue_hint(venue) do
-    case Venues.fetch_venue_by_name(venue) do
+    case MusicListings.fetch_venue_by_name(venue) do
       {:ok, found} -> {:ok, "✓ Matches '#{found.name}'"}
       {:error, _reason} -> {:warn, "⚠ No venue matches — approval will fail"}
     end
