@@ -87,6 +87,29 @@ defmodule MusicListings.VenuesTest do
     end
   end
 
+  describe "fetch_venue_by_parser_module_name/1" do
+    setup do
+      venue = insert(:venue, parser_module_name: "SomeVenueParser")
+
+      %{venue_id: venue.id}
+    end
+
+    test "returns venue when it exists", %{venue_id: venue_id} do
+      assert {:ok, %Venue{id: ^venue_id}} =
+               Venues.fetch_venue_by_parser_module_name("SomeVenueParser")
+    end
+
+    test "ignores casing", %{venue_id: venue_id} do
+      assert {:ok, %Venue{id: ^venue_id}} =
+               Venues.fetch_venue_by_parser_module_name("somevenueparser")
+    end
+
+    test "returns error when not found" do
+      assert {:error, :venue_not_found} =
+               Venues.fetch_venue_by_parser_module_name("NonExistantParser")
+    end
+  end
+
   describe "create_venue/2" do
     test "returns error when no user" do
       assert {:error, :not_allowed} == Venues.create_venue(nil, %{})

@@ -6,6 +6,7 @@ defmodule MusicListings.EventsTest do
   alias MusicListings.Events.EventInfo
   alias MusicListings.Events.PagedEvents
   alias MusicListings.Events.ShowTimeInfo
+  alias MusicListingsSchema.CrawlSummary
   alias MusicListingsSchema.Event
   alias MusicListingsSchema.SubmittedEvent
   alias MusicListingsSchema.Venue
@@ -489,6 +490,77 @@ defmodule MusicListings.EventsTest do
 
       assert event.id == deleted_event.id
       assert deleted_event.deleted_at == DateHelpers.now()
+    end
+  end
+
+  describe "list_events_added_during_crawl/1" do
+    # The crawl summary row is written when the crawl starts, so an event is
+    # "added by" that crawl when it was inserted at or after that point. Note the
+    # schema autogenerates timestamps from DateHelpers.now/0, which is frozen in
+    # test - so anchor to it rather than the wall clock.
+    defp crawl_summary(started_at) do
+      %CrawlSummary{id: 1, inserted_at: started_at}
+    end
+
+    defp crawl_started_a_minute_ago do
+      DateHelpers.now() |> DateTime.add(-60, :second) |> crawl_summary()
+    end
+
+    test "returns the events the crawl inserted" do
+      venue = insert(:venue)
+      insert(:event, venue: venue, title: "Brand New Show")
+
+      assert [%Event{title: "Brand New Show"}] =
+               Events.list_events_added_during_crawl(crawl_started_a_minute_ago())
+    end
+
+    test "excludes events that predate the crawl" do
+      venue = insert(:venue)
+
+      insert(:event,
+        venue: venue,
+        title: "Already Known Show",
+        inserted_at: DateHelpers.now() |> DateTime.add(-1, :day)
+      )
+
+      assert [] == Events.list_events_added_during_crawl(crawl_started_a_minute_ago())
+    end
+
+    test "excludes deleted events" do
+      venue = insert(:venue)
+      insert(:event, venue: venue, title: "Cancelled Show", deleted_at: DateHelpers.now())
+
+      assert [] == Events.list_events_added_during_crawl(crawl_started_a_minute_ago())
+    end
+
+    test "sorts by venue name, then date, then title" do
+      zulu = insert(:venue, name: "Zulu Hall")
+      alpha = insert(:venue, name: "Alpha Hall")
+
+      insert(:event, venue: zulu, title: "Zulu Show", date: ~D[2024-08-02])
+      insert(:event, venue: alpha, title: "Later Alpha Show", date: ~D[2024-08-03])
+      insert(:event, venue: alpha, title: "Earlier Alpha Show", date: ~D[2024-08-02])
+      # same venue and date as the above, so only the title can break the tie
+      insert(:event, venue: alpha, title: "A Same Day Show", date: ~D[2024-08-02])
+
+      assert [
+               %Event{title: "A Same Day Show"},
+               %Event{title: "Earlier Alpha Show"},
+               %Event{title: "Later Alpha Show"},
+               %Event{title: "Zulu Show"}
+             ] = Events.list_events_added_during_crawl(crawl_started_a_minute_ago())
+    end
+
+    test "preloads the venue" do
+      venue = insert(:venue, name: "Some Venue")
+      insert(:event, venue: venue)
+
+      assert [%Event{venue: %Venue{name: "Some Venue"}}] =
+               Events.list_events_added_during_crawl(crawl_started_a_minute_ago())
+    end
+
+    test "returns an empty list when the crawl added nothing" do
+      assert [] == Events.list_events_added_during_crawl(crawl_started_a_minute_ago())
     end
   end
 end

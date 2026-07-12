@@ -1,14 +1,28 @@
 import Config
 
 # Configure your database
-config :music_listings, MusicListings.Repo,
-  username: "postgres",
-  password: "postgres",
-  hostname: "localhost",
-  database: "music_listings_dev",
-  stacktrace: true,
-  show_sensitive_data_on_connection_error: true,
-  pool_size: 10
+#
+# USE_PROD_DB=true points the dev app at the production database on Render (via
+# $PROD_DB_URL, same var bin/pull-prod-db.sh uses). This is how bin/crawl-venue.sh
+# crawls the venues whose origin blocks Render's egress IP and writes the results
+# straight to prod. Render's *external* endpoint requires SSL; the internal one
+# used in runtime.exs does not.
+if System.get_env("USE_PROD_DB") == "true" do
+  config :music_listings, MusicListings.Repo,
+    url: System.fetch_env!("PROD_DB_URL"),
+    ssl: [verify: :verify_none],
+    stacktrace: true,
+    pool_size: 2
+else
+  config :music_listings, MusicListings.Repo,
+    username: "postgres",
+    password: "postgres",
+    hostname: "localhost",
+    database: "music_listings_dev",
+    stacktrace: true,
+    show_sensitive_data_on_connection_error: true,
+    pool_size: 10
+end
 
 # For development, we disable any cache and enable
 # debugging and code reloading.
