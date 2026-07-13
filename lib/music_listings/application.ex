@@ -7,7 +7,6 @@ defmodule MusicListings.Application do
 
   alias Appsignal.CheckIn
   alias Appsignal.Logger.Handler, as: AppsignalLogHandler
-  alias Appsignal.Phoenix.LiveView, as: AppsignalLiveView
   alias MusicListings.Analytics.TelemetryHandler
   alias MusicListings.Workers.DataRetrievalWorker
 
@@ -78,9 +77,14 @@ defmodule MusicListings.Application do
       TelemetryHandler.attach()
 
       # HTTP requests, Ecto, Oban and Finch are auto-instrumented via the
-      # configured otp_app; LiveView and log forwarding must be attached here.
+      # configured otp_app; log forwarding must be attached here.
+      #
+      # We deliberately do NOT call Appsignal.Phoenix.LiveView.attach/0. It hooks
+      # mount, handle_params, handle_event *and* render, and opens a root span for
+      # each — and AppSignal bills a root span as a request. On an all-LiveView app
+      # that bills ~7-10 requests per pageview, which blew the plan's request quota.
+      # LiveView errors are still reported via Honeybadger's logger backend.
       if appsignal_active? do
-        AppsignalLiveView.attach()
         AppsignalLogHandler.add("phoenix")
       end
 
