@@ -139,7 +139,15 @@ defmodule MusicListings.MixProject do
         "esbuild music_listings --minify",
         "phx.digest"
       ],
-      check: ["format", "credo --strict", "compile --warnings-as-errors", "dialyzer", "docs"]
+      check: [
+        "format",
+        "credo --strict",
+        "compile --warnings-as-errors",
+        "xref graph --label compile-connected --fail-above 0",
+        "xref graph --format cycles --fail-above 2",
+        "dialyzer",
+        "docs"
+      ]
     ]
   end
 end
