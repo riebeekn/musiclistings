@@ -1356,27 +1356,52 @@ defmodule MusicListingsWeb.CustomComponents do
   attr :event, :any, required: true
 
   defp recently_added_card(assigns) do
+    first_show = List.first(assigns.event.showtimes)
+    event_id = first_show && first_show.event_id
+    slug = SEO.slugify(assigns.event.title || "event")
+
+    navigate =
+      event_id && ~p"/events/#{event_id}/#{slug}?#{[ref: "new_this_week"]}"
+
+    assigns = assign(assigns, navigate: navigate)
+
     ~H"""
-    <article class="group w-60 shrink-0 snap-start border border-hairline bg-ink-2/40 p-4 transition-colors hover:border-paper-dim hover:bg-ink-2 sm:w-64">
-      <p class="kicker truncate text-paper-dim">{@event.venue.name}</p>
-      <h3 class="mt-2 line-clamp-2 min-h-[2lh] font-display text-xl font-bold leading-[0.95] text-paper transition-colors group-hover:text-spotlight sm:text-2xl">
-        <.event_title_link event_info={@event} ref="new_this_week">
-          {@event.title}
-        </.event_title_link>
-      </h3>
-      <p class="mt-2 flex items-center gap-1.5 font-mono text-sm font-semibold text-spotlight-deep [font-variant-numeric:tabular-nums]">
-        <MusicListingsWeb.CoreComponents.icon
-          name="hero-calendar-days-solid"
-          class="size-3.5 text-spotlight"
-        />
-        {DateHelpers.format_date(@event.date)}
-      </p>
-      <div class="mt-3 flex items-center justify-between gap-2">
-        <span :if={@event.added_at} class="kicker text-paper-dim">
-          {DateHelpers.added_ago_in_words(@event.added_at)}
-        </span>
-      </div>
+    <.link
+      :if={@navigate}
+      navigate={@navigate}
+      class="group block w-60 shrink-0 snap-start border border-hairline bg-ink-2/40 p-4 transition-colors hover:border-paper-dim hover:bg-ink-2 sm:w-64"
+    >
+      <.recently_added_card_body event={@event} />
+    </.link>
+    <article
+      :if={!@navigate}
+      class="group w-60 shrink-0 snap-start border border-hairline bg-ink-2/40 p-4 transition-colors hover:border-paper-dim hover:bg-ink-2 sm:w-64"
+    >
+      <.recently_added_card_body event={@event} />
     </article>
+    """
+  end
+
+  attr :event, :any, required: true
+
+  defp recently_added_card_body(assigns) do
+    ~H"""
+    <p class="kicker truncate text-paper-dim">{@event.venue.name}</p>
+    <h3 class="mt-2 line-clamp-2 min-h-[2lh] font-display text-xl font-bold leading-[0.95] text-paper transition-colors group-hover:text-spotlight sm:text-2xl">
+      {@event.title}
+    </h3>
+    <p class="mt-2 flex items-center gap-1.5 font-mono text-sm font-semibold text-spotlight-deep [font-variant-numeric:tabular-nums]">
+      <MusicListingsWeb.CoreComponents.icon
+        name="hero-calendar-days-solid"
+        class="size-3.5 text-spotlight"
+      />
+      {DateHelpers.format_date(@event.date)}
+    </p>
+    <div class="mt-3 flex items-center justify-between gap-2">
+      <span :if={@event.added_at} class="kicker text-paper-dim">
+        {DateHelpers.added_ago_in_words(@event.added_at)}
+      </span>
+    </div>
     """
   end
 
