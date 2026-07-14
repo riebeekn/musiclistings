@@ -46,6 +46,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       |> Map.put(:venue_rows, sort_venues(assigns.crawl_summary.venue_crawl_summaries))
       |> Map.put(:error_count, Enum.count(assigns.crawl_summary.crawl_errors))
       |> Map.put(:added_event_count, Enum.count(assigns.added_events))
+      |> Map.put(:no_events_venues, no_events_venues(assigns.crawl_summary.crawl_errors))
 
     ~H"""
     <.h1>Nightly Crawl Report</.h1>
@@ -124,14 +125,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
             <div style="color:#ece9e0;font-size:12px;line-height:1.5;padding-top:8px;white-space:pre-wrap;font-family:'Space Mono','SFMono-Regular',monospace;">
               {crawl_error.error}
             </div>
-            <%= if crawl_error.type == :no_events_error do %>
-              <div style="color:#a8a49a;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding-top:10px;">
-                Crawl locally
-              </div>
-              <div style="color:#d8ff3e;font-size:12px;line-height:1.45;padding-top:4px;word-break:break-word;font-family:'Space Mono','SFMono-Regular',monospace;">
-                {local_crawl_command(crawl_error.venue)}
-              </div>
-            <% else %>
+            <%= if crawl_error.type != :no_events_error do %>
               <div style="color:#a8a49a;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding-top:10px;">
                 Raw event
               </div>
@@ -142,6 +136,23 @@ defmodule MusicListings.Emails.LatestCrawlResults do
           </div>
         </mj-text>
       <% end %>
+    <% end %>
+
+    <%= if @no_events_venues != [] do %>
+      <.h2>Crawl locally</.h2>
+      <.muted>
+        Run this from the project root to re-crawl every venue that found no events:
+      </.muted>
+      <mj-text padding="6px 0">
+        <div style="border-left:3px solid #d8ff3e;background-color:#1c1c1d;border-radius:6px;padding:12px 14px;">
+          <div style="color:#d8ff3e;font-size:12px;line-height:1.45;word-break:break-word;font-family:'Space Mono','SFMono-Regular',monospace;">
+            {local_crawl_command(@no_events_venues)}
+          </div>
+          <div style="color:#a8a49a;font-size:11px;line-height:1.45;padding-top:8px;">
+            {@no_events_venues |> Enum.map_join(" · ", & &1.name)}
+          </div>
+        </div>
+      </mj-text>
     <% end %>
 
     <%= if @added_event_count > 0 do %>
@@ -161,15 +172,23 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     """
   end
 
+  defp no_events_venues(crawl_errors) do
+    crawl_errors
+    |> Enum.filter(&(&1.type == :no_events_error))
+    |> Enum.map(& &1.venue)
+    |> Enum.uniq_by(& &1.id)
+    |> Enum.sort_by(& &1.name)
+  end
+
   # A venue reports no events either because its parser has silently broken, or
   # because its origin blocks Render's egress IP and the crawl never reaches it.
   # Either way the fix starts by crawling it from a machine that can reach it, so
-  # hand over the exact command to run.
+  # hand over a single command covering every venue that came up empty.
   #
-  # Identify the venue by parser_module_name, not id: this command is written by
+  # Identify venues by parser_module_name, not id: this command is written by
   # prod but pasted into a local shell, and venue ids differ between the two.
-  defp local_crawl_command(venue) do
-    "bin/crawl-venue.sh #{venue.parser_module_name}    # #{venue.name}"
+  defp local_crawl_command(venues) do
+    "bin/crawl-venue.sh #{Enum.map_join(venues, " ", & &1.parser_module_name)}"
   end
 
   defp sort_venues(venue_crawl_summaries) do
@@ -187,6 +206,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     v1 = build_venue(1, "First Venue", "FirstVenueParser")
     v2 = build_venue(2, "Second Venue", "SecondVenueParser")
     v3 = build_venue(3, "Quiet Venue", "QuietVenueParser")
+    v4 = build_venue(4, "Blocked Venue", "BlockedVenueParser")
 
     # venue summaries
     vcs1 =
@@ -216,11 +236,21 @@ defmodule MusicListings.Emails.LatestCrawlResults do
         errors: 0
       })
 
+    vcs4 =
+      build_venue_crawl_summary(v4, %{
+        duplicate: 0,
+        ignored: 0,
+        new: 0,
+        updated: 0,
+        errors: 1
+      })
+
     # errors
     ce1 = build_crawl_error(1, v1)
     ce2 = build_crawl_error(2, v2)
     ce3 = build_crawl_error(3, v2)
     ce4 = build_no_events_error(4, v3)
+    ce5 = build_no_events_error(5, v4)
 
     # events added by this crawl
     added_events = [
@@ -230,8 +260,8 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     ]
 
     build_crawl_summary()
-    |> Map.put(:crawl_errors, [ce1, ce2, ce3, ce4])
-    |> Map.put(:venue_crawl_summaries, [vcs1, vcs2, vcs3])
+    |> Map.put(:crawl_errors, [ce1, ce2, ce3, ce4, ce5])
+    |> Map.put(:venue_crawl_summaries, [vcs1, vcs2, vcs3, vcs4])
     |> new_email(added_events)
   end
 

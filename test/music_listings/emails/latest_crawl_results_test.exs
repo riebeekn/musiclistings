@@ -45,7 +45,7 @@ defmodule MusicListings.Emails.LatestCrawlResultsTest do
 
   defp no_events_error(venue) do
     %CrawlError{
-      id: 1,
+      id: venue.id,
       venue: venue,
       venue_id: venue.id,
       type: :no_events_error,
@@ -73,6 +73,28 @@ defmodule MusicListings.Emails.LatestCrawlResultsTest do
       assert email.html_body =~ "Crawl locally"
       assert email.html_body =~ "bin/crawl-venue.sh BlockedVenueParser"
       refute email.html_body =~ "Raw event"
+    end
+
+    test "rolls every empty venue into a single command, sorted by venue name" do
+      zulu = insert(:venue, name: "Zulu Test Hall", parser_module_name: "ZuluParser")
+      alpha = insert(:venue, name: "Alpha Test Hall", parser_module_name: "AlphaParser")
+
+      email =
+        [no_events_error(zulu), no_events_error(alpha)]
+        |> crawl_summary()
+        |> LatestCrawlResults.new_email()
+
+      assert email.html_body =~ "bin/crawl-venue.sh AlphaParser ZuluParser"
+      # one command, not one per venue
+      assert email.html_body |> String.split("bin/crawl-venue.sh") |> length() == 2
+    end
+
+    test "omits the section when no venue came up empty" do
+      venue = insert(:venue)
+
+      email = [parse_error(venue)] |> crawl_summary() |> LatestCrawlResults.new_email()
+
+      refute email.html_body =~ "Crawl locally"
     end
   end
 
