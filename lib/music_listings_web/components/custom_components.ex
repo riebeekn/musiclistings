@@ -859,6 +859,7 @@ defmodule MusicListingsWeb.CustomComponents do
   attr :events, :list, required: true
   attr :current_user, :any, required: true
   attr :sort_by, :string, default: "title"
+  attr :ref, :string, default: nil
 
   def events_list(assigns) do
     ~H"""
@@ -868,11 +869,16 @@ defmodule MusicListingsWeb.CustomComponents do
         <div class="mb-14">
           <%= if @sort_by == "venue" do %>
             <%= for {venue, venue_events} <- group_events_by_venue(events) do %>
-              <.venue_grouped_card venue={venue} events={venue_events} current_user={@current_user} />
+              <.venue_grouped_card
+                venue={venue}
+                events={venue_events}
+                current_user={@current_user}
+                ref={@ref}
+              />
             <% end %>
           <% else %>
             <%= for event <- events do %>
-              <.event_card event={event} current_user={@current_user} />
+              <.event_card event={event} current_user={@current_user} ref={@ref} />
             <% end %>
           <% end %>
         </div>
@@ -1023,6 +1029,7 @@ defmodule MusicListingsWeb.CustomComponents do
   """
   attr :events, :list, required: true
   attr :current_user, :any, required: true
+  attr :ref, :string, default: nil
 
   def venue_events_list(assigns) do
     ~H"""
@@ -1032,6 +1039,7 @@ defmodule MusicListingsWeb.CustomComponents do
           date={date}
           events={sort_events_by_time(events)}
           current_user={@current_user}
+          ref={@ref}
         />
       <% end %>
     </div>
@@ -1191,7 +1199,7 @@ defmodule MusicListingsWeb.CustomComponents do
     ~H"""
     <div class="mt-8 flex flex-wrap items-center gap-3">
       <a
-        :if={@event.ticket_url}
+        :if={@event.ticket_url not in [nil, ""]}
         href={MusicListings.Affiliate.maybe_wrap_affiliate_link(@event.ticket_url)}
         class="inline-flex h-9 items-center justify-center gap-x-2 rounded bg-spotlight px-4 font-mono text-xs font-medium uppercase tracking-widest text-ink transition-colors hover:bg-spotlight-deep"
         target="_blank"
@@ -1268,11 +1276,10 @@ defmodule MusicListingsWeb.CustomComponents do
       <div class="relative">
         <div data-rail-scroll class="overflow-x-auto pb-2 rail-scroll">
           <div class="flex w-max snap-x snap-mandatory gap-2">
-            <.link
+            <.event_title_link
               :for={event <- @events}
-              navigate={
-                ~p"/events/#{List.first(event.showtimes).event_id}/#{SEO.slugify(event.title || "event")}?ref=new_this_week"
-              }
+              event_info={event}
+              ref="new_this_week"
               class="group w-[44vw] max-w-44 shrink-0 snap-start border border-hairline bg-ink-2/40 px-3 py-2 transition-colors hover:border-paper-dim hover:bg-ink-2"
             >
               <p class="kicker truncate text-paper-dim">{event.venue.name}</p>
@@ -1286,7 +1293,7 @@ defmodule MusicListingsWeb.CustomComponents do
                 />
                 {DateHelpers.format_date(event.date)}
               </p>
-            </.link>
+            </.event_title_link>
           </div>
         </div>
         <div class="pointer-events-none absolute top-0 bottom-2 right-0 w-10 bg-gradient-to-l from-ink to-transparent">
@@ -1383,6 +1390,7 @@ defmodule MusicListingsWeb.CustomComponents do
   attr :event, :any, required: true
   attr :current_user, :any, required: true
   attr :show_date, :boolean, default: false
+  attr :ref, :string, default: nil
 
   defp event_card(assigns) do
     ~H"""
@@ -1401,7 +1409,7 @@ defmodule MusicListingsWeb.CustomComponents do
             <.event_age_restriction age_restriction={@event.age_restriction} />
           </div>
           <h3 class="font-display text-2xl font-bold leading-[0.95] text-paper transition-colors group-hover:text-spotlight sm:text-3xl">
-            <.event_title_link event_info={@event}>
+            <.event_title_link event_info={@event} ref={@ref}>
               {@event.title}
             </.event_title_link>
           </h3>
@@ -1432,6 +1440,11 @@ defmodule MusicListingsWeb.CustomComponents do
     """
   end
 
+  attr :venue, :any, required: true
+  attr :events, :list, required: true
+  attr :current_user, :any, required: true
+  attr :ref, :string, default: nil
+
   defp venue_grouped_card(assigns) do
     ~H"""
     <article class="border-b border-hairline py-6">
@@ -1440,11 +1453,16 @@ defmodule MusicListingsWeb.CustomComponents do
         <div class="h-px flex-1 bg-hairline"></div>
       </div>
       <%= for event <- @events do %>
-        <.grouped_event_row event={event} current_user={@current_user} />
+        <.grouped_event_row event={event} current_user={@current_user} ref={@ref} />
       <% end %>
     </article>
     """
   end
+
+  attr :date, :any, required: true
+  attr :events, :list, required: true
+  attr :current_user, :any, required: true
+  attr :ref, :string, default: nil
 
   defp venue_date_grouped_card(assigns) do
     ~H"""
@@ -1453,7 +1471,7 @@ defmodule MusicListingsWeb.CustomComponents do
         <time datetime={@date}>{DateHelpers.format_date(@date)}</time>
       </h3>
       <%= for event <- @events do %>
-        <.grouped_event_row event={event} current_user={@current_user} />
+        <.grouped_event_row event={event} current_user={@current_user} ref={@ref} />
       <% end %>
     </article>
     """
@@ -1461,6 +1479,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   attr :event, :any, required: true
   attr :current_user, :any, required: true
+  attr :ref, :string, default: nil
 
   defp grouped_event_row(assigns) do
     ~H"""
@@ -1468,7 +1487,7 @@ defmodule MusicListingsWeb.CustomComponents do
       <div class="min-w-0">
         <div class="flex flex-wrap items-center gap-2.5">
           <h4 class="group inline font-display text-xl font-bold leading-tight text-paper sm:text-2xl">
-            <.event_title_link event_info={@event}>
+            <.event_title_link event_info={@event} ref={@ref}>
               <span class="transition-colors group-hover:text-spotlight">{@event.title}</span>
             </.event_title_link>
           </h4>
@@ -1500,8 +1519,19 @@ defmodule MusicListingsWeb.CustomComponents do
     """
   end
 
+  # The single builder for every event-detail link in the app. `ref` records the
+  # surface the visit came from (rail / listing / venue page) so the analytics
+  # funnel can compare conversion across them; without it, an internal browse
+  # click is indistinguishable from a search engine landing.
+  #
+  # The `?ref=` variants are deliberately left crawlable: EventLive.Show emits a
+  # rel=canonical without query params (SEO.canonical_url/1), which is what
+  # consolidates them. Blocking them in robots.txt would stop Googlebot reading
+  # that canonical, and rel="nofollow" would sever the site's main internal link
+  # path to event pages.
   attr :event_info, :any, required: true
   attr :ref, :string, default: nil
+  attr :class, :string, default: "transition-colors"
   slot :inner_block, required: true
 
   defp event_title_link(assigns) do
@@ -1519,7 +1549,7 @@ defmodule MusicListingsWeb.CustomComponents do
     assigns = assign(assigns, event_id: event_id, navigate: navigate)
 
     ~H"""
-    <.link :if={@event_id} navigate={@navigate} class="transition-colors">
+    <.link :if={@event_id} navigate={@navigate} class={@class}>
       {render_slot(@inner_block)}
     </.link>
     <span :if={!@event_id}>{render_slot(@inner_block)}</span>

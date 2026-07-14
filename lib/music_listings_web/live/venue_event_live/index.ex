@@ -149,7 +149,7 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
       <div class="mb-2 h-px flex-1 bg-hairline"></div>
     </div>
 
-    <.venue_events_list events={@events} current_user={@current_user} />
+    <.venue_events_list events={@events} current_user={@current_user} ref="venue_page" />
 
     <div class="my-8">
       <.pager

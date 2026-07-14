@@ -31,8 +31,8 @@ defmodule MusicListings.Analytics.TelemetryHandler do
   end
 
   @doc false
-  def handle_event([:music_listings, :new_this_week, :shown], _measurements, _metadata, _config) do
-    record("new_this_week.shown", %{})
+  def handle_event([:music_listings, :new_this_week, :shown], _measurements, metadata, _config) do
+    record("new_this_week.shown", visitor_fields(metadata))
   end
 
   def handle_event(
@@ -41,7 +41,10 @@ defmodule MusicListings.Analytics.TelemetryHandler do
         metadata,
         _config
       ) do
-    record("new_this_week.card_click", %{"event_id" => metadata[:event_id]})
+    record(
+      "new_this_week.card_click",
+      metadata |> visitor_fields() |> Map.put("event_id", metadata[:event_id])
+    )
   end
 
   def handle_event(
@@ -50,10 +53,12 @@ defmodule MusicListings.Analytics.TelemetryHandler do
         metadata,
         _config
       ) do
-    record("event.ticket_link_shown", %{
-      "event_id" => metadata[:event_id],
-      "ref" => metadata[:ref]
-    })
+    record(
+      "event.ticket_link_shown",
+      metadata
+      |> visitor_fields()
+      |> Map.merge(%{"event_id" => metadata[:event_id], "ref" => metadata[:ref]})
+    )
   end
 
   def handle_event(
@@ -62,10 +67,22 @@ defmodule MusicListings.Analytics.TelemetryHandler do
         metadata,
         _config
       ) do
-    record("event.ticket_click", %{
-      "event_id" => metadata[:event_id],
-      "ref" => metadata[:ref]
-    })
+    record(
+      "event.ticket_click",
+      metadata
+      |> visitor_fields()
+      |> Map.merge(%{"event_id" => metadata[:event_id], "ref" => metadata[:ref]})
+    )
+  end
+
+  # Every event carries the visitor id (for dedup and cross-pageview
+  # attribution) and the user agent (so bots can be filtered out at report time
+  # rather than dropped at write time).
+  defp visitor_fields(metadata) do
+    %{
+      "visitor_id" => metadata[:visitor_id],
+      "user_agent" => metadata[:user_agent]
+    }
   end
 
   defp record(name, metadata) do

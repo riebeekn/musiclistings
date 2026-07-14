@@ -79,6 +79,111 @@ defmodule MusicListings.AnalyticsTest do
     end
   end
 
+  describe "surface_funnel_between/2" do
+    @window_from ~U[2024-07-25 00:00:00Z]
+    @window_to ~U[2024-08-01 00:00:00Z]
+
+    defp shown_at(at, metadata),
+      do: record_at("event.ticket_link_shown", at, metadata)
+
+    defp clicked_at(at, metadata),
+      do: record_at("event.ticket_click", at, metadata)
+
+    test "splits ticket CTR by the surface the visit came from" do
+      shown_at(~U[2024-07-28 12:00:00Z], %{
+        "ref" => "new_this_week",
+        "event_id" => "1",
+        "visitor_id" => "v1"
+      })
+
+      shown_at(~U[2024-07-28 12:00:00Z], %{
+        "ref" => "listing",
+        "event_id" => "2",
+        "visitor_id" => "v2"
+      })
+
+      clicked_at(~U[2024-07-28 12:05:00Z], %{
+        "ref" => "listing",
+        "event_id" => "2",
+        "visitor_id" => "v2"
+      })
+
+      assert Analytics.surface_funnel_between(@window_from, @window_to) == %{
+               "new_this_week" => %{shown: 1, clicks: 0},
+               "listing" => %{shown: 1, clicks: 1}
+             }
+    end
+
+    test "dedupes repeat impressions from one visitor on one event in a day" do
+      # The ?ref= param persists in the URL, so a LiveView reconnect or a
+      # back/forward re-mounts the page and re-fires the impression. Counting
+      # those would inflate the denominator and depress the surface's CTR.
+      for _remount <- 1..5 do
+        shown_at(~U[2024-07-28 12:00:00Z], %{
+          "ref" => "new_this_week",
+          "event_id" => "1",
+          "visitor_id" => "v1"
+        })
+      end
+
+      assert %{"new_this_week" => %{shown: 1}} =
+               Analytics.surface_funnel_between(@window_from, @window_to)
+    end
+
+    test "counts distinct visitors and distinct events separately" do
+      shown_at(~U[2024-07-28 12:00:00Z], %{
+        "ref" => "listing",
+        "event_id" => "1",
+        "visitor_id" => "v1"
+      })
+
+      shown_at(~U[2024-07-28 12:00:00Z], %{
+        "ref" => "listing",
+        "event_id" => "1",
+        "visitor_id" => "v2"
+      })
+
+      shown_at(~U[2024-07-28 12:00:00Z], %{
+        "ref" => "listing",
+        "event_id" => "2",
+        "visitor_id" => "v1"
+      })
+
+      assert %{"listing" => %{shown: 3}} =
+               Analytics.surface_funnel_between(@window_from, @window_to)
+    end
+
+    test "excludes known bots, which reach the page over a real socket but never buy" do
+      shown_at(~U[2024-07-28 12:00:00Z], %{
+        "ref" => "new_this_week",
+        "event_id" => "1",
+        "visitor_id" => "bot1",
+        "user_agent" => "Mozilla/5.0 (compatible; SomeCrawler/2.1; +http://example.com/bot)"
+      })
+
+      shown_at(~U[2024-07-28 12:00:00Z], %{
+        "ref" => "new_this_week",
+        "event_id" => "2",
+        "visitor_id" => "human",
+        "user_agent" => "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) Safari/604.1"
+      })
+
+      assert %{"new_this_week" => %{shown: 1}} =
+               Analytics.surface_funnel_between(@window_from, @window_to)
+    end
+
+    test "keeps rows recorded before visitor tracking shipped, counting each once" do
+      # Historical rows have neither visitor_id nor user_agent. They must not
+      # collapse into a single deduped row, nor be dropped as "not known human".
+      for event_id <- ["1", "2", "3"] do
+        shown_at(~U[2024-07-28 12:00:00Z], %{"ref" => "new_this_week", "event_id" => event_id})
+      end
+
+      assert %{"new_this_week" => %{shown: 3}} =
+               Analytics.surface_funnel_between(@window_from, @window_to)
+    end
+  end
+
   describe "weekly_rail_traction/1" do
     test "buckets events into trailing and prior 7-day windows" do
       reference = ~U[2024-08-01 12:00:00Z]

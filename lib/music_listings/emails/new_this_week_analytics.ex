@@ -14,6 +14,18 @@ defmodule MusicListings.Emails.NewThisWeekAnalytics do
   @detail_ticket_shown "event.ticket_link_shown"
   @rail_ref "new_this_week"
 
+  # Ordered so the two internal browse surfaces sit next to each other — that
+  # side-by-side is the whole point of the section. The nil bucket is mostly
+  # search-engine landings, which arrive with buying intent and will always
+  # convert far better than any browse surface; it's shown for context, not as
+  # the rail's benchmark.
+  @surfaces [
+    {"new_this_week", "New This Week rail"},
+    {"listing", "Events listing"},
+    {"venue_page", "Venue page"},
+    {nil, "Search / direct"}
+  ]
+
   def new_email(report) do
     new()
     |> to_site_admin()
@@ -38,6 +50,7 @@ defmodule MusicListings.Emails.NewThisWeekAnalytics do
 
     assigns =
       assigns
+      |> Map.put(:surface_rows, surface_rows(Map.get(report, :this_week_surfaces, %{})))
       |> Map.put(:this_shown, count(report.this_week, @shown))
       |> Map.put(:this_card, count(report.this_week, @card_click))
       |> Map.put(:prior_shown, count(report.prior_week, @shown))
@@ -86,9 +99,34 @@ defmodule MusicListings.Emails.NewThisWeekAnalytics do
       <:col :let={row} label="Change">{change_cell(row.this, row.prior)}</:col>
     </.table>
 
+    <.h2>Ticket CTR by surface</.h2>
+    <.muted>
+      Deduplicated per visitor/event/day and excluding known bots. Compare the rail
+      against <strong style="color:#ece9e0;">Events listing</strong>
+      — both are internal browse clicks. Search / direct is mostly search-engine
+      landings, which arrive intending to buy, so it is context, not a benchmark.
+    </.muted>
+
+    <.table rows={@surface_rows}>
+      <:col :let={row} label="Surface">
+        <span style="color:#ece9e0;font-weight:700;">{row.label}</span>
+      </:col>
+      <:col :let={row} label="Ticket-eligible views">
+        <span style="color:#a8a49a;">{row.shown}</span>
+      </:col>
+      <:col :let={row} label="Ticket clicks">
+        <span style="color:#a8a49a;">{row.clicks}</span>
+      </:col>
+      <:col :let={row} label="Ticket CTR">
+        <span style="color:#d8ff3e;font-weight:700;">{ctr(row.clicks, row.shown)}</span>
+      </:col>
+    </.table>
+
     <.h2>Rail conversions</.h2>
     <.muted>
-      Full funnel: Rail card click → Event page with a ticket link → Ticket click
+      Full funnel: Rail card click → Event page with a ticket link → Ticket click.
+      These figures are raw — not deduplicated, not bot-filtered — so they will
+      read lower than the table above.
     </.muted>
 
     <.stat_band>
@@ -111,6 +149,18 @@ defmodule MusicListings.Emails.NewThisWeekAnalytics do
       %{label: "Views", this: assigns.this_shown, prior: assigns.prior_shown},
       %{label: "Card clicks", this: assigns.this_card, prior: assigns.prior_card}
     ]
+  end
+
+  # Always renders every surface, including ones with no traffic — a surface
+  # silently missing from the table would read as "no data collected" rather
+  # than "nobody clicked", which is exactly the ambiguity this report exists to
+  # remove.
+  defp surface_rows(surfaces) do
+    Enum.map(@surfaces, fn {ref, label} ->
+      counts = Map.get(surfaces, ref, %{shown: 0, clicks: 0})
+
+      %{label: label, shown: counts.shown, clicks: counts.clicks}
+    end)
   end
 
   # An HEX-rendering helper that returns the styled change cell. Positive change is
@@ -166,7 +216,13 @@ defmodule MusicListings.Emails.NewThisWeekAnalytics do
       this_week_conversions: %{@rail_ref => 18, nil => 56},
       prior_week_conversions: %{@rail_ref => 14, nil => 47},
       this_week_ticket_shown: %{@rail_ref => 47, nil => 143},
-      prior_week_ticket_shown: %{@rail_ref => 39, nil => 131}
+      prior_week_ticket_shown: %{@rail_ref => 39, nil => 131},
+      this_week_surfaces: %{
+        @rail_ref => %{shown: 47, clicks: 18},
+        "listing" => %{shown: 96, clicks: 31},
+        "venue_page" => %{shown: 24, clicks: 6},
+        nil => %{shown: 143, clicks: 56}
+      }
     }
     |> new_email()
   end

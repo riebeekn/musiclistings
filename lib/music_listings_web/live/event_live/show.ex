@@ -43,7 +43,9 @@ defmodule MusicListingsWeb.EventLive.Show do
     :telemetry.execute(
       [:music_listings, :event, :ticket_click],
       %{},
-      %{event_id: event_id, ref: socket.assigns[:ref]}
+      socket
+      |> visitor_metadata()
+      |> Map.merge(%{event_id: event_id, ref: socket.assigns[:ref]})
     )
 
     noreply(socket)
@@ -64,7 +66,7 @@ defmodule MusicListingsWeb.EventLive.Show do
       :telemetry.execute(
         [:music_listings, :new_this_week, :card_click],
         %{},
-        %{event_id: event_id}
+        socket |> visitor_metadata() |> Map.put(:event_id, event_id)
       )
     end
 
@@ -79,15 +81,28 @@ defmodule MusicListingsWeb.EventLive.Show do
   # split rail-referred impressions from direct ones. Guarded on connected?/1 so
   # it counts once per page view, mirroring maybe_track_recently_added_click/2.
   defp maybe_track_ticket_link_shown(socket, event, params) do
-    if connected?(socket) and is_binary(event.ticket_url) do
+    # `not in [nil, ""]` rather than is_binary/1: an empty-string ticket_url
+    # renders a dead "Get Tickets" button, so counting it as an impression would
+    # add a denominator that can never convert. Matches the ranker's definition
+    # of "has a ticket" (RecentlyAddedRanker.collapse_to_shows/1).
+    if connected?(socket) and event.ticket_url not in [nil, ""] do
       :telemetry.execute(
         [:music_listings, :event, :ticket_link_shown],
         %{},
-        %{event_id: to_string(event.id), ref: params["ref"]}
+        socket
+        |> visitor_metadata()
+        |> Map.merge(%{event_id: to_string(event.id), ref: params["ref"]})
       )
     end
 
     :ok
+  end
+
+  defp visitor_metadata(socket) do
+    %{
+      visitor_id: socket.assigns[:visitor_id],
+      user_agent: socket.assigns[:user_agent]
+    }
   end
 
   defp assign_event_seo(socket, event) do

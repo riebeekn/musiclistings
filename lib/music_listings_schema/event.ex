@@ -16,7 +16,7 @@ defmodule MusicListingsSchema.Event do
           price_lo: Decimal.t(),
           price_hi: Decimal.t(),
           age_restriction: :all_ages | :eighteen_plus | :nineteen_plus | :unknown,
-          ticket_url: String.t(),
+          ticket_url: String.t() | nil,
           details_url: String.t(),
           locked_from_updates?: boolean(),
           inserted_at: DateTime.t(),

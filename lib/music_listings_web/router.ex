@@ -18,6 +18,7 @@ defmodule MusicListingsWeb.Router do
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
+    plug MusicListingsWeb.Plugs.VisitorId
     plug :fetch_live_flash
     plug :put_root_layout, html: {MusicListingsWeb.Layouts, :root}
     plug :protect_from_forgery
@@ -43,7 +44,10 @@ defmodule MusicListingsWeb.Router do
     get "/feed.xml", FeedController, :index
 
     live_session :current_user,
-      on_mount: [{MusicListingsWeb.UserAuth, :mount_current_user}] do
+      on_mount: [
+        {MusicListingsWeb.UserAuth, :mount_current_user},
+        {MusicListingsWeb.VisitorTracking, :assign_visitor}
+      ] do
       live "/events", EventLive.Index, :index
       live "/events/new", EventLive.New, :new
       live "/events/venue/:venue_id", VenueEventLive.Index, :index

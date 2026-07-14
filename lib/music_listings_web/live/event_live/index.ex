@@ -274,19 +274,28 @@ defmodule MusicListingsWeb.EventLive.Index do
 
   # Records a single "rail shown" impression per connected session — guarded so
   # pagination/filter patches (which re-run handle_params) don't re-count it.
+  # The caller only reaches here on a connected mount, so the dead render never
+  # counts.
   defp maybe_track_recently_added_shown(socket, recently_added) do
     if socket.assigns.just_added_enabled and recently_added != [] and
          not socket.assigns.new_this_week_tracked do
       :telemetry.execute(
         [:music_listings, :new_this_week, :shown],
         %{},
-        %{}
+        visitor_metadata(socket)
       )
 
       assign(socket, :new_this_week_tracked, true)
     else
       socket
     end
+  end
+
+  defp visitor_metadata(socket) do
+    %{
+      visitor_id: socket.assigns[:visitor_id],
+      user_agent: socket.assigns[:user_agent]
+    }
   end
 
   defp update_socket_assigns(socket, paged_events) do
@@ -403,7 +412,7 @@ defmodule MusicListingsWeb.EventLive.Index do
       <.loading_indicator />
     <% end %>
 
-    <.events_list events={@events} current_user={@current_user} sort_by={@sort_by} />
+    <.events_list events={@events} current_user={@current_user} sort_by={@sort_by} ref="listing" />
 
     <div class={[
       "border-t border-hairline",

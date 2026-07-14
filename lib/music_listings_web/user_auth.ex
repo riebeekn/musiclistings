@@ -6,6 +6,7 @@ defmodule MusicListingsWeb.UserAuth do
   import Plug.Conn
 
   alias MusicListings.Accounts
+  alias MusicListingsWeb.Plugs.VisitorId
 
   # Make the remember me cookie valid for 60 days.
   # If you want bump or reduce this value, also change
@@ -46,26 +47,18 @@ defmodule MusicListingsWeb.UserAuth do
   end
 
   # This function renews the session ID and erases the whole
-  # session to avoid fixation attacks. If there is any data
-  # in the session you may want to preserve after log in/log out,
-  # you must explicitly fetch the session data before clearing
-  # and then immediately set it after clearing, for example:
-  #
-  #     defp renew_session(conn) do
-  #       preferred_locale = get_session(conn, :preferred_locale)
-  #
-  #       conn
-  #       |> configure_session(renew: true)
-  #       |> clear_session()
-  #       |> put_session(:preferred_locale, preferred_locale)
-  #     end
-  #
+  # session to avoid fixation attacks. The anonymous visitor id is deliberately
+  # carried across the wipe: it is not a credential, and analytics dedup /
+  # attribution would otherwise break for anyone who logs in or out mid-visit.
   defp renew_session(conn) do
     delete_csrf_token()
+
+    visitor_id = get_session(conn, VisitorId.session_key())
 
     conn
     |> configure_session(renew: true)
     |> clear_session()
+    |> put_session(VisitorId.session_key(), visitor_id || VisitorId.generate())
   end
 
   @doc """

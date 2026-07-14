@@ -38,11 +38,24 @@ defmodule MusicListingsWeb.RecentlyAddedAnalyticsTest do
       assert html =~ "New This Week"
 
       assert [shown] = rows("new_this_week.shown")
-      assert shown.metadata == %{}
+      assert is_binary(shown.metadata["visitor_id"])
 
       # Re-running handle_params (e.g. a filter/pagination patch) must not re-count.
       render_patch(view, ~p"/events")
       assert length(rows("new_this_week.shown")) == 1
+    end
+
+    test "is not recorded on the dead render", %{conn: conn} do
+      # handle_params runs on the dead render too, so the impression must stay
+      # behind a connected?/1 guard — otherwise every page view would count
+      # twice, and every JS-less crawler once, inflating the denominator behind
+      # Card CTR.
+      FunWithFlags.enable(:show_recently_added)
+
+      conn = get(conn, ~p"/events")
+
+      assert html_response(conn, 200)
+      assert rows("new_this_week.shown") == []
     end
 
     test "is not recorded when the flag is off", %{conn: conn} do
@@ -122,6 +135,49 @@ defmodule MusicListingsWeb.RecentlyAddedAnalyticsTest do
 
       assert [click] = rows("event.ticket_click")
       assert click.metadata["ref"] == nil
+    end
+
+    test "attributes a click to the listing, not to 'direct'", %{conn: conn, event: event} do
+      # The control group. Before this, a listing click was indistinguishable
+      # from a search-engine landing, so the rail was being benchmarked against
+      # high-intent search traffic rather than against the other browse surface.
+      {:ok, view, _html} = live(conn, "/events/#{event.id}/freshly-added-show?ref=listing")
+
+      view
+      |> element("a[phx-click='event_ticket_click']")
+      |> render_click()
+
+      assert [click] = rows("event.ticket_click")
+      assert click.metadata["ref"] == "listing"
+      assert is_binary(click.metadata["visitor_id"])
+    end
+  end
+
+  describe "listing links carry a ref" do
+    test "events listing links to the detail page with ?ref=listing", %{conn: conn} do
+      {:ok, _view, html} = live(conn, ~p"/events")
+
+      assert html =~ "ref=listing"
+    end
+
+    test "venue page links to the detail page with ?ref=venue_page", %{conn: conn, event: event} do
+      {:ok, _view, html} = live(conn, ~p"/events/venue/#{event.venue_id}")
+
+      assert html =~ "ref=venue_page"
+    end
+  end
+
+  describe "empty-string ticket_url" do
+    test "records no impression and renders no button", %{conn: conn} do
+      # is_binary("") is true and HEEx treats "" as truthy, so an empty ticket_url
+      # used to log a ticket-link impression *and* render a dead "Get Tickets"
+      # button — a denominator that could never convert.
+      event = insert(:event, ticket_url: "", title: "Blank Ticket Url Show")
+
+      {:ok, _view, html} = live(conn, ~p"/events/#{event.id}/blank-ticket-url-show")
+
+      refute html =~ "Get Tickets"
+      assert rows("event.ticket_link_shown") == []
     end
   end
 end
