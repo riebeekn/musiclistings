@@ -808,6 +808,7 @@ defmodule MusicListingsWeb.CustomComponents do
   attr :venues, :list, required: true
   attr :current_user, :any, default: nil
   attr :crawling?, :boolean, default: false
+  attr :crawling_venue_id, :any, default: nil
 
   def venue_summary(assigns) do
     ~H"""
@@ -838,7 +839,7 @@ defmodule MusicListingsWeb.CustomComponents do
               >
                 <MusicListingsWeb.CoreComponents.icon
                   name="hero-arrow-path"
-                  class={"size-4 #{if @crawling?, do: "animate-spin"}"}
+                  class={"size-4 #{if to_string(venue.id) == @crawling_venue_id, do: "animate-spin"}"}
                 /> Crawl
               </MusicListingsWeb.CoreComponents.button>
             </div>

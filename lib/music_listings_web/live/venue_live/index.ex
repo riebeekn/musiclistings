@@ -13,6 +13,7 @@ defmodule MusicListingsWeb.VenueLive.Index do
       venues: venues,
       venue_count: Enum.count(venues),
       crawling?: false,
+      crawling_venue_id: nil,
       meta_description:
         "Browse every Toronto music venue we track — from small clubs to concert halls. Find upcoming shows, addresses, and venue details.",
       canonical_url: SEO.canonical_url("/venues")
@@ -43,6 +44,7 @@ defmodule MusicListingsWeb.VenueLive.Index do
 
       socket
       |> assign(:crawling?, true)
+      |> assign(:crawling_venue_id, venue_id)
       |> start_async(:crawl, fn -> MusicListings.crawl_venue(current_user, venue_id) end)
       |> noreply()
     end
@@ -54,6 +56,7 @@ defmodule MusicListingsWeb.VenueLive.Index do
 
     socket
     |> assign(:crawling?, false)
+    |> assign(:crawling_venue_id, nil)
     |> assign(:venues, venues)
     |> crawl_flash(result)
     |> noreply()
@@ -62,6 +65,7 @@ defmodule MusicListingsWeb.VenueLive.Index do
   def handle_async(:crawl, {:exit, _reason}, socket) do
     socket
     |> assign(:crawling?, false)
+    |> assign(:crawling_venue_id, nil)
     |> put_flash(:error, "Crawl failed.")
     |> noreply()
   end
@@ -97,7 +101,12 @@ defmodule MusicListingsWeb.VenueLive.Index do
         </.button>
       </div>
     </.when_admin>
-    <.venue_summary venues={@venues} current_user={@current_user} crawling?={@crawling?} />
+    <.venue_summary
+      venues={@venues}
+      current_user={@current_user}
+      crawling?={@crawling?}
+      crawling_venue_id={@crawling_venue_id}
+    />
     """
   end
 end
