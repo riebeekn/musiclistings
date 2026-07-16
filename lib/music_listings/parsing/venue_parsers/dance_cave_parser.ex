@@ -1,0 +1,59 @@
+defmodule MusicListings.Parsing.VenueParsers.DanceCaveParser do
+  @moduledoc """
+  Parser for extracing events from The Dance Cave (2nd floor of Lee's Palace),
+  listed via Live Nation.
+  """
+  @behaviour MusicListings.Parsing.VenueParser
+
+  alias MusicListings.Parsing.VenueParsers.BaseParsers.LiveNationParser
+
+  @impl true
+  defdelegate source_url, to: LiveNationParser
+
+  @live_nation_venue_id "KovZpZAdnd6A"
+  @impl true
+  def retrieve_events_fun do
+    LiveNationParser.retrieve_events_fun(@live_nation_venue_id)
+  end
+
+  @impl true
+  defdelegate events(body), to: LiveNationParser
+
+  @impl true
+  defdelegate next_page_url(body, current_url), to: LiveNationParser
+
+  @impl true
+  defdelegate event_id(event), to: LiveNationParser
+
+  @impl true
+  def ignored_event_id(event) do
+    event_id(event)
+  end
+
+  @impl true
+  defdelegate event_title(event), to: LiveNationParser
+
+  @impl true
+  defdelegate performers(event), to: LiveNationParser
+
+  @impl true
+  defdelegate event_date(event), to: LiveNationParser
+
+  @impl true
+  defdelegate additional_dates(event), to: LiveNationParser
+
+  @impl true
+  defdelegate event_time(event), to: LiveNationParser
+
+  @impl true
+  defdelegate price(event), to: LiveNationParser
+
+  @impl true
+  defdelegate age_restriction(event), to: LiveNationParser
+
+  @impl true
+  defdelegate ticket_url(event), to: LiveNationParser
+
+  @impl true
+  defdelegate details_url(event), to: LiveNationParser
+end
