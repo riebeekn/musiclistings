@@ -21,6 +21,7 @@ defmodule MusicListings.Emails.ParserPullbackTest do
     Map.merge(
       %{
         venue_name: "The Phoenix",
+        venue_website: "https://thephoenix.example",
         baseline_yield: 42,
         recent_yield: 0,
         drop_pct: 1.0,
@@ -66,9 +67,14 @@ defmodule MusicListings.Emails.ParserPullbackTest do
           evaluated_count: 12,
           healthy_count: 10,
           flagged: [
-            flagged_venue(%{venue_name: "The Phoenix", drop_pct: 1.0}),
+            flagged_venue(%{
+              venue_name: "The Phoenix",
+              venue_website: "https://thephoenix.example",
+              drop_pct: 1.0
+            }),
             flagged_venue(%{
               venue_name: "Horseshoe",
+              venue_website: nil,
               baseline_yield: 18,
               recent_yield: 5,
               drop_pct: 0.72,
@@ -82,6 +88,10 @@ defmodule MusicListings.Emails.ParserPullbackTest do
       assert email.subject == "Parser Health — 2 venues may have pulled back"
       assert email.html_body =~ "The Phoenix"
       assert email.html_body =~ "Horseshoe"
+      # A venue with a website links its name to that URL...
+      assert email.html_body =~ ~s(<a href="https://thephoenix.example")
+      # ...while a venue without one renders its name as plain text (no anchor).
+      refute email.html_body =~ ~s(<a href="Horseshoe)
       # drop_pct 0.72 -> "72%"
       assert email.html_body =~ "72%"
       assert is_binary(email.text_body) and email.text_body != ""

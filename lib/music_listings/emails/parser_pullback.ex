@@ -47,7 +47,11 @@ defmodule MusicListings.Emails.ParserPullback do
       <.h2>Possible pullbacks</.h2>
       <.table rows={@report.flagged}>
         <:col :let={v} label="Venue">
-          <span style="color:#ece9e0;font-weight:700;">{v.venue_name}</span>
+          <%= if v.venue_website do %>
+            <a href={v.venue_website} style="color:#d8ff3e;font-weight:700;text-decoration:none;">{v.venue_name}</a>
+          <% else %>
+            <span style="color:#ece9e0;font-weight:700;">{v.venue_name}</span>
+          <% end %>
         </:col>
         <:col :let={v} label="Typical">
           <span style="color:#a8a49a;">{round_count(v.baseline_yield)}</span>
@@ -93,6 +97,7 @@ defmodule MusicListings.Emails.ParserPullback do
       flagged: [
         %{
           venue_name: "The Phoenix Concert Theatre",
+          venue_website: "https://thephoenixconcerttheatre.com",
           baseline_yield: 42,
           recent_yield: 0,
           drop_pct: 1.0,
@@ -101,6 +106,7 @@ defmodule MusicListings.Emails.ParserPullback do
         },
         %{
           venue_name: "Horseshoe Tavern",
+          venue_website: nil,
           baseline_yield: 18,
           recent_yield: 5,
           drop_pct: 0.72,

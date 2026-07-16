@@ -34,6 +34,7 @@ defmodule MusicListings.ParserHealth do
 
   @type flagged_venue :: %{
           venue_name: String.t(),
+          venue_website: String.t() | nil,
           baseline_yield: number(),
           recent_yield: number(),
           drop_pct: float(),
@@ -92,6 +93,7 @@ defmodule MusicListings.ParserHealth do
       select: %{
         venue_id: vcs.venue_id,
         venue_name: v.name,
+        venue_website: v.website,
         yield: vcs.new + vcs.updated + vcs.duplicate,
         errors: vcs.errors,
         crawled_at: cs.completed_at
@@ -111,6 +113,7 @@ defmodule MusicListings.ParserHealth do
 
       %{
         venue_name: hd(sorted).venue_name,
+        venue_website: hd(sorted).venue_website,
         baseline_yield: baseline_yield,
         recent_yield: recent_yield,
         drop_pct: drop_pct(baseline_yield, recent_yield),

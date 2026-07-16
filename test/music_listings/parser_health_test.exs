@@ -27,7 +27,7 @@ defmodule MusicListings.ParserHealthTest do
 
   describe "pullback_report/1" do
     test "flags a venue whose recent yield collapsed below its baseline" do
-      venue = insert(:venue, name: "Phoenix")
+      venue = insert(:venue, name: "Phoenix", website: "https://thephoenix.example")
 
       # Healthy baseline ~20/crawl for a couple weeks...
       for days_ago <- 4..17, do: crawl(venue, days_ago, 20)
@@ -40,6 +40,7 @@ defmodule MusicListings.ParserHealthTest do
       assert report.healthy_count == 0
       assert [flagged] = report.flagged
       assert flagged.venue_name == "Phoenix"
+      assert flagged.venue_website == "https://thephoenix.example"
       assert flagged.baseline_yield == 20
       assert flagged.recent_yield == 0.0
       assert flagged.drop_pct == 1.0
@@ -100,6 +101,8 @@ defmodule MusicListings.ParserHealthTest do
       assert report.evaluated_count == 1
       assert [flagged] = report.flagged
       assert flagged.venue_name == "Active"
+      # Venues without a website carry through as nil.
+      assert flagged.venue_website == nil
       assert flagged.baseline_yield == 20
     end
   end
