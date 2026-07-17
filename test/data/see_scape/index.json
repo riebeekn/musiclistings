@@ -1,0 +1,31 @@
+{
+  "data": {
+    "listing": {
+      "data": [
+        {
+          "id": "2477611",
+          "title": "HARD+HYPER vol. 6",
+          "date": "2026-07-18T00:00:00.000",
+          "startTime": "2026-07-18T21:00:00.000",
+          "contentUrl": "/events/2477611",
+          "venue": {
+            "id": "257804",
+            "name": "See-Scape"
+          }
+        },
+        {
+          "id": "2489087",
+          "title": "DISCO NOIR",
+          "date": "2026-07-27T00:00:00.000",
+          "startTime": "2026-07-27T21:00:00.000",
+          "contentUrl": "/events/2489087",
+          "venue": {
+            "id": "257804",
+            "name": "See-Scape"
+          }
+        }
+      ],
+      "totalResults": 2
+    }
+  }
+}
