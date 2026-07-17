@@ -1,6 +1,9 @@
 defmodule MusicListings.Parsing.VenueParsers.BudweiserStageParser do
   @moduledoc """
-  Parser for extracing events from https://www.livenation.com/venue/KovZpZAEkkIA/budweiser-stage-events
+  Parser for extracing events from https://www.livenation.com/venue/KovZpZAEkkIA/rbc-amphitheatre-events
+
+  The venue was formerly named Budweiser Stage (hence the module name); it is now
+  RBC Amphitheatre. Same LiveNation venue id, so nothing here changes.
   """
   @behaviour MusicListings.Parsing.VenueParser
 
