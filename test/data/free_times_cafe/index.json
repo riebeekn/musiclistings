@@ -1,0 +1,106 @@
+{
+  "comp_id": "comp-kw6rllyd",
+  "name": "Free Times Cafe",
+  "time_zone": "America/Toronto",
+  "categories": [
+    { "id": 17729, "name": "Comedy" },
+    { "id": 17730, "name": "Music" },
+    { "id": 17731, "name": "Open Mic" },
+    { "id": 17869, "name": "Jazz" },
+    { "id": 28544, "name": "Klezmer" },
+    { "id": 104605, "name": "Folk Music" }
+  ],
+  "events": [
+    {
+      "id": 3889439,
+      "title": "GLEN HORNBLAST & AIDAN DEVINE",
+      "start": "2024-08-15T20:00",
+      "end": "2024-08-15T22:00",
+      "all_day": 0,
+      "time_zone": "America/Toronto",
+      "link": null,
+      "tickets": null,
+      "registration": null,
+      "repeat": { "type": "", "interval": "1", "end": "", "advanced": "" },
+      "categories": [
+        { "id": 17730, "name": "Music", "color": "#3899ec", "order_index": 1 },
+        { "id": 104605, "name": "Folk Music", "color": "#63A5F2", "order_index": 48 }
+      ]
+    },
+    {
+      "id": 3911584,
+      "title": "*BOSPHORUS GROOVE*",
+      "start": "2024-09-10T21:45",
+      "end": "2024-09-10T23:00",
+      "all_day": 0,
+      "time_zone": "America/Toronto",
+      "link": null,
+      "tickets": null,
+      "registration": null,
+      "repeat": { "type": "", "interval": "", "end": "", "advanced": "" },
+      "categories": [
+        { "id": 28544, "name": "Klezmer", "color": "#3899ec", "order_index": 13 }
+      ]
+    },
+    {
+      "id": 3999001,
+      "title": "Open Mic Night",
+      "start": "2024-08-20T19:30",
+      "end": "2024-08-20T22:30",
+      "all_day": 0,
+      "time_zone": "America/Toronto",
+      "link": "https://www.eventbrite.ca/e/open-mic-tickets-1234567890?aff=ebdssbdestsearch&utm_source=wix",
+      "tickets": null,
+      "registration": null,
+      "repeat": { "type": "", "interval": "", "end": "", "advanced": "" },
+      "categories": [
+        { "id": 17731, "name": "Open Mic", "color": "#3899ec", "order_index": 2 }
+      ]
+    },
+    {
+      "id": 3888888,
+      "title": "Jazz Trio",
+      "start": "2024-08-05T20:00:00",
+      "end": "2024-08-05T22:00:00",
+      "all_day": 0,
+      "time_zone": "America/Toronto",
+      "link": "event_page",
+      "tickets": null,
+      "registration": null,
+      "repeat": { "type": "", "interval": "", "end": "", "advanced": "" },
+      "categories": [
+        { "id": 17869, "name": "Jazz", "color": "#3899ec", "order_index": 3 }
+      ]
+    },
+    {
+      "id": 1000001,
+      "title": "Past Folk Show",
+      "start": "2024-07-15T20:00",
+      "end": "2024-07-15T22:00",
+      "all_day": 0,
+      "time_zone": "America/Toronto",
+      "link": null,
+      "tickets": null,
+      "registration": null,
+      "repeat": { "type": "", "interval": "", "end": "", "advanced": "" },
+      "categories": [
+        { "id": 17730, "name": "Music", "color": "#3899ec", "order_index": 1 }
+      ]
+    },
+    {
+      "id": 2548775,
+      "title": "SCARY GOOD COMEDY",
+      "start": "2024-08-10T20:00",
+      "end": "2024-08-10T22:00",
+      "all_day": 0,
+      "time_zone": "America/Toronto",
+      "link": null,
+      "tickets": null,
+      "registration": null,
+      "repeat": { "type": "", "interval": "", "end": "", "advanced": "" },
+      "categories": [
+        { "id": 17729, "name": "Comedy", "color": "#3899EC", "order_index": 0 }
+      ]
+    }
+  ]
+}
