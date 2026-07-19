@@ -11,7 +11,9 @@ defmodule MusicListings.Emails.ParserPullbackTest do
         recent_crawls: 3,
         evaluated_count: 0,
         healthy_count: 0,
-        flagged: []
+        flagged: [],
+        awaiting: [],
+        awaiting_count: 0
       },
       overrides
     )
@@ -95,6 +97,22 @@ defmodule MusicListings.Emails.ParserPullbackTest do
       # drop_pct 0.72 -> "72%"
       assert email.html_body =~ "72%"
       assert is_binary(email.text_body) and email.text_body != ""
+    end
+
+    test "lists venues still building a baseline when any are awaiting" do
+      report =
+        base_report(%{
+          evaluated_count: 12,
+          healthy_count: 12,
+          awaiting: ["New Venue", "Second Venue"],
+          awaiting_count: 2
+        })
+
+      email = ParserPullback.new_email(report)
+
+      assert email.html_body =~ "New Venue"
+      assert email.html_body =~ "Second Venue"
+      assert email.html_body =~ "building a"
     end
   end
 end

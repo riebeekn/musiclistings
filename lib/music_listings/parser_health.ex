@@ -48,7 +48,9 @@ defmodule MusicListings.ParserHealth do
           recent_crawls: pos_integer(),
           evaluated_count: non_neg_integer(),
           healthy_count: non_neg_integer(),
-          flagged: [flagged_venue()]
+          flagged: [flagged_venue()],
+          awaiting: [String.t()],
+          awaiting_count: non_neg_integer()
         }
 
   @doc """
@@ -58,12 +60,24 @@ defmodule MusicListings.ParserHealth do
   def pullback_report(reference \\ DateHelpers.now()) do
     window_start = DateTime.add(reference, -@lookback_days, :day)
 
-    analyses =
+    evaluated =
       window_start
       |> fetch_rows(reference)
       |> Enum.group_by(& &1.venue_id)
-      |> Enum.map(fn {_venue_id, rows} -> analyze(rows) end)
-      |> Enum.reject(&is_nil/1)
+      |> Enum.map(fn {venue_id, rows} -> {venue_id, analyze(rows)} end)
+      |> Enum.reject(fn {_venue_id, analysis} -> is_nil(analysis) end)
+
+    evaluated_ids = MapSet.new(evaluated, fn {venue_id, _analysis} -> venue_id end)
+    analyses = Enum.map(evaluated, fn {_venue_id, analysis} -> analysis end)
+
+    # Active venues we couldn't evaluate yet — no crawls in the window, or not
+    # enough of them to establish a baseline. These are the difference between
+    # the venue index count and the evaluated count.
+    awaiting =
+      fetch_active_venues()
+      |> Enum.reject(&MapSet.member?(evaluated_ids, &1.id))
+      |> Enum.map(& &1.name)
+      |> Enum.sort()
 
     flagged =
       analyses
@@ -77,7 +91,9 @@ defmodule MusicListings.ParserHealth do
       recent_crawls: @recent_crawls,
       evaluated_count: length(analyses),
       healthy_count: length(analyses) - length(flagged),
-      flagged: flagged
+      flagged: flagged,
+      awaiting: awaiting,
+      awaiting_count: length(awaiting)
     }
   end
 
@@ -99,6 +115,11 @@ defmodule MusicListings.ParserHealth do
         crawled_at: cs.completed_at
       }
     )
+    |> Repo.all()
+  end
+
+  defp fetch_active_venues do
+    from(v in Venue, where: v.pull_events?, select: %{id: v.id, name: v.name})
     |> Repo.all()
   end
 

@@ -36,7 +36,20 @@ defmodule MusicListings.Emails.ParserPullback do
       </:stat>
       <:stat label="Healthy">{@report.healthy_count}</:stat>
       <:stat label="Evaluated">{@report.evaluated_count}</:stat>
+      <:stat label="Awaiting">{@report.awaiting_count}</:stat>
     </.stat_band>
+
+    <%= if @report.awaiting != [] do %>
+      <.muted>
+        {@report.awaiting_count} active {pluralize(@report.awaiting_count, "venue")}
+        {if @report.awaiting_count == 1, do: "isn't", else: "aren't"} evaluated yet — still building a
+        crawl baseline, so {if @report.awaiting_count == 1, do: "it", else: "they"} won't be judged for
+        pullback until reaching ~{@report.recent_crawls + 5} crawls: {Enum.join(
+          @report.awaiting,
+          ", "
+        )}.
+      </.muted>
+    <% end %>
 
     <%= if @report.flagged == [] do %>
       <.muted>
@@ -94,6 +107,8 @@ defmodule MusicListings.Emails.ParserPullback do
       recent_crawls: 3,
       evaluated_count: 47,
       healthy_count: 45,
+      awaiting: ["Free Times Cafe", "See-Scape", "Tapestry"],
+      awaiting_count: 3,
       flagged: [
         %{
           venue_name: "The Phoenix Concert Theatre",

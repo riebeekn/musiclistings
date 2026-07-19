@@ -70,7 +70,7 @@ defmodule MusicListings.ParserHealthTest do
       assert report.flagged == []
     end
 
-    test "skips venues without enough history to judge" do
+    test "skips venues without enough history to judge but lists them as awaiting" do
       venue = insert(:venue, name: "New Venue")
 
       # Only 3 crawls total — not enough baseline.
@@ -80,6 +80,17 @@ defmodule MusicListings.ParserHealthTest do
 
       assert report.evaluated_count == 0
       assert report.flagged == []
+      assert "New Venue" in report.awaiting
+      assert report.awaiting_count == length(report.awaiting)
+    end
+
+    test "lists active venues with no crawls in the window as awaiting" do
+      insert(:venue, name: "Never Crawled")
+
+      report = ParserHealth.pullback_report(@reference)
+
+      assert report.evaluated_count == 0
+      assert "Never Crawled" in report.awaiting
     end
 
     test "ignores crawls outside the lookback window and inactive venues" do
@@ -104,6 +115,10 @@ defmodule MusicListings.ParserHealthTest do
       # Venues without a website carry through as nil.
       assert flagged.venue_website == nil
       assert flagged.baseline_yield == 20
+      # The active venue was evaluated and the inactive one is excluded entirely,
+      # so neither shows up as awaiting.
+      refute "Active" in report.awaiting
+      refute "Inactive" in report.awaiting
     end
   end
 end

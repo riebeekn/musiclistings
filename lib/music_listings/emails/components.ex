@@ -152,7 +152,7 @@ defmodule MusicListings.Emails.Components do
       <table role="presentation" width="100%" style="border-collapse:collapse;text-align:center;">
         <tr>
           <%= for stat <- @stat do %>
-            <td style="padding:6px 4px;vertical-align:top;width:33%;">
+            <td style={"padding:6px 4px;vertical-align:top;width:#{stat_column_width(@stat)};"}>
               <div style={"font-family:'Big Shoulders Display','Hanken Grotesk',Helvetica,Arial,sans-serif;font-size:44px;font-weight:800;line-height:1;color:#{stat_accent(stat[:accent])};"}>
                 {render_slot(stat)}
               </div>
@@ -299,6 +299,9 @@ defmodule MusicListings.Emails.Components do
   defp stat_accent("spotlight"), do: "#d8ff3e"
   defp stat_accent("ember"), do: "#ff5a36"
   defp stat_accent(_other), do: "#ece9e0"
+
+  # Split the row evenly across however many stats are present.
+  defp stat_column_width(stats), do: "#{div(100, length(stats))}%"
 
   defp badge_bg("ember"), do: "#ff5a36"
   defp badge_bg(_other), do: "#d8ff3e"
