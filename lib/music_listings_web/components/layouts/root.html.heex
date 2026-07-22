@@ -88,8 +88,6 @@
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
     </script>
-    <script defer data-domain="torontomusiclistings.com" src="https://plausible.io/js/script.js">
-    </script>
     <Turnstile.script :if={assigns[:show_turnstile]} />
     <script type="application/ld+json">
       <%= Phoenix.HTML.raw(MusicListingsWeb.SEO.encode_json_ld(MusicListingsWeb.SEO.website_json_ld())) %>

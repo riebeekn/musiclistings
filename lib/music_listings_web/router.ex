@@ -13,7 +13,7 @@ defmodule MusicListingsWeb.Router do
                 "https://challenges.cloudflare.com https://www.google.com;"
               end)
 
-  @csp_policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://plausible.io; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' wss: https:; frame-src #{@frame_src}"
+  @csp_policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' wss: https:; frame-src #{@frame_src}"
 
   pipeline :browser do
     plug :accepts, ["html"]
