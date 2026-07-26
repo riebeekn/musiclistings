@@ -11,3 +11,10 @@ export ADMIN_EMAIL="admin@example.com"
 # and write the results to prod). Requires your IP to be on the Render database's
 # inbound allowlist.
 export PROD_DB_URL="postgresql://user:password@host.render.com/database"
+
+# Impact.com credentials for the TicketNetwork affiliate catalog, used to attach
+# affiliate ticket links to events after each crawl (see
+# MusicListings.Affiliates.TicketNetwork).
+# Leave unset to skip affiliate matching entirely.
+export TICKET_NETWORK_ACCOUNT_SID=""
+export TICKET_NETWORK_AUTH_TOKEN=""

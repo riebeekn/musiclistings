@@ -17,6 +17,7 @@ defmodule MusicListingsSchema.Event do
           price_hi: Decimal.t(),
           age_restriction: :all_ages | :eighteen_plus | :nineteen_plus | :unknown,
           ticket_url: String.t(),
+          ticketnetwork_url: String.t(),
           details_url: String.t(),
           locked_from_updates?: boolean(),
           inserted_at: DateTime.t(),
@@ -38,6 +39,7 @@ defmodule MusicListingsSchema.Event do
       values: [:all_ages, :eighteen_plus, :nineteen_plus, :unknown]
 
     field :ticket_url, :string
+    field :ticketnetwork_url, :string
     field :details_url, :string
     field :deleted_at, :utc_datetime
     field :locked_from_updates?, :boolean, source: :locked_from_updates, default: false

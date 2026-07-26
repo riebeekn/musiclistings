@@ -42,6 +42,12 @@ config :phoenix_live_view,
 # Use test HTTP client that returns errors, so parsers hit fallback paths
 config :music_listings, :http_client, MusicListings.HttpClient.Test
 
+# Dummy TicketNetwork credentials so the affiliate matcher treats itself as
+# configured and serves its catalog from fixtures rather than skipping.
+config :music_listings, :ticket_network,
+  account_sid: "test_account_sid",
+  auth_token: "test_auth_token"
+
 # Oban test config
 config :music_listings, Oban, testing: :inline
 

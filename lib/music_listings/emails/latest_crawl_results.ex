@@ -4,6 +4,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
   """
   use MusicListings.Mailer
 
+  alias MusicListings.Affiliates.TicketNetwork
   alias MusicListings.Events
   alias MusicListings.Repo
   alias MusicListingsSchema.CrawlError
@@ -18,8 +19,12 @@ defmodule MusicListings.Emails.LatestCrawlResults do
 
   The events the crawl added are looked up from its time window unless passed in -
   `preview/0` supplies its own so it can render without touching the database.
+
+  `ticket_network_stats` is the outcome of the affiliate matching pass that runs
+  after the crawl, or `nil` when it was skipped or failed - its section is then
+  omitted entirely.
   """
-  def new_email(crawl_summary, added_events \\ nil) do
+  def new_email(crawl_summary, added_events \\ nil, ticket_network_stats \\ nil) do
     crawl_summary =
       Repo.preload(crawl_summary, crawl_errors: [:venue], venue_crawl_summaries: [:venue])
 
@@ -29,7 +34,13 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     |> to_site_admin()
     |> from_noreply()
     |> subject(subject_line(crawl_summary))
-    |> body(mjml(%{crawl_summary: crawl_summary, added_events: added_events}))
+    |> body(
+      mjml(%{
+        crawl_summary: crawl_summary,
+        added_events: added_events,
+        ticket_network_stats: ticket_network_stats
+      })
+    )
   end
 
   defp subject_line(%{new: new, errors: errors}) when errors > 0 do
@@ -47,6 +58,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       |> Map.put(:error_count, Enum.count(assigns.crawl_summary.crawl_errors))
       |> Map.put(:added_event_count, Enum.count(assigns.added_events))
       |> Map.put(:no_events_venues, no_events_venues(assigns.crawl_summary.crawl_errors))
+      |> Map.put(:ticket_network_stats, ticket_network_stats(assigns[:ticket_network_stats]))
 
     ~H"""
     <.h1>Nightly Crawl Report</.h1>
@@ -155,6 +167,40 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       </mj-text>
     <% end %>
 
+    <%= if @ticket_network_stats do %>
+      <.h2>TicketNetwork affiliate links</.h2>
+      <.muted>
+        {@ticket_network_stats.linked} set · {@ticket_network_stats.cleared} cleared · {@ticket_network_stats.matched} catalog {pluralize(
+          @ticket_network_stats.matched,
+          "item"
+        )} matched · {@ticket_network_stats.unmatched_items} unmatched · {@ticket_network_stats.untracked_items} at venues we don't track
+      </.muted>
+
+      <%= if @ticket_network_stats.consecutive_runs != [] do %>
+        <.muted>
+          Consecutive-night runs — identically titled shows on back-to-back nights. These match on
+          TicketNetwork dating its listings exactly a day early; since the titles within a run are
+          identical, a listing that landed on the wrong night would look just as convincing. Worth a
+          spot check.
+        </.muted>
+        <.table rows={@ticket_network_stats.consecutive_runs}>
+          <:col :let={run} label="Venue">
+            <span style="color:#a8a49a;">
+              {venue_name(@ticket_network_stats.venue_names, run.venue_id)}
+            </span>
+          </:col>
+          <:col :let={run} label="Event">
+            <span style="color:#ece9e0;font-weight:700;">{run.title}</span>
+          </:col>
+          <:col :let={run} label="Dates">
+            <span style="white-space:nowrap;color:#a8a49a;">
+              {Enum.map_join(run.dates, " · ", &DateHelpers.format_date/1)}
+            </span>
+          </:col>
+        </.table>
+      <% end %>
+    <% end %>
+
     <%= if @added_event_count > 0 do %>
       <.h2>New events ({@added_event_count})</.h2>
       <.table rows={@added_events}>
@@ -170,6 +216,15 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       </.table>
     <% end %>
     """
+  end
+
+  # The matching pass returns :skipped when no API credentials are configured
+  # and nil when it failed; either way there is nothing worth reporting.
+  defp ticket_network_stats(%TicketNetwork.Stats{} = stats), do: stats
+  defp ticket_network_stats(_other), do: nil
+
+  defp venue_name(venue_names, venue_id) do
+    Map.get(venue_names, venue_id, "venue ##{venue_id}")
   end
 
   defp no_events_venues(crawl_errors) do
@@ -259,10 +314,27 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       build_event(v2, "Badge Époque Ensemble", ~D[2026-08-21])
     ]
 
+    ticket_network_stats = %TicketNetwork.Stats{
+      matched: 497,
+      linked: 12,
+      cleared: 3,
+      unmatched_items: 171,
+      untracked_items: 68,
+      venue_names: %{1 => v1.name, 2 => v2.name},
+      consecutive_runs: [
+        %{venue_id: 1, title: "Alexisonfire", dates: [~D[2026-08-14], ~D[2026-08-15]]},
+        %{
+          venue_id: 2,
+          title: "TSO - Star Wars: A New Hope in Concert",
+          dates: [~D[2027-01-28], ~D[2027-01-29], ~D[2027-01-30]]
+        }
+      ]
+    }
+
     build_crawl_summary()
     |> Map.put(:crawl_errors, [ce1, ce2, ce3, ce4, ce5])
     |> Map.put(:venue_crawl_summaries, [vcs1, vcs2, vcs3, vcs4])
-    |> new_email(added_events)
+    |> new_email(added_events, ticket_network_stats)
   end
 
   def preview_details do

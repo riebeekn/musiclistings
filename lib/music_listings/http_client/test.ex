@@ -77,7 +77,12 @@ defmodule MusicListings.HttpClient.Test do
       # Story — token endpoint is fetched first, then the events API is called
       # with the token it yields.
       {"storytoronto.ca/_api/v1/access-tokens", "story/access_tokens.json"},
-      {"storytoronto.ca/_api/wix-one-events-server", "story/index.json"}
+      {"storytoronto.ca/_api/wix-one-events-server", "story/index.json"},
+      # TicketNetwork affiliate catalog — paged, so each page has its own fixture
+      {"api.impact.com/Mediapartners/test_account_sid/Catalogs/1872/Items?Query=Category+%3D+%27CONCERTS%27+AND+Gtin+%3D+%27Toronto%27&Page=1",
+       "ticket_network/page_1.json"},
+      {"api.impact.com/Mediapartners/test_account_sid/Catalogs/1872/Items?Query=Category+%3D+%27CONCERTS%27+AND+Gtin+%3D+%27Toronto%27&Page=2",
+       "ticket_network/page_2.json"}
     ]
   end
 end
