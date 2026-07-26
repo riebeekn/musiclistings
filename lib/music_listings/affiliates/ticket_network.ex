@@ -65,24 +65,29 @@ defmodule MusicListings.Affiliates.TicketNetwork do
   end
 
   @doc """
-  Runs the pass and returns only its stats, logging rather than propagating
-  failures.  Used by the nightly crawl, where a TicketNetwork outage must not
-  fail the crawl or suppress the summary email.
+  Runs the pass and returns its outcome, logging rather than raising on failure.
+  Used by the nightly crawl, where a TicketNetwork outage must not fail the
+  crawl or suppress the summary email.
+
+  Returns the stats on success, `:skipped` when no credentials are configured,
+  and `{:error, reason}` otherwise - the caller reports the failure in the crawl
+  summary email, so a timed-out catalog doesn't look like a night with nothing
+  to say.
   """
-  @spec run_quietly(keyword()) :: Stats.t() | :skipped | nil
+  @spec run_quietly(keyword()) :: Stats.t() | :skipped | {:error, term()}
   def run_quietly(opts \\ []) do
     case run(opts) do
       {:ok, stats} ->
         stats
 
-      {:error, reason} ->
+      {:error, reason} = error ->
         Logger.error("TicketNetwork matching failed: #{inspect(reason)}")
-        nil
+        error
     end
   rescue
     error ->
       Logger.error("TicketNetwork matching crashed: #{inspect(error)}")
-      nil
+      {:error, error}
   end
 
   @doc """

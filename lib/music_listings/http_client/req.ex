@@ -14,17 +14,16 @@ defmodule MusicListings.HttpClient.Req do
   # retry?/2 so Req uses our bounded exponential backoff and ignores the header.
   @max_retry_delay_ms :timer.seconds(30)
 
+  # Suit a venue page: quick to answer, and worth several attempts because a
+  # venue that fails is a venue whose events we lose for the night. Callers with
+  # a slower endpoint override these per request - see `request_options/2`.
+  @default_receive_timeout :timer.seconds(30)
+  @default_max_retries 3
+
   @impl true
-  def get(url, headers \\ []) do
+  def get(url, headers \\ [], opts \\ []) do
     url
-    |> Req.get(
-      headers: headers,
-      compressed: true,
-      finch: MusicListings.ReqFinch,
-      receive_timeout: 30_000,
-      retry: &retry?/2,
-      max_retries: 3
-    )
+    |> Req.get(request_options(headers, opts))
     |> case do
       {:ok, response} -> {:ok, Response.new(response)}
       {:error, error} -> {:error, error}
@@ -34,19 +33,24 @@ defmodule MusicListings.HttpClient.Req do
   @impl true
   def post(url, body, headers) do
     url
-    |> Req.post(
-      headers: headers,
-      compressed: true,
-      json: body,
-      finch: MusicListings.ReqFinch,
-      receive_timeout: 30_000,
-      retry: &retry?/2,
-      max_retries: 3
-    )
+    |> Req.post([json: body] ++ request_options(headers, []))
     |> case do
       {:ok, response} -> {:ok, Response.new(response)}
       {:error, error} -> {:error, error}
     end
+  end
+
+  # Only the two tunables a caller has ever needed are overridable; the retry
+  # policy itself stays here so every request in the app backs off the same way.
+  defp request_options(headers, opts) do
+    [
+      headers: headers,
+      compressed: true,
+      finch: MusicListings.ReqFinch,
+      receive_timeout: Keyword.get(opts, :receive_timeout, @default_receive_timeout),
+      retry: &retry?/2,
+      max_retries: Keyword.get(opts, :max_retries, @default_max_retries)
+    ]
   end
 
   defp retry?(request, %{status: status}) when status in @retry_statuses do

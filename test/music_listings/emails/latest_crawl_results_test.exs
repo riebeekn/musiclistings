@@ -228,4 +228,44 @@ defmodule MusicListings.Emails.LatestCrawlResultsTest do
       refute email.html_body =~ "Consecutive-night runs"
     end
   end
+
+  describe "new_email/3 - TicketNetwork failures" do
+    defp result_email(result) do
+      [] |> crawl_summary() |> LatestCrawlResults.new_email(nil, result)
+    end
+
+    # A timeout used to render exactly like a night with nothing to report.
+    test "reports a timed-out catalog" do
+      email = result_email({:error, %Req.TransportError{reason: :timeout}})
+
+      assert email.html_body =~ "TicketNetwork affiliate links"
+      assert email.html_body =~ "Matching did not run"
+      assert email.html_body =~ "timed out"
+      assert email.html_body =~ "Existing affiliate links are untouched"
+    end
+
+    test "reports an unexpected status" do
+      email = result_email({:error, {:unexpected_status, 401}})
+
+      assert email.html_body =~ "Matching did not run"
+      assert email.html_body =~ "HTTP 401"
+    end
+
+    test "reports a crash" do
+      email = result_email({:error, %RuntimeError{message: "boom"}})
+
+      assert email.html_body =~ "Matching did not run"
+      assert email.html_body =~ "boom"
+    end
+
+    # No credentials is the normal state in dev, not something to report.
+    test "says nothing when the pass was skipped or never ran" do
+      for result <- [:skipped, nil] do
+        email = result_email(result)
+
+        refute email.html_body =~ "TicketNetwork affiliate links"
+        refute email.html_body =~ "Matching did not run"
+      end
+    end
+  end
 end

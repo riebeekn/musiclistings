@@ -24,7 +24,7 @@ defmodule MusicListings.Workers.DataRetrievalWorker do
     |> case do
       {:ok, crawl_summary} ->
         # Runs after the crawl so it matches against fresh event data.  Failures
-        # are logged and folded in as a nil stat rather than raised - a
+        # are logged and handed to the email to report rather than raised - a
         # TicketNetwork outage must not cost us the crawl summary email.
         ticket_network_stats = TicketNetwork.run_quietly()
 

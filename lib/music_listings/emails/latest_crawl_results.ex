@@ -20,11 +20,11 @@ defmodule MusicListings.Emails.LatestCrawlResults do
   The events the crawl added are looked up from its time window unless passed in -
   `preview/0` supplies its own so it can render without touching the database.
 
-  `ticket_network_stats` is the outcome of the affiliate matching pass that runs
-  after the crawl, or `nil` when it was skipped or failed - its section is then
-  omitted entirely.
+  `ticket_network_result` is the outcome of the affiliate matching pass that runs
+  after the crawl: its `Stats` on success, `{:error, reason}` when it failed, or
+  `:skipped`/`nil` when it never ran.  A failure is reported; a skip is not.
   """
-  def new_email(crawl_summary, added_events \\ nil, ticket_network_stats \\ nil) do
+  def new_email(crawl_summary, added_events \\ nil, ticket_network_result \\ nil) do
     crawl_summary =
       Repo.preload(crawl_summary, crawl_errors: [:venue], venue_crawl_summaries: [:venue])
 
@@ -38,7 +38,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       mjml(%{
         crawl_summary: crawl_summary,
         added_events: added_events,
-        ticket_network_stats: ticket_network_stats
+        ticket_network_result: ticket_network_result
       })
     )
   end
@@ -52,13 +52,16 @@ defmodule MusicListings.Emails.LatestCrawlResults do
   end
 
   defp mjml(assigns) do
+    ticket_network_result = assigns[:ticket_network_result]
+
     assigns =
       assigns
       |> Map.put(:venue_rows, sort_venues(assigns.crawl_summary.venue_crawl_summaries))
       |> Map.put(:error_count, Enum.count(assigns.crawl_summary.crawl_errors))
       |> Map.put(:added_event_count, Enum.count(assigns.added_events))
       |> Map.put(:no_events_venues, no_events_venues(assigns.crawl_summary.crawl_errors))
-      |> Map.put(:ticket_network_stats, ticket_network_stats(assigns[:ticket_network_stats]))
+      |> Map.put(:ticket_network_stats, ticket_network_stats(ticket_network_result))
+      |> Map.put(:ticket_network_error, ticket_network_error(ticket_network_result))
 
     ~H"""
     <.h1>Nightly Crawl Report</.h1>
@@ -167,6 +170,24 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       </mj-text>
     <% end %>
 
+    <%= if @ticket_network_error do %>
+      <.h2>TicketNetwork affiliate links</.h2>
+      <mj-text padding="6px 0">
+        <div style="border-left:3px solid #ff5a36;background-color:#1c1c1d;border-radius:6px;padding:12px 14px;">
+          <div style="font-family:'Big Shoulders Display','Hanken Grotesk',Helvetica,Arial,sans-serif;font-size:15px;font-weight:700;color:#ff5a36;">
+            Matching did not run
+          </div>
+          <div style="color:#ece9e0;font-size:12px;line-height:1.5;padding-top:8px;">
+            {@ticket_network_error}
+          </div>
+          <div style="color:#a8a49a;font-size:11px;line-height:1.45;padding-top:8px;">
+            Existing affiliate links are untouched — the pass writes nothing unless it fetches the
+            whole catalog, so none were set or cleared tonight.
+          </div>
+        </div>
+      </mj-text>
+    <% end %>
+
     <%= if @ticket_network_stats do %>
       <.h2>TicketNetwork affiliate links</.h2>
       <.muted>
@@ -224,10 +245,43 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     """
   end
 
-  # The matching pass returns :skipped when no API credentials are configured
-  # and nil when it failed; either way there is nothing worth reporting.
+  # The matching pass returns :skipped when no API credentials are configured -
+  # the normal state in dev - which isn't worth a word in the report.
   defp ticket_network_stats(%TicketNetwork.Stats{} = stats), do: stats
   defp ticket_network_stats(_other), do: nil
+
+  # A failure, on the other hand, has to be said out loud: the section simply
+  # going missing is indistinguishable from a night where nothing was skipped.
+  defp ticket_network_error({:error, reason}), do: describe_ticket_network_error(reason)
+  defp ticket_network_error(_other), do: nil
+
+  defp describe_ticket_network_error(%Req.TransportError{reason: :timeout}) do
+    "The catalog request timed out."
+  end
+
+  defp describe_ticket_network_error(%Req.TransportError{reason: reason}) do
+    "The catalog request failed to reach the API (#{inspect(reason)})."
+  end
+
+  defp describe_ticket_network_error({:unexpected_status, status}) do
+    "The catalog returned HTTP #{status}."
+  end
+
+  defp describe_ticket_network_error(:too_many_pages) do
+    "The catalog reported more pages than we are willing to fetch."
+  end
+
+  defp describe_ticket_network_error(:not_configured) do
+    "No API credentials are configured."
+  end
+
+  defp describe_ticket_network_error(error) when is_exception(error) do
+    "The pass crashed: #{Exception.message(error)}"
+  end
+
+  defp describe_ticket_network_error(other) do
+    "The pass failed: #{inspect(other)}"
+  end
 
   defp venue_name(venue_names, venue_id) do
     Map.get(venue_names, venue_id, "venue ##{venue_id}")

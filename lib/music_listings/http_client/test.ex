@@ -12,7 +12,7 @@ defmodule MusicListings.HttpClient.Test do
   @fixture_base "test/data"
 
   @impl true
-  def get(url, _headers \\ []) do
+  def get(url, _headers \\ [], _opts \\ []) do
     case fixture_for_url(url) do
       {:ok, body} -> {:ok, Response.new(200, body)}
       :error -> {:error, :test_env}

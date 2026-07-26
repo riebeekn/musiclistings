@@ -27,6 +27,12 @@ defmodule MusicListings.Affiliates.TicketNetwork.Client do
   # Toronto catalog runs to 8 pages, so this is a long way clear of normal.
   @max_pages 50
 
+  # The Impact.com catalog is slow enough that the crawler's 30s default times
+  # it out, so give it two minutes. One retry rather than the usual three: at
+  # this timeout a hung catalog would otherwise hold up the crawl summary email
+  # for the better part of an hour before we gave up on it.
+  @request_opts [receive_timeout: :timer.minutes(2), max_retries: 1]
+
   @doc """
   Fetches every catalog item for Toronto concerts.
 
@@ -58,7 +64,7 @@ defmodule MusicListings.Affiliates.TicketNetwork.Client do
   defp fetch_pages(credentials, today, page, acc) do
     url = page_url(credentials.account_sid, page)
 
-    case HttpClient.get(url, headers(credentials)) do
+    case HttpClient.get(url, headers(credentials), @request_opts) do
       {:ok, %HttpClient.Response{status: 200, body: body}} ->
         payload = ParseHelpers.maybe_decode!(body)
         items = payload |> Map.get("Items", []) |> parse_items(today)

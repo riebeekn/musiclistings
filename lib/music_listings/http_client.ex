@@ -25,16 +25,20 @@ defmodule MusicListings.HttpClient do
   end
 
   @doc """
-  Callback invoked on a get
+  Callback invoked on a get.
+
+  `opts` carries per-request overrides for callers whose endpoint doesn't fit
+  the crawler's defaults - see `MusicListings.HttpClient.Req` for the options
+  it honours.
   """
-  @callback get(url :: String.t(), headers :: list() | nil) ::
+  @callback get(url :: String.t(), headers :: list() | nil, opts :: keyword()) ::
               {:ok, Response.t()} | {:error, any()}
 
   @doc """
   Client specific get
   """
-  def get(url, headers \\ []) do
-    http_client().get(url, headers)
+  def get(url, headers \\ [], opts \\ []) do
+    http_client().get(url, headers, opts)
   end
 
   @doc """

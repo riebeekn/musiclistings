@@ -138,17 +138,26 @@ defmodule MusicListings.Affiliates.TicketNetworkTest do
   end
 
   describe "run_quietly/1" do
-    test "returns nil rather than raising when the catalog is unreachable" do
+    defp put_credentials(credentials) do
       original = Application.get_env(:music_listings, :ticket_network)
 
-      Application.put_env(:music_listings, :ticket_network,
-        account_sid: "unknown_account_sid",
-        auth_token: "test_auth_token"
-      )
+      Application.put_env(:music_listings, :ticket_network, credentials)
 
       on_exit(fn -> Application.put_env(:music_listings, :ticket_network, original) end)
+    end
 
-      assert TicketNetwork.run_quietly(today: @today) == nil
+    # The reason is what the crawl summary email reports, so it has to survive
+    # the pass rather than being flattened into a bare nil.
+    test "returns the reason rather than raising when the catalog is unreachable" do
+      put_credentials(account_sid: "unknown_account_sid", auth_token: "test_auth_token")
+
+      assert {:error, _reason} = TicketNetwork.run_quietly(today: @today)
+    end
+
+    test "returns :skipped when no credentials are configured" do
+      put_credentials(account_sid: nil, auth_token: nil)
+
+      assert TicketNetwork.run_quietly(today: @today) == :skipped
     end
   end
 end
