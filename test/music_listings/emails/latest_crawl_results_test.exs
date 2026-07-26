@@ -1,6 +1,7 @@
 defmodule MusicListings.Emails.LatestCrawlResultsTest do
   use MusicListings.DataCase, async: true
 
+  alias MusicListings.Affiliates.TicketNetwork
   alias MusicListings.Emails.LatestCrawlResults
   alias MusicListingsSchema.CrawlError
   alias MusicListingsSchema.CrawlSummary
@@ -155,6 +156,76 @@ defmodule MusicListings.Emails.LatestCrawlResultsTest do
       email = [] |> crawl_summary() |> LatestCrawlResults.new_email()
 
       refute email.html_body =~ "New events"
+    end
+  end
+
+  describe "new_email/3 - TicketNetwork consecutive-night runs" do
+    defp ticket_network_stats(runs, venue) do
+      %TicketNetwork.Stats{
+        matched: 596,
+        linked: 100,
+        cleared: 0,
+        unmatched_items: 65,
+        untracked_items: 68,
+        venue_names: %{venue.id => venue.name},
+        consecutive_runs: runs
+      }
+    end
+
+    defp runs_email(runs) do
+      venue = insert(:venue, name: "Roy Test Hall")
+
+      runs = Enum.map(runs, &Map.put(&1, :venue_id, venue.id))
+
+      []
+      |> crawl_summary()
+      |> LatestCrawlResults.new_email(nil, ticket_network_stats(runs, venue))
+    end
+
+    test "renders a run's nights as a date range" do
+      email =
+        runs_email([
+          %{title: "TSO - Messiah", dates: [~D[2026-12-18], ~D[2026-12-19], ~D[2026-12-20]]}
+        ])
+
+      assert email.html_body =~ "TSO - Messiah"
+      assert email.html_body =~ "Dec 18 - 20 2026"
+    end
+
+    # The whole email is one fixed-width column, so an unbreakable cell doesn't
+    # just widen its own table - it stretches the message past the body width
+    # and pushes every table's right-hand columns out of view.
+    test "leaves no unbreakable run of dates wide enough to stretch the email" do
+      email =
+        runs_email([
+          %{
+            title: "National Geographic Live: Chris Schell",
+            dates:
+              [~D[2026-11-08], ~D[2026-11-09], ~D[2026-11-10]] ++
+                [~D[2027-03-21], ~D[2027-03-22], ~D[2027-03-23]] ++
+                [~D[2027-04-18], ~D[2027-04-19], ~D[2027-04-20]] ++
+                [~D[2027-05-30], ~D[2027-05-31], ~D[2027-06-01]]
+          }
+        ])
+
+      assert email.html_body =~ "Nov 08 - 10 2026"
+      assert email.html_body =~ "May 30 - Jun 01 2027"
+
+      longest =
+        ~r/white-space:nowrap[^>]*>([^<]*)</
+        |> Regex.scan(email.html_body, capture: :all_but_first)
+        |> List.flatten()
+        |> Enum.map(&(&1 |> String.replace(~r/\s+/, " ") |> String.trim() |> String.length()))
+        |> Enum.max()
+
+      assert longest <= 40
+    end
+
+    test "omits the runs table when the crawl found no runs" do
+      email = runs_email([])
+
+      assert email.html_body =~ "TicketNetwork affiliate links"
+      refute email.html_body =~ "Consecutive-night runs"
     end
   end
 end

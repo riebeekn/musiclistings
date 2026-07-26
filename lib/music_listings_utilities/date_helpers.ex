@@ -160,6 +160,57 @@ defmodule MusicListingsUtilities.DateHelpers do
   end
 
   @doc """
+  Formats a set of dates as the runs of consecutive days they form, e.g.
+  `["Dec 15 - 16 2026", "Dec 18 - 20 2026"]`.
+
+  Returns one string per run rather than a single joined string, so a caller
+  laying these out can break between runs - a long list of dates on one
+  unbreakable line will stretch a fixed-width email past its own body.
+
+  A run of one keeps the weekday that `format_date/1` gives it, since a single
+  date reads as a date rather than as a span.
+  """
+  @spec format_date_ranges([Date.t()]) :: [String.t()]
+  def format_date_ranges(dates) do
+    dates
+    |> Enum.uniq()
+    |> Enum.sort(Date)
+    |> Enum.chunk_while([], &chunk_consecutive/2, &close_run/1)
+    |> Enum.map(&format_date_range/1)
+  end
+
+  defp chunk_consecutive(date, [previous | _rest] = run) do
+    if Date.diff(date, previous) == 1 do
+      {:cont, [date | run]}
+    else
+      {:cont, Enum.reverse(run), [date]}
+    end
+  end
+
+  defp chunk_consecutive(date, []), do: {:cont, [date]}
+
+  defp close_run([]), do: {:cont, []}
+  defp close_run(run), do: {:cont, Enum.reverse(run), []}
+
+  defp format_date_range([date]), do: format_date(date)
+
+  defp format_date_range(run) do
+    first = List.first(run)
+    last = List.last(run)
+
+    cond do
+      first.year != last.year ->
+        "#{Calendar.strftime(first, "%b %d %Y")} - #{Calendar.strftime(last, "%b %d %Y")}"
+
+      first.month != last.month ->
+        "#{Calendar.strftime(first, "%b %d")} - #{Calendar.strftime(last, "%b %d %Y")}"
+
+      true ->
+        "#{Calendar.strftime(first, "%b %d")} - #{Calendar.strftime(last, "%d %Y")}"
+    end
+  end
+
+  @doc """
   Formats a UTC datetime for display in Eastern time as a full timestamp, e.g.
   "Thursday · Aug 1, 2024 · 12:00 PM EDT". Used for "as of" headers in emails.
   """

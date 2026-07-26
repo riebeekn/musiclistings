@@ -83,4 +83,59 @@ defmodule MusicListingsUtilities.DateHelpersTest do
                Enum.sort_by(times, &DateHelpers.night_ordered_time_key/1)
     end
   end
+
+  describe "format_date_ranges/1" do
+    test "collapses consecutive days into a range" do
+      dates = [~D[2026-12-18], ~D[2026-12-19], ~D[2026-12-20]]
+
+      assert ["Dec 18 - 20 2026"] == DateHelpers.format_date_ranges(dates)
+    end
+
+    test "breaks a gap into separate ranges" do
+      dates = [~D[2026-12-15], ~D[2026-12-16], ~D[2026-12-18], ~D[2026-12-19], ~D[2026-12-20]]
+
+      assert ["Dec 15 - 16 2026", "Dec 18 - 20 2026"] == DateHelpers.format_date_ranges(dates)
+    end
+
+    test "names both months when a range spans two" do
+      dates = [~D[2027-05-30], ~D[2027-05-31], ~D[2027-06-01]]
+
+      assert ["May 30 - Jun 01 2027"] == DateHelpers.format_date_ranges(dates)
+    end
+
+    test "names both years when a range spans two" do
+      dates = [~D[2026-12-31], ~D[2027-01-01]]
+
+      assert ["Dec 31 2026 - Jan 01 2027"] == DateHelpers.format_date_ranges(dates)
+    end
+
+    test "keeps the weekday on a lone date" do
+      assert ["Sun, Nov 08 2026"] == DateHelpers.format_date_ranges([~D[2026-11-08]])
+    end
+
+    test "sorts and dedupes before grouping" do
+      dates = [~D[2026-11-09], ~D[2026-11-08], ~D[2026-11-09], ~D[2026-11-10]]
+
+      assert ["Nov 08 - 10 2026"] == DateHelpers.format_date_ranges(dates)
+    end
+
+    test "handles no dates at all" do
+      assert [] == DateHelpers.format_date_ranges([])
+    end
+
+    test "keeps a repertory booking's four visits apart" do
+      dates =
+        [~D[2026-11-08], ~D[2026-11-09], ~D[2026-11-10]] ++
+          [~D[2027-03-21], ~D[2027-03-22], ~D[2027-03-23]] ++
+          [~D[2027-04-18], ~D[2027-04-19], ~D[2027-04-20]] ++
+          [~D[2027-05-30], ~D[2027-05-31], ~D[2027-06-01]]
+
+      assert [
+               "Nov 08 - 10 2026",
+               "Mar 21 - 23 2027",
+               "Apr 18 - 20 2027",
+               "May 30 - Jun 01 2027"
+             ] == DateHelpers.format_date_ranges(dates)
+    end
+  end
 end

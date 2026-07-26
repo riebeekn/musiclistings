@@ -193,9 +193,15 @@ defmodule MusicListings.Emails.LatestCrawlResults do
             <span style="color:#ece9e0;font-weight:700;">{run.title}</span>
           </:col>
           <:col :let={run} label="Dates">
-            <span style="white-space:nowrap;color:#a8a49a;">
-              {Enum.map_join(run.dates, " · ", &DateHelpers.format_date/1)}
-            </span>
+            <%!-- One span per range, with the separators outside them: a run of
+            many nights then wraps between its ranges rather than forcing the
+            table - and with it the whole email - wider than the body. --%>
+            <%= for {range, index} <- Enum.with_index(DateHelpers.format_date_ranges(run.dates)) do %>
+              <%= if index > 0 do %>
+                <span style="color:#2b2b27;"> · </span>
+              <% end %>
+              <span style="white-space:nowrap;color:#a8a49a;">{range}</span>
+            <% end %>
           </:col>
         </.table>
       <% end %>
@@ -327,6 +333,26 @@ defmodule MusicListings.Emails.LatestCrawlResults do
           venue_id: 2,
           title: "TSO - Star Wars: A New Hope in Concert",
           dates: [~D[2027-01-28], ~D[2027-01-29], ~D[2027-01-30]]
+        },
+        # A repertory booking that returns four times over the year - the widest
+        # the dates column ever gets, and the reason it has to wrap.
+        %{
+          venue_id: 2,
+          title: "National Geographic Live: Chris Schell",
+          dates: [
+            ~D[2026-11-08],
+            ~D[2026-11-09],
+            ~D[2026-11-10],
+            ~D[2027-03-21],
+            ~D[2027-03-22],
+            ~D[2027-03-23],
+            ~D[2027-04-18],
+            ~D[2027-04-19],
+            ~D[2027-04-20],
+            ~D[2027-05-30],
+            ~D[2027-05-31],
+            ~D[2027-06-01]
+          ]
         }
       ]
     }
