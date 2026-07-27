@@ -1,0 +1,508 @@
+{
+ "kind": "calendar#events",
+ "etag": "\"p33ft5gvcurp9a0o\"",
+ "summary": "EVENTS IN CONTXT",
+ "description": "",
+ "updated": "2026-07-27T13:09:10.155Z",
+ "timeZone": "America/Toronto",
+ "accessRole": "reader",
+ "defaultReminders": [],
+ "items": [
+  {
+   "kind": "calendar#event",
+   "etag": "\"3554997260446558\"",
+   "id": "4lhii9pau5h6kblovd7a9qqk5g_20250410",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=NGxoaWk5cGF1NWg2a2Jsb3ZkN2E5cXFrNWdfMjAyNTA0MTAgMDI3NTU5YjIwOGQwZGM3ZTg4ZjRiODdlMTNiZDc2MmIwMTg2YzdhOTZiNTUyMTI4NGE4Nzg2YzBlYzM2ZDQ5Y0Bn",
+   "created": "2025-01-31T13:05:34.000Z",
+   "updated": "2026-04-29T21:37:10.223Z",
+   "summary": "5-10pm Dining",
+   "description": "Reader: Michael Boughn",
+   "creator": {
+    "email": "annelieberwirth@gmail.com"
+   },
+   "organizer": {
+    "email": "027559b208d0dc7e88f4b87e13bd762b0186c7a96b5521284a8786c0ec36d49c@group.calendar.google.com",
+    "displayName": "EVENTS IN CONTXT",
+    "self": true
+   },
+   "start": {
+    "date": "2025-04-10"
+   },
+   "end": {
+    "date": "2025-04-11"
+   },
+   "recurringEventId": "4lhii9pau5h6kblovd7a9qqk5g",
+   "originalStartTime": {
+    "date": "2025-04-10"
+   },
+   "iCalUID": "4lhii9pau5h6kblovd7a9qqk5g@google.com",
+   "sequence": 2,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3488790756886814\"",
+   "id": "6eqm16et5sc5vobu87vlkckhrj",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=NmVxbTE2ZXQ1c2M1dm9idTg3dmxrY2tocmogMDI3NTU5YjIwOGQwZGM3ZTg4ZjRiODdlMTNiZDc2MmIwMTg2YzdhOTZiNTUyMTI4NGE4Nzg2YzBlYzM2ZDQ5Y0Bn",
+   "created": "2025-04-11T16:13:42.000Z",
+   "updated": "2025-04-11T18:16:18.443Z",
+   "summary": "The Shop Family Residency Night 1",
+   "description": "<p><b>The Shop Family</b> compositions of the tunes are borrowed from <b>modern gospel</b>, <b>pop punk</b>, and several sub genres of <b>African </b>music and combine them with the quintet’s mutual foundation in modern and traditional <b>jazz</b>. The magic of the ensemble is in the combination of these elements with each member’s personal influences. The outcome is a truly unique sound  that’s continually evolving.</p><p><br></p><p><b>The Shop Family Features:</b><br></p><p></p><p><b><b>:: Bureh Bollo- Kamara </b>-- </b>guitar<br><b>:: Omar Gittens </b>-- drums, percussions<br><b>:: Carlo Santo Domingo </b>-- bass<br><b>:: Racha Moukalled </b>-- vibraphone<br><b><b>:: Connor Moe </b>-- </b>saxes, flutes</p><p></p><p><b></b>More on the band: <a href=\"https://theshopfamily.net/about\" target=\"_blank\"><u>The Shop</u></a><br><br>Doors: 6pm<br>Concert: 7pm</p><p><b><a href=\"https://square.link/u/vZIYGHQl\">Tickets May 16</a></b></p>",
+   "creator": {
+    "email": "annelieberwirth@gmail.com"
+   },
+   "organizer": {
+    "email": "027559b208d0dc7e88f4b87e13bd762b0186c7a96b5521284a8786c0ec36d49c@group.calendar.google.com",
+    "displayName": "EVENTS IN CONTXT",
+    "self": true
+   },
+   "start": {
+    "date": "2025-05-16"
+   },
+   "end": {
+    "date": "2025-05-17"
+   },
+   "transparency": "transparent",
+   "iCalUID": "6eqm16et5sc5vobu87vlkckhrj@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3499245820183262\"",
+   "id": "18iu1r19g7hc115i6mqsp771ke",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MThpdTFyMTlnN2hjMTE1aTZtcXNwNzcxa2UgMDI3NTU5YjIwOGQwZGM3ZTg4ZjRiODdlMTNiZDc2MmIwMTg2YzdhOTZiNTUyMTI4NGE4Nzg2YzBlYzM2ZDQ5Y0Bn",
+   "created": "2025-06-11T06:20:48.000Z",
+   "updated": "2025-06-11T06:21:50.091Z",
+   "summary": "1-4pm Listening Room",
+   "description": "An afternoon of jazz, curated by DJ Watts is Live\nPWYC",
+   "creator": {
+    "email": "annelieberwirth@gmail.com"
+   },
+   "organizer": {
+    "email": "027559b208d0dc7e88f4b87e13bd762b0186c7a96b5521284a8786c0ec36d49c@group.calendar.google.com",
+    "displayName": "EVENTS IN CONTXT",
+    "self": true
+   },
+   "start": {
+    "date": "2025-06-21"
+   },
+   "end": {
+    "date": "2025-06-22"
+   },
+   "transparency": "transparent",
+   "iCalUID": "18iu1r19g7hc115i6mqsp771ke@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3499503098729886\"",
+   "id": "6ohv371gg8c963r4jvaarmndv3",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=Nm9odjM3MWdnOGM5NjNyNGp2YWFybW5kdjMgMDI3NTU5YjIwOGQwZGM3ZTg4ZjRiODdlMTNiZDc2MmIwMTg2YzdhOTZiNTUyMTI4NGE4Nzg2YzBlYzM2ZDQ5Y0Bn",
+   "created": "2025-06-12T18:05:49.000Z",
+   "updated": "2025-06-12T18:05:49.364Z",
+   "summary": "The Mark Hundevad Quartet",
+   "description": "<table><tbody><tr><td><table><tbody><tr><td><table><tbody><tr><td><table><tbody><tr><td><h3>2 Parts For John William Coltrane (Part 2)</h3><p>Featuring:<strong> <br></strong><strong>The Mark Hundevad Quartet<br></strong><strong>With Shawn Nykwist on Saxophone</strong></p><table><tbody><tr><td><table><tbody><tr><td><p>Join us in welcoming Mark Hundevad and his ensembles as the band honours legendary Saxophonist, icon and our inspiration, John Coltrane in CONTXT.</p><table><tbody><tr><td><table><tbody><tr><td><table><tbody><tr><td><a href=\"https://checkout.square.site/buy/NETC7HWFHYCVE3GBXLYLT7JT\" target=\"_blank\"><u><u><b>Tickets Here</b></u></u></a></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><table><tbody><tr><td><table><tbody><tr><td><table><tbody><tr><td><table><tbody><tr><td><p><strong>The Players</strong></p><p><strong></strong><strong>:: Mark Hundevad</strong>-- Vibes and Drums</p><p><strong><strong></strong></strong><strong><strong>:: Shawn Nykwist</strong>-- </strong>Saxophones</p><p><strong><strong></strong></strong><strong>:: James Thomson </strong>-- Bass<br></p><p><strong></strong><strong><strong>:: Sam Heineman</strong>--  </strong>Piano<strong></strong> and Drums</p><p><br></p><p></p><p><strong>Adv. $20 -- </strong>door $30<strong></strong><strong><br></strong></p><p><strong>6:00pm -- </strong>doors and dinner</p><p><strong>7:00pm -- </strong>show<strong></strong></p></td></tr></tbody></table></td></tr></tbody></table><table><tbody><tr><td></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table>",
+   "creator": {
+    "email": "annelieberwirth@gmail.com"
+   },
+   "organizer": {
+    "email": "027559b208d0dc7e88f4b87e13bd762b0186c7a96b5521284a8786c0ec36d49c@group.calendar.google.com",
+    "displayName": "EVENTS IN CONTXT",
+    "self": true
+   },
+   "start": {
+    "date": "2025-07-05"
+   },
+   "end": {
+    "date": "2025-07-06"
+   },
+   "transparency": "transparent",
+   "iCalUID": "6ohv371gg8c963r4jvaarmndv3@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3508178259376414\"",
+   "id": "0eunlq7otgamst63rmg42i0j5u",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MGV1bmxxN290Z2Ftc3Q2M3JtZzQyaTBqNXUgMDI3NTU5YjIwOGQwZGM3ZTg4ZjRiODdlMTNiZDc2MmIwMTg2YzdhOTZiNTUyMTI4NGE4Nzg2YzBlYzM2ZDQ5Y0Bn",
+   "created": "2025-08-01T22:58:49.000Z",
+   "updated": "2025-08-01T22:58:49.688Z",
+   "summary": "Private Event",
+   "creator": {
+    "email": "annelieberwirth@gmail.com"
+   },
+   "organizer": {
+    "email": "027559b208d0dc7e88f4b87e13bd762b0186c7a96b5521284a8786c0ec36d49c@group.calendar.google.com",
+    "displayName": "EVENTS IN CONTXT",
+    "self": true
+   },
+   "start": {
+    "date": "2025-08-23"
+   },
+   "end": {
+    "date": "2025-08-24"
+   },
+   "transparency": "transparent",
+   "iCalUID": "0eunlq7otgamst63rmg42i0j5u@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3544925900705566\"",
+   "id": "3v77qui28977lop7pqk04r1q7n",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=M3Y3N3F1aTI4OTc3bG9wN3BxazA0cjFxN24gMDI3NTU5YjIwOGQwZGM3ZTg4ZjRiODdlMTNiZDc2MmIwMTg2YzdhOTZiNTUyMTI4NGE4Nzg2YzBlYzM2ZDQ5Y0Bn",
+   "created": "2026-03-02T14:47:44.000Z",
+   "updated": "2026-03-02T14:49:10.352Z",
+   "summary": "7pm DJ JC in CONTXT (Free Event)",
+   "location": "CONTXT by Trane, 254 Lansdowne Ave Main Floor, Toronto, ON M6H 3X9, Canada",
+   "creator": {
+    "email": "annelieberwirth@gmail.com"
+   },
+   "organizer": {
+    "email": "027559b208d0dc7e88f4b87e13bd762b0186c7a96b5521284a8786c0ec36d49c@group.calendar.google.com",
+    "displayName": "EVENTS IN CONTXT",
+    "self": true
+   },
+   "start": {
+    "date": "2026-03-07"
+   },
+   "end": {
+    "date": "2026-03-08"
+   },
+   "transparency": "transparent",
+   "iCalUID": "3v77qui28977lop7pqk04r1q7n@google.com",
+   "sequence": 1,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3539739841527358\"",
+   "id": "39o49b78qo66bg73095ig65bl0_20260403",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MzlvNDliNzhxbzY2Ymc3MzA5NWlnNjVibDBfMjAyNjA0MDMgMDI3NTU5YjIwOGQwZGM3ZTg4ZjRiODdlMTNiZDc2MmIwMTg2YzdhOTZiNTUyMTI4NGE4Nzg2YzBlYzM2ZDQ5Y0Bn",
+   "created": "2026-01-31T14:31:42.000Z",
+   "updated": "2026-01-31T14:32:00.763Z",
+   "summary": "8pm Alex Harding & Lucian Ban - \"DARK BLUE\" Toronto Release Concert",
+   "description": "<p>Detroit-born baritone saxophonist <strong><b>Alex Harding</b></strong> and Transylvanian expat, New York City–based pianist <strong><b>Lucian Ban</b></strong> are longtime collaborators and leading voices in contemporary jazz. Over more than two decades, they have founded multiple projects together, released acclaimed recordings on American and European labels, and performed extensively across the U.S. and Europe.</p><p><strong><b>DARK BLUE</b></strong> (Sunnyside Records) is a celebration of their musical brotherhood—a duo exploration blending original compositions and improvisations shaped by jazz, blues, and European chamber music. From avant-blues and spontaneous improvisations to lyrical ballads and Sun Ra–inspired atmospheres (Harding is a frequent collaborator with the Arkestra), <em><i>DARK BLUE</i></em> captures two master musicians in deep, intuitive dialogue.</p><p>As legendary tuba player <strong><b>Howard Johnson</b></strong> writes in the album’s liner notes:<br><em><i>“Lucian and Alex have been honing their duo craft for some years. Now they have become one voice when they want to and still manage to complement each other.”</i></em></p><p><strong><b>Lucian Ban</b></strong> – Piano</p><p><strong><b>Alex Harding</b></strong> – Baritone Saxophone &amp; Percussion</p><p></p><p></p><p><strong><b>Doors:</b></strong> 7:00 PM / <strong><b>Concert:</b></strong> 8:00 PM<br><strong><b>Advance Tickets:</b></strong> $35 / <strong><b>Door:</b></strong> $45<strong><b><br>918 Bathurst Centre </b></strong>for Culture, Arts, Media and Education<br><br><b><a href=\"https://tickets.contxtbytrane.com/events/contxtbytrane/2027583\">GET TICKETS</a></b></p><p><br></p>",
+   "location": "918 Bathurst Centre for Culture, Arts, Media and Education, 918 Bathurst St, Toronto, ON M5R 3G5, Canada",
+   "creator": {
+    "email": "annelieberwirth@gmail.com"
+   },
+   "organizer": {
+    "email": "027559b208d0dc7e88f4b87e13bd762b0186c7a96b5521284a8786c0ec36d49c@group.calendar.google.com",
+    "displayName": "EVENTS IN CONTXT",
+    "self": true
+   },
+   "start": {
+    "date": "2026-04-03"
+   },
+   "end": {
+    "date": "2026-04-04"
+   },
+   "recurringEventId": "39o49b78qo66bg73095ig65bl0",
+   "originalStartTime": {
+    "date": "2026-04-03"
+   },
+   "iCalUID": "39o49b78qo66bg73095ig65bl0@google.com",
+   "sequence": 1,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3554643202819358\"",
+   "id": "1l6ivisfre9qb5439e0pm1t71v_20260508",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MWw2aXZpc2ZyZTlxYjU0MzllMHBtMXQ3MXZfMjAyNjA1MDggMDI3NTU5YjIwOGQwZGM3ZTg4ZjRiODdlMTNiZDc2MmIwMTg2YzdhOTZiNTUyMTI4NGE4Nzg2YzBlYzM2ZDQ5Y0Bn",
+   "created": "2026-04-19T10:17:48.000Z",
+   "updated": "2026-04-27T20:26:41.409Z",
+   "summary": "7:30pm Film Night - Superfly",
+   "description": "<p>Caliban Arts Theatre presents The Other Film Festival \"TOFF\". The other Film Festival was founded in 1998 as part of Caliban's programming season. We feature TOFF this year as part of our 30th anniversary. We look forward to having you and all your friends with us as we enjoy the 6-part series, every Friday in CONTXT.<br><strong><b><br>Schedule- </b></strong><strong><b>Series One<br></b></strong></p><p><strong><b>April 24 - </b></strong>Coffey<br><strong><b>May 08 - </b></strong>Superfly<br><strong><b>May 15 - </b></strong>Trouble Man<br><strong><b>May 22 - </b></strong>Come Back Charleston Blue<br><strong><b>May 29- </b></strong>Cooley High<br><strong><b>Jun 05 - </b></strong>Cotton Comes To Harlem</p><p>Doors, Dinner &amp; Popcorn: 6:00pm / Film: 7:30pm<br>Admission: $10<br><strong><b>First 15 people free!! Reserve before April 19 midnight.</b></strong></p><a href=\"https://tickets.contxtbytrane.com/events/contxtbytrane/2162515\" target=\"_blank\"><b>Get Tickets</b></a>",
+   "location": "CONTXT by Trane, 254 Lansdowne Ave Main Floor, Toronto, ON M6H 3X9, Canada",
+   "creator": {
+    "email": "annelieberwirth@gmail.com"
+   },
+   "organizer": {
+    "email": "027559b208d0dc7e88f4b87e13bd762b0186c7a96b5521284a8786c0ec36d49c@group.calendar.google.com",
+    "displayName": "EVENTS IN CONTXT",
+    "self": true
+   },
+   "start": {
+    "date": "2026-05-08"
+   },
+   "end": {
+    "date": "2026-05-09"
+   },
+   "recurringEventId": "1l6ivisfre9qb5439e0pm1t71v",
+   "originalStartTime": {
+    "date": "2026-05-08"
+   },
+   "transparency": "transparent",
+   "iCalUID": "1l6ivisfre9qb5439e0pm1t71v@google.com",
+   "sequence": 1,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3556457666920350\"",
+   "id": "0rludm1rckacs20f4mtuuaqigr_20260607",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MHJsdWRtMXJja2FjczIwZjRtdHV1YXFpZ3JfMjAyNjA2MDcgMDI3NTU5YjIwOGQwZGM3ZTg4ZjRiODdlMTNiZDc2MmIwMTg2YzdhOTZiNTUyMTI4NGE4Nzg2YzBlYzM2ZDQ5Y0Bn",
+   "created": "2026-05-08T08:26:51.000Z",
+   "updated": "2026-05-08T08:27:13.460Z",
+   "summary": "1pm tUkU + bUdi",
+   "creator": {
+    "email": "annelieberwirth@gmail.com"
+   },
+   "organizer": {
+    "email": "027559b208d0dc7e88f4b87e13bd762b0186c7a96b5521284a8786c0ec36d49c@group.calendar.google.com",
+    "displayName": "EVENTS IN CONTXT",
+    "self": true
+   },
+   "start": {
+    "date": "2026-06-07"
+   },
+   "end": {
+    "date": "2026-06-08"
+   },
+   "recurringEventId": "0rludm1rckacs20f4mtuuaqigr",
+   "originalStartTime": {
+    "date": "2026-06-07"
+   },
+   "transparency": "transparent",
+   "iCalUID": "0rludm1rckacs20f4mtuuaqigr@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3561561333005790\"",
+   "id": "6e45vma3m84lcob4n4ssm5j1i8",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=NmU0NXZtYTNtODRsY29iNG40c3NtNWoxaTggMDI3NTU5YjIwOGQwZGM3ZTg4ZjRiODdlMTNiZDc2MmIwMTg2YzdhOTZiNTUyMTI4NGE4Nzg2YzBlYzM2ZDQ5Y0Bn",
+   "created": "2026-06-06T21:17:36.000Z",
+   "updated": "2026-06-06T21:17:46.502Z",
+   "summary": "8pm The Sade Experience at 918 Bathurst",
+   "description": "<p><b><a href=\"https://tickets.contxtbytrane.com/events/contxtbytrane/2204127\">Get Tickets</a></b><br><br>The Sade Experience is an immersive, living journey into the heart and soul of a global icon. Created and performed by the mesmerizing, evocative talents of Shelley Hamilton, this ensemble delivers the ultimate “quiet storm” experience, bringing unparalleled depth and presence to the stage - every song curated for pure immersion.</p><p>Joining Shelley on stage will be Joe Palawan on Keys , Sean Bray on guitar, Carrie Chesnutt on sax, Dave Patel on Drums and Dane Wedderburn on bass.</p><p>June 18, 2026 – 8pm-11pm<br>Early Bird $30 (ends May 31)<br>Adm: $40 adv $50 door</p>",
+   "location": "918 Bathurst Centre for Culture, Arts, Media and Education, 918 Bathurst St, Toronto, ON M5R 3G5, Canada",
+   "creator": {
+    "email": "annelieberwirth@gmail.com"
+   },
+   "organizer": {
+    "email": "027559b208d0dc7e88f4b87e13bd762b0186c7a96b5521284a8786c0ec36d49c@group.calendar.google.com",
+    "displayName": "EVENTS IN CONTXT",
+    "self": true
+   },
+   "start": {
+    "dateTime": "2026-06-18T08:30:00-04:00",
+    "timeZone": "Europe/Berlin"
+   },
+   "end": {
+    "dateTime": "2026-06-18T09:30:00-04:00",
+    "timeZone": "Europe/Berlin"
+   },
+   "iCalUID": "6e45vma3m84lcob4n4ssm5j1i8@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3556313172035230\"",
+   "id": "q90denji4h8tkjh2mduogg072q_20260628",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=cTkwZGVuamk0aDh0a2poMm1kdW9nZzA3MnFfMjAyNjA2MjggMDI3NTU5YjIwOGQwZGM3ZTg4ZjRiODdlMTNiZDc2MmIwMTg2YzdhOTZiNTUyMTI4NGE4Nzg2YzBlYzM2ZDQ5Y0Bn",
+   "created": "2026-01-12T20:49:21.000Z",
+   "updated": "2026-05-07T12:23:06.017Z",
+   "summary": "11:30am Brunch in CONTXT",
+   "description": "11:30am-4pm",
+   "creator": {
+    "email": "annelieberwirth@gmail.com"
+   },
+   "organizer": {
+    "email": "027559b208d0dc7e88f4b87e13bd762b0186c7a96b5521284a8786c0ec36d49c@group.calendar.google.com",
+    "displayName": "EVENTS IN CONTXT",
+    "self": true
+   },
+   "start": {
+    "date": "2026-06-28"
+   },
+   "end": {
+    "date": "2026-06-29"
+   },
+   "recurringEventId": "q90denji4h8tkjh2mduogg072q",
+   "originalStartTime": {
+    "date": "2026-06-28"
+   },
+   "transparency": "transparent",
+   "iCalUID": "q90denji4h8tkjh2mduogg072q@google.com",
+   "sequence": 1,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3565305291028350\"",
+   "id": "nfvgohtvdb1kbktbo3advhv0rn",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=bmZ2Z29odHZkYjFrYmt0Ym8zYWR2aHYwcm4gMDI3NTU5YjIwOGQwZGM3ZTg4ZjRiODdlMTNiZDc2MmIwMTg2YzdhOTZiNTUyMTI4NGE4Nzg2YzBlYzM2ZDQ5Y0Bn",
+   "created": "2025-12-20T21:31:30.000Z",
+   "updated": "2026-06-28T13:17:25.514Z",
+   "summary": "7:30pm The ROCKSTEADY and SOUL Listening and Dance Sessions",
+   "description": "<p><b><a href=\"https://tickets.contxtbytrane.com/events/contxtbytrane/1988255\" target=\"_blank\"><u><u>RSVP here</u></u></a></b></p><p><br>A night of the timeless tunes and unforgettable beats of Rocksteady and Classic Soul music, featuring the music of iconic artists as Ken Boothe, Dawn Penn, Desmond Dekker, The Jamaicans, Toots and the Maytals, Sid Bucknor, Bob Marley and The Wailers, Jimmy Cliff and some SOUL MUSIC, featuring classic selections by DJs - JC Sunshine and Carl Allen</p><p><br>Doors: 6pm/ Party starts at 7:30pm<br>Appreciate JC - PWYC and Enjoy <b><a href=\"https://tickets.contxtbytrane.com/events/contxtbytrane/1988255\" target=\"_blank\"><u><u>RSVP here</u></u></a></b></p><p>Bring Your Friends. Come out hear, snack, chill, and enjoy. LIGHT AND HEALTHY MENU AVAILABLE.<br><br>This will be a limited capacity party of incredible soulful music. Come celebrate the music and the season in CONTXT.</p>",
+   "location": "CONTXT by Trane, 254 Lansdowne Ave Main Floor, Toronto, ON M6H 3X9, Canada",
+   "creator": {
+    "email": "annelieberwirth@gmail.com"
+   },
+   "organizer": {
+    "email": "027559b208d0dc7e88f4b87e13bd762b0186c7a96b5521284a8786c0ec36d49c@group.calendar.google.com",
+    "displayName": "EVENTS IN CONTXT",
+    "self": true
+   },
+   "start": {
+    "date": "2026-07-03"
+   },
+   "end": {
+    "date": "2026-07-04"
+   },
+   "iCalUID": "nfvgohtvdb1kbktbo3advhv0rn@google.com",
+   "sequence": 3,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3556311693127582\"",
+   "id": "76r15aj84hibv8osbe79bfo2un",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=NzZyMTVhajg0aGlidjhvc2JlNzliZm8ydW4gMDI3NTU5YjIwOGQwZGM3ZTg4ZjRiODdlMTNiZDc2MmIwMTg2YzdhOTZiNTUyMTI4NGE4Nzg2YzBlYzM2ZDQ5Y0Bn",
+   "created": "2026-05-07T12:06:47.000Z",
+   "updated": "2026-05-07T12:10:46.563Z",
+   "summary": "7pm Teiku feat. Jason Stein and Jaribu Shahid",
+   "description": "Chicago/Detroit based ensemble \"Teiku\" reframes unique and rare Eastern European ancestral passover melodies in an improvised music setting. The expansive possibilities of instant composition, the ritualistic origins of the melodies, and the inspiration of jazz pioneers like Ornette Coleman and Muhal Richard Abrams all contribute to the immersive world of Teiku.<br><br>The band features bass clarinetist Jason Stein (Natural Information Society, Hearts and Minds), bassist Jaribu Shahid (Art Ensemble of Chicago, Sun Ra Arkestra, Geri Allen), and founders pianist Josh Harlow (Vincent Davis, Wadada Leo Smith) and percussionist Jonathan Barahal (saajtak, Wadada Leo Smith, Michael Formanek). Teiku is releasing their sophomore album, Klang, this June on Ginkgo Records.<br><br><a href=\"https://tickets.contxtbytrane.com/events/contxtbytrane/2203887\" target=\"_blank\">Get Tickets</a>",
+   "location": "CONTXT by Trane, 254 Lansdowne Ave Main Floor, Toronto, ON M6H 3X9, Canada",
+   "creator": {
+    "email": "annelieberwirth@gmail.com"
+   },
+   "organizer": {
+    "email": "027559b208d0dc7e88f4b87e13bd762b0186c7a96b5521284a8786c0ec36d49c@group.calendar.google.com",
+    "displayName": "EVENTS IN CONTXT",
+    "self": true
+   },
+   "start": {
+    "date": "2026-07-04"
+   },
+   "end": {
+    "date": "2026-07-05"
+   },
+   "transparency": "transparent",
+   "iCalUID": "76r15aj84hibv8osbe79bfo2un@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3561561929320126\"",
+   "id": "6f47fjq6gsodm01n7o0ij7vvlk",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=NmY0N2ZqcTZnc29kbTAxbjdvMGlqN3Z2bGsgMDI3NTU5YjIwOGQwZGM3ZTg4ZjRiODdlMTNiZDc2MmIwMTg2YzdhOTZiNTUyMTI4NGE4Nzg2YzBlYzM2ZDQ5Y0Bn",
+   "created": "2026-06-06T21:19:51.000Z",
+   "updated": "2026-06-06T21:22:44.660Z",
+   "summary": "1:30pm Lunch with Muneeb Hermans Quartet",
+   "description": "<p>This July, join an intimate five-part jazz series spotlighting acclaimed <strong><b>Cape Town–born trumpeter Muneeb Hermans</b></strong>, whose sound blends soulful tradition with world-class experience. Each evening offers a distinct musical journey—from cinematic storytelling and jazz standards to original compositions and bold collaborations—set in an atmosphere designed for close listening and connection.</p><p>The series opens on July 5th with Muneeb Herman's Quartet, followed by July 11th showcasing his Quintet interpreting beloved jazz standards. On July 18th, the Quintet returns with music from Muneeb’s acclaimed album <em><i>One for HP</i></em>, before the season culminates in a special finale on July 25th featuring an expanded lineup and surprise guest appearances, bringing the series to an unforgettable close. On July 26th his quartet is returning to CONTXT for a special Wrap-up concert.</p><p><br></p><p><strong><b>Lunch with Muneeb Hermans Quartet</b></strong><br><br>Muneeb Hermans - Trumpet<br>Mark Hundevad - Drums<br>Evan Miles - Piano<br>Chris Banks - Bass</p><p><br></p><p>Sunday July 05 | 1:30pm – 4pm, Doors at 11:30am |$25 adv. |CONTXT<br><a href=\"https://tickets.contxtbytrane.com/events/contxtbytrane/2185214\"><b>GET TICKETS</b></a></p><p><br></p><p></p>",
+   "location": "CONTXT by Trane, 254 Lansdowne Ave Main Floor, Toronto, ON M6H 3X9, Canada",
+   "creator": {
+    "email": "annelieberwirth@gmail.com"
+   },
+   "organizer": {
+    "email": "027559b208d0dc7e88f4b87e13bd762b0186c7a96b5521284a8786c0ec36d49c@group.calendar.google.com",
+    "displayName": "EVENTS IN CONTXT",
+    "self": true
+   },
+   "start": {
+    "date": "2026-07-05"
+   },
+   "end": {
+    "date": "2026-07-06"
+   },
+   "transparency": "transparent",
+   "iCalUID": "6f47fjq6gsodm01n7o0ij7vvlk@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3565305556956990\"",
+   "id": "nj4p3o8tqprlo88ulbl3e1jlea_20260709",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=bmo0cDNvOHRxcHJsbzg4dWxibDNlMWpsZWFfMjAyNjA3MDkgMDI3NTU5YjIwOGQwZGM3ZTg4ZjRiODdlMTNiZDc2MmIwMTg2YzdhOTZiNTUyMTI4NGE4Nzg2YzBlYzM2ZDQ5Y0Bn",
+   "created": "2026-03-07T21:10:18.000Z",
+   "updated": "2026-06-28T13:19:38.478Z",
+   "summary": "7pm Afro Brasilica / w Victor Monsivais",
+   "description": "<p>Afro Brasilica is a multidisciplinary creative residency that champions sound, movement and conversation. Rooted in music, including but not limited to: Brazilian Samba, Afro-Latin, Latin Jazz and more, the project expands on the idea of community cultivation through shared expression within CONTXT. </p><p>Through dynamic DJ sets, visual art, poetry, dialogue, guest performances, spirited libations and curated tapas, Afro Brasilica weaves a limitless, intentional approach like the rings of its latter-namesake wood; intricate and unique, yet, connected and intersectional.</p><p>This residency is curated, hosted and produced by Trust The Process Press</p><p>PWYC - Thursdays - Doors 7:00 pm, Show: 8:00 pm.</p><br><a href=\"https://tickets.contxtbytrane.com/events/contxtbytrane/2001101\" target=\"_blank\"><b>RSVP here</b></a>",
+   "location": "CONTXT by Trane, 254 Lansdowne Ave Main Floor, Toronto, ON M6H 3X9, Canada",
+   "creator": {
+    "email": "annelieberwirth@gmail.com"
+   },
+   "organizer": {
+    "email": "027559b208d0dc7e88f4b87e13bd762b0186c7a96b5521284a8786c0ec36d49c@group.calendar.google.com",
+    "displayName": "EVENTS IN CONTXT",
+    "self": true
+   },
+   "start": {
+    "date": "2026-07-09"
+   },
+   "end": {
+    "date": "2026-07-10"
+   },
+   "recurringEventId": "nj4p3o8tqprlo88ulbl3e1jlea",
+   "originalStartTime": {
+    "date": "2026-07-09"
+   },
+   "transparency": "transparent",
+   "iCalUID": "nj4p3o8tqprlo88ulbl3e1jlea@google.com",
+   "sequence": 4,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3568543439058654\"",
+   "id": "6mgc92fgs6n4010on4ch9unob9_20260808",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=Nm1nYzkyZmdzNm40MDEwb240Y2g5dW5vYjlfMjAyNjA4MDggMDI3NTU5YjIwOGQwZGM3ZTg4ZjRiODdlMTNiZDc2MmIwMTg2YzdhOTZiNTUyMTI4NGE4Nzg2YzBlYzM2ZDQ5Y0Bn",
+   "created": "2026-07-17T07:01:03.000Z",
+   "updated": "2026-07-17T07:01:59.529Z",
+   "summary": "7pm - Sonny Rollins Tribute",
+   "description": "4 Weeks, 4 Bands, 4 Horns... For Sonny Rollins<br><br>One of the greatest Jazz Saxophonist of all time, WALTER THEODORE \"SONNY\" ROLLINS was born on September 7, 1930 in New York City. He grew up in Harlem not far from the Savoy Ballroom, the Apollo Theatre, and the doorstep of his idol, Coleman Hawkins. After early discovery of Fats Waller and Louis Armstrong, he started out on alto saxophone, inspired by Louis Jordan. At the age of sixteen, he switched to tenor, trying to emulate Hawkins. He also fell under the spell of the musical revolution that surrounded him, bebop.He began to follow Charlie Parker, and soon came under the wing of Thelonious Monk, who became his musical mentor and guru. When he was living in Sugar Hill, his neighborhood musical peers included Jackie McLean, Kenny Drew, and Art Taylor, but it was young Sonny who was first out of the pack, working and recording with Babs Gonzales, J.J. Johnson, Bud Powell, and Miles Davis before he turned twenty.<br><br>Schedule, Dates and Bands:<br>AUGUST 08 – Rob Christian QuartetRob Christian – SaxophonesChris Pruden – PianoChris Banks – BassMark Hundevad - Drums<br><br> AUGUST 15 – Joel Harbans QuartetJoel Harbans – SaxophonesBureh Bollo-Kamara – GuitarEthan Tilbury – BassDonny Milwalkee - Drums<br><br> AUGUST 22 – Mark Hundevad QuartetShawn Nykwist – SaxophonesChris Pruden – PianoJames Thompson – BassMark Hundevad - Drums<br><br> AUGUST 29 – The Bridge QuartetShawn Nykwist – SaxophonesLee Wallace – GuitarChris Banks – BassMark Hundevad – Drums <br><br>Doors at 6pm – Concert at 7pm  <br>Concert $25 adv. ($80 for all 4 concerts) | Doors $40<br><a href=\"https://tickets.contxtbytrane.com/events/contxtbytrane/2316182\"><b>TICKETS HERE</b></a>",
+   "location": "CONTXT by Trane, 254 Lansdowne Ave Main Floor, Toronto, ON M6H 3X9, Canada",
+   "creator": {
+    "email": "annelieberwirth@gmail.com"
+   },
+   "organizer": {
+    "email": "027559b208d0dc7e88f4b87e13bd762b0186c7a96b5521284a8786c0ec36d49c@group.calendar.google.com",
+    "displayName": "EVENTS IN CONTXT",
+    "self": true
+   },
+   "start": {
+    "date": "2026-08-08"
+   },
+   "end": {
+    "date": "2026-08-09"
+   },
+   "recurringEventId": "6mgc92fgs6n4010on4ch9unob9",
+   "originalStartTime": {
+    "date": "2026-08-08"
+   },
+   "transparency": "transparent",
+   "iCalUID": "6mgc92fgs6n4010on4ch9unob9@google.com",
+   "sequence": 1,
+   "eventType": "default"
+  }
+ ]
+}

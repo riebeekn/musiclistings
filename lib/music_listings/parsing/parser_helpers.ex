@@ -323,6 +323,18 @@ defmodule MusicListings.Parsing.ParseHelpers do
   end
 
   @doc """
+  As `build_time_from_time_string/1`, for the common case of a caller that has
+  nothing to say about an unparseable time and just wants `nil`.
+  """
+  @spec time_from_time_string(String.t() | nil) :: Time.t() | nil
+  def time_from_time_string(time_string) do
+    case build_time_from_time_string(time_string) do
+      {:ok, time} -> time
+      {:error, :invalid_time} -> nil
+    end
+  end
+
+  @doc """
   For handling datetime strings missing seconds and offset
   i.e convert a dt string of the format 2024-08-31T19:00
   to 2024-08-31T19:00:00-04:00

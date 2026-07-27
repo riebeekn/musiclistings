@@ -78,6 +78,8 @@ defmodule MusicListings.HttpClient.Test do
       # with the token it yields.
       {"storytoronto.ca/_api/v1/access-tokens", "story/access_tokens.json"},
       {"storytoronto.ca/_api/wix-one-events-server", "story/index.json"},
+      # CONTXT by Trane — the venue's public Google Calendar
+      {"googleapis.com/calendar/v3/calendars/027559b2", "contxt_by_trane/index.json"},
       # TicketNetwork affiliate catalog — paged, so each page has its own fixture
       {"api.impact.com/Mediapartners/test_account_sid/Catalogs/1872/Items?Query=Category+%3D+%27CONCERTS%27+AND+Gtin+%3D+%27Toronto%27&Page=1",
        "ticket_network/page_1.json"},
