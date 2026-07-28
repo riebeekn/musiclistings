@@ -8,6 +8,7 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
   def mount(_params, _session, socket) do
     socket
     |> assign(:crawling?, false)
+    |> assign(:resale_enabled, FunWithFlags.enabled?(:show_resale_tickets))
     |> ok()
   end
 
@@ -149,7 +150,11 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
       <div class="mb-2 h-px flex-1 bg-hairline"></div>
     </div>
 
-    <.venue_events_list events={@events} current_user={@current_user} />
+    <.venue_events_list
+      events={@events}
+      current_user={@current_user}
+      show_resale={@resale_enabled}
+    />
 
     <div class="my-8">
       <.pager

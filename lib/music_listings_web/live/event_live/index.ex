@@ -27,6 +27,7 @@ defmodule MusicListingsWeb.EventLive.Index do
     |> assign(:selected_date, selected_date)
     |> assign(:sort_by, sort_by)
     |> assign(:just_added_enabled, FunWithFlags.enabled?(:show_recently_added))
+    |> assign(:resale_enabled, FunWithFlags.enabled?(:show_resale_tickets))
     |> assign(:venue_filtering_form, to_form(%{}))
     |> assign(:date_filtering_form, to_form(%{}))
     |> assign(:page_title, "Toronto Live Music Events")
@@ -403,7 +404,12 @@ defmodule MusicListingsWeb.EventLive.Index do
       <.loading_indicator />
     <% end %>
 
-    <.events_list events={@events} current_user={@current_user} sort_by={@sort_by} />
+    <.events_list
+      events={@events}
+      current_user={@current_user}
+      sort_by={@sort_by}
+      show_resale={@resale_enabled}
+    />
 
     <div class={[
       "border-t border-hairline",

@@ -333,6 +333,78 @@ defmodule MusicListingsWeb.EventLiveTest do
     end
   end
 
+  describe "resale links (feature flag)" do
+    @resale_url "https://goto.ticketnetwork.com/c/1001"
+
+    setup do
+      today = DateHelpers.today_eastern()
+      venue = insert(:venue)
+
+      with_resale =
+        insert(:event,
+          venue: venue,
+          date: today,
+          title: "ev-resale",
+          ticketnetwork_url: @resale_url
+        )
+
+      without_resale =
+        insert(:event, venue: venue, date: today, title: "ev-plain", ticketnetwork_url: nil)
+
+      %{with_resale_id: with_resale.id, without_resale_id: without_resale.id}
+    end
+
+    test "resale link is hidden by default (flag off)", %{conn: conn, with_resale_id: id} do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      assert has_element?(view, "#event-#{id}")
+      refute has_element?(view, "#event-#{id} a[href='#{@resale_url}']")
+    end
+
+    test "resale link is shown when the flag is enabled", %{conn: conn, with_resale_id: id} do
+      FunWithFlags.enable(:show_resale_tickets)
+
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      assert has_element?(view, "#event-#{id} a[href='#{@resale_url}']")
+    end
+
+    test "renders nothing for events without a ticketnetwork url", %{
+      conn: conn,
+      without_resale_id: id
+    } do
+      FunWithFlags.enable(:show_resale_tickets)
+
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      assert has_element?(view, "#event-#{id}")
+      refute has_element?(view, "#event-#{id} a[rel='noopener sponsored'][href^='https://goto']")
+    end
+
+    test "primary ticket link is rendered before the resale link", %{
+      conn: conn,
+      with_resale_id: id
+    } do
+      FunWithFlags.enable(:show_resale_tickets)
+
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      row = view |> element("#event-#{id}") |> render()
+
+      assert :binary.match(row, "https://tickets@example.com") <
+               :binary.match(row, @resale_url)
+    end
+
+    test "resale link is shown when sorting by venue", %{conn: conn, with_resale_id: id} do
+      FunWithFlags.enable(:show_resale_tickets)
+
+      {:ok, view, _html} =
+        conn |> put_connect_params(%{"sort_by" => "venue"}) |> live(~p"/events")
+
+      assert has_element?(view, "#event-#{id} a[href='#{@resale_url}']")
+    end
+  end
+
   describe "new" do
     test "saves submitted event with valid parameters", %{conn: conn} do
       {:ok, view, _html} = live(conn, ~p"/events/new")

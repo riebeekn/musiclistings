@@ -860,6 +860,7 @@ defmodule MusicListingsWeb.CustomComponents do
   attr :events, :list, required: true
   attr :current_user, :any, required: true
   attr :sort_by, :string, default: "title"
+  attr :show_resale, :boolean, default: false
 
   def events_list(assigns) do
     ~H"""
@@ -869,11 +870,16 @@ defmodule MusicListingsWeb.CustomComponents do
         <div class="mb-14">
           <%= if @sort_by == "venue" do %>
             <%= for {venue, venue_events} <- group_events_by_venue(events) do %>
-              <.venue_grouped_card venue={venue} events={venue_events} current_user={@current_user} />
+              <.venue_grouped_card
+                venue={venue}
+                events={venue_events}
+                current_user={@current_user}
+                show_resale={@show_resale}
+              />
             <% end %>
           <% else %>
             <%= for event <- events do %>
-              <.event_card event={event} current_user={@current_user} />
+              <.event_card event={event} current_user={@current_user} show_resale={@show_resale} />
             <% end %>
           <% end %>
         </div>
@@ -1024,6 +1030,7 @@ defmodule MusicListingsWeb.CustomComponents do
   """
   attr :events, :list, required: true
   attr :current_user, :any, required: true
+  attr :show_resale, :boolean, default: false
 
   def venue_events_list(assigns) do
     ~H"""
@@ -1033,6 +1040,7 @@ defmodule MusicListingsWeb.CustomComponents do
           date={date}
           events={sort_events_by_time(events)}
           current_user={@current_user}
+          show_resale={@show_resale}
         />
       <% end %>
     </div>
@@ -1187,6 +1195,7 @@ defmodule MusicListingsWeb.CustomComponents do
   <.event_actions event={@event} />
   """
   attr :event, :any, required: true
+  attr :show_resale, :boolean, default: false
 
   def event_actions(assigns) do
     ~H"""
@@ -1200,7 +1209,7 @@ defmodule MusicListingsWeb.CustomComponents do
         phx-click="event_ticket_click"
         phx-value-id={@event.id}
       >
-        <MusicListingsWeb.CoreComponents.icon name="hero-ticket-solid" class="size-4" /> Get Tickets
+        <MusicListingsWeb.CoreComponents.icon name="hero-ticket-solid" class="size-4" /> Tickets
       </a>
       <a
         :if={@event.details_url}
@@ -1213,6 +1222,18 @@ defmodule MusicListingsWeb.CustomComponents do
           name="hero-information-circle-solid"
           class="size-4"
         /> Venue page
+      </a>
+      <a
+        :if={@show_resale && @event.ticketnetwork_url}
+        href={@event.ticketnetwork_url}
+        class="inline-flex h-9 items-center justify-center gap-x-2 rounded border border-hairline px-4 font-mono text-xs font-medium tracking-widest text-paper-dim transition-colors hover:border-paper-dim hover:text-paper"
+        target="_blank"
+        rel="noopener sponsored"
+      >
+        <MusicListingsWeb.CoreComponents.icon
+          name="hero-arrow-top-right-on-square"
+          class="size-4"
+        /> TicketNetwork
       </a>
     </div>
     """
@@ -1409,6 +1430,7 @@ defmodule MusicListingsWeb.CustomComponents do
   attr :event, :any, required: true
   attr :current_user, :any, required: true
   attr :show_date, :boolean, default: false
+  attr :show_resale, :boolean, default: false
 
   defp event_card(assigns) do
     ~H"""
@@ -1448,6 +1470,7 @@ defmodule MusicListingsWeb.CustomComponents do
                 price_lo={@event.price_lo}
                 price_hi={@event.price_hi}
               />
+              <.event_resale_url url={showtime.ticketnetwork_url} show_resale={@show_resale} />
               <.event_details_url details_url={showtime.details_url} />
               <.delete_event_link current_user={@current_user} event_id={showtime.event_id} />
             </div>
@@ -1466,7 +1489,7 @@ defmodule MusicListingsWeb.CustomComponents do
         <div class="h-px flex-1 bg-hairline"></div>
       </div>
       <%= for event <- @events do %>
-        <.grouped_event_row event={event} current_user={@current_user} />
+        <.grouped_event_row event={event} current_user={@current_user} show_resale={@show_resale} />
       <% end %>
     </article>
     """
@@ -1479,7 +1502,7 @@ defmodule MusicListingsWeb.CustomComponents do
         <time datetime={@date}>{DateHelpers.format_date(@date)}</time>
       </h3>
       <%= for event <- @events do %>
-        <.grouped_event_row event={event} current_user={@current_user} />
+        <.grouped_event_row event={event} current_user={@current_user} show_resale={@show_resale} />
       <% end %>
     </article>
     """
@@ -1487,6 +1510,7 @@ defmodule MusicListingsWeb.CustomComponents do
 
   attr :event, :any, required: true
   attr :current_user, :any, required: true
+  attr :show_resale, :boolean, default: false
 
   defp grouped_event_row(assigns) do
     ~H"""
@@ -1517,6 +1541,7 @@ defmodule MusicListingsWeb.CustomComponents do
               price_lo={@event.price_lo}
               price_hi={@event.price_hi}
             />
+            <.event_resale_url url={showtime.ticketnetwork_url} show_resale={@show_resale} />
             <.event_details_url details_url={showtime.details_url} />
             <.delete_event_link current_user={@current_user} event_id={showtime.event_id} />
           </div>
@@ -1611,6 +1636,28 @@ defmodule MusicListingsWeb.CustomComponents do
         <.event_price price_format={@price_format} price_lo={@price_lo} price_hi={@price_hi} />
       </span>
     <% end %>
+    """
+  end
+
+  # Secondary TicketNetwork (resale) link. Deliberately de-emphasised so it never
+  # competes with the primary spotlight ticket chip, and always rendered after it.
+  attr :url, :string, default: nil
+  attr :show_resale, :boolean, default: false
+
+  defp event_resale_url(assigns) do
+    ~H"""
+    <a
+      :if={@show_resale && @url}
+      href={@url}
+      class="inline-flex items-center gap-1 font-mono text-[0.7rem] tracking-wider text-spotlight bg-spotlight/10 ring-1 ring-inset ring-spotlight/30 px-3 py-1 transition-colors hover:bg-spotlight hover:text-ink"
+      target="_blank"
+      rel="noopener sponsored"
+    >
+      <MusicListingsWeb.CoreComponents.icon
+        name="hero-arrow-top-right-on-square"
+        class="size-3.5"
+      /> TicketNetwork
+    </a>
     """
   end
 

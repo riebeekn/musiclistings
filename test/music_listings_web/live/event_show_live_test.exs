@@ -79,4 +79,85 @@ defmodule MusicListingsWeb.EventLive.ShowTest do
       assert html =~ "This event is no longer listed"
     end
   end
+
+  describe "resale link (feature flag)" do
+    @resale_url "https://goto.ticketnetwork.com/c/3003"
+
+    setup do
+      event =
+        insert(:event,
+          venue: insert(:venue),
+          title: "Resale Show",
+          date: ~D[2026-06-01],
+          ticket_url: "https://tickets.example.com/face-value",
+          ticketnetwork_url: @resale_url
+        )
+
+      %{event: event}
+    end
+
+    test "is hidden by default (flag off)", %{conn: conn, event: event} do
+      {:ok, _view, html} = live(conn, ~p"/events/#{event.id}/resale-show")
+
+      assert html =~ "Tickets"
+      refute html =~ @resale_url
+      refute html =~ "TicketNetwork"
+    end
+
+    test "is shown when the flag is enabled", %{conn: conn, event: event} do
+      FunWithFlags.enable(:show_resale_tickets)
+
+      {:ok, _view, html} = live(conn, ~p"/events/#{event.id}/resale-show")
+
+      assert html =~ "TicketNetwork"
+      assert html =~ @resale_url
+    end
+
+    test "renders the face-value link before the resale link", %{conn: conn, event: event} do
+      FunWithFlags.enable(:show_resale_tickets)
+
+      {:ok, _view, html} = live(conn, ~p"/events/#{event.id}/resale-show")
+
+      assert :binary.match(html, "https://tickets.example.com/face-value") <
+               :binary.match(html, @resale_url)
+    end
+
+    test "is not rendered when the event has no ticketnetwork url", %{conn: conn} do
+      FunWithFlags.enable(:show_resale_tickets)
+
+      event =
+        insert(:event,
+          venue: insert(:venue),
+          title: "Plain Show",
+          date: ~D[2026-06-01],
+          ticketnetwork_url: nil
+        )
+
+      {:ok, _view, html} = live(conn, ~p"/events/#{event.id}/plain-show")
+
+      refute html =~ "Resale tickets"
+    end
+
+    test "JSON-LD offers keep the face-value url, not the resale url", %{
+      conn: conn,
+      event: event
+    } do
+      FunWithFlags.enable(:show_resale_tickets)
+
+      {:ok, _view, html} = live(conn, ~p"/events/#{event.id}/resale-show")
+
+      # The resale url is present in the page body, so scope the assertion to the
+      # MusicEvent JSON-LD block: offers must advertise the face-value ticket url,
+      # never the marked-up resale one.
+      music_event_json =
+        html
+        |> String.split(~s(<script type="application/ld+json">))
+        |> Enum.find(&String.contains?(&1, ~s("@type":"MusicEvent")))
+        |> String.split("</script>")
+        |> List.first()
+
+      assert music_event_json =~ ~s("url":"https://tickets.example.com/face-value")
+      refute music_event_json =~ "goto.ticketnetwork.com"
+    end
+  end
 end

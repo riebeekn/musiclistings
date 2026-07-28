@@ -31,6 +31,27 @@ defmodule MusicListingsWeb.VenueEventLiveTest do
       refute has_element?(view, "#event-#{e3_id}")
     end
 
+    test "shows the resale link only when the flag is enabled", %{conn: conn} do
+      resale_url = "https://goto.ticketnetwork.com/c/2002"
+      venue = insert(:venue)
+
+      event =
+        insert(:event,
+          venue: venue,
+          date: ~D[2024-08-01],
+          title: "resale show",
+          ticketnetwork_url: resale_url
+        )
+
+      {:ok, flag_off_view, _html} = live(conn, ~p"/events/venue/#{venue.id}")
+      refute has_element?(flag_off_view, "#event-#{event.id} a[href='#{resale_url}']")
+
+      FunWithFlags.enable(:show_resale_tickets)
+
+      {:ok, flag_on_view, _html} = live(conn, ~p"/events/venue/#{venue.id}")
+      assert has_element?(flag_on_view, "#event-#{event.id} a[href='#{resale_url}']")
+    end
+
     test "does not show the delete buttons", %{
       conn: conn,
       venue_id: venue_id,

@@ -17,6 +17,7 @@ defmodule MusicListingsWeb.EventLive.Show do
 
         socket
         |> assign(:ref, params["ref"])
+        |> assign(:resale_enabled, FunWithFlags.enabled?(:show_resale_tickets))
         |> assign_event_seo(event)
         |> ok()
       else
@@ -115,7 +116,7 @@ defmodule MusicListingsWeb.EventLive.Show do
       <.event_notice :if={@notice} message={@notice} />
       <.event_header event={@event} />
       <.event_details_list event={@event} />
-      <.event_actions event={@event} />
+      <.event_actions event={@event} show_resale={@resale_enabled} />
     </article>
     """
   end

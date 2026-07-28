@@ -7,8 +7,9 @@ defmodule MusicListings.Events.ShowTimeInfo do
           event_id: pos_integer(),
           time: Time.t(),
           ticket_url: String.t(),
+          ticketnetwork_url: String.t(),
           details_url: String.t()
         }
 
-  defstruct [:event_id, :time, :ticket_url, :details_url]
+  defstruct [:event_id, :time, :ticket_url, :ticketnetwork_url, :details_url]
 end
