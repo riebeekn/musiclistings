@@ -102,7 +102,7 @@ defmodule MusicListings.Affiliates.TicketNetworkTest do
 
       {:ok, stats} = TicketNetwork.run(today: @today)
 
-      # The Koerner Hall item in page_2.json.
+      # The CAA Theatre item in page_2.json.
       assert stats.untracked_items == 1
     end
 

@@ -186,10 +186,10 @@ defmodule MusicListings.Affiliates.TicketNetwork.MatcherTest do
 
   describe "match/3 venue resolution" do
     test "counts items at venues we don't track" do
-      result = Matcher.match([item(venue_label: "Koerner Hall")], [event([])], @venue_ids)
+      result = Matcher.match([item(venue_label: "CAA Theatre")], [event([])], @venue_ids)
 
       assert result.matches == []
-      assert result.untracked_labels == %{"Koerner Hall" => 1}
+      assert result.untracked_labels == %{"CAA Theatre" => 1}
     end
 
     test "does not match an event at a different venue on the right date" do

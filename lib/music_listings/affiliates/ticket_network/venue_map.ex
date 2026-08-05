@@ -33,6 +33,7 @@ defmodule MusicListings.Affiliates.TicketNetwork.VenueMap do
     "Horseshoe Tavern" => "HorseshoeTavernParser",
     "Hugh's Room Live" => "HughsRoomParser",
     "Jane Mallett Theatre" => "StLawrenceArtsCentreParser",
+    "Koerner Hall" => "KoernerHallParser",
     "Lees Palace" => "LeesPalaceParser",
     # Both Great Hall rooms are the one venue to us.  Note we also have a
     # separate "Longboat Hall" venue row with no parser and no events - it must
@@ -68,8 +69,7 @@ defmodule MusicListings.Affiliates.TicketNetwork.VenueMap do
 
   # Venues TicketNetwork covers that we deliberately do not, listed so a future
   # reader can tell "not mapped yet" from "not ours".  Mostly Mirvish-style
-  # theatre and comedy rooms.  Koerner Hall is the one real music venue here and
-  # is the best candidate if we ever add another parser.
+  # theatre and comedy rooms.
   # @untracked [
   #   "CAA Theatre",
   #   "Comedy Bar Danforth",
@@ -77,7 +77,6 @@ defmodule MusicListings.Affiliates.TicketNetwork.VenueMap do
   #   "Ed Mirvish Theatre",
   #   "Elgin Theatre At Elgin & Winter Garden Theatre Centre",
   #   "Fort York National Historic Site",
-  #   "Koerner Hall",
   #   "Lithuanian House",
   #   "Princess Of Wales Theatre",
   #   "South River in the Portlands",
