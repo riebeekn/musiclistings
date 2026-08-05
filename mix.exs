@@ -86,6 +86,15 @@ defmodule MusicListings.MixProject do
       # remove when meeseeks is updated
       {:rustler_precompiled, "~> 0.9.0", override: true},
       {:tzdata, "~> 1.1"},
+      # tzdata caps hackney at ~> 1.17 (< 2.0), so hackney 4.x is unreachable and the
+      # newest usable hackney is 1.25.0. Nothing else in the tree constrains certifi or
+      # parse_trans, so the resolver happily takes their latest and silently backtracks
+      # hackney to 1.17.1 — which is vulnerable to GHSA-9fm9-hp7p-53mf and
+      # GHSA-vq52-99r9-h5pw. hackney 1.25.0 needs certifi ~> 2.15.0 and parse_trans
+      # exactly 3.4.1, so pin both to keep hackney on 1.25.0.
+      # Remove when tzdata allows hackney 4.x (or we move off tzdata).
+      {:certifi, "~> 2.15.0", override: true},
+      {:parse_trans, "3.4.1", override: true},
       {:scrivener_ecto, "~> 3.0"},
       {:redirect, "~> 0.4.0"},
       {:goal, "~> 1.0"},
