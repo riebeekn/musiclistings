@@ -1,4 +1,4 @@
-defmodule MusicListingsWeb.RecentlyAddedAnalyticsTest do
+defmodule MusicListingsWeb.ClickAnalyticsTest do
   # async: false so the SQL sandbox runs in shared mode — the telemetry handler
   # inserts from the LiveView process, which needs the test's connection.
   use MusicListingsWeb.ConnCase, async: false
@@ -122,6 +122,65 @@ defmodule MusicListingsWeb.RecentlyAddedAnalyticsTest do
 
       assert [click] = rows("event.ticket_click")
       assert click.metadata["ref"] == nil
+    end
+  end
+
+  describe "resale (TicketNetwork) click" do
+    setup do
+      FunWithFlags.enable(:show_resale_tickets)
+
+      on_exit(fn -> FunWithFlags.disable(:show_resale_tickets) end)
+
+      resale_event =
+        insert(:event,
+          title: "Resale Show",
+          date: DateHelpers.today_eastern(),
+          ticket_url: "https://tickets.example.com/resale",
+          ticketnetwork_url: "https://gotickets.example.com/resale"
+        )
+
+      %{resale_event: resale_event}
+    end
+
+    test "is recorded from the event detail page with the rail referrer",
+         %{conn: conn, resale_event: resale_event} do
+      {:ok, view, _html} =
+        live(conn, "/events/#{resale_event.id}/resale-show?ref=new_this_week")
+
+      view
+      |> element("a[phx-click='event_resale_click']")
+      |> render_click()
+
+      assert [click] = rows("event.resale_click")
+      assert click.metadata["event_id"] == to_string(resale_event.id)
+      assert click.metadata["surface"] == "detail"
+      assert click.metadata["ref"] == "new_this_week"
+    end
+
+    test "is recorded from a listings row with a nil ref",
+         %{conn: conn, resale_event: resale_event} do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      view
+      |> element("#event-#{resale_event.id} a[phx-click='event_resale_click']")
+      |> render_click()
+
+      assert [click] = rows("event.resale_click")
+      assert click.metadata["event_id"] == to_string(resale_event.id)
+      assert click.metadata["surface"] == "list"
+      assert click.metadata["ref"] == nil
+    end
+
+    test "is recorded from a venue page listings row",
+         %{conn: conn, resale_event: resale_event} do
+      {:ok, view, _html} = live(conn, ~p"/events/venue/#{resale_event.venue_id}")
+
+      view
+      |> element("#event-#{resale_event.id} a[phx-click='event_resale_click']")
+      |> render_click()
+
+      assert [click] = rows("event.resale_click")
+      assert click.metadata["surface"] == "list"
     end
   end
 end

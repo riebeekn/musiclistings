@@ -79,7 +79,31 @@ defmodule MusicListings.AnalyticsTest do
     end
   end
 
-  describe "weekly_rail_traction/1" do
+  describe "metadata_counts_between/4" do
+    test "counts a single event name split by an arbitrary metadata key" do
+      record_at("event.resale_click", ~U[2024-07-28 12:00:00Z], %{"surface" => "list"})
+      record_at("event.resale_click", ~U[2024-07-29 12:00:00Z], %{"surface" => "list"})
+      record_at("event.resale_click", ~U[2024-07-30 12:00:00Z], %{"surface" => "detail"})
+      # key missing entirely — grouped under nil
+      record_at("event.resale_click", ~U[2024-07-30 12:00:00Z], %{})
+      # different event name — ignored
+      record_at("event.ticket_click", ~U[2024-07-30 12:00:00Z], %{"surface" => "list"})
+      # outside the window — ignored
+      record_at("event.resale_click", ~U[2024-07-01 12:00:00Z], %{"surface" => "list"})
+
+      counts =
+        Analytics.metadata_counts_between(
+          "event.resale_click",
+          "surface",
+          ~U[2024-07-25 00:00:00Z],
+          ~U[2024-08-01 00:00:00Z]
+        )
+
+      assert counts == %{"list" => 2, "detail" => 1, nil => 1}
+    end
+  end
+
+  describe "weekly_engagement/1" do
     test "buckets events into trailing and prior 7-day windows" do
       reference = ~U[2024-08-01 12:00:00Z]
 
@@ -91,16 +115,19 @@ defmodule MusicListings.AnalyticsTest do
       record_at("event.ticket_link_shown", ~U[2024-07-31 12:00:00Z], %{"ref" => nil})
       record_at("event.ticket_click", ~U[2024-07-30 12:00:00Z], %{"ref" => "new_this_week"})
       record_at("event.ticket_click", ~U[2024-07-31 12:00:00Z], %{"ref" => nil})
+      record_at("event.resale_click", ~U[2024-07-30 12:00:00Z], %{"surface" => "list"})
+      record_at("event.resale_click", ~U[2024-07-31 12:00:00Z], %{"surface" => "detail"})
 
       # prior week: [2024-07-18 12:00, 2024-07-25 12:00)
       record_at("new_this_week.shown", ~U[2024-07-20 12:00:00Z])
       record_at("event.ticket_link_shown", ~U[2024-07-20 12:00:00Z], %{"ref" => "new_this_week"})
       record_at("event.ticket_click", ~U[2024-07-20 12:00:00Z], %{"ref" => "new_this_week"})
+      record_at("event.resale_click", ~U[2024-07-20 12:00:00Z], %{"surface" => "list"})
 
       # outside both windows
       record_at("new_this_week.shown", ~U[2024-07-10 12:00:00Z])
 
-      report = Analytics.weekly_rail_traction(reference)
+      report = Analytics.weekly_engagement(reference)
 
       assert report.period_end == reference
       assert report.this_week_start == ~U[2024-07-25 12:00:00Z]
@@ -110,19 +137,23 @@ defmodule MusicListings.AnalyticsTest do
                "new_this_week.shown" => 2,
                "new_this_week.card_click" => 1,
                "event.ticket_link_shown" => 2,
-               "event.ticket_click" => 2
+               "event.ticket_click" => 2,
+               "event.resale_click" => 2
              }
 
       assert report.prior_week == %{
                "new_this_week.shown" => 1,
                "event.ticket_link_shown" => 1,
-               "event.ticket_click" => 1
+               "event.ticket_click" => 1,
+               "event.resale_click" => 1
              }
 
       assert report.this_week_conversions == %{"new_this_week" => 1, nil => 1}
       assert report.prior_week_conversions == %{"new_this_week" => 1}
       assert report.this_week_ticket_shown == %{"new_this_week" => 1, nil => 1}
       assert report.prior_week_ticket_shown == %{"new_this_week" => 1}
+      assert report.this_week_resale_surfaces == %{"list" => 1, "detail" => 1}
+      assert report.prior_week_resale_surfaces == %{"list" => 1}
     end
   end
 
@@ -179,6 +210,22 @@ defmodule MusicListings.AnalyticsTest do
                %AnalyticsEvent{
                  name: "event.ticket_click",
                  metadata: %{"event_id" => "42", "ref" => nil}
+               }
+             ] = Repo.all(AnalyticsEvent)
+    end
+
+    test "resale_click event stores the event id, surface and ref" do
+      TelemetryHandler.handle_event(
+        [:music_listings, :event, :resale_click],
+        %{},
+        %{event_id: "42", surface: "list", ref: nil},
+        nil
+      )
+
+      assert [
+               %AnalyticsEvent{
+                 name: "event.resale_click",
+                 metadata: %{"event_id" => "42", "surface" => "list", "ref" => nil}
                }
              ] = Repo.all(AnalyticsEvent)
     end

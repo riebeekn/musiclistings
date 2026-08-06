@@ -2,6 +2,7 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
   use MusicListingsWeb, :live_view
   use Goal
 
+  alias MusicListingsWeb.AnalyticsTracking
   alias MusicListingsWeb.SEO
 
   @impl true
@@ -75,6 +76,15 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
       _no_change ->
         noreply(socket)
     end
+  end
+
+  # Fired when a TicketNetwork (resale) chip in a list row is clicked. There is
+  # no `ref` on this page, so these are recorded with a nil referrer.
+  @impl true
+  def handle_event("event_resale_click", params, socket) do
+    AnalyticsTracking.track_resale_click(params, socket.assigns[:ref])
+
+    noreply(socket)
   end
 
   @impl true

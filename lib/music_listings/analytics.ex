@@ -63,20 +63,39 @@ defmodule MusicListings.Analytics do
   @spec ref_counts_between(String.t(), DateTime.t(), DateTime.t()) ::
           %{optional(String.t() | nil) => non_neg_integer()}
   def ref_counts_between(name, %DateTime{} = from, %DateTime{} = to) when is_binary(name) do
+    metadata_counts_between(name, "ref", from, to)
+  end
+
+  @doc """
+  Like `ref_counts_between/3`, but splits by any `metadata` key. Returns a map of
+  `value => count`, with events missing the key grouped under the `nil` key.
+  Used to split `event.resale_click`s by the `surface` they were clicked from
+  ("list" vs "detail").
+  """
+  @spec metadata_counts_between(String.t(), String.t(), DateTime.t(), DateTime.t()) ::
+          %{optional(String.t() | nil) => non_neg_integer()}
+  def metadata_counts_between(name, key, %DateTime{} = from, %DateTime{} = to)
+      when is_binary(name) and is_binary(key) do
     AnalyticsEvent
     |> where([event], event.name == ^name)
     |> where([event], event.inserted_at >= ^from and event.inserted_at < ^to)
-    |> group_by([event], fragment("?->>'ref'", event.metadata))
-    |> select([event], {fragment("?->>'ref'", event.metadata), count(event.id)})
+    # Grouped via the select alias rather than by repeating the fragment:
+    # Postgres treats the two bound key params as distinct expressions and
+    # rejects the GROUP BY as not matching the selected column.
+    |> select(
+      [event],
+      {selected_as(fragment("?->>?", event.metadata, ^key), :value), count(event.id)}
+    )
+    |> group_by([event], selected_as(:value))
     |> Repo.all()
     |> Map.new()
   end
 
   @doc """
-  Builds the data for the weekly "New This Week" rail traction email: event
-  counts for the trailing 7 days (`this_week`) alongside the preceding 7 days
-  (`prior_week`) for a period-over-period comparison. Windows are rolling
-  (relative to `reference`), not calendar-aligned.
+  Builds the data for the weekly engagement email: event counts for the trailing
+  7 days (`this_week`) alongside the preceding 7 days (`prior_week`) for a
+  period-over-period comparison. Windows are rolling (relative to `reference`),
+  not calendar-aligned.
 
   `*_conversions` hold `event.ticket_click` counts split by referrer (see
   `ref_counts_between/3`) so the email can report the rail conversion funnel
@@ -84,8 +103,12 @@ defmodule MusicListings.Analytics do
   hold `event.ticket_link_shown` counts split by referrer, giving the fair
   conversion denominator: rail visits that actually had a ticket link to click
   (a card click on an event with no ticket link can never convert).
+
+  `*_resale_surfaces` split TicketNetwork clicks by where they were clicked
+  ("list" vs "detail"); their totals are already in `this_week`/`prior_week`
+  under `event.resale_click`.
   """
-  @spec weekly_rail_traction(DateTime.t()) :: %{
+  @spec weekly_engagement(DateTime.t()) :: %{
           period_end: DateTime.t(),
           this_week_start: DateTime.t(),
           prior_week_start: DateTime.t(),
@@ -94,9 +117,11 @@ defmodule MusicListings.Analytics do
           this_week_conversions: %{optional(String.t() | nil) => non_neg_integer()},
           prior_week_conversions: %{optional(String.t() | nil) => non_neg_integer()},
           this_week_ticket_shown: %{optional(String.t() | nil) => non_neg_integer()},
-          prior_week_ticket_shown: %{optional(String.t() | nil) => non_neg_integer()}
+          prior_week_ticket_shown: %{optional(String.t() | nil) => non_neg_integer()},
+          this_week_resale_surfaces: %{optional(String.t() | nil) => non_neg_integer()},
+          prior_week_resale_surfaces: %{optional(String.t() | nil) => non_neg_integer()}
         }
-  def weekly_rail_traction(reference \\ DateHelpers.now()) do
+  def weekly_engagement(reference \\ DateHelpers.now()) do
     this_week_start = DateTime.add(reference, -7, :day)
     prior_week_start = DateTime.add(reference, -14, :day)
 
@@ -112,7 +137,16 @@ defmodule MusicListings.Analytics do
       this_week_ticket_shown:
         ref_counts_between("event.ticket_link_shown", this_week_start, reference),
       prior_week_ticket_shown:
-        ref_counts_between("event.ticket_link_shown", prior_week_start, this_week_start)
+        ref_counts_between("event.ticket_link_shown", prior_week_start, this_week_start),
+      this_week_resale_surfaces:
+        metadata_counts_between("event.resale_click", "surface", this_week_start, reference),
+      prior_week_resale_surfaces:
+        metadata_counts_between(
+          "event.resale_click",
+          "surface",
+          prior_week_start,
+          this_week_start
+        )
     }
   end
 end

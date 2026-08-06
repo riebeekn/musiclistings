@@ -1,8 +1,9 @@
-defmodule MusicListings.Emails.NewThisWeekAnalytics do
+defmodule MusicListings.Emails.WeeklyAnalytics do
   @moduledoc """
-  Weekly admin email reporting engagement with the "New This Week" rail: trailing
-  7-day impressions and clicks, with a prior-week comparison so we can judge
-  whether the feature is gaining traction.
+  Weekly admin email reporting site engagement: outbound ticket and TicketNetwork
+  (resale) clicks, plus traction on the "New This Week" rail. Covers the trailing
+  7 days with a prior-week comparison so we can judge whether things are gaining
+  traction.
   """
   use MusicListings.Mailer
 
@@ -12,6 +13,7 @@ defmodule MusicListings.Emails.NewThisWeekAnalytics do
   @card_click "new_this_week.card_click"
   @detail_ticket_click "event.ticket_click"
   @detail_ticket_shown "event.ticket_link_shown"
+  @resale_click "event.resale_click"
   @rail_ref "new_this_week"
 
   def new_email(report) do
@@ -23,10 +25,11 @@ defmodule MusicListings.Emails.NewThisWeekAnalytics do
   end
 
   defp subject_line(report) do
-    shown = count(report.this_week, @shown)
-    clicks = count(report.this_week, @card_click)
+    ticket = count(report.this_week, @detail_ticket_click)
+    resale = count(report.this_week, @resale_click)
+    card = count(report.this_week, @card_click)
 
-    "Rail Traction — #{shown} #{pluralize(shown, "view")}, #{clicks} #{pluralize(clicks, "click")} (last 7 days)"
+    "Weekly Analytics — #{ticket} ticket, #{resale} resale, #{card} rail #{pluralize(card, "click")} (last 7 days)"
   end
 
   defp mjml(assigns) do
@@ -35,6 +38,7 @@ defmodule MusicListings.Emails.NewThisWeekAnalytics do
     this_conversions = Map.get(report, :this_week_conversions, %{})
     prior_conversions = Map.get(report, :prior_week_conversions, %{})
     this_ticket_shown = Map.get(report, :this_week_ticket_shown, %{})
+    this_resale_surfaces = Map.get(report, :this_week_resale_surfaces, %{})
 
     assigns =
       assigns
@@ -54,14 +58,44 @@ defmodule MusicListings.Emails.NewThisWeekAnalytics do
       # Overall detail-page ticket engagement (all referrers).
       |> Map.put(:this_detail_ticket, count(report.this_week, @detail_ticket_click))
       |> Map.put(:this_detail_shown, count(report.this_week, @detail_ticket_shown))
+      |> Map.put(:prior_detail_ticket, count(report.prior_week, @detail_ticket_click))
+      # TicketNetwork (resale) clicks, split by where they were clicked. The
+      # resale chip has no impression event, so there is no CTR here — just
+      # volume, and which surface is driving it.
+      |> Map.put(:this_resale, count(report.this_week, @resale_click))
+      |> Map.put(:prior_resale, count(report.prior_week, @resale_click))
+      |> Map.put(:this_resale_list, count(this_resale_surfaces, "list"))
+      |> Map.put(:this_resale_detail, count(this_resale_surfaces, "detail"))
 
     ~H"""
-    <.h1>New This Week — Rail Traction</.h1>
+    <.h1>Weekly Analytics</.h1>
     <.muted>
       {DateHelpers.format_eastern_day(@report.this_week_start)} – {DateHelpers.format_eastern_date(
         @report.period_end
       )}
     </.muted>
+
+    <.h2>Outbound clicks</.h2>
+
+    <.stat_band>
+      <:stat label="Ticket clicks" accent="spotlight">{@this_detail_ticket}</:stat>
+      <:stat label="Resale clicks">{@this_resale}</:stat>
+      <:stat label="Resale from list">{@this_resale_list}</:stat>
+      <:stat label="Resale from detail">{@this_resale_detail}</:stat>
+    </.stat_band>
+
+    <.muted>
+      Ticket clicks are the primary ticket button on the event page (CTR {ctr(
+        @this_detail_ticket,
+        @this_detail_shown
+      )} of {@this_detail_shown} pages where a ticket link was shown). Resale clicks are
+      TicketNetwork links, counted on both the listings and the event page. Resale {change_cell(
+        @this_resale,
+        @prior_resale
+      )} vs prior 7 days
+    </.muted>
+
+    <.h2>New This Week rail</.h2>
 
     <.stat_band>
       <:stat label="Views" accent="spotlight">{@this_shown}</:stat>
@@ -100,16 +134,21 @@ defmodule MusicListings.Emails.NewThisWeekAnalytics do
 
     <.muted>
       Conversion is ticket clicks ÷ ticket-eligible views (rail cards that reached
-      an event with a ticket link). Rail conversions {change_cell(@this_rail_conv, @prior_rail_conv)} vs prior 7 days · Overall
-      event-page ticket CTR {ctr(@this_detail_ticket, @this_detail_shown)} ({@this_detail_ticket} of {@this_detail_shown} pages where a ticket link was shown)
+      an event with a ticket link). Rail conversions {change_cell(@this_rail_conv, @prior_rail_conv)} vs prior 7 days
     </.muted>
     """
   end
 
   defp metric_rows(assigns) do
     [
-      %{label: "Views", this: assigns.this_shown, prior: assigns.prior_shown},
-      %{label: "Card clicks", this: assigns.this_card, prior: assigns.prior_card}
+      %{
+        label: "Ticket clicks",
+        this: assigns.this_detail_ticket,
+        prior: assigns.prior_detail_ticket
+      },
+      %{label: "Resale clicks", this: assigns.this_resale, prior: assigns.prior_resale},
+      %{label: "Rail views", this: assigns.this_shown, prior: assigns.prior_shown},
+      %{label: "Rail card clicks", this: assigns.this_card, prior: assigns.prior_card}
     ]
   end
 
@@ -155,26 +194,30 @@ defmodule MusicListings.Emails.NewThisWeekAnalytics do
         @shown => 412,
         @card_click => 63,
         @detail_ticket_click => 74,
-        @detail_ticket_shown => 190
+        @detail_ticket_shown => 190,
+        @resale_click => 21
       },
       prior_week: %{
         @shown => 349,
         @card_click => 58,
         @detail_ticket_click => 61,
-        @detail_ticket_shown => 170
+        @detail_ticket_shown => 170,
+        @resale_click => 16
       },
       this_week_conversions: %{@rail_ref => 18, nil => 56},
       prior_week_conversions: %{@rail_ref => 14, nil => 47},
       this_week_ticket_shown: %{@rail_ref => 47, nil => 143},
-      prior_week_ticket_shown: %{@rail_ref => 39, nil => 131}
+      prior_week_ticket_shown: %{@rail_ref => 39, nil => 131},
+      this_week_resale_surfaces: %{"list" => 15, "detail" => 6},
+      prior_week_resale_surfaces: %{"list" => 11, "detail" => 5}
     }
     |> new_email()
   end
 
   def preview_details do
     [
-      title: "New This Week Analytics",
-      description: "Weekly digest of New This Week rail engagement, sent via Oban cron",
+      title: "Weekly Analytics",
+      description: "Weekly digest of site engagement — ticket, resale and rail clicks",
       tags: [category: "Admin"]
     ]
   end

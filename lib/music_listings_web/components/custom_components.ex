@@ -1229,6 +1229,9 @@ defmodule MusicListingsWeb.CustomComponents do
         class="inline-flex h-9 items-center justify-center gap-x-2 rounded border border-hairline px-4 font-mono text-xs font-medium tracking-widest text-paper-dim transition-colors hover:border-paper-dim hover:text-paper"
         target="_blank"
         rel="noopener sponsored"
+        phx-click="event_resale_click"
+        phx-value-id={@event.id}
+        phx-value-surface="detail"
       >
         <MusicListingsWeb.CoreComponents.icon
           name="hero-arrow-top-right-on-square"
@@ -1470,7 +1473,11 @@ defmodule MusicListingsWeb.CustomComponents do
                 price_lo={@event.price_lo}
                 price_hi={@event.price_hi}
               />
-              <.event_resale_url url={showtime.ticketnetwork_url} show_resale={@show_resale} />
+              <.event_resale_url
+                url={showtime.ticketnetwork_url}
+                event_id={showtime.event_id}
+                show_resale={@show_resale}
+              />
               <.event_details_url details_url={showtime.details_url} />
               <.delete_event_link current_user={@current_user} event_id={showtime.event_id} />
             </div>
@@ -1541,7 +1548,11 @@ defmodule MusicListingsWeb.CustomComponents do
               price_lo={@event.price_lo}
               price_hi={@event.price_hi}
             />
-            <.event_resale_url url={showtime.ticketnetwork_url} show_resale={@show_resale} />
+            <.event_resale_url
+              url={showtime.ticketnetwork_url}
+              event_id={showtime.event_id}
+              show_resale={@show_resale}
+            />
             <.event_details_url details_url={showtime.details_url} />
             <.delete_event_link current_user={@current_user} event_id={showtime.event_id} />
           </div>
@@ -1642,6 +1653,7 @@ defmodule MusicListingsWeb.CustomComponents do
   # Secondary TicketNetwork (resale) link. Deliberately de-emphasised so it never
   # competes with the primary spotlight ticket chip, and always rendered after it.
   attr :url, :string, default: nil
+  attr :event_id, :any, default: nil
   attr :show_resale, :boolean, default: false
 
   defp event_resale_url(assigns) do
@@ -1652,6 +1664,9 @@ defmodule MusicListingsWeb.CustomComponents do
       class="inline-flex items-center gap-1 font-mono text-[0.7rem] tracking-wider text-spotlight bg-spotlight/10 ring-1 ring-inset ring-spotlight/30 px-3 py-1 transition-colors hover:bg-spotlight hover:text-ink"
       target="_blank"
       rel="noopener sponsored"
+      phx-click="event_resale_click"
+      phx-value-id={@event_id}
+      phx-value-surface="list"
     >
       <MusicListingsWeb.CoreComponents.icon
         name="hero-arrow-top-right-on-square"

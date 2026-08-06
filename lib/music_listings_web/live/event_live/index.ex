@@ -3,6 +3,7 @@ defmodule MusicListingsWeb.EventLive.Index do
   use Goal
 
   alias MusicListingsUtilities.DateHelpers
+  alias MusicListingsWeb.AnalyticsTracking
   alias MusicListingsWeb.SEO
 
   @impl true
@@ -263,6 +264,14 @@ defmodule MusicListingsWeb.EventLive.Index do
     |> update_socket_assigns(paged_events)
     |> assign(:new_this_week, recently_added_events(socket))
     |> noreply()
+  end
+
+  # Fired when a TicketNetwork (resale) chip in a list row is clicked. There is
+  # no `ref` on this page, so these are recorded with a nil referrer.
+  def handle_event("event_resale_click", params, socket) do
+    AnalyticsTracking.track_resale_click(params, socket.assigns[:ref])
+
+    noreply(socket)
   end
 
   defp recently_added_events(socket) do

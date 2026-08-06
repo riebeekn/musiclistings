@@ -3,6 +3,7 @@ defmodule MusicListingsWeb.EventLive.Show do
   use Goal
 
   alias MusicListingsUtilities.DateHelpers
+  alias MusicListingsWeb.AnalyticsTracking
   alias MusicListingsWeb.SEO
 
   @impl true
@@ -46,6 +47,15 @@ defmodule MusicListingsWeb.EventLive.Show do
       %{},
       %{event_id: event_id, ref: socket.assigns[:ref]}
     )
+
+    noreply(socket)
+  end
+
+  # Fired when the TicketNetwork (resale) link on the detail page is clicked.
+  # Carries the same `ref` as the primary ticket click so resale clicks can also
+  # be attributed to the rail.
+  def handle_event("event_resale_click", params, socket) do
+    AnalyticsTracking.track_resale_click(params, socket.assigns[:ref])
 
     noreply(socket)
   end

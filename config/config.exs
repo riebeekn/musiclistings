@@ -101,8 +101,8 @@ config :music_listings, Oban,
        # {"0 7 * * *", MusicListings.Workers.PurgeEventsWorker, max_attempts: 1},
        # run daily at 13:00 UTC (~9am Eastern) - weekly parser pullback check
        {"0 13 * * *", MusicListings.Workers.ParserHealthWorker, max_attempts: 1},
-       # run Mondays at 13:00 UTC (~9am Eastern) - weekly rail traction digest
-       {"0 13 * * 1", MusicListings.Workers.NewThisWeekAnalyticsWorker, max_attempts: 1}
+       # run Mondays at 13:00 UTC (~9am Eastern) - weekly engagement digest
+       {"0 13 * * 1", MusicListings.Workers.WeeklyAnalyticsWorker, max_attempts: 1}
      ]}
   ]
 
