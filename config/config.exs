@@ -60,7 +60,11 @@ config :logger, :console,
 # Configure HB logger
 config :honeybadger,
   use_logger: true,
-  insights_enabled: true
+  insights_enabled: true,
+  # Bots fetch our HTML pages with `Accept: application/json`, which Phoenix correctly
+  # answers with a 406. Honeybadger.Plug only skips 404s and reports every other status,
+  # so without this a well-behaved refusal shows up in the daily digest as an app error.
+  exclude_errors: [Phoenix.NotAcceptableError]
 
 # AppSignal (APM) base config — activated for prod in runtime.exs.
 # otp_app enables automatic Ecto / Oban / Finch (HTTP) instrumentation.

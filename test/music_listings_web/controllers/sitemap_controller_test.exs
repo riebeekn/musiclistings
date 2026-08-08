@@ -129,5 +129,15 @@ defmodule MusicListingsWeb.SitemapControllerTest do
 
       assert body =~ ~r{<loc>[^<]+/events/venue/#{venue.id}</loc>\s*</url>}
     end
+
+    test "serves a crawler that asks for XML without a */* fallback", %{conn: conn} do
+      conn =
+        conn
+        |> put_req_header("accept", "application/xml")
+        |> get(~p"/sitemap.xml")
+
+      assert response_content_type(conn, :xml)
+      assert response(conn, 200) =~ "urlset"
+    end
   end
 end

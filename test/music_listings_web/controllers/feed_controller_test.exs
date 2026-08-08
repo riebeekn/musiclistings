@@ -79,5 +79,15 @@ defmodule MusicListingsWeb.FeedControllerTest do
 
       assert body =~ "<![CDATA[Red Karavan, Jinn&amp;Juice"
     end
+
+    test "serves a reader that asks for RSS without a */* fallback", %{conn: conn} do
+      conn =
+        conn
+        |> put_req_header("accept", "application/rss+xml, application/atom+xml;q=0.8")
+        |> get(~p"/feed.xml")
+
+      assert response_content_type(conn, :xml)
+      assert response(conn, 200) =~ "<rss"
+    end
   end
 end

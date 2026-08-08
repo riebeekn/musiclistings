@@ -159,5 +159,17 @@ defmodule MusicListingsWeb.EventLive.ShowTest do
       assert music_event_json =~ ~s("url":"https://tickets.example.com/face-value")
       refute music_event_json =~ "goto.ticketnetwork.com"
     end
+
+    # Bots regularly request event pages with `Accept: application/json`. We have no
+    # JSON API, so 406 is the right answer — this pins that so a future `accepts`
+    # change is a deliberate one. The matching Honeybadger `exclude_errors` entry in
+    # config/config.exs keeps these out of the error digest.
+    test "refuses a JSON-only Accept header", %{conn: conn, event: event} do
+      assert_raise Phoenix.NotAcceptableError, fn ->
+        conn
+        |> put_req_header("accept", "application/json")
+        |> get(~p"/events/#{event.id}/dream-theater-live")
+      end
+    end
   end
 end

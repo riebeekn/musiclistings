@@ -33,14 +33,28 @@ defmodule MusicListingsWeb.Router do
     plug :accepts, ["json"]
   end
 
+  # Static XML documents for crawlers and feed readers.
+  pipeline :xml_document do
+    plug :accepts, ["xml", "rss", "atom", "html"]
+
+    plug :put_secure_browser_headers, %{
+      "content-security-policy" => @csp_policy
+    }
+  end
+
   redirect("/", "/events", :temporary)
+
+  ## Feed and sitemap
+  scope "/", MusicListingsWeb do
+    pipe_through :xml_document
+
+    get "/sitemap.xml", SitemapController, :index
+    get "/feed.xml", FeedController, :index
+  end
 
   ## Public routes
   scope "/", MusicListingsWeb do
     pipe_through :browser
-
-    get "/sitemap.xml", SitemapController, :index
-    get "/feed.xml", FeedController, :index
 
     live_session :current_user,
       on_mount: [{MusicListingsWeb.UserAuth, :mount_current_user}] do
