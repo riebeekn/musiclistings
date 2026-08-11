@@ -6,6 +6,7 @@ defmodule MusicListings.CrawlerTest do
   alias MusicListings.Repo
   alias MusicListingsSchema.CrawlError
   alias MusicListingsSchema.CrawlSummary
+  alias MusicListingsSchema.Event
 
   # Crawling unfixtured venue URLs through the test HTTP client logs expected
   # errors/warnings (the stub returns {:error, :test_env}). Capture them so they
@@ -85,6 +86,14 @@ defmodule MusicListings.CrawlerTest do
       assert crawl_error.type == :no_events_error
       assert crawl_error.error == "No events found for #{venue.name}"
       assert crawl_error.venue_id == venue.id
+    end
+
+    test "stores upcoming events but not past or implausibly far future ones" do
+      venue = insert(:venue, parser_module_name: "DateRangeEventsParser")
+
+      assert {:ok, %CrawlSummary{new: 1}} = Crawler.crawl([venue])
+
+      assert ["upcoming"] == Repo.all(Event) |> Enum.map(& &1.external_id)
     end
   end
 

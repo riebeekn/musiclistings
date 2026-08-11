@@ -145,7 +145,11 @@ defmodule MusicListings.Parsing.ParseHelpers do
 
   @doc """
   Not all sites include the year in the event date, in those cases use this
-  function which pseudo intelligently determines the year
+  function which pseudo intelligently determines the year.
+
+  Prefer `build_date_from_month_day_strings_anchored/3` when the source offers
+  a date that reliably precedes the event, such as a CMS publish date - the
+  year it yields doesn't depend on when the crawl happens to run.
   """
   @spec build_date_from_month_day_strings(
           month_string :: String.t(),
@@ -156,10 +160,56 @@ defmodule MusicListings.Parsing.ParseHelpers do
 
     with {:ok, day} <- day_string_to_integer(day_string),
          {:ok, month} <- month_string |> clean_month_string() |> month_string_to_integer(),
-         {:ok, candidate_date} <- Date.new(today.year, month, day) do
-      {:ok, maybe_increment_year(candidate_date, today)}
+         {:ok, candidate_date} <- Date.new(today.year, month, day),
+         {:ok, date} <- maybe_adjust_year(candidate_date, today) do
+      {:ok, date}
     else
       _error -> {:error, :invalid_date}
+    end
+  end
+
+  @doc """
+  Builds a date from a month / day that carries no year, using `anchor_date` -
+  a date known to precede the event, such as the CMS publish date of the
+  listing - to resolve the year.
+
+  Picks the earliest year for which the resulting date is not before the
+  anchor, so a listing published in December for a January show rolls into the
+  following year, while a stale listing for a show that has already happened
+  stays in the past rather than being bumped a year forward.
+
+  Prefer this over `build_date_from_month_day_strings/2` whenever the source
+  provides a trustworthy anchor: the result does not depend on when the crawl
+  happens to run.
+  """
+  @spec build_date_from_month_day_strings_anchored(
+          month_string :: String.t(),
+          day_string :: String.t(),
+          anchor_date :: Date.t()
+        ) :: {:ok, Date.t()} | {:error, :invalid_date}
+  def build_date_from_month_day_strings_anchored(month_string, day_string, anchor_date) do
+    with {:ok, day} <- day_string_to_integer(day_string),
+         {:ok, month} <- month_string |> clean_month_string() |> month_string_to_integer(),
+         {:ok, candidate_date} <- Date.new(anchor_date.year, month, day),
+         {:ok, date} <- maybe_increment_year_to_clear_anchor(candidate_date, anchor_date) do
+      {:ok, date}
+    else
+      _error -> {:error, :invalid_date}
+    end
+  end
+
+  defp maybe_increment_year_to_clear_anchor(candidate_date, anchor_date) do
+    # A couple of days of grace covers timezone skew and listings published the
+    # day of the show - it matches the tolerance the crawler itself applies
+    # when rejecting past events.
+    earliest_date = Date.add(anchor_date, -2)
+
+    if Date.before?(candidate_date, earliest_date) do
+      # Date.new/3 rather than Date.new!/3: a Feb 29 candidate rolling into a
+      # non leap year has no valid date, and we'd rather report that than raise
+      Date.new(candidate_date.year + 1, candidate_date.month, candidate_date.day)
+    else
+      {:ok, candidate_date}
     end
   end
 
@@ -177,17 +227,35 @@ defmodule MusicListings.Parsing.ParseHelpers do
     end
   end
 
-  defp maybe_increment_year(candidate_date, today) do
-    # There is no year provided... so subtract a few days from today
-    # then compare the dates if candidate event date < today increment
-    # the year... this is pretty hacky, TODO: revisit in the future
-    thirty_five_days_ago = Date.add(today, -35)
+  # With no year to go on, the event is assumed to fall inside a window that
+  # starts however long a site might keep a show listed after it happens.  The
+  # window is exactly one year wide, so every month/day maps to a single date
+  # and a candidate past the far edge belongs to the year behind.
+  #
+  # The far edge matters as much as the near one: on New Year's Day a lingering
+  # "Dec. 26" would otherwise be read as the December still to come - a whole
+  # year late.  Pulling it back instead puts it in the past, where the crawler
+  # drops it.
+  @stale_listing_tolerance_days 35
+  @booking_horizon_days 365 - @stale_listing_tolerance_days
 
-    if Date.before?(candidate_date, thirty_five_days_ago) do
-      Date.new!(candidate_date.year + 1, candidate_date.month, candidate_date.day)
-    else
-      candidate_date
+  defp maybe_adjust_year(candidate_date, today) do
+    cond do
+      Date.before?(candidate_date, Date.add(today, -@stale_listing_tolerance_days)) ->
+        shift_year(candidate_date, 1)
+
+      Date.after?(candidate_date, Date.add(today, @booking_horizon_days)) ->
+        shift_year(candidate_date, -1)
+
+      true ->
+        {:ok, candidate_date}
     end
+  end
+
+  # Date.new/3 rather than Date.new!/3: Feb 29 has no counterpart in a
+  # neighbouring non leap year, and that's an unparseable date, not a crash
+  defp shift_year(date, offset) do
+    Date.new(date.year + offset, date.month, date.day)
   end
 
   defp clean_month_string(month_string) do
@@ -222,6 +290,7 @@ defmodule MusicListings.Parsing.ParseHelpers do
   defp month_string_to_integer("08"), do: {:ok, 8}
   defp month_string_to_integer("september"), do: {:ok, 9}
   defp month_string_to_integer("sep"), do: {:ok, 9}
+  defp month_string_to_integer("sept"), do: {:ok, 9}
   defp month_string_to_integer("09"), do: {:ok, 9}
   defp month_string_to_integer("october"), do: {:ok, 10}
   defp month_string_to_integer("oct"), do: {:ok, 10}

@@ -65,6 +65,78 @@ defmodule MusicListings.Parsing.ParserHelpersTest do
     end
   end
 
+  describe "build_date_from_month_day_strings_anchored/3" do
+    test "keeps the anchor's year when the date follows it" do
+      assert {:ok, ~D[2025-08-24]} ==
+               ParseHelpers.build_date_from_month_day_strings_anchored(
+                 "Aug",
+                 "24",
+                 ~D[2025-08-10]
+               )
+    end
+
+    test "rolls into the next year when the date precedes the anchor" do
+      assert {:ok, ~D[2026-01-15]} ==
+               ParseHelpers.build_date_from_month_day_strings_anchored(
+                 "January",
+                 "15",
+                 ~D[2025-12-28]
+               )
+    end
+
+    test "leaves a date that has already passed in the past" do
+      # The whole point: a listing published long ago for a show that has since
+      # happened must not be pushed a year forward, no matter when we parse it
+      assert {:ok, ~D[2025-06-05]} ==
+               ParseHelpers.build_date_from_month_day_strings_anchored(
+                 "Jun",
+                 "05",
+                 ~D[2025-05-22]
+               )
+    end
+
+    test "allows two days of grace before the anchor" do
+      assert {:ok, ~D[2025-08-08]} ==
+               ParseHelpers.build_date_from_month_day_strings_anchored(
+                 "Aug",
+                 "08",
+                 ~D[2025-08-10]
+               )
+
+      assert {:ok, ~D[2026-08-07]} ==
+               ParseHelpers.build_date_from_month_day_strings_anchored(
+                 "Aug",
+                 "07",
+                 ~D[2025-08-10]
+               )
+    end
+
+    test "returns an error when the rolled over date does not exist" do
+      assert {:error, :invalid_date} ==
+               ParseHelpers.build_date_from_month_day_strings_anchored(
+                 "Feb",
+                 "29",
+                 ~D[2024-06-01]
+               )
+    end
+
+    test "returns an error for an unparseable month or day" do
+      assert {:error, :invalid_date} ==
+               ParseHelpers.build_date_from_month_day_strings_anchored(
+                 "NOTAMONTH",
+                 "1st",
+                 ~D[2025-08-10]
+               )
+
+      assert {:error, :invalid_date} ==
+               ParseHelpers.build_date_from_month_day_strings_anchored(
+                 "Feb",
+                 "31",
+                 ~D[2025-01-01]
+               )
+    end
+  end
+
   describe "parse_day_month_day_string/1" do
     test "parses valid day, month day format" do
       assert {:ok, _date} = ParseHelpers.parse_day_month_day_string("Friday, January 23")

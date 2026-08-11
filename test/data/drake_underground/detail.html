@@ -1,6 +1,30 @@
 <html>
 <body>
-  <h1>The Boneheads</h1>
-  <img src="thumbnail_07-June-24-2025-Boneheads.jpg" alt="event poster" />
+  <!-- The booking widget uses the same typography class as the hero date label,
+       and appears first in the document -->
+  <div class="c-booking">
+    <p aria-hidden="true" class="u-typo-label-small u-text-gray-500" data-dates-display="">-</p>
+  </div>
+
+  <section class="c-hero-edito">
+    <div class="c-hero-edito_container || u-container">
+      <div class="c-hero-edito_content">
+        <div class="u-flex u-flex-col u-gap-y-fluid-2xl">
+          <h1 class="u-typo-h1 u-max-w-edito anim-reveal-translate">The Boneheads</h1>
+
+          <div class="u-relative u-flex u-flex-wrap u-justify-between u-gap-gutter u-line-x u-pt-6">
+            <p class="u-typo-label-small anim-reveal-translate">Jun. 26, 7:00PM - 11:00PM</p>
+            <ul class="c-tag_list">
+              <li class="c-tag">Drake Underground</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The poster image carries a different day than the hero label on purpose:
+       the label is the authoritative date, the image name is only a fallback -->
+  <img class="c-image_img" src="https://thedrake.ca/uploads/2025/06/thumbnail_07-June-24-2025-Boneheads.jpg" alt="event poster" />
 </body>
 </html>

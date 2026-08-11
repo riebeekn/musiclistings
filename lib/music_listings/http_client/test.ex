@@ -64,8 +64,15 @@ defmodule MusicListings.HttpClient.Test do
        "td_music_hall/instances.json"},
       {"tdmusichall.mhrth.com/api/attendable/v1/instances/", "td_music_hall/instance.json"},
       {"tdmusichall.mhrth.com/tickets/", "td_music_hall/detail.html"},
-      # Drake Underground
-      {"thedrake.ca/event/", "drake_underground/detail.html"},
+      # Drake Underground - the event page is the only place the show date
+      # appears, so each fixture stands for a different shape of that page.
+      # Deliberately no catch-all: an event with no fixture exercises the
+      # "couldn't reach the page" path.
+      {"thedrake.ca/event/3809/", "drake_underground/detail.html"},
+      {"thedrake.ca/event/i-feel-free", "drake_underground/detail_image_date_only.html"},
+      {"thedrake.ca/event/with-love-ramaan", "drake_underground/detail_stale_listing.html"},
+      {"thedrake.ca/event/bo-staloch", "drake_underground/detail_implausible_image_date.html"},
+      {"thedrake.ca/event/stacey-ryan", "drake_underground/detail_no_date.html"},
       # The Bowl at Sobeys Stadium - each show has its own page holding the
       # ticket vendor link and the show time.  Only the shows the tests care
       # about have a fixture; the rest are left unmatched on purpose so the

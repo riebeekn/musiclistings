@@ -4,12 +4,35 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
+  import Meeseeks.CSS
+
   alias MusicListings.HttpClient
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
+  alias MusicListings.Parsing.Selectors
 
   @drake_underground_location_id 67
+
+  # The event API carries no event date whatsoever - the date lives only on the
+  # event's own page, as a label like "Aug. 24, 7:00PM - 10:30PM" that omits the
+  # year.  The Drake keeps shows listed for months after they happen, so the
+  # year cannot be guessed from the current date: it is resolved against the
+  # WordPress publish date of the listing, which always precedes the show.
+  # The label lives in the page hero.  The booking widget elsewhere on the page
+  # uses the same typography class for its (empty) date placeholder, so the
+  # hero is selected first and any other candidate has to look like a date.
+  @hero_date_label_selector ".c-hero-edito_content p.u-typo-label-small"
+  @date_label_selector "p.u-typo-label-small"
+  @date_label_regex ~r/^\s*([A-Za-z]{3,})\.?\s+(\d{1,2})(?:,\s*(\d{1,2}:\d{2}\s*[AP]M))?/i
+
+  # Poster images are often named like "thumbnail_07-July-04-2025-Cicadachar" -
+  # a secondary source, but one that carries a real year
+  @image_date_regex ~r/\b(January|February|March|April|May|June|July|August|September|October|November|December)[-_](\d{1,2})[-_](\d{4})\b/i
+
+  # No show is booked more than this far ahead of its listing being published;
+  # anything beyond it means we've read the wrong thing off the page
+  @max_days_after_publish 550
 
   @impl true
   def source_url,
@@ -58,62 +81,15 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
 
   @impl true
   def event_date(event) do
-    # The event date is not directly available in the API response
-    # We need to fetch the event page to get the date information
-    event_page_url = event["link"]
-
-    case HttpClient.get(event_page_url) do
-      {:ok, %{body: body}} ->
-        extract_date_from_event_page(body)
-
-      _fallback ->
-        # Fall back to post date if we can't get the event page
-        post_date_string = event["date"]
-        [date_part, _rest] = String.split(post_date_string, "T")
-        [year_string, month_string, day_string] = String.split(date_part, "-")
-
-        {:ok, date} =
-          ParseHelpers.build_date_from_year_month_day_strings(
-            year_string,
-            month_string,
-            day_string
-          )
-
-        date
-    end
-  end
-
-  defp extract_date_from_event_page(body) do
-    # Look for date pattern like "Jul. 04, 7:00PM - 11:00PM"
-    date_regex = ~r/(\w+)\.\s+(\d+),\s+(\d+:\d+[AP]M)/i
-
-    case Regex.run(date_regex, body) do
-      [_ign, month_string, day_string, _time_string] ->
-        # If date is found, parse it (year is assumed to be current or next year)
-        {:ok, date} = ParseHelpers.build_date_from_month_day_strings(month_string, day_string)
+    case detail_info(event) do
+      %{date: %Date{} = date} ->
         date
 
-      _fallback ->
-        # If we can't find the date pattern, look for date in image URL or title
-        # Images often have names like "thumbnail_07-July-04-2025-Cicadachar"
-        image_date_regex =
-          ~r/\b(January|February|March|April|May|June|July|August|September|October|November|December)[-_](\d{1,2})[-_](\d{4})\b/i
-
-        case Regex.run(image_date_regex, body) do
-          [_ign, month_string, day_string, year_string] ->
-            {:ok, date} =
-              ParseHelpers.build_date_from_year_month_day_strings(
-                year_string,
-                month_string,
-                day_string
-              )
-
-            date
-
-          _fallback ->
-            # Default to today if we can't find any date information
-            Date.utc_today()
-        end
+      _no_date ->
+        # Deliberately fail rather than fall back to a guess: a fabricated date
+        # publishes a show that isn't happening, which is worse than missing it.
+        # The raise is recorded as a parse error and surfaced in the crawl email.
+        raise "Unable to determine event date for #{event["link"]}"
     end
   end
 
@@ -123,8 +99,110 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
   end
 
   @impl true
-  def event_time(_event) do
-    nil
+  def event_time(event) do
+    case detail_info(event) do
+      %{time: time} -> time
+      _no_time -> nil
+    end
+  end
+
+  # The event page is fetched once per event and memoized: every callback for a
+  # given event runs in the same task process (see Crawler.EventParser), so the
+  # date and the time cost a single request between them.
+  defp detail_info(event) do
+    cache_key = {:drake_underground_detail, event["link"]}
+
+    case Process.get(cache_key) do
+      nil ->
+        info = fetch_detail_info(event)
+        Process.put(cache_key, info)
+        info
+
+      cached ->
+        cached
+    end
+  end
+
+  defp fetch_detail_info(event) do
+    with {:ok, %HttpClient.Response{status: 200, body: body}} <- HttpClient.get(event["link"]),
+         {:ok, anchor_date} <- published_on(event) do
+      extract_detail_info(body, anchor_date)
+    else
+      _error -> :error
+    end
+  end
+
+  defp extract_detail_info(body, anchor_date) do
+    document = Meeseeks.parse(body)
+
+    case date_and_time_from_label(document, anchor_date) do
+      %{date: %Date{}} = info -> info
+      _no_label_date -> %{date: date_from_image_name(body, anchor_date), time: nil}
+    end
+  end
+
+  defp date_and_time_from_label(document, anchor_date) do
+    case Regex.run(@date_label_regex, date_label(document)) do
+      [_match, month_string, day_string | rest] ->
+        date =
+          month_string
+          |> ParseHelpers.build_date_from_month_day_strings_anchored(day_string, anchor_date)
+          |> validate_date(anchor_date)
+
+        %{date: date, time: rest |> List.first() |> ParseHelpers.time_from_time_string()}
+
+      _no_match ->
+        %{date: nil, time: nil}
+    end
+  end
+
+  defp date_label(document) do
+    document
+    |> Selectors.all_matches(css(@hero_date_label_selector))
+    |> case do
+      [] -> Selectors.all_matches(document, css(@date_label_selector))
+      hero_matches -> hero_matches
+    end
+    |> Selectors.text()
+    |> Enum.find("", &Regex.match?(@date_label_regex, &1))
+  end
+
+  defp date_from_image_name(body, anchor_date) do
+    case Regex.run(@image_date_regex, body) do
+      [_match, month_string, day_string, year_string] ->
+        year_string
+        |> ParseHelpers.build_date_from_year_month_day_strings(month_string, day_string)
+        |> validate_date(anchor_date)
+
+      _no_match ->
+        nil
+    end
+  end
+
+  # A listing is always published before the show it advertises, and never much
+  # more than a year before, so a date outside that window means we matched
+  # something that isn't the event date
+  defp validate_date({:ok, date}, anchor_date) do
+    earliest = Date.add(anchor_date, -2)
+    latest = Date.add(anchor_date, @max_days_after_publish)
+
+    if Date.before?(date, earliest) or Date.after?(date, latest) do
+      nil
+    else
+      date
+    end
+  end
+
+  defp validate_date(_error, _anchor_date), do: nil
+
+  defp published_on(event) do
+    with post_date_string when is_binary(post_date_string) <- event["date"],
+         [date_part | _rest] <- String.split(post_date_string, "T"),
+         [year_string, month_string, day_string] <- String.split(date_part, "-") do
+      ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
+    else
+      _error -> {:error, :invalid_date}
+    end
   end
 
   @impl true

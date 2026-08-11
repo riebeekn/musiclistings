@@ -13,7 +13,10 @@ defmodule MusicListingsUtilities.DateHelpers do
   """
   def today do
     if Application.get_env(:music_listings, :env) == :test do
-      @mock_date
+      # Tests may override the default @mock_date via the
+      # :mock_today env. Tests overriding the default need to be
+      # marked as async: false
+      Application.get_env(:music_listings, :mock_today) || @mock_date
     else
       Date.utc_today()
     end

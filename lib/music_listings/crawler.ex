@@ -19,6 +19,9 @@ defmodule MusicListings.Crawler do
 
   require Logger
 
+  # Roughly 18 months - beyond any real booking horizon for the venues we crawl
+  @max_days_ahead 550
+
   @doc """
   The crawl function is called to retrieve and store events.  Events will
   be inserted or updated depending on whether the event already exists
@@ -50,7 +53,9 @@ defmodule MusicListings.Crawler do
           |> DataSource.retrieve_events(parser.source_url())
           |> maybe_insert_no_events_error(venue, crawl_summary)
           |> EventParser.parse_events(parser, venue, crawl_summary)
-          |> Enum.reject(&(no_date?(&1) || event_in_the_past?(&1)))
+          |> Enum.reject(
+            &(no_date?(&1) || event_in_the_past?(&1) || event_too_far_in_future?(&1))
+          )
           |> EventStorage.save_events(crawl_summary)
           |> List.flatten()
           |> insert_venue_summary(venue, crawl_summary)
@@ -109,6 +114,23 @@ defmodule MusicListings.Crawler do
         Enum.all?(payload.parsed_event, &(Date.compare(&1.date, two_days_ago) == :lt))
       else
         Date.compare(payload.parsed_event.date, two_days_ago) == :lt
+      end
+    else
+      false
+    end
+  end
+
+  # Several venues publish dates without a year, leaving the parser to infer one.
+  # When that inference goes wrong it goes wrong by a whole year, so anything
+  # implausibly far out is treated as a bad parse rather than a real booking.
+  defp event_too_far_in_future?(payload) do
+    if payload.status == :ok do
+      cutoff = DateHelpers.now() |> DateHelpers.to_eastern_date() |> Date.add(@max_days_ahead)
+
+      if is_list(payload.parsed_event) do
+        Enum.all?(payload.parsed_event, &(Date.compare(&1.date, cutoff) == :gt))
+      else
+        Date.compare(payload.parsed_event.date, cutoff) == :gt
       end
     else
       false
