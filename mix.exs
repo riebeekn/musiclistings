@@ -65,7 +65,7 @@ defmodule MusicListings.MixProject do
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 4.1"},
       {:phoenix_live_view, "~> 1.1"},
-      {:phoenix_live_dashboard, "~> 0.8.5"},
+      {:phoenix_live_dashboard, "~> 0.9.0"},
       {:lazy_html, ">= 0.0.0", only: :test},
       {:swoosh, "~> 1.5"},
       {:finch, "~> 0.13"},
