@@ -196,36 +196,6 @@ defmodule MusicListings.Emails.LatestCrawlResults do
           "item"
         )} matched · {@ticket_network_stats.unmatched_items} unmatched · {@ticket_network_stats.untracked_items} at venues we don't track
       </.muted>
-
-      <%= if @ticket_network_stats.consecutive_runs != [] do %>
-        <.muted>
-          Consecutive-night runs — identically titled shows on back-to-back nights. These match on
-          TicketNetwork dating its listings exactly a day early; since the titles within a run are
-          identical, a listing that landed on the wrong night would look just as convincing. Worth a
-          spot check.
-        </.muted>
-        <.table rows={@ticket_network_stats.consecutive_runs}>
-          <:col :let={run} label="Venue">
-            <span style="color:#a8a49a;">
-              {venue_name(@ticket_network_stats.venue_names, run.venue_id)}
-            </span>
-          </:col>
-          <:col :let={run} label="Event">
-            <span style="color:#ece9e0;font-weight:700;">{run.title}</span>
-          </:col>
-          <:col :let={run} label="Dates">
-            <%!-- One span per range, with the separators outside them: a run of
-            many nights then wraps between its ranges rather than forcing the
-            table - and with it the whole email - wider than the body. --%>
-            <%= for {range, index} <- Enum.with_index(DateHelpers.format_date_ranges(run.dates)) do %>
-              <%= if index > 0 do %>
-                <span style="color:#2b2b27;"> · </span>
-              <% end %>
-              <span style="white-space:nowrap;color:#a8a49a;">{range}</span>
-            <% end %>
-          </:col>
-        </.table>
-      <% end %>
     <% end %>
 
     <%= if @added_event_count > 0 do %>
@@ -281,10 +251,6 @@ defmodule MusicListings.Emails.LatestCrawlResults do
 
   defp describe_ticket_network_error(other) do
     "The pass failed: #{inspect(other)}"
-  end
-
-  defp venue_name(venue_names, venue_id) do
-    Map.get(venue_names, venue_id, "venue ##{venue_id}")
   end
 
   defp no_events_venues(crawl_errors) do
@@ -380,35 +346,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       cleared: 3,
       unmatched_items: 171,
       untracked_items: 68,
-      venue_names: %{1 => v1.name, 2 => v2.name},
-      consecutive_runs: [
-        %{venue_id: 1, title: "Alexisonfire", dates: [~D[2026-08-14], ~D[2026-08-15]]},
-        %{
-          venue_id: 2,
-          title: "TSO - Star Wars: A New Hope in Concert",
-          dates: [~D[2027-01-28], ~D[2027-01-29], ~D[2027-01-30]]
-        },
-        # A repertory booking that returns four times over the year - the widest
-        # the dates column ever gets, and the reason it has to wrap.
-        %{
-          venue_id: 2,
-          title: "National Geographic Live: Chris Schell",
-          dates: [
-            ~D[2026-11-08],
-            ~D[2026-11-09],
-            ~D[2026-11-10],
-            ~D[2027-03-21],
-            ~D[2027-03-22],
-            ~D[2027-03-23],
-            ~D[2027-04-18],
-            ~D[2027-04-19],
-            ~D[2027-04-20],
-            ~D[2027-05-30],
-            ~D[2027-05-31],
-            ~D[2027-06-01]
-          ]
-        }
-      ]
+      venue_names: %{1 => v1.name, 2 => v2.name}
     }
 
     build_crawl_summary()
