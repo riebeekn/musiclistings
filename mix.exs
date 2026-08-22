@@ -94,7 +94,7 @@ defmodule MusicListings.MixProject do
       # exactly 3.4.1, so pin both to keep hackney on 1.25.0.
       # Remove when tzdata allows hackney 4.x (or we move off tzdata).
       {:certifi, "~> 2.15.0", override: true},
-      {:parse_trans, "3.4.1", override: true},
+      {:parse_trans, "3.4.2", override: true},
       {:scrivener_ecto, "~> 3.0"},
       {:redirect, "~> 0.4.0"},
       {:goal, "~> 1.0"},
