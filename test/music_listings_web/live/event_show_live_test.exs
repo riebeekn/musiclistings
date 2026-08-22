@@ -80,6 +80,57 @@ defmodule MusicListingsWeb.EventLive.ShowTest do
     end
   end
 
+  describe "duplicate info / ticket links" do
+    @shared_url "https://example.com/events/shared"
+
+    test "hides the venue page link when it matches the ticket url", %{conn: conn} do
+      event =
+        insert(:event,
+          venue: insert(:venue),
+          title: "Shared Link Show",
+          date: ~D[2026-06-01],
+          ticket_url: @shared_url,
+          details_url: @shared_url
+        )
+
+      {:ok, _view, html} = live(conn, ~p"/events/#{event.id}/shared-link-show")
+
+      assert html =~ "Tickets"
+      refute html =~ "Venue page"
+    end
+
+    test "keeps the venue page link when the urls differ", %{conn: conn} do
+      event =
+        insert(:event,
+          venue: insert(:venue),
+          title: "Distinct Link Show",
+          date: ~D[2026-06-01],
+          ticket_url: @shared_url,
+          details_url: "https://example.com/events/details"
+        )
+
+      {:ok, _view, html} = live(conn, ~p"/events/#{event.id}/distinct-link-show")
+
+      assert html =~ "Tickets"
+      assert html =~ "Venue page"
+    end
+
+    test "keeps the venue page link when the event has no ticket url", %{conn: conn} do
+      event =
+        insert(:event,
+          venue: insert(:venue),
+          title: "Ticketless Show",
+          date: ~D[2026-06-01],
+          ticket_url: nil,
+          details_url: "https://example.com/events/details"
+        )
+
+      {:ok, _view, html} = live(conn, ~p"/events/#{event.id}/ticketless-show")
+
+      assert html =~ "Venue page"
+    end
+  end
+
   describe "resale link (feature flag)" do
     @resale_url "https://goto.ticketnetwork.com/c/3003"
 

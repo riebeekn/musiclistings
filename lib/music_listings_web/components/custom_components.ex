@@ -1212,7 +1212,10 @@ defmodule MusicListingsWeb.CustomComponents do
         <MusicListingsWeb.CoreComponents.icon name="hero-ticket-solid" class="size-4" /> Tickets
       </a>
       <a
-        :if={@event.details_url}
+        :if={
+          @event.details_url &&
+            !duplicate_event_urls?(@event.ticket_url, @event.details_url)
+        }
         href={@event.details_url}
         class="inline-flex h-9 items-center justify-center gap-x-2 rounded border border-hairline bg-ink px-4 font-mono text-xs font-medium uppercase tracking-widest text-paper transition-colors hover:bg-ink-3"
         target="_blank"
@@ -1478,7 +1481,10 @@ defmodule MusicListingsWeb.CustomComponents do
                 event_id={showtime.event_id}
                 show_resale={@show_resale}
               />
-              <.event_details_url details_url={showtime.details_url} />
+              <.event_details_url
+                details_url={showtime.details_url}
+                ticket_url={showtime.ticket_url}
+              />
               <.delete_event_link current_user={@current_user} event_id={showtime.event_id} />
             </div>
           <% end %>
@@ -1553,7 +1559,10 @@ defmodule MusicListingsWeb.CustomComponents do
               event_id={showtime.event_id}
               show_resale={@show_resale}
             />
-            <.event_details_url details_url={showtime.details_url} />
+            <.event_details_url
+              details_url={showtime.details_url}
+              ticket_url={showtime.ticket_url}
+            />
             <.delete_event_link current_user={@current_user} event_id={showtime.event_id} />
           </div>
         <% end %>
@@ -1676,11 +1685,27 @@ defmodule MusicListingsWeb.CustomComponents do
     """
   end
 
+  # A handful of venues (Burdock, Sneaky Dee's, Standard Time, ...) expose a single
+  # URL that serves as both the ticket link and the event page.  Two chips pointing at
+  # one destination is noise, so the Info chip yields to the richer Tickets chip, which
+  # also carries the price, the affiliate wrapping and the click tracking.
+  # `ticket_url != ""` keeps this decoupled from the separate empty-string bug: a blank
+  # ticket url is treated as absent here rather than as a match against a blank details
+  # url, so the Info chip keeps rendering exactly as it does today.
+  defp duplicate_event_urls?(ticket_url, details_url)
+       when is_binary(ticket_url) and is_binary(details_url) and ticket_url != "",
+       do: ticket_url == details_url
+
+  defp duplicate_event_urls?(_ticket_url, _details_url), do: false
+
   defp event_details_url(%{details_url: nil} = assigns), do: ~H""
 
   defp event_details_url(assigns) do
+    assigns = assign_new(assigns, :ticket_url, fn -> nil end)
+
     ~H"""
     <a
+      :if={!duplicate_event_urls?(@ticket_url, @details_url)}
       href={@details_url}
       class="inline-flex items-center gap-1 font-mono text-[0.7rem] uppercase tracking-wider text-paper-dim ring-1 ring-inset ring-hairline px-3 py-1 transition-colors hover:text-paper hover:ring-paper-dim"
       target="_blank"

@@ -405,6 +405,101 @@ defmodule MusicListingsWeb.EventLiveTest do
     end
   end
 
+  describe "duplicate info / ticket links" do
+    @shared_url "https://example.com/events/shared"
+    @distinct_details_url "https://example.com/events/details"
+
+    setup do
+      today = DateHelpers.today_eastern()
+      venue = insert(:venue)
+
+      duplicate =
+        insert(:event,
+          venue: venue,
+          date: today,
+          title: "ev-duplicate",
+          ticket_url: @shared_url,
+          details_url: @shared_url
+        )
+
+      distinct =
+        insert(:event,
+          venue: venue,
+          date: today,
+          title: "ev-distinct",
+          ticket_url: @shared_url,
+          details_url: @distinct_details_url
+        )
+
+      ticketless =
+        insert(:event,
+          venue: venue,
+          date: today,
+          title: "ev-ticketless",
+          ticket_url: nil,
+          details_url: @distinct_details_url
+        )
+
+      %{duplicate_id: duplicate.id, distinct_id: distinct.id, ticketless_id: ticketless.id}
+    end
+
+    test "renders only the ticket chip when both urls match", %{
+      conn: conn,
+      duplicate_id: id
+    } do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      assert has_element?(view, "#event-#{id} a[rel='noopener sponsored'][href='#{@shared_url}']")
+      refute has_element?(view, "#event-#{id} a[rel='noopener'][href='#{@shared_url}']")
+    end
+
+    test "renders both chips when the urls differ", %{conn: conn, distinct_id: id} do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      assert has_element?(view, "#event-#{id} a[rel='noopener sponsored'][href='#{@shared_url}']")
+
+      assert has_element?(
+               view,
+               "#event-#{id} a[rel='noopener'][href='#{@distinct_details_url}']"
+             )
+    end
+
+    test "renders the info chip when the event has no ticket url", %{
+      conn: conn,
+      ticketless_id: id
+    } do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      assert has_element?(
+               view,
+               "#event-#{id} a[rel='noopener'][href='#{@distinct_details_url}']"
+             )
+    end
+
+    test "treats a blank ticket url as absent rather than as a match", %{conn: conn} do
+      event =
+        insert(:event,
+          venue: insert(:venue),
+          date: DateHelpers.today_eastern(),
+          title: "ev-blank",
+          ticket_url: "",
+          details_url: ""
+        )
+
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      assert has_element?(view, "#event-#{event.id} a[rel='noopener'][href='']")
+    end
+
+    test "hides the duplicate info chip when sorting by venue", %{conn: conn, duplicate_id: id} do
+      {:ok, view, _html} =
+        conn |> put_connect_params(%{"sort_by" => "venue"}) |> live(~p"/events")
+
+      assert has_element?(view, "#event-#{id} a[rel='noopener sponsored'][href='#{@shared_url}']")
+      refute has_element?(view, "#event-#{id} a[rel='noopener'][href='#{@shared_url}']")
+    end
+  end
+
   describe "new" do
     test "saves submitted event with valid parameters", %{conn: conn} do
       {:ok, view, _html} = live(conn, ~p"/events/new")
