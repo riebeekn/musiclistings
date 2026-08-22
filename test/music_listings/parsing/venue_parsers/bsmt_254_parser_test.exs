@@ -85,13 +85,54 @@ defmodule MusicListings.Parsing.VenueParsers.Bsmt254ParserTest do
   end
 
   describe "event_time/1" do
-    test "returns the event start time", %{event: event} do
+    test "returns the start time from the event's own page", %{index_html: index_html} do
+      event = event_with_slug(index_html, "rhythm-n-bingo")
+
+      assert ~T[20:00:00] == Bsmt254Parser.event_time(event)
+    end
+
+    test "returns the start time when the page lists no tickets", %{index_html: index_html} do
+      event = event_with_slug(index_html, "not-a-bbq-x-hit-play")
+
+      assert ~T[21:45:00] == Bsmt254Parser.event_time(event)
+    end
+
+    test "returns nil when the event page can't be fetched", %{event: event} do
       assert nil == Bsmt254Parser.event_time(event)
     end
   end
 
   describe "price/1" do
-    test "returns the event price", %{event: event} do
+    # The venue writes its tiers with slashes, ie. "$12 adv / $15 door"
+    test "reads a slash separated price as a range", %{index_html: index_html} do
+      event = event_with_slug(index_html, "rhythm-n-bingo")
+
+      assert %Price{format: :range, lo: Decimal.new("12"), hi: Decimal.new("15")} ==
+               Bsmt254Parser.price(event)
+    end
+
+    # The blurbs run to prose, and "... / 7\" release" is a record, not a $7 tier
+    test "ignores a slash that doesn't introduce another amount", %{index_html: index_html} do
+      event = event_with_slug(index_html, "project-nowhere-night-2")
+
+      assert %Price{format: :fixed, lo: Decimal.new("20"), hi: Decimal.new("20")} ==
+               Bsmt254Parser.price(event)
+    end
+
+    test "still reads a pwyc price as pwyc", %{index_html: index_html} do
+      event = event_with_slug(index_html, "project-nowhere-night-1")
+
+      assert %Price{format: :pwyc, lo: nil, hi: nil} == Bsmt254Parser.price(event)
+    end
+
+    test "returns the price when the page lists no tickets", %{index_html: index_html} do
+      event = event_with_slug(index_html, "not-a-bbq-x-hit-play")
+
+      assert %Price{format: :fixed, lo: Decimal.new("20"), hi: Decimal.new("20")} ==
+               Bsmt254Parser.price(event)
+    end
+
+    test "returns unknown when the event page can't be fetched", %{event: event} do
       assert %Price{format: :unknown, lo: nil, hi: nil} ==
                Bsmt254Parser.price(event)
     end
@@ -104,7 +145,21 @@ defmodule MusicListings.Parsing.VenueParsers.Bsmt254ParserTest do
   end
 
   describe "ticket_url/1" do
-    test "returns the event ticket url", %{event: event} do
+    test "returns the ticket url from the event's own page", %{index_html: index_html} do
+      event = event_with_slug(index_html, "rhythm-n-bingo")
+
+      assert "https://www.eventbrite.ca/e/rhythm-n-bingo-tickets-1996769144262?aff=oddtdtcreator" ==
+               Bsmt254Parser.ticket_url(event)
+    end
+
+    # Some shows sell at the door only and link nothing but their instagram
+    test "returns nil when the event page carries no ticket button", %{index_html: index_html} do
+      event = event_with_slug(index_html, "not-a-bbq-x-hit-play")
+
+      assert nil == Bsmt254Parser.ticket_url(event)
+    end
+
+    test "returns nil when the event page can't be fetched", %{event: event} do
       assert nil == Bsmt254Parser.ticket_url(event)
     end
   end
@@ -114,5 +169,18 @@ defmodule MusicListings.Parsing.VenueParsers.Bsmt254ParserTest do
       assert "https://www.bsmt254.com/event/the-bridge-with-milo-raad-ryan-king-valis-marivs/" ==
                Bsmt254Parser.details_url(event)
     end
+  end
+
+  # The start time, the price and the ticket url only exist on an event's own
+  # page - these pull specific events out of the listing fixture, each of which
+  # maps to a different event page fixture in MusicListings.HttpClient.Test.
+  # Selected by slug rather than title: several listing titles carry en dashes
+  # and encoded ampersands.
+  defp event_with_slug(index_html, slug) do
+    index_html
+    |> Bsmt254Parser.events()
+    |> Enum.find(fn event ->
+      event |> Bsmt254Parser.details_url() |> String.contains?("/#{slug}/")
+    end)
   end
 end

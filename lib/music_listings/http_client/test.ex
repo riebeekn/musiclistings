@@ -102,6 +102,14 @@ defmodule MusicListings.HttpClient.Test do
       {"thephoenixconcerttheatre.com/events/event/the-volunteers",
        "phoenix/detail_and_up_price.html"},
       {"thephoenixconcerttheatre.com/events/event/homixide-gang", "phoenix/detail_no_price.html"},
+      # BSMT 254 - the listing carries no ticket link, start time or price, so
+      # each fixture stands for a different shape of an event's own page.  As
+      # above, the listing's other events are left unmatched on purpose so the
+      # "couldn't reach the page" fallbacks are exercised too.
+      {"bsmt254.com/event/rhythm-n-bingo", "bsmt254/detail.html"},
+      {"bsmt254.com/event/not-a-bbq-x-hit-play", "bsmt254/detail_no_ticket_link.html"},
+      {"bsmt254.com/event/project-nowhere-night-1", "bsmt254/detail_pwyc_price.html"},
+      {"bsmt254.com/event/project-nowhere-night-2", "bsmt254/detail_prose_price.html"},
       # Story — token endpoint is fetched first, then the events API is called
       # with the token it yields.
       {"storytoronto.ca/_api/v1/access-tokens", "story/access_tokens.json"},
