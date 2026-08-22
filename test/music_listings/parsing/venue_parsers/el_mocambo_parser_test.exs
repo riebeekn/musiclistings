@@ -101,7 +101,36 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParserTest do
   end
 
   describe "ticket_url/1" do
-    test "returns the event ticket url", %{event: event} do
+    test "returns the calendar's website icon url, without fetching the event page" do
+      event =
+        "#{File.cwd!()}/test/data/el_mocambo/single_event_with_website_icon.html"
+        |> Path.expand()
+        |> File.read!()
+        |> ElMocamboParser.events()
+        |> List.first()
+
+      assert "https://www.eventbrite.ca/e/myles-castello-live-show-tickets-1994945923961" ==
+               ElMocamboParser.ticket_url(event)
+    end
+
+    # The description's first link is the band's trailer, and the page's "add to
+    # Google Calendar" href embeds a url encoded ticket link - neither should win
+    # over the anchor the venue actually labelled "GET TICKETS HERE!".
+    test "falls back to the labelled link on the event's page", %{index_html: index_html} do
+      event = event_with_title(index_html, "Sousapalooza Day 1")
+
+      assert "https://ticketscene.ca/events/57134/" == ElMocamboParser.ticket_url(event)
+    end
+
+    test "returns nil when the event page has no labelled ticket link", %{
+      index_html: index_html
+    } do
+      event = event_with_title(index_html, "High Flyer Release Show")
+
+      assert nil == ElMocamboParser.ticket_url(event)
+    end
+
+    test "returns nil when the event page can't be fetched", %{event: event} do
       assert nil == ElMocamboParser.ticket_url(event)
     end
   end
@@ -111,5 +140,14 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParserTest do
       assert "https://elmocambo.com/event/strangelove/" ==
                ElMocamboParser.details_url(event)
     end
+  end
+
+  # Events that leave the calendar's website icon empty only carry a ticket link
+  # on their own page - these pull such events out of the calendar fixture, each
+  # of which maps to a different event page fixture in MusicListings.HttpClient.Test.
+  defp event_with_title(index_html, title) do
+    index_html
+    |> ElMocamboParser.events()
+    |> Enum.find(&(ElMocamboParser.event_title(&1) == title))
   end
 end

@@ -89,6 +89,11 @@ defmodule MusicListings.HttpClient.Test do
        "great_hall/detail.html"},
       {"thegreathall.ca/event/casey-mq", "great_hall/detail_no_button.html"},
       {"thegreathall.ca/event/nada-surf", "great_hall/detail_link_protect.html"},
+      # El Mocambo - only the events that leave the calendar's website icon
+      # empty need their own page fetched, so these stand for the two shapes
+      # that page comes in.  The rest are left unmatched on purpose.
+      {"elmocambo.com/event/sousapalooza-day-1", "el_mocambo/detail.html"},
+      {"elmocambo.com/event/high-flyer-release-show", "el_mocambo/detail_no_ticket_link.html"},
       # Story — token endpoint is fetched first, then the events API is called
       # with the token it yields.
       {"storytoronto.ca/_api/v1/access-tokens", "story/access_tokens.json"},

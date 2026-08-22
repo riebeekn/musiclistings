@@ -12,6 +12,20 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
   alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.Selectors
 
+  # An event's ticket link is in one of two places, never both: the calendar
+  # renders The Events Calendar's Website field as a bare icon carrying no text,
+  # and events that leave that field empty instead label a link "GET TICKETS
+  # HERE!" in the description on their own page.  Roughly two thirds use the
+  # first, which costs nothing to read, so the page is only fetched for the rest.
+  @website_icon_selector ".bdt-address-website-icon a"
+  @description_selector ".tribe-events-single-event-description"
+
+  # The description also carries unrelated links (a trailer, a charity the show
+  # supports), so the ticket link is found by its label rather than by position.
+  # Scoping to the description matters on its own: the page's "add to Google
+  # Calendar" href embeds the url encoded ticket link, and would otherwise match.
+  @ticket_link_text_regex ~r/\btickets?\b/i
+
   @impl true
   def source_url, do: "https://elmocambo.com/events-new/"
 
@@ -114,8 +128,39 @@ defmodule MusicListings.Parsing.VenueParsers.ElMocamboParser do
   end
 
   @impl true
-  def ticket_url(_event) do
-    nil
+  def ticket_url(event) do
+    event
+    |> Selectors.url(css(@website_icon_selector))
+    |> case do
+      website when is_binary(website) and website != "" -> website
+      _no_website -> ticket_url_from_details_page(event)
+    end
+    |> ParseHelpers.sanitize_ticket_url()
+  end
+
+  defp ticket_url_from_details_page(event) do
+    with details_url when is_binary(details_url) and details_url != "" <-
+           details_url(event),
+         {:ok, %HttpClient.Response{status: 200, body: body}} <-
+           HttpClient.get(details_url, [], max_retries: 1) do
+      body
+      |> Selectors.match_one(css(@description_selector))
+      |> extract_ticket_link()
+    else
+      _no_ticket_url -> nil
+    end
+  end
+
+  defp extract_ticket_link(nil), do: nil
+
+  defp extract_ticket_link(description) do
+    description
+    |> Selectors.all_matches(css("a[href]"))
+    |> Enum.find(&Regex.match?(@ticket_link_text_regex, Selectors.text(&1)))
+    |> case do
+      nil -> nil
+      link -> Selectors.attr(link, "href")
+    end
   end
 
   @impl true
