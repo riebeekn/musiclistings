@@ -106,6 +106,15 @@ defmodule MusicListings.Parsing.VenueParsers.LeesPalaceParserTest do
       assert "https://www.showclix.com/event/whitehall-the-dance-cave" ==
                LeesPalaceParser.ticket_url(event)
     end
+
+    # The Horseshoe, which shares this template, has already moved the link off
+    # the button and onto an overlay anchor
+    test "returns the ticket url when the listing moves to the overlay link" do
+      event = event_from("single_event_new_template.html")
+
+      assert "https://events.leapevents.com/event/slow-magic" ==
+               LeesPalaceParser.ticket_url(event)
+    end
   end
 
   describe "details_url/1" do
@@ -113,5 +122,19 @@ defmodule MusicListings.Parsing.VenueParsers.LeesPalaceParserTest do
       assert "https://www.leespalace.com/event/whitehall-the-dance-cave" ==
                LeesPalaceParser.details_url(event)
     end
+
+    test "returns nil rather than the bare domain when there is no event page" do
+      event = event_from("single_event_new_template.html")
+
+      assert nil == LeesPalaceParser.details_url(event)
+    end
+  end
+
+  defp event_from(fixture) do
+    "#{File.cwd!()}/test/data/lees_palace/#{fixture}"
+    |> Path.expand()
+    |> File.read!()
+    |> LeesPalaceParser.events()
+    |> List.first()
   end
 end

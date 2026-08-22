@@ -113,16 +113,46 @@ defmodule MusicListings.Parsing.VenueParsers.HorseshoeTavernParserTest do
   end
 
   describe "ticket_url/1" do
-    test "returns the event ticket url", %{event: event} do
+    test "returns the ticket url from the overlay link" do
+      event = event_from("single_event_no_price.html")
+
+      assert "https://tixr.com/e/188215" == HorseshoeTavernParser.ticket_url(event)
+    end
+
+    # A co-promoted show also links the promoter's vendor; the venue's own link
+    # is always first
+    test "returns the venue's own link when a show lists two vendors" do
+      event = event_from("single_event_two_vendors.html")
+
+      assert "https://tixr.com/e/192036" == HorseshoeTavernParser.ticket_url(event)
+    end
+
+    # The listing served this shape until 2026, with the link on the button itself
+    test "returns the event ticket url from the legacy markup", %{event: event} do
       assert "https:\/\/www.showclix.com\/event\/philip-sayce24" ==
                HorseshoeTavernParser.ticket_url(event)
     end
   end
 
   describe "details_url/1" do
-    test "returns the event details url", %{event: event} do
+    # The current listing has no per event pages at all
+    test "returns nil when the listing links no event page" do
+      event = event_from("single_event_no_price.html")
+
+      assert nil == HorseshoeTavernParser.details_url(event)
+    end
+
+    test "returns the event details url from the legacy markup", %{event: event} do
       assert "https://www.horseshoetavern.com/event/philip-sayce24" ==
                HorseshoeTavernParser.details_url(event)
     end
+  end
+
+  defp event_from(fixture) do
+    "#{File.cwd!()}/test/data/horseshoe_tavern/#{fixture}"
+    |> Path.expand()
+    |> File.read!()
+    |> HorseshoeTavernParser.events()
+    |> List.first()
   end
 end

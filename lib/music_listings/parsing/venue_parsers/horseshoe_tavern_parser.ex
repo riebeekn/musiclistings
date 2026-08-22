@@ -4,32 +4,22 @@ defmodule MusicListings.Parsing.VenueParsers.HorseshoeTavernParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
-  import Meeseeks.CSS
-
-  alias MusicListings.HttpClient
   alias MusicListings.Parsing.ParseHelpers
-  alias MusicListings.Parsing.Performers
-  alias MusicListings.Parsing.Price
-  alias MusicListings.Parsing.Selectors
+  alias MusicListings.Parsing.VenueParsers.BaseParsers.HorseshoeLeesParser
+
+  @base_url "https://www.horseshoetavern.com"
 
   @impl true
-  def source_url, do: "https://www.horseshoetavern.com/events"
+  def source_url, do: HorseshoeLeesParser.source_url(@base_url)
 
   @impl true
-  def retrieve_events_fun do
-    fn url -> HttpClient.get(url) end
-  end
+  defdelegate retrieve_events_fun, to: HorseshoeLeesParser
 
   @impl true
-  def events(body) do
-    Selectors.all_matches(body, css(".schedule-event"))
-  end
+  defdelegate events(body), to: HorseshoeLeesParser
 
   @impl true
-  def next_page_url(_body, _current_url) do
-    # no next page
-    nil
-  end
+  defdelegate next_page_url(body, current_url), to: HorseshoeLeesParser
 
   @impl true
   def event_id(event) do
@@ -45,72 +35,31 @@ defmodule MusicListings.Parsing.VenueParsers.HorseshoeTavernParser do
   end
 
   @impl true
-  def event_title(event) do
-    Selectors.text(event, css(".schedule-speaker-name"))
-  end
+  defdelegate event_title(event), to: HorseshoeLeesParser
 
   @impl true
-  def performers(event) do
-    event
-    |> Selectors.all_matches(css(".schedule-speaker-name"))
-    |> Selectors.text()
-    |> Performers.new()
-  end
+  defdelegate performers(event), to: HorseshoeLeesParser
 
   @impl true
-  def event_date(event) do
-    full_date_string = Selectors.text(event, css(".schedule-event-time"))
-
-    [_day_of_week, day_month_string, year_string] = String.split(full_date_string, ", ")
-    [month_string, day_string] = String.split(day_month_string)
-
-    {:ok, date} =
-      ParseHelpers.build_date_from_year_month_day_strings(year_string, month_string, day_string)
-
-    date
-  end
+  defdelegate event_date(event), to: HorseshoeLeesParser
 
   @impl true
-  def additional_dates(_event) do
-    []
-  end
+  defdelegate additional_dates(event), to: HorseshoeLeesParser
 
   @impl true
-  def event_time(event) do
-    case event
-         |> Selectors.all_matches(css(".schedule-event-time"))
-         |> Selectors.text()
-         |> Enum.find(fn element -> element |> String.contains?("pm") end)
-         |> ParseHelpers.build_time_from_time_string() do
-      {:ok, time} -> time
-      {:error, _reason} -> nil
-    end
-  end
+  defdelegate event_time(event), to: HorseshoeLeesParser
 
   @impl true
-  def price(event) do
-    event
-    |> Selectors.all_matches(css(".schedule-event-time"))
-    |> Selectors.text()
-    |> Enum.find(fn element -> element |> String.contains?("$") end)
-    |> Price.new()
-  end
+  defdelegate price(event), to: HorseshoeLeesParser
 
   @impl true
-  def age_restriction(event) do
-    event
-    |> Selectors.text(css(".non"))
-    |> ParseHelpers.age_restriction_string_to_enum()
-  end
+  defdelegate age_restriction(event), to: HorseshoeLeesParser
 
   @impl true
-  def ticket_url(event) do
-    Selectors.url(event, css(".blb"))
-  end
+  defdelegate ticket_url(event), to: HorseshoeLeesParser
 
   @impl true
   def details_url(event) do
-    slug = Selectors.url(event, css(".schedule-speaker"))
-    "https://www.horseshoetavern.com#{slug}"
+    HorseshoeLeesParser.details_url(event, @base_url)
   end
 end
