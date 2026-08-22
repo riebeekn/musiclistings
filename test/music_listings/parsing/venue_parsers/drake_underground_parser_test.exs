@@ -162,7 +162,22 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParserTest do
   end
 
   describe "ticket_url/1" do
-    test "returns the event ticket url", %{event: event} do
+    test "returns the hero ticket url, ignoring the restaurant cross sell buttons", %{
+      event: event
+    } do
+      assert "https://admitone.com/events/toronto/pro/concerts/drake-underground/the-boneheads/" ==
+               DrakeUndergroundParser.ticket_url(event)
+    end
+
+    test "returns nil when the page carries no ticket link", %{index_html: index_html} do
+      event = event_with_link(index_html, "i-feel-free")
+
+      assert nil == DrakeUndergroundParser.ticket_url(event)
+    end
+
+    test "returns nil when the event page can't be fetched", %{index_html: index_html} do
+      event = event_with_link(index_html, "lovefoxy")
+
       assert nil == DrakeUndergroundParser.ticket_url(event)
     end
   end

@@ -34,6 +34,15 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
   # anything beyond it means we've read the wrong thing off the page
   @max_days_after_publish 550
 
+  # The ticket link is the lone button in the page hero, next to the date
+  # label.  It points at whichever vendor the promoter used (eventbrite,
+  # ticketmaster, admitone, dice, tixr, posh...), so there is nothing to
+  # allowlist.  Further down the page the hotel restaurants are cross sold with
+  # buttons carrying the same `c-button -alt` classes, so the hero scope and the
+  # link text both have to agree before we take a href.
+  @ticket_link_selector ".c-hero-edito_content a.c-button[href]"
+  @ticket_link_text_regex ~r/\btickets\b/i
+
   @impl true
   def source_url,
     do:
@@ -108,7 +117,7 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
 
   # The event page is fetched once per event and memoized: every callback for a
   # given event runs in the same task process (see Crawler.EventParser), so the
-  # date and the time cost a single request between them.
+  # date, the time and the ticket url cost a single request between them.
   defp detail_info(event) do
     cache_key = {:drake_underground_detail, event["link"]}
 
@@ -135,9 +144,27 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
   defp extract_detail_info(body, anchor_date) do
     document = Meeseeks.parse(body)
 
-    case date_and_time_from_label(document, anchor_date) do
+    document
+    |> date_and_time_from_label(anchor_date)
+    |> case do
       %{date: %Date{}} = info -> info
       _no_label_date -> %{date: date_from_image_name(body, anchor_date), time: nil}
+    end
+    |> Map.put(:ticket_url, extract_ticket_url(document))
+  end
+
+  defp extract_ticket_url(document) do
+    document
+    |> Selectors.all_matches(css(@ticket_link_selector))
+    |> Enum.find(&Regex.match?(@ticket_link_text_regex, Selectors.text(&1)))
+    |> case do
+      nil ->
+        nil
+
+      link ->
+        link
+        |> Selectors.attr("href")
+        |> ParseHelpers.sanitize_ticket_url()
     end
   end
 
@@ -216,8 +243,11 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
   end
 
   @impl true
-  def ticket_url(_event) do
-    nil
+  def ticket_url(event) do
+    case detail_info(event) do
+      %{ticket_url: ticket_url} -> ticket_url
+      _no_ticket_url -> nil
+    end
   end
 
   @impl true
