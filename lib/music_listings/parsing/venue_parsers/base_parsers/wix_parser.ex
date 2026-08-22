@@ -7,6 +7,13 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.WixParser do
   alias MusicListings.Parsing.Price
   alias MusicListingsUtilities.DateHelpers
 
+  # Wix Events registration types.  Only an EXTERNAL event carries a vendor url;
+  # a TICKETS event is sold by Wix itself, on the event's own page.  RSVP (1) and
+  # NO_REGISTRATION (4) events have nothing to buy - a venue that takes cash at
+  # the door is the latter, and correctly has no ticket url at all.
+  @external_registration 3
+  @wix_ticketing_registration 2
+
   def retrieve_events_fun do
     fn url -> HttpClient.get(url) end
   end
@@ -61,11 +68,30 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.WixParser do
     :unknown
   end
 
-  def ticket_url(event) do
-    event["registration"]["external"]["registration"]
+  def ticket_url(event, base_url) do
+    case registration_type(event) do
+      @external_registration -> event["registration"]["external"]["registration"]
+      @wix_ticketing_registration -> event_page_url(event, base_url)
+      _nothing_to_buy -> nil
+    end
+  end
+
+  # Each event has a page of its own on the venue's site, which is where a Wix
+  # ticketed event is bought.  The event carries no absolute url of its own, so
+  # the venue's base url has to be supplied.
+  def event_page_url(event, base_url) do
+    case event["slug"] do
+      nil -> nil
+      "" -> nil
+      slug -> "#{base_url}/event-details/#{slug}"
+    end
   end
 
   def details_url(_event) do
     nil
+  end
+
+  defp registration_type(event) do
+    get_in(event, ["registration", "type"])
   end
 end

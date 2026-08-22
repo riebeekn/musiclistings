@@ -102,7 +102,10 @@ defmodule MusicListings.Parsing.VenueParsers.CameronHouseParserTest do
   end
 
   describe "ticket_url/1" do
-    test "returns the event ticket url", %{event: event} do
+    # This venue takes payment at the door, so its shows carry no registration
+    # of any kind - they must not be given a link to an event page that has
+    # nothing to buy on it.
+    test "returns nil when a show has no registration", %{event: event} do
       assert nil == CameronHouseParser.ticket_url(event)
     end
   end

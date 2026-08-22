@@ -103,15 +103,31 @@ defmodule MusicListings.Parsing.VenueParsers.RedwoodTheatreParserTest do
   end
 
   describe "ticket_url/1" do
-    test "returns the event ticket url", %{event: event} do
+    test "returns the vendor url when the venue sells through one", %{event: event} do
       assert "https://actionnetwork.org/ticketed_events/sudan-remember-us-the-redwood-theatre-january-17?clear_id=true" ==
+               RedwoodTheatreParser.ticket_url(event)
+    end
+
+    # Most of this venue's shows are ticketed by Wix itself rather than an
+    # outside vendor, and are bought on the event's own page
+    test "returns the event page when wix sells the tickets", %{index_html: index_html} do
+      event = event_with_title(index_html, "SexBandit")
+
+      assert "https://www.theredwoodtheatre.com/event-details/sexbandit" ==
                RedwoodTheatreParser.ticket_url(event)
     end
   end
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert "https://www.theredwoodtheatre.com/" == RedwoodTheatreParser.details_url(event)
+      assert "https://www.theredwoodtheatre.com/event-details/film-screening-gaza-doctors-under-attack-1" ==
+               RedwoodTheatreParser.details_url(event)
     end
+  end
+
+  defp event_with_title(index_html, title) do
+    index_html
+    |> RedwoodTheatreParser.events()
+    |> Enum.find(fn event -> RedwoodTheatreParser.event_title(event) == title end)
   end
 end
