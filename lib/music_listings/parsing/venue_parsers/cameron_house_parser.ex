@@ -10,6 +10,7 @@ defmodule MusicListings.Parsing.VenueParsers.CameronHouseParser do
   alias MusicListings.Parsing.VenueParsers.BaseParsers.WixParser
 
   @base_url "https://www.thecameron.com"
+  @event_page_base_url "#{@base_url}/events"
 
   @impl true
   def source_url, do: "#{@base_url}/shows"
@@ -61,8 +62,8 @@ defmodule MusicListings.Parsing.VenueParsers.CameronHouseParser do
   defdelegate age_restriction(event), to: WixParser
 
   @impl true
-  def ticket_url(event), do: WixParser.ticket_url(event, @base_url)
+  def ticket_url(event), do: WixParser.ticket_url(event, @event_page_base_url)
 
   @impl true
-  def details_url(_event), do: "https://www.thecameron.com/"
+  def details_url(event), do: WixParser.event_page_url(event, @event_page_base_url)
 end

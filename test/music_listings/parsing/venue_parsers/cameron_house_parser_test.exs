@@ -111,8 +111,11 @@ defmodule MusicListings.Parsing.VenueParsers.CameronHouseParserTest do
   end
 
   describe "details_url/1" do
+    # This venue publishes its event pages under /events, not the /event-details
+    # that Wix defaults to
     test "returns the event details url", %{event: event} do
-      assert "https://www.thecameron.com/" == CameronHouseParser.details_url(event)
+      assert "https://www.thecameron.com/events/the-dunlop-brothers-2024-07-23-21-00" ==
+               CameronHouseParser.details_url(event)
     end
   end
 end

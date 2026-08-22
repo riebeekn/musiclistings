@@ -10,6 +10,7 @@ defmodule MusicListings.Parsing.VenueParsers.RedwoodTheatreParser do
   alias MusicListings.Parsing.VenueParsers.BaseParsers.WixParser
 
   @base_url "https://www.theredwoodtheatre.com"
+  @event_page_base_url "#{@base_url}/event-details"
 
   @impl true
   def source_url, do: "#{@base_url}/"
@@ -66,8 +67,8 @@ defmodule MusicListings.Parsing.VenueParsers.RedwoodTheatreParser do
   defdelegate age_restriction(event), to: WixParser
 
   @impl true
-  def ticket_url(event), do: WixParser.ticket_url(event, @base_url)
+  def ticket_url(event), do: WixParser.ticket_url(event, @event_page_base_url)
 
   @impl true
-  def details_url(event), do: WixParser.event_page_url(event, @base_url)
+  def details_url(event), do: WixParser.event_page_url(event, @event_page_base_url)
 end

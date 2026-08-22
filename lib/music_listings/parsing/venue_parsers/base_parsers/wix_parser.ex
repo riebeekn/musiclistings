@@ -68,22 +68,23 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.WixParser do
     :unknown
   end
 
-  def ticket_url(event, base_url) do
+  def ticket_url(event, event_page_base_url) do
     case registration_type(event) do
       @external_registration -> event["registration"]["external"]["registration"]
-      @wix_ticketing_registration -> event_page_url(event, base_url)
+      @wix_ticketing_registration -> event_page_url(event, event_page_base_url)
       _nothing_to_buy -> nil
     end
   end
 
   # Each event has a page of its own on the venue's site, which is where a Wix
-  # ticketed event is bought.  The event carries no absolute url of its own, so
-  # the venue's base url has to be supplied.
-  def event_page_url(event, base_url) do
+  # ticketed event is bought.  The event carries no absolute url of its own, and
+  # the route the venue publishes those pages under is theirs to choose - some
+  # use /events, others /event-details - so the caller supplies the whole base.
+  def event_page_url(event, event_page_base_url) do
     case event["slug"] do
       nil -> nil
       "" -> nil
-      slug -> "#{base_url}/event-details/#{slug}"
+      slug -> "#{event_page_base_url}/#{slug}"
     end
   end
 
