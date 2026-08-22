@@ -93,7 +93,7 @@ defmodule MusicListings.MixProject do
       # GHSA-vq52-99r9-h5pw. hackney 1.25.0 needs certifi ~> 2.15.0 and parse_trans
       # exactly 3.4.1, so pin both to keep hackney on 1.25.0.
       # Remove when tzdata allows hackney 4.x (or we move off tzdata).
-      {:certifi, "~> 2.15.0", override: true},
+      {:certifi, "~> 2.17.0", override: true},
       {:parse_trans, "3.4.1", override: true},
       {:scrivener_ecto, "~> 3.0"},
       {:redirect, "~> 0.4.0"},
