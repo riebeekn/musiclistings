@@ -103,7 +103,38 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParserTest do
   end
 
   describe "ticket_url/1" do
-    test "returns the event ticket url", %{event: event} do
+    test "returns the ticket url from the event's own page", %{event: event} do
+      assert "https://link.dice.fm/J8a9ff947024" == GreatHallParser.ticket_url(event)
+    end
+
+    test "unwraps a link protected vendor url", %{index_html: index_html} do
+      event = event_with_title(index_html, "Nada Surf")
+
+      assert "https://www.ticketmaster.ca/event/10006490C59A1D0A" ==
+               GreatHallParser.ticket_url(event)
+    end
+
+    test "returns nil when the event page carries no ticket button", %{index_html: index_html} do
+      event = event_with_title(index_html, "Casey MQ")
+
+      assert nil == GreatHallParser.ticket_url(event)
+    end
+
+    test "returns nil when the event page can't be fetched", %{index_html: index_html} do
+      event = event_with_title(index_html, "Kate Nash")
+
+      assert nil == GreatHallParser.ticket_url(event)
+    end
+
+    # Nothing to fetch when the calendar renders the Info button with no link
+    test "returns nil when the calendar links no event page" do
+      event =
+        "#{File.cwd!()}/test/data/great_hall/single_event_no_details_url.html"
+        |> Path.expand()
+        |> File.read!()
+        |> GreatHallParser.events()
+        |> List.first()
+
       assert nil == GreatHallParser.ticket_url(event)
     end
   end
@@ -113,5 +144,14 @@ defmodule MusicListings.Parsing.VenueParsers.GreatHallParserTest do
       assert "https://thegreathall.ca/event/brass-camel-featuring-a-short-walk-to-pluto/" ==
                GreatHallParser.details_url(event)
     end
+  end
+
+  # The vendor link only exists on an event's own page - these pull specific
+  # events out of the calendar fixture, each of which maps to a different event
+  # page fixture in MusicListings.HttpClient.Test.
+  defp event_with_title(index_html, title) do
+    index_html
+    |> GreatHallParser.events()
+    |> Enum.find(&(GreatHallParser.event_title(&1) == title))
   end
 end

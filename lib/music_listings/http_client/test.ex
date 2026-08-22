@@ -81,6 +81,14 @@ defmodule MusicListings.HttpClient.Test do
       {"liveatthebowl.com/heroes-a-video-game-symphony",
        "bowl/heroes-a-video-game-symphony.html"},
       {"liveatthebowl.com/interpol", "bowl/interpol.html"},
+      # The Great Hall - the calendar carries no vendor link at all, so each
+      # fixture stands for a different shape of an event's own page.  As above,
+      # the calendar's other events are left unmatched on purpose so the
+      # "couldn't reach the page" path is exercised too.
+      {"thegreathall.ca/event/brass-camel-featuring-a-short-walk-to-pluto",
+       "great_hall/detail.html"},
+      {"thegreathall.ca/event/casey-mq", "great_hall/detail_no_button.html"},
+      {"thegreathall.ca/event/nada-surf", "great_hall/detail_link_protect.html"},
       # Story — token endpoint is fetched first, then the events API is called
       # with the token it yields.
       {"storytoronto.ca/_api/v1/access-tokens", "story/access_tokens.json"},
