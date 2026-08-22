@@ -117,7 +117,7 @@ defmodule MusicListings.Parsing.VenueParsers.PistonParserTest do
   end
 
   describe "ticket_url/1" do
-    test "returns the event ticket url", %{event: event} do
+    test "ignores non ticket vendor links in the excerpt", %{event: event} do
       assert nil == PistonParser.ticket_url(event)
     end
   end

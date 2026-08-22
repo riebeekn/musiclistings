@@ -57,16 +57,116 @@ defmodule MusicListings.Parsing.ParseHelpers do
     |> String.replace("\\/", "/")
   end
 
+  # Entities we deliberately fold to an ASCII equivalent rather than decode
+  # faithfully, so titles sort, search and compare cleanly.  These run before
+  # the generic decoder below, which would otherwise yield the real code point
+  # (ie. &#8217; would become a curly apostrophe instead of a straight one).
+  @ascii_entities %{
+    "#8217" => "'",
+    "rsquo" => "'",
+    "#8216" => "'",
+    "lsquo" => "'",
+    "#8220" => "\"",
+    "ldquo" => "\"",
+    "#8221" => "\"",
+    "rdquo" => "\"",
+    "#8211" => "-",
+    "ndash" => "-",
+    "#8212" => "-",
+    "mdash" => "-",
+    "#8230" => "...",
+    "hellip" => "...",
+    "#038" => "&",
+    "amp" => "&"
+  }
+
+  # Named entities the numeric decoder can't handle on its own.  Unlike the
+  # table above these decode faithfully - an accent carries meaning, so
+  # "Caf&eacute;" should read "Café" rather than "Cafe".
+  @named_entities %{
+    "nbsp" => " ",
+    "lt" => "<",
+    "gt" => ">",
+    "quot" => "\"",
+    "apos" => "'",
+    "bull" => "•",
+    "copy" => "©",
+    "reg" => "®",
+    "middot" => "·",
+    "raquo" => "»",
+    "laquo" => "«",
+    "rarr" => "→",
+    "times" => "×",
+    "semi" => ";",
+    "deg" => "°",
+    "agrave" => "à",
+    "aacute" => "á",
+    "auml" => "ä",
+    "ccedil" => "ç",
+    "egrave" => "è",
+    "eacute" => "é",
+    "ecirc" => "ê",
+    "iacute" => "í",
+    "ntilde" => "ñ",
+    "oacute" => "ó",
+    "ouml" => "ö",
+    "uacute" => "ú",
+    "uuml" => "ü"
+  }
+
+  # Code points that are technically whitespace but read as noise in a title:
+  # non breaking space, zero width space and byte order mark.
+  @invisible_code_points [0xA0, 0x200B, 0xFEFF]
+
   @spec fix_encoding(String.t()) :: String.t()
   def fix_encoding(content) do
     content
-    |> String.replace("&#8217;", "'")
-    |> String.replace("&#8220;", "\"")
-    |> String.replace("&#8221;", "\"")
-    |> String.replace("&#038;", "&")
-    |> String.replace("&amp;", "&")
-    |> String.replace("&#8211;", "-")
     |> decode_unicode_escapes()
+    |> decode_html_entities()
+  end
+
+  # Venue feeds arrive with entities encoded to varying depths - a title can
+  # carry a bare &nbsp;, a numeric &#160;, or an &amp;nbsp; that only becomes an
+  # entity once the outer &amp; is decoded.  Decoding repeatedly settles all
+  # three, and stopping as soon as a pass changes nothing keeps a title that
+  # legitimately contains "&" from looping.
+  defp decode_html_entities(content) do
+    case decode_entities_once(content) do
+      ^content -> content
+      decoded -> decode_html_entities(decoded)
+    end
+  end
+
+  defp decode_entities_once(content) do
+    Regex.replace(
+      ~r/&(#[xX]?[0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]*);/,
+      content,
+      fn match, entity -> decode_entity(entity) || match end
+    )
+  end
+
+  defp decode_entity(entity) do
+    Map.get(@ascii_entities, entity) || Map.get(@named_entities, entity) ||
+      decode_numeric_entity(entity)
+  end
+
+  defp decode_numeric_entity("#x" <> hex), do: hex |> parse_int(16) |> to_code_point()
+  defp decode_numeric_entity("#X" <> hex), do: hex |> parse_int(16) |> to_code_point()
+  defp decode_numeric_entity("#" <> digits), do: digits |> parse_int(10) |> to_code_point()
+  defp decode_numeric_entity(_named), do: nil
+
+  defp parse_int(string, base) do
+    case Integer.parse(string, base) do
+      {integer, ""} -> integer
+      _not_a_number -> nil
+    end
+  end
+
+  defp to_code_point(nil), do: nil
+  defp to_code_point(code_point) when code_point in @invisible_code_points, do: " "
+
+  defp to_code_point(code_point) do
+    if code_point in 0..0x10FFFF, do: List.to_string([code_point])
   end
 
   defp decode_unicode_escapes(content) do

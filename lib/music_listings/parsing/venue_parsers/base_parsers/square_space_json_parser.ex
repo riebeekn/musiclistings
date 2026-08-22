@@ -9,6 +9,19 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.SquareSpaceJsonParser d
   alias MusicListings.Parsing.Price
   alias MusicListingsUtilities.DateHelpers
 
+  # Ticket vendors seen linked from SquareSpace excerpts.  Matched as
+  # substrings, so `eventbrite.` covers both the .com and .ca domains.
+  @ticket_hosts [
+    "eventbrite.",
+    "ticketweb.",
+    "tixr.com",
+    "dice.fm",
+    "showclix.com",
+    "admitone.com",
+    "posh.vip",
+    "seetickets."
+  ]
+
   def source_url(base_url, collection_id, crumb) do
     today = DateHelpers.today()
 
@@ -79,11 +92,31 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.SquareSpaceJsonParser d
     :unknown
   end
 
-  def ticket_url(_event) do
-    nil
+  # The SquareSpace item has no ticket field - the vendor link, when there is
+  # one, is an anchor inside the `excerpt` HTML.  Most excerpts that carry a
+  # link point at the performer's Instagram instead, so a link only counts as a
+  # ticket link when it points at a known vendor.
+  def ticket_url(event) do
+    event["excerpt"]
+    |> links()
+    |> Enum.find(&ticket_link?/1)
+    |> ParseHelpers.sanitize_ticket_url()
   end
 
   def details_url(event, base_url) do
     "#{base_url}/events/#{event["urlId"]}"
+  end
+
+  defp links(nil), do: []
+
+  defp links(excerpt) do
+    ~r/<a[^>]*href="([^"]+)"/
+    |> Regex.scan(excerpt)
+    |> Enum.map(fn [_match, href] -> ParseHelpers.fix_encoding(href) end)
+    |> Enum.filter(&String.starts_with?(&1, "http"))
+  end
+
+  defp ticket_link?(url) do
+    Enum.any?(@ticket_hosts, &String.contains?(url, &1))
   end
 end

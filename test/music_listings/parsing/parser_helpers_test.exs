@@ -166,6 +166,48 @@ defmodule MusicListings.Parsing.ParserHelpersTest do
     end
   end
 
+  describe "fix_encoding/1" do
+    test "decodes named entities" do
+      assert "Dayfields (and the GALs)" ==
+               ParseHelpers.fix_encoding("Dayfields&nbsp;(and the GALs)")
+
+      assert "Rima & The Bees" == ParseHelpers.fix_encoding("Rima &amp; The Bees")
+      assert "Café du Nord" == ParseHelpers.fix_encoding("Caf&eacute; du Nord")
+    end
+
+    test "decodes decimal and hexadecimal entities" do
+      assert "Beyoncé" == ParseHelpers.fix_encoding("Beyonc&#233;")
+      assert "Sold 'Out'" == ParseHelpers.fix_encoding("Sold &#x27;Out&#x27;")
+    end
+
+    test "folds smart punctuation to its ascii equivalent" do
+      assert "Bob Marley's Legend" == ParseHelpers.fix_encoding("Bob Marley&#8217;s Legend")
+
+      assert "Elevation - The U2 Show" ==
+               ParseHelpers.fix_encoding("Elevation &#8211; The U2 Show")
+
+      assert "Awake & Dreaming" == ParseHelpers.fix_encoding("Awake &#038; Dreaming")
+    end
+
+    test "normalizes invisible code points to a space" do
+      assert "zero width" == ParseHelpers.fix_encoding("zero&#8203;width")
+      assert "no break" == ParseHelpers.fix_encoding("no&#160;break")
+    end
+
+    test "decodes entities that are themselves encoded" do
+      assert "A & B" == ParseHelpers.fix_encoding("A &amp;amp; B")
+    end
+
+    test "decodes unicode escapes" do
+      assert "école" == ParseHelpers.fix_encoding("\\u00e9cole")
+    end
+
+    test "leaves a bare ampersand and unknown entities alone" do
+      assert "Blues & Burlesque" == ParseHelpers.fix_encoding("Blues & Burlesque")
+      assert "Bare &notanentity; stays" == ParseHelpers.fix_encoding("Bare &notanentity; stays")
+    end
+  end
+
   describe "sanitize_ticket_url/1" do
     test "returns nil for nil" do
       assert nil == ParseHelpers.sanitize_ticket_url(nil)

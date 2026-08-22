@@ -118,7 +118,8 @@ defmodule MusicListings.Parsing.VenueParsers.PaintedLadyParserTest do
 
   describe "ticket_url/1" do
     test "returns the event ticket url", %{event: event} do
-      assert nil == PaintedLadyParser.ticket_url(event)
+      assert "https://www.eventbrite.com/e/1989430549327?aff=oddtdtcreator" ==
+               PaintedLadyParser.ticket_url(event)
     end
   end
 
