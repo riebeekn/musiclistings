@@ -156,10 +156,112 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.CarbonhouseParser do
   end
 
   def ticket_url(event) do
-    Selectors.url(event, css(".tickets"))
+    event
+    |> Selectors.url(css(".tickets"))
+    |> with_scheme()
+  end
+
+  # A run of shows sells each night separately, so the listing has no single
+  # link to give: it renders "Buy Tickets" as an unclickable span (class
+  # `no_ticket_link`) and puts a link per night on the event's own page.  Note
+  # Selectors.url/2 reads an href off whatever it matches, so that span yields
+  # nil rather than an error - the dates simply arrive with no ticket url.
+  def ticket_url(event, date) do
+    case ticket_url(event) do
+      nil -> showing_ticket_url(event, date)
+      listed_url -> listed_url
+    end
   end
 
   def details_url(event) do
     Selectors.url(event, css(".more"))
+  end
+
+  defp showing_ticket_url(event, date) do
+    event
+    |> showings()
+    |> Enum.find_value(fn {showing_date, url} ->
+      if Date.compare(showing_date, date) == :eq, do: url
+    end)
+  end
+
+  # The event page is fetched once per event and memoized: ticket_url/2 is
+  # called once per date (see Crawler.EventParser), so a run of shows costs a
+  # single request between all of its nights.
+  defp showings(event) do
+    details_url = details_url(event)
+    cache_key = {:carbonhouse_showings, details_url}
+
+    case Process.get(cache_key) do
+      nil ->
+        showings = fetch_showings(details_url)
+        Process.put(cache_key, showings)
+        showings
+
+      cached ->
+        cached
+    end
+  end
+
+  defp fetch_showings(details_url) when is_binary(details_url) and details_url != "" do
+    case HttpClient.get(details_url, [], max_retries: 1) do
+      {:ok, %HttpClient.Response{status: 200, body: body}} -> parse_showings(body)
+      _error -> []
+    end
+  end
+
+  defp fetch_showings(_no_details_url), do: []
+
+  defp parse_showings(body) do
+    case body |> ParseHelpers.clean_html() |> Meeseeks.parse() do
+      %Meeseeks.Document{} = document ->
+        document
+        |> Selectors.all_matches(css(".event_showings .listItem"))
+        |> Enum.flat_map(&showing/1)
+
+      _unparseable ->
+        []
+    end
+  end
+
+  defp showing(listing) do
+    with %Date{} = date <- showing_date(listing),
+         url when is_binary(url) <- listing |> Selectors.url(css(".tickets")) |> with_scheme() do
+      [{date, url}]
+    else
+      _no_showing -> []
+    end
+  end
+
+  # A vendor link is occasionally entered with the scheme left off, ie.
+  # "ticketmaster.ca/..." - stored as is it would resolve against our own domain
+  # rather than the vendor's.
+  defp with_scheme(nil), do: nil
+  defp with_scheme("http://" <> _rest = url), do: url
+  defp with_scheme("https://" <> _rest = url), do: url
+  defp with_scheme("//" <> rest), do: "https://#{rest}"
+  defp with_scheme("/" <> _rest = path), do: path
+
+  defp with_scheme(url) do
+    if url |> String.split("/") |> List.first() |> String.contains?(".") do
+      "https://#{url}"
+    else
+      url
+    end
+  end
+
+  defp showing_date(listing) do
+    day_string = Selectors.text(listing, css(".m-date__day"))
+    month_string = Selectors.text(listing, css(".m-date__month"))
+    year_string = Selectors.text(listing, css(".m-date__year"))
+
+    case ParseHelpers.build_date_from_year_month_day_strings(
+           year_string,
+           month_string,
+           day_string
+         ) do
+      {:ok, date} -> date
+      {:error, _reason} -> nil
+    end
   end
 end

@@ -49,6 +49,11 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParser do
   @impl true
   defdelegate ticket_url(event), to: CarbonhouseParser
 
+  # A run of shows lists no ticket link at all - each night sells separately,
+  # from the event's own page.
+  @impl true
+  defdelegate ticket_url(event, date), to: CarbonhouseParser
+
   @impl true
   defdelegate details_url(event), to: CarbonhouseParser
 end

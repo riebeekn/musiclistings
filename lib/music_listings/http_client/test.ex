@@ -106,6 +106,10 @@ defmodule MusicListings.HttpClient.Test do
       # each fixture stands for a different shape of an event's own page.  As
       # above, the listing's other events are left unmatched on purpose so the
       # "couldn't reach the page" fallbacks are exercised too.
+      # HISTORY - a run of shows lists no ticket link of its own, so each night's
+      # link is read off the event's own page.  Deliberately no catch-all: the
+      # listing's single date events must not fetch anything.
+      {"historytoronto.com/events/detail/isoxo", "history/detail_showings.html"},
       {"bsmt254.com/event/rhythm-n-bingo", "bsmt254/detail.html"},
       {"bsmt254.com/event/not-a-bbq-x-hit-play", "bsmt254/detail_no_ticket_link.html"},
       {"bsmt254.com/event/project-nowhere-night-1", "bsmt254/detail_pwyc_price.html"},

@@ -123,6 +123,47 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParserTest do
       assert "https://www.ticketmaster.ca/event/10006099F25B4189" ==
                HistoryParser.ticket_url(event)
     end
+
+    # A run of shows sells each night separately, so the listing renders its
+    # "Buy Tickets" as an unclickable span
+    test "returns nil when the listing links no tickets" do
+      assert nil == HistoryParser.ticket_url(multi_date_event())
+    end
+  end
+
+  describe "ticket_url/2" do
+    test "returns the listed url without reading the event page", %{event: event} do
+      assert "https://www.ticketmaster.ca/event/10006099F25B4189" ==
+               HistoryParser.ticket_url(event, ~D[2024-07-19])
+    end
+
+    test "returns the link for the night being asked about" do
+      event = multi_date_event()
+
+      assert "https://www.ticketmaster.ca/isoxo-toronto-ontario-08-28-2026/event/100064ACE7F975D9" ==
+               HistoryParser.ticket_url(event, ~D[2026-08-28])
+    end
+
+    # The venue enters the odd vendor link with the scheme left off, which would
+    # otherwise resolve against our own domain
+    test "adds the missing scheme to a link entered without one" do
+      event = multi_date_event()
+
+      assert "https://ticketmaster.ca/isoxo-toronto-ontario-08-29-2026/event/100064ACE7FC75DF" ==
+               HistoryParser.ticket_url(event, ~D[2026-08-29])
+    end
+
+    test "returns nil for a date the event page doesn't list" do
+      assert nil == HistoryParser.ticket_url(multi_date_event(), ~D[2026-08-30])
+    end
+  end
+
+  defp multi_date_event do
+    "#{File.cwd!()}/test/data/history/single_event_multi_date.html"
+    |> Path.expand()
+    |> File.read!()
+    |> HistoryParser.events()
+    |> List.first()
   end
 
   describe "details_url/1" do
