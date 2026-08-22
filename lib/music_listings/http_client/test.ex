@@ -94,6 +94,14 @@ defmodule MusicListings.HttpClient.Test do
       # that page comes in.  The rest are left unmatched on purpose.
       {"elmocambo.com/event/sousapalooza-day-1", "el_mocambo/detail.html"},
       {"elmocambo.com/event/high-flyer-release-show", "el_mocambo/detail_no_ticket_link.html"},
+      # The Phoenix - the index carries neither the vendor link nor the price,
+      # so each fixture stands for a different shape of an event's own page.
+      # ladytron is deliberately left unmatched to exercise the "couldn't reach
+      # the page" fallbacks.
+      {"thephoenixconcerttheatre.com/events/event/tinariwen", "phoenix/detail.html"},
+      {"thephoenixconcerttheatre.com/events/event/the-volunteers",
+       "phoenix/detail_and_up_price.html"},
+      {"thephoenixconcerttheatre.com/events/event/homixide-gang", "phoenix/detail_no_price.html"},
       # Story — token endpoint is fetched first, then the events API is called
       # with the token it yields.
       {"storytoronto.ca/_api/v1/access-tokens", "story/access_tokens.json"},

@@ -89,7 +89,28 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParserTest do
   end
 
   describe "price/1" do
-    test "returns the event price", %{event: event} do
+    test "returns the price from the event's own page", %{index_html: index_html} do
+      event = event_with_title(index_html, "Tinariwen")
+
+      assert %Price{format: :variable, lo: Decimal.new("40"), hi: Decimal.new("50")} ==
+               PhoenixParser.price(event)
+    end
+
+    # "$19 and up" is the venue's way of writing "$19+"
+    test "reads an open ended price as variable", %{index_html: index_html} do
+      event = event_with_title(index_html, "The Volunteers")
+
+      assert %Price{format: :variable, lo: Decimal.new("19"), hi: Decimal.new("19")} ==
+               PhoenixParser.price(event)
+    end
+
+    test "returns unknown when the event page lists no price", %{index_html: index_html} do
+      event = event_with_title(index_html, "Homixide Gang")
+
+      assert %Price{format: :unknown, lo: nil, hi: nil} == PhoenixParser.price(event)
+    end
+
+    test "returns unknown when the event page can't be fetched", %{event: event} do
       assert %Price{format: :unknown, lo: nil, hi: nil} ==
                PhoenixParser.price(event)
     end
@@ -102,7 +123,21 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParserTest do
   end
 
   describe "ticket_url/1" do
-    test "returns the event ticket url", %{event: event} do
+    test "returns the ticket url from the event's own page", %{index_html: index_html} do
+      event = event_with_title(index_html, "Tinariwen")
+
+      assert "https://www.eventbrite.ca/e/1985722643882?aff=oddtdtcreator" ==
+               PhoenixParser.ticket_url(event)
+    end
+
+    test "returns the ticket url even when no price is listed", %{index_html: index_html} do
+      event = event_with_title(index_html, "Homixide Gang")
+
+      assert "https://www.ticketmaster.ca/event/10006490C59A1D0A" ==
+               PhoenixParser.ticket_url(event)
+    end
+
+    test "returns nil when the event page can't be fetched", %{event: event} do
       assert nil == PhoenixParser.ticket_url(event)
     end
   end
@@ -112,5 +147,14 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParserTest do
       assert "https://thephoenixconcerttheatre.com/events/event/ladytron/" ==
                PhoenixParser.details_url(event)
     end
+  end
+
+  # The vendor link and the price only exist on an event's own page - these pull
+  # specific events out of the index fixture, each of which maps to a different
+  # event page fixture in MusicListings.HttpClient.Test.
+  defp event_with_title(index_html, title) do
+    index_html
+    |> PhoenixParser.events()
+    |> Enum.find(&(PhoenixParser.event_title(&1) == title))
   end
 end

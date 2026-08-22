@@ -12,6 +12,13 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParser do
   alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.Selectors
 
+  @ticket_link_selector "a.btn-event[href]"
+  @price_selector ".ticket-prices .price"
+
+  # The venue writes an open ended price as "$19 and up", which Price.new/1
+  # reads as a fixed $19 - it only recognizes the trailing plus form.
+  @open_ended_price_regex ~r/\s*and up\b/i
+
   @impl true
   def source_url, do: "https://thephoenixconcerttheatre.com/events/"
 
@@ -88,8 +95,11 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParser do
   end
 
   @impl true
-  def price(_event) do
-    Price.unknown()
+  def price(event) do
+    case detail_info(event) do
+      %{price: %Price{} = price} -> price
+      _no_price -> Price.unknown()
+    end
   end
 
   @impl true
@@ -100,8 +110,71 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParser do
   end
 
   @impl true
-  def ticket_url(_event) do
-    nil
+  def ticket_url(event) do
+    case detail_info(event) do
+      %{ticket_url: ticket_url} -> ticket_url
+      _no_ticket_url -> nil
+    end
+  end
+
+  # The event page is fetched once per event and memoized: every callback for a
+  # given event runs in the same task process (see Crawler.EventParser), so the
+  # ticket url and the price cost a single request between them.
+  defp detail_info(event) do
+    details_url = details_url(event)
+    cache_key = {:phoenix_detail, details_url}
+
+    case Process.get(cache_key) do
+      nil ->
+        info = fetch_detail_info(details_url)
+        Process.put(cache_key, info)
+        info
+
+      cached ->
+        cached
+    end
+  end
+
+  # Only an enrichment - the title, date, time and age all come from the index -
+  # so one retry and no more.
+  defp fetch_detail_info(details_url) when is_binary(details_url) and details_url != "" do
+    case HttpClient.get(details_url, [], max_retries: 1) do
+      {:ok, %HttpClient.Response{status: 200, body: body}} -> extract_detail_info(body)
+      _error -> :error
+    end
+  end
+
+  defp fetch_detail_info(_no_details_url), do: :error
+
+  defp extract_detail_info(body) do
+    case Meeseeks.parse(body) do
+      %Meeseeks.Document{} = document ->
+        %{ticket_url: extract_ticket_url(document), price: extract_price(document)}
+
+      _unparseable ->
+        :error
+    end
+  end
+
+  defp extract_ticket_url(document) do
+    document
+    |> Selectors.url(css(@ticket_link_selector))
+    |> ParseHelpers.sanitize_ticket_url()
+  end
+
+  defp extract_price(document) do
+    document
+    |> Selectors.match_one(css(@price_selector))
+    |> case do
+      nil ->
+        Price.unknown()
+
+      price ->
+        price
+        |> Selectors.text()
+        |> String.replace(@open_ended_price_regex, "+")
+        |> Price.new()
+    end
   end
 
   @impl true
