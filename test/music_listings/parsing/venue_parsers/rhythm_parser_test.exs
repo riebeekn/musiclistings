@@ -85,18 +85,30 @@ defmodule MusicListings.Parsing.VenueParsers.RhythmParserTest do
 
   describe "price/1" do
     test "returns the event price", %{event: event} do
-      assert %Price{format: :unknown, hi: nil, lo: nil} == RhythmParser.price(event)
+      assert %Price{format: :fixed, hi: Decimal.new("30"), lo: Decimal.new("30")} ==
+               RhythmParser.price(event)
     end
   end
 
   describe "age_restriction/1" do
     test "returns the event age restriction", %{event: event} do
-      assert :unknown == RhythmParser.age_restriction(event)
+      assert :nineteen_plus == RhythmParser.age_restriction(event)
     end
   end
 
   describe "ticket_url/1" do
-    test "returns the event ticket url", %{event: event} do
+    test "returns nil when the promoter linked nothing", %{event: event} do
+      # RA sells this one itself, and its ticket widget can't be linked to
+      assert nil == RhythmParser.ticket_url(event)
+    end
+
+    test "returns nil when no promotional link is a ticket link", %{index_json: index_json} do
+      # This event's only promotional link is an Instagram profile
+      event =
+        index_json
+        |> RhythmParser.events()
+        |> Enum.find(&(&1["id"] == "2476759"))
+
       assert nil == RhythmParser.ticket_url(event)
     end
   end

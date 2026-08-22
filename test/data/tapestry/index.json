@@ -8,6 +8,9 @@
           "date": "2026-07-18T00:00:00.000",
           "startTime": "2026-07-18T21:00:00.000",
           "contentUrl": "/events/2478710",
+          "cost": "",
+          "minimumAge": null,
+          "promotionalLinks": [],
           "venue": {
             "id": "208391",
             "name": "Tapestry"

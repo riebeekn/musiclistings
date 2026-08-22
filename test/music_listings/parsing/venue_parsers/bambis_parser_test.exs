@@ -85,18 +85,20 @@ defmodule MusicListings.Parsing.VenueParsers.BambisParserTest do
 
   describe "price/1" do
     test "returns the event price", %{event: event} do
-      assert %Price{format: :unknown, hi: nil, lo: nil} == BambisParser.price(event)
+      assert %Price{format: :range, hi: Decimal.new("20"), lo: Decimal.new("10")} ==
+               BambisParser.price(event)
     end
   end
 
   describe "age_restriction/1" do
     test "returns the event age restriction", %{event: event} do
-      assert :unknown == BambisParser.age_restriction(event)
+      assert :nineteen_plus == BambisParser.age_restriction(event)
     end
   end
 
   describe "ticket_url/1" do
-    test "returns the event ticket url", %{event: event} do
+    test "returns nil when the promoter linked nothing", %{event: event} do
+      # RA sells this one itself, and its ticket widget can't be linked to
       assert nil == BambisParser.ticket_url(event)
     end
   end

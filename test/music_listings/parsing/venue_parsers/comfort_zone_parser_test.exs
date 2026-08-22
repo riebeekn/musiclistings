@@ -85,19 +85,21 @@ defmodule MusicListings.Parsing.VenueParsers.ComfortZoneParserTest do
 
   describe "price/1" do
     test "returns the event price", %{event: event} do
-      assert %Price{format: :unknown, hi: nil, lo: nil} == ComfortZoneParser.price(event)
+      assert %Price{format: :fixed, hi: Decimal.new("25"), lo: Decimal.new("25")} ==
+               ComfortZoneParser.price(event)
     end
   end
 
   describe "age_restriction/1" do
     test "returns the event age restriction", %{event: event} do
-      assert :unknown == ComfortZoneParser.age_restriction(event)
+      assert :nineteen_plus == ComfortZoneParser.age_restriction(event)
     end
   end
 
   describe "ticket_url/1" do
-    test "returns the event ticket url", %{event: event} do
-      assert nil == ComfortZoneParser.ticket_url(event)
+    test "returns the promoter's external vendor link", %{event: event} do
+      assert "https://www.ticketgateway.com/event/view/the-comfort-zone-present----stacey-pullen---" ==
+               ComfortZoneParser.ticket_url(event)
     end
   end
 

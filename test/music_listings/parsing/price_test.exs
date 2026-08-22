@@ -49,5 +49,23 @@ defmodule MusicListings.Parsing.PriceTest do
       assert %Price{lo: Decimal.new("40.00"), hi: Decimal.new("40.00"), format: :fixed} ==
                Price.new("$40.00 CAD")
     end
+
+    test "treats a list of tier prices as a range from cheapest to dearest" do
+      assert %Price{lo: Decimal.new("10"), hi: Decimal.new("20"), format: :range} ==
+               Price.new("$10, $15, $20")
+
+      # Out of order, and the bounds still come from the amounts themselves
+      assert %Price{lo: Decimal.new("15"), hi: Decimal.new("40"), format: :range} ==
+               Price.new("$40, $15, $25")
+
+      assert %Price{lo: Decimal.new("20"), hi: Decimal.new("20"), format: :fixed} ==
+               Price.new("$20, $20")
+    end
+
+    test "returns unknown rather than raising on a price it can't read" do
+      # A raise here is rescued as a parse error and drops the whole event
+      assert %Price{lo: nil, hi: nil, format: :unknown} == Price.new("TBA")
+      assert %Price{lo: nil, hi: nil, format: :unknown} == Price.new("call the venue")
+    end
   end
 end

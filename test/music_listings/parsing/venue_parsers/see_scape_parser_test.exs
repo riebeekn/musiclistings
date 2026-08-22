@@ -85,19 +85,20 @@ defmodule MusicListings.Parsing.VenueParsers.SeeScapeParserTest do
 
   describe "price/1" do
     test "returns the event price", %{event: event} do
-      assert %Price{format: :unknown, hi: nil, lo: nil} == SeeScapeParser.price(event)
+      assert %Price{format: :fixed, hi: Decimal.new("20"), lo: Decimal.new("20")} ==
+               SeeScapeParser.price(event)
     end
   end
 
   describe "age_restriction/1" do
     test "returns the event age restriction", %{event: event} do
-      assert :unknown == SeeScapeParser.age_restriction(event)
+      assert :nineteen_plus == SeeScapeParser.age_restriction(event)
     end
   end
 
   describe "ticket_url/1" do
-    test "returns the event ticket url", %{event: event} do
-      assert nil == SeeScapeParser.ticket_url(event)
+    test "returns the promoter's ticket link even when its title is decorated", %{event: event} do
+      assert "https://752cxc.bloomtickets.ca/event/2208" == SeeScapeParser.ticket_url(event)
     end
   end
 

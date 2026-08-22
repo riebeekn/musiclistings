@@ -1,1 +1,88 @@
-{"data":{"listing":{"data":[{"contentUrl":"/events/2474787","date":"2026-07-17T00:00:00.000","id":"2474787","startTime":"2026-07-17T23:59:00.000","title":"404: ANSBRO","venue":{"id":"4665","name":"The Comfort Zone"}},{"contentUrl":"/events/2474805","date":"2026-07-31T00:00:00.000","id":"2474805","startTime":"2026-07-31T23:59:00.000","title":"404: SHOGUN","venue":{"id":"4665","name":"The Comfort Zone"}},{"contentUrl":"/events/2474816","date":"2026-08-28T00:00:00.000","id":"2474816","startTime":"2026-08-28T23:59:00.000","title":"404: BET ON system","venue":{"id":"4665","name":"The Comfort Zone"}},{"contentUrl":"/events/2474820","date":"2026-10-30T00:00:00.000","id":"2474820","startTime":"2026-10-30T23:59:00.000","title":"404: BET ON system","venue":{"id":"4665","name":"The Comfort Zone"}},{"contentUrl":"/events/2474826","date":"2026-11-27T00:00:00.000","id":"2474826","startTime":"2026-11-27T23:59:00.000","title":"404: BET ON system","venue":{"id":"4665","name":"The Comfort Zone"}}],"totalResults":5}}}
+{
+  "data": {
+    "listing": {
+      "data": [
+        {
+          "id": "2474787",
+          "title": "404: ANSBRO",
+          "date": "2026-07-17T00:00:00.000",
+          "startTime": "2026-07-17T23:59:00.000",
+          "contentUrl": "/events/2474787",
+          "cost": "25",
+          "minimumAge": 19,
+          "promotionalLinks": [
+            {
+              "title": "Tickets",
+              "url": "https://www.ticketgateway.com/event/view/the-comfort-zone-present----stacey-pullen---"
+            },
+            {
+              "title": "Website",
+              "url": "https://comfortzonetoronto.ca"
+            }
+          ],
+          "venue": {
+            "id": "4665",
+            "name": "The Comfort Zone"
+          }
+        },
+        {
+          "id": "2474805",
+          "title": "404: SHOGUN",
+          "date": "2026-07-31T00:00:00.000",
+          "startTime": "2026-07-31T23:59:00.000",
+          "contentUrl": "/events/2474805",
+          "cost": "20",
+          "minimumAge": 19,
+          "promotionalLinks": [],
+          "venue": {
+            "id": "4665",
+            "name": "The Comfort Zone"
+          }
+        },
+        {
+          "id": "2474816",
+          "title": "404: BET ON system",
+          "date": "2026-08-28T00:00:00.000",
+          "startTime": "2026-08-28T23:59:00.000",
+          "contentUrl": "/events/2474816",
+          "cost": "20",
+          "minimumAge": 19,
+          "promotionalLinks": [],
+          "venue": {
+            "id": "4665",
+            "name": "The Comfort Zone"
+          }
+        },
+        {
+          "id": "2474820",
+          "title": "404: BET ON system",
+          "date": "2026-10-30T00:00:00.000",
+          "startTime": "2026-10-30T23:59:00.000",
+          "contentUrl": "/events/2474820",
+          "cost": "20",
+          "minimumAge": 19,
+          "promotionalLinks": [],
+          "venue": {
+            "id": "4665",
+            "name": "The Comfort Zone"
+          }
+        },
+        {
+          "id": "2474826",
+          "title": "404: BET ON system",
+          "date": "2026-11-27T00:00:00.000",
+          "startTime": "2026-11-27T23:59:00.000",
+          "contentUrl": "/events/2474826",
+          "cost": "20",
+          "minimumAge": 19,
+          "promotionalLinks": [],
+          "venue": {
+            "id": "4665",
+            "name": "The Comfort Zone"
+          }
+        }
+      ],
+      "totalResults": 5
+    }
+  }
+}

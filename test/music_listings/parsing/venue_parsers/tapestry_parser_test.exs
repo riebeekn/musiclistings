@@ -96,7 +96,7 @@ defmodule MusicListings.Parsing.VenueParsers.TapestryParserTest do
   end
 
   describe "ticket_url/1" do
-    test "returns the event ticket url", %{event: event} do
+    test "returns nil when no ticket link", %{event: event} do
       assert nil == TapestryParser.ticket_url(event)
     end
   end

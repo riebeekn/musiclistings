@@ -32,6 +32,12 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.ResidentAdvisorParser d
           date
           startTime
           contentUrl
+          cost
+          minimumAge
+          promotionalLinks {
+            title
+            url
+          }
           venue {
             id
             name
@@ -42,6 +48,8 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.ResidentAdvisorParser d
     }
   }
   """
+
+  @ticket_link_title_regex ~r/ticket/i
 
   # We fetch a single page. The clubs we track list well under this many
   # upcoming events, so rather than implement pagination we take a page big
@@ -105,11 +113,28 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.ResidentAdvisorParser d
     end
   end
 
-  def price(_event), do: Price.unknown()
+  def price(event), do: Price.new(event["cost"])
 
-  def age_restriction(_event), do: :unknown
+  def age_restriction(event) do
+    case event["minimumAge"] do
+      nil -> :unknown
+      minimum_age -> ParseHelpers.age_restriction_string_to_enum("#{minimum_age}+")
+    end
+  end
 
-  def ticket_url(_event), do: nil
+  # Only the promoter's own vendor link is usable.  Where RA sells the tickets
+  # itself there is nothing to link to: its buy page is an iframe widget that
+  # bounces to /robots.txt when opened as a page in its own right, there is no
+  # standalone RA ticket url, and the event page is already what `details_url/1`
+  # returns.  Those events get no ticket url and are just linked via the details_url.
+  def ticket_url(event) do
+    (event["promotionalLinks"] || [])
+    |> Enum.find(&Regex.match?(@ticket_link_title_regex, &1["title"] || ""))
+    |> case do
+      nil -> nil
+      link -> ParseHelpers.sanitize_ticket_url(link["url"])
+    end
+  end
 
   def details_url(event), do: "#{@base_url}#{event["contentUrl"]}"
 
