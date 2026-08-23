@@ -75,6 +75,9 @@ defmodule MusicListings.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.2.0"},
       {:bandit, "~> 1.5"},
+      # swoosh caps req at "~> 0.5.10 or ~> 0.6 or ~> 1.0" (still true on swoosh main),
+      # so req 0.7.x is unreachable while swoosh is in the tree.
+      # Bump when swoosh allows ~> 0.7.
       {:req, "~> 0.6.1"},
       {:brotli, "~> 0.3.0"},
       {:meeseeks, "~> 0.18.0"},
@@ -85,16 +88,7 @@ defmodule MusicListings.MixProject do
       # Override to 0.9 — only the OTP 25+/Elixir 1.15+ floor changed, the NIF-download API is compatible.
       # remove when meeseeks is updated
       {:rustler_precompiled, "~> 0.9.0", override: true},
-      {:tzdata, "~> 1.1"},
-      # tzdata caps hackney at ~> 1.17 (< 2.0), so hackney 4.x is unreachable and the
-      # newest usable hackney is 1.25.0. Nothing else in the tree constrains certifi or
-      # parse_trans, so the resolver happily takes their latest and silently backtracks
-      # hackney to 1.17.1 — which is vulnerable to GHSA-9fm9-hp7p-53mf and
-      # GHSA-vq52-99r9-h5pw. hackney 1.25.0 needs certifi ~> 2.15.0 and parse_trans
-      # exactly 3.4.1, so pin both to keep hackney on 1.25.0.
-      # Remove when tzdata allows hackney 4.x (or we move off tzdata).
-      {:certifi, "~> 2.15.0", override: true},
-      {:parse_trans, "3.4.1", override: true},
+      {:tz, "~> 0.28"},
       {:scrivener_ecto, "~> 3.0"},
       {:redirect, "~> 0.4.0"},
       {:goal, "~> 1.0"},

@@ -126,7 +126,7 @@ config :fun_with_flags, :cache, enabled: false
 config :fun_with_flags, :cache_bust_notifications, enabled: false
 
 # TZ config
-config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase
+config :elixir, :time_zone_database, Tz.TimeZoneDatabase
 
 # Set env
 config :music_listings, env: Mix.env()
