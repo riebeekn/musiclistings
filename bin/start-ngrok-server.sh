@@ -68,6 +68,6 @@ else
   curl -s "https://api.qrserver.com/v1/create-qr-code/?size=400x400&margin=10&data=${ENC}" -o "${QR_PNG}"
 fi
 
-echo "📱 Scan the QR above (or the PNG in Preview) with your phone camera, then tap the Safari banner."
+echo "📱 Scan the QR above with your phone camera."
 echo "   First load shows ngrok's 'Visit Site' interstitial — tap through it."
 echo "   Tunnel is running in the background; stop it with: ./bin/stop-ngrok-server.sh"
