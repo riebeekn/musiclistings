@@ -34,10 +34,17 @@ if ! curl -s -o /dev/null --max-time 2 http://localhost:4040/api/tunnels; then
 fi
 
 # 3. Poll ngrok's local API for the public https URL.
+#
+# Both assignments below end in `|| true` on purpose. `set -e` combined with
+# `pipefail` treats `VAR=$(failing_pipeline)` as a fatal error, and on a cold start
+# ngrok's API isn't listening yet, so the very first curl exits 7 and would kill the
+# script here - on attempt 1 of 20, before the retry loop is any use and before the
+# error branch below can print a thing.
 URL=""
 for _ in $(seq 1 20); do
-  URL=$(curl -s --max-time 2 http://localhost:4040/api/tunnels 2>/dev/null \
-        | sed -n 's/.*"public_url":"\(https:[^"]*\)".*/\1/p' | head -1)
+  TUNNELS=$(curl -s --max-time 2 http://localhost:4040/api/tunnels 2>/dev/null || true)
+  URL=$(printf '%s' "${TUNNELS}" \
+        | sed -n 's/.*"public_url":"\(https:[^"]*\)".*/\1/p' | head -1 || true)
   [ -n "${URL}" ] && break
   sleep 1
 done
@@ -61,6 +68,6 @@ else
   curl -s "https://api.qrserver.com/v1/create-qr-code/?size=400x400&margin=10&data=${ENC}" -o "${QR_PNG}"
 fi
 
-echo "📱 Scan the QR (now open in Preview) with your phone camera, then tap the Safari banner."
+echo "📱 Scan the QR above (or the PNG in Preview) with your phone camera, then tap the Safari banner."
 echo "   First load shows ngrok's 'Visit Site' interstitial — tap through it."
 echo "   Tunnel is running in the background; stop it with: ./bin/stop-ngrok-server.sh"
