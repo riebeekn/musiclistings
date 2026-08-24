@@ -52,6 +52,84 @@ Hooks.DateFilter = {
     });
   },
 };
+// Search typeahead keyboard navigation. Highlighting is done client-side so arrowing
+// through results costs no round trips; the list itself is re-rendered by the server on
+// each debounced keystroke, which resets the highlight - that's intended, since the
+// results underneath it have changed.
+Hooks.SearchTypeahead = {
+  mounted() {
+    this.activeIndex = -1;
+    this.onKeyDown = (event) => this.handleKeyDown(event);
+    this.el.addEventListener("keydown", this.onKeyDown);
+
+    // Committing the search steps out of the field. The server closes the dropdown; this
+    // gives up focus, which on a phone drops the on-screen keyboard - otherwise Enter
+    // scopes a listing the keyboard is still covering. Listening for `submit` on the
+    // container (it bubbles) rather than blurring inside the Enter keydown, which can
+    // cancel the implicit form submission before LiveView ever sees it.
+    this.onSubmit = () => this.input()?.blur();
+    this.el.addEventListener("submit", this.onSubmit);
+  },
+  updated() {
+    // Results changed underneath us, so any previous highlight is meaningless.
+    this.activeIndex = -1;
+    this.paint();
+  },
+  destroyed() {
+    this.el.removeEventListener("keydown", this.onKeyDown);
+    this.el.removeEventListener("submit", this.onSubmit);
+  },
+  input() {
+    return this.el.querySelector("#event-search");
+  },
+  items() {
+    return Array.from(this.el.querySelectorAll("[data-suggestion]"));
+  },
+  handleKeyDown(event) {
+    const items = this.items();
+
+    if (event.key === "Escape") {
+      this.activeIndex = -1;
+      this.pushEvent("dismiss-suggestions", {});
+      return;
+    }
+
+    if (!items.length) return;
+
+    // Tab leaves the widget - the expected combobox behaviour, options are reached with
+    // the arrow keys - so it should take the dropdown with it instead of leaving it open
+    // behind whatever gets focus next. No preventDefault: focus still moves normally.
+    if (event.key === "Tab") {
+      this.activeIndex = -1;
+      this.pushEvent("dismiss-suggestions", {});
+      return;
+    }
+
+    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      event.preventDefault();
+      const delta = event.key === "ArrowDown" ? 1 : -1;
+      this.activeIndex =
+        (this.activeIndex + delta + items.length) % items.length;
+      this.paint();
+      items[this.activeIndex].scrollIntoView({ block: "nearest" });
+      return;
+    }
+
+    if (event.key === "Enter" && this.activeIndex >= 0) {
+      // Let the highlighted suggestion win over submitting the search form. With nothing
+      // highlighted, Enter falls through to the form submit handled above.
+      event.preventDefault();
+      items[this.activeIndex].click();
+    }
+  },
+  paint() {
+    this.items().forEach((item, index) => {
+      const active = index === this.activeIndex;
+      item.classList.toggle("bg-ink-3", active);
+      item.setAttribute("aria-selected", active ? "true" : "false");
+    });
+  },
+};
 Hooks.SortBy = {
   mounted() {
     this.handleEvent("saveSortByToLocalStorage", ({ sort_by }) => {

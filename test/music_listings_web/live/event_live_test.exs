@@ -212,6 +212,374 @@ defmodule MusicListingsWeb.EventLiveTest do
     end
   end
 
+  describe "search" do
+    setup do
+      today = DateHelpers.today_eastern()
+      venue = insert(:venue)
+
+      # Search reads the headliner and openers as well as the title, so the fixtures spell
+      # out their own bills rather than inheriting the factory's default headliner.
+      e1 =
+        insert(:event,
+          venue: venue,
+          date: today,
+          title: "Bob Mintzer Quartet",
+          headliner: "Bob Mintzer"
+        )
+
+      e2 =
+        insert(:event,
+          venue: venue,
+          date: Date.add(today, 1),
+          title: "Metric",
+          headliner: "Metric"
+        )
+
+      e3 =
+        insert(:event,
+          venue: venue,
+          date: Date.add(today, 2),
+          title: "Bob Mintzer Big Band",
+          headliner: "Bob Mintzer"
+        )
+
+      e4 =
+        insert(:event,
+          venue: venue,
+          date: Date.add(today, 3),
+          title: "Album Release Party",
+          headliner: "Frigs",
+          openers: ["Dilly Dally"]
+        )
+
+      %{venue_id: venue.id, e1_id: e1.id, e2_id: e2.id, e3_id: e3.id, e4_id: e4.id}
+    end
+
+    defp search(view, term) do
+      view
+      |> element("#search-form")
+      |> render_change(%{"q" => term})
+    end
+
+    test "scopes the listing to matching titles", %{
+      conn: conn,
+      e1_id: e1_id,
+      e2_id: e2_id,
+      e3_id: e3_id
+    } do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      assert has_element?(view, "#event-#{e2_id}")
+
+      view
+      |> element("#search-form")
+      |> render_change(%{"q" => "mintzer"})
+
+      assert has_element?(view, "#event-#{e1_id}")
+      assert has_element?(view, "#event-#{e3_id}")
+      refute has_element?(view, "#event-#{e2_id}")
+    end
+
+    test "scopes the listing on a headliner that is not in the title", %{
+      conn: conn,
+      e1_id: e1_id,
+      e4_id: e4_id
+    } do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      view
+      |> element("#search-form")
+      |> render_change(%{"q" => "frigs"})
+
+      assert has_element?(view, "#event-#{e4_id}")
+      refute has_element?(view, "#event-#{e1_id}")
+    end
+
+    test "scopes the listing on an opener", %{conn: conn, e1_id: e1_id, e4_id: e4_id} do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      view
+      |> element("#search-form")
+      |> render_change(%{"q" => "dilly dally"})
+
+      assert has_element?(view, "#event-#{e4_id}")
+      refute has_element?(view, "#event-#{e1_id}")
+    end
+
+    test "names the openers on a suggestion matched by its support act", %{conn: conn} do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      html =
+        view
+        |> element("#search-form")
+        |> render_change(%{"q" => "dilly"})
+
+      assert html =~ "Album Release Party"
+      assert html =~ "with Dilly Dally"
+    end
+
+    test "submitting closes the dropdown but keeps the term and the scoped listing", %{
+      conn: conn,
+      e1_id: e1_id,
+      e2_id: e2_id
+    } do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      view
+      |> element("#search-form")
+      |> render_change(%{"q" => "mintzer"})
+
+      assert has_element?(view, "#search-suggestions")
+
+      html =
+        view
+        |> element("#search-form")
+        |> render_submit(%{"q" => "mintzer"})
+
+      refute has_element?(view, "#search-suggestions")
+      assert html =~ ~s(value="mintzer")
+      assert has_element?(view, "#event-#{e1_id}")
+      refute has_element?(view, "#event-#{e2_id}")
+      refute_patched(view)
+    end
+
+    test "submitting a term typed inside the debounce window still scopes the listing", %{
+      conn: conn,
+      e1_id: e1_id,
+      e2_id: e2_id
+    } do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      # No preceding render_change: this is the "typed fast and hit Enter" path, where the
+      # debounced change event never fired and submit carries the only copy of the term.
+      view
+      |> element("#search-form")
+      |> render_submit(%{"q" => "mintzer"})
+
+      assert has_element?(view, "#event-#{e1_id}")
+      refute has_element?(view, "#event-#{e2_id}")
+    end
+
+    test "submitting an empty box clears the search", %{conn: conn, e2_id: e2_id} do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      search(view, "mintzer")
+      refute has_element?(view, "#event-#{e2_id}")
+
+      view
+      |> element("#search-form")
+      |> render_submit(%{"q" => ""})
+
+      assert has_element?(view, "#event-#{e2_id}")
+    end
+
+    # Search is deliberately the one filter with no URL presence: it should not survive a
+    # refresh or a back-navigation the way the localStorage-backed filters do.
+    test "searching never touches the URL", %{conn: conn} do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      search(view, "mintzer")
+
+      refute_patched(view)
+    end
+
+    test "a fresh load is unscoped, even with a stale q param in the URL", %{
+      conn: conn,
+      e1_id: e1_id,
+      e2_id: e2_id
+    } do
+      {:ok, view, _html} = live(conn, ~p"/events?#{[q: "mintzer"]}")
+
+      assert has_element?(view, "#event-#{e1_id}")
+      assert has_element?(view, "#event-#{e2_id}")
+      assert has_element?(view, "#event-search[value='']")
+    end
+
+    test "reloading after a search returns the full listing", %{conn: conn, e2_id: e2_id} do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      search(view, "mintzer")
+      refute has_element?(view, "#event-#{e2_id}")
+
+      {:ok, reloaded, _html} = live(conn, ~p"/events")
+
+      assert has_element?(reloaded, "#event-#{e2_id}")
+      assert has_element?(reloaded, "#event-search[value='']")
+    end
+
+    test "shows typeahead suggestions linking straight to the event", %{
+      conn: conn,
+      e1_id: e1_id
+    } do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      refute has_element?(view, "#search-suggestions")
+
+      view
+      |> element("#search-form")
+      |> render_change(%{"q" => "mintzer"})
+
+      assert has_element?(view, "#search-suggestions [data-suggestion]", "Bob Mintzer Quartet")
+      assert has_element?(view, "#search-suggestions [data-suggestion]", "Bob Mintzer Big Band")
+
+      assert has_element?(
+               view,
+               "#search-suggestions a[href='/events/#{e1_id}/bob-mintzer-quartet']"
+             )
+    end
+
+    test "does not offer suggestions for a single character term", %{conn: conn} do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      view
+      |> element("#search-form")
+      |> render_change(%{"q" => "m"})
+
+      refute has_element?(view, "#search-suggestions")
+    end
+
+    test "dismisses the suggestions without clearing the search", %{conn: conn, e1_id: e1_id} do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      view
+      |> element("#search-form")
+      |> render_change(%{"q" => "mintzer"})
+
+      assert has_element?(view, "#search-suggestions")
+
+      render_click(view, "dismiss-suggestions", %{})
+
+      refute has_element?(view, "#search-suggestions")
+      # the listing stays scoped
+      assert has_element?(view, "#event-#{e1_id}")
+    end
+
+    test "clearing the search restores the full listing", %{
+      conn: conn,
+      e2_id: e2_id
+    } do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      search(view, "mintzer")
+      refute has_element?(view, "#event-#{e2_id}")
+
+      view
+      |> element("#search-bar-component button[phx-click='clear-search']")
+      |> render_click()
+
+      assert has_element?(view, "#event-#{e2_id}")
+      assert has_element?(view, "#event-search[value='']")
+    end
+
+    test "shows an empty state naming the term when nothing matches", %{conn: conn} do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      html = search(view, "nonexistent band")
+
+      assert html =~ "No upcoming events match"
+      assert html =~ "nonexistent band"
+    end
+
+    test "renders one search bar serving both breakpoints", %{conn: conn} do
+      {:ok, view, _html} = live(conn, ~p"/events")
+      search(view, "mintzer")
+
+      # A single field, not the desktop/mobile pair the other filters use.
+      assert [_only_one] = view |> render() |> then(&Regex.scan(~r/id="event-search"/, &1))
+      assert has_element?(view, "#event-search[value='mintzer']")
+      assert has_element?(view, "button[phx-click='clear-search'][aria-label='Clear search']")
+    end
+
+    # The pager patches rather than navigates, so the term rides along in assigns.  This is
+    # the invariant that replaced carrying "q" in the pager's query string: if handle_params
+    # ever resets search_term again, page 2 of a search silently becomes the full listing.
+    test "the search survives paging", %{conn: conn, e1_id: e1_id, e2_id: e2_id} do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      search(view, "mintzer")
+
+      render_patch(view, ~p"/events?page=1")
+
+      assert has_element?(view, "#event-#{e1_id}")
+      refute has_element?(view, "#event-#{e2_id}")
+      assert has_element?(view, "#event-search[value='mintzer']")
+    end
+
+    test "the search survives changing the sort order", %{
+      conn: conn,
+      e1_id: e1_id,
+      e2_id: e2_id
+    } do
+      {:ok, view, _html} = live(conn, ~p"/events")
+      search(view, "mintzer")
+
+      view
+      |> element("#sort-by-component button[phx-value-sort-by='venue']")
+      |> render_click()
+
+      assert has_element?(view, "#event-#{e1_id}")
+      refute has_element?(view, "#event-#{e2_id}")
+    end
+
+    test "the search survives clearing the venue filter", %{
+      conn: conn,
+      e1_id: e1_id,
+      e2_id: e2_id
+    } do
+      {:ok, view, _html} = live(conn, ~p"/events")
+      search(view, "mintzer")
+
+      render_click(view, "clear-venue-filtering", %{})
+
+      assert has_element?(view, "#event-#{e1_id}")
+      refute has_element?(view, "#event-#{e2_id}")
+    end
+
+    test "handles an empty or whitespace-only term without crashing", %{
+      conn: conn,
+      e2_id: e2_id
+    } do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      for query <- ["", "  ", "\t"] do
+        html = search(view, query)
+
+        assert has_element?(view, "#event-#{e2_id}")
+        refute html =~ "No upcoming events match"
+      end
+    end
+
+    test "truncates a term that exceeds the length cap", %{conn: conn, e1_id: e1_id} do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      # The input carries a matching maxlength, but a crafted payload can ignore it, so the
+      # server has to be the thing that bounds the LIKE pattern.
+      html = search(view, "mintzer" <> String.duplicate("a", 200))
+
+      refute has_element?(view, "#event-#{e1_id}")
+
+      assert [term] =
+               Regex.run(~r/id="event-search"[^>]*value="([^"]*)"/, html, capture: :all_but_first)
+
+      assert String.length(term) == 100
+    end
+
+    test "treats wildcard characters as literals rather than matching everything", %{
+      conn: conn,
+      e1_id: e1_id,
+      e2_id: e2_id
+    } do
+      {:ok, view, _html} = live(conn, ~p"/events")
+
+      # "mint%" would match "Bob Mintzer Quartet" if % were passed through to LIKE.
+      html = search(view, "mint%")
+
+      refute has_element?(view, "#event-#{e1_id}")
+      refute has_element?(view, "#event-#{e2_id}")
+      assert html =~ "No upcoming events match"
+    end
+  end
+
   describe "sorting" do
     setup do
       today = DateHelpers.today_eastern()

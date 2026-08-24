@@ -6,6 +6,10 @@ defmodule MusicListingsWeb.EventLive.Index do
   alias MusicListingsWeb.AnalyticsTracking
   alias MusicListingsWeb.SEO
 
+  # Cap on the free-text search term.  Anything longer is almost certainly not a real
+  # title, and it bounds the LIKE pattern we hand to Postgres.
+  @max_search_length 100
+
   @impl true
   def mount(_params, _session, socket) do
     venue_ids = get_venue_ids_in_local_storage(socket)
@@ -31,6 +35,9 @@ defmodule MusicListingsWeb.EventLive.Index do
     |> assign(:resale_enabled, FunWithFlags.enabled?(:show_resale_tickets))
     |> assign(:venue_filtering_form, to_form(%{}))
     |> assign(:date_filtering_form, to_form(%{}))
+    |> assign(:search_form, to_form(%{}))
+    |> assign(:search_term, "")
+    |> assign(:search_suggestions, [])
     |> assign(:page_title, "Toronto Live Music Events")
     |> assign(
       :meta_description,
@@ -87,19 +94,10 @@ defmodule MusicListingsWeb.EventLive.Index do
   @impl true
   def handle_params(params, _uri, socket) do
     venue_ids = socket.assigns[:venue_ids] || []
-    selected_date = socket.assigns[:selected_date]
 
     case validate(:index, params) do
       {:ok, normalized_params} ->
-        from_date = parse_selected_date(selected_date)
-
-        paged_events =
-          MusicListings.list_events(
-            page: normalized_params[:page],
-            venue_ids: venue_ids,
-            from_date: from_date,
-            sort_by: sort_by_atom(socket.assigns[:sort_by])
-          )
+        paged_events = list_events_for(socket, page: normalized_params[:page])
 
         if connected?(socket) do
           recently_added = recently_added_events(socket)
@@ -146,58 +144,77 @@ defmodule MusicListingsWeb.EventLive.Index do
         end
       end)
 
-    from_date = parse_selected_date(socket.assigns[:selected_date])
-
-    paged_events =
-      MusicListings.list_events(
-        page: socket.assigns[:current_page],
-        venue_ids: venue_ids,
-        from_date: from_date,
-        sort_by: sort_by_atom(socket.assigns[:sort_by])
-      )
-
     socket
-    |> update_socket_assigns(paged_events, venue_ids)
+    |> assign(:venue_ids, venue_ids)
+    |> reload_events()
     |> push_event("saveVenueFilterIdsToLocalStorage", %{venue_ids: venue_ids})
     |> noreply()
   end
 
   @impl true
   def handle_event("clear-venue-filtering", _params, socket) do
-    venue_ids = []
+    socket
+    |> assign(:venue_ids, [])
+    |> reload_events()
+    |> push_event("clearVenueFilterIdsFromLocalStorage", %{})
+    |> noreply()
+  end
 
-    from_date = parse_selected_date(socket.assigns[:selected_date])
-
-    paged_events =
-      MusicListings.list_events(
-        page: socket.assigns[:current_page],
-        venue_ids: venue_ids,
-        from_date: from_date,
-        sort_by: sort_by_atom(socket.assigns[:sort_by])
-      )
+  # Search is the one filter that lives nowhere but socket assigns.  The venue/date/sort
+  # filters persist in localStorage because they describe how you like to browse; a search
+  # term describes what you are looking for right now, and it should not outlive the visit.
+  # Keeping it out of the URL is what makes a refresh or a back-navigation return the full
+  # listing instead of yesterday's query.  Paging still works: the pager patches, so assigns
+  # survive, and list_events_for/2 reads the term back out of them.
+  @impl true
+  def handle_event("search", %{"q" => search_term}, socket) do
+    search_term = normalize_search_term(search_term)
 
     socket
-    |> update_socket_assigns(paged_events, venue_ids)
-    |> push_event("clearVenueFilterIdsFromLocalStorage", %{})
+    |> assign(:search_term, search_term)
+    |> assign(:search_suggestions, suggestions_for(socket, search_term))
+    |> reload_events(page: 1)
+    |> noreply()
+  end
+
+  # Enter commits whatever has been typed.  It needs its own handler rather than reusing
+  # "search": that one reoffers the suggestions it just rendered, so the dropdown stays
+  # put and pressing Enter looks like it did nothing.  Submitting also flushes any pending
+  # debounce, so a term typed and entered inside 300ms still reaches the listing.
+  @impl true
+  def handle_event("submit-search", %{"q" => search_term}, socket) do
+    search_term = normalize_search_term(search_term)
+
+    socket
+    |> assign(:search_term, search_term)
+    |> assign(:search_suggestions, [])
+    |> reload_events(page: 1)
+    |> noreply()
+  end
+
+  @impl true
+  def handle_event("clear-search", _params, socket) do
+    socket
+    |> assign(:search_term, "")
+    |> assign(:search_suggestions, [])
+    |> reload_events(page: 1)
+    |> noreply()
+  end
+
+  @impl true
+  def handle_event("dismiss-suggestions", _params, socket) do
+    socket
+    |> assign(:search_suggestions, [])
     |> noreply()
   end
 
   @impl true
   def handle_event("sort-changed", %{"sort-by" => sort_by}, socket) do
     sort_by = if sort_by in ["title", "venue"], do: sort_by, else: "title"
-    from_date = parse_selected_date(socket.assigns[:selected_date])
-
-    paged_events =
-      MusicListings.list_events(
-        page: socket.assigns[:current_page],
-        venue_ids: socket.assigns[:venue_ids],
-        from_date: from_date,
-        sort_by: sort_by_atom(sort_by)
-      )
 
     socket
-    |> update_socket_assigns(paged_events)
     |> assign(:sort_by, sort_by)
+    |> reload_events()
     |> push_event("saveSortByToLocalStorage", %{sort_by: sort_by})
     |> noreply()
   end
@@ -205,21 +222,11 @@ defmodule MusicListingsWeb.EventLive.Index do
   @impl true
   def handle_event("date-filter-changed", %{"date" => date}, socket) do
     selected_date = parse_selected_date(date)
-
-    paged_events =
-      MusicListings.list_events(
-        page: 1,
-        venue_ids: socket.assigns[:venue_ids],
-        from_date: selected_date,
-        sort_by: sort_by_atom(socket.assigns[:sort_by])
-      )
-
     selected_date_string = if selected_date, do: Date.to_iso8601(selected_date), else: ""
 
     socket
-    |> update_socket_assigns(paged_events)
     |> assign(:selected_date, selected_date_string)
-    |> assign(:current_page, 1)
+    |> reload_events(page: 1)
     |> push_event("saveDateFilterToLocalStorage", %{selected_date: selected_date_string})
     |> noreply()
   end
@@ -227,20 +234,10 @@ defmodule MusicListingsWeb.EventLive.Index do
   @impl true
   def handle_event("clear-date-filter", _params, socket) do
     today = Date.to_iso8601(DateHelpers.effective_today_eastern())
-    selected_date = parse_selected_date(today)
-
-    paged_events =
-      MusicListings.list_events(
-        page: 1,
-        venue_ids: socket.assigns[:venue_ids],
-        from_date: selected_date,
-        sort_by: sort_by_atom(socket.assigns[:sort_by])
-      )
 
     socket
-    |> update_socket_assigns(paged_events)
     |> assign(:selected_date, today)
-    |> assign(:current_page, 1)
+    |> reload_events(page: 1)
     |> push_event("saveDateFilterToLocalStorage", %{selected_date: today})
     |> noreply()
   end
@@ -253,15 +250,8 @@ defmodule MusicListingsWeb.EventLive.Index do
       ) do
     MusicListings.delete_event(current_user, event_id)
 
-    paged_events =
-      MusicListings.list_events(
-        page: socket.assigns[:current_page],
-        venue_ids: socket.assigns[:venue_ids],
-        sort_by: sort_by_atom(socket.assigns[:sort_by])
-      )
-
     socket
-    |> update_socket_assigns(paged_events)
+    |> reload_events()
     |> assign(:new_this_week, recently_added_events(socket))
     |> noreply()
   end
@@ -299,6 +289,45 @@ defmodule MusicListingsWeb.EventLive.Index do
     end
   end
 
+  # Single source of truth for the listing query.  Every filter is read back out of
+  # assigns, so a handler only has to assign the value it changed before calling this -
+  # that is what stops a newly added filter from being silently dropped by the handlers
+  # that forgot to thread it through.  `overrides` is for the cases that also reset paging.
+  # The term arrives straight off the form now that it is not a URL param, so this is the
+  # only thing bounding it before it reaches the LIKE pattern.  The input carries a
+  # matching maxlength, but that is a client-side courtesy, not a guarantee.
+  defp normalize_search_term(nil), do: ""
+
+  defp normalize_search_term(search_term) do
+    search_term
+    |> String.trim()
+    |> String.slice(0, @max_search_length)
+  end
+
+  # Suggestions only make sense once there is something to disambiguate; a one-character
+  # term matches most of the catalogue.
+  defp suggestions_for(_socket, search_term) when byte_size(search_term) < 2, do: []
+
+  defp suggestions_for(_socket, search_term) do
+    MusicListings.search_event_titles(search_term)
+  end
+
+  defp list_events_for(socket, overrides) do
+    [
+      page: socket.assigns[:current_page],
+      venue_ids: socket.assigns[:venue_ids] || [],
+      from_date: parse_selected_date(socket.assigns[:selected_date]),
+      sort_by: sort_by_atom(socket.assigns[:sort_by]),
+      search: socket.assigns[:search_term]
+    ]
+    |> Keyword.merge(overrides)
+    |> MusicListings.list_events()
+  end
+
+  defp reload_events(socket, overrides \\ []) do
+    update_socket_assigns(socket, list_events_for(socket, overrides))
+  end
+
   defp update_socket_assigns(socket, paged_events) do
     socket
     |> assign(:events, paged_events.events)
@@ -334,7 +363,7 @@ defmodule MusicListingsWeb.EventLive.Index do
   def render(assigns) do
     ~H"""
     <%!-- MASTHEAD --%>
-    <section class={if @just_added_enabled, do: "mb-6", else: "mb-10"}>
+    <section class={if @just_added_enabled, do: "mb-5", else: "mb-6"}>
       <p class="kicker flex items-center gap-2">
         <span class="inline-block h-2 w-8 bg-spotlight"></span> Toronto · Live Music Listings
       </p>
@@ -348,6 +377,16 @@ defmodule MusicListingsWeb.EventLive.Index do
         Every show worth leaving the house for — concerts, club nights and DIY gigs
         from dozens of venues across the city, refreshed daily.
       </p>
+    </section>
+
+    <%!-- SEARCH: one block for both breakpoints, high enough on the page that the
+          typeahead opens above the on-screen keyboard on a phone. --%>
+    <section class={if @just_added_enabled, do: "mb-6", else: "mb-8"}>
+      <.search_bar
+        for={@search_form}
+        search_term={@search_term}
+        suggestions={@search_suggestions}
+      />
     </section>
 
     <%!-- Just Added rail (feature-flagged) --%>
@@ -413,6 +452,8 @@ defmodule MusicListingsWeb.EventLive.Index do
       <.loading_indicator />
     <% end %>
 
+    <.no_results :if={!@loading and @events == []} search_term={@search_term} />
+
     <.events_list
       events={@events}
       current_user={@current_user}
@@ -425,6 +466,41 @@ defmodule MusicListingsWeb.EventLive.Index do
       if(@just_added_enabled, do: "mt-8 pt-5", else: "mt-10 pt-6")
     ]}>
       <.pager current_page={@current_page} total_pages={@total_pages} path={~p"/events"} />
+    </div>
+    """
+  end
+
+  attr :search_term, :string, default: ""
+
+  # The listing renders nothing at all for an empty result set, which reads as a broken
+  # page.  The date filter is the usual culprit: from_date defaults to today, so a search
+  # for a band who played last week matches rows that are already filtered out.
+  defp no_results(assigns) do
+    ~H"""
+    <div class="border-t border-hairline py-14 text-center">
+      <p class="headline text-2xl text-paper">
+        <%= if @search_term == "" do %>
+          No upcoming events
+        <% else %>
+          No upcoming events match “{@search_term}”
+        <% end %>
+      </p>
+      <p class="mx-auto mt-3 max-w-md text-sm leading-relaxed text-paper-dim">
+        <%= if @search_term == "" do %>
+          Try clearing your venue or date filters.
+        <% else %>
+          Try a different spelling, or clear your venue and date filters — search only looks at
+          upcoming shows.
+        <% end %>
+      </p>
+      <button
+        :if={@search_term != ""}
+        type="button"
+        phx-click="clear-search"
+        class="mt-6 inline-flex h-9 items-center justify-center rounded bg-spotlight px-4 font-mono text-xs font-medium uppercase tracking-widest text-ink transition-colors hover:bg-spotlight-deep"
+      >
+        Clear search
+      </button>
     </div>
     """
   end

@@ -164,7 +164,7 @@ defmodule MusicListingsWeb.CustomComponents do
       <%= if @current_page > 1 do %>
         <.button_link
           label="Prev page"
-          url={@path <> "?page=#{@current_page - 1}"}
+          url={"#{@path}?page=#{@current_page - 1}"}
           icon_name="hero-arrow-left"
           icon_position={:left}
         />
@@ -172,7 +172,7 @@ defmodule MusicListingsWeb.CustomComponents do
       <%= if @current_page < @total_pages do %>
         <.button_link
           label="Next page"
-          url={@path <> "?page=#{@current_page + 1}"}
+          url={"#{@path}?page=#{@current_page + 1}"}
           icon_name="hero-arrow-right"
         />
       <% end %>
@@ -695,6 +695,110 @@ defmodule MusicListingsWeb.CustomComponents do
   end
 
   @doc """
+  Renders the search bar, with a typeahead dropdown of matching event titles.
+
+  Deliberately a single piece of markup rather than the desktop/mobile pair the filters
+  use: it sits high on the page, so on a phone the dropdown opens between the field and
+  the on-screen keyboard rather than behind it.
+
+  ## Example
+
+  <.search_bar for={@form} search_term={@search_term} suggestions={@search_suggestions} />
+  """
+
+  attr :for, :any, required: true, doc: "the data structure for the form"
+  attr :search_term, :string, default: ""
+  attr :suggestions, :list, default: []
+
+  def search_bar(assigns) do
+    ~H"""
+    <div
+      id="search-bar-component"
+      phx-hook="SearchTypeahead"
+      class="relative max-w-xl"
+      phx-click-away={if @suggestions != [], do: "dismiss-suggestions"}
+    >
+      <.form for={@for} id="search-form" phx-change="search" phx-submit="submit-search">
+        <label for="event-search" class="sr-only">Search events</label>
+        <MusicListingsWeb.CoreComponents.icon
+          name="hero-magnifying-glass"
+          class="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-paper-dim"
+        />
+        <input
+          type="search"
+          id="event-search"
+          name="q"
+          value={@search_term}
+          autocomplete="off"
+          role="combobox"
+          aria-expanded={to_string(@suggestions != [])}
+          aria-controls="search-suggestions"
+          enterkeyhint="search"
+          maxlength="100"
+          phx-debounce="300"
+          placeholder="Search shows and artists"
+          class={
+            [
+              "w-full rounded-lg border border-hairline bg-ink-2 py-2.5 pl-10 pr-10 text-paper",
+              "placeholder:text-paper-dim focus:border-spotlight focus:ring-spotlight transition-colors",
+              "[&::-webkit-search-cancel-button]:hidden",
+              # 16px on phones is not a style choice: iOS Safari zooms the page in when you
+              # focus an input smaller than that, and the zoomed layout is wider than the
+              # screen, which is where the horizontal scrolling comes from. Back to the
+              # 14px the other filter controls use once there is room for it.
+              "text-base sm:text-sm"
+            ]
+          }
+        />
+        <button
+          :if={@search_term != ""}
+          type="button"
+          phx-click="clear-search"
+          aria-label="Clear search"
+          class="absolute right-3 top-1/2 -translate-y-1/2 text-paper-dim hover:text-paper transition-colors"
+        >
+          <MusicListingsWeb.CoreComponents.icon name="hero-x-mark" class="size-4" />
+        </button>
+      </.form>
+
+      <ul
+        :if={@suggestions != []}
+        id="search-suggestions"
+        role="listbox"
+        class="absolute z-30 mt-2 max-h-60 w-full overflow-auto rounded-xl border border-hairline bg-ink-2 py-2 text-sm shadow-2xl shadow-black/50 sm:max-h-72"
+      >
+        <li :for={suggestion <- @suggestions}>
+          <.link
+            data-suggestion
+            role="option"
+            aria-selected="false"
+            navigate={
+              ~p"/events/#{suggestion.event_id}/#{MusicListingsWeb.SEO.slugify(suggestion.title || "event")}"
+            }
+            class="block px-4 py-2.5 text-paper hover:bg-ink-3 transition-colors"
+          >
+            <span class="block truncate">{suggestion.title}</span>
+            <span class="block truncate text-xs text-paper-dim">
+              {format_suggestion_date(suggestion.date)} · {suggestion.venue_name}{format_suggestion_openers(
+                suggestion.openers
+              )}
+            </span>
+          </.link>
+        </li>
+      </ul>
+    </div>
+    """
+  end
+
+  defp format_suggestion_date(nil), do: ""
+  defp format_suggestion_date(date), do: Calendar.strftime(date, "%a %b %-d")
+
+  # Search matches the whole bill, so a suggestion can be here because of a support act.
+  # Naming the openers is what makes that row make sense to the person who typed them.
+  defp format_suggestion_openers(openers) when openers in [nil, []], do: ""
+  defp format_suggestion_openers(openers), do: " · with " <> Enum.join(openers, ", ")
+
+  @doc """
   Renders the sort toggle for the mobile bottom sheet.
 
   ## Example
@@ -1117,10 +1221,16 @@ defmodule MusicListingsWeb.CustomComponents do
       </.link>
     </p>
 
-    <h1 class="mt-3 font-display text-5xl font-bold leading-[0.9] text-paper sm:text-6xl lg:text-7xl">
+    <%!-- break-words is load-bearing on a phone: titles routinely carry unbreakable tokens
+          like "Belew/Vai/Levin/Bozzio", and browsers offer no break opportunity at a slash,
+          so at 48px one of those pushes the page wider than the screen. --%>
+    <h1 class="mt-3 font-display text-5xl font-bold leading-[0.9] break-words text-paper sm:text-6xl lg:text-7xl">
       {@event.title}
     </h1>
-    <p :if={@event.openers != []} class="mt-3 font-display text-2xl font-medium text-paper-dim">
+    <p
+      :if={@event.openers != []}
+      class="mt-3 font-display text-2xl font-medium break-words text-paper-dim"
+    >
       with {Enum.join(@event.openers, ", ")}
     </p>
     """

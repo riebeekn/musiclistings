@@ -7,6 +7,7 @@ defmodule MusicListings.Events do
   alias Ecto.Changeset
   alias MusicListings.Accounts.User
   alias MusicListings.Events.EventInfo
+  alias MusicListings.Events.EventSuggestion
   alias MusicListings.Events.PagedEvents
   alias MusicListings.Events.RecentlyAddedRanker
   alias MusicListings.Events.ShowTimeInfo
@@ -19,12 +20,20 @@ defmodule MusicListings.Events do
   @default_page 1
   @default_page_size 100
 
+  # Typeahead: how many suggestions to offer, and how many dates any single show may
+  # claim of them.  A tour playing two nights should surface both - someone who finds
+  # night one sold out needs to know night two exists - but a weekly residency running
+  # sixty dates would otherwise fill the dropdown by itself.
+  @default_suggestion_limit 8
+  @max_suggestion_dates_per_show 3
+
   @type list_events_opts ::
           {:page, pos_integer()}
           | {:page_size, pos_integer()}
           | {:venue_ids, list(pos_integer())}
           | {:from_date, Date.t()}
           | {:sort_by, :title | :venue}
+          | {:search, String.t() | nil}
   @spec list_events(list(list_events_opts)) :: PagedEvents.t()
   def list_events(opts \\ []) do
     page = Keyword.get(opts, :page, @default_page)
@@ -32,6 +41,7 @@ defmodule MusicListings.Events do
     venue_ids = Keyword.get(opts, :venue_ids, [])
     from_date = Keyword.get(opts, :from_date, nil)
     sort_by = Keyword.get(opts, :sort_by, :title)
+    search = Keyword.get(opts, :search, nil)
 
     today = DateHelpers.effective_today_eastern()
     start_date = from_date || today
@@ -42,19 +52,9 @@ defmodule MusicListings.Events do
     # see MusicListingsUtilities.DateHelpers.night_date/2.
     pagination_result =
       Event
-      |> where(
-        [event],
-        fragment(
-          "(? - (CASE WHEN ? IS NOT NULL AND ? < ? THEN 1 ELSE 0 END)) >= ?",
-          event.date,
-          event.time,
-          event.time,
-          ^night_cutoff,
-          ^start_date
-        )
-      )
-      |> where([event], is_nil(event.deleted_at))
+      |> where_upcoming(start_date, night_cutoff)
       |> maybe_filter_by_venues(venue_ids)
+      |> maybe_filter_by_search(search)
       |> order_by(
         [event],
         asc:
@@ -210,6 +210,89 @@ defmodule MusicListings.Events do
     }
   end
 
+  @doc """
+  Returns up to `:limit` typeahead suggestions for `search_term`, newest-first by night date.
+
+  Each date gets its own suggestion, so a two-night run offers both - the alternative hides
+  the second night from anyone who finds the first sold out.  A single show (one title at one
+  venue) is capped at `@max_suggestion_dates_per_show` of its earliest dates so a long-running
+  residency can't crowd everything else out; the scoped listing below the dropdown always has
+  the complete set.
+
+  Matching covers the full bill (title, headliner and openers), so each suggestion carries its
+  openers - otherwise a row matched on a support act looks like it matched nothing at all.
+  Returns `[]` for a blank term or one with no usable tokens.
+  """
+  @spec search_event_titles(String.t() | nil, keyword()) :: [EventSuggestion.t()]
+  def search_event_titles(search_term, opts \\ [])
+
+  def search_event_titles(nil, _opts), do: []
+
+  def search_event_titles(search_term, opts) when is_binary(search_term) do
+    limit = Keyword.get(opts, :limit, @default_suggestion_limit)
+
+    if search_tokens(search_term) == [] do
+      []
+    else
+      start_date = DateHelpers.effective_today_eastern()
+      night_cutoff = DateHelpers.night_cutoff_time()
+
+      # The cap is applied in SQL rather than by trimming the result in Elixir: ranking has
+      # to see every matching date to know which are a show's earliest, and a residency with
+      # sixty dates would otherwise swallow any pool of rows small enough to be worth fetching.
+      ranked_events =
+        Event
+        |> where_upcoming(start_date, night_cutoff)
+        |> maybe_filter_by_search(search_term)
+        |> select([event], %{
+          id: event.id,
+          date_rank:
+            over(row_number(),
+              partition_by: [event.title, event.venue_id],
+              order_by: [
+                asc:
+                  fragment(
+                    "(? - (CASE WHEN ? IS NOT NULL AND ? < ? THEN 1 ELSE 0 END))",
+                    event.date,
+                    event.time,
+                    event.time,
+                    ^night_cutoff
+                  ),
+                asc: event.id
+              ]
+            )
+        })
+
+      Event
+      |> join(:inner, [event], ranked in subquery(ranked_events), on: ranked.id == event.id)
+      |> where([_event, ranked], ranked.date_rank <= ^@max_suggestion_dates_per_show)
+      |> order_by(
+        [event],
+        asc:
+          fragment(
+            "(? - (CASE WHEN ? IS NOT NULL AND ? < ? THEN 1 ELSE 0 END))",
+            event.date,
+            event.time,
+            event.time,
+            ^night_cutoff
+          ),
+        asc: event.title
+      )
+      |> limit(^limit)
+      |> preload(:venue)
+      |> Repo.all()
+      |> Enum.map(
+        &%EventSuggestion{
+          event_id: &1.id,
+          title: &1.title,
+          date: night_date(&1),
+          venue_name: &1.venue.name,
+          openers: &1.openers || []
+        }
+      )
+    end
+  end
+
   defp night_date(event), do: DateHelpers.night_date(event.date, event.time)
 
   defp sort_key(event, :venue), do: event.venue.name
@@ -220,6 +303,67 @@ defmodule MusicListings.Events do
   defp maybe_filter_by_venues(query, venue_ids) when is_list(venue_ids) do
     query
     |> where([event], event.venue_id in ^venue_ids)
+  end
+
+  # Restricts to live (non-deleted) events on or after `start_date`.  Late-night shows
+  # (before the cutoff) belong to the previous night out, so the comparison is against
+  # that computed "night date" rather than the stored one - the stored date/time stay
+  # true.  See MusicListingsUtilities.DateHelpers.night_date/2.
+  defp where_upcoming(query, start_date, night_cutoff) do
+    query
+    |> where(
+      [event],
+      fragment(
+        "(? - (CASE WHEN ? IS NOT NULL AND ? < ? THEN 1 ELSE 0 END)) >= ?",
+        event.date,
+        event.time,
+        event.time,
+        ^night_cutoff,
+        ^start_date
+      )
+    )
+    |> where([event], is_nil(event.deleted_at))
+  end
+
+  defp maybe_filter_by_search(query, nil), do: query
+
+  defp maybe_filter_by_search(query, search_term) when is_binary(search_term) do
+    search_term
+    |> search_tokens()
+    |> Enum.reduce(query, fn token, acc ->
+      pattern = "%#{escape_like(token)}%"
+
+      # Each token has to appear somewhere on the bill, but not all in the same field:
+      # "mintzer trio" should still find a Bob Mintzer show whose opener is a trio.
+      # openers is a text[], so it is flattened to a single string first - a token can
+      # never contain a space (search_tokens/1 splits on whitespace), so joining can't
+      # produce a false match across two adjacent openers.
+      where(
+        acc,
+        [event],
+        ilike(event.title, ^pattern) or ilike(event.headliner, ^pattern) or
+          fragment("array_to_string(coalesce(?, '{}'), ' ') ILIKE ?", event.openers, ^pattern)
+      )
+    end)
+  end
+
+  # Splits a raw search string into the tokens we actually match on.  Every token has to
+  # match (AND), so "bob quartet" finds "Bob Mintzer Quartet".  Single characters are
+  # dropped - they match nearly everything and just slow the query down.
+  defp search_tokens(search_term) do
+    search_term
+    |> String.trim()
+    |> String.split(~r/\s+/, trim: true)
+    |> Enum.reject(&(String.length(&1) < 2))
+  end
+
+  # LIKE treats %, _ and \ as syntax, so a user typing "%" would otherwise match every
+  # row.  Escape them before interpolating into the pattern.
+  defp escape_like(token) do
+    token
+    |> String.replace("\\", "\\\\")
+    |> String.replace("%", "\\%")
+    |> String.replace("_", "\\_")
   end
 
   @spec list_submitted_events(User, list(list_events_opts)) :: PagedEvents.t()

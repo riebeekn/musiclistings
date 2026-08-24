@@ -4,6 +4,7 @@ defmodule MusicListings.EventsTest do
   alias MusicListings.Accounts.User
   alias MusicListings.Events
   alias MusicListings.Events.EventInfo
+  alias MusicListings.Events.EventSuggestion
   alias MusicListings.Events.PagedEvents
   alias MusicListings.Events.ShowTimeInfo
   alias MusicListingsSchema.CrawlSummary
@@ -225,6 +226,312 @@ defmodule MusicListings.EventsTest do
                   ]}
                ]
              } = Events.list_events(sort_by: :venue)
+    end
+  end
+
+  describe "list_events/1 with :search" do
+    setup do
+      venue = insert(:venue)
+
+      # The factory defaults every event to headliner "Bob Mintzer", which now matters:
+      # search reads the headliner too, so each fixture states its own bill explicitly.
+      insert(:event,
+        venue: venue,
+        date: ~D[2024-08-01],
+        title: "Bob Mintzer Quartet",
+        headliner: "Bob Mintzer",
+        openers: ["The Sidemen"]
+      )
+
+      insert(:event,
+        venue: venue,
+        date: ~D[2024-08-02],
+        title: "bob mintzer big band",
+        headliner: "bob mintzer"
+      )
+
+      insert(:event, venue: venue, date: ~D[2024-08-03], title: "Metric", headliner: "Metric")
+
+      insert(:event,
+        venue: venue,
+        date: ~D[2024-08-04],
+        title: "100% Silk Night",
+        headliner: "Silk Night"
+      )
+
+      insert(:event,
+        venue: venue,
+        date: ~D[2024-08-05],
+        title: "Drum_Circle",
+        headliner: "Drum_Circle"
+      )
+
+      %{venue_id: venue.id}
+    end
+
+    defp titles(%PagedEvents{events: events}) do
+      events
+      |> Enum.flat_map(fn {_date, event_infos} -> event_infos end)
+      |> Enum.map(& &1.title)
+    end
+
+    test "matches on a partial title, case insensitively" do
+      assert ["Bob Mintzer Quartet", "bob mintzer big band"] =
+               titles(Events.list_events(search: "MINTZER"))
+    end
+
+    test "requires every token to match, in any order" do
+      assert ["Bob Mintzer Quartet"] = titles(Events.list_events(search: "quartet bob"))
+    end
+
+    test "returns no events when only some tokens match" do
+      assert [] = titles(Events.list_events(search: "bob metric"))
+    end
+
+    test "ignores single character tokens" do
+      assert ["Bob Mintzer Quartet", "bob mintzer big band"] =
+               titles(Events.list_events(search: "mintzer x"))
+    end
+
+    test "treats % as a literal, not a wildcard" do
+      assert ["100% Silk Night"] = titles(Events.list_events(search: "100%"))
+    end
+
+    test "treats _ as a literal, not a single character wildcard" do
+      assert ["Drum_Circle"] = titles(Events.list_events(search: "drum_circle"))
+
+      assert [] = titles(Events.list_events(search: "drumxcircle"))
+    end
+
+    test "nil and blank searches behave the same as no search at all" do
+      unfiltered = titles(Events.list_events())
+
+      assert unfiltered == titles(Events.list_events(search: nil))
+      assert unfiltered == titles(Events.list_events(search: ""))
+      assert unfiltered == titles(Events.list_events(search: "   "))
+    end
+
+    test "composes with the venue filter" do
+      other_venue = insert(:venue)
+
+      insert(:event,
+        venue: other_venue,
+        date: ~D[2024-08-06],
+        title: "Bob Mintzer Trio",
+        headliner: "Bob Mintzer"
+      )
+
+      assert ["Bob Mintzer Trio"] =
+               titles(Events.list_events(search: "mintzer", venue_ids: [other_venue.id]))
+    end
+
+    test "composes with the from_date filter" do
+      assert ["bob mintzer big band"] =
+               titles(Events.list_events(search: "mintzer", from_date: ~D[2024-08-02]))
+    end
+
+    test "matches on the headliner when the title does not contain the term" do
+      venue = insert(:venue)
+
+      insert(:event,
+        venue: venue,
+        date: ~D[2024-08-08],
+        title: "Jazz Wednesdays",
+        headliner: "Kalabash Trio"
+      )
+
+      assert ["Jazz Wednesdays"] = titles(Events.list_events(search: "kalabash"))
+    end
+
+    test "matches on an opener" do
+      assert ["Bob Mintzer Quartet"] = titles(Events.list_events(search: "sidemen"))
+    end
+
+    test "matches when tokens are spread across the title, headliner and openers" do
+      venue = insert(:venue)
+
+      insert(:event,
+        venue: venue,
+        date: ~D[2024-08-09],
+        title: "Album Release Party",
+        headliner: "Frigs",
+        openers: ["Dilly Dally", "Weaves"]
+      )
+
+      assert ["Album Release Party"] = titles(Events.list_events(search: "frigs weaves release"))
+    end
+
+    test "does not match across two adjacent openers" do
+      venue = insert(:venue)
+
+      insert(:event,
+        venue: venue,
+        date: ~D[2024-08-10],
+        title: "Double Bill",
+        headliner: "Headliner Band",
+        openers: ["Alpha", "Beta"]
+      )
+
+      # "alphabeta" would only match if the openers array were joined without a separator.
+      assert [] = titles(Events.list_events(search: "alphabeta"))
+    end
+
+    test "handles events with no openers" do
+      venue = insert(:venue)
+
+      insert(:event,
+        venue: venue,
+        date: ~D[2024-08-11],
+        title: "Solo Set",
+        headliner: "Lido Pimienta",
+        openers: []
+      )
+
+      assert ["Solo Set"] = titles(Events.list_events(search: "lido"))
+    end
+
+    test "still excludes deleted events" do
+      venue = insert(:venue)
+
+      insert(:event,
+        venue: venue,
+        date: ~D[2024-08-07],
+        title: "Bob Mintzer Deleted",
+        headliner: "Bob Mintzer",
+        deleted_at: DateHelpers.now()
+      )
+
+      refute "Bob Mintzer Deleted" in titles(Events.list_events(search: "mintzer"))
+    end
+  end
+
+  describe "search_event_titles/2" do
+    setup do
+      venue = insert(:venue, name: "Suggestion Test Venue")
+
+      insert(:event,
+        venue: venue,
+        date: ~D[2024-08-02],
+        title: "Bob Mintzer Quartet",
+        headliner: "Bob Mintzer",
+        openers: ["The Sidemen"]
+      )
+
+      insert(:event,
+        venue: venue,
+        date: ~D[2024-08-03],
+        title: "Bob Mintzer Quartet",
+        headliner: "Bob Mintzer"
+      )
+
+      insert(:event,
+        venue: venue,
+        date: ~D[2024-08-04],
+        title: "Bob Mintzer Big Band",
+        headliner: "Bob Mintzer"
+      )
+
+      insert(:event,
+        venue: venue,
+        date: ~D[2024-07-01],
+        title: "Bob Mintzer Past",
+        headliner: "Bob Mintzer"
+      )
+
+      %{venue: venue}
+    end
+
+    test "carries the openers so a suggestion matched on a support act explains itself" do
+      assert [%EventSuggestion{title: "Bob Mintzer Quartet", openers: ["The Sidemen"]}] =
+               Events.search_event_titles("sidemen")
+    end
+
+    test "suggests events matched on the headliner alone", %{venue: venue} do
+      insert(:event,
+        venue: venue,
+        date: ~D[2024-08-05],
+        title: "Jazz Wednesdays",
+        headliner: "Kalabash Trio"
+      )
+
+      assert [%EventSuggestion{title: "Jazz Wednesdays"}] =
+               Events.search_event_titles("kalabash")
+    end
+
+    test "offers every date of a multi-night run, earliest first" do
+      assert [
+               %EventSuggestion{
+                 title: "Bob Mintzer Quartet",
+                 date: ~D[2024-08-02],
+                 venue_name: "Suggestion Test Venue",
+                 openers: ["The Sidemen"]
+               },
+               %EventSuggestion{title: "Bob Mintzer Quartet", date: ~D[2024-08-03]},
+               %EventSuggestion{title: "Bob Mintzer Big Band", date: ~D[2024-08-04]}
+             ] = Events.search_event_titles("mintzer")
+    end
+
+    test "caps a long residency so it cannot fill the dropdown", %{venue: venue} do
+      for day <- 1..10 do
+        insert(:event,
+          venue: venue,
+          date: Date.add(~D[2024-09-01], day),
+          title: "Karaoke Thursdays",
+          headliner: "Karaoke Thursdays"
+        )
+      end
+
+      suggestions = Events.search_event_titles("karaoke")
+
+      assert length(suggestions) == 3
+      assert Enum.map(suggestions, & &1.date) == [~D[2024-09-02], ~D[2024-09-03], ~D[2024-09-04]]
+    end
+
+    test "counts the cap per venue, so a title running at two venues is not collapsed", %{
+      venue: venue
+    } do
+      other_venue = insert(:venue, name: "Second Suggestion Venue")
+
+      for {v, day} <- [{venue, 1}, {other_venue, 2}] do
+        insert(:event,
+          venue: v,
+          date: Date.add(~D[2024-09-10], day),
+          title: "Second Summer Festival",
+          headliner: "Second Summer Festival"
+        )
+      end
+
+      venue_names =
+        "second summer"
+        |> Events.search_event_titles()
+        |> Enum.map(& &1.venue_name)
+
+      assert venue_names == ["Suggestion Test Venue", "Second Suggestion Venue"]
+    end
+
+    test "excludes events in the past" do
+      titles =
+        "mintzer"
+        |> Events.search_event_titles()
+        |> Enum.map(& &1.title)
+
+      refute "Bob Mintzer Past" in titles
+    end
+
+    test "respects the :limit option" do
+      assert [%EventSuggestion{title: "Bob Mintzer Quartet"}] =
+               Events.search_event_titles("mintzer", limit: 1)
+    end
+
+    test "returns an empty list for blank or unusable search terms" do
+      assert [] = Events.search_event_titles(nil)
+      assert [] = Events.search_event_titles("")
+      assert [] = Events.search_event_titles("   ")
+      assert [] = Events.search_event_titles("x")
+    end
+
+    test "returns an empty list when nothing matches" do
+      assert [] = Events.search_event_titles("nonexistent band")
     end
   end
 
