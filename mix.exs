@@ -78,7 +78,7 @@ defmodule MusicListings.MixProject do
       # swoosh caps req at "~> 0.5.10 or ~> 0.6 or ~> 1.0" (still true on swoosh main),
       # so req 0.7.x is unreachable while swoosh is in the tree.
       # Bump when swoosh allows ~> 0.7.
-      {:req, "~> 0.6.1"},
+      {:req, "~> 0.7.3"},
       {:brotli, "~> 0.3.0"},
       {:meeseeks, "~> 0.18.0"},
       {:oban, "~> 2.17"},
