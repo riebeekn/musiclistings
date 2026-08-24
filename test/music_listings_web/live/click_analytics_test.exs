@@ -54,6 +54,12 @@ defmodule MusicListingsWeb.ClickAnalyticsTest do
   end
 
   describe "card click" do
+    setup do
+      FunWithFlags.enable(:show_recently_added)
+      on_exit(fn -> FunWithFlags.disable(:show_recently_added) end)
+      :ok
+    end
+
     test "is recorded when arriving via ?ref=new_this_week", %{conn: conn, event: event} do
       {:ok, _view, _html} =
         live(conn, "/events/#{event.id}/freshly-added-show?ref=new_this_week")
@@ -64,6 +70,18 @@ defmodule MusicListingsWeb.ClickAnalyticsTest do
 
     test "is not recorded without the ref param", %{conn: conn, event: event} do
       {:ok, _view, _html} = live(conn, ~p"/events/#{event.id}/freshly-added-show")
+
+      assert rows("new_this_week.card_click") == []
+    end
+
+    test "is not recorded when the rail flag is off", %{conn: conn, event: event} do
+      # ?ref=new_this_week URLs stay in circulation long after the rail stops
+      # rendering - bookmarked, shared, indexed - and counting those arrivals as
+      # rail clicks is what made the metric read a 94% card CTR with no rail.
+      FunWithFlags.disable(:show_recently_added)
+
+      {:ok, _view, _html} =
+        live(conn, "/events/#{event.id}/freshly-added-show?ref=new_this_week")
 
       assert rows("new_this_week.card_click") == []
     end

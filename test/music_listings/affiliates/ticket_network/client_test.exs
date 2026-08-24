@@ -10,7 +10,8 @@ defmodule MusicListings.Affiliates.TicketNetwork.ClientTest do
     test "walks every page reported by the catalog" do
       {:ok, items} = Client.fetch_items(@today)
 
-      # Two items on page 1, three on page 2, one of which is junk.
+      # Two items on page 1, four on page 2 - one carrying a junk date and one
+      # with no tickets left, both of which are dropped.
       assert length(items) == 4
       assert Enum.map(items, & &1.catalog_item_id) == ["1001", "1002", "1000", "1003"]
     end
@@ -41,6 +42,15 @@ defmodule MusicListings.Affiliates.TicketNetwork.ClientTest do
       {:ok, items} = Client.fetch_items(@today)
 
       refute Enum.any?(items, &(&1.name == "Malcolm Todd"))
+    end
+
+    test "drops rows with no tickets left to sell" do
+      # A `$0.00- $0.00` range is the catalog's way of saying there are no
+      # listings behind the event; its affiliate link lands on a "no tickets
+      # available" page, so it must never reach an event.
+      {:ok, items} = Client.fetch_items(@today)
+
+      refute Enum.any?(items, &(&1.name == "Sold Out Show"))
     end
 
     test "returns an error when credentials are absent" do

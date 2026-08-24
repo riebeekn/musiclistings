@@ -9,6 +9,7 @@ defmodule MusicListings.Analytics do
   """
   import Ecto.Query
 
+  alias MusicListings.Events
   alias MusicListings.Repo
   alias MusicListingsSchema.AnalyticsEvent
   alias MusicListingsUtilities.DateHelpers
@@ -107,6 +108,10 @@ defmodule MusicListings.Analytics do
   `*_resale_surfaces` split TicketNetwork clicks by where they were clicked
   ("list" vs "detail"); their totals are already in `this_week`/`prior_week`
   under `event.resale_click`.
+
+  `resale_links_live` is the current exposure behind those clicks - how many
+  upcoming events carry a resale link at all. It is a point-in-time count, not a
+  windowed one, so it describes the state at send time rather than the period.
   """
   @spec weekly_engagement(DateTime.t()) :: %{
           period_end: DateTime.t(),
@@ -119,7 +124,8 @@ defmodule MusicListings.Analytics do
           this_week_ticket_shown: %{optional(String.t() | nil) => non_neg_integer()},
           prior_week_ticket_shown: %{optional(String.t() | nil) => non_neg_integer()},
           this_week_resale_surfaces: %{optional(String.t() | nil) => non_neg_integer()},
-          prior_week_resale_surfaces: %{optional(String.t() | nil) => non_neg_integer()}
+          prior_week_resale_surfaces: %{optional(String.t() | nil) => non_neg_integer()},
+          resale_links_live: non_neg_integer()
         }
   def weekly_engagement(reference \\ DateHelpers.now()) do
     this_week_start = DateTime.add(reference, -7, :day)
@@ -146,7 +152,8 @@ defmodule MusicListings.Analytics do
           "surface",
           prior_week_start,
           this_week_start
-        )
+        ),
+      resale_links_live: Events.count_events_with_resale_link()
     }
   end
 end

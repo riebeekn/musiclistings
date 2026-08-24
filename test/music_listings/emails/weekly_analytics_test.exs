@@ -15,11 +15,50 @@ defmodule MusicListings.Emails.WeeklyAnalyticsTest do
       this_week_ticket_shown: Keyword.get(opts, :this_week_ticket_shown, %{}),
       prior_week_ticket_shown: Keyword.get(opts, :prior_week_ticket_shown, %{}),
       this_week_resale_surfaces: Keyword.get(opts, :this_week_resale_surfaces, %{}),
-      prior_week_resale_surfaces: Keyword.get(opts, :prior_week_resale_surfaces, %{})
+      prior_week_resale_surfaces: Keyword.get(opts, :prior_week_resale_surfaces, %{}),
+      resale_links_live: Keyword.get(opts, :resale_links_live, 0)
     }
   end
 
   describe "new_email/1" do
+    test "reports the ticket CTR against the prior week's, not just the click count" do
+      # Clicks rose 50% here while the rate fell, because the impression base
+      # nearly doubled - which is what happens the week ticket links are added to
+      # a batch of venues. Reporting clicks alone reads that as engagement growth.
+      email =
+        %{"event.ticket_click" => 150, "event.ticket_link_shown" => 2000}
+        |> report(%{"event.ticket_click" => 100, "event.ticket_link_shown" => 1000})
+        |> WeeklyAnalytics.new_email()
+
+      assert email.html_body =~ "7.5%"
+      assert email.html_body =~ "10.0%"
+      assert email.html_body =~ "Ticket link impressions"
+      assert email.text_body =~ "2000"
+      assert email.text_body =~ "1000"
+    end
+
+    test "reports how many events currently carry a resale link" do
+      email =
+        %{"event.resale_click" => 12}
+        |> report(%{"event.resale_click" => 40}, resale_links_live: 38)
+        |> WeeklyAnalytics.new_email()
+
+      assert email.html_body =~ "38"
+      assert email.html_body =~ "Events with a resale link"
+    end
+
+    test "does not present rail views over card clicks as a CTR" do
+      # Views count once per session, card clicks once per arrival; dividing one
+      # by the other produced a 94% "CTR" the week the rail stopped rendering.
+      email =
+        %{"new_this_week.shown" => 208, "new_this_week.card_click" => 196}
+        |> report(%{"new_this_week.shown" => 2510, "new_this_week.card_click" => 275})
+        |> WeeklyAnalytics.new_email()
+
+      refute email.html_body =~ "Card CTR"
+      assert email.html_body =~ "Different denominators"
+    end
+
     test "addresses the email to the site admin from no-reply" do
       email =
         %{"new_this_week.shown" => 100, "new_this_week.card_click" => 10}

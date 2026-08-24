@@ -13,7 +13,9 @@ defmodule MusicListingsWeb.EventLive.Show do
       canonical_slug = SEO.event_slug(event)
 
       if params["slug"] == canonical_slug do
-        maybe_track_recently_added_click(socket, params)
+        rail_enabled? = FunWithFlags.enabled?(:show_recently_added)
+
+        maybe_track_recently_added_click(socket, params, rail_enabled?)
         maybe_track_ticket_link_shown(socket, event, params)
 
         socket
@@ -70,7 +72,18 @@ defmodule MusicListingsWeb.EventLive.Show do
   # preserved across the canonicalisation redirect (see redirect_path/3), so
   # counting here attributes card_click, ticket_link_shown and ticket_click all
   # to the same canonical mount and avoids double-counting a redirected arrival.
-  defp maybe_track_recently_added_click(socket, %{"ref" => "new_this_week", "id" => event_id}) do
+  #
+  # Also gated on the rail's own feature flag. Without that, an arrival on a
+  # ?ref=new_this_week URL still in circulation - bookmarked, shared, or indexed -
+  # counts as a rail click long after the rail stopped rendering, which is exactly
+  # what produced a 94% "card CTR" in the week the flag went off. The flag is read
+  # once in mount/3 and passed in rather than checked here, per the project's
+  # rule on FunWithFlags lookups.
+  defp maybe_track_recently_added_click(
+         socket,
+         %{"ref" => "new_this_week", "id" => event_id},
+         true
+       ) do
     if connected?(socket) do
       :telemetry.execute(
         [:music_listings, :new_this_week, :card_click],
@@ -82,7 +95,7 @@ defmodule MusicListingsWeb.EventLive.Show do
     :ok
   end
 
-  defp maybe_track_recently_added_click(_socket, _params), do: :ok
+  defp maybe_track_recently_added_click(_socket, _params, _rail_enabled?), do: :ok
 
   # Records that a ticket link was actually presented on the detail page (fires
   # only when the event has a ticket_url). Paired with the event.ticket_click

@@ -59,13 +59,16 @@ defmodule MusicListings.Emails.WeeklyAnalytics do
       |> Map.put(:this_detail_ticket, count(report.this_week, @detail_ticket_click))
       |> Map.put(:this_detail_shown, count(report.this_week, @detail_ticket_shown))
       |> Map.put(:prior_detail_ticket, count(report.prior_week, @detail_ticket_click))
+      |> Map.put(:prior_detail_shown, count(report.prior_week, @detail_ticket_shown))
       # TicketNetwork (resale) clicks, split by where they were clicked. The
       # resale chip has no impression event, so there is no CTR here — just
-      # volume, and which surface is driving it.
+      # volume, which surface is driving it, and the count of events currently
+      # carrying a link as a stand-in for exposure.
       |> Map.put(:this_resale, count(report.this_week, @resale_click))
       |> Map.put(:prior_resale, count(report.prior_week, @resale_click))
       |> Map.put(:this_resale_list, count(this_resale_surfaces, "list"))
       |> Map.put(:this_resale_detail, count(this_resale_surfaces, "detail"))
+      |> Map.put(:resale_links_live, Map.get(report, :resale_links_live, 0))
 
     ~H"""
     <.h1>Weekly Analytics</.h1>
@@ -82,17 +85,20 @@ defmodule MusicListings.Emails.WeeklyAnalytics do
       <:stat label="Resale clicks">{@this_resale}</:stat>
       <:stat label="Resale from list">{@this_resale_list}</:stat>
       <:stat label="Resale from detail">{@this_resale_detail}</:stat>
+      <:stat label="Events with a resale link">{@resale_links_live}</:stat>
     </.stat_band>
 
     <.muted>
-      Ticket clicks are the primary ticket button on the event page (CTR {ctr(
+      Ticket clicks are the primary ticket button on the event page: CTR {ctr(
         @this_detail_ticket,
         @this_detail_shown
-      )} of {@this_detail_shown} pages where a ticket link was shown). Resale clicks are
-      TicketNetwork links, counted on both the listings and the event page. Resale {change_cell(
-        @this_resale,
-        @prior_resale
-      )} vs prior 7 days
+      )} of {@this_detail_shown} pages where a ticket link was shown, against {ctr(
+        @prior_detail_ticket,
+        @prior_detail_shown
+      )} of {@prior_detail_shown} the prior 7 days. Compare the rates, not the click counts -
+      adding ticket links to more venues raises both at once. Resale clicks are TicketNetwork
+      links, counted on both the listings and the event page, across the {@resale_links_live} upcoming
+      events currently carrying one. Resale {change_cell(@this_resale, @prior_resale)} vs prior 7 days
     </.muted>
 
     <.h2>New This Week rail</.h2>
@@ -103,7 +109,9 @@ defmodule MusicListings.Emails.WeeklyAnalytics do
     </.stat_band>
 
     <.muted>
-      Card CTR {ctr(@this_card, @this_shown)} · vs prior 7 days below
+      Views count once per browsing session the rail rendered in; card clicks count each
+      arrival on an event page via a rail link. Different denominators, so the ratio is not a
+      CTR - compare each against the prior 7 days below.
     </.muted>
 
     <.h2>This week vs prior week</.h2>
@@ -145,6 +153,11 @@ defmodule MusicListings.Emails.WeeklyAnalytics do
         label: "Ticket clicks",
         this: assigns.this_detail_ticket,
         prior: assigns.prior_detail_ticket
+      },
+      %{
+        label: "Ticket link impressions",
+        this: assigns.this_detail_shown,
+        prior: assigns.prior_detail_shown
       },
       %{label: "Resale clicks", this: assigns.this_resale, prior: assigns.prior_resale},
       %{label: "Rail views", this: assigns.this_shown, prior: assigns.prior_shown},
@@ -209,7 +222,8 @@ defmodule MusicListings.Emails.WeeklyAnalytics do
       this_week_ticket_shown: %{@rail_ref => 47, nil => 143},
       prior_week_ticket_shown: %{@rail_ref => 39, nil => 131},
       this_week_resale_surfaces: %{"list" => 15, "detail" => 6},
-      prior_week_resale_surfaces: %{"list" => 11, "detail" => 5}
+      prior_week_resale_surfaces: %{"list" => 11, "detail" => 5},
+      resale_links_live: 38
     }
     |> new_email()
   end

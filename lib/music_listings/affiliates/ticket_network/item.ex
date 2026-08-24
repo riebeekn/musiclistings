@@ -15,10 +15,10 @@ defmodule MusicListings.Affiliates.TicketNetwork.Item do
     | `Gtin`         | city (what we filter the catalog on)    |
     | `Mpn` / `Asin` | province / country                      |
     | `LaunchDate`   | event date, offset by a day - see below |
-    | `Text1`        | price range                             |
+    | `Text1`        | price range, and the stock signal       |
     | `Url`          | the affiliate link                      |
 
-  Two quirks matter:
+  Three quirks matter:
 
     * `LaunchDate` runs a day behind the real event date, and its *time*
       component is a placeholder (only ever 19:00 or 20:00, disagreeing with
@@ -30,8 +30,7 @@ defmodule MusicListings.Affiliates.TicketNetwork.Item do
     * A handful of rows carry nonsense years (2074, 2075, 2076 in the catalog
       as sampled).  They are dropped here.
 
-  `Text1` is not decoded at all - roughly two thirds of the catalog reports
-  `$0.00- $0.00`, so it is not usable as price data.
+    * `Text1` is useless as *price* data but is the catalog's only stock signal.
   """
   alias MusicListings.Affiliates.TicketNetwork.VenueMap
 
@@ -50,14 +49,16 @@ defmodule MusicListings.Affiliates.TicketNetwork.Item do
 
   @doc """
   Builds an item from a decoded catalog row, or returns `nil` when the row is
-  unusable (missing a name, venue, url or a sane date).
+  unusable (missing a name, venue, url or a sane date) or has no tickets left to
+  sell (see the `Text1` note above).
   """
   @spec new(map(), today :: Date.t()) :: t() | nil
   def new(row, today) do
     with {:ok, name} <- fetch_string(row, "Name"),
          {:ok, url} <- fetch_string(row, "Url"),
          {:ok, venue_label} <- fetch_venue_label(row),
-         {:ok, date} <- fetch_date(row, today) do
+         {:ok, date} <- fetch_date(row, today),
+         :ok <- check_in_stock(row) do
       %__MODULE__{
         catalog_item_id: row["CatalogItemId"],
         name: name,
@@ -97,6 +98,30 @@ defmodule MusicListings.Affiliates.TicketNetwork.Item do
       [label | _rest] when is_binary(label) -> fetch_string(%{"Labels" => label}, "Labels")
       _other -> :error
     end
+  end
+
+  # The catalog's stock signal: a row whose price range is all zeroes has no
+  # listings behind it.  Reads every amount in the range rather than matching the
+  # exact `$0.00- $0.00` string, so a change in spacing or a one-sided range
+  # doesn't silently start letting dead rows through.
+  defp check_in_stock(row) do
+    with {:ok, text} <- fetch_string(row, "Text1"),
+         true <- text |> parse_amounts() |> Enum.any?(&(&1 > 0)) do
+      :ok
+    else
+      _other -> :error
+    end
+  end
+
+  defp parse_amounts(text) do
+    ~r/\$\s*(\d+(?:\.\d+)?)/
+    |> Regex.scan(text)
+    |> Enum.flat_map(fn [_full, amount] ->
+      case Float.parse(amount) do
+        {value, _rest} -> [value]
+        :error -> []
+      end
+    end)
   end
 
   # Takes the date exactly as written, rather than parsing the full timestamp.
