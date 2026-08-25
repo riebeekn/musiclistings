@@ -1223,8 +1223,16 @@ defmodule MusicListingsWeb.CustomComponents do
 
     <%!-- break-words is load-bearing on a phone: titles routinely carry unbreakable tokens
           like "Belew/Vai/Levin/Bozzio", and browsers offer no break opportunity at a slash,
-          so at 48px one of those pushes the page wider than the screen. --%>
-    <h1 class="mt-3 font-display text-5xl font-bold leading-[0.9] break-words text-paper sm:text-6xl lg:text-7xl">
+          so at 48px one of those pushes the page wider than the screen.
+
+          leading-[1.05], not the tighter leading used by .headline: this title is mixed
+          case, so it has descenders. In Big Shoulders Display a 'g' reaches -0.140em and a
+          cap 'T' reaches +0.800em, so consecutive lines only clear when line-height >=
+          0.94em. The old leading-[0.9] overlapped them by 0.04em (~2px at text-5xl) and
+          "…: The / Tour" collided. 1.05 is the shared value for mixed-case display type
+          across the app (see the event card titles). .headline can stay far tighter because
+          it is uppercase — no descenders at all. --%>
+    <h1 class="mt-3 font-display text-5xl font-bold leading-[1.05] break-words text-paper sm:text-6xl lg:text-7xl">
       {@event.title}
     </h1>
     <p
@@ -1525,7 +1533,7 @@ defmodule MusicListingsWeb.CustomComponents do
   defp recently_added_card_body(assigns) do
     ~H"""
     <p class="kicker truncate text-paper-dim">{@event.venue.name}</p>
-    <h3 class="mt-2 line-clamp-2 min-h-[2lh] font-display text-xl font-bold leading-[0.95] text-paper transition-colors group-hover:text-spotlight sm:text-2xl">
+    <h3 class="mt-2 line-clamp-2 min-h-[2lh] font-display text-xl font-bold leading-[1.05] text-paper transition-colors group-hover:text-spotlight sm:text-2xl">
       {@event.title}
     </h3>
     <p class="mt-2 flex items-center gap-1.5 font-mono text-sm font-semibold text-spotlight-deep [font-variant-numeric:tabular-nums]">
@@ -1564,7 +1572,7 @@ defmodule MusicListingsWeb.CustomComponents do
             <.event_venue venue={@event.venue} />
             <.event_age_restriction age_restriction={@event.age_restriction} />
           </div>
-          <h3 class="font-display text-2xl font-bold leading-[0.95] text-paper transition-colors group-hover:text-spotlight sm:text-3xl">
+          <h3 class="font-display text-2xl font-bold leading-[1.05] text-paper transition-colors group-hover:text-spotlight sm:text-3xl">
             <.event_title_link event_info={@event}>
               {@event.title}
             </.event_title_link>

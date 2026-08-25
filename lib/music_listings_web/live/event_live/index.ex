@@ -367,7 +367,7 @@ defmodule MusicListingsWeb.EventLive.Index do
       <p class="kicker flex items-center gap-2">
         <span class="inline-block h-2 w-8 bg-spotlight"></span> Toronto · Live Music Listings
       </p>
-      <h1 class="headline mt-4 text-[3.25rem] leading-[0.86] text-paper sm:text-7xl lg:text-8xl">
+      <h1 class="headline mt-4 text-[3.25rem] text-paper sm:text-7xl lg:text-8xl">
         What's <span class="text-spotlight glow">On</span> <br class="hidden sm:block" />Tonight
       </h1>
       <p class={[
