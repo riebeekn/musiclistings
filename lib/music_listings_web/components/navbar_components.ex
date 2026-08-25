@@ -24,8 +24,8 @@ defmodule MusicListingsWeb.NavbarComponents do
   """
   def navbar(assigns) do
     ~H"""
+    <.ticker />
     <header class="sticky top-0 z-50">
-      <.ticker />
       <nav class="bg-ink/85 backdrop-blur-xl border-b border-hairline">
         <.mobile_updated_banner current_user={@current_user} />
         <.main_menu current_user={@current_user} />
