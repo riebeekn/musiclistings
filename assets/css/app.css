@@ -150,12 +150,25 @@
     background-image:
       radial-gradient(120% 60% at 50% -10%, color-mix(in oklab, var(--color-spotlight) 7%, transparent), transparent 60%);
     background-attachment: fixed;
+    /* Containing block for the grain layer below, so it spans the whole
+       document rather than resolving against the initial containing block
+       (which is viewport-sized and would leave everything below the fold
+       ungrained). Safe for the app's `fixed` overlays — modals, the bottom
+       sheet, flash toasts — since `relative` does not create a containing
+       block for `position: fixed`. */
+    position: relative;
   }
 
-  /* Film grain over everything (cheap, GPU-friendly, pointer-transparent). */
+  /* Film grain over everything (cheap, GPU-friendly, pointer-transparent).
+     Deliberately `absolute`, NOT `fixed`: on iOS Safari a full-viewport
+     `position: fixed` layer makes the page composite edge-to-edge, which let
+     scrolling content paint into the status-bar strip above the sticky
+     header. Confirmed on-device — dropping `mix-blend-mode` did not help,
+     only dropping `fixed` did. The trade-off is that the grain now scrolls
+     with the page instead of sitting still. */
   body::after {
     content: "";
-    position: fixed;
+    position: absolute;
     inset: 0;
     z-index: 60;
     pointer-events: none;

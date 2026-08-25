@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- keep in sync with --color-ink in assets/css/app.css -->
+    <meta name="theme-color" content="#0b0b0c" />
     <meta name="csrf-token" content={get_csrf_token()} />
     <.live_title prefix=" Toronto Music Listings · ">
       {assigns[:page_title] || "Listings"}
