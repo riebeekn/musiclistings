@@ -8,6 +8,7 @@ written in [Elixir](https://elixir-lang.org/) and [Phoenix LiveView](https://hex
 - [Running the app locally](#running-the-app-locally)
   - [Tests and code quality](#tests-and-code-quality)
   - [Helper scripts](#helper-scripts)
+  - [Mix tasks](#mix-tasks)
 - [Admin functionality](#admin-functionality)
 - [Feature flags](#feature-flags)
 - [HTTP Client config](#http-client-config)
@@ -17,6 +18,8 @@ written in [Elixir](https://elixir-lang.org/) and [Phoenix LiveView](https://hex
   - [Parsing modules](#parsing-modules)
   - [Adding a new venue](#adding-a-new-venue)
   - [Venues Render can't reach](#venues-render-cant-reach)
+- [Affiliate ticket links](#affiliate-ticket-links)
+- [Analytics](#analytics)
 - [Monitoring](#monitoring)
 - [Hosting and Infrastructure](#hosting-and-infrastructure)
   - [GitHub Actions](#github-actions)
@@ -39,7 +42,8 @@ Erlang / Elixir versions are pinned in `.tool-versions` ([asdf](https://asdf-vm.
 
 - Copy `.envrc_template` to `.envrc` and update / source the required environment variables (or install [direnv](https://direnv.net/docs/installation.html)):
   - `ADMIN_EMAIL` - the email address the application will send communications to.  The application sends an email summary of the nightly event population runs and also when an event is submitted via the UI.  In development these emails are not actually sent, they are available at [http://localhost:4000/dev/mailbox](http://localhost:4000/dev/mailbox) instead.  See [http://localhost:4000/dev/gallery](http://localhost:4000/dev/gallery) for a preview of the emails.
-  - `PROD_DB_URL` - Render's **external** Postgres connection string.  Only needed for the [helper scripts](#helper-scripts) that talk to the production database (`bin/pull-prod-db.sh`, `bin/crawl-venue.sh`); the app itself doesn't need it.  Requires your IP to be on the Render database's inbound allowlist.
+  - `PROD_DB_URL` - Render's **external** Postgres connection string.  Only needed for the [helper scripts](#helper-scripts) that talk to the production database (`bin/pull-prod-db.sh`, `bin/crawl-venue.sh`); the app itself doesn't need it.  Requires your IP to be on the Render database's inbound allowlist (see [Terraform](#terraform)).
+  - `TICKET_NETWORK_ACCOUNT_SID` / `TICKET_NETWORK_AUTH_TOKEN` - Impact.com credentials for the TicketNetwork affiliate catalog, see [Affiliate ticket links](#affiliate-ticket-links).  Optional - leave them unset and affiliate matching is skipped entirely.
 - Install dependencies and set up the database: `mix setup` (this runs `deps.get`, `ecto.setup` and builds assets).
 - Run the server (`iex -S mix phx.server`).  Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 - A fresh local database has venues but no events.  To populate events, either:
@@ -55,7 +59,7 @@ mix coveralls.html      # test suite with a coverage report
 mix check               # format, credo --strict, compile --warnings-as-errors, xref cycle checks, dialyzer, docs
 ```
 
-Both `mix check` and `mix test` should be run and passing before opening a PR - CI runs the same checks.
+Both `mix check` and `mix test` should be run and passing before opening a PR.  CI (`.github/workflows/ci.yml`) runs all of the above and additionally audits dependencies and security: `mix deps.audit` (with `.mix_audit_ignore`), `mix hex.audit`, `mix deps.unlock --check-unused`, `mix sobelow`, and [zizmor](https://github.com/zizmorcore/zizmor) over the workflow files themselves.
 
 ### Helper scripts
 
@@ -64,6 +68,12 @@ The scripts in `bin/` each document their own usage in a header comment:
 - `bin/pull-prod-db.sh` - dumps the production database and restores it into the local dev database, so you can work against real crawl data.
 - `bin/crawl-venue.sh` - crawls the given venues from your machine and writes the results **straight to production**.  See [Venues Render can't reach](#venues-render-cant-reach).
 - `bin/start-ngrok-server.sh` / `bin/stop-ngrok-server.sh` - exposes the local dev server over an ngrok tunnel and prints a QR code, for checking mobile-only behaviour without deploying.
+
+### Mix tasks
+
+- `mix crawl_venue [VenueName]Parser ...` - crawls the given venues against whichever database the app is pointed at.  Venues are identified by `parser_module_name`, not id.  See [Venues Render can't reach](#venues-render-cant-reach).
+- `mix match_ticket_network [--dry-run] [--verbose]` - runs the TicketNetwork affiliate match by hand.  See [Affiliate ticket links](#affiliate-ticket-links).
+- `mix list_live_nation_venues` - dumps the LiveNation venues that actually have tracked events to a CSV.  LiveNation lists ~800 Toronto venues but only ~50 have events, so this is the shortlist worth writing parsers for.
 
 ## Admin functionality
 
@@ -86,7 +96,10 @@ Now you can login at `/users/log_in`.
 
 Feature flags are handled by [FunWithFlags](https://github.com/tompave/fun_with_flags), persisted via Ecto in the `feature_flags` table (no Redis).  The in-memory cache is deliberately **disabled** (see `config/config.exs`) so that toggles take effect immediately with no staleness and no need for cross-node cache busting.  The tradeoff is that every check hits the database, so check a flag once per request and reuse the boolean rather than calling `FunWithFlags.enabled?/1` in a loop.
 
-Flags can be toggled from the admin UI at `/feature_flags`.
+Flags can be toggled from the admin UI at `/feature_flags`.  The flags currently in use are:
+
+- `show_recently_added` - the "New This Week" rail on the events pages.
+- `show_resale_tickets` - the TicketNetwork resale ticket links, see [Affiliate ticket links](#affiliate-ticket-links).
 
 ## HTTP Client config
 
@@ -125,7 +138,7 @@ Once event population has concluded an email is sent to the configured `ADMIN_EM
 Oban still runs inside the web service and handles the scheduled jobs that aren't the crawl (see the crontab in `config/config.exs`):
 
 - `ParserHealthWorker` - daily; scans recent crawl history for venues whose parser yield has dropped off and emails the findings to `ADMIN_EMAIL`.  This is how a silently broken parser gets noticed.
-- `NewThisWeekAnalyticsWorker` - Mondays; emails the weekly "New This Week" rail traction report.
+- `WeeklyAnalyticsWorker` - Mondays; emails the weekly engagement digest built from the [analytics](#analytics) events - week over week pageviews, ticket link impressions, ticket clicks and resale clicks.
 - `PurgeEventsWorker` - purges historical events.  Currently switched off (its crontab entry is commented out).
 
 ### Parsing modules
@@ -162,6 +175,31 @@ These sites *are* reachable from a home/residential connection, so they get craw
 That runs `mix crawl_venue` with `USE_PROD_DB=true`, which points the dev app at the production database via `$PROD_DB_URL` (see `config/dev.exs`) so the results land in prod.  Venues are identified by their `parser_module_name` rather than their id, since ids are assigned per environment.  The nightly crawl summary email prints the exact command to run for any venue that reported "No events found".
 
 Currently affected: **Wiggle Room** and **Junction Underground** (both on the same Hostinger box).
+
+## Affiliate ticket links
+
+Events can carry a resale ticket link from TicketNetwork, sourced from their [Impact.com](https://impact.com/) affiliate catalog and stored on `events.ticketnetwork_url`.  The code lives in `lib/music_listings/affiliates/ticket_network.ex` and `lib/music_listings/affiliates/ticket_network/`.
+
+Matching runs at the end of the nightly crawl - `DataRetrievalWorker` calls `TicketNetwork.run_quietly/1` once the crawl has finished, so it always matches against fresh event data.  The crawler itself deliberately leaves the column alone: re-parsing a venue page tells us nothing about TicketNetwork's inventory.  The pass is self-healing, in that every upcoming event at a covered venue is reconsidered on each run and any event that no longer matches has its link cleared, so a delisted product doesn't leave a dead link behind.  A TicketNetwork failure is logged and reported in the crawl summary email rather than raised - an outage there must not cost us the crawl summary.
+
+The catalog is only fetched when `TICKET_NETWORK_ACCOUNT_SID` and `TICKET_NETWORK_AUTH_TOKEN` are set; without them the pass reports that it was skipped and exits cleanly.  In production these are set on the Render **cron** service only, as the web service never calls the API.
+
+Which venues are eligible, and how a catalog item gets matched to one of our events, lives in `venue_map.ex` and `matcher.ex`.  After editing either, check the effect without writing anything:
+
+```
+mix match_ticket_network --dry-run
+mix match_ticket_network --dry-run --verbose
+```
+
+Whether the links are actually rendered is controlled by the `show_resale_tickets` [feature flag](#feature-flags).
+
+## Analytics
+
+First-party product analytics live in `MusicListings.Analytics` and are stored in the `analytics_events` table as a name plus a free-form metadata map.  Call sites emit a `:telemetry` event and `MusicListings.Analytics.TelemetryHandler` (attached at boot in `lib/music_listings/application.ex`) persists it, which keeps the measurement layer decoupled from any particular storage or vendor.  The handler swallows and logs its own failures, since `:telemetry` permanently detaches a handler that raises.
+
+The events currently recorded are `new_this_week.shown`, `new_this_week.card_click`, `event.ticket_link_shown`, `event.ticket_click` and `event.resale_click`.
+
+`WeeklyAnalyticsWorker` turns these into the Monday engagement email (see [Background jobs](#background-jobs)).  `MusicListings.Analytics.counts/0` is handy for a quick read from `iex`.
 
 ## Monitoring
 

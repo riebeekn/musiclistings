@@ -42,7 +42,7 @@ Terraform workspace, so the first step is to switch to or create the workspace.
 
 For example:
 ```
-terraform create workspace new staging
+terraform workspace new staging
 ```
 
 Or if the workspace already exists:
@@ -66,6 +66,12 @@ Instead of natively running terraform apply, plan, and destroy commands use the
 fetch the environment-specific variables live from the 1Password `<workspace>.tfvars`
 item (into a temp file that is deleted on exit) based on the current workspace, so
 nothing sensitive is written to disk.
+
+### To preview changes
+
+```
+./tf_plan.sh
+```
 
 ### To bring up the infrastructure
 
@@ -102,6 +108,44 @@ So for example the value of this variable could be `staging:crn-123343,qa:crn-12
 Add the GitHub repository action variables at the following URL:
 https://the_github_repo_url/settings/variables/actions.  Add the `RENDER_API_KEY`
 secret at https://the_github_repo_url/settings/secrets/actions.
+
+### Database access and the IP allow list
+
+`postgres.tf` sets the Render database's `ip_allow_list` to a single entry: the public
+IP of the machine running the apply, looked up at plan/apply time via
+`data "http" "myip"`.  Two consequences worth knowing:
+
+- Nothing else can reach the database externally.  The Render services themselves use
+  the *internal* connection string, so they are unaffected.
+- When your home IP changes, external access stops working - the fix is to re-run
+  `./tf_apply.sh` from the machine that needs access, which refreshes the entry.
+
+This is what the root README's `PROD_DB_URL` (used by `bin/pull-prod-db.sh` and
+`bin/crawl-venue.sh`) depends on.  The connection string itself comes from the
+`db_connection_info` output, which is marked sensitive, so read it with:
+
+```
+terraform output -json db_connection_info
+```
+
+### Application environment variables
+
+The application's runtime environment variables are set by Terraform from the
+`app_*` variables in the `<workspace>.tfvars` note (see `variables.tf`) - admin email,
+Brevo, Turnstile, Honeybadger, AppSignal and the TicketNetwork affiliate credentials.
+
+The split between the two services is deliberate:
+
+- `web_service.tf` - the Phoenix web service.
+- `cron.tf` - the nightly crawler.  It runs the same image with `CRAWL_AND_EXIT=true`,
+  and it is the only service given `TICKET_NETWORK_ACCOUNT_SID` /
+  `TICKET_NETWORK_AUTH_TOKEN`, since affiliate matching happens at the end of the
+  crawl and the web service never calls that API.  Its schedule comes from
+  `render_cron_service_schedule`.
+
+Adding a new environment variable to the app therefore means adding it to
+`variables.tf`, to the relevant service's `env_vars` block, and to each workspace's
+1Password note.
 
 ### To destroy the infrastructure
 
