@@ -60,13 +60,13 @@ defmodule MusicListings.Parsing.VenueParsers.FunctionBarParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "6a35cc3b0af6370eee397edc" == FunctionBarParser.event_id(event)
+      assert "/live-music/2026/07/17/the-bad-apples" == FunctionBarParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "6a35cc3b0af6370eee397edc" == FunctionBarParser.ignored_event_id(event)
+      assert "/live-music/2026/07/17/the-bad-apples" == FunctionBarParser.ignored_event_id(event)
     end
   end
 

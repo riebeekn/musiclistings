@@ -60,13 +60,14 @@ defmodule MusicListings.Parsing.VenueParsers.PaintedLadyParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "6a050e9b322a5531c2321cd7" == PaintedLadyParser.event_id(event)
+      assert "/shows-1/makenzy-williamson-album-release" == PaintedLadyParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "6a050e9b322a5531c2321cd7" == PaintedLadyParser.ignored_event_id(event)
+      assert "/shows-1/makenzy-williamson-album-release" ==
+               PaintedLadyParser.ignored_event_id(event)
     end
   end
 

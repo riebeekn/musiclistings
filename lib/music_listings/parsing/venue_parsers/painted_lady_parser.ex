@@ -57,9 +57,7 @@ defmodule MusicListings.Parsing.VenueParsers.PaintedLadyParser do
   defdelegate ticket_url(event), to: SquareSpaceJsonParser
 
   @impl true
-  # The Painted Lady's events collection lives at /shows-1 (not /events), so the
-  # base parser's details_url would 404 - use the item's own fullUrl instead.
   def details_url(event) do
-    @base_url <> event["fullUrl"]
+    SquareSpaceJsonParser.details_url(event, @base_url)
   end
 end

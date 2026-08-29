@@ -60,13 +60,13 @@ defmodule MusicListings.Parsing.VenueParsers.PistonParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "6a089fe2c054f434c6bccd83" == PistonParser.event_id(event)
+      assert "/calendar/zjxsxq37dvy0xw4m9u5lien1zkylb3" == PistonParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "6a089fe2c054f434c6bccd83" == PistonParser.ignored_event_id(event)
+      assert "/calendar/zjxsxq37dvy0xw4m9u5lien1zkylb3" == PistonParser.ignored_event_id(event)
     end
   end
 

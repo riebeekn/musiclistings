@@ -49,8 +49,12 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.SquareSpaceJsonParser d
     end
   end
 
+  # SquareSpace's GetItemsByMonth response no longer carries the item's `id`,
+  # `urlId` or top-level `startDate` / `endDate` - the trimmed item only has
+  # `fullUrl` and a `structuredContent` map.  `fullUrl` is unique within a
+  # collection, so it stands in as the event identity.
   def event_id(event) do
-    event["id"]
+    event["fullUrl"]
   end
 
   def ignored_event_id(event) do
@@ -68,7 +72,8 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.SquareSpaceJsonParser d
   end
 
   def event_date(event) do
-    event["startDate"]
+    event
+    |> start_date_ms()
     |> DateTime.from_unix!(:millisecond)
     |> DateHelpers.to_eastern_date()
   end
@@ -78,7 +83,8 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.SquareSpaceJsonParser d
   end
 
   def event_time(event) do
-    event["startDate"]
+    event
+    |> start_date_ms()
     |> DateTime.from_unix!(:millisecond)
     |> DateHelpers.to_eastern_datetime()
     |> DateTime.to_time()
@@ -104,7 +110,14 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.SquareSpaceJsonParser d
   end
 
   def details_url(event, base_url) do
-    "#{base_url}/events/#{event["urlId"]}"
+    base_url <> event["fullUrl"]
+  end
+
+  # The start timestamp now lives in `structuredContent`.  Older responses
+  # (and any that SquareSpace reverts) carry an identical copy at the top
+  # level, so fall back to it rather than assuming one shape.
+  defp start_date_ms(event) do
+    get_in(event, ["structuredContent", "startDate"]) || event["startDate"]
   end
 
   defp links(nil), do: []

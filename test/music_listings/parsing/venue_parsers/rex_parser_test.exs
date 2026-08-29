@@ -60,13 +60,13 @@ defmodule MusicListings.Parsing.VenueParsers.RexParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "66953788463e0d7186889314" == RexParser.event_id(event)
+      assert "/events/adrean-farrugia-brad-goode-quintet" == RexParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "66953788463e0d7186889314" == RexParser.ignored_event_id(event)
+      assert "/events/adrean-farrugia-brad-goode-quintet" == RexParser.ignored_event_id(event)
     end
   end
 

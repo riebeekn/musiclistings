@@ -57,9 +57,7 @@ defmodule MusicListings.Parsing.VenueParsers.FunctionBarParser do
   defdelegate ticket_url(event), to: SquareSpaceJsonParser
 
   @impl true
-  # Function Bar's events collection lives at /live-music (not /events), so the
-  # base parser's details_url would 404 - use the item's own fullUrl instead.
   def details_url(event) do
-    @base_url <> event["fullUrl"]
+    SquareSpaceJsonParser.details_url(event, @base_url)
   end
 end

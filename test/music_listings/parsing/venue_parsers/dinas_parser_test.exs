@@ -60,13 +60,13 @@ defmodule MusicListings.Parsing.VenueParsers.DinasParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "68d1a6893043e954726b8b6c" == DinasParser.event_id(event)
+      assert "/events/mbgcamilleleon" == DinasParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "68d1a6893043e954726b8b6c" == DinasParser.ignored_event_id(event)
+      assert "/events/mbgcamilleleon" == DinasParser.ignored_event_id(event)
     end
   end
 
