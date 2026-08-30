@@ -2,6 +2,7 @@ defmodule MusicListingsWeb.EventLive.Show do
   use MusicListingsWeb, :live_view
   use Goal
 
+  alias MusicListings.Accounts.User
   alias MusicListingsUtilities.DateHelpers
   alias MusicListingsWeb.AnalyticsTracking
   alias MusicListingsWeb.SEO
@@ -21,6 +22,7 @@ defmodule MusicListingsWeb.EventLive.Show do
         socket
         |> assign(:ref, params["ref"])
         |> assign(:resale_enabled, FunWithFlags.enabled?(:show_resale_tickets))
+        |> assign_flagged(event)
         |> assign_event_seo(event)
         |> ok()
       else
@@ -62,8 +64,56 @@ defmodule MusicListingsWeb.EventLive.Show do
     noreply(socket)
   end
 
+  # Admin curation controls.  Both actions are authorised in the context, not
+  # here - the button is merely hidden from non-admins.
+  def handle_event(
+        "delete-event",
+        %{"id" => event_id},
+        %{assigns: %{current_user: current_user}} = socket
+      ) do
+    current_user
+    |> MusicListings.delete_event(event_id)
+    |> case do
+      {:ok, deleted_event} ->
+        # Re-derive the notice so the page immediately says the event is no
+        # longer listed, and drop the dismiss button with the flag it resolved.
+        socket
+        |> assign(:event, %{socket.assigns.event | deleted_at: deleted_event.deleted_at})
+        |> assign(:notice, notice_for_event(deleted_event))
+        |> assign(:flagged?, false)
+        |> noreply()
+
+      _no_change ->
+        noreply(socket)
+    end
+  end
+
+  def handle_event(
+        "dismiss-event-flags",
+        %{"id" => event_id},
+        %{assigns: %{current_user: current_user}} = socket
+      ) do
+    current_user
+    |> MusicListings.dismiss_event_flags(event_id)
+    |> case do
+      {:ok, _count} -> socket |> assign(:flagged?, false) |> noreply()
+      _no_change -> noreply(socket)
+    end
+  end
+
   defparams :show do
     required(:id, :integer)
+  end
+
+  # Only admins can act on a flag, so only admins pay for the lookup.
+  defp assign_flagged(socket, event) do
+    flagged? =
+      case socket.assigns[:current_user] do
+        %User{role: :admin} -> MusicListings.event_flagged?(event.id)
+        _user_or_nil -> false
+      end
+
+    assign(socket, :flagged?, flagged?)
   end
 
   # Emitted when a visitor arrives via a "New This Week" rail card (the rail
@@ -139,7 +189,12 @@ defmodule MusicListingsWeb.EventLive.Show do
       <.event_notice :if={@notice} message={@notice} />
       <.event_header event={@event} />
       <.event_details_list event={@event} />
-      <.event_actions event={@event} show_resale={@resale_enabled} />
+      <.event_actions
+        event={@event}
+        show_resale={@resale_enabled}
+        current_user={@current_user}
+        flagged?={@flagged?}
+      />
     </article>
     """
   end

@@ -9,6 +9,7 @@ defmodule MusicListings.Workers.DataRetrievalWorker do
 
   alias MusicListings.Affiliates.TicketNetwork
   alias MusicListings.Crawler
+  alias MusicListings.Curation
   alias MusicListings.Emails.LatestCrawlResults
   alias MusicListings.Mailer
   alias MusicListings.Repo
@@ -27,6 +28,11 @@ defmodule MusicListings.Workers.DataRetrievalWorker do
         # are logged and handed to the email to report rather than raised - a
         # TicketNetwork outage must not cost us the crawl summary email.
         ticket_network_stats = TicketNetwork.run_quietly()
+
+        # Also after the crawl, for the same reason: it reviews what the crawl
+        # just wrote.  The return value is ignored - the email reads the open
+        # flags itself, so a failure here still reports the standing queue.
+        Curation.run_quietly()
 
         crawl_summary
         |> LatestCrawlResults.new_email(nil, ticket_network_stats)

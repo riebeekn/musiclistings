@@ -5,11 +5,13 @@ defmodule MusicListings.Emails.LatestCrawlResults do
   use MusicListings.Mailer
 
   alias MusicListings.Affiliates.TicketNetwork
+  alias MusicListings.Curation
   alias MusicListings.Events
   alias MusicListings.Repo
   alias MusicListingsSchema.CrawlError
   alias MusicListingsSchema.CrawlSummary
   alias MusicListingsSchema.Event
+  alias MusicListingsSchema.EventFlag
   alias MusicListingsSchema.Venue
   alias MusicListingsSchema.VenueCrawlSummary
   alias MusicListingsUtilities.DateHelpers
@@ -24,11 +26,17 @@ defmodule MusicListings.Emails.LatestCrawlResults do
   after the crawl: its `Stats` on success, `{:error, reason}` when it failed, or
   `:skipped`/`nil` when it never ran.  A failure is reported; a skip is not.
   """
-  def new_email(crawl_summary, added_events \\ nil, ticket_network_result \\ nil) do
+  def new_email(
+        crawl_summary,
+        added_events \\ nil,
+        ticket_network_result \\ nil,
+        review_flags \\ nil
+      ) do
     crawl_summary =
       Repo.preload(crawl_summary, crawl_errors: [:venue], venue_crawl_summaries: [:venue])
 
     added_events = added_events || Events.list_events_added_during_crawl(crawl_summary)
+    review_flags = review_flags || Curation.list_open_flags()
 
     new()
     |> to_site_admin()
@@ -38,7 +46,8 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       mjml(%{
         crawl_summary: crawl_summary,
         added_events: added_events,
-        ticket_network_result: ticket_network_result
+        ticket_network_result: ticket_network_result,
+        review_flags: review_flags
       })
     )
   end
@@ -62,6 +71,11 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       |> Map.put(:no_events_venues, no_events_venues(assigns.crawl_summary.crawl_errors))
       |> Map.put(:ticket_network_stats, ticket_network_stats(ticket_network_result))
       |> Map.put(:ticket_network_error, ticket_network_error(ticket_network_result))
+      |> Map.put(:title_flags, Enum.filter(assigns.review_flags, &(&1.type == :non_event_title)))
+      |> Map.put(
+        :duplicate_flags,
+        Enum.filter(assigns.review_flags, &(&1.type == :duplicate_event))
+      )
 
     ~H"""
     <.h1>Nightly Crawl Report</.h1>
@@ -196,6 +210,46 @@ defmodule MusicListings.Emails.LatestCrawlResults do
           "item"
         )} matched · {@ticket_network_stats.unmatched_items} unmatched · {@ticket_network_stats.untracked_items} at venues we don't track
       </.muted>
+    <% end %>
+
+    <%= if @title_flags != [] do %>
+      <.h2>Needs review — not a show ({Enum.count(@title_flags)})</.h2>
+      <.muted>
+        Titles that read as a venue status rather than a performance. Open one to delete it, or
+        mark it as fine to drop it from this list.
+      </.muted>
+      <.table rows={@title_flags}>
+        <:col :let={flag} label="Venue">
+          <span style="color:#a8a49a;">{flag.event.venue.name}</span>
+        </:col>
+        <:col :let={flag} label="Date">
+          <span style="white-space:nowrap;">{DateHelpers.format_date(flag.event.date)}</span>
+        </:col>
+        <:col :let={flag} label="Event">
+          <.event_link event={flag.event} />
+        </:col>
+      </.table>
+    <% end %>
+
+    <%= if @duplicate_flags != [] do %>
+      <.h2>Needs review — possible duplicates ({Enum.count(@duplicate_flags)})</.h2>
+      <.muted>
+        The same show listed twice on one date, either at one venue or across two rooms in the
+        same building. Delete whichever of the pair is redundant.
+      </.muted>
+      <.table rows={@duplicate_flags}>
+        <:col :let={flag} label="Date">
+          <span style="white-space:nowrap;">{DateHelpers.format_date(flag.event.date)}</span>
+        </:col>
+        <:col :let={flag} label="Listing">
+          <span style="color:#a8a49a;">{flag.event.venue.name}</span><br />
+          <.event_link event={flag.event} />
+        </:col>
+        <:col :let={flag} label="Duplicate of">
+          <span style="color:#a8a49a;">{flag.related_event.venue.name}</span><br />
+          <.event_link event={flag.related_event} />
+        </:col>
+      </.table>
     <% end %>
 
     <%= if @added_event_count > 0 do %>
@@ -349,10 +403,21 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       venue_names: %{1 => v1.name, 2 => v2.name}
     }
 
+    # flags awaiting review
+    review_flags = [
+      build_title_flag(1, build_event(v1, "CLOSED MONDAY - WEDNESDAY", ~D[2026-08-31], 101)),
+      build_title_flag(2, build_event(v2, "Private Booking", ~D[2026-09-04], 102)),
+      build_duplicate_flag(
+        3,
+        build_event(v1, "Slow Teeth with Waxlimbs", ~D[2026-09-06], 103),
+        build_event(v2, "Slow Teeth w/ Waxlimbs", ~D[2026-09-06], 104)
+      )
+    ]
+
     build_crawl_summary()
     |> Map.put(:crawl_errors, [ce1, ce2, ce3, ce4, ce5])
     |> Map.put(:venue_crawl_summaries, [vcs1, vcs2, vcs3, vcs4])
-    |> new_email(added_events, ticket_network_stats)
+    |> new_email(added_events, ticket_network_stats, review_flags)
   end
 
   def preview_details do
@@ -411,12 +476,35 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     }
   end
 
-  defp build_event(venue, title, date) do
+  defp build_event(venue, title, date, id \\ nil) do
     %Event{
+      id: id,
       venue: venue,
       venue_id: venue.id,
       title: title,
       date: date
+    }
+  end
+
+  defp build_title_flag(id, event) do
+    %EventFlag{
+      id: id,
+      event: event,
+      event_id: event.id,
+      type: :non_event_title,
+      reason: "Title looks like a venue status rather than a show"
+    }
+  end
+
+  defp build_duplicate_flag(id, event, related_event) do
+    %EventFlag{
+      id: id,
+      event: event,
+      event_id: event.id,
+      related_event: related_event,
+      related_event_id: related_event.id,
+      type: :duplicate_event,
+      reason: "Also listed on this date in the same building"
     }
   end
 

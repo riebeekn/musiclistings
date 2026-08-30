@@ -1314,6 +1314,8 @@ defmodule MusicListingsWeb.CustomComponents do
   """
   attr :event, :any, required: true
   attr :show_resale, :boolean, default: false
+  attr :current_user, :any, default: nil
+  attr :flagged?, :boolean, default: false
 
   def event_actions(assigns) do
     ~H"""
@@ -1359,6 +1361,24 @@ defmodule MusicListingsWeb.CustomComponents do
           class="size-4"
         /> TicketNetwork
       </a>
+      <.when_admin current_user={@current_user}>
+        <button
+          phx-click="delete-event"
+          phx-value-id={@event.id}
+          data-confirm="Are you sure?"
+          class="inline-flex h-9 items-center justify-center rounded border border-hairline px-4 font-mono text-xs font-medium uppercase tracking-widest text-paper-dim transition-colors hover:border-ember hover:text-ember"
+        >
+          Delete
+        </button>
+        <button
+          :if={@flagged?}
+          phx-click="dismiss-event-flags"
+          phx-value-id={@event.id}
+          class="inline-flex h-9 items-center justify-center rounded border border-hairline px-4 font-mono text-xs font-medium uppercase tracking-widest text-paper-dim transition-colors hover:border-paper-dim hover:text-paper"
+        >
+          Not an issue
+        </button>
+      </.when_admin>
     </div>
     """
   end

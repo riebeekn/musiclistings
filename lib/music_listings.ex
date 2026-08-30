@@ -4,6 +4,7 @@ defmodule MusicListings do
   """
   alias MusicListings.Accounts.User
   alias MusicListings.Crawler
+  alias MusicListings.Curation
   alias MusicListings.Events
   alias MusicListings.Events.EventInfo
   alias MusicListings.Events.EventSuggestion
@@ -80,6 +81,13 @@ defmodule MusicListings do
 
   @spec delete_event(User | nil, pos_integer()) :: {:ok, Event} | {:error, :not_allowed}
   defdelegate delete_event(user, event_id), to: Events
+
+  @spec event_flagged?(pos_integer()) :: boolean()
+  defdelegate event_flagged?(event_id), to: Curation, as: :flagged?
+
+  @spec dismiss_event_flags(User | nil, pos_integer()) ::
+          {:ok, non_neg_integer()} | {:error, :not_allowed}
+  defdelegate dismiss_event_flags(user, event_id), to: Curation, as: :dismiss_flags
 
   @spec delete_submitted_events(User, list()) ::
           {:ok, non_neg_integer()} | {:error, :not_allowed}

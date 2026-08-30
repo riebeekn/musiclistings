@@ -158,6 +158,40 @@ defmodule MusicListings.Emails.LatestCrawlResultsTest do
     end
   end
 
+  describe "new_email/4 - review queue" do
+    test "lists flagged titles, linked to the event page" do
+      venue = insert(:venue, name: "Flagged Test Hall")
+      event = insert(:event, venue: venue, title: "PRIVATE EVENT", date: ~D[2026-09-04])
+
+      MusicListings.Curation.run()
+
+      email = [] |> crawl_summary() |> LatestCrawlResults.new_email()
+
+      assert email.html_body =~ "Needs review — not a show (1)"
+      assert email.html_body =~ "PRIVATE EVENT"
+      assert email.html_body =~ "https://torontomusiclistings.com/events/#{event.id}"
+    end
+
+    test "lists duplicate pairs with both sides" do
+      venue = insert(:venue, name: "Duplicate Test Hall")
+      insert(:event, venue: venue, title: "Kettama", date: ~D[2026-09-05])
+      insert(:event, venue: venue, title: "Kettama", date: ~D[2026-09-05])
+
+      MusicListings.Curation.run()
+
+      email = [] |> crawl_summary() |> LatestCrawlResults.new_email()
+
+      assert email.html_body =~ "Needs review — possible duplicates (1)"
+      assert email.html_body =~ "Duplicate Test Hall"
+    end
+
+    test "omits both sections entirely when nothing is flagged" do
+      email = [] |> crawl_summary() |> LatestCrawlResults.new_email(nil, nil, [])
+
+      refute email.html_body =~ "Needs review"
+    end
+  end
+
   describe "new_email/3 - TicketNetwork failures" do
     defp result_email(result) do
       [] |> crawl_summary() |> LatestCrawlResults.new_email(nil, result)

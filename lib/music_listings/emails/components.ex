@@ -8,6 +8,23 @@ defmodule MusicListings.Emails.Components do
   """
   use Phoenix.Component
 
+  # The public site.  Hardcoded rather than taken from the endpoint: the nightly
+  # crawl runs with `crawl_and_exit?` set, and that supervision tree does not
+  # start `MusicListingsWeb.Endpoint`, so `Endpoint.url/0` is unavailable in the
+  # one process that sends this mail.
+  @site_url "https://torontomusiclistings.com"
+
+  @doc "Absolute URL of the public site."
+  def site_url, do: @site_url
+
+  @doc """
+  Absolute URL of an event's page.
+
+  Links to the bare id: `/events/:id` redirects to the canonical slug URL, so
+  the email needs no slug logic and this module stays clear of the web layer.
+  """
+  def event_url(event_id), do: "#{@site_url}/events/#{event_id}"
+
   @doc "Outer MJML shell: branded masthead, content card and footer."
   attr :inner_content, :any, required: true
 
@@ -66,12 +83,23 @@ defmodule MusicListings.Emails.Components do
           <mj-column>
             <mj-text align="center" color="#a8a49a" font-size="12px" line-height="1.6">
               Sent by Toronto Music Listings ·
-              <a href="https://torontomusiclistings.com" style="color:#d8ff3e;text-decoration:none;">torontomusiclistings.com</a>
+              <a href={site_url()} style="color:#d8ff3e;text-decoration:none;">torontomusiclistings.com</a>
             </mj-text>
           </mj-column>
         </mj-section>
       </mj-body>
     </mjml>
+    """
+  end
+
+  @doc "Links an event title to its page on the site."
+  attr :event, :any, required: true
+
+  def event_link(assigns) do
+    ~H"""
+    <a href={event_url(@event.id)} style="color:#d8ff3e;font-weight:700;text-decoration:none;">
+      {@event.title}
+    </a>
     """
   end
 

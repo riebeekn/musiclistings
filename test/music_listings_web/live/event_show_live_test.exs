@@ -223,4 +223,66 @@ defmodule MusicListingsWeb.EventLive.ShowTest do
       end
     end
   end
+
+  defp flagged_event(_context) do
+    venue = insert(:venue)
+    date = Date.add(MusicListingsUtilities.DateHelpers.today_eastern(), 7)
+
+    event = insert(:event, venue: venue, title: "PRIVATE EVENT", date: date, ticket_url: nil)
+
+    MusicListings.Curation.run()
+
+    %{event: event}
+  end
+
+  defp show_path(event), do: ~p"/events/#{event.id}/#{MusicListingsWeb.SEO.event_slug(event)}"
+
+  describe "admin curation controls - anonymous" do
+    setup :flagged_event
+
+    test "hides both controls", %{conn: conn, event: event} do
+      {:ok, view, _html} = live(conn, show_path(event))
+
+      refute has_element?(view, ~s([phx-click="delete-event"]))
+      refute has_element?(view, ~s([phx-click="dismiss-event-flags"]))
+    end
+  end
+
+  describe "admin curation controls - logged in" do
+    setup [:register_and_log_in_user, :flagged_event]
+
+    test "shows both controls", %{conn: conn, event: event} do
+      {:ok, view, _html} = live(conn, show_path(event))
+
+      assert has_element?(view, ~s([phx-click="delete-event"][phx-value-id="#{event.id}"]))
+      assert has_element?(view, ~s([phx-click="dismiss-event-flags"]))
+    end
+
+    test "delete soft-deletes the event and shows the notice", %{conn: conn, event: event} do
+      {:ok, view, _html} = live(conn, show_path(event))
+
+      html = view |> element(~s([phx-click="delete-event"])) |> render_click()
+
+      assert html =~ "no longer listed"
+      assert MusicListings.Repo.get(MusicListingsSchema.Event, event.id).deleted_at
+    end
+
+    test "dismissing clears the flag and hides the button", %{conn: conn, event: event} do
+      {:ok, view, _html} = live(conn, show_path(event))
+
+      view |> element(~s([phx-click="dismiss-event-flags"])) |> render_click()
+
+      refute has_element?(view, ~s([phx-click="dismiss-event-flags"]))
+      refute MusicListings.event_flagged?(event.id)
+    end
+
+    test "hides the dismiss button for an unflagged event", %{conn: conn} do
+      clean = insert(:event, title: "A Real Band", date: ~D[2026-06-01])
+
+      {:ok, view, _html} = live(conn, show_path(clean))
+
+      assert has_element?(view, ~s([phx-click="delete-event"]))
+      refute has_element?(view, ~s([phx-click="dismiss-event-flags"]))
+    end
+  end
 end
