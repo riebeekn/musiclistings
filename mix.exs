@@ -73,7 +73,7 @@ defmodule MusicListings.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 1.0"},
       {:jason, "~> 1.2"},
-      {:dns_cluster, "~> 0.2.0"},
+      {:dns_cluster, "~> 0.3.0"},
       {:bandit, "~> 1.5"},
       # swoosh caps req at "~> 0.5.10 or ~> 0.6 or ~> 1.0" (still true on swoosh main),
       # so req 0.7.x is unreachable while swoosh is in the tree.
