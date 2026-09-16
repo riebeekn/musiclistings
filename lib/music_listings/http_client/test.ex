@@ -114,6 +114,10 @@ defmodule MusicListings.HttpClient.Test do
       {"bsmt254.com/event/not-a-bbq-x-hit-play", "bsmt254/detail_no_ticket_link.html"},
       {"bsmt254.com/event/project-nowhere-night-1", "bsmt254/detail_pwyc_price.html"},
       {"bsmt254.com/event/project-nowhere-night-2", "bsmt254/detail_prose_price.html"},
+      # The Pilot - the listing's date carries no year, so it is read off the
+      # event's own page.  Deliberately no catch-all: an event with no fixture
+      # exercises the "couldn't reach the page" path.
+      {"thepilot.ca/events/23421/", "pilot/detail.html"},
       # Story — token endpoint is fetched first, then the events API is called
       # with the token it yields.
       {"storytoronto.ca/_api/v1/access-tokens", "story/access_tokens.json"},

@@ -32,7 +32,7 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParserTest do
     test "returns expected events", %{index_html: index_html} do
       events = PilotParser.events(index_html)
 
-      assert 18 == Enum.count(events)
+      assert 15 == Enum.count(events)
     end
   end
 
@@ -44,35 +44,47 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "pilot_2025_05_02" == PilotParser.event_id(event)
+      assert "pilot_23421" == PilotParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "pilot_2025_05_02" == PilotParser.ignored_event_id(event)
+      assert "pilot_23421" == PilotParser.ignored_event_id(event)
     end
   end
 
   describe "event_title/1" do
     test "returns event title", %{event: event} do
-      assert "LIVE MUSIC - GENERATOR PARTY - Presents: NIRVANA vs. HOLE!" ==
-               PilotParser.event_title(event)
+      assert "Live Music - Pressgang Mutiny and My Druthers" == PilotParser.event_title(event)
     end
   end
 
   describe "performers/1" do
     test "returns the event performers", %{event: event} do
       assert %Performers{
-               headliner: "LIVE MUSIC - GENERATOR PARTY - Presents: NIRVANA vs. HOLE!",
+               headliner: "Live Music - Pressgang Mutiny and My Druthers",
                openers: []
              } == PilotParser.performers(event)
     end
   end
 
+  # The listing's date carries no year, so it comes from the event's own page,
+  # served for the first event by MusicListings.HttpClient.Test.  The second
+  # event has no such fixture and stands in for a page that couldn't be reached.
   describe "event_date/1" do
-    test "returns the event date", %{event: event} do
-      assert ~D[2025-05-02] == PilotParser.event_date(event)
+    test "returns the event date from the event's own page", %{event: event} do
+      assert ~D[2026-09-18] == PilotParser.event_date(event)
+    end
+
+    test "raises rather than guess when the event's page can't be reached", %{
+      index_html: index_html
+    } do
+      event = index_html |> PilotParser.events() |> Enum.at(1)
+
+      assert_raise RuntimeError, ~r/Unable to determine event date/, fn ->
+        PilotParser.event_date(event)
+      end
     end
   end
 
@@ -83,8 +95,18 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParserTest do
   end
 
   describe "event_time/1" do
-    test "returns the event start time", %{event: event} do
-      assert ~T[20:00:00] == PilotParser.event_time(event)
+    test "returns the event start time from the event's own page", %{event: event} do
+      assert ~T[19:00:00] == PilotParser.event_time(event)
+    end
+
+    test "raises rather than guess when the event's page can't be reached", %{
+      index_html: index_html
+    } do
+      event = index_html |> PilotParser.events() |> Enum.at(1)
+
+      assert_raise RuntimeError, ~r/Unable to determine event date/, fn ->
+        PilotParser.event_time(event)
+      end
     end
   end
 
@@ -109,7 +131,7 @@ defmodule MusicListings.Parsing.VenueParsers.PilotParserTest do
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert "https://thepilot.ca/events/18490/live-music-cabin-fever-copy-2" ==
+      assert "https://thepilot.ca/events/23421/live-music-jacqueline-madsen-with-frannie-dj-hailey-henrique-copy-2" ==
                PilotParser.details_url(event)
     end
   end
