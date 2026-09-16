@@ -4,46 +4,24 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
-  alias MusicListings.HttpClient
-  alias MusicListings.Parsing.ParseHelpers
-  alias MusicListings.Parsing.Performers
-  alias MusicListings.Parsing.Price
-  alias MusicListingsUtilities.DateHelpers
+  alias MusicListings.Parsing.VenueParsers.BaseParsers.ShowpassParser
 
   @venue_id 17_330
 
   @impl true
-  def source_url do
-    now_iso = DateHelpers.now() |> DateTime.to_iso8601()
-
-    "https://www.showpass.com/api/public/events/" <>
-      "?ends_on__gte=#{now_iso}" <>
-      "&only_parents=true" <>
-      "&ordering=starts_on,id" <>
-      "&page=1" <>
-      "&page_size=50" <>
-      "&venue__in=#{@venue_id}"
-  end
+  def source_url, do: ShowpassParser.build_source_url(@venue_id)
 
   @impl true
-  def retrieve_events_fun do
-    fn url -> HttpClient.get(url) end
-  end
+  defdelegate retrieve_events_fun, to: ShowpassParser
 
   @impl true
-  def events(body) do
-    body = ParseHelpers.maybe_decode!(body)
-
-    body["results"]
-  end
+  defdelegate events(body), to: ShowpassParser
 
   @impl true
-  def next_page_url(body, _current_url) do
-    body = ParseHelpers.maybe_decode!(body)
+  defdelegate next_page_url(body, current_url), to: ShowpassParser
 
-    body["next"]
-  end
-
+  # Burdock events were originally stored keyed on the numeric Showpass id
+  # rather than the slug, so keep that to avoid re-inserting existing events
   @impl true
   def event_id(event) do
     event["id"]
@@ -56,74 +34,29 @@ defmodule MusicListings.Parsing.VenueParsers.BurdockParser do
   end
 
   @impl true
-  def event_title(event) do
-    event["name"]
-  end
+  defdelegate event_title(event), to: ShowpassParser
 
   @impl true
-  def performers(event) do
-    [event_title(event)]
-    |> Performers.new()
-  end
+  defdelegate performers(event), to: ShowpassParser
 
   @impl true
-  def event_date(event) do
-    {:ok, utc_datetime, _offset} =
-      event["starts_on"]
-      |> DateTime.from_iso8601()
-
-    DateHelpers.to_eastern_date(utc_datetime)
-  end
+  defdelegate event_date(event), to: ShowpassParser
 
   @impl true
-  def additional_dates(_event) do
-    []
-  end
+  defdelegate additional_dates(event), to: ShowpassParser
 
   @impl true
-  def event_time(event) do
-    case event["local_starts_on"] do
-      nil ->
-        nil
-
-      local_starts_on ->
-        # Parse just the time portion from the ISO8601 string to preserve local time
-        # e.g. "2026-02-04T20:30:00-05:00" -> "20:30:00"
-        local_starts_on
-        |> String.split("T")
-        |> List.last()
-        |> String.split("-")
-        |> List.first()
-        |> String.split("+")
-        |> List.first()
-        |> Time.from_iso8601!()
-    end
-  end
+  defdelegate event_time(event), to: ShowpassParser
 
   @impl true
-  def price(event) do
-    case event["ticket_types"] do
-      [first_ticket | _rest] ->
-        first_ticket["price"]
-        |> Price.new()
-
-      _other ->
-        Price.unknown()
-    end
-  end
+  defdelegate price(event), to: ShowpassParser
 
   @impl true
-  def age_restriction(_event) do
-    :unknown
-  end
+  defdelegate age_restriction(event), to: ShowpassParser
 
   @impl true
-  def ticket_url(event) do
-    event["frontend_details_url"]
-  end
+  defdelegate ticket_url(event), to: ShowpassParser
 
   @impl true
-  def details_url(event) do
-    event["frontend_details_url"]
-  end
+  defdelegate details_url(event), to: ShowpassParser
 end
