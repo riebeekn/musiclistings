@@ -3,6 +3,7 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.WixParser do
   Base parser for wix sites
   """
   alias MusicListings.HttpClient
+  alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
   alias MusicListingsUtilities.DateHelpers
@@ -41,11 +42,16 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.WixParser do
   end
 
   def event_date(event) do
-    {:ok, utc_datetime, _offset} =
-      event["scheduling"]["config"]["startDate"]
-      |> DateTime.from_iso8601()
+    case scheduling_config(event) do
+      %{"scheduleTbd" => true, "scheduleTbdMessage" => message} ->
+        {date, _time} = parse_schedule_tbd_message(message)
+        date
 
-    DateHelpers.to_eastern_date(utc_datetime)
+      %{"startDate" => start_date} ->
+        start_date
+        |> parse_utc_datetime()
+        |> DateHelpers.to_eastern_date()
+    end
   end
 
   def additional_dates(_event) do
@@ -53,11 +59,16 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.WixParser do
   end
 
   def event_time(event) do
-    {:ok, utc_datetime, _offset} =
-      event["scheduling"]["config"]["startDate"]
-      |> DateTime.from_iso8601()
+    case scheduling_config(event) do
+      %{"scheduleTbd" => true, "scheduleTbdMessage" => message} ->
+        {_date, time} = parse_schedule_tbd_message(message)
+        time
 
-    DateHelpers.to_eastern_time(utc_datetime)
+      %{"startDate" => start_date} ->
+        start_date
+        |> parse_utc_datetime()
+        |> DateHelpers.to_eastern_time()
+    end
   end
 
   def price(_event) do
@@ -94,5 +105,31 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.WixParser do
 
   defp registration_type(event) do
     get_in(event, ["registration", "type"])
+  end
+
+  defp scheduling_config(event) do
+    get_in(event, ["scheduling", "config"]) || %{}
+  end
+
+  defp parse_utc_datetime(start_date) do
+    {:ok, utc_datetime, _offset} = DateTime.from_iso8601(start_date)
+    utc_datetime
+  end
+
+  # A Wix event whose schedule is "TBD" carries no startDate at all - only a
+  # free text message the venue typed in.  Some venues use that for the actual
+  # date, e.g. "Sept 15,2026. 9:00 PM", so pull the date (and time, when it's
+  # there) out of the message rather than dropping the event.
+  @schedule_tbd_message_regex ~r/^\s*(?<month>[a-z]+)\.?\s+(?<day>\d{1,2})\s*,?\s*(?<year>\d{4})(?:[.,\s]+(?<time>\d{1,2}(?::\d{2})?\s*[ap]\.?m\.?))?/i
+
+  defp parse_schedule_tbd_message(message) do
+    case Regex.named_captures(@schedule_tbd_message_regex, message) do
+      %{"month" => month, "day" => day, "year" => year, "time" => time} ->
+        {:ok, date} = ParseHelpers.build_date_from_year_month_day_strings(year, month, day)
+        {date, ParseHelpers.time_from_time_string(time)}
+
+      nil ->
+        raise ArgumentError, "unparseable Wix scheduleTbdMessage: #{inspect(message)}"
+    end
   end
 end

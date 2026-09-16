@@ -15,7 +15,19 @@ defmodule MusicListings.Parsing.VenueParsers.ReservoirLoungeParserTest do
       |> ReservoirLoungeParser.events()
       |> Enum.find(&(&1["id"] == "cc86ce50-76da-4726-bfd3-b8eb4d460d31"))
 
-    %{index_html: index_html, event: event}
+    # The venue has since switched to marking every show's schedule as "TBD"
+    # in Wix and typing the real date into the free text message instead
+    schedule_tbd_html =
+      "#{File.cwd!()}/test/data/reservoir_lounge/index_schedule_tbd.html"
+      |> Path.expand()
+      |> File.read!()
+
+    schedule_tbd_event =
+      schedule_tbd_html
+      |> ReservoirLoungeParser.events()
+      |> Enum.find(&(&1["id"] == "a572e89f-06d1-4e7c-b73b-b1b248c1b159"))
+
+    %{index_html: index_html, event: event, schedule_tbd_event: schedule_tbd_event}
   end
 
   describe "source_url/0" do
@@ -70,6 +82,12 @@ defmodule MusicListings.Parsing.VenueParsers.ReservoirLoungeParserTest do
     test "returns the event date", %{event: event} do
       assert ~D[2026-07-17] == ReservoirLoungeParser.event_date(event)
     end
+
+    test "returns the event date from the schedule tbd message", %{
+      schedule_tbd_event: schedule_tbd_event
+    } do
+      assert ~D[2026-09-15] == ReservoirLoungeParser.event_date(schedule_tbd_event)
+    end
   end
 
   describe "additional_dates/1" do
@@ -81,6 +99,12 @@ defmodule MusicListings.Parsing.VenueParsers.ReservoirLoungeParserTest do
   describe "event_time/1" do
     test "returns the event start time", %{event: event} do
       assert ~T[21:30:00] == ReservoirLoungeParser.event_time(event)
+    end
+
+    test "returns the event start time from the schedule tbd message", %{
+      schedule_tbd_event: schedule_tbd_event
+    } do
+      assert ~T[21:00:00] == ReservoirLoungeParser.event_time(schedule_tbd_event)
     end
   end
 
