@@ -11,6 +11,9 @@
 # here instead. The nightly crawl summary email prints the exact command to run for
 # any venue that reported "No events found".
 #
+# When it finishes, a "Local Crawl Report" email is sent to $ADMIN_EMAIL via Brevo,
+# the same report the nightly crawl sends, so $BREVO_API_KEY must be set too.
+#
 # Usage:
 #   ./bin/crawl-venue.sh WiggleRoomParser
 #   ./bin/crawl-venue.sh WiggleRoomParser JunctionUndergroundParser
@@ -39,6 +42,14 @@ if [[ -z "${PROD_DB_URL:-}" ]]; then
   exit 1
 fi
 
+for var in ADMIN_EMAIL BREVO_API_KEY; do
+  if [[ -z "${!var:-}" ]]; then
+    echo "Error: ${var} is not set (needed to email the crawl report)."
+    echo "Add it to .envrc (see .envrc_template) and try again."
+    exit 1
+  fi
+done
+
 if [[ "$SKIP_CONFIRM" != true ]]; then
   echo "This will crawl the following venues and write the results to the"
   echo "PRODUCTION database on Render:"
@@ -46,6 +57,8 @@ if [[ "$SKIP_CONFIRM" != true ]]; then
   for venue in "$@"; do
     echo "  - ${venue}"
   done
+  echo
+  echo "A crawl report will be emailed to ${ADMIN_EMAIL}."
   echo
   read -r -p "Continue? [y/N] " reply
   if [[ ! "$reply" =~ ^[Yy]$ ]]; then

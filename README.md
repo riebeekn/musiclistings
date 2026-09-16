@@ -18,6 +18,7 @@ written in [Elixir](https://elixir-lang.org/) and [Phoenix LiveView](https://hex
   - [Parsing modules](#parsing-modules)
   - [Adding a new venue](#adding-a-new-venue)
   - [Venues Render can't reach](#venues-render-cant-reach)
+  - [Venues behind a Cloudflare challenge](#venues-behind-a-cloudflare-challenge)
 - [Affiliate ticket links](#affiliate-ticket-links)
 - [Analytics](#analytics)
 - [Monitoring](#monitoring)
@@ -45,6 +46,7 @@ Erlang / Elixir versions are pinned in `.tool-versions` ([asdf](https://asdf-vm.
   - `PROD_DB_URL` - Render's **external** Postgres connection string.  Only needed for the [helper scripts](#helper-scripts) that talk to the production database (`bin/pull-prod-db.sh`, `bin/crawl-venue.sh`); the app itself doesn't need it.  Requires your IP to be on the Render database's inbound allowlist (see [Terraform](#terraform)).
   - `TICKET_NETWORK_ACCOUNT_SID` / `TICKET_NETWORK_AUTH_TOKEN` - Impact.com credentials for the TicketNetwork affiliate catalog, see [Affiliate ticket links](#affiliate-ticket-links).  Optional - leave them unset and affiliate matching is skipped entirely.
 - Install dependencies and set up the database: `mix setup` (this runs `deps.get`, `ecto.setup` and builds assets).
+- Optional: `./bin/install-curl-impersonate.sh` fetches the `curl-impersonate` binary the crawler needs for the venues behind a Cloudflare challenge (see [Venues behind a Cloudflare challenge](#venues-behind-a-cloudflare-challenge)).  Without it those venues just report "No events found" locally; everything else works.
 - Run the server (`iex -S mix phx.server`).  Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 - A fresh local database has venues but no events.  To populate events, either:
   - Run the crawler from `iex`: `MusicListings.Workers.DataRetrievalWorker.perform(%{})` (this crawls every venue and takes a while), or
@@ -67,6 +69,7 @@ The scripts in `bin/` each document their own usage in a header comment:
 
 - `bin/pull-prod-db.sh` - dumps the production database and restores it into the local dev database, so you can work against real crawl data.
 - `bin/crawl-venue.sh` - crawls the given venues from your machine and writes the results **straight to production**.  See [Venues Render can't reach](#venues-render-cant-reach).
+- `bin/install-curl-impersonate.sh` - downloads the `curl-impersonate` binary into `bin/curl-impersonate/` (gitignored).  See [Venues behind a Cloudflare challenge](#venues-behind-a-cloudflare-challenge).
 - `bin/start-ngrok-server.sh` / `bin/stop-ngrok-server.sh` - exposes the local dev server over an ngrok tunnel and prints a QR code, for checking mobile-only behaviour without deploying.
 
 ### Mix tasks
@@ -111,7 +114,9 @@ config :music_listings, :http_client, MusicListings.HttpClient.Req
 
 [Req](https://github.com/wojtekmach/req) is what the app uses everywhere outside of tests (see `lib/music_listings/http_client/req.ex`), where it handles `brotli`/`gzip` decoding, timeouts and retries.  It runs against a dedicated Finch pool (`MusicListings.ReqFinch`, started in `lib/music_listings/application.ex`) so that crawling doesn't contend with the pool used for sending email.
 
-The test environment swaps in `MusicListings.HttpClient.Test`, which serves the HTML fixtures under `test/data/` instead of making real requests.
+Passing `browser: true` to `HttpClient.get/3` routes the request through `MusicListings.HttpClient.CurlImpersonate` instead, which shells out to the [curl-impersonate](https://github.com/lexiforest/curl-impersonate) binary so the request carries a real Chrome TLS fingerprint.  This is for venues whose bot protection rejects the BEAM's fingerprint outright - see [Venues behind a Cloudflare challenge](#venues-behind-a-cloudflare-challenge).
+
+The test environment swaps in `MusicListings.HttpClient.Test`, which serves the HTML fixtures under `test/data/` instead of making real requests (and ignores `browser: true`).
 
 To add a new http client add a module at `lib/music_listings/http_client/` and implement the `lib/music_listings/http_client.ex` behaviour.
 
@@ -172,9 +177,15 @@ These sites *are* reachable from a home/residential connection, so they get craw
 ./bin/crawl-venue.sh WiggleRoomParser JunctionUndergroundParser
 ```
 
-That runs `mix crawl_venue` with `USE_PROD_DB=true`, which points the dev app at the production database via `$PROD_DB_URL` (see `config/dev.exs`) so the results land in prod.  Venues are identified by their `parser_module_name` rather than their id, since ids are assigned per environment.  The nightly crawl summary email prints the exact command to run for any venue that reported "No events found".
+That runs `mix crawl_venue` with `USE_PROD_DB=true`, which points the dev app at the production database via `$PROD_DB_URL` (see `config/dev.exs`) so the results land in prod, and mails a "Local Crawl Report" to `$ADMIN_EMAIL` via Brevo (so `$BREVO_API_KEY` must be set) - the same report the nightly crawl sends.  Venues are identified by their `parser_module_name` rather than their id, since ids are assigned per environment.  The nightly crawl summary email prints the exact command to run for any venue that reported "No events found".
 
 Currently affected: **Wiggle Room** and **Junction Underground** (both on the same Hostinger box).
+
+### Venues behind a Cloudflare challenge
+
+**Massey Hall**, **Roy Thomson Hall** and **TD Music Hall** (all `*.mhrth.com`) sit behind a Cloudflare Managed Challenge that is keyed on the client's bot score, not its IP.  Erlang's `:ssl` stack has a TLS fingerprint (JA3/JA4: cipher and extension order, no GREASE) that Cloudflare classes as automated, so every request made from Finch/Req - from Render *or* a home connection, with any headers - gets the "Just a moment..." challenge page as a `403` with `cf-mitigated: challenge`.  The BEAM can't reproduce a browser's fingerprint, so `MhRthTdmhParser` makes all of its requests with `browser: true`, which shells out to [curl-impersonate](https://github.com/lexiforest/curl-impersonate) (see [HTTP Client config](#http-client-config)).  Cloudflare occasionally still challenges an individual request; the client's retry absorbs that.
+
+The `Dockerfile` installs a pinned curl-impersonate release into the image, so the nightly crawl on Render needs nothing extra.  Locally, run `./bin/install-curl-impersonate.sh` once to fetch the binary for your machine into `bin/curl-impersonate/`; the client also honours `$CURL_IMPERSONATE_BIN` or a `curl-impersonate` on your `$PATH`.  Without it those three venues report "No events found" with a `:curl_impersonate_not_installed` error.  Keep the version and checksums in `bin/install-curl-impersonate.sh` and the `Dockerfile` in step when upgrading.
 
 ## Affiliate ticket links
 

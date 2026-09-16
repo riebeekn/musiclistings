@@ -168,8 +168,25 @@ environment, so a command written by prod would point at the wrong venue locally
 ```
 
 This runs `mix crawl_venue` with `USE_PROD_DB=true`, which points the dev app at the production
-database via `$PROD_DB_URL` (see `config/dev.exs`) so the results land in prod. The nightly crawl
-summary email prints the exact command for any venue that reported "No events found".
+database via `$PROD_DB_URL` (see `config/dev.exs`) so the results land in prod, and emails a
+"Local Crawl Report" to `$ADMIN_EMAIL` via Brevo (`$BREVO_API_KEY` required) just like the nightly
+crawl does. The nightly crawl summary email prints the exact command for any venue that reported
+"No events found".
+
+## Venues Behind a Cloudflare Challenge
+
+**Massey Hall, Roy Thomson Hall and TD Music Hall** (`*.mhrth.com`) sit behind a Cloudflare Managed
+Challenge keyed on bot score. Erlang's `:ssl` TLS fingerprint is classed as automated, so Finch/Req
+gets a `403` challenge page (`cf-mitigated: challenge`) from *any* IP with *any* headers — changing
+IP or headers does not help. `MhRthTdmhParser` therefore makes all of its requests with
+`HttpClient.get(url, [], browser: true)`, which shells out to the `curl-impersonate` binary
+(`MusicListings.HttpClient.CurlImpersonate`) to present a real Chrome fingerprint.
+
+- The `Dockerfile` installs a pinned release, so prod needs nothing extra.
+- Locally run `./bin/install-curl-impersonate.sh` once (binary lands in gitignored
+  `bin/curl-impersonate/`); the client also honours `$CURL_IMPERSONATE_BIN` or `$PATH`.
+- Keep the version/checksums in `bin/install-curl-impersonate.sh` and the `Dockerfile` in step.
+- Use `browser: true` only for venues that actually need it — it spawns a process per request.
 
 ## Database Operations
 

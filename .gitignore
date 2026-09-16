@@ -40,6 +40,9 @@ _dialyzer
 
 .iex.exs
 
+# curl-impersonate binary fetched by bin/install-curl-impersonate.sh
+/bin/curl-impersonate/
+
 .envrc
 
 *.xlsx

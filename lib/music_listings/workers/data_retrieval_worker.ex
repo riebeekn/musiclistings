@@ -35,7 +35,7 @@ defmodule MusicListings.Workers.DataRetrievalWorker do
         Curation.run_quietly()
 
         crawl_summary
-        |> LatestCrawlResults.new_email(nil, ticket_network_stats)
+        |> LatestCrawlResults.new_email(ticket_network_result: ticket_network_stats)
         |> Mailer.deliver()
 
       _error ->

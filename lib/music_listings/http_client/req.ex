@@ -4,6 +4,7 @@ defmodule MusicListings.HttpClient.Req do
   """
   @behaviour MusicListings.HttpClient
 
+  alias MusicListings.HttpClient.CurlImpersonate
   alias MusicListings.HttpClient.Response
 
   @retry_statuses [403, 408, 429, 500, 502, 503, 504]
@@ -20,8 +21,19 @@ defmodule MusicListings.HttpClient.Req do
   @default_receive_timeout :timer.seconds(30)
   @default_max_retries 3
 
+  # `browser: true` routes the request through curl-impersonate so it presents
+  # a real Chrome TLS fingerprint - for venues behind a Cloudflare challenge
+  # that rejects the BEAM's fingerprint. See `MusicListings.HttpClient.CurlImpersonate`.
   @impl true
   def get(url, headers \\ [], opts \\ []) do
+    if Keyword.get(opts, :browser, false) do
+      CurlImpersonate.get(url, headers, opts)
+    else
+      req_get(url, headers, opts)
+    end
+  end
+
+  defp req_get(url, headers, opts) do
     url
     |> Req.get(request_options(headers, opts))
     |> case do

@@ -16,48 +16,58 @@ defmodule MusicListings.Emails.LatestCrawlResults do
   alias MusicListingsSchema.VenueCrawlSummary
   alias MusicListingsUtilities.DateHelpers
 
+  @default_title "Nightly Crawl Report"
+
   @doc """
   Builds the crawl summary email.
 
-  The events the crawl added are looked up from its time window unless passed in -
-  `preview/0` supplies its own so it can render without touching the database.
+  ## Options
 
-  `ticket_network_result` is the outcome of the affiliate matching pass that runs
-  after the crawl: its `Stats` on success, `{:error, reason}` when it failed, or
-  `:skipped`/`nil` when it never ran.  A failure is reported; a skip is not.
+    * `:title` - heading and subject prefix.  Defaults to "Nightly Crawl Report";
+      `mix crawl_venue` passes "Local Crawl Report" so a run from a laptop is
+      distinguishable from the nightly one in the inbox.
+    * `:added_events` - the events the crawl added.  Looked up from the crawl's
+      time window unless passed in - `preview/0` supplies its own so it can
+      render without touching the database.
+    * `:ticket_network_result` - the outcome of the affiliate matching pass that
+      runs after the crawl: its `Stats` on success, `{:error, reason}` when it
+      failed, or `:skipped`/`nil` when it never ran.  A failure is reported; a
+      skip is not.
+    * `:review_flags` - the open curation flags.  Read from the database unless
+      passed in.
   """
-  def new_email(
-        crawl_summary,
-        added_events \\ nil,
-        ticket_network_result \\ nil,
-        review_flags \\ nil
-      ) do
+  def new_email(crawl_summary, opts \\ []) do
     crawl_summary =
       Repo.preload(crawl_summary, crawl_errors: [:venue], venue_crawl_summaries: [:venue])
 
-    added_events = added_events || Events.list_events_added_during_crawl(crawl_summary)
-    review_flags = review_flags || Curation.list_open_flags()
+    title = Keyword.get(opts, :title, @default_title)
+
+    added_events =
+      Keyword.get(opts, :added_events) || Events.list_events_added_during_crawl(crawl_summary)
+
+    review_flags = Keyword.get(opts, :review_flags) || Curation.list_open_flags()
 
     new()
     |> to_site_admin()
     |> from_noreply()
-    |> subject(subject_line(crawl_summary))
+    |> subject(subject_line(title, crawl_summary))
     |> body(
       mjml(%{
+        title: title,
         crawl_summary: crawl_summary,
         added_events: added_events,
-        ticket_network_result: ticket_network_result,
+        ticket_network_result: Keyword.get(opts, :ticket_network_result),
         review_flags: review_flags
       })
     )
   end
 
-  defp subject_line(%{new: new, errors: errors}) when errors > 0 do
-    "Crawl Report — #{new} new, #{errors} #{pluralize(errors, "error")}"
+  defp subject_line(title, %{new: new, errors: errors}) when errors > 0 do
+    "#{title} — #{new} new, #{errors} #{pluralize(errors, "error")}"
   end
 
-  defp subject_line(%{new: new}) do
-    "Crawl Report — #{new} new #{pluralize(new, "event")}"
+  defp subject_line(title, %{new: new}) do
+    "#{title} — #{new} new #{pluralize(new, "event")}"
   end
 
   defp mjml(assigns) do
@@ -78,7 +88,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       )
 
     ~H"""
-    <.h1>Nightly Crawl Report</.h1>
+    <.h1>{@title}</.h1>
     <.muted>{DateHelpers.format_eastern_datetime(@crawl_summary.inserted_at)}</.muted>
 
     <.stat_band>
@@ -417,7 +427,11 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     build_crawl_summary()
     |> Map.put(:crawl_errors, [ce1, ce2, ce3, ce4, ce5])
     |> Map.put(:venue_crawl_summaries, [vcs1, vcs2, vcs3, vcs4])
-    |> new_email(added_events, ticket_network_stats, review_flags)
+    |> new_email(
+      added_events: added_events,
+      ticket_network_result: ticket_network_stats,
+      review_flags: review_flags
+    )
   end
 
   def preview_details do

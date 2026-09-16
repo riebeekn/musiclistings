@@ -29,7 +29,9 @@ defmodule MusicListings.HttpClient do
 
   `opts` carries per-request overrides for callers whose endpoint doesn't fit
   the crawler's defaults - see `MusicListings.HttpClient.Req` for the options
-  it honours.
+  it honours. `browser: true` sends the request with a real browser TLS
+  fingerprint (via curl-impersonate) for venues whose bot protection rejects
+  the BEAM's; the test client ignores it.
   """
   @callback get(url :: String.t(), headers :: list() | nil, opts :: keyword()) ::
               {:ok, Response.t()} | {:error, any()}

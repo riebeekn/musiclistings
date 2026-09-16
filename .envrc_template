@@ -12,6 +12,17 @@ export ADMIN_EMAIL="admin@example.com"
 # inbound allowlist.
 export PROD_DB_URL="postgresql://user:password@host.render.com/database"
 
+# Brevo API key, used by bin/crawl-venue.sh to email the crawl report to
+# ADMIN_EMAIL (set above) the same way the nightly crawl does. Only needed for
+# USE_PROD_DB=true runs; plain dev drops mail in http://localhost:4000/dev/mailbox.
+export BREVO_API_KEY=""
+
+# Optional: path to the curl-impersonate binary used for venues behind a
+# Cloudflare challenge (Massey Hall, Roy Thomson Hall, TD Music Hall). Only
+# needed if it isn't on your PATH or in bin/curl-impersonate/ (where
+# bin/install-curl-impersonate.sh puts it).
+# export CURL_IMPERSONATE_BIN=""
+
 # Impact.com credentials for the TicketNetwork affiliate catalog, used to attach
 # affiliate ticket links to events after each crawl (see
 # MusicListings.Affiliates.TicketNetwork).

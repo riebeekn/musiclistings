@@ -7,12 +7,22 @@ import Config
 # crawls the venues whose origin blocks Render's egress IP and writes the results
 # straight to prod. Render's *external* endpoint requires SSL; the internal one
 # used in runtime.exs does not.
+#
+# A run against prod also mails its crawl report for real, via Brevo like the
+# nightly crawl, rather than dropping it in the local Swoosh mailbox where
+# nobody will see it.
 if System.get_env("USE_PROD_DB") == "true" do
   config :music_listings, MusicListings.Repo,
     url: System.fetch_env!("PROD_DB_URL"),
     ssl: [verify: :verify_none],
     stacktrace: true,
     pool_size: 2
+
+  config :music_listings, MusicListings.Mailer,
+    adapter: Swoosh.Adapters.Brevo,
+    api_key: System.fetch_env!("BREVO_API_KEY")
+
+  config :swoosh, :api_client, Swoosh.ApiClient.Req
 else
   config :music_listings, MusicListings.Repo,
     username: "postgres",
@@ -97,8 +107,11 @@ config :phoenix_live_view,
   # Enable helpful, but potentially expensive runtime checks
   enable_expensive_runtime_checks: true
 
-# Disable swoosh api client as it is only required for production adapters.
-config :swoosh, :api_client, false
+# Disable swoosh api client as it is only required for production adapters
+# (the USE_PROD_DB branch above turns it back on for Brevo).
+if System.get_env("USE_PROD_DB") != "true" do
+  config :swoosh, :api_client, false
+end
 
 # Use empty api key for dev
 config :honeybadger,

@@ -158,7 +158,24 @@ defmodule MusicListings.Emails.LatestCrawlResultsTest do
     end
   end
 
-  describe "new_email/4 - review queue" do
+  describe "new_email/2 - title" do
+    test "defaults to the nightly report" do
+      email = [] |> crawl_summary() |> LatestCrawlResults.new_email()
+
+      assert email.subject =~ "Nightly Crawl Report"
+      assert email.html_body =~ "Nightly Crawl Report"
+    end
+
+    test "can be overridden for a local run" do
+      email = [] |> crawl_summary() |> LatestCrawlResults.new_email(title: "Local Crawl Report")
+
+      assert email.subject =~ "Local Crawl Report"
+      assert email.html_body =~ "Local Crawl Report"
+      refute email.html_body =~ "Nightly"
+    end
+  end
+
+  describe "new_email/2 - review queue" do
     test "lists flagged titles, linked to the event page" do
       venue = insert(:venue, name: "Flagged Test Hall")
       event = insert(:event, venue: venue, title: "PRIVATE EVENT", date: ~D[2026-09-04])
@@ -186,15 +203,15 @@ defmodule MusicListings.Emails.LatestCrawlResultsTest do
     end
 
     test "omits both sections entirely when nothing is flagged" do
-      email = [] |> crawl_summary() |> LatestCrawlResults.new_email(nil, nil, [])
+      email = [] |> crawl_summary() |> LatestCrawlResults.new_email(review_flags: [])
 
       refute email.html_body =~ "Needs review"
     end
   end
 
-  describe "new_email/3 - TicketNetwork failures" do
+  describe "new_email/2 - TicketNetwork failures" do
     defp result_email(result) do
-      [] |> crawl_summary() |> LatestCrawlResults.new_email(nil, result)
+      [] |> crawl_summary() |> LatestCrawlResults.new_email(ticket_network_result: result)
     end
 
     # A timeout used to render exactly like a night with nothing to report.

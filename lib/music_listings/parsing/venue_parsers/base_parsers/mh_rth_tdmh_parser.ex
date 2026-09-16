@@ -2,6 +2,10 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   @moduledoc """
   Base parser for Massey Hall, Roy Thomson Hall and
   TD Music Hall, as they are on a single site
+
+  mhrth.com sits behind a Cloudflare challenge that rejects the BEAM's TLS
+  fingerprint, so every request here is made with `browser: true`
+  (see `MusicListings.HttpClient.CurlImpersonate`).
   """
   import Meeseeks.CSS
 
@@ -14,8 +18,10 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   require Logger
 
   def retrieve_events_fun do
-    fn url -> HttpClient.get(url) end
+    fn url -> get(url) end
   end
+
+  defp get(url), do: HttpClient.get(url, [], browser: true)
 
   def events(body) do
     body
@@ -142,10 +148,10 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
 
   defp fetch_instances_from_api(details_path, base_url) do
     with {:ok, %HttpClient.Response{status: 200, body: detail_body}} <-
-           HttpClient.get("#{base_url}#{details_path}"),
+           get("#{base_url}#{details_path}"),
          {:ok, event_id} <- extract_event_id(detail_body),
          {:ok, %HttpClient.Response{status: 200, body: api_body}} <-
-           HttpClient.get("#{base_url}/api/attendable/v1/instances/?child_of=#{event_id}"),
+           get("#{base_url}/api/attendable/v1/instances/?child_of=#{event_id}"),
          {:ok, instances} <- parse_instances(api_body) do
       {:ok, instances}
     else
@@ -273,7 +279,7 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
 
   defp do_fetch_booking_url(instance_detail_url) do
     with {:ok, %HttpClient.Response{status: 200, body: body}} <-
-           HttpClient.get(instance_detail_url),
+           get(instance_detail_url),
          %{"booking_url" => url} when is_binary(url) and url != "" <-
            ParseHelpers.maybe_decode!(body) do
       {:ok, url}
