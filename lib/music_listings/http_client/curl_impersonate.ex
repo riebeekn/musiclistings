@@ -91,6 +91,10 @@ defmodule MusicListings.HttpClient.CurlImpersonate do
   # curl writes the body to a temp file and only the HTTP status to stdout, so
   # a binary body never has to be split out of curl's own output. On a non-zero
   # exit stdout carries curl's error message instead (stderr is merged in).
+  #
+  # `bin` is resolved from config / `$CURL_IMPERSONATE_BIN` / `$PATH`, never
+  # from request input, and `body_path` is a path we generate ourselves.
+  # sobelow_skip ["CI.System", "Traversal.FileModule"]
   defp request(bin, url, headers, timeout) do
     body_path = body_tmp_path()
 
@@ -131,6 +135,8 @@ defmodule MusicListings.HttpClient.CurlImpersonate do
     end
   end
 
+  # `body_path` is always a path we generated in `body_tmp_path/0`.
+  # sobelow_skip ["Traversal.FileModule"]
   defp read_body(body_path) do
     case File.read(body_path) do
       {:ok, body} -> body
