@@ -10,7 +10,8 @@ defmodule MusicListingsWeb.EventLive.New do
     |> assign(
       page_title: "Submit an Event",
       form: to_form(changeset, as: :event),
-      show_turnstile: true
+      show_turnstile: true,
+      noindex: true
     )
     |> ok()
   end

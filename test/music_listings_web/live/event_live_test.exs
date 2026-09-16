@@ -869,6 +869,11 @@ defmodule MusicListingsWeb.EventLiveTest do
   end
 
   describe "new" do
+    test "is marked noindex so search engines skip the form", %{conn: conn} do
+      html = conn |> get(~p"/events/new") |> html_response(200)
+      assert html =~ ~s(<meta name="robots" content="noindex">)
+    end
+
     test "saves submitted event with valid parameters", %{conn: conn} do
       {:ok, view, _html} = live(conn, ~p"/events/new")
       assert has_element?(view, "h1", "Submit Your Event")
