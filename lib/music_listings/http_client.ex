@@ -31,7 +31,9 @@ defmodule MusicListings.HttpClient do
   the crawler's defaults - see `MusicListings.HttpClient.Req` for the options
   it honours. `browser: true` sends the request with a real browser TLS
   fingerprint (via curl-impersonate) for venues whose bot protection rejects
-  the BEAM's; the test client ignores it.
+  the BEAM's; the test client ignores it.  With `browser: true`,
+  `no_retry_statuses:` lists statuses to return without retrying (see
+  `MusicListings.HttpClient.CurlImpersonate`).
   """
   @callback get(url :: String.t(), headers :: list() | nil, opts :: keyword()) ::
               {:ok, Response.t()} | {:error, any()}

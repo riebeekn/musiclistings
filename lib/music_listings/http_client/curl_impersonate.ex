@@ -48,7 +48,10 @@ defmodule MusicListings.HttpClient.CurlImpersonate do
 
   @doc """
   GETs `url` via curl-impersonate. Honours the same `opts` as the Req client:
-  `:receive_timeout` and `:max_retries`.
+  `:receive_timeout` and `:max_retries`, plus `:no_retry_statuses` - statuses
+  to return straight away rather than retry, for an endpoint where one means a
+  broken response rather than "not right now" (e.g. an API that 500s on a
+  particular record every time).
   """
   @spec get(String.t(), list(), keyword()) :: {:ok, Response.t()} | {:error, any()}
   def get(url, headers \\ [], opts \\ []) do
@@ -59,14 +62,16 @@ defmodule MusicListings.HttpClient.CurlImpersonate do
       bin ->
         max_retries = Keyword.get(opts, :max_retries, @default_max_retries)
         timeout = Keyword.get(opts, :receive_timeout, @default_receive_timeout)
-        request_with_retries(bin, url, headers, timeout, max_retries, 0)
+        retry_statuses = @retry_statuses -- Keyword.get(opts, :no_retry_statuses, [])
+        request_with_retries(bin, url, headers, timeout, {max_retries, retry_statuses}, 0)
     end
   end
 
-  defp request_with_retries(bin, url, headers, timeout, max_retries, attempt) do
+  defp request_with_retries(bin, url, headers, timeout, retry_policy, attempt) do
+    {max_retries, retry_statuses} = retry_policy
     result = request(bin, url, headers, timeout)
 
-    if retry?(result) and attempt < max_retries do
+    if retry?(result, retry_statuses) and attempt < max_retries do
       delay = min(Integer.pow(2, attempt) * 1_000, @max_retry_delay_ms)
       attempts_left = max_retries - attempt
 
@@ -76,14 +81,14 @@ defmodule MusicListings.HttpClient.CurlImpersonate do
       )
 
       Process.sleep(delay)
-      request_with_retries(bin, url, headers, timeout, max_retries, attempt + 1)
+      request_with_retries(bin, url, headers, timeout, retry_policy, attempt + 1)
     else
       result
     end
   end
 
-  defp retry?({:ok, %Response{status: status}}), do: status in @retry_statuses
-  defp retry?({:error, _reason}), do: true
+  defp retry?({:ok, %Response{status: status}}, retry_statuses), do: status in retry_statuses
+  defp retry?({:error, _reason}, _retry_statuses), do: true
 
   defp describe({:ok, %Response{status: status}}), do: "response with status #{status}"
   defp describe({:error, reason}), do: "error #{inspect(reason)}"

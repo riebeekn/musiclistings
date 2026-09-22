@@ -8,10 +8,12 @@ defmodule MusicListings.HttpClient.CurlImpersonateTest do
   # A stand-in for the real binary that speaks just enough of curl's CLI for the
   # client: it writes a body to `--output`, prints the status for `--write-out`,
   # and takes the status to return from the last path segment of the URL. It
-  # also records the argv it was called with so the test can inspect it.
+  # also records the argv it was called with so the test can inspect it, and
+  # appends a line per call to "$ARGV_LOG.calls" so retries can be counted.
   @fake_bin """
   #!/bin/bash
   printf '%s\\n' "$@" > "$ARGV_LOG"
+  echo call >> "$ARGV_LOG.calls"
   out=""
   url=""
   while [[ $# -gt 0 ]]; do
@@ -79,6 +81,33 @@ defmodule MusicListings.HttpClient.CurlImpersonateTest do
                CurlImpersonate.get("https://venue.test/403", [], max_retries: 1)
     end
 
+    test "retries a server error by default", %{argv_log: argv_log} do
+      assert {:ok, %Response{status: 500}} =
+               CurlImpersonate.get("https://venue.test/500", [], max_retries: 1)
+
+      assert 2 == call_count(argv_log)
+    end
+
+    test "returns a status in :no_retry_statuses without retrying", %{argv_log: argv_log} do
+      assert {:ok, %Response{status: 500}} =
+               CurlImpersonate.get("https://venue.test/500", [],
+                 max_retries: 3,
+                 no_retry_statuses: [500]
+               )
+
+      assert 1 == call_count(argv_log)
+    end
+
+    test "still retries other statuses when some are excluded", %{argv_log: argv_log} do
+      assert {:ok, %Response{status: 403}} =
+               CurlImpersonate.get("https://venue.test/403", [],
+                 max_retries: 1,
+                 no_retry_statuses: [500]
+               )
+
+      assert 2 == call_count(argv_log)
+    end
+
     test "returns an error when curl exits non-zero" do
       assert {:error, {:curl_impersonate_failed, 6, "curl: (6) Could not resolve host"}} =
                CurlImpersonate.get("https://venue.test/fail", [], max_retries: 0)
@@ -90,5 +119,9 @@ defmodule MusicListings.HttpClient.CurlImpersonateTest do
       assert {:error, {:curl_impersonate_failed, %ErlangError{original: :enoent}}} =
                CurlImpersonate.get("https://venue.test/200", [], max_retries: 0)
     end
+  end
+
+  defp call_count(argv_log) do
+    "#{argv_log}.calls" |> File.read!() |> String.split("\n", trim: true) |> length()
   end
 end

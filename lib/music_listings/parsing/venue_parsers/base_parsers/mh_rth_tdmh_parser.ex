@@ -36,18 +36,23 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
 
   def max_concurrency, do: 1
 
-  defp get(url) do
+  defp get(url, opts \\ []) do
     :music_listings
     |> Application.get_env(:mhrth_request_interval_ms, @default_request_interval_ms)
     |> Process.sleep()
 
-    HttpClient.get(url, [], browser: true)
+    HttpClient.get(url, [], [browser: true] ++ opts)
   end
 
-  # Like get/1 but reduces the outcome to the body or a short reason - the
-  # response itself carries a whole challenge page, too much for a crawl report.
+  # For the per-event follow-up lookups (detail page, instances API, booking
+  # URL).  Reduces the outcome to the body or a short reason - the response
+  # itself carries a whole challenge page, too much for a crawl report.
+  #
+  # The instances API 500s on some events every time, so retrying a 500
+  # only adds requests - and request volume is what draws the challenge.  The
+  # listing pages keep the default retries: losing one loses the whole venue.
   defp get_body(url) do
-    case get(url) do
+    case get(url, no_retry_statuses: [500]) do
       {:ok, %HttpClient.Response{status: 200, body: body}} -> {:ok, body}
       {:ok, %HttpClient.Response{status: status}} -> {:error, "HTTP #{status} from #{url}"}
       {:error, reason} -> {:error, "request to #{url} failed: #{inspect(reason)}"}
