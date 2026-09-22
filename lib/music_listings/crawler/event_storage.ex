@@ -107,8 +107,19 @@ defmodule MusicListings.Crawler.EventStorage do
       ticket_url: parsed_event.ticket_url,
       details_url: parsed_event.details_url
     }
+    |> keep_unresolved_fields(payload.lookup_failures)
     |> event_changeset(existing_event)
     |> maybe_update(payload, parsed_event, crawl_summary)
+  end
+
+  # A field the parser couldn't look up comes back nil, which would wipe a value
+  # an earlier crawl found.  Leaving it out of the attrs keeps the stored value.
+  # A field that was looked up and really is empty is still cleared, as is a
+  # value the parser did manage to find (e.g. one date of a multi-date event).
+  defp keep_unresolved_fields(attrs, lookup_failures) do
+    unresolved = Enum.flat_map(lookup_failures, & &1.fields)
+
+    Map.reject(attrs, fn {field, value} -> is_nil(value) and field in unresolved end)
   end
 
   defp maybe_update(

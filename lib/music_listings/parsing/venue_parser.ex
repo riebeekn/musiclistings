@@ -75,5 +75,12 @@ defmodule MusicListings.Parsing.VenueParser do
   """
   @callback details_url(event :: Meeseeks.Result.t()) :: String.t() | nil
 
-  @optional_callbacks ticket_url: 2
+  @doc """
+  How many of the venue's events to parse at once.  Defaults to 8 when not
+  implemented.  Lower it for a parser that makes follow-up requests per event
+  to a site that throttles or challenges bursts of traffic.
+  """
+  @callback max_concurrency() :: pos_integer()
+
+  @optional_callbacks ticket_url: 2, max_concurrency: 0
 end

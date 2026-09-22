@@ -153,6 +153,59 @@ defmodule MusicListings.Crawler.EventStorageTest do
       assert crawl_error.error =~ "not_null_violation"
     end
 
+    test "keeps a stored value the parser couldn't look up", %{
+      payloads: [payload],
+      crawl_summary: crawl_summary
+    } do
+      EventStorage.save_events([payload], crawl_summary)
+
+      blocked =
+        payload
+        |> Map.update!(:parsed_event, &%{&1 | ticket_url: nil, time: nil, title: "Northlane!"})
+        |> Payload.set_lookup_failures([
+          %{fields: [:time, :ticket_url], message: "HTTP 403 from https://example.com"}
+        ])
+
+      [saved] = EventStorage.save_events([blocked], crawl_summary)
+      assert :updated == saved.operation
+
+      persisted_event = Event |> last() |> Repo.one()
+      # the rest of the event still updates...
+      assert persisted_event.title == "Northlane!"
+      # ...but the fields that couldn't be looked up aren't wiped
+      assert persisted_event.ticket_url == "https://www.ticketmaster.ca/event/1000603D7B880DBA"
+      assert persisted_event.time == ~T[18:00:00]
+    end
+
+    test "still updates a field the parser found despite a lookup failure", %{
+      payloads: [payload],
+      crawl_summary: crawl_summary
+    } do
+      EventStorage.save_events([payload], crawl_summary)
+
+      found =
+        payload
+        |> Map.update!(:parsed_event, &%{&1 | ticket_url: "https://example.com/new"})
+        |> Payload.set_lookup_failures([%{fields: [:ticket_url], message: "HTTP 403"}])
+
+      EventStorage.save_events([found], crawl_summary)
+
+      assert (Event |> last() |> Repo.one()).ticket_url == "https://example.com/new"
+    end
+
+    test "clears a field the parser looked up and found empty", %{
+      payloads: [payload],
+      crawl_summary: crawl_summary
+    } do
+      EventStorage.save_events([payload], crawl_summary)
+
+      removed = Map.update!(payload, :parsed_event, &%{&1 | ticket_url: nil})
+
+      EventStorage.save_events([removed], crawl_summary)
+
+      assert (Event |> last() |> Repo.one()).ticket_url == nil
+    end
+
     test "does nothing where payload status is not :ok", %{crawl_summary: crawl_summary} do
       payload = %Payload{status: :parse_error}
       assert [payload] == EventStorage.save_events([payload], crawl_summary)

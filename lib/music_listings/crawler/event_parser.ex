@@ -4,6 +4,7 @@ defmodule MusicListings.Crawler.EventParser do
   the Payload.parsed_event field
   """
   alias MusicListings.Crawler.Payload
+  alias MusicListings.Parsing.LookupFailures
   alias MusicListings.Parsing.VenueParser
   alias MusicListings.Repo
   alias MusicListingsSchema.CrawlError
@@ -44,11 +45,12 @@ defmodule MusicListings.Crawler.EventParser do
       fn payload ->
         try do
           parsed_event = parse_event(payload, parser, venue)
+          lookup_failures = LookupFailures.take()
 
           if excluded_title?(parsed_event) do
             {:ignore, payload}
           else
-            {:ok, parsed_event, payload}
+            {:ok, parsed_event, Payload.set_lookup_failures(payload, lookup_failures)}
           end
         rescue
           error ->
@@ -68,11 +70,19 @@ defmodule MusicListings.Crawler.EventParser do
             end
         end
       end,
-      max_concurrency: @max_concurrency,
+      max_concurrency: max_concurrency(parser),
       timeout: @task_timeout,
       ordered: false
     )
     |> collect_results()
+  end
+
+  defp max_concurrency(parser) do
+    if function_exported?(parser, :max_concurrency, 0) do
+      parser.max_concurrency()
+    else
+      @max_concurrency
+    end
   end
 
   # Every event of a multi-date listing shares the listing's title

@@ -3,6 +3,7 @@ defmodule MusicListings.Crawler.EventParserTest do
 
   alias MusicListings.Crawler.EventParser
   alias MusicListings.Crawler.Payload
+  alias MusicListings.Parsing.LookupFailures
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
   alias MusicListings.Parsing.VenueParsers.HistoryParser
@@ -120,6 +121,11 @@ defmodule MusicListings.Crawler.EventParserTest do
     @impl true
     def age_restriction(_title), do: :unknown
     @impl true
+    def ticket_url("Blocked" <> _rest) do
+      LookupFailures.record([:ticket_url], "HTTP 403")
+      nil
+    end
+
     def ticket_url(_title), do: nil
     @impl true
     def details_url(_title), do: nil
@@ -219,6 +225,25 @@ defmodule MusicListings.Crawler.EventParserTest do
       Enum.each(events, fn event ->
         assert event.ticket_url == "https://example.com/tickets/only-one"
       end)
+    end
+  end
+
+  describe "parse_events/3 - lookup failures" do
+    setup do
+      %{venue: Repo.get_by!(Venue, name: "History")}
+    end
+
+    test "attaches each event's lookup failures to its own payload", %{venue: venue} do
+      payloads =
+        ["Blocked Show", "Fine Show"]
+        |> Enum.map(&Payload.new/1)
+        |> EventParser.parse_events(TestParserTitle, venue, insert(:crawl_summary))
+        |> Map.new(&{&1.raw_event, &1})
+
+      assert [%{fields: [:ticket_url], message: "HTTP 403"}] ==
+               payloads["Blocked Show"].lookup_failures
+
+      assert [] == payloads["Fine Show"].lookup_failures
     end
   end
 

@@ -22,6 +22,10 @@ defmodule MusicListings.Crawler do
   # Roughly 18 months - beyond any real booking horizon for the venues we crawl
   @max_days_ahead 550
 
+  # Enough lookup failures to see the pattern without burying the rest of the
+  # crawl report when a whole venue is blocked
+  @max_lookup_failures_reported 20
+
   @doc """
   The crawl function is called to retrieve and store events.  Events will
   be inserted or updated depending on whether the event already exists
@@ -56,6 +60,7 @@ defmodule MusicListings.Crawler do
           |> Enum.reject(
             &(no_date?(&1) || event_in_the_past?(&1) || event_too_far_in_future?(&1))
           )
+          |> record_lookup_failures(venue, crawl_summary)
           |> EventStorage.save_events(crawl_summary)
           |> List.flatten()
           |> insert_venue_summary(venue, crawl_summary)
@@ -154,6 +159,47 @@ defmodule MusicListings.Crawler do
     insert_venue_error(type, message, venue, crawl_summary)
     payloads
   end
+
+  # A parser that couldn't look up some of an event's fields (see
+  # MusicListings.Parsing.LookupFailures) still produces the event, so without
+  # this the gaps would only ever show up as missing ticket links on the site.
+  # One error per venue keeps a blocked venue from flooding the report.
+  defp record_lookup_failures(payloads, venue, crawl_summary) do
+    lines =
+      for %{lookup_failures: [_failure | _rest] = failures} = payload <- payloads,
+          failure <- failures do
+        "#{describe_event(payload)}: #{failure.message}"
+      end
+
+    if lines != [] do
+      insert_venue_error(:lookup_error, lookup_failures_message(lines), venue, crawl_summary)
+    end
+
+    payloads
+  end
+
+  defp describe_event(%{parsed_event: [event | _rest]}),
+    do: describe_event(%{parsed_event: event})
+
+  defp describe_event(%{parsed_event: event}), do: "#{event.date} #{event.title}"
+
+  defp lookup_failures_message(lines) do
+    {shown, hidden} = Enum.split(lines, @max_lookup_failures_reported)
+
+    more = if hidden == [], do: [], else: ["...and #{length(hidden)} more"]
+
+    Enum.join(
+      [
+        "#{pluralize_lookups(length(lines))} failed. Any values already stored for the " <>
+          "affected fields were kept."
+        | shown ++ more
+      ],
+      "\n"
+    )
+  end
+
+  defp pluralize_lookups(1), do: "1 lookup"
+  defp pluralize_lookups(count), do: "#{count} lookups"
 
   defp insert_venue_error(type, message, venue, crawl_summary) do
     %CrawlError{

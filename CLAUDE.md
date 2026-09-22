@@ -190,6 +190,14 @@ IP or headers does not help. `MhRthTdmhParser` therefore makes all of its reques
   `bin/curl-impersonate/`); the client also honours `$CURL_IMPERSONATE_BIN` or `$PATH`.
 - Keep the version/checksums in `bin/install-curl-impersonate.sh` and the `Dockerfile` in step.
 - Use `browser: true` only for venues that actually need it — it spawns a process per request.
+- curl-impersonate doesn't guarantee a pass: the challenge is keyed on bot score, and a burst of
+  requests can still draw it part way through a crawl. `MhRthTdmhParser` therefore parses one event
+  at a time (the optional `max_concurrency/0` parser callback) and pauses before every request
+  (`:mhrth_request_interval_ms`, 500ms by default, 0 in test).
+- A follow-up lookup that fails (detail page, instances API, booking URL) is reported via
+  `MusicListings.Parsing.LookupFailures`. The crawl report then shows a `lookup_error` for the
+  venue, and `EventStorage` keeps the stored ticket link/time instead of overwriting them with
+  `nil`. Any parser whose follow-up requests can fail should record its failures the same way.
 
 ## Database Operations
 

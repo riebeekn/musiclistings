@@ -9,10 +9,19 @@ defmodule MusicListings.Crawler.Payload do
           operation: :created | :updated | :noop,
           raw_event: Meeseeks.Result,
           parsed_event: MusicListingsSchema.Event,
-          persisted_event: MusicListingsSchema.Event
+          persisted_event: MusicListingsSchema.Event,
+          lookup_failures: [MusicListings.Parsing.LookupFailures.failure()]
         }
 
-  defstruct [:raw_event, :parsed_event, :status, :error, :persisted_event, :operation]
+  defstruct [
+    :raw_event,
+    :parsed_event,
+    :status,
+    :error,
+    :persisted_event,
+    :operation,
+    lookup_failures: []
+  ]
 
   def new(meeseeks_event_selector_result) do
     %__MODULE__{raw_event: meeseeks_event_selector_result}
@@ -28,6 +37,10 @@ defmodule MusicListings.Crawler.Payload do
 
   def set_ignored(%__MODULE__{} = payload) do
     %{payload | status: :ignore}
+  end
+
+  def set_lookup_failures(%__MODULE__{} = payload, lookup_failures) do
+    %{payload | lookup_failures: lookup_failures}
   end
 
   def set_parsed_event(%__MODULE__{} = payload, parsed_event) do

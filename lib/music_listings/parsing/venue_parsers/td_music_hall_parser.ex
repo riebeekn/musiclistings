@@ -14,6 +14,9 @@ defmodule MusicListings.Parsing.VenueParsers.TDMusicHallParser do
   defdelegate retrieve_events_fun, to: MhRthTdmhParser
 
   @impl true
+  defdelegate max_concurrency, to: MhRthTdmhParser
+
+  @impl true
   defdelegate events(body), to: MhRthTdmhParser
 
   @impl true

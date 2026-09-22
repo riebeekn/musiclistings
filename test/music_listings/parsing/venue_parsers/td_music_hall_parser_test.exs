@@ -1,8 +1,10 @@
 defmodule MusicListings.Parsing.VenueParsers.TDMusicHallParserTest do
   use ExUnit.Case, async: true
 
+  alias MusicListings.Parsing.LookupFailures
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
+  alias MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser
   alias MusicListings.Parsing.VenueParsers.TDMusicHallParser
 
   setup do
@@ -132,6 +134,30 @@ defmodule MusicListings.Parsing.VenueParsers.TDMusicHallParserTest do
   describe "ticket_url/1" do
     test "returns the event ticket url", %{event: event} do
       assert "https://tickets.mhrth.com/300/301/" == TDMusicHallParser.ticket_url(event)
+    end
+  end
+
+  describe "lookup failures" do
+    test "reports the fields it couldn't look up when the details page is unreachable", %{
+      event: event
+    } do
+      # no fixture is served for this host, so every follow-up request fails
+      assert nil == MhRthTdmhParser.ticket_url(event, "https://unreachable.example")
+
+      assert [%{fields: [:time, :ticket_url], message: message}] = LookupFailures.take()
+      assert message =~ "Couldn't look up the dates for /tickets/four-chords-and-the-truth-nov/"
+      assert message =~ ":test_env"
+    end
+
+    test "reports nothing when the lookups succeed", %{event: event} do
+      assert "https://tickets.mhrth.com/300/301/" == TDMusicHallParser.ticket_url(event)
+      assert [] == LookupFailures.take()
+    end
+  end
+
+  describe "max_concurrency/0" do
+    test "parses one event at a time" do
+      assert 1 == TDMusicHallParser.max_concurrency()
     end
   end
 

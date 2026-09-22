@@ -6,10 +6,20 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   mhrth.com sits behind a Cloudflare challenge that rejects the BEAM's TLS
   fingerprint, so every request here is made with `browser: true`
   (see `MusicListings.HttpClient.CurlImpersonate`).
+
+  Even then the challenge is keyed on a bot score, and each event costs several
+  follow-up requests (detail page, instances API, one booking lookup per date).
+  Fired off eight events at a time that burst was enough to start drawing
+  challenges part way through a crawl, leaving events without ticket links.  So
+  events are parsed one at a time (`max_concurrency/0`) with a pause before
+  every request, and a lookup that fails is reported through
+  `MusicListings.Parsing.LookupFailures` - which also stops it overwriting a
+  ticket link or time an earlier crawl found.
   """
   import Meeseeks.CSS
 
   alias MusicListings.HttpClient
+  alias MusicListings.Parsing.LookupFailures
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
@@ -17,11 +27,41 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
 
   require Logger
 
+  # Pause before each request to the site, see the moduledoc.  Zero in test.
+  @default_request_interval_ms 500
+
   def retrieve_events_fun do
     fn url -> get(url) end
   end
 
-  defp get(url), do: HttpClient.get(url, [], browser: true)
+  def max_concurrency, do: 1
+
+  defp get(url) do
+    :music_listings
+    |> Application.get_env(:mhrth_request_interval_ms, @default_request_interval_ms)
+    |> Process.sleep()
+
+    HttpClient.get(url, [], browser: true)
+  end
+
+  # Like get/1 but reduces the outcome to the body or a short reason - the
+  # response itself carries a whole challenge page, too much for a crawl report.
+  defp get_body(url) do
+    case get(url) do
+      {:ok, %HttpClient.Response{status: 200, body: body}} -> {:ok, body}
+      {:ok, %HttpClient.Response{status: status}} -> {:error, "HTTP #{status} from #{url}"}
+      {:error, reason} -> {:error, "request to #{url} failed: #{inspect(reason)}"}
+    end
+  end
+
+  defp decode(body) when is_binary(body) do
+    case Jason.decode(body) do
+      {:ok, decoded} -> {:ok, decoded}
+      {:error, _error} -> {:error, "response was not JSON"}
+    end
+  end
+
+  defp decode(body), do: {:ok, body}
 
   def events(body) do
     body
@@ -146,17 +186,20 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
     end
   end
 
+  # Without the instances the event still has its date from the listing, but
+  # neither a time nor a ticket link.
   defp fetch_instances_from_api(details_path, base_url) do
-    with {:ok, %HttpClient.Response{status: 200, body: detail_body}} <-
-           get("#{base_url}#{details_path}"),
+    with {:ok, detail_body} <- get_body("#{base_url}#{details_path}"),
          {:ok, event_id} <- extract_event_id(detail_body),
-         {:ok, %HttpClient.Response{status: 200, body: api_body}} <-
-           get("#{base_url}/api/attendable/v1/instances/?child_of=#{event_id}"),
+         {:ok, api_body} <-
+           get_body("#{base_url}/api/attendable/v1/instances/?child_of=#{event_id}"),
          {:ok, instances} <- parse_instances(api_body) do
       {:ok, instances}
     else
-      error ->
-        Logger.warning("Failed to fetch instances for #{details_path}: #{inspect(error)}")
+      {:error, reason} ->
+        message = "Couldn't look up the dates for #{details_path}: #{reason}"
+        Logger.warning(message)
+        LookupFailures.record([:time, :ticket_url], message)
         :error
     end
   end
@@ -188,23 +231,26 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   defp extract_event_id(html_body) do
     case Regex.run(~r/instance-list[^>]*event-id="(\d+)"/, html_body) do
       [_full_match, event_id] -> {:ok, event_id}
-      _no_match -> :error
+      _no_match -> {:error, "no event id on the details page"}
     end
   end
 
   defp parse_instances(body) do
-    case ParseHelpers.maybe_decode!(body) do
-      %{"items" => items} when is_list(items) ->
+    case decode(body) do
+      {:ok, %{"items" => items}} when is_list(items) ->
         instances =
           items
           |> Enum.map(&parse_instance/1)
           |> Enum.reject(&is_nil/1)
           |> Enum.sort_by(fn {date, time, _detail_url} -> {date, time} end)
 
-        if instances == [], do: :error, else: {:ok, instances}
+        if instances == [], do: {:error, "no dated instances"}, else: {:ok, instances}
 
-      _unexpected ->
-        :error
+      {:ok, _unexpected} ->
+        {:error, "unexpected instances response"}
+
+      {:error, reason} ->
+        {:error, reason}
     end
   end
 
@@ -277,18 +323,20 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
     end
   end
 
+  # A response without a booking_url is taken at its word - the show has no
+  # ticket link (yet) - so only a failed request counts as a lookup failure.
   defp do_fetch_booking_url(instance_detail_url) do
-    with {:ok, %HttpClient.Response{status: 200, body: body}} <-
-           get(instance_detail_url),
-         %{"booking_url" => url} when is_binary(url) and url != "" <-
-           ParseHelpers.maybe_decode!(body) do
-      {:ok, url}
+    with {:ok, body} <- get_body(instance_detail_url),
+         {:ok, instance} <- decode(body) do
+      case instance do
+        %{"booking_url" => url} when is_binary(url) and url != "" -> {:ok, url}
+        _no_booking_url -> :error
+      end
     else
-      error ->
-        Logger.warning(
-          "Failed to fetch booking_url for #{instance_detail_url}: #{inspect(error)}"
-        )
-
+      {:error, reason} ->
+        message = "Couldn't look up the ticket link for #{instance_detail_url}: #{reason}"
+        Logger.warning(message)
+        LookupFailures.record([:ticket_url], message)
         :error
     end
   end

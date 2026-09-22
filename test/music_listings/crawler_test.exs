@@ -103,6 +103,28 @@ defmodule MusicListings.CrawlerTest do
       assert crawl_error.venue_id == venue.id
     end
 
+    test "reports lookup failures and keeps the ticket link an earlier crawl found" do
+      venue = insert(:venue, parser_module_name: "LookupFailureParser")
+
+      event =
+        insert(:event,
+          venue: venue,
+          external_id: "blocked_event",
+          title: "Blocked Show",
+          ticket_url: "https://example.com/tickets"
+        )
+
+      assert {:ok, %CrawlSummary{}} = Crawler.crawl([venue])
+
+      assert Repo.get!(Event, event.id).ticket_url == "https://example.com/tickets"
+
+      assert [crawl_error] = Repo.all(CrawlError)
+      assert crawl_error.type == :lookup_error
+      assert crawl_error.venue_id == venue.id
+      assert crawl_error.error =~ "1 lookup failed."
+      assert crawl_error.error =~ "Blocked Show: HTTP 403 from https://example.com/tickets"
+    end
+
     test "stores upcoming events but not past or implausibly far future ones" do
       venue = insert(:venue, parser_module_name: "DateRangeEventsParser")
 

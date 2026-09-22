@@ -42,6 +42,10 @@ config :phoenix_live_view,
 # Use test HTTP client that returns errors, so parsers hit fallback paths
 config :music_listings, :http_client, MusicListings.HttpClient.Test
 
+# The mhrth.com parsers pause before each request to stay under Cloudflare's
+# radar - no need against local fixtures.
+config :music_listings, :mhrth_request_interval_ms, 0
+
 # Dummy TicketNetwork credentials so the affiliate matcher treats itself as
 # configured and serves its catalog from fixtures rather than skipping.
 config :music_listings, :ticket_network,

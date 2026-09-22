@@ -397,6 +397,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     ce3 = build_crawl_error(3, v2)
     ce4 = build_no_events_error(4, v3)
     ce5 = build_fetch_error(5, v4)
+    ce6 = build_lookup_error(6, v2)
 
     # events added by this crawl
     added_events = [
@@ -426,7 +427,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     ]
 
     build_crawl_summary()
-    |> Map.put(:crawl_errors, [ce1, ce2, ce3, ce4, ce5])
+    |> Map.put(:crawl_errors, [ce1, ce2, ce3, ce4, ce5, ce6])
     |> Map.put(:venue_crawl_summaries, [vcs1, vcs2, vcs3, vcs4])
     |> new_email(
       added_events: added_events,
@@ -540,6 +541,20 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       venue_id: venue.id,
       type: :fetch_error,
       error: "Request to https://blocked.example.com/events failed: timeout"
+    }
+  end
+
+  defp build_lookup_error(id, venue) do
+    %CrawlError{
+      id: id,
+      venue: venue,
+      venue_id: venue.id,
+      type: :lookup_error,
+      error: """
+      2 lookups failed. Any values already stored for the affected fields were kept.
+      2026-10-14 Four Chords and the Truth: Couldn't look up the ticket link for https://example.com/api/attendable/v1/instances/301/: HTTP 403 from https://example.com/api/attendable/v1/instances/301/
+      2026-10-21 Hawksley Workman: Couldn't look up the dates for /tickets/hawksley-workman/: HTTP 403 from https://example.com/tickets/hawksley-workman/
+      """
     }
   end
 
