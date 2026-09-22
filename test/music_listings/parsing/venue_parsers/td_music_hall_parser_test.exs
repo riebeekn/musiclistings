@@ -138,6 +138,7 @@ defmodule MusicListings.Parsing.VenueParsers.TDMusicHallParserTest do
   end
 
   describe "lookup failures" do
+    @tag :capture_log
     test "reports the fields it couldn't look up when the details page is unreachable", %{
       event: event
     } do

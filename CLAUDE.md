@@ -194,7 +194,10 @@ IP or headers does not help. `MhRthTdmhParser` therefore makes all of its reques
   requests can still draw it part way through a crawl. `MhRthTdmhParser` therefore parses one event
   at a time (the optional `max_concurrency/0` parser callback) and pauses before every request
   (`:mhrth_request_interval_ms`, 500ms by default, 0 in test).
-- A follow-up lookup that fails (detail page, instances API, booking URL) is reported via
+- The instances API (`/api/attendable/v1/instances/`) must be requested with
+  `accept: application/json`. curl-impersonate otherwise sends Chrome's page-load Accept header,
+  which selects the API's HTML renderer and returns `500` for many events.
+- A follow-up lookup that fails (details page, instances API) is reported via
   `MusicListings.Parsing.LookupFailures`. The crawl report then shows a `lookup_error` for the
   venue, and `EventStorage` keeps the stored ticket link/time instead of overwriting them with
   `nil`. Any parser whose follow-up requests can fail should record its failures the same way.

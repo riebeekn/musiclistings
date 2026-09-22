@@ -7,8 +7,9 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   fingerprint, so every request here is made with `browser: true`
   (see `MusicListings.HttpClient.CurlImpersonate`).
 
-  Even then the challenge is keyed on a bot score, and each event costs several
-  follow-up requests (detail page, instances API, one booking lookup per date).
+  Even then the challenge is keyed on a bot score, and each event costs two
+  follow-up requests: the details page (for the event id) and the instances
+  API (for each date's time and ticket link).
   Fired off eight events at a time that burst was enough to start drawing
   challenges part way through a crawl, leaving events without ticket links.  So
   events are parsed one at a time (`max_concurrency/0`) with a pause before
@@ -30,29 +31,36 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   # Pause before each request to the site, see the moduledoc.  Zero in test.
   @default_request_interval_ms 500
 
+  # The API is a Django REST framework one, which picks its renderer from the
+  # Accept header.  curl-impersonate sends Chrome's page-load Accept header,
+  # which selects the HTML "browsable API" renderer - and that 500s for many
+  # events.  Asking for JSON, as the site's own ticket widget does, doesn't.
+  @api_headers [{"accept", "application/json"}]
+
   def retrieve_events_fun do
     fn url -> get(url) end
   end
 
   def max_concurrency, do: 1
 
-  defp get(url, opts \\ []) do
+  defp get(url, headers \\ [], opts \\ []) do
     :music_listings
     |> Application.get_env(:mhrth_request_interval_ms, @default_request_interval_ms)
     |> Process.sleep()
 
-    HttpClient.get(url, [], [browser: true] ++ opts)
+    HttpClient.get(url, headers, [browser: true] ++ opts)
   end
 
-  # For the per-event follow-up lookups (detail page, instances API, booking
-  # URL).  Reduces the outcome to the body or a short reason - the response
-  # itself carries a whole challenge page, too much for a crawl report.
+  # For the per-event follow-up lookups (details page, instances API).  Reduces
+  # the outcome to the body or a short reason - the response itself carries a
+  # whole challenge page, too much for a crawl report.
   #
-  # The instances API 500s on some events every time, so retrying a 500
-  # only adds requests - and request volume is what draws the challenge.  The
-  # listing pages keep the default retries: losing one loses the whole venue.
-  defp get_body(url) do
-    case get(url, no_retry_statuses: [500]) do
+  # A 500 from these endpoints has so far been a request the site can't serve
+  # (see @api_headers), not a blip, so retrying it only adds requests - and
+  # request volume is what draws the challenge.  The listing pages keep the
+  # default retries: losing one loses the whole venue.
+  defp get_body(url, headers \\ []) do
+    case get(url, headers, no_retry_statuses: [500]) do
       {:ok, %HttpClient.Response{status: 200, body: body}} -> {:ok, body}
       {:ok, %HttpClient.Response{status: status}} -> {:error, "HTTP #{status} from #{url}"}
       {:error, reason} -> {:error, "request to #{url} failed: #{inspect(reason)}"}
@@ -150,21 +158,21 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
 
   def event_date(event, base_url) do
     case fetch_instances(event, base_url) do
-      {:ok, [{first_date, _first_time, _detail_url} | _rest]} -> first_date
+      {:ok, [{first_date, _first_time, _booking_url} | _rest]} -> first_date
       :error -> event_date(event)
     end
   end
 
   def additional_dates(event, base_url) do
     case fetch_instances(event, base_url) do
-      {:ok, [_first | rest]} -> Enum.map(rest, fn {date, _time, _detail_url} -> date end)
+      {:ok, [_first | rest]} -> Enum.map(rest, fn {date, _time, _booking_url} -> date end)
       :error -> additional_dates(event)
     end
   end
 
   def event_time(event, base_url) do
     case fetch_instances(event, base_url) do
-      {:ok, [{_first_date, time, _detail_url} | _rest]} -> time
+      {:ok, [{_first_date, time, _booking_url} | _rest]} -> time
       :error -> nil
     end
   end
@@ -196,8 +204,7 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   defp fetch_instances_from_api(details_path, base_url) do
     with {:ok, detail_body} <- get_body("#{base_url}#{details_path}"),
          {:ok, event_id} <- extract_event_id(detail_body),
-         {:ok, api_body} <-
-           get_body("#{base_url}/api/attendable/v1/instances/?child_of=#{event_id}"),
+         {:ok, api_body} <- get_body(instances_url(base_url, event_id), @api_headers),
          {:ok, instances} <- parse_instances(api_body) do
       {:ok, instances}
     else
@@ -209,14 +216,29 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
     end
   end
 
+  # Mirrors the request the site's own ticket widget makes.  Without `fields`
+  # the response carries no booking URL, which would cost another request per
+  # date.
+  defp instances_url(base_url, event_id) do
+    query =
+      URI.encode_query(%{
+        "child_of" => event_id,
+        "limit" => 1000,
+        "fields" => "start_datetime,booking_url,generated_booking_url",
+        "order" => "start_datetime"
+      })
+
+    "#{base_url}/api/attendable/v1/instances/?#{query}"
+  end
+
   defp filter_instances(instances, event) do
     {start_date, end_date} = index_date_range(event)
 
     instances
-    |> Enum.filter(fn {date, _time, _detail_url} ->
+    |> Enum.filter(fn {date, _time, _booking_url} ->
       Date.compare(date, start_date) != :lt and Date.compare(date, end_date) != :gt
     end)
-    |> Enum.uniq_by(fn {date, _time, _detail_url} -> date end)
+    |> Enum.uniq_by(fn {date, _time, _booking_url} -> date end)
   end
 
   defp index_date_range(event) do
@@ -247,7 +269,7 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
           items
           |> Enum.map(&parse_instance/1)
           |> Enum.reject(&is_nil/1)
-          |> Enum.sort_by(fn {date, time, _detail_url} -> {date, time} end)
+          |> Enum.sort_by(fn {date, time, _booking_url} -> {date, time} end)
 
         if instances == [], do: {:error, "no dated instances"}, else: {:ok, instances}
 
@@ -259,13 +281,12 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
     end
   end
 
-  defp parse_instance(%{"title" => title, "meta" => %{"detail_url" => detail_url}})
-       when is_binary(title) and is_binary(detail_url) do
+  defp parse_instance(%{"title" => title} = item) when is_binary(title) do
     case Regex.run(~r/^(\d{4}-\d{2}-\d{2}),\s*(\d{2}:\d{2})/, title) do
       [_full_match, date_str, time_str] ->
         with {:ok, date} <- Date.from_iso8601(date_str),
              {:ok, time} <- Time.from_iso8601("#{time_str}:00") do
-          {date, time, detail_url}
+          {date, time, booking_url(item)}
         else
           _error -> nil
         end
@@ -277,6 +298,17 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
 
   defp parse_instance(_item), do: nil
 
+  # The site's widget falls back to the generated tickets.mhrth.com link when an
+  # instance has no booking_url of its own.  Neither means no ticket link (yet).
+  defp booking_url(item) do
+    Enum.find_value(["booking_url", "generated_booking_url"], fn field ->
+      case item[field] do
+        url when is_binary(url) and url != "" -> url
+        _missing -> nil
+      end
+    end)
+  end
+
   def price(_event) do
     Price.unknown()
   end
@@ -286,63 +318,21 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   end
 
   def ticket_url(event, base_url) do
-    with {:ok, [{_date, _time, instance_detail_url} | _rest]} <-
-           fetch_instances(event, base_url),
-         {:ok, booking_url} <- fetch_booking_url(instance_detail_url) do
-      booking_url
-    else
+    case fetch_instances(event, base_url) do
+      {:ok, [{_date, _time, booking_url} | _rest]} -> booking_url
       _error -> nil
     end
   end
 
   def ticket_url(event, base_url, date) do
     with {:ok, instances} <- fetch_instances(event, base_url),
-         {:ok, instance_detail_url} <- find_instance_detail_url(instances, date),
-         {:ok, booking_url} <- fetch_booking_url(instance_detail_url) do
+         {_date, _time, booking_url} <-
+           Enum.find(instances, fn {instance_date, _time, _booking_url} ->
+             Date.compare(instance_date, date) == :eq
+           end) do
       booking_url
     else
       _error -> nil
-    end
-  end
-
-  defp find_instance_detail_url(instances, date) do
-    case Enum.find(instances, fn {instance_date, _time, _detail_url} ->
-           Date.compare(instance_date, date) == :eq
-         end) do
-      {_date, _time, detail_url} -> {:ok, detail_url}
-      nil -> :error
-    end
-  end
-
-  defp fetch_booking_url(instance_detail_url) do
-    cache_key = {:mh_rth_tdmh_booking_url, instance_detail_url}
-
-    case Process.get(cache_key) do
-      nil ->
-        result = do_fetch_booking_url(instance_detail_url)
-        Process.put(cache_key, result)
-        result
-
-      cached ->
-        cached
-    end
-  end
-
-  # A response without a booking_url is taken at its word - the show has no
-  # ticket link (yet) - so only a failed request counts as a lookup failure.
-  defp do_fetch_booking_url(instance_detail_url) do
-    with {:ok, body} <- get_body(instance_detail_url),
-         {:ok, instance} <- decode(body) do
-      case instance do
-        %{"booking_url" => url} when is_binary(url) and url != "" -> {:ok, url}
-        _no_booking_url -> :error
-      end
-    else
-      {:error, reason} ->
-        message = "Couldn't look up the ticket link for #{instance_detail_url}: #{reason}"
-        Logger.warning(message)
-        LookupFailures.record([:ticket_url], message)
-        :error
     end
   end
 

@@ -12,7 +12,11 @@
         "slug": "2026-05-25-2000-7048",
         "first_published_at": "2025-08-18T10:52:07.025693-04:00"
       },
-      "title": "2026-05-25, 20:00  (7048)"
+      "title": "2026-05-25, 20:00  (7048)",
+      "status": "ONS",
+      "start_datetime": "2026-05-25T20:00:00-04:00",
+      "booking_url": "https://tickets.mhrth.com/7047/7048/",
+      "generated_booking_url": "https://tickets.mhrth.com/7047/7048/"
     },
     {
       "id": 4294,
@@ -23,7 +27,11 @@
         "slug": "2026-05-26-2000-7049",
         "first_published_at": "2025-08-18T10:55:57.765543-04:00"
       },
-      "title": "2026-05-26, 20:00  (7049)"
+      "title": "2026-05-26, 20:00  (7049)",
+      "status": "ONS",
+      "start_datetime": "2026-05-26T20:00:00-04:00",
+      "booking_url": "https://tickets.mhrth.com/7047/7049/",
+      "generated_booking_url": "https://tickets.mhrth.com/7047/7049/"
     }
   ]
 }
