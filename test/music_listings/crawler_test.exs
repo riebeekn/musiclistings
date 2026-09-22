@@ -88,6 +88,21 @@ defmodule MusicListings.CrawlerTest do
       assert crawl_error.venue_id == venue.id
     end
 
+    test "creates a fetch_error instead of a no_events_error when the site can't be fetched" do
+      venue = insert(:venue, parser_module_name: "PartialFetchParser")
+
+      assert {:ok, %CrawlSummary{new: 1}} = Crawler.crawl([venue])
+
+      # the first page's event is still stored...
+      assert ["page_1_event"] == Repo.all(Event) |> Enum.map(& &1.external_id)
+
+      # ...and the failed page is reported rather than "No events found"
+      assert [crawl_error] = Repo.all(CrawlError)
+      assert crawl_error.type == :fetch_error
+      assert crawl_error.error == "HTTP 403 from https://example.com/events?page=2"
+      assert crawl_error.venue_id == venue.id
+    end
+
     test "stores upcoming events but not past or implausibly far future ones" do
       venue = insert(:venue, parser_module_name: "DateRangeEventsParser")
 

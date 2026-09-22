@@ -170,8 +170,11 @@ environment, so a command written by prod would point at the wrong venue locally
 This runs `mix crawl_venue` with `USE_PROD_DB=true`, which points the dev app at the production
 database via `$PROD_DB_URL` (see `config/dev.exs`) so the results land in prod, and emails a
 "Local Crawl Report" to `$ADMIN_EMAIL` via Brevo (`$BREVO_API_KEY` required) just like the nightly
-crawl does. The nightly crawl summary email prints the exact command for any venue that reported
-"No events found".
+crawl does. The nightly crawl summary email prints the exact command for any venue that logged a
+`fetch_error` (a timeout, other transport failure, or non-200 status). Venues that were fetched but
+listed nothing get a `no_events_error` instead and are left out of the command — that's usually a
+seasonal venue or a broken parser, and crawling locally won't help. A parser that crashes on the
+page itself logs a `page_parse_error`.
 
 ## Venues Behind a Cloudflare Challenge
 

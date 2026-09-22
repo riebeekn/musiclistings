@@ -78,7 +78,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       |> Map.put(:venue_rows, sort_venues(assigns.crawl_summary.venue_crawl_summaries))
       |> Map.put(:error_count, Enum.count(assigns.crawl_summary.crawl_errors))
       |> Map.put(:added_event_count, Enum.count(assigns.added_events))
-      |> Map.put(:no_events_venues, no_events_venues(assigns.crawl_summary.crawl_errors))
+      |> Map.put(:unreachable_venues, unreachable_venues(assigns.crawl_summary.crawl_errors))
       |> Map.put(:ticket_network_stats, ticket_network_stats(ticket_network_result))
       |> Map.put(:ticket_network_error, ticket_network_error(ticket_network_result))
       |> Map.put(:title_flags, Enum.filter(assigns.review_flags, &(&1.type == :non_event_title)))
@@ -164,7 +164,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
             <div style="color:#ece9e0;font-size:12px;line-height:1.5;padding-top:8px;white-space:pre-wrap;font-family:'Space Mono','SFMono-Regular',monospace;">
               {crawl_error.error}
             </div>
-            <%= if crawl_error.type != :no_events_error do %>
+            <%= if crawl_error.raw_event do %>
               <div style="color:#a8a49a;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding-top:10px;">
                 Raw event
               </div>
@@ -177,18 +177,18 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       <% end %>
     <% end %>
 
-    <%= if @no_events_venues != [] do %>
+    <%= if @unreachable_venues != [] do %>
       <.h2>Crawl locally</.h2>
       <.muted>
-        Run this from the project root to re-crawl every venue that found no events:
+        Run this from the project root to re-crawl every venue whose site couldn't be fetched:
       </.muted>
       <mj-text padding="6px 0">
         <div style="border-left:3px solid #d8ff3e;background-color:#1c1c1d;border-radius:6px;padding:12px 14px;">
           <div style="color:#d8ff3e;font-size:12px;line-height:1.45;word-break:break-word;font-family:'Space Mono','SFMono-Regular',monospace;">
-            {local_crawl_command(@no_events_venues)}
+            {local_crawl_command(@unreachable_venues)}
           </div>
           <div style="color:#a8a49a;font-size:11px;line-height:1.45;padding-top:8px;">
-            {@no_events_venues |> Enum.map_join(" · ", & &1.name)}
+            {@unreachable_venues |> Enum.map_join(" · ", & &1.name)}
           </div>
         </div>
       </mj-text>
@@ -317,18 +317,19 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     "The pass failed: #{inspect(other)}"
   end
 
-  defp no_events_venues(crawl_errors) do
+  defp unreachable_venues(crawl_errors) do
     crawl_errors
-    |> Enum.filter(&(&1.type == :no_events_error))
+    |> Enum.filter(&(&1.type == :fetch_error))
     |> Enum.map(& &1.venue)
     |> Enum.uniq_by(& &1.id)
     |> Enum.sort_by(& &1.name)
   end
 
-  # A venue reports no events either because its parser has silently broken, or
-  # because its origin blocks Render's egress IP and the crawl never reaches it.
-  # Either way the fix starts by crawling it from a machine that can reach it, so
-  # hand over a single command covering every venue that came up empty.
+  # A fetch error usually means the venue's origin blocks Render's egress IP (a
+  # timeout) or its bot protection (a 403), and the fix starts by crawling it
+  # from a machine that can reach it - so hand over a single command covering
+  # every venue that couldn't be fetched.  Venues that were fetched but listed
+  # nothing are left out: a seasonal venue won't have more events locally.
   #
   # Identify venues by parser_module_name, not id: this command is written by
   # prod but pasted into a local shell, and venue ids differ between the two.
@@ -395,7 +396,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     ce2 = build_crawl_error(2, v2)
     ce3 = build_crawl_error(3, v2)
     ce4 = build_no_events_error(4, v3)
-    ce5 = build_no_events_error(5, v4)
+    ce5 = build_fetch_error(5, v4)
 
     # events added by this crawl
     added_events = [
@@ -529,6 +530,16 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       venue_id: venue.id,
       type: :no_events_error,
       error: "No events found for #{venue.name}"
+    }
+  end
+
+  defp build_fetch_error(id, venue) do
+    %CrawlError{
+      id: id,
+      venue: venue,
+      venue_id: venue.id,
+      type: :fetch_error,
+      error: "Request to https://blocked.example.com/events failed: timeout"
     }
   end
 

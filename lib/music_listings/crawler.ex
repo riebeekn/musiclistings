@@ -51,7 +51,7 @@ defmodule MusicListings.Crawler do
         {:ok, parser} ->
           parser
           |> DataSource.retrieve_events(parser.source_url())
-          |> maybe_insert_no_events_error(venue, crawl_summary)
+          |> record_retrieval_error(venue, crawl_summary)
           |> EventParser.parse_events(parser, venue, crawl_summary)
           |> Enum.reject(
             &(no_date?(&1) || event_in_the_past?(&1) || event_too_far_in_future?(&1))
@@ -137,18 +137,32 @@ defmodule MusicListings.Crawler do
     end
   end
 
-  defp maybe_insert_no_events_error(payloads, venue, crawl_summary) do
-    if payloads == [] do
-      %CrawlError{
-        crawl_summary_id: crawl_summary.id,
-        venue_id: venue.id,
-        type: :no_events_error,
-        error: "No events found for #{venue.name}"
-      }
-      |> Repo.insert!()
-    end
+  defp record_retrieval_error({:ok, []}, venue, crawl_summary) do
+    insert_venue_error(
+      :no_events_error,
+      "No events found for #{venue.name}",
+      venue,
+      crawl_summary
+    )
 
+    []
+  end
+
+  defp record_retrieval_error({:ok, payloads}, _venue, _crawl_summary), do: payloads
+
+  defp record_retrieval_error({:error, {type, message}, payloads}, venue, crawl_summary) do
+    insert_venue_error(type, message, venue, crawl_summary)
     payloads
+  end
+
+  defp insert_venue_error(type, message, venue, crawl_summary) do
+    %CrawlError{
+      crawl_summary_id: crawl_summary.id,
+      venue_id: venue.id,
+      type: type,
+      error: message
+    }
+    |> Repo.insert!()
   end
 
   defp get_parser(venue) do
@@ -159,13 +173,8 @@ defmodule MusicListings.Crawler do
   end
 
   defp insert_invalid_parser_error(venue, crawl_summary) do
-    %CrawlError{
-      crawl_summary_id: crawl_summary.id,
-      venue_id: venue.id,
-      type: :invalid_parser_error,
-      error: "Invalid parser module: #{venue.parser_module_name}"
-    }
-    |> Repo.insert!()
+    message = "Invalid parser module: #{venue.parser_module_name}"
+    insert_venue_error(:invalid_parser_error, message, venue, crawl_summary)
   end
 
   defp insert_venue_summary(payloads, venue, crawl_summary) do

@@ -6,7 +6,7 @@
 # (gitignored). The crawler shells out to it for venues behind a Cloudflare
 # challenge that rejects the BEAM's TLS fingerprint - currently Massey Hall,
 # Roy Thomson Hall and TD Music Hall (see MusicListings.HttpClient.CurlImpersonate).
-# Without it those venues report "No events found" when crawled locally.
+# Without it those venues report a fetch error when crawled locally.
 #
 # Keep the version/checksums in step with the Dockerfile, which installs the
 # same release for the nightly crawl on Render.

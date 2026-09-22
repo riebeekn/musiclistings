@@ -64,23 +64,34 @@ defmodule MusicListings.Emails.LatestCrawlResultsTest do
     }
   end
 
-  describe "new_email/1 - no events found" do
+  defp fetch_error(venue) do
+    %CrawlError{
+      id: venue.id,
+      venue: venue,
+      venue_id: venue.id,
+      type: :fetch_error,
+      error: "Request to https://example.com/events failed: timeout"
+    }
+  end
+
+  describe "new_email/1 - fetch errors" do
     test "hands over the local crawl command, keyed by parser module name" do
       venue = insert(:venue, parser_module_name: "BlockedVenueParser")
 
-      email = [no_events_error(venue)] |> crawl_summary() |> LatestCrawlResults.new_email()
+      email = [fetch_error(venue)] |> crawl_summary() |> LatestCrawlResults.new_email()
 
       assert email.html_body =~ "Crawl locally"
       assert email.html_body =~ "bin/crawl-venue.sh BlockedVenueParser"
+      assert email.html_body =~ "Request to https://example.com/events failed: timeout"
       refute email.html_body =~ "Raw event"
     end
 
-    test "rolls every empty venue into a single command, sorted by venue name" do
+    test "rolls every unreachable venue into a single command, sorted by venue name" do
       zulu = insert(:venue, name: "Zulu Test Hall", parser_module_name: "ZuluParser")
       alpha = insert(:venue, name: "Alpha Test Hall", parser_module_name: "AlphaParser")
 
       email =
-        [no_events_error(zulu), no_events_error(alpha)]
+        [fetch_error(zulu), fetch_error(alpha)]
         |> crawl_summary()
         |> LatestCrawlResults.new_email()
 
@@ -89,12 +100,30 @@ defmodule MusicListings.Emails.LatestCrawlResultsTest do
       assert email.html_body |> String.split("bin/crawl-venue.sh") |> length() == 2
     end
 
-    test "omits the section when no venue came up empty" do
-      venue = insert(:venue)
+    test "leaves venues that were fetched but listed nothing out of the command" do
+      blocked = insert(:venue, name: "Blocked Hall", parser_module_name: "BlockedParser")
+      seasonal = insert(:venue, name: "Seasonal Patio", parser_module_name: "SeasonalParser")
 
-      email = [parse_error(venue)] |> crawl_summary() |> LatestCrawlResults.new_email()
+      email =
+        [fetch_error(blocked), no_events_error(seasonal)]
+        |> crawl_summary()
+        |> LatestCrawlResults.new_email()
 
+      assert email.html_body =~ "bin/crawl-venue.sh BlockedParser"
+      refute email.html_body =~ "SeasonalParser"
+      assert email.html_body =~ "No events found for Seasonal Patio"
+    end
+  end
+
+  describe "new_email/1 - no events found" do
+    test "reports the error without a local crawl command" do
+      venue = insert(:venue, parser_module_name: "SeasonalVenueParser")
+
+      email = [no_events_error(venue)] |> crawl_summary() |> LatestCrawlResults.new_email()
+
+      assert email.html_body =~ "No events found for #{venue.name}"
       refute email.html_body =~ "Crawl locally"
+      refute email.html_body =~ "Raw event"
     end
   end
 

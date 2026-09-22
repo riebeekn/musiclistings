@@ -9,7 +9,7 @@
 # at the TCP layer, so the nightly crawl can never reach them - the connection just
 # times out. They are reachable from a home/residential connection, so we crawl them
 # here instead. The nightly crawl summary email prints the exact command to run for
-# any venue that reported "No events found".
+# any venue that couldn't be fetched (a fetch_error).
 #
 # When it finishes, a "Local Crawl Report" email is sent to $ADMIN_EMAIL via Brevo,
 # the same report the nightly crawl sends, so $BREVO_API_KEY must be set too.
