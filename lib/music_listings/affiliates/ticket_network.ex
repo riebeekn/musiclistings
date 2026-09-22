@@ -91,6 +91,23 @@ defmodule MusicListings.Affiliates.TicketNetwork do
   end
 
   @doc """
+  The nightly crawl's entry point: `run_quietly/1`, but only while resale links
+  are shown on the site (the `show_resale_tickets` flag).  With the flag off
+  there's no point fetching the catalog and rewriting links nobody sees, so it
+  returns `:skipped`.  Turning the flag back on leaves links as stale as the last
+  run until the next nightly crawl - run `mix match_ticket_network` to refresh
+  them straight away.
+  """
+  @spec run_if_enabled(keyword()) :: Stats.t() | :skipped | {:error, term()}
+  def run_if_enabled(opts \\ []) do
+    if FunWithFlags.enabled?(:show_resale_tickets) do
+      run_quietly(opts)
+    else
+      :skipped
+    end
+  end
+
+  @doc """
   Fetches and matches the catalog without writing anything, returning the full
   match result alongside the stats.
 

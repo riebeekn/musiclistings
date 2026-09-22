@@ -26,8 +26,9 @@ defmodule MusicListings.Workers.DataRetrievalWorker do
       {:ok, crawl_summary} ->
         # Runs after the crawl so it matches against fresh event data.  Failures
         # are logged and handed to the email to report rather than raised - a
-        # TicketNetwork outage must not cost us the crawl summary email.
-        ticket_network_stats = TicketNetwork.run_quietly()
+        # TicketNetwork outage must not cost us the crawl summary email.  Skipped
+        # if resale links are hidden on the site.
+        ticket_network_stats = TicketNetwork.run_if_enabled()
 
         # Also after the crawl, for the same reason: it reviews what the crawl
         # just wrote.  The return value is ignored - the email reads the open

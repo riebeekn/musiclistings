@@ -23,6 +23,34 @@ defmodule MusicListings.Affiliates.TicketNetworkTest do
     )
   end
 
+  describe "run_if_enabled/1" do
+    test "runs the pass while resale links are shown" do
+      FunWithFlags.enable(:show_resale_tickets)
+      event = hovvdy_event(horseshoe_venue())
+
+      assert %TicketNetwork.Stats{linked: 1} = TicketNetwork.run_if_enabled(today: @today)
+      assert Repo.get!(Event, event.id).ticketnetwork_url =~ "goto.ticketnetwork.com"
+    end
+
+    test "skips the pass and leaves links alone while resale links are hidden" do
+      FunWithFlags.disable(:show_resale_tickets)
+
+      matched = hovvdy_event(horseshoe_venue())
+
+      stale =
+        hovvdy_event(horseshoe_venue(),
+          title: "Someone Not In The Catalog",
+          ticketnetwork_url: "https://goto.ticketnetwork.com/c/stale"
+        )
+
+      assert :skipped == TicketNetwork.run_if_enabled(today: @today)
+      assert Repo.get!(Event, matched.id).ticketnetwork_url == nil
+
+      assert Repo.get!(Event, stale.id).ticketnetwork_url ==
+               "https://goto.ticketnetwork.com/c/stale"
+    end
+  end
+
   describe "run/1" do
     test "writes the affiliate url onto a matched event" do
       event = hovvdy_event(horseshoe_venue())
