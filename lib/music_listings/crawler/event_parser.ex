@@ -17,6 +17,20 @@ defmodule MusicListings.Crawler.EventParser do
   @max_concurrency 8
   @task_timeout 120_000
 
+  # Calendar entries that aren't a show - closures, private hires and
+  # placeholders.  Matched against the whole title, ignoring case and
+  # surrounding whitespace, so "Closed for Renovations" or "Open Stage - TBA"
+  # still get through.  Anything broader is left to `MusicListings.Curation`,
+  # which flags a title for review rather than dropping it.
+  @excluded_titles [
+    "private event",
+    "private booking",
+    "closed",
+    "closed!",
+    "tba",
+    "to be announced"
+  ]
+
   @spec parse_events(
           payloads :: list(Payload),
           parser :: VenueParser,
@@ -29,7 +43,13 @@ defmodule MusicListings.Crawler.EventParser do
     |> Task.async_stream(
       fn payload ->
         try do
-          {:ok, parse_event(payload, parser, venue), payload}
+          parsed_event = parse_event(payload, parser, venue)
+
+          if excluded_title?(parsed_event) do
+            {:ignore, payload}
+          else
+            {:ok, parsed_event, payload}
+          end
         rescue
           error ->
             if ignored_event?(payload, parser, venue) do
@@ -53,6 +73,14 @@ defmodule MusicListings.Crawler.EventParser do
       ordered: false
     )
     |> collect_results()
+  end
+
+  # Every event of a multi-date listing shares the listing's title
+  defp excluded_title?([event | _rest]), do: excluded_title?(event)
+  defp excluded_title?(%Event{title: nil}), do: false
+
+  defp excluded_title?(%Event{title: title}) do
+    (title |> String.trim() |> String.downcase()) in @excluded_titles
   end
 
   defp ignored_event?(payload, parser, venue) do

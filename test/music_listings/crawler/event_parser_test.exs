@@ -87,6 +87,44 @@ defmodule MusicListings.Crawler.EventParserTest do
     def details_url(_event), do: "https://example.com/show"
   end
 
+  # The raw event is the title, so each test can supply its own
+  defmodule TestParserTitle do
+    @moduledoc false
+    @behaviour MusicListings.Parsing.VenueParser
+
+    @impl true
+    def source_url, do: "https://example.com"
+    @impl true
+    def retrieve_events_fun, do: fn _e -> {:error, :not_used} end
+    @impl true
+    def events(_body), do: []
+    @impl true
+    def next_page_url(_body, _current_url), do: nil
+    @impl true
+    def event_id(title), do: title
+    @impl true
+    def ignored_event_id(title), do: title
+    @impl true
+    def event_title(title), do: title
+    @impl true
+    def performers(title), do: %Performers{headliner: title, openers: []}
+    @impl true
+    def event_date(_title), do: ~D[2026-05-25]
+    @impl true
+    def additional_dates("Closed " <> _rest), do: [~D[2026-05-26]]
+    def additional_dates(_title), do: []
+    @impl true
+    def event_time(_title), do: nil
+    @impl true
+    def price(_title), do: Price.unknown()
+    @impl true
+    def age_restriction(_title), do: :unknown
+    @impl true
+    def ticket_url(_title), do: nil
+    @impl true
+    def details_url(_title), do: nil
+  end
+
   describe "parse_events/3" do
     setup do
       payloads = load_payloads("test/data/history/single_event.html")
@@ -181,6 +219,44 @@ defmodule MusicListings.Crawler.EventParserTest do
       Enum.each(events, fn event ->
         assert event.ticket_url == "https://example.com/tickets/only-one"
       end)
+    end
+  end
+
+  describe "parse_events/3 - excluded titles" do
+    setup do
+      %{venue: Repo.get_by!(Venue, name: "History")}
+    end
+
+    defp statuses_by_title(titles, venue) do
+      titles
+      |> Enum.map(&Payload.new/1)
+      |> EventParser.parse_events(TestParserTitle, venue, insert(:crawl_summary))
+      |> Map.new(&{&1.raw_event, &1.status})
+    end
+
+    test "ignores closures, private hires and placeholders, whatever the case", %{venue: venue} do
+      titles = [
+        "Private Event",
+        "PRIVATE BOOKING",
+        "closed",
+        "Closed!",
+        "tba",
+        "  To Be Announced  "
+      ]
+
+      assert titles |> statuses_by_title(venue) |> Map.values() |> Enum.all?(&(&1 == :ignore))
+    end
+
+    test "keeps titles that only contain an excluded phrase", %{venue: venue} do
+      titles = ["Closed for Renovations Party", "Open Stage - TBA", "Private Event Band"]
+
+      assert titles |> statuses_by_title(venue) |> Map.values() |> Enum.all?(&(&1 == :ok))
+    end
+
+    test "ignores every date of a multi-date listing with an excluded title", %{venue: venue} do
+      # additional_dates makes "Closed " titles multi-date, but "Closed " itself
+      # trims to "closed"
+      assert %{"Closed " => :ignore} == statuses_by_title(["Closed "], venue)
     end
   end
 
