@@ -87,7 +87,7 @@ defmodule MusicListings.MixProject do
       # mjml 6.0 needs rustler_precompiled ~> 0.9, meeseeks_html5ever still pins ~> 0.8.
       # Override to 0.9 — only the OTP 25+/Elixir 1.15+ floor changed, the NIF-download API is compatible.
       # remove when meeseeks is updated
-      {:rustler_precompiled, "~> 0.9.0", override: true},
+      {:rustler_precompiled, "~> 0.10.0", override: true},
       {:tz, "~> 0.28"},
       {:scrivener_ecto, "~> 3.0"},
       {:redirect, "~> 0.4.0"},
