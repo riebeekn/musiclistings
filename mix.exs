@@ -75,10 +75,7 @@ defmodule MusicListings.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.3.0"},
       {:bandit, "~> 1.5"},
-      # swoosh caps req at "~> 0.5.10 or ~> 0.6 or ~> 1.0" (still true on swoosh main),
-      # so req 0.7.x is unreachable while swoosh is in the tree.
-      # Bump when swoosh allows ~> 0.7.
-      {:req, "~> 0.6.1"},
+      {:req, "~> 0.7.5"},
       {:brotli, "~> 0.3.0"},
       {:meeseeks, "~> 0.18.0"},
       {:oban, "~> 2.17"},
@@ -87,7 +84,7 @@ defmodule MusicListings.MixProject do
       # mjml 6.0 needs rustler_precompiled ~> 0.9, meeseeks_html5ever still pins ~> 0.8.
       # Override to 0.9 — only the OTP 25+/Elixir 1.15+ floor changed, the NIF-download API is compatible.
       # remove when meeseeks is updated
-      {:rustler_precompiled, "~> 0.9.0", override: true},
+      {:rustler_precompiled, "~> 0.10.0", override: true},
       {:tz, "~> 0.28"},
       {:scrivener_ecto, "~> 3.0"},
       {:redirect, "~> 0.4.0"},
