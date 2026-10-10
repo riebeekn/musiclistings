@@ -53,6 +53,7 @@ _dialyzer
 *.tfvars
 /*.txt
 *.csv
+!test/data/**/*.csv
 *.sql
 
 .claude

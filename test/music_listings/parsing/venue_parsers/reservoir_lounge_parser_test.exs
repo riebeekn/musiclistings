@@ -6,60 +6,92 @@ defmodule MusicListings.Parsing.VenueParsers.ReservoirLoungeParserTest do
   alias MusicListings.Parsing.VenueParsers.ReservoirLoungeParser
 
   setup do
-    index_file_path = Path.expand("#{File.cwd!()}/test/data/reservoir_lounge/index.html")
+    index_file_path = Path.expand("#{File.cwd!()}/test/data/reservoir_lounge/index.csv")
 
-    index_html = File.read!(index_file_path)
+    index_csv = File.read!(index_file_path)
 
     event =
-      index_html
+      index_csv
       |> ReservoirLoungeParser.events()
-      |> Enum.find(&(&1["id"] == "cc86ce50-76da-4726-bfd3-b8eb4d460d31"))
+      |> Enum.find(&(&1["band"] == "Shane Philips"))
 
-    # The venue has since switched to marking every show's schedule as "TBD"
-    # in Wix and typing the real date into the free text message instead
-    schedule_tbd_html =
-      "#{File.cwd!()}/test/data/reservoir_lounge/index_schedule_tbd.html"
-      |> Path.expand()
-      |> File.read!()
-
-    schedule_tbd_event =
-      schedule_tbd_html
-      |> ReservoirLoungeParser.events()
-      |> Enum.find(&(&1["id"] == "a572e89f-06d1-4e7c-b73b-b1b248c1b159"))
-
-    %{index_html: index_html, event: event, schedule_tbd_event: schedule_tbd_event}
+    %{index_csv: index_csv, event: event}
   end
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://www.reservoirlounge.com/live-shows" == ReservoirLoungeParser.source_url()
+      assert "https://docs.google.com/spreadsheets/d/e/2PACX-1vTl2Egl9fk6KXx2FEngyFD-eClJ8WgPCzoOTrW9j6x5KVF9-zdpvJB_CVPHf7KBzuaVt303pzwuh7ki/pub?gid=206764270&single=true&output=csv" ==
+               ReservoirLoungeParser.source_url()
     end
   end
 
   describe "events/1" do
-    test "returns expected events", %{index_html: index_html} do
-      events = ReservoirLoungeParser.events(index_html)
+    test "returns an event for each night of the week", %{index_csv: index_csv} do
+      events = ReservoirLoungeParser.events(index_csv)
 
-      assert 4 == Enum.count(events)
+      assert [
+               ~D[2026-09-22],
+               ~D[2026-09-23],
+               ~D[2026-09-24],
+               ~D[2026-09-25],
+               ~D[2026-09-26],
+               ~D[2026-09-27]
+             ] == Enum.map(events, &ReservoirLoungeParser.event_date/1)
+    end
+
+    test "accepts rows already decoded by the http client", %{index_csv: index_csv} do
+      rows = NimbleCSV.RFC4180.parse_string(index_csv, skip_headers: false)
+
+      assert ReservoirLoungeParser.events(index_csv) == ReservoirLoungeParser.events(rows)
+    end
+
+    test "skips nights with nothing booked" do
+      csv = """
+      Week of,9/22/2026,,,
+      Day,Artist,Genre,Time,Image
+      Tuesday,,,,
+      Wednesday,Alison Young,,9:00 pm,
+      """
+
+      assert [%{"band" => "Alison Young", "date" => ~D[2026-09-23]}] =
+               ReservoirLoungeParser.events(csv)
+    end
+
+    test "returns no events when the week of date is not a tuesday" do
+      csv = """
+      Week of,2026-09-23,,,
+      Day,Artist,Genre,Time,Image
+      Tuesday,Janice Hagan,,9:00 pm,
+      """
+
+      assert [] == ReservoirLoungeParser.events(csv)
+    end
+
+    test "returns no events when the week of date is missing" do
+      csv = """
+      Day,Artist,Genre,Time,Image
+      Tuesday,Janice Hagan,,9:00 pm,
+      """
+
+      assert [] == ReservoirLoungeParser.events(csv)
     end
   end
 
   describe "next_page_url/2" do
-    test "returns nil", %{index_html: index_html} do
-      assert nil == ReservoirLoungeParser.next_page_url(index_html, nil)
+    test "returns nil", %{index_csv: index_csv} do
+      assert nil == ReservoirLoungeParser.next_page_url(index_csv, nil)
     end
   end
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "cc86ce50-76da-4726-bfd3-b8eb4d460d31" == ReservoirLoungeParser.event_id(event)
+      assert "reservoir_lounge_2026_09_25" == ReservoirLoungeParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "cc86ce50-76da-4726-bfd3-b8eb4d460d31" ==
-               ReservoirLoungeParser.ignored_event_id(event)
+      assert "reservoir_lounge_2026_09_25" == ReservoirLoungeParser.ignored_event_id(event)
     end
   end
 
@@ -80,13 +112,7 @@ defmodule MusicListings.Parsing.VenueParsers.ReservoirLoungeParserTest do
 
   describe "event_date/1" do
     test "returns the event date", %{event: event} do
-      assert ~D[2026-07-17] == ReservoirLoungeParser.event_date(event)
-    end
-
-    test "returns the event date from the schedule tbd message", %{
-      schedule_tbd_event: schedule_tbd_event
-    } do
-      assert ~D[2026-09-15] == ReservoirLoungeParser.event_date(schedule_tbd_event)
+      assert ~D[2026-09-25] == ReservoirLoungeParser.event_date(event)
     end
   end
 
@@ -101,10 +127,8 @@ defmodule MusicListings.Parsing.VenueParsers.ReservoirLoungeParserTest do
       assert ~T[21:30:00] == ReservoirLoungeParser.event_time(event)
     end
 
-    test "returns the event start time from the schedule tbd message", %{
-      schedule_tbd_event: schedule_tbd_event
-    } do
-      assert ~T[21:00:00] == ReservoirLoungeParser.event_time(schedule_tbd_event)
+    test "returns nil when no time is listed" do
+      assert nil == ReservoirLoungeParser.event_time(%{"time" => ""})
     end
   end
 
@@ -122,13 +146,15 @@ defmodule MusicListings.Parsing.VenueParsers.ReservoirLoungeParserTest do
 
   describe "ticket_url/1" do
     test "returns the event ticket url", %{event: event} do
-      assert "https://reservoirlounge.com/#contact" == ReservoirLoungeParser.ticket_url(event)
+      assert "https://www.reservoirlounge.com/contact.html#reserve" ==
+               ReservoirLoungeParser.ticket_url(event)
     end
   end
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert nil == ReservoirLoungeParser.details_url(event)
+      assert "https://www.reservoirlounge.com/schedule.html" ==
+               ReservoirLoungeParser.details_url(event)
     end
   end
 end
