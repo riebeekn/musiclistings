@@ -1,0 +1,9 @@
+Config.CSP: Missing Content-Security-Policy,lib/music_listings_web/router.ex:25,15E7B4E
+Config.CSP: Missing Content-Security-Policy,lib/music_listings_web/router.ex:40,7D4BD15
+Config.CSWH: Cross-Site Websocket Hijacking,lib/music_listings_web/endpoint.ex:21,3E1B077
+Config.CSWH: Cross-Site Websocket Hijacking,lib/music_listings_web/endpoint.ex:44,5B1E9B2
+XSS.Raw: XSS,lib/music_listings_web/components/layouts/root.html.heex:96,478D24A
+XSS.Raw: XSS,lib/music_listings_web/components/layouts/root.html.heex:99,439BE8
+XSS.Raw: XSS,lib/music_listings_web/components/layouts/root.html.heex:103,50EA1D2
+XSS.SendResp: XSS in `send_resp`,lib/music_listings_web/controllers/feed_controller.ex:13,2039C58
+XSS.SendResp: XSS in `send_resp`,lib/music_listings_web/controllers/sitemap_controller.ex:31,6FD40A2
