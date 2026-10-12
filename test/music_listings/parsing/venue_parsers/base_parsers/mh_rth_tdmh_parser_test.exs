@@ -22,6 +22,31 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParserTest do
     %{challenged_event: challenged_event, event: event}
   end
 
+  describe "dedupe_key/1" do
+    test "is the event's details page", %{event: event} do
+      assert "/tickets/belle-and-sebastian/" == MhRthTdmhParser.dedupe_key(event)
+    end
+  end
+
+  describe "next_page_url/2" do
+    test "stops at the fifth page even when the listing has more" do
+      # Roy Thomson Hall's fixture is page 2 of 8
+      index_html = File.read!("test/data/roy_thomson_hall/index.html")
+
+      assert "https://roythomsonhall.mhrth.com/tickets/?page=5" ==
+               MhRthTdmhParser.next_page_url(
+                 index_html,
+                 "https://roythomsonhall.mhrth.com/tickets/?page=4"
+               )
+
+      assert nil ==
+               MhRthTdmhParser.next_page_url(
+                 index_html,
+                 "https://roythomsonhall.mhrth.com/tickets/?page=5"
+               )
+    end
+  end
+
   describe "challenge breaker" do
     test "a challenged lookup skips the lookups after it", %{
       challenged_event: challenged_event,

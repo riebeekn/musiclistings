@@ -39,35 +39,11 @@ defmodule MusicListings.Parsing.VenueParsers.TDMusicHallParserTest do
   end
 
   describe "next_page_url/2" do
-    test "returns the next page url", %{index_html: index_html} do
-      assert "https://tdmusichall.mhrth.com/tickets/?page=2" ==
-               TDMusicHallParser.next_page_url(
-                 index_html,
-                 "https://tdmusichall.mhrth.com/tickets/?page=1"
-               )
-
-      assert "https://tdmusichall.mhrth.com/tickets/?page=3" ==
-               TDMusicHallParser.next_page_url(
-                 index_html,
-                 "https://tdmusichall.mhrth.com/tickets/?page=2"
-               )
-
-      assert "https://tdmusichall.mhrth.com/tickets/?page=4" ==
-               TDMusicHallParser.next_page_url(
-                 index_html,
-                 "https://tdmusichall.mhrth.com/tickets/?page=3"
-               )
-
-      assert "https://tdmusichall.mhrth.com/tickets/?page=5" ==
-               TDMusicHallParser.next_page_url(
-                 index_html,
-                 "https://tdmusichall.mhrth.com/tickets/?page=4"
-               )
-
+    test "returns nil on the listing's last page", %{index_html: index_html} do
       assert nil ==
                TDMusicHallParser.next_page_url(
                  index_html,
-                 "https://tdmusichall.mhrth.com/tickets/?page=5"
+                 "https://tdmusichall.mhrth.com/tickets/?page=1"
                )
     end
   end

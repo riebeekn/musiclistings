@@ -39,6 +39,9 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   # Pause before each request to the site, see the moduledoc.  Zero in test.
   @default_request_interval_ms 500
 
+  # Never more of the listing than this, however many pages it has
+  @max_pages 5
+
   # The API is a Django REST framework one, which picks its renderer from the
   # Accept header.  curl-impersonate sends Chrome's page-load Accept header,
   # which selects the HTML "browsable API" renderer - and that 500s for many
@@ -113,7 +116,13 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
     |> Selectors.all_matches(css(".c-card--event"))
   end
 
-  def next_page_url(_body, current_url) do
+  # The cards link to the event's details page, which is also what its
+  # lookups are keyed on
+  def dedupe_key(event), do: details_url(event)
+
+  # Only the pages the listing links to: one past the last serves the last
+  # page's events again, and each of those would make its own lookups.
+  def next_page_url(body, current_url) do
     current_page =
       current_url
       |> URI.parse()
@@ -122,13 +131,17 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
       |> Map.get("page")
       |> String.to_integer()
 
-    if current_page < 5 do
+    if current_page < @max_pages and has_next_page?(body) do
       current_page_string = Integer.to_string(current_page)
       next_page_string = (current_page + 1) |> Integer.to_string()
       String.replace(current_url, current_page_string, next_page_string)
     else
       nil
     end
+  end
+
+  defp has_next_page?(body) do
+    Selectors.match_one(body, css(".c-pagination__item--next a")) != nil
   end
 
   def event_id(event) do

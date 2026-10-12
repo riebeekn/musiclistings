@@ -17,6 +17,9 @@ defmodule MusicListings.Parsing.VenueParsers.RoyThomsonHallParser do
   defdelegate max_concurrency, to: MhRthTdmhParser
 
   @impl true
+  defdelegate dedupe_key(event), to: MhRthTdmhParser
+
+  @impl true
   def events(body) do
     body
     |> MhRthTdmhParser.events()

@@ -82,5 +82,14 @@ defmodule MusicListings.Parsing.VenueParser do
   """
   @callback max_concurrency() :: pos_integer()
 
-  @optional_callbacks ticket_url: 2, max_concurrency: 0
+  @doc """
+  A key identifying the event's listing, for a venue whose listing can show
+  the same event more than once (e.g. on more than one page).  Of the events
+  sharing a key only the first is parsed, so its follow-up requests are made
+  once.  Must be read off the raw event alone - it is called for every event
+  before parsing, so it must not make a request.
+  """
+  @callback dedupe_key(event :: Meeseeks.Result.t()) :: term()
+
+  @optional_callbacks ticket_url: 2, max_concurrency: 0, dedupe_key: 1
 end

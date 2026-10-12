@@ -125,6 +125,18 @@ defmodule MusicListings.CrawlerTest do
       assert crawl_error.error =~ "Blocked Show: HTTP 403 from https://example.com/tickets"
     end
 
+    test "parses an event listed more than once only once" do
+      venue = insert(:venue, parser_module_name: "DuplicateListingParser")
+
+      assert {:ok, %CrawlSummary{}} = Crawler.crawl([venue])
+
+      assert ["first", "last", "repeated"] ==
+               Event |> Repo.all() |> Enum.map(& &1.external_id) |> Enum.sort()
+
+      assert [crawl_error] = Repo.all(CrawlError)
+      assert crawl_error.error =~ "3 lookups failed."
+    end
+
     test "stores upcoming events but not past or implausibly far future ones" do
       venue = insert(:venue, parser_module_name: "DateRangeEventsParser")
 

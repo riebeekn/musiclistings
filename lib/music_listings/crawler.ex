@@ -56,6 +56,7 @@ defmodule MusicListings.Crawler do
           parser
           |> DataSource.retrieve_events(parser.source_url())
           |> record_retrieval_error(venue, crawl_summary)
+          |> drop_duplicate_listings(parser)
           |> EventParser.parse_events(parser, venue, crawl_summary)
           |> Enum.reject(
             &(no_date?(&1) || event_in_the_past?(&1) || event_too_far_in_future?(&1))
@@ -158,6 +159,15 @@ defmodule MusicListings.Crawler do
   defp record_retrieval_error({:error, {type, message}, payloads}, venue, crawl_summary) do
     insert_venue_error(type, message, venue, crawl_summary)
     payloads
+  end
+
+  # See the VenueParser.dedupe_key/1 callback
+  defp drop_duplicate_listings(payloads, parser) do
+    if function_exported?(parser, :dedupe_key, 1) do
+      Enum.uniq_by(payloads, &parser.dedupe_key(&1.raw_event))
+    else
+      payloads
+    end
   end
 
   # A parser that couldn't look up some of an event's fields (see
