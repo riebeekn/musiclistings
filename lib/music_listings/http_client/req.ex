@@ -58,7 +58,7 @@ defmodule MusicListings.HttpClient.Req do
     [
       headers: headers,
       compressed: true,
-      finch: MusicListings.ReqFinch,
+      finch: [name: MusicListings.ReqFinch],
       receive_timeout: Keyword.get(opts, :receive_timeout, @default_receive_timeout),
       retry: &retry?/2,
       max_retries: Keyword.get(opts, :max_retries, @default_max_retries)

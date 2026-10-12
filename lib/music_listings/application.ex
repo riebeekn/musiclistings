@@ -25,7 +25,8 @@ defmodule MusicListings.Application do
          name: MusicListings.ReqFinch,
          pools: %{
            :default => [size: 100, count: 4]
-         }}
+         }},
+        MusicListings.Parsing.ChallengeBreaker
       ]
 
       # See https://hexdocs.pm/elixir/Supervisor.html
@@ -62,6 +63,7 @@ defmodule MusicListings.Application do
          pools: %{
            :default => [size: 100, count: 4]
          }},
+        MusicListings.Parsing.ChallengeBreaker,
         # Start a worker by calling: MusicListings.Worker.start_link(arg)
         # {MusicListings.Worker, arg},
         # Start to serve requests, typically the last entry

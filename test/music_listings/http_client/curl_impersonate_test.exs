@@ -76,9 +76,11 @@ defmodule MusicListings.HttpClient.CurlImpersonateTest do
                CurlImpersonate.get("https://venue.test/404", [], max_retries: 3)
     end
 
-    test "retries a challenge status and returns the last response" do
+    test "returns a challenge status without retrying", %{argv_log: argv_log} do
       assert {:ok, %Response{status: 403}} =
-               CurlImpersonate.get("https://venue.test/403", [], max_retries: 1)
+               CurlImpersonate.get("https://venue.test/403", [], max_retries: 3)
+
+      assert 1 == call_count(argv_log)
     end
 
     test "retries a server error by default", %{argv_log: argv_log} do
@@ -99,8 +101,8 @@ defmodule MusicListings.HttpClient.CurlImpersonateTest do
     end
 
     test "still retries other statuses when some are excluded", %{argv_log: argv_log} do
-      assert {:ok, %Response{status: 403}} =
-               CurlImpersonate.get("https://venue.test/403", [],
+      assert {:ok, %Response{status: 503}} =
+               CurlImpersonate.get("https://venue.test/503", [],
                  max_retries: 1,
                  no_retry_statuses: [500]
                )

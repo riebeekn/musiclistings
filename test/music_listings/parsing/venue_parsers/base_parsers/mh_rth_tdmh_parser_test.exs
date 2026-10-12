@@ -1,0 +1,66 @@
+defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParserTest do
+  use ExUnit.Case, async: true
+
+  alias MusicListings.HttpClient.Response
+  alias MusicListings.Parsing.LookupFailures
+  alias MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser
+
+  # Answers every request with a 403, see MusicListings.HttpClient.Test
+  @challenged_url "https://challenged.mhrth.test"
+  @base_url "https://masseyhall.mhrth.com"
+
+  setup do
+    [challenged_event | _rest] =
+      "test/data/massey_hall/index.html" |> File.read!() |> MhRthTdmhParser.events()
+
+    [event] =
+      "test/data/massey_hall/single_event.html" |> File.read!() |> MhRthTdmhParser.events()
+
+    # each event is cached by its details page, so they must differ
+    refute MhRthTdmhParser.details_url(challenged_event) == MhRthTdmhParser.details_url(event)
+
+    %{challenged_event: challenged_event, event: event}
+  end
+
+  describe "challenge breaker" do
+    test "a challenged lookup skips the lookups after it", %{
+      challenged_event: challenged_event,
+      event: event
+    } do
+      assert nil == MhRthTdmhParser.event_time(challenged_event, @challenged_url)
+      assert [%{message: message}] = LookupFailures.take()
+      assert message =~ "HTTP 403"
+
+      assert nil == MhRthTdmhParser.event_time(event, @base_url)
+      assert [%{fields: [:time, :ticket_url], message: message}] = LookupFailures.take()
+      assert message =~ "skipped"
+      assert message =~ "Cloudflare challenge"
+
+      # the listing's own date still stands
+      assert ~D[2026-05-25] == MhRthTdmhParser.event_date(event, @base_url)
+    end
+
+    test "a challenged listing page skips the lookups", %{event: event} do
+      assert {:ok, %Response{status: 403}} =
+               MhRthTdmhParser.retrieve_events_fun().("#{@challenged_url}/tickets/?page=1")
+
+      assert nil == MhRthTdmhParser.event_time(event, @base_url)
+      assert [%{message: message}] = LookupFailures.take()
+      assert message =~ "skipped"
+    end
+
+    test "a listing page that gets through resets it", %{
+      challenged_event: challenged_event,
+      event: event
+    } do
+      assert nil == MhRthTdmhParser.event_time(challenged_event, @challenged_url)
+      LookupFailures.take()
+
+      assert {:ok, %Response{status: 200}} =
+               MhRthTdmhParser.retrieve_events_fun().("#{@base_url}/tickets/?page=1")
+
+      assert ~T[20:00:00] == MhRthTdmhParser.event_time(event, @base_url)
+      assert [] == LookupFailures.take()
+    end
+  end
+end

@@ -193,7 +193,11 @@ IP or headers does not help. `MhRthTdmhParser` therefore makes all of its reques
 - curl-impersonate doesn't guarantee a pass: the challenge is keyed on bot score, and a burst of
   requests can still draw it part way through a crawl. `MhRthTdmhParser` therefore parses one event
   at a time (the optional `max_concurrency/0` parser callback) and pauses before every request
-  (`:mhrth_request_interval_ms`, 500ms by default, 0 in test).
+  (`:mhrth_request_interval_ms`, 500ms by default, 0 in test). The curl-impersonate client does
+  not retry a `403` (unlike the Req client): a retry seconds later draws the same challenge and
+  only adds to the request volume that earned it. For the same reason a `403` trips
+  `MusicListings.Parsing.ChallengeBreaker`, and `MhRthTdmhParser` skips its follow-up lookups
+  until a listing page gets through again (the skipped events are reported as lookup failures).
 - The instances API (`/api/attendable/v1/instances/`) must be requested with
   `accept: application/json`. curl-impersonate otherwise sends Chrome's page-load Accept header,
   which selects the API's HTML renderer and returns `500` for many events.

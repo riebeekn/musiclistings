@@ -11,8 +11,19 @@ defmodule MusicListings.HttpClient.Test do
 
   @fixture_base "test/data"
 
+  # Hosts that answer every request with a fixed status - e.g. a site that
+  # has started serving a bot-mitigation challenge.
+  @status_hosts [{"challenged.mhrth.test", 403}]
+
   @impl true
   def get(url, _headers \\ [], _opts \\ []) do
+    case List.keyfind(@status_hosts, URI.parse(url).host, 0) do
+      {_host, status} -> {:ok, Response.new(status, "")}
+      nil -> get_fixture(url)
+    end
+  end
+
+  defp get_fixture(url) do
     case fixture_for_url(url) do
       {:ok, body} -> {:ok, Response.new(200, body)}
       :error -> {:error, :test_env}

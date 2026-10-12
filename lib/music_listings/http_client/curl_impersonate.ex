@@ -31,10 +31,12 @@ defmodule MusicListings.HttpClient.CurlImpersonate do
   # BoringSSL finds it wherever the binary was built to look.
   @ca_bundle "/etc/ssl/certs/ca-certificates.crt"
 
-  # Same retry policy as `MusicListings.HttpClient.Req`: retry the statuses
-  # Cloudflare / origins use for "not right now" with bounded exponential
-  # backoff. 403 is included because that is what the challenge page returns.
-  @retry_statuses [403, 408, 429, 500, 502, 503, 504]
+  # Retry the statuses origins use for "not right now" with bounded exponential
+  # backoff. Unlike `MusicListings.HttpClient.Req` this leaves out 403: here a
+  # 403 is the Cloudflare challenge, which is keyed on bot score - a retry
+  # within seconds draws the same challenge and only adds to the request volume
+  # that earned it.
+  @retry_statuses [408, 429, 500, 502, 503, 504]
   @max_retry_delay_ms :timer.seconds(30)
   @default_receive_timeout :timer.seconds(30)
   @default_max_retries 3

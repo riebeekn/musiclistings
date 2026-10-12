@@ -16,10 +16,18 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   every request, and a lookup that fails is reported through
   `MusicListings.Parsing.LookupFailures` - which also stops it overwriting a
   ticket link or time an earlier crawl found.
+
+  Once a request draws the challenge (a 403) the follow-up lookups stop for the
+  rest of the venue's crawl, via `MusicListings.Parsing.ChallengeBreaker`: more
+  requests won't get past it and only keep the bot score where it is.  The
+  remaining events fall back to the listing's dates and are reported as lookup
+  failures.  A listing page that gets through again resets the breaker, so one
+  venue's challenge doesn't cost the next venue its lookups.
   """
   import Meeseeks.CSS
 
   alias MusicListings.HttpClient
+  alias MusicListings.Parsing.ChallengeBreaker
   alias MusicListings.Parsing.LookupFailures
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
@@ -38,7 +46,16 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   @api_headers [{"accept", "application/json"}]
 
   def retrieve_events_fun do
-    fn url -> get(url) end
+    fn url ->
+      case get(url) do
+        {:ok, %HttpClient.Response{status: 200}} = result ->
+          ChallengeBreaker.reset(__MODULE__)
+          result
+
+        result ->
+          track_challenge(result)
+      end
+    end
   end
 
   def max_concurrency, do: 1
@@ -60,12 +77,27 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   # request volume is what draws the challenge.  The listing pages keep the
   # default retries: losing one loses the whole venue.
   defp get_body(url, headers \\ []) do
-    case get(url, headers, no_retry_statuses: [500]) do
-      {:ok, %HttpClient.Response{status: 200, body: body}} -> {:ok, body}
-      {:ok, %HttpClient.Response{status: status}} -> {:error, "HTTP #{status} from #{url}"}
-      {:error, reason} -> {:error, "request to #{url} failed: #{inspect(reason)}"}
+    if ChallengeBreaker.tripped?(__MODULE__) do
+      {:error, "skipped the request to #{url}, an earlier one drew the Cloudflare challenge"}
+    else
+      url
+      |> get(headers, no_retry_statuses: [500])
+      |> track_challenge()
+      |> case do
+        {:ok, %HttpClient.Response{status: 200, body: body}} -> {:ok, body}
+        {:ok, %HttpClient.Response{status: status}} -> {:error, "HTTP #{status} from #{url}"}
+        {:error, reason} -> {:error, "request to #{url} failed: #{inspect(reason)}"}
+      end
     end
   end
+
+  # A 403 from mhrth.com is the Cloudflare challenge page
+  defp track_challenge({:ok, %HttpClient.Response{status: 403}} = result) do
+    ChallengeBreaker.trip(__MODULE__)
+    result
+  end
+
+  defp track_challenge(result), do: result
 
   defp decode(body) when is_binary(body) do
     case Jason.decode(body) do
