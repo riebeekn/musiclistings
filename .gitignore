@@ -57,3 +57,6 @@ _dialyzer
 *.sql
 
 .claude
+
+# Local-only notes and reviews (not for the public repo)
+/private_docs/
