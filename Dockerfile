@@ -87,6 +87,16 @@ RUN apt-get update -y && \
   apt-get install -y libstdc++6 openssl libncurses6 locales ca-certificates \
   && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
+# Req/Mint and curl-impersonate trust the OS store, so distrust the roots Mozilla
+# removed after the eMudhra intermediate CA key compromise
+# (https://paraxial.io/blog/emudhra-ca). Debian's DSA-6572-1 only drops G3 and
+# Comodo AAA, and only once apt picks it up; the final check fails the build if
+# any of them remain.
+RUN sed -i -E 's#^(mozilla/(emSign_(ECC_Root_CA_-_G3|Root_CA_-_C1|ECC_Root_CA_-_C3)|Comodo_AAA_Services_root)\.crt)$#!\1#' \
+    /etc/ca-certificates.conf \
+  && update-ca-certificates --fresh \
+  && ! ls /etc/ssl/certs | grep -iE 'emsign_(ecc_root_ca_-_(g3|c3)|root_ca_-_c1)|comodo_aaa'
+
 # Set the locale
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
 
