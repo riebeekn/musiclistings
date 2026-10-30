@@ -202,6 +202,9 @@ IP or headers does not help. `MhRthTdmhParser` therefore makes all of its reques
   to (requesting past the last page returns that page's events again), and implements the
   optional `dedupe_key/1` callback so an event listed twice is parsed, and looked up, once.
   `dedupe_key/1` must not make a request - the crawler calls it on every event before parsing.
+- An event whose listing dates are already stored with ticket links (matched on `details_url`) skips
+  its follow-up lookups and reuses the stored dates, times and links; only new events, new dates,
+  and dates still missing a link are looked up.
 - The instances API (`/api/attendable/v1/instances/`) must be requested with
   `accept: application/json`. curl-impersonate otherwise sends Chrome's page-load Accept header,
   which selects the API's HTML renderer and returns `500` for many events.

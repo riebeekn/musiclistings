@@ -1,5 +1,5 @@
 defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParserTest do
-  use ExUnit.Case, async: true
+  use MusicListings.DataCase, async: true
 
   alias MusicListings.HttpClient.Response
   alias MusicListings.Parsing.LookupFailures
@@ -44,6 +44,74 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParserTest do
                  index_html,
                  "https://roythomsonhall.mhrth.com/tickets/?page=5"
                )
+    end
+  end
+
+  # Stored under the challenged host, so any lookup the parser does make draws a
+  # 403 and shows up as a lookup failure
+  describe "stored lookups" do
+    setup do
+      %{details_url: "#{@challenged_url}/tickets/belle-and-sebastian/"}
+    end
+
+    test "an event stored with ticket links for its dates isn't looked up", %{
+      event: event,
+      details_url: details_url
+    } do
+      insert(:event,
+        details_url: details_url,
+        date: ~D[2026-05-25],
+        time: ~T[20:00:00],
+        ticket_url: "https://tickets.mhrth.com/1/"
+      )
+
+      insert(:event,
+        details_url: details_url,
+        date: ~D[2026-05-26],
+        time: ~T[19:30:00],
+        ticket_url: "https://tickets.mhrth.com/2/"
+      )
+
+      assert ~D[2026-05-25] == MhRthTdmhParser.event_date(event, @challenged_url)
+      assert [~D[2026-05-26]] == MhRthTdmhParser.additional_dates(event, @challenged_url)
+      assert ~T[20:00:00] == MhRthTdmhParser.event_time(event, @challenged_url)
+
+      assert "https://tickets.mhrth.com/2/" ==
+               MhRthTdmhParser.ticket_url(event, @challenged_url, ~D[2026-05-26])
+
+      assert [] == LookupFailures.take()
+    end
+
+    test "a stored date without a ticket link is looked up", %{
+      event: event,
+      details_url: details_url
+    } do
+      insert(:event,
+        details_url: details_url,
+        date: ~D[2026-05-25],
+        ticket_url: "https://tickets.mhrth.com/1/"
+      )
+
+      insert(:event, details_url: details_url, date: ~D[2026-05-26], ticket_url: nil)
+
+      assert nil == MhRthTdmhParser.event_time(event, @challenged_url)
+      assert [%{message: message}] = LookupFailures.take()
+      assert message =~ "HTTP 403"
+    end
+
+    test "a listing date that isn't stored yet is looked up", %{
+      event: event,
+      details_url: details_url
+    } do
+      insert(:event,
+        details_url: details_url,
+        date: ~D[2026-05-25],
+        ticket_url: "https://tickets.mhrth.com/1/"
+      )
+
+      assert nil == MhRthTdmhParser.event_time(event, @challenged_url)
+      assert [%{message: message}] = LookupFailures.take()
+      assert message =~ "HTTP 403"
     end
   end
 

@@ -185,6 +185,23 @@ defmodule MusicListings.Events do
     |> Repo.all()
   end
 
+  @doc """
+  Lists the stored events with the given details page that fall between
+  `from_date` and `to_date` inclusive, by date.
+
+  Lets a parser reuse what an earlier crawl looked up for an event rather than
+  request it again.
+  """
+  @spec list_events_by_details_url(String.t(), Date.t(), Date.t()) :: [Event.t()]
+  def list_events_by_details_url(details_url, from_date, to_date) do
+    Event
+    |> where([event], event.details_url == ^details_url)
+    |> where([event], event.date >= ^from_date and event.date <= ^to_date)
+    |> where([event], is_nil(event.deleted_at))
+    |> order_by([event], asc: event.date, asc: event.time)
+    |> Repo.all()
+  end
+
   @spec fetch_event(pos_integer()) :: {:ok, Event.t()} | {:error, :not_found}
   def fetch_event(event_id) do
     Event

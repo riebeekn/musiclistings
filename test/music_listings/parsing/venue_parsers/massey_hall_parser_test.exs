@@ -1,5 +1,5 @@
 defmodule MusicListings.Parsing.VenueParsers.MasseyHallParserTest do
-  use ExUnit.Case, async: true
+  use MusicListings.DataCase, async: true
 
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price

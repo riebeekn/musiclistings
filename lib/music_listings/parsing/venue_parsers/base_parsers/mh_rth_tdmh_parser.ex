@@ -15,7 +15,8 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   events are parsed one at a time (`max_concurrency/0`) with a pause before
   every request, and a lookup that fails is reported through
   `MusicListings.Parsing.LookupFailures` - which also stops it overwriting a
-  ticket link or time an earlier crawl found.
+  ticket link or time an earlier crawl found.  An event an earlier crawl
+  already stored ticket links for isn't looked up at all.
 
   Once a request draws the challenge (a 403) the follow-up lookups stop for the
   rest of the venue's crawl, via `MusicListings.Parsing.ChallengeBreaker`: more
@@ -26,6 +27,7 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   """
   import Meeseeks.CSS
 
+  alias MusicListings.Events
   alias MusicListings.HttpClient
   alias MusicListings.Parsing.ChallengeBreaker
   alias MusicListings.Parsing.LookupFailures
@@ -228,12 +230,36 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
 
     case Process.get(cache_key) do
       nil ->
-        result = do_fetch_instances(event, details_path, base_url)
+        result =
+          stored_instances(event, details_path, base_url) ||
+            do_fetch_instances(event, details_path, base_url)
+
         Process.put(cache_key, result)
         result
 
       cached ->
         cached
+    end
+  end
+
+  # The lookups only add each date's time and ticket link.  Once an earlier
+  # crawl has stored a ticket link for the listing's first and last dates, and
+  # for every date in between that it stored, the two requests are skipped -
+  # every request counts towards the challenge.  A date the listing gains, or a
+  # stored date still without a link, sends the event back to the lookups.
+  defp stored_instances(event, details_path, base_url) do
+    {start_date, end_date} = index_date_range(event)
+
+    stored =
+      "#{base_url}#{details_path}"
+      |> Events.list_events_by_details_url(start_date, end_date)
+      |> Enum.uniq_by(& &1.date)
+
+    stored_dates = Enum.map(stored, & &1.date)
+
+    if start_date in stored_dates and end_date in stored_dates and
+         Enum.all?(stored, &(&1.ticket_url not in [nil, ""])) do
+      {:ok, Enum.map(stored, &{&1.date, &1.time, &1.ticket_url})}
     end
   end
 
