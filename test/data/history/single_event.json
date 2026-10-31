@@ -1,0 +1,28 @@
+{
+  "data": {
+    "getEvents": [
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9179iH7",
+            "name": "KETTAMA",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          },
+          {
+            "discovery_id": "K8vZ917qSdf",
+            "name": "Loods",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          }
+        ],
+        "discovery_id": "177Zv0G653rShzz",
+        "event_date": "2026-10-31",
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "name": "KETTAMA",
+        "url": "https://www.ticketmaster.ca/kettama-toronto-ontario-10-31-2026/event/100064B49ECDBE38"
+      }
+    ]
+  }
+}

@@ -4,56 +4,57 @@ defmodule MusicListings.Parsing.VenueParsers.HistoryParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
-  alias MusicListings.Parsing.VenueParsers.BaseParsers.CarbonhouseParser
+  alias MusicListings.Parsing.VenueParsers.BaseParsers.LiveNationParser
 
   @impl true
-  def source_url, do: "https://www.historytoronto.com/events/events_ajax/0"
+  defdelegate source_url, to: LiveNationParser
+
+  @live_nation_venue_id "KovZ917AJ4f"
+  @impl true
+  def retrieve_events_fun do
+    LiveNationParser.retrieve_events_fun(@live_nation_venue_id)
+  end
 
   @impl true
-  defdelegate retrieve_events_fun, to: CarbonhouseParser
+  defdelegate events(body), to: LiveNationParser
 
   @impl true
-  defdelegate events(body), to: CarbonhouseParser
+  defdelegate next_page_url(body, current_url), to: LiveNationParser
+
+  # Events stored while History was on Carbonhouse were keyed on title and date.
+  # `mix rekey_history_events` moves them over to the Live Nation id.
+  @impl true
+  defdelegate event_id(event), to: LiveNationParser
 
   @impl true
-  def next_page_url(body, current_url),
-    do: CarbonhouseParser.next_page_url_by_offset(body, current_url)
+  def ignored_event_id(event) do
+    event_id(event)
+  end
 
   @impl true
-  defdelegate event_id(event), to: CarbonhouseParser
+  defdelegate event_title(event), to: LiveNationParser
 
   @impl true
-  defdelegate ignored_event_id(event), to: CarbonhouseParser
+  defdelegate performers(event), to: LiveNationParser
 
   @impl true
-  defdelegate event_title(event), to: CarbonhouseParser
+  defdelegate event_date(event), to: LiveNationParser
 
   @impl true
-  defdelegate performers(event), to: CarbonhouseParser
+  defdelegate additional_dates(event), to: LiveNationParser
 
   @impl true
-  defdelegate event_date(event), to: CarbonhouseParser
+  defdelegate event_time(event), to: LiveNationParser
 
   @impl true
-  defdelegate additional_dates(event), to: CarbonhouseParser
+  defdelegate price(event), to: LiveNationParser
 
   @impl true
-  defdelegate event_time(event), to: CarbonhouseParser
+  defdelegate age_restriction(event), to: LiveNationParser
 
   @impl true
-  defdelegate price(event), to: CarbonhouseParser
+  defdelegate ticket_url(event), to: LiveNationParser
 
   @impl true
-  defdelegate age_restriction(event), to: CarbonhouseParser
-
-  @impl true
-  defdelegate ticket_url(event), to: CarbonhouseParser
-
-  # A run of shows lists no ticket link at all - each night sells separately,
-  # from the event's own page.
-  @impl true
-  defdelegate ticket_url(event, date), to: CarbonhouseParser
-
-  @impl true
-  defdelegate details_url(event), to: CarbonhouseParser
+  defdelegate details_url(event), to: LiveNationParser
 end

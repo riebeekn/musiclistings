@@ -64,7 +64,7 @@ defmodule MusicListings.Venues do
   end
 
   @spec fetch_venue_by_parser_module_name(String.t()) ::
-          {:ok, Venue} | {:error, :venue_not_found}
+          {:ok, Venue.t()} | {:error, :venue_not_found}
   def fetch_venue_by_parser_module_name(parser_module_name) do
     from(venue in Venue,
       where: fragment("lower(?) = lower(?)", venue.parser_module_name, ^parser_module_name)

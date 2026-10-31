@@ -1,0 +1,1512 @@
+{
+  "data": {
+    "getEvents": [
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9179iH7",
+            "name": "KETTAMA",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          },
+          {
+            "discovery_id": "K8vZ917qSdf",
+            "name": "Loods",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          }
+        ],
+        "discovery_id": "177Zv0G653rShzz",
+        "event_date": "2026-10-31",
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "name": "KETTAMA",
+        "url": "https://www.ticketmaster.ca/kettama-toronto-ontario-10-31-2026/event/100064B49ECDBE38"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917Gmh7",
+            "name": "Sleeping With Sirens",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ917fqi0",
+            "name": "Rain City Drive",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ917LtFV",
+            "name": "Shyeye",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "177Zv0G6GwdVb1R",
+        "event_date": "2026-11-01",
+        "event_status_code": "onsale",
+        "event_time": "18:00:00",
+        "name": "Sleeping With Sirens: An Ending In Itself Tour",
+        "url": "https://www.ticketmaster.ca/sleeping-with-sirens-an-ending-in-toronto-ontario-11-01-2026/event/100064CC83D182AF"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917hlEV",
+            "name": "Amble",
+            "genre_id": "KnvZfZ7vAva",
+            "genre": "Folk"
+          }
+        ],
+        "discovery_id": "1AvZZ_aGkI7dtKH",
+        "event_date": "2026-11-02",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Amble",
+        "url": "https://www.ticketmaster.ca/amble-toronto-ontario-11-02-2026/event/1000649A040E94FC"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917_6ef",
+            "name": "Geese",
+            "genre_id": "KnvZfZ7vAvv",
+            "genre": "Alternative"
+          },
+          {
+            "discovery_id": "K8vZ917_Yp0",
+            "name": "Gwenifer Raymond",
+            "genre_id": "KnvZfZ7vAv6",
+            "genre": "Country"
+          }
+        ],
+        "discovery_id": "1A8Zk3fGkeJq_g9",
+        "event_date": "2026-11-03",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Geese - Getting Killed Again Tour",
+        "url": "https://www.ticketmaster.ca/geese-getting-killed-again-tour-toronto-ontario-11-03-2026/event/10006494A6759D57"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917_6ef",
+            "name": "Geese",
+            "genre_id": "KnvZfZ7vAvv",
+            "genre": "Alternative"
+          },
+          {
+            "discovery_id": "K8vZ917_Yp0",
+            "name": "Gwenifer Raymond",
+            "genre_id": "KnvZfZ7vAv6",
+            "genre": "Country"
+          }
+        ],
+        "discovery_id": "1A8Zk3fGkeJragO",
+        "event_date": "2026-11-04",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Geese - Getting Killed Again Tour",
+        "url": "https://www.ticketmaster.ca/geese-getting-killed-again-tour-toronto-ontario-11-04-2026/event/10006494A6789D60"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917rFZ0",
+            "name": "Angine de Poitrine",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ917xkMf",
+            "name": "Fuudge",
+            "genre_id": "KnvZfZ7vAvv",
+            "genre": "Alternative"
+          }
+        ],
+        "discovery_id": "177Zv0G61Shy4ZE",
+        "event_date": "2026-11-05",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Angine de Poitrine",
+        "url": "https://www.ticketmaster.ca/angine-de-poitrine-toronto-ontario-11-05-2026/event/100064ACDBE55027"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917ppmf",
+            "name": "Trippie Redd",
+            "genre_id": "KnvZfZ7vAv1",
+            "genre": "Hip-Hop/Rap"
+          },
+          {
+            "discovery_id": "K8vZ917h-k0",
+            "name": "K Suave",
+            "genre_id": "KnvZfZ7vAv1",
+            "genre": "Hip-Hop/Rap"
+          },
+          {
+            "discovery_id": "K8vZ917xvi7",
+            "name": "BalloutDaDon",
+            "genre_id": "KnvZfZ7vAv1",
+            "genre": "Hip-Hop/Rap"
+          },
+          {
+            "discovery_id": "K8vZ917-TQ7",
+            "name": "Gigi Holland",
+            "genre_id": "KnvZfZ7vAv1",
+            "genre": "Hip-Hop/Rap"
+          },
+          {
+            "discovery_id": "K8vZ917-TQf",
+            "name": "Goldie",
+            "genre_id": "KnvZfZ7vAv1",
+            "genre": "Hip-Hop/Rap"
+          }
+        ],
+        "discovery_id": "1A8ZkfsGkeSDqFN",
+        "event_date": "2026-11-10",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Trippie Redd - The Non-disclosure Agreement Tour",
+        "url": "https://www.ticketmaster.ca/trippie-redd-the-nondisclosure-agreement-tour-toronto-ontario-11-10-2026/event/10006531B3EDD223"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZpaCiNe",
+            "name": "Bryce Alakai",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          }
+        ],
+        "discovery_id": "177Zv0G62T63o81",
+        "event_date": "2026-11-12",
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "name": "Bryce Alakai",
+        "url": "https://www.ticketmaster.ca/bryce-alakai-toronto-ontario-11-12-2026/event/100064FFC749140A"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917hRP0",
+            "name": "it's murph",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          },
+          {
+            "discovery_id": "K8vZ917QVSV",
+            "name": "Nils Hoffmann",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          }
+        ],
+        "discovery_id": "1A8ZkfxGkeSzGEu",
+        "event_date": "2026-11-13",
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "name": "it's murph: Fade Into Nothing Tour",
+        "url": "https://www.ticketmaster.ca/its-murph-fade-into-nothing-tour-toronto-ontario-11-13-2026/event/10006522B3E0C9CD"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917hRP0",
+            "name": "it's murph",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          },
+          {
+            "discovery_id": "K8vZ917QVSV",
+            "name": "Nils Hoffmann",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          }
+        ],
+        "discovery_id": "1A8ZkfxGkeSzHEQ",
+        "event_date": "2026-11-14",
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "name": "it's murph: Fade Into Nothing Tour",
+        "url": "https://www.ticketmaster.ca/its-murph-fade-into-nothing-tour-toronto-ontario-11-14-2026/event/10006522B3E3C9DA"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917fIMf",
+            "name": "Wheeler Walker Jr.",
+            "genre_id": "KnvZfZ7vAv6",
+            "genre": "Country"
+          },
+          {
+            "discovery_id": "K8vZ9172wI0",
+            "name": "Channing Wilson",
+            "genre_id": "KnvZfZ7vAv6",
+            "genre": "Country"
+          }
+        ],
+        "discovery_id": "177Zv0G6G5FnMCE",
+        "event_date": "2026-11-15",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Wheeler Walker Jr. - Pullin' Out: The Farewell Tour",
+        "url": "https://www.ticketmaster.ca/wheeler-walker-jr-pullin-out-the-toronto-ontario-11-15-2026/event/100064C2C8AB73A7"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917oVbV",
+            "name": "Wage War",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          },
+          {
+            "discovery_id": "K8vZ917Gt8V",
+            "name": "We Came As Romans",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          },
+          {
+            "discovery_id": "K8vZ9173Wj7",
+            "name": "Varials",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          },
+          {
+            "discovery_id": "K8vZ917KuXV",
+            "name": "Cane Hill",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "177Zv0G6G2_Ekqb",
+        "event_date": "2026-11-16",
+        "event_status_code": "onsale",
+        "event_time": "18:00:00",
+        "name": "WAGE WAR - EMERGENCY BROADCAST TOUR",
+        "url": "https://www.ticketmaster.ca/wage-war-emergency-broadcast-tour-toronto-ontario-11-16-2026/event/100064C3D99C6758"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9179fwV",
+            "name": "Orville Peck",
+            "genre_id": "KnvZfZ7vAv6",
+            "genre": "Country"
+          },
+          {
+            "discovery_id": "K8vZ917Le57",
+            "name": "Abbie Callahan",
+            "genre_id": "KnvZfZ7vAv6",
+            "genre": "Country"
+          }
+        ],
+        "discovery_id": "177Zv0G6297xmHL",
+        "event_date": "2026-11-17",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Orville Peck - Man Turned Mule Tour",
+        "url": "https://www.ticketmaster.ca/orville-peck-man-turned-mule-tour-toronto-ontario-11-17-2026/event/100064F5C48AEF1F"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9172ZR7",
+            "name": "Madeon",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          },
+          {
+            "discovery_id": "K8vZ917GYcV",
+            "name": "Anamanaguchi",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "177Zv0G61hw4hOH",
+        "event_date": "2026-11-19",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Madeon presents Victory Live",
+        "url": "https://www.ticketmaster.ca/madeon-presents-victory-live-toronto-ontario-11-19-2026/event/100064A6F255B83C"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917fZt0",
+            "name": "GRYFFIN",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          }
+        ],
+        "discovery_id": "177Zv0G65ReurkD",
+        "event_date": "2026-11-20",
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "name": "GRYFFIN",
+        "url": "https://www.ticketmaster.ca/gryffin-toronto-ontario-11-20-2026/event/100064BBC235E1BB"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917fZt0",
+            "name": "GRYFFIN",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          }
+        ],
+        "discovery_id": "177Zv0G65ReCC6a",
+        "event_date": "2026-11-21",
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "name": "GRYFFIN",
+        "url": "https://www.ticketmaster.ca/gryffin-toronto-ontario-11-21-2026/event/100064BBC238E1C9"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917Gi3f",
+            "name": "Whitechapel",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          },
+          {
+            "discovery_id": "K8vZ917GYbf",
+            "name": "Chelsea Grin",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ9175m57",
+            "name": "The Acacia Strain",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ917jbH7",
+            "name": "Carcosa",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "177Zv0G6G1uZ16i",
+        "event_date": "2026-11-24",
+        "event_status_code": "onsale",
+        "event_time": "18:00:00",
+        "name": "Whitechapel - 20th Anniversary Tour",
+        "url": "https://www.ticketmaster.ca/whitechapel-20th-anniversary-tour-toronto-ontario-11-24-2026/event/100064C28D00A1EC"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917GZx7",
+            "name": "Bonobo",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          },
+          {
+            "discovery_id": "K8vZ917qWQ0",
+            "name": "Anish Kumar",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          }
+        ],
+        "discovery_id": "177Zv0G6G5toj-J",
+        "event_date": "2026-11-26",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Bonobo: Distance in Static Live North American Tour",
+        "url": "https://www.ticketmaster.ca/bonobo-distance-in-static-live-north-toronto-ontario-11-26-2026/event/100064C2E945C866"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917qzIV",
+            "name": "ZULAN",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          }
+        ],
+        "discovery_id": "1AvZZ_KGkDInbSQ",
+        "event_date": "2026-11-27",
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "name": "ZULAN",
+        "url": "https://www.ticketmaster.ca/zulan-toronto-ontario-11-27-2026/event/1000653EE8A98CDA"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917qEAV",
+            "name": "Josh Baker",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          }
+        ],
+        "discovery_id": "1AvZZ_8GkSQncSt",
+        "event_date": "2026-11-28",
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "name": "Josh Baker",
+        "url": "https://www.ticketmaster.ca/josh-baker-toronto-ontario-11-28-2026/event/1000650CDAAADCE9"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917ou80",
+            "name": "Turnover",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ917uih0",
+            "name": "Nothing",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ917QBU0",
+            "name": "Trauma Ray",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "177Zv0G6u_Xu7K2",
+        "event_date": "2026-11-29",
+        "event_status_code": "onsale",
+        "event_time": "18:30:00",
+        "name": "Turnover - Down On Earth Tour",
+        "url": "https://www.ticketmaster.ca/turnover-down-on-earth-tour-toronto-ontario-11-29-2026/event/100064D67E3444CF"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9175lTV",
+            "name": "DragonForce",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          },
+          {
+            "discovery_id": "K8vZ917GBs0",
+            "name": "Ensiferum",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          },
+          {
+            "discovery_id": "K8vZ91720QV",
+            "name": "Rhapsody of Fire",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          }
+        ],
+        "discovery_id": "177Zv0G653LMiFb",
+        "event_date": "2026-12-02",
+        "event_status_code": "onsale",
+        "event_time": "18:30:00",
+        "name": "DragonForce: Inhuman Rampage 20th Anniversary",
+        "url": "https://www.ticketmaster.ca/dragonforce-inhuman-rampage-20th-anniversary-toronto-ontario-12-02-2026/event/100064B49FDEC218"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9171f50",
+            "name": "The Bouncing Souls",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ917GN70",
+            "name": "The Flatliners",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ9171bLf",
+            "name": "The Suicide Machines",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1A8Zk3pGkdw95gP",
+        "event_date": "2026-12-05",
+        "event_status_code": "onsale",
+        "event_time": "18:00:00",
+        "name": "The Bouncing Souls & The Flatliners",
+        "url": "https://www.ticketmaster.ca/the-bouncing-souls-the-flatliners-toronto-ontario-12-05-2026/event/10006496F25CBD65"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9178nYV",
+            "name": "Syd",
+            "genre_id": "KnvZfZ7vAv1",
+            "genre": "Hip-Hop/Rap"
+          }
+        ],
+        "discovery_id": "1AvZZ_3GkR0FBmi",
+        "event_date": "2026-12-08",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Syd",
+        "url": "https://www.ticketmaster.ca/syd-toronto-ontario-12-08-2026/event/1000652BE423ABAC"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9179eGV",
+            "name": "Imminence",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          },
+          {
+            "discovery_id": "K8vZ917_kB0",
+            "name": "Dying Wish",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ917_dVf",
+            "name": "Gaerea",
+            "genre_id": "KnvZfZ7vAvt",
+            "genre": "Metal"
+          }
+        ],
+        "discovery_id": "177Zv0G6GUpf56r",
+        "event_date": "2026-12-11",
+        "event_status_code": "onsale",
+        "event_time": "18:00:00",
+        "name": "Imminence - Axis Mundi Tour: North America 2026",
+        "url": "https://www.ticketmaster.ca/imminence-axis-mundi-tour-north-america-toronto-ontario-12-11-2026/event/100064CD9650B1DE"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9175Hj7",
+            "name": "Wolf Parade",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ9175xtV",
+            "name": "Destroyer",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1A8ZkoKGkeRenXA",
+        "event_date": "2026-12-12",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Wolf Parade",
+        "url": "https://www.ticketmaster.ca/wolf-parade-toronto-ontario-12-12-2026/event/10006453AF0AAF85"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9178Ppf",
+            "name": "Shakey Graves",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "177Zv0G61MZPmsT",
+        "event_date": "2026-12-14",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Shakey Graves - Fondness, Etc. Tour",
+        "url": "https://www.ticketmaster.ca/shakey-graves-fondness-etc-tour-toronto-ontario-12-14-2026/event/100064ADC096EC7F"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917GQtf",
+            "name": "Down With Webster",
+            "genre_id": "KnvZfZ7vAv1",
+            "genre": "Hip-Hop/Rap"
+          },
+          {
+            "discovery_id": "K8vZ9178_c7",
+            "name": "SonReal",
+            "genre_id": "KnvZfZ7vAv1",
+            "genre": "Hip-Hop/Rap"
+          }
+        ],
+        "discovery_id": "1A8Zk4aGkeXqoEs",
+        "event_date": "2026-12-17",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Down With Webster",
+        "url": "https://www.ticketmaster.ca/down-with-webster-toronto-ontario-12-17-2026/event/10006549BE7519F1"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917faj7",
+            "name": "Jason Ross",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          }
+        ],
+        "discovery_id": "177Zv0G613YZld2",
+        "event_date": "2026-12-19",
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "name": "Jason Ross Presents: The True North Tour",
+        "url": "https://www.ticketmaster.ca/jason-ross-presents-the-true-north-toronto-ontario-12-19-2026/event/100064A4B002B0CF"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917QD-f",
+            "name": "Odd Mob",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          }
+        ],
+        "discovery_id": "1A8Zk4AGken6tqi",
+        "event_date": "2026-12-30",
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "name": "Odd Mob",
+        "url": "https://www.ticketmaster.ca/odd-mob-toronto-ontario-12-30-2026/event/10006545AA1E976C"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917qyp7",
+            "name": "Stella Lefty",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          }
+        ],
+        "discovery_id": "1A8Zkf4Gkddr1l2",
+        "event_date": "2027-01-12",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Stella Lefty: Long Way Home Tour",
+        "url": "https://www.ticketmaster.ca/stella-lefty-long-way-home-tour-toronto-ontario-01-12-2027/event/10006515C378AACF"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917qyp7",
+            "name": "Stella Lefty",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          }
+        ],
+        "discovery_id": "1AvZZ_oGklpe4Bz",
+        "event_date": "2027-01-13",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Stella Lefty: Long Way Home Tour",
+        "url": "https://www.ticketmaster.ca/stella-lefty-long-way-home-tour-toronto-ontario-01-13-2027/event/1000651AD6095EB8"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917KsA0",
+            "name": "Chris Lorenzo",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          }
+        ],
+        "discovery_id": "168Zk4870ZA8d1uk",
+        "event_date": "2027-01-15",
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "name": "Chris Lorenzo",
+        "url": "https://www.ticketmaster.ca/chris-lorenzo-toronto-ontario-01-15-2027/event/10006550124F29C5"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917h3bf",
+            "name": "AYYBO",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          }
+        ],
+        "discovery_id": "1A8Zk46Gkd5nrDD",
+        "event_date": "2027-01-16",
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "name": "AYYBO",
+        "url": "https://www.ticketmaster.ca/ayybo-toronto-ontario-01-16-2027/event/10006547CBA9EEFB"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917hOe7",
+            "name": "Ninajirachi",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          }
+        ],
+        "discovery_id": "1A8ZkfsGkeM2qtB",
+        "event_date": "2027-01-21",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Ninajirachi's I Love My Computer and It Loves Me Tour",
+        "url": "https://www.ticketmaster.ca/ninajirachis-i-love-my-computer-and-toronto-ontario-01-21-2027/event/10006531B73DDA7A"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917hOe7",
+            "name": "Ninajirachi",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          }
+        ],
+        "discovery_id": "1A8ZkfsGkeM8qn6",
+        "event_date": "2027-01-22",
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "name": "Ninajirachi's I Love My Computer and It Loves Me Tour",
+        "url": "https://www.ticketmaster.ca/ninajirachis-i-love-my-computer-and-toronto-ontario-01-22-2027/event/10006531B741DA87"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917_rk0",
+            "name": "Alexandra Kay",
+            "genre_id": "KnvZfZ7vAv6",
+            "genre": "Country"
+          }
+        ],
+        "discovery_id": "117ZvPp8GpfkvC",
+        "event_date": "2027-01-26",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "ALEXANDRA KAY - THE ONE WOMAN SHOW",
+        "url": "https://www.ticketmaster.ca/alexandra-kay-the-one-woman-show-toronto-ontario-01-26-2027/event/100065590316506D"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917ryx0",
+            "name": "DJ Meredith Marks",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          }
+        ],
+        "discovery_id": "1AvZZ_3GkR9gEVL",
+        "event_date": "2027-01-28",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "DJ Meredith Marks",
+        "url": "https://www.ticketmaster.ca/dj-meredith-marks-toronto-ontario-01-28-2027/event/1000652BD7D67D1F"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9178MC7",
+            "name": "Houndmouth",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ917jpfV",
+            "name": "Brown Horse",
+            "genre_id": "KnvZfZ7vAv6",
+            "genre": "Country"
+          }
+        ],
+        "discovery_id": "16vZZ_ax6G7YB_a",
+        "event_date": "2027-02-05",
+        "event_status_code": "rescheduled",
+        "event_time": "19:00:00",
+        "name": "Houndmouth: The Lordy Tour",
+        "url": "https://www.ticketmaster.ca/houndmouth-the-lordy-tour-toronto-ontario-02-05-2027/event/1000649887C3A649"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917qIjV",
+            "name": "Swimming Paul",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          }
+        ],
+        "discovery_id": "16vZZ_fbtG7yU3d",
+        "event_date": "2027-02-06",
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "name": "Swimming Paul - North America Tour 2027",
+        "url": "https://www.ticketmaster.ca/swimming-paul-north-america-tour-2027-toronto-ontario-02-06-2027/event/1000654629E76483"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917quo7",
+            "name": "Riordan",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          },
+          {
+            "discovery_id": "K8vZ917L1_f",
+            "name": "IDEMI",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          },
+          {
+            "discovery_id": "K8vZ917Ozh0",
+            "name": "Boss Priester",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          }
+        ],
+        "discovery_id": "168Zk46aJZACC66k",
+        "event_date": "2027-02-12",
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "name": "Riordan Presents \"Remapped\" Toronto",
+        "url": "https://www.ticketmaster.ca/riordan-presents-remapped-toronto-toronto-ontario-02-12-2027/event/10006547266DD665"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917rMUV",
+            "name": "Strings From Paris",
+            "genre_id": "KnvZfZ7vAeJ",
+            "genre": "Classical"
+          }
+        ],
+        "discovery_id": "1AvZZ_fGkzJHeT2",
+        "event_date": "2027-02-14",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Strings From Paris",
+        "url": "https://www.ticketmaster.ca/strings-from-paris-toronto-ontario-02-14-2027/event/1000654E26F02FCF"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917prsf",
+            "name": "Chelsea Cutler",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ917GQEV",
+            "name": "Lamb",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1AvZZ_KGkSTt7DW",
+        "event_date": "2027-02-16",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Chelsea Cutler - IS THIS THE END? Tour",
+        "url": "https://www.ticketmaster.ca/chelsea-cutler-is-this-the-end-toronto-ontario-02-16-2027/event/1000653CFFA44EFD"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917hal7",
+            "name": "Dexter and The Moonrocks",
+            "genre_id": "KnvZfZ7vAvv",
+            "genre": "Alternative"
+          }
+        ],
+        "discovery_id": "1A8ZkfNGkexxzkf",
+        "event_date": "2027-02-17",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Dexter and the Moonrocks: Friends That I Don't Like - Canadian Tour",
+        "url": "https://www.ticketmaster.ca/dexter-and-the-moonrocks-friends-that-toronto-ontario-02-17-2027/event/10006523A28B8194"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917fQVV",
+            "name": "Alan Walker",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          }
+        ],
+        "discovery_id": "1AvZZ_3GkIlb6G_",
+        "event_date": "2027-02-18",
+        "event_status_code": "onsale",
+        "event_time": "18:00:00",
+        "name": "Alan Walker",
+        "url": "https://www.ticketmaster.ca/alan-walker-toronto-ontario-02-18-2027/event/1000652A2B607319"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917fQVV",
+            "name": "Alan Walker",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          }
+        ],
+        "discovery_id": "1AvZZ_3GkIlbMGN",
+        "event_date": "2027-02-19",
+        "event_status_code": "onsale",
+        "event_time": "18:00:00",
+        "name": "Alan Walker",
+        "url": "https://www.ticketmaster.ca/alan-walker-toronto-ontario-02-19-2027/event/1000652A2B637323"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9178PVf",
+            "name": "CHVRCHES",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1k7ZvPfvGA29JEO",
+        "event_date": "2027-02-23",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "CHVRCHES - LIVE 2027",
+        "url": "https://www.ticketmaster.ca/chvrches-live-2027-toronto-ontario-02-23-2027/event/100065501F5E69E0"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9175lu0",
+            "name": "Death From Above 1979",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1avZZ_aGgf9ZdC5u",
+        "event_date": "2027-02-25",
+        "event_status_code": "rescheduled",
+        "event_time": "19:00:00",
+        "name": "Death From Above 1979 - Private Lives Tour",
+        "url": "https://www.ticketmaster.ca/death-from-above-1979-private-lives-toronto-ontario-02-25-2027/event/1000649335517DAC"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917hacV",
+            "name": "Interplanetary Criminal",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          },
+          {
+            "discovery_id": "K8vZ917-yd0",
+            "name": "Riria",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          }
+        ],
+        "discovery_id": "1avZZ_f0fGyZdC65",
+        "event_date": "2027-02-26",
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "name": "Interplanetary Criminal",
+        "url": "https://www.ticketmaster.ca/interplanetary-criminal-toronto-ontario-02-26-2027/event/1000654914339D6A"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917pxl0",
+            "name": "Cory Wong",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ9174N4V",
+            "name": "dodie",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          },
+          {
+            "discovery_id": "K8vZ917pUtf",
+            "name": "Prep",
+            "genre_id": "KnvZfZ7vAee",
+            "genre": "R&B"
+          }
+        ],
+        "discovery_id": "1A8ZkfzGkeNR6Y0",
+        "event_date": "2027-03-03",
+        "event_status_code": "onsale",
+        "event_time": "18:30:00",
+        "name": "Cory Wong featuring dodie with special guest PREP",
+        "url": "https://www.ticketmaster.ca/cory-wong-featuring-dodie-with-special-toronto-ontario-03-03-2027/event/10006538A3BC7C24"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917Gwu7",
+            "name": "Hey Rosetta!",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1A8ZkfsGkdxmE37",
+        "event_date": "2027-03-05",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Hey Rosetta!",
+        "url": "https://www.ticketmaster.ca/hey-rosetta-toronto-ontario-03-05-2027/event/10006531E2BA7484"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917Gwu7",
+            "name": "Hey Rosetta!",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1k7ZvPuyGA1ykmQ",
+        "event_date": "2027-03-06",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Hey Rosetta!",
+        "url": "https://www.ticketmaster.ca/hey-rosetta-toronto-ontario-03-06-2027/event/100065379AE46B9A"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917Gwu7",
+            "name": "Hey Rosetta!",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "168ZkfMvpZA2A81a",
+        "event_date": "2027-03-07",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Hey Rosetta!",
+        "url": "https://www.ticketmaster.ca/hey-rosetta-toronto-ontario-03-07-2027/event/10006537056E4F98"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917p84V",
+            "name": "Ashe",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          },
+          {
+            "discovery_id": "K8vZfZ7Eavk",
+            "name": "Claire Rosinkranz",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          }
+        ],
+        "discovery_id": "1A8Zk4KGkdYOuvZ",
+        "event_date": "2027-03-11",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Ashe: The Girl of Your Dreams Tour",
+        "url": "https://www.ticketmaster.ca/ashe-the-girl-of-your-dreams-toronto-ontario-03-11-2027/event/10006553F080D040"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917bSD7",
+            "name": "The Mary Wallopers",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1A8ZkfAGkdZtpYA",
+        "event_date": "2027-03-12",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "The Mary Wallopers",
+        "url": "https://www.ticketmaster.ca/the-mary-wallopers-toronto-ontario-03-12-2027/event/10006505C0A56C05"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917C4M7",
+            "name": "Lake Street Dive",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ917QZZf",
+            "name": "SNACKTIME",
+            "genre_id": "KnvZfZ7vAvv",
+            "genre": "Alternative"
+          }
+        ],
+        "discovery_id": "1A8Zk4fGkdxAXxc",
+        "event_date": "2027-03-17",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Lake Street Dive - What About Flamingos? 2027 Tour",
+        "url": "https://www.ticketmaster.ca/lake-street-dive-what-about-flamingos-toronto-ontario-03-17-2027/event/10006554E217E8AD"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917hCoV",
+            "name": "Saint Levant",
+            "genre_id": "KnvZfZ7vAv1",
+            "genre": "Hip-Hop/Rap"
+          }
+        ],
+        "discovery_id": "177Zv0G6CEmiqt_",
+        "event_date": "2027-03-23",
+        "event_status_code": "rescheduled",
+        "event_time": "19:00:00",
+        "name": "SAINT LEVANT - AFANDI WORLD TOUR",
+        "url": "https://www.ticketmaster.ca/saint-levant-afandi-world-tour-toronto-ontario-03-23-2027/event/100064E9EEB1DA59"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917hCoV",
+            "name": "Saint Levant",
+            "genre_id": "KnvZfZ7vAv1",
+            "genre": "Hip-Hop/Rap"
+          }
+        ],
+        "discovery_id": "177Zv0G6CEmcutq",
+        "event_date": "2027-03-24",
+        "event_status_code": "rescheduled",
+        "event_time": "19:00:00",
+        "name": "SAINT LEVANT - AFANDI WORLD TOUR",
+        "url": "https://www.ticketmaster.ca/saint-levant-afandi-world-tour-toronto-ontario-03-24-2027/event/100064E9EEB4DA5D"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917hCoV",
+            "name": "Saint Levant",
+            "genre_id": "KnvZfZ7vAv1",
+            "genre": "Hip-Hop/Rap"
+          }
+        ],
+        "discovery_id": "1A8Zkf_GkdYNtyG",
+        "event_date": "2027-03-25",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "SAINT LEVANT - AFANDI WORLD TOUR",
+        "url": "https://www.ticketmaster.ca/saint-levant-afandi-world-tour-toronto-ontario-03-25-2027/event/10006519F08E9E4C"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9174edf",
+            "name": "Morat",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          }
+        ],
+        "discovery_id": "177Zv0G65ag8wpj",
+        "event_date": "2027-03-26",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Morat YEM World Tour 2027",
+        "url": "https://www.ticketmaster.ca/morat-yem-world-tour-2027-toronto-ontario-03-26-2027/event/100064B27543259C"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9179WxV",
+            "name": "Ruby Waters",
+            "genre_id": "KnvZfZ7vAvv",
+            "genre": "Alternative"
+          }
+        ],
+        "discovery_id": "15vZZ_fjkx9-7",
+        "event_date": "2027-03-27",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Ruby Waters: Suppre$$ions North America Tour",
+        "url": "https://www.ticketmaster.ca/ruby-waters-suppreions-north-america-tour-toronto-ontario-03-27-2027/event/1000654706897844"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917QeP0",
+            "name": "Ayra Starr",
+            "genre_id": "KnvZfZ7vAee",
+            "genre": "R&B"
+          }
+        ],
+        "discovery_id": "1A8Zk4kGkdHscla",
+        "event_date": "2027-03-29",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Ayra Starr: Starrgirl World Tour",
+        "url": "https://www.ticketmaster.ca/ayra-starr-starrgirl-world-tour-toronto-ontario-03-29-2027/event/10006546FCC6DAC9"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9171BM0",
+            "name": "Michelle Branch",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1A8Zk4kGkdKP6J5",
+        "event_date": "2027-03-30",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Michelle Branch: Everywhere And Back Again Tour",
+        "url": "https://www.ticketmaster.ca/michelle-branch-everywhere-and-back-again-toronto-ontario-03-30-2027/event/10006546D394798B"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9171BM0",
+            "name": "Michelle Branch",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1A8Zk4kGkdKJ6JQ",
+        "event_date": "2027-03-31",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Michelle Branch: Everywhere And Back Again Tour",
+        "url": "https://www.ticketmaster.ca/michelle-branch-everywhere-and-back-again-toronto-ontario-03-31-2027/event/10006546D398799A"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZfZ7JlIk",
+            "name": "brakence",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          }
+        ],
+        "discovery_id": "1A8Zk4pGkdJbAAt",
+        "event_date": "2027-04-01",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "brakence - the marroW tour",
+        "url": "https://www.ticketmaster.ca/brakence-the-marrow-tour-toronto-ontario-04-01-2027/event/10006556E6605169"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917oanf",
+            "name": "The Interrupters",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ917-r80",
+            "name": "Doom Regulator",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ917feQ7",
+            "name": "Rat Boy",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1A8ZkfsGkdRk_-b",
+        "event_date": "2027-04-10",
+        "event_status_code": "onsale",
+        "event_time": "18:00:00",
+        "name": "The Interrupters",
+        "url": "https://www.ticketmaster.ca/the-interrupters-toronto-ontario-04-10-2027/event/10006531EF199858"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9175Hdf",
+            "name": "Beirut",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1A8Zkf-GkdhBz7a",
+        "event_date": "2027-04-13",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Beirut",
+        "url": "https://www.ticketmaster.ca/beirut-toronto-ontario-04-13-2027/event/10006521DBEB8109"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917GeP0",
+            "name": "The Wombats",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ917b_uf",
+            "name": "The Lathums",
+            "genre_id": "KnvZfZ7vAvv",
+            "genre": "Alternative"
+          }
+        ],
+        "discovery_id": "1AvZZ_fGkHOryLl",
+        "event_date": "2027-04-26",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "THE WOMBATS - A Guide to Love Loss And Desperation 20th Anniversary",
+        "url": "https://www.ticketmaster.ca/the-wombats-a-guide-to-love-toronto-ontario-04-26-2027/event/1000654F207B97EB"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917_gE7",
+            "name": "Frank Turner & the Sleeping Souls",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ9174WF0",
+            "name": "Nobro",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ9172Nff",
+            "name": "Skinny Lister",
+            "genre_id": "KnvZfZ7vAva",
+            "genre": "Folk"
+          },
+          {
+            "discovery_id": "K8vZ9172iYV",
+            "name": "Beans On Toast",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1A8Zk4fGkdSJo24",
+        "event_date": "2027-05-01",
+        "event_status_code": "onsale",
+        "event_time": "17:30:00",
+        "name": "Frank Turner & The Sleeping Souls: Last Evenings World Tour",
+        "url": "https://www.ticketmaster.ca/frank-turner-the-sleeping-souls-last-toronto-ontario-05-01-2027/event/10006554F39913D5"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917KSff",
+            "name": "The Warning",
+            "genre_id": "KnvZfZ7vAvv",
+            "genre": "Alternative"
+          },
+          {
+            "discovery_id": "K8vZ917jFj7",
+            "name": "wilt",
+            "genre_id": "KnvZfZ7vAvv",
+            "genre": "Alternative"
+          }
+        ],
+        "discovery_id": "1AvZZ_3GklTRH3z",
+        "event_date": "2027-05-11",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "The Warning - Everything's Falling World Tour",
+        "url": "https://www.ticketmaster.ca/the-warning-everythings-falling-world-tour-toronto-ontario-05-11-2027/event/1000652AFFBFC4B8"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917pja0",
+            "name": "Ocean Alley",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          },
+          {
+            "discovery_id": "K8vZ9179Bb7",
+            "name": "Mild Orange",
+            "genre_id": "KnvZfZ7vAvv",
+            "genre": "Alternative"
+          }
+        ],
+        "discovery_id": "1k7ZvP4MGA2SShW",
+        "event_date": "2027-05-16",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Ocean Alley North America '27",
+        "url": "https://www.ticketmaster.ca/ocean-alley-north-america-27-toronto-ontario-05-16-2027/event/100065577FCF36FD"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917pD-0",
+            "name": "Cleopatrick",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1A8Zk46GkeOcDpu",
+        "event_date": "2027-05-22",
+        "event_status_code": "onsale",
+        "event_time": "19:00:00",
+        "name": "Cleopatrick",
+        "url": "https://www.ticketmaster.ca/cleopatrick-toronto-ontario-05-22-2027/event/10006547A0B7B58D"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9172pOV",
+            "name": "Carly Rae Jepsen",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          },
+          {
+            "discovery_id": "K8vZ917_c90",
+            "name": "Sarah Kinsley",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1AvZZ_KGkIaWWxu",
+        "event_date": "2027-05-25",
+        "event_status_code": "onsale",
+        "event_time": "18:30:00",
+        "name": "Carly Rae Jepsen: Day and Night Tour",
+        "url": "https://www.ticketmaster.ca/carly-rae-jepsen-day-and-night-toronto-ontario-05-25-2027/event/1000653A09F7D88D"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ9172pOV",
+            "name": "Carly Rae Jepsen",
+            "genre_id": "KnvZfZ7vAev",
+            "genre": "Pop"
+          },
+          {
+            "discovery_id": "K8vZ917_c90",
+            "name": "Sarah Kinsley",
+            "genre_id": "KnvZfZ7vAeA",
+            "genre": "Rock"
+          }
+        ],
+        "discovery_id": "1A8Zk47Gkd65FPY",
+        "event_date": "2027-05-26",
+        "event_status_code": "onsale",
+        "event_time": "18:30:00",
+        "name": "Carly Rae Jepsen: Day and Night Tour",
+        "url": "https://www.ticketmaster.ca/carly-rae-jepsen-day-and-night-toronto-ontario-05-26-2027/event/10006544C72C8970"
+      },
+      {
+        "artists": [
+          {
+            "discovery_id": "K8vZ917K9M7",
+            "name": "FKJ",
+            "genre_id": "KnvZfZ7vAvF",
+            "genre": "Dance/Electronic"
+          }
+        ],
+        "discovery_id": "177Zv0G65U2NyX_",
+        "event_date": "2027-05-28",
+        "event_status_code": "onsale",
+        "event_time": "20:00:00",
+        "name": "FKJ - TYBER TOUR",
+        "url": "https://www.ticketmaster.ca/fkj-tyber-tour-toronto-ontario-05-28-2027/event/100064BD8F8F9F99"
+      }
+    ]
+  }
+}

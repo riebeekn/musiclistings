@@ -133,7 +133,7 @@ defmodule MusicListings.Crawler.EventParserTest do
 
   describe "parse_events/3" do
     setup do
-      payloads = load_payloads("test/data/history/single_event.html")
+      payloads = load_payloads("test/data/history/single_event.json")
       venue = Repo.get_by!(Venue, name: "History")
 
       %{payloads: payloads, venue: venue}
@@ -156,24 +156,25 @@ defmodule MusicListings.Crawler.EventParserTest do
       assert %Payload{
                status: :ok,
                parsed_event: %MusicListingsSchema.Event{
-                 external_id: "lucky_daye_2024_07_31",
-                 title: "Lucky Daye",
-                 headliner: "Lucky Daye",
-                 openers: [],
-                 date: ~D[2024-07-31],
+                 external_id: "177Zv0G653rShzz",
+                 title: "KETTAMA",
+                 headliner: "KETTAMA",
+                 openers: ["Loods"],
+                 date: ~D[2026-10-31],
                  time: ~T[20:00:00],
                  price_format: :unknown,
                  price_lo: nil,
                  price_hi: nil,
                  age_restriction: :unknown,
-                 ticket_url: "https://www.ticketmaster.ca/event/10006099F25B4189",
+                 ticket_url:
+                   "https://www.ticketmaster.ca/kettama-toronto-ontario-10-31-2026/event/100064B49ECDBE38",
                  venue_id: ^venue_id
                }
              } = payload
     end
 
     test "on failed parse returns payload populated with parse error", %{venue: venue} do
-      parse_error_payloads = load_payloads("test/data/history/parse_error_event.html")
+      parse_error_payloads = load_payloads("test/data/history/parse_error_event.json")
 
       [payload] =
         EventParser.parse_events(
