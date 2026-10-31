@@ -143,9 +143,12 @@ defmodule MusicListings.Parsing.VenueParsers.RoyThomsonHallParserTest do
                RoyThomsonHallParser.ticket_url(event, ~D[2025-09-20])
     end
 
-    test "falls back to the generated booking url when a date has no booking url", %{
+    test "returns the earliest showing's link for a date with several showings", %{
       event: event
     } do
+      assert "https://www.ticketmaster.ca/event/10006300ABCD1234" ==
+               RoyThomsonHallParser.ticket_url(event, ~D[2025-09-20])
+
       assert "https://tickets.mhrth.com/100/103/" ==
                RoyThomsonHallParser.ticket_url(event, ~D[2025-09-21])
     end

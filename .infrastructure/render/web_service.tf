@@ -29,6 +29,9 @@ resource "render_web_service" "this" {
     "BREVO_API_KEY" = {
       value = var.app_brevo_api_key
     },
+    "FIRECRAWL_API_KEY" = {
+      value = var.app_firecrawl_api_key
+    },
     "TURNSTILE_SECRET_KEY" = {
       value = var.app_turnstile_secret_key
     },

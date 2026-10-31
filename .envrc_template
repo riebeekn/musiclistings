@@ -23,6 +23,11 @@ export BREVO_API_KEY=""
 # bin/install-curl-impersonate.sh puts it).
 # export CURL_IMPERSONATE_BIN=""
 
+# Optional: Firecrawl API key, used to fetch the venues behind a Cloudflare
+# challenge (Massey Hall, Roy Thomson Hall, TD Music Hall) - see
+# MusicListings.HttpClient.Firecrawl.  Without it requests go unauthenticated.
+# export FIRECRAWL_API_KEY=""
+
 # Impact.com credentials for the TicketNetwork affiliate catalog, used to attach
 # affiliate ticket links to events after each crawl (see
 # MusicListings.Affiliates.TicketNetwork).
