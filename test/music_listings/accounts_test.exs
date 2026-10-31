@@ -1,6 +1,6 @@
 # credo:disable-for-this-file
 defmodule MusicListings.AccountsTest do
-  use MusicListings.DataCase
+  use MusicListings.DataCase, async: true
 
   alias MusicListings.Accounts
 
