@@ -9,6 +9,7 @@ defmodule MusicListings.Affiliates.TicketNetworkTest do
   # whose catalog date is a day before the show.
   @today ~D[2026-07-25]
   @show_date ~D[2026-11-08]
+  @no_credentials [account_sid: nil, auth_token: nil]
 
   # Venues are created by migrations rather than factories, and the matcher
   # resolves them by parser module name, so use the real row.
@@ -148,11 +149,7 @@ defmodule MusicListings.Affiliates.TicketNetworkTest do
     end
 
     test "skips when no credentials are configured" do
-      original = Application.get_env(:music_listings, :ticket_network)
-      Application.put_env(:music_listings, :ticket_network, account_sid: nil, auth_token: nil)
-      on_exit(fn -> Application.put_env(:music_listings, :ticket_network, original) end)
-
-      assert TicketNetwork.run(today: @today) == {:ok, :skipped}
+      assert TicketNetwork.run(today: @today, credentials: @no_credentials) == {:ok, :skipped}
     end
 
     test "dry runs report without writing" do
@@ -166,26 +163,17 @@ defmodule MusicListings.Affiliates.TicketNetworkTest do
   end
 
   describe "run_quietly/1" do
-    defp put_credentials(credentials) do
-      original = Application.get_env(:music_listings, :ticket_network)
-
-      Application.put_env(:music_listings, :ticket_network, credentials)
-
-      on_exit(fn -> Application.put_env(:music_listings, :ticket_network, original) end)
-    end
-
     # The reason is what the crawl summary email reports, so it has to survive
     # the pass rather than being flattened into a bare nil.
     test "returns the reason rather than raising when the catalog is unreachable" do
-      put_credentials(account_sid: "unknown_account_sid", auth_token: "test_auth_token")
+      credentials = [account_sid: "unknown_account_sid", auth_token: "test_auth_token"]
 
-      assert {:error, _reason} = TicketNetwork.run_quietly(today: @today)
+      assert {:error, _reason} =
+               TicketNetwork.run_quietly(today: @today, credentials: credentials)
     end
 
     test "returns :skipped when no credentials are configured" do
-      put_credentials(account_sid: nil, auth_token: nil)
-
-      assert TicketNetwork.run_quietly(today: @today) == :skipped
+      assert TicketNetwork.run_quietly(today: @today, credentials: @no_credentials) == :skipped
     end
   end
 end

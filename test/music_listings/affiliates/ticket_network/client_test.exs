@@ -54,33 +54,33 @@ defmodule MusicListings.Affiliates.TicketNetwork.ClientTest do
     end
 
     test "returns an error when credentials are absent" do
-      original = Application.get_env(:music_listings, :ticket_network)
-      Application.put_env(:music_listings, :ticket_network, account_sid: nil, auth_token: nil)
-      on_exit(fn -> Application.put_env(:music_listings, :ticket_network, original) end)
+      opts = [credentials: [account_sid: nil, auth_token: nil]]
 
-      assert Client.fetch_items(@today) == {:error, :not_configured}
-      refute Client.configured?()
+      assert Client.fetch_items(@today, opts) == {:error, :not_configured}
     end
 
     test "fails rather than returning a partial catalog when a page is unreachable" do
       # A short read would look to the matcher like a batch of delisted events
       # and would clear links that are still live.
-      original = Application.get_env(:music_listings, :ticket_network)
+      opts = [credentials: [account_sid: "unknown_account_sid", auth_token: "test_auth_token"]]
 
-      Application.put_env(:music_listings, :ticket_network,
-        account_sid: "unknown_account_sid",
-        auth_token: "test_auth_token"
-      )
-
-      on_exit(fn -> Application.put_env(:music_listings, :ticket_network, original) end)
-
-      assert {:error, _reason} = Client.fetch_items(@today)
+      assert {:error, _reason} = Client.fetch_items(@today, opts)
     end
   end
 
-  describe "configured?/0" do
+  describe "configured?/1" do
     test "is true when both credentials are present" do
       assert Client.configured?()
+    end
+
+    test "is false when a credential is missing or blank" do
+      refute Client.configured?(credentials: [account_sid: nil, auth_token: nil])
+      refute Client.configured?(credentials: [account_sid: "sid", auth_token: ""])
+      refute Client.configured?(credentials: [])
+    end
+
+    test "uses the credentials passed in over the app config" do
+      assert Client.configured?(credentials: [account_sid: "sid", auth_token: "token"])
     end
   end
 end

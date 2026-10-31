@@ -7,7 +7,9 @@ defmodule MusicListings.Affiliates.TicketNetwork.Client do
   API pages 100 items at a time and reports the page count in `@numpages`.
 
   Credentials come from `config :music_listings, :ticket_network` (set from the
-  environment in `config/runtime.exs`).  Authentication is HTTP Basic with the
+  environment in `config/runtime.exs`), unless the caller passes its own as the
+  `:credentials` option (`[account_sid: ..., auth_token: ...]`) - which is how
+  tests vary them without touching global config.  Authentication is HTTP Basic with the
   account SID as the username and the auth token as the password.
   """
   alias MusicListings.Affiliates.TicketNetwork.Item
@@ -40,9 +42,9 @@ defmodule MusicListings.Affiliates.TicketNetwork.Client do
   a short read would look like a batch of delisted events to the matcher and
   cause it to clear links that are still live.
   """
-  @spec fetch_items(Date.t()) :: {:ok, [Item.t()]} | {:error, term()}
-  def fetch_items(today \\ Date.utc_today()) do
-    case config() do
+  @spec fetch_items(Date.t(), keyword()) :: {:ok, [Item.t()]} | {:error, term()}
+  def fetch_items(today \\ Date.utc_today(), opts \\ []) do
+    case credentials(opts) do
       {:ok, credentials} -> fetch_pages(credentials, today, 1, [])
       :error -> {:error, :not_configured}
     end
@@ -52,9 +54,9 @@ defmodule MusicListings.Affiliates.TicketNetwork.Client do
   Whether API credentials are configured.  They are absent in dev and test, and
   the caller skips the run rather than failing.
   """
-  @spec configured? :: boolean()
-  def configured? do
-    match?({:ok, _credentials}, config())
+  @spec configured?(keyword()) :: boolean()
+  def configured?(opts \\ []) do
+    match?({:ok, _credentials}, credentials(opts))
   end
 
   defp fetch_pages(_credentials, _today, page, _acc) when page > @max_pages do
@@ -116,8 +118,12 @@ defmodule MusicListings.Affiliates.TicketNetwork.Client do
     ]
   end
 
-  defp config do
-    config = Application.get_env(:music_listings, :ticket_network, [])
+  defp credentials(opts) do
+    config =
+      Keyword.get_lazy(opts, :credentials, fn ->
+        Application.get_env(:music_listings, :ticket_network, [])
+      end)
+
     account_sid = config[:account_sid]
     auth_token = config[:auth_token]
 

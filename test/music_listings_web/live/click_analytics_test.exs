@@ -1,7 +1,10 @@
 defmodule MusicListingsWeb.ClickAnalyticsTest do
-  # async: false so the SQL sandbox runs in shared mode — the telemetry handler
-  # inserts from the LiveView process, which needs the test's connection.
-  use MusicListingsWeb.ConnCase, async: false
+  # The telemetry handler inserts from the LiveView process, which reaches the
+  # test's sandboxed connection via $callers, so this can run async.  Feature
+  # flags live only in the DB (no cache), so enabling one is rolled back with
+  # the test's transaction - no on_exit cleanup needed (and an on_exit couldn't
+  # reach the DB in async mode anyway).
+  use MusicListingsWeb.ConnCase, async: true
 
   import Ecto.Query
   import Phoenix.LiveViewTest
@@ -56,7 +59,6 @@ defmodule MusicListingsWeb.ClickAnalyticsTest do
   describe "card click" do
     setup do
       FunWithFlags.enable(:show_recently_added)
-      on_exit(fn -> FunWithFlags.disable(:show_recently_added) end)
       :ok
     end
 
@@ -146,8 +148,6 @@ defmodule MusicListingsWeb.ClickAnalyticsTest do
   describe "resale (TicketNetwork) click" do
     setup do
       FunWithFlags.enable(:show_resale_tickets)
-
-      on_exit(fn -> FunWithFlags.disable(:show_resale_tickets) end)
 
       resale_event =
         insert(:event,

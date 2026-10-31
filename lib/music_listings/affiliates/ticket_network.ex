@@ -56,6 +56,13 @@ defmodule MusicListings.Affiliates.TicketNetwork do
 
   Returns `{:ok, :skipped}` when no API credentials are configured, which is the
   normal state in dev and test.
+
+  Options:
+
+    * `:today` - the date to match from (defaults to today, UTC)
+    * `:dry_run` - report what would change without writing it
+    * `:credentials` - `[account_sid: ..., auth_token: ...]` to use instead of
+      the app config (see `MusicListings.Affiliates.TicketNetwork.Client`)
   """
   @spec run(keyword()) :: {:ok, Stats.t()} | {:ok, :skipped} | {:error, term()}
   def run(opts \\ []) do
@@ -120,9 +127,10 @@ defmodule MusicListings.Affiliates.TicketNetwork do
           | {:error, term()}
   def analyze(opts \\ []) do
     today = Keyword.get(opts, :today, Date.utc_today())
+    client_opts = Keyword.take(opts, [:credentials])
 
-    if Client.configured?() do
-      with {:ok, items} <- Client.fetch_items(today) do
+    if Client.configured?(client_opts) do
+      with {:ok, items} <- Client.fetch_items(today, client_opts) do
         venue_ids = venue_ids_by_parser_module_name()
         events = upcoming_events(Map.values(venue_ids), today)
 
