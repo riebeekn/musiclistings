@@ -3,20 +3,25 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   Base parser for Massey Hall, Roy Thomson Hall and
   TD Music Hall, as they are on a single site
 
-  mhrth.com sits behind a Cloudflare challenge that rejects the BEAM's TLS
-  fingerprint, so every request here is made with `browser: true`
-  (see `MusicListings.HttpClient.CurlImpersonate`).
+  mhrth.com sits behind a Cloudflare challenge keyed on bot score, which rejects
+  the BEAM's TLS fingerprint and, from Render, even a real Chrome one.  So every
+  request here goes through Firecrawl (`firecrawl: true`, see
+  `MusicListings.HttpClient.Firecrawl`), which loads the page in a real browser
+  on its own IPs.
 
-  Even then the challenge is keyed on a bot score, and each event costs two
-  follow-up requests: the details page (for the event id) and the instances
-  API (for each date's time and ticket link).
-  Fired off eight events at a time that burst was enough to start drawing
-  challenges part way through a crawl, leaving events without ticket links.  So
+  The listing has each event's dates but not its times or ticket links.  Those
+  come from the event's details page, where the site's `<instance-list>` widget
+  fills them in from the API behind it - so they're only there because Firecrawl
+  hands back the page as the browser rendered it.  Requesting that API
+  directly instead would need an `Accept: application/json` header, and Firecrawl
+  doesn't pass headers on.
+
+  Every request counts toward the challenge (and costs a Firecrawl credit), so
   events are parsed one at a time (`max_concurrency/0`) with a pause before
-  every request, and a lookup that fails is reported through
+  every request, and an event an earlier crawl already stored ticket links for
+  isn't looked up at all.  A lookup that fails is reported through
   `MusicListings.Parsing.LookupFailures` - which also stops it overwriting a
-  ticket link or time an earlier crawl found.  An event an earlier crawl
-  already stored ticket links for isn't looked up at all.
+  ticket link or time an earlier crawl found.
 
   Once a request draws the challenge (a 403) the follow-up lookups stop for the
   rest of the venue's crawl, via `MusicListings.Parsing.ChallengeBreaker`: more
@@ -44,12 +49,6 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   # Never more of the listing than this, however many pages it has
   @max_pages 5
 
-  # The API is a Django REST framework one, which picks its renderer from the
-  # Accept header.  curl-impersonate sends Chrome's page-load Accept header,
-  # which selects the HTML "browsable API" renderer - and that 500s for many
-  # events.  Asking for JSON, as the site's own ticket widget does, doesn't.
-  @api_headers [{"accept", "application/json"}]
-
   def retrieve_events_fun do
     fn url ->
       case get(url) do
@@ -65,28 +64,23 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
 
   def max_concurrency, do: 1
 
-  defp get(url, headers \\ [], opts \\ []) do
+  defp get(url) do
     :music_listings
     |> Application.get_env(:mhrth_request_interval_ms, @default_request_interval_ms)
     |> Process.sleep()
 
-    HttpClient.get(url, headers, [browser: true] ++ opts)
+    HttpClient.get(url, [], firecrawl: true)
   end
 
-  # For the per-event follow-up lookups (details page, instances API).  Reduces
-  # the outcome to the body or a short reason - the response itself carries a
-  # whole challenge page, too much for a crawl report.
-  #
-  # A 500 from these endpoints has so far been a request the site can't serve
-  # (see @api_headers), not a blip, so retrying it only adds requests - and
-  # request volume is what draws the challenge.  The listing pages keep the
-  # default retries: losing one loses the whole venue.
-  defp get_body(url, headers \\ []) do
+  # For the per-event details page lookups.  Reduces the outcome to the body or
+  # a short reason - the response itself carries a whole challenge page, too
+  # much for a crawl report.
+  defp get_body(url) do
     if ChallengeBreaker.tripped?(__MODULE__) do
       {:error, "skipped the request to #{url}, an earlier one drew the Cloudflare challenge"}
     else
       url
-      |> get(headers, no_retry_statuses: [500])
+      |> get()
       |> track_challenge()
       |> case do
         {:ok, %HttpClient.Response{status: 200, body: body}} -> {:ok, body}
@@ -103,15 +97,6 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   end
 
   defp track_challenge(result), do: result
-
-  defp decode(body) when is_binary(body) do
-    case Jason.decode(body) do
-      {:ok, decoded} -> {:ok, decoded}
-      {:error, _error} -> {:error, "response was not JSON"}
-    end
-  end
-
-  defp decode(body), do: {:ok, body}
 
   def events(body) do
     body
@@ -244,8 +229,8 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
 
   # The lookups only add each date's time and ticket link.  Once an earlier
   # crawl has stored a ticket link for the listing's first and last dates, and
-  # for every date in between that it stored, the two requests are skipped -
-  # every request counts towards the challenge.  A date the listing gains, or a
+  # for every date in between that it stored, the request is skipped - every
+  # request counts towards the challenge.  A date the listing gains, or a
   # stored date still without a link, sends the event back to the lookups.
   defp stored_instances(event, details_path, base_url) do
     {start_date, end_date} = index_date_range(event)
@@ -264,20 +249,18 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   end
 
   defp do_fetch_instances(event, details_path, base_url) do
-    case fetch_instances_from_api(details_path, base_url) do
+    case fetch_showings(details_path, base_url) do
       {:ok, instances} -> {:ok, filter_instances(instances, event)}
       :error -> :error
     end
   end
 
-  # Without the instances the event still has its date from the listing, but
+  # Without the showings the event still has its date from the listing, but
   # neither a time nor a ticket link.
-  defp fetch_instances_from_api(details_path, base_url) do
+  defp fetch_showings(details_path, base_url) do
     with {:ok, detail_body} <- get_body("#{base_url}#{details_path}"),
-         {:ok, event_id} <- extract_event_id(detail_body),
-         {:ok, api_body} <- get_body(instances_url(base_url, event_id), @api_headers),
-         {:ok, instances} <- parse_instances(api_body) do
-      {:ok, instances}
+         {:ok, showings} <- showings(detail_body) do
+      {:ok, showings}
     else
       {:error, reason} ->
         message = "Couldn't look up the dates for #{details_path}: #{reason}"
@@ -285,21 +268,6 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
         LookupFailures.record([:time, :ticket_url], message)
         :error
     end
-  end
-
-  # Mirrors the request the site's own ticket widget makes.  Without `fields`
-  # the response carries no booking URL, which would cost another request per
-  # date.
-  defp instances_url(base_url, event_id) do
-    query =
-      URI.encode_query(%{
-        "child_of" => event_id,
-        "limit" => 1000,
-        "fields" => "start_datetime,booking_url,generated_booking_url",
-        "order" => "start_datetime"
-      })
-
-    "#{base_url}/api/attendable/v1/instances/?#{query}"
   end
 
   defp filter_instances(instances, event) do
@@ -326,58 +294,86 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
     end
   end
 
-  defp extract_event_id(html_body) do
-    case Regex.run(~r/instance-list[^>]*event-id="(\d+)"/, html_body) do
-      [_full_match, event_id] -> {:ok, event_id}
-      _no_match -> {:error, "no event id on the details page"}
-    end
-  end
+  @doc """
+  Reads an event's showings, as `{date, time, ticket_url}` sorted by date and
+  time, off its details page as a browser renders it.
 
-  defp parse_instances(body) do
-    case decode(body) do
-      {:ok, %{"items" => items}} when is_list(items) ->
-        instances =
-          items
-          |> Enum.map(&parse_instance/1)
-          |> Enum.reject(&is_nil/1)
-          |> Enum.sort_by(fn {date, time, _booking_url} -> {date, time} end)
+  The `<instance-list>` widget renders each showing as a `.c-instance`, holding
+  the date and either the showing itself or - when the page groups showings by
+  date - a list of them.  A showing's time is only shown when it has an end time,
+  and its ticket link only while it's on sale (not once it's sold out or
+  postponed), so either can be `nil`.  Past showings aren't rendered at all.
+  """
+  @spec showings(String.t()) ::
+          {:ok, [{Date.t(), Time.t() | nil, String.t() | nil}]} | {:error, String.t()}
+  def showings(detail_body) do
+    instance_list = Selectors.match_one(detail_body, css("instance-list"))
 
-        if instances == [], do: {:error, "no dated instances"}, else: {:ok, instances}
+    cond do
+      is_nil(instance_list) ->
+        {:error, "no showings widget on the details page"}
 
-      {:ok, _unexpected} ->
-        {:error, "unexpected instances response"}
+      Selectors.match_one(instance_list, css(".loading-container")) ->
+        {:error, "the showings hadn't loaded"}
 
-      {:error, reason} ->
-        {:error, reason}
-    end
-  end
-
-  defp parse_instance(%{"title" => title} = item) when is_binary(title) do
-    case Regex.run(~r/^(\d{4}-\d{2}-\d{2}),\s*(\d{2}:\d{2})/, title) do
-      [_full_match, date_str, time_str] ->
-        with {:ok, date} <- Date.from_iso8601(date_str),
-             {:ok, time} <- Time.from_iso8601("#{time_str}:00") do
-          {date, time, booking_url(item)}
-        else
-          _error -> nil
+      true ->
+        instance_list
+        |> Selectors.all_matches(css(".c-instance"))
+        |> Enum.flat_map(&instance_showings/1)
+        |> Enum.sort_by(fn {date, time, _ticket_url} ->
+          {Date.to_gregorian_days(date), time && Time.to_iso8601(time)}
+        end)
+        |> case do
+          [] -> {:error, "no dated showings"}
+          showings -> {:ok, showings}
         end
-
-      _no_match ->
-        nil
     end
   end
 
-  defp parse_instance(_item), do: nil
+  defp instance_showings(instance) do
+    case showing_date(instance) do
+      nil ->
+        []
 
-  # The site's widget falls back to the generated tickets.mhrth.com link when an
-  # instance has no booking_url of its own.  Neither means no ticket link (yet).
-  defp booking_url(item) do
-    Enum.find_value(["booking_url", "generated_booking_url"], fn field ->
-      case item[field] do
-        url when is_binary(url) and url != "" -> url
-        _missing -> nil
-      end
-    end)
+      date ->
+        instance
+        |> Selectors.all_matches(css("li"))
+        |> Enum.filter(&Selectors.match_one(&1, css(".c-instance__info")))
+        |> case do
+          # a single showing, rather than a date's list of them
+          [] -> [instance]
+          grouped_showings -> grouped_showings
+        end
+        |> Enum.map(&{date, showing_time(&1), Selectors.url(&1, css(".c-btn--book"))})
+    end
+  end
+
+  # e.g. "Saturday, October 31, 2026"
+  defp showing_date(instance) do
+    with date_string when is_binary(date_string) <-
+           Selectors.text(instance, css(".c-instance__date")),
+         [_full_match, month, day, year] <-
+           Regex.run(~r/([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})/, date_string),
+         {:ok, date} <- ParseHelpers.build_date_from_year_month_day_strings(year, month, day) do
+      date
+    else
+      _no_date -> nil
+    end
+  end
+
+  # "8:00 PM", or "8:00 PM - 10:30 PM" when the widget shows the end time too
+  defp showing_time(showing) do
+    case Selectors.match_one(showing, css(".c-instance__list-time span")) do
+      nil ->
+        nil
+
+      time_span ->
+        time_span
+        |> Selectors.text()
+        |> String.split(" - ")
+        |> hd()
+        |> ParseHelpers.time_from_time_string()
+    end
   end
 
   def price(_event) do
@@ -407,9 +403,14 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
     end
   end
 
+  # The details page's path.  The listing links it by path, but by full URL
+  # once a browser has rendered the page (as Firecrawl hands it back) - either
+  # way it has to come out the same, as the stored events are matched on it.
   def details_url(event) do
     event
     |> Selectors.match_one(css(".c-card__cover-link"))
     |> Selectors.attr("href")
+    |> URI.parse()
+    |> Map.fetch!(:path)
   end
 end

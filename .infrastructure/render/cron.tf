@@ -46,6 +46,9 @@ resource "render_cron_job" "this" {
     "APPSIGNAL_APP_ENV" = {
       value = var.environment
     },
+    "FIRECRAWL_API_KEY" = {
+      value = var.app_firecrawl_api_key
+    },
     # Affiliate link matching runs at the end of the nightly crawl, so these
     # only belong on the cron service - the web service never calls the API.
     "TICKET_NETWORK_ACCOUNT_SID" = {

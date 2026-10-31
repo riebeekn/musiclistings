@@ -5,6 +5,7 @@ defmodule MusicListings.HttpClient.Req do
   @behaviour MusicListings.HttpClient
 
   alias MusicListings.HttpClient.CurlImpersonate
+  alias MusicListings.HttpClient.Firecrawl
   alias MusicListings.HttpClient.Response
 
   @retry_statuses [403, 408, 429, 500, 502, 503, 504]
@@ -24,12 +25,14 @@ defmodule MusicListings.HttpClient.Req do
   # `browser: true` routes the request through curl-impersonate so it presents
   # a real Chrome TLS fingerprint - for venues behind a Cloudflare challenge
   # that rejects the BEAM's fingerprint. See `MusicListings.HttpClient.CurlImpersonate`.
+  # `firecrawl: true` has Firecrawl load the page in a real browser on its own
+  # IPs, for a challenge that rejects ours too. See `MusicListings.HttpClient.Firecrawl`.
   @impl true
   def get(url, headers \\ [], opts \\ []) do
-    if Keyword.get(opts, :browser, false) do
-      CurlImpersonate.get(url, headers, opts)
-    else
-      req_get(url, headers, opts)
+    cond do
+      Keyword.get(opts, :firecrawl, false) -> Firecrawl.get(url, opts)
+      Keyword.get(opts, :browser, false) -> CurlImpersonate.get(url, headers, opts)
+      true -> req_get(url, headers, opts)
     end
   end
 

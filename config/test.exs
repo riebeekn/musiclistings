@@ -49,6 +49,12 @@ config :music_listings, :mhrth_request_interval_ms, 0
 # curl-impersonate backs off between retries - no need against a fake binary.
 config :music_listings, :curl_impersonate_retry_base_delay_ms, 0
 
+# The Firecrawl client's own tests stub its API with Req.Test
+config :music_listings, :firecrawl_req_options,
+  plug: {Req.Test, MusicListings.HttpClient.Firecrawl}
+
+config :music_listings, :firecrawl_retry_base_delay_ms, 0
+
 # Dummy TicketNetwork credentials so the affiliate matcher treats itself as
 # configured and serves its catalog from fixtures rather than skipping.
 config :music_listings, :ticket_network,

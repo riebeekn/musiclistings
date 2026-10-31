@@ -59,17 +59,10 @@ defmodule MusicListings.HttpClient.Test do
 
   defp fixtures do
     [
-      # Roy Thomson Hall
-      {"roythomsonhall.mhrth.com/api/attendable/v1/instances/?child_of",
-       "roy_thomson_hall/instances.json"},
+      # Massey Hall, Roy Thomson Hall and TD Music Hall - an event's details
+      # page, as a browser renders it (see MhRthTdmhParser.showings/1)
       {"roythomsonhall.mhrth.com/tickets/", "roy_thomson_hall/detail.html"},
-      # Massey Hall
-      {"masseyhall.mhrth.com/api/attendable/v1/instances/?child_of",
-       "massey_hall/instances.json"},
       {"masseyhall.mhrth.com/tickets/", "massey_hall/detail.html"},
-      # TD Music Hall
-      {"tdmusichall.mhrth.com/api/attendable/v1/instances/?child_of",
-       "td_music_hall/instances.json"},
       {"tdmusichall.mhrth.com/tickets/", "td_music_hall/detail.html"},
       # Drake Underground - the event page is the only place the show date
       # appears, so each fixture stands for a different shape of that page.

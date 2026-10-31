@@ -28,6 +28,80 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParserTest do
     end
   end
 
+  describe "details_url/1" do
+    test "is the same path whether the listing links by path or by full URL", %{event: event} do
+      [rendered_event] =
+        MhRthTdmhParser.events("""
+        <div class="c-card c-card--event">
+          <a class="c-card__cover-link" href="https://masseyhall.mhrth.com/tickets/belle-and-sebastian/"></a>
+        </div>
+        """)
+
+      assert "/tickets/belle-and-sebastian/" == MhRthTdmhParser.details_url(event)
+      assert "/tickets/belle-and-sebastian/" == MhRthTdmhParser.details_url(rendered_event)
+    end
+  end
+
+  describe "showings/1" do
+    test "reads each showing's date, time and ticket link" do
+      assert {:ok,
+              [
+                {~D[2026-05-25], ~T[20:00:00], "https://tickets.mhrth.com/7047/7048/"},
+                {~D[2026-05-26], ~T[20:00:00], "https://tickets.mhrth.com/7047/7049/"}
+              ]} ==
+               "test/data/massey_hall/detail.html" |> File.read!() |> MhRthTdmhParser.showings()
+    end
+
+    test "reads every showing of a date when they're grouped, with their end times" do
+      assert {:ok,
+              [
+                {~D[2025-09-18], ~T[19:30:00], "https://tickets.mhrth.com/100/101/"},
+                {~D[2025-09-20], ~T[19:30:00],
+                 "https://www.ticketmaster.ca/event/10006300ABCD1234"},
+                {~D[2025-09-20], ~T[22:00:00], "https://tickets.mhrth.com/100/104/"},
+                {~D[2025-09-21], ~T[15:00:00], "https://tickets.mhrth.com/100/103/"}
+              ]} ==
+               "test/data/roy_thomson_hall/detail.html"
+               |> File.read!()
+               |> MhRthTdmhParser.showings()
+    end
+
+    test "a showing that's sold out has no ticket link, nor a time without an end time" do
+      html = """
+      <instance-list event-id="1" class="hydrated"><ul class="c-instances">
+        <li class="c-instances__group c-instances__group--single"><div class="c-instance">
+          <div class="c-instance__group-date c-instance__group-date--desktop">
+            <div class="c-instance__date">Friday, December 4, 2026</div>
+            <div class="c-instance__info"><div class="c-instance__doors"><p>Doors</p><span>7:00 PM</span></div></div>
+          </div>
+          <div class="c-instance__list-info"><div class="c-instance__button c-instance__button--desktop">
+            <span class="c-btn c-btn--disabled">Sold Out</span>
+          </div></div>
+        </div></li>
+      </ul></instance-list>
+      """
+
+      assert {:ok, [{~D[2026-12-04], nil, nil}]} == MhRthTdmhParser.showings(html)
+    end
+
+    test "is an error when the widget hadn't loaded, has nothing listed, or isn't there" do
+      assert {:error, "the showings hadn't loaded"} ==
+               MhRthTdmhParser.showings("""
+               <instance-list event-id="1"><div class="loading-container"><svg></svg></div></instance-list>
+               """)
+
+      assert {:error, "no dated showings"} ==
+               MhRthTdmhParser.showings("""
+               <instance-list event-id="1" class="hydrated"><div class="c-instance__empty">
+                 <h2 class="c-heading">Tickets for this event are currently unavailable.</h2>
+               </div></instance-list>
+               """)
+
+      assert {:error, "no showings widget on the details page"} ==
+               MhRthTdmhParser.showings("<html><body><h1>Just a moment...</h1></body></html>")
+    end
+  end
+
   describe "next_page_url/2" do
     test "stops at the fifth page even when the listing has more" do
       # Roy Thomson Hall's fixture is page 2 of 8

@@ -136,6 +136,12 @@ variable "app_appsignal_push_api_key" {
   sensitive   = true
 }
 
+variable "app_firecrawl_api_key" {
+  description = "Firecrawl API key"
+  type        = string
+  sensitive   = true
+}
+
 variable "app_ticket_network_account_sid" {
   description = <<EOT
 Impact.com account SID for the TicketNetwork affiliate catalog. Doubles as the

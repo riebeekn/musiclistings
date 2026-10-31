@@ -47,6 +47,13 @@ if config_env() != :test do
     auth_token: System.get_env("TICKET_NETWORK_AUTH_TOKEN")
 end
 
+# Firecrawl, which fetches the mhrth.com venues (see MusicListings.HttpClient.Firecrawl).
+# Outside the :prod block so a local `bin/crawl-venue.sh` run uses the key from
+# .envrc.  Optional - without it requests go to Firecrawl unauthenticated.
+if config_env() != :test do
+  config :music_listings, :firecrawl_api_key, System.get_env("FIRECRAWL_API_KEY")
+end
+
 if config_env() == :prod do
   database_url =
     System.get_env("DATABASE_URL") ||

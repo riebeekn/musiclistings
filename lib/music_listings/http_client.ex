@@ -33,7 +33,10 @@ defmodule MusicListings.HttpClient do
   fingerprint (via curl-impersonate) for venues whose bot protection rejects
   the BEAM's; the test client ignores it.  With `browser: true`,
   `no_retry_statuses:` lists statuses to return without retrying (see
-  `MusicListings.HttpClient.CurlImpersonate`).
+  `MusicListings.HttpClient.CurlImpersonate`).  `firecrawl: true` fetches the
+  page rendered by a real browser on Firecrawl's IPs, for bot protection that
+  rejects ours whatever the fingerprint (see `MusicListings.HttpClient.Firecrawl`);
+  the test client ignores that too.
   """
   @callback get(url :: String.t(), headers :: list() | nil, opts :: keyword()) ::
               {:ok, Response.t()} | {:error, any()}

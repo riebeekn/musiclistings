@@ -180,38 +180,47 @@ page itself logs a `page_parse_error`.
 
 **Massey Hall, Roy Thomson Hall and TD Music Hall** (`*.mhrth.com`) sit behind a Cloudflare Managed
 Challenge keyed on bot score. Erlang's `:ssl` TLS fingerprint is classed as automated, so Finch/Req
-gets a `403` challenge page (`cf-mitigated: challenge`) from *any* IP with *any* headers — changing
-IP or headers does not help. `MhRthTdmhParser` therefore makes all of its requests with
-`HttpClient.get(url, [], browser: true)`, which shells out to the `curl-impersonate` binary
-(`MusicListings.HttpClient.CurlImpersonate`) to present a real Chrome fingerprint.
+gets a `403` challenge page (`cf-mitigated: challenge`) whatever the headers. The IP counts too: a
+real Chrome fingerprint (curl-impersonate) gets through from a residential IP but not from Render's.
+`MhRthTdmhParser` therefore makes all of its requests with `HttpClient.get(url, [], firecrawl: true)`,
+which has Firecrawl (`MusicListings.HttpClient.Firecrawl`) load the page in a real browser on its own
+IPs and return the rendered HTML.
 
-- The `Dockerfile` installs a pinned release, so prod needs nothing extra.
-- Locally run `./bin/install-curl-impersonate.sh` once (binary lands in gitignored
-  `bin/curl-impersonate/`); the client also honours `$CURL_IMPERSONATE_BIN` or `$PATH`.
-- Keep the version/checksums in `bin/install-curl-impersonate.sh` and the `Dockerfile` in step.
-- Use `browser: true` only for venues that actually need it — it spawns a process per request.
-- curl-impersonate doesn't guarantee a pass: the challenge is keyed on bot score, and a burst of
-  requests can still draw it part way through a crawl. `MhRthTdmhParser` therefore parses one event
-  at a time (the optional `max_concurrency/0` parser callback) and pauses before every request
-  (`:mhrth_request_interval_ms`, 500ms by default, 0 in test). The curl-impersonate client does
-  not retry a `403` (unlike the Req client): a retry seconds later draws the same challenge and
-  only adds to the request volume that earned it. For the same reason a `403` trips
+- `$FIRECRAWL_API_KEY` (Render env via the `app_firecrawl_api_key` Terraform variable; `.envrc`
+  locally) authenticates the requests. It's optional - Firecrawl also serves unauthenticated
+  requests - but set it for the nightly crawl. Each request is 1 Firecrawl credit.
+- The response's `status` is the *target's* (Firecrawl's `metadata.statusCode`), so a challenged
+  page is still a `403`. Firecrawl doesn't pass request headers on.
+- Listing card links come back as full URLs from a rendered page (paths from a plain fetch);
+  `MhRthTdmhParser.details_url/1` reduces either to the path, as stored events are matched on it.
+- The listing has each event's dates but no times or ticket links. Those come from the event's
+  details page, where the site's `<instance-list>` widget renders them from
+  `/api/attendable/v1/instances/` - so they're only in the HTML because the page is rendered
+  (`MhRthTdmhParser.showings/1`). Don't call that API directly: it needs
+  `accept: application/json` (otherwise it picks its HTML renderer and `500`s), which Firecrawl
+  can't send. The widget hides past showings, only shows a time for a showing with an end time,
+  and only links a showing while it's on sale, so a looked-up time or ticket link can be `nil`.
+- A burst of requests can still draw the challenge, so `MhRthTdmhParser` parses one event at a
+  time (the optional `max_concurrency/0` parser callback) and pauses before every request
+  (`:mhrth_request_interval_ms`, 500ms by default, 0 in test). A `403` trips
   `MusicListings.Parsing.ChallengeBreaker`, and `MhRthTdmhParser` skips its follow-up lookups
   until a listing page gets through again (the skipped events are reported as lookup failures).
-- Every request counts toward the challenge, so the parser only follows pages the listing links
-  to (requesting past the last page returns that page's events again), and implements the
-  optional `dedupe_key/1` callback so an event listed twice is parsed, and looked up, once.
-  `dedupe_key/1` must not make a request - the crawler calls it on every event before parsing.
+- Every request counts toward the challenge (and costs a credit), so the parser only follows
+  pages the listing links to (requesting past the last page returns that page's events again),
+  and implements the optional `dedupe_key/1` callback so an event listed twice is parsed, and
+  looked up, once. `dedupe_key/1` must not make a request - the crawler calls it on every event
+  before parsing.
 - An event whose listing dates are already stored with ticket links (matched on `details_url`) skips
-  its follow-up lookups and reuses the stored dates, times and links; only new events, new dates,
+  its follow-up lookup and reuses the stored dates, times and links; only new events, new dates,
   and dates still missing a link are looked up.
-- The instances API (`/api/attendable/v1/instances/`) must be requested with
-  `accept: application/json`. curl-impersonate otherwise sends Chrome's page-load Accept header,
-  which selects the API's HTML renderer and returns `500` for many events.
-- A follow-up lookup that fails (details page, instances API) is reported via
-  `MusicListings.Parsing.LookupFailures`. The crawl report then shows a `lookup_error` for the
-  venue, and `EventStorage` keeps the stored ticket link/time instead of overwriting them with
-  `nil`. Any parser whose follow-up requests can fail should record its failures the same way.
+- A follow-up lookup that fails is reported via `MusicListings.Parsing.LookupFailures`. The crawl
+  report then shows a `lookup_error` for the venue, and `EventStorage` keeps the stored ticket
+  link/time instead of overwriting them with `nil`. Any parser whose follow-up requests can fail
+  should record its failures the same way.
+- `MusicListings.HttpClient.CurlImpersonate` (`browser: true`) is no longer used by any parser but
+  is kept as a fallback. The `Dockerfile` installs a pinned release; locally
+  `./bin/install-curl-impersonate.sh` puts the binary in gitignored `bin/curl-impersonate/`. Keep
+  the version/checksums in the two in step.
 
 ## Database Operations
 
