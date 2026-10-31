@@ -37,6 +37,7 @@ defmodule MusicListings.HttpClient.CurlImpersonate do
   # within seconds draws the same challenge and only adds to the request volume
   # that earned it.
   @retry_statuses [408, 429, 500, 502, 503, 504]
+  @default_retry_base_delay_ms :timer.seconds(1)
   @max_retry_delay_ms :timer.seconds(30)
   @default_receive_timeout :timer.seconds(30)
   @default_max_retries 3
@@ -74,7 +75,7 @@ defmodule MusicListings.HttpClient.CurlImpersonate do
     result = request(bin, url, headers, timeout)
 
     if retry?(result, retry_statuses) and attempt < max_retries do
-      delay = min(Integer.pow(2, attempt) * 1_000, @max_retry_delay_ms)
+      delay = min(Integer.pow(2, attempt) * retry_base_delay_ms(), @max_retry_delay_ms)
       attempts_left = max_retries - attempt
 
       Logger.warning(
@@ -87,6 +88,14 @@ defmodule MusicListings.HttpClient.CurlImpersonate do
     else
       result
     end
+  end
+
+  defp retry_base_delay_ms do
+    Application.get_env(
+      :music_listings,
+      :curl_impersonate_retry_base_delay_ms,
+      @default_retry_base_delay_ms
+    )
   end
 
   defp retry?({:ok, %Response{status: status}}, retry_statuses), do: status in retry_statuses
