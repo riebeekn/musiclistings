@@ -4,9 +4,6 @@ defmodule MusicListings.Parsing.VenueParsers.RedwoodTheatreParser do
   """
   @behaviour MusicListings.Parsing.VenueParser
 
-  import Meeseeks.CSS
-
-  alias MusicListings.Parsing.Selectors
   alias MusicListings.Parsing.VenueParsers.BaseParsers.WixParser
 
   @base_url "https://www.theredwoodtheatre.com"
@@ -20,15 +17,7 @@ defmodule MusicListings.Parsing.VenueParsers.RedwoodTheatreParser do
 
   @impl true
   def events(body) do
-    json =
-      body
-      |> Selectors.match_one(css("script[type=\"application/json\"]#wix-warmup-data"))
-      |> Selectors.data()
-      |> Jason.decode!()
-
-    json["appsWarmupData"]["140603ad-af8d-84a5-2c80-a0f60cb47351"]["widgetcomp-m1qup2z8"][
-      "events"
-    ]["events"]
+    WixParser.warmup_events(body)
     |> Enum.reject(&schedule_tbd?/1)
   end
 

@@ -34,6 +34,13 @@ defmodule MusicListings.Parsing.VenueParsers.RivoliParserTest do
 
       assert 18 = Enum.count(events)
     end
+
+    test "finds the events when wix changes the widget id", %{index_html: index_html} do
+      renamed = String.replace(index_html, "widgetcomp-jg3gu6hl", "widgetcomp-somethingnew")
+
+      refute renamed == index_html
+      assert 18 = renamed |> RivoliParser.events() |> Enum.count()
+    end
   end
 
   describe "next_page_url/2" do

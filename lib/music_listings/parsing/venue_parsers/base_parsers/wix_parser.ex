@@ -2,10 +2,13 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.WixParser do
   @moduledoc """
   Base parser for wix sites
   """
+  import Meeseeks.CSS
+
   alias MusicListings.HttpClient
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
+  alias MusicListings.Parsing.Selectors
   alias MusicListingsUtilities.DateHelpers
 
   # Wix Events registration types.  Only an EXTERNAL event carries a vendor url;
@@ -15,8 +18,41 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.WixParser do
   @external_registration 3
   @wix_ticketing_registration 2
 
+  # App id of the Wix Events app in a page's warmup data
+  @wix_events_app_id "140603ad-af8d-84a5-2c80-a0f60cb47351"
+
   def retrieve_events_fun do
     fn url -> HttpClient.get(url) end
+  end
+
+  @doc """
+  Extracts the events from a page's `wix-warmup-data` script.
+
+  The Wix Events app keys its data by a per-widget id (e.g. `widgetcomp-jg3gu6hl`)
+  that changes whenever the site owner re-adds or edits the widget, so rather than
+  hardcoding it we take the events from whichever of the app's widgets has them.
+  """
+  def warmup_events(body) do
+    body
+    |> warmup_data()
+    |> events_app_widgets()
+    |> Enum.find_value([], fn widget -> get_in(widget, ["events", "events"]) end)
+  end
+
+  defp warmup_data(body) do
+    body
+    |> Selectors.match_one(css("script[type=\"application/json\"]#wix-warmup-data"))
+    |> Selectors.data()
+    |> Jason.decode!()
+  end
+
+  # The Wix Events app's widgets, keyed by widget id.  A page without the
+  # app has no events, so we treat it as having no widgets.
+  defp events_app_widgets(warmup_data) do
+    case get_in(warmup_data, ["appsWarmupData", @wix_events_app_id]) do
+      nil -> []
+      widgets -> Map.values(widgets)
+    end
   end
 
   def next_page_url(_body, _current_url) do
