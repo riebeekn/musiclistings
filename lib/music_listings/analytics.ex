@@ -12,6 +12,7 @@ defmodule MusicListings.Analytics do
   alias MusicListings.Events
   alias MusicListings.Repo
   alias MusicListingsSchema.AnalyticsEvent
+  alias MusicListingsSchema.Event
   alias MusicListingsUtilities.DateHelpers
 
   @doc """
@@ -54,106 +55,153 @@ defmodule MusicListings.Analytics do
     |> Map.new()
   end
 
-  @doc """
-  Like `counts_between/2`, but for a single event `name`, split by the value of
-  the `ref` key in each event's `metadata`. Returns a map of `ref => count`
-  (events with no `ref` are grouped under the `nil` key). Used to attribute
-  `event.ticket_click`s to their referrer — e.g. how many came from the
-  "New This Week" rail (`ref == "new_this_week"`) versus direct visits.
-  """
-  @spec ref_counts_between(String.t(), DateTime.t(), DateTime.t()) ::
-          %{optional(String.t() | nil) => non_neg_integer()}
-  def ref_counts_between(name, %DateTime{} = from, %DateTime{} = to) when is_binary(name) do
-    metadata_counts_between(name, "ref", from, to)
-  end
+  @ticket_click "event.ticket_click"
+  @ticket_link_shown "event.ticket_link_shown"
+  @coverage_snapshot "weekly.ticket_coverage"
+  @baseline_weeks 4
+  @top_n 5
+
+  @type ticket_counts :: %{clicks: number(), impressions: number()}
+  @type coverage :: %{total: non_neg_integer(), with_ticket_link: non_neg_integer()}
 
   @doc """
-  Like `ref_counts_between/3`, but splits by any `metadata` key. Returns a map of
-  `value => count`, with events missing the key grouped under the `nil` key.
-  Used to split `event.resale_click`s by the `surface` they were clicked from
-  ("list" vs "detail").
-  """
-  @spec metadata_counts_between(String.t(), String.t(), DateTime.t(), DateTime.t()) ::
-          %{optional(String.t() | nil) => non_neg_integer()}
-  def metadata_counts_between(name, key, %DateTime{} = from, %DateTime{} = to)
-      when is_binary(name) and is_binary(key) do
-    AnalyticsEvent
-    |> where([event], event.name == ^name)
-    |> where([event], event.inserted_at >= ^from and event.inserted_at < ^to)
-    # Grouped via the select alias rather than by repeating the fragment:
-    # Postgres treats the two bound key params as distinct expressions and
-    # rejects the GROUP BY as not matching the selected column.
-    |> select(
-      [event],
-      {selected_as(fragment("?->>?", event.metadata, ^key), :value), count(event.id)}
-    )
-    |> group_by([event], selected_as(:value))
-    |> Repo.all()
-    |> Map.new()
-  end
+  Builds the data for the weekly engagement email, built on the event page's
+  ticket button: clicks (`event.ticket_click`) and impressions
+  (`event.ticket_link_shown`, recorded only when the event has a ticket link).
 
-  @doc """
-  Builds the data for the weekly engagement email: event counts for the trailing
-  7 days (`this_week`) alongside the preceding 7 days (`prior_week`) for a
-  period-over-period comparison. Windows are rolling (relative to `reference`),
-  not calendar-aligned.
-
-  `*_conversions` hold `event.ticket_click` counts split by referrer (see
-  `ref_counts_between/3`) so the email can report the rail conversion funnel
-  (card click on the rail → ticket click on the detail page). `*_ticket_shown`
-  hold `event.ticket_link_shown` counts split by referrer, giving the fair
-  conversion denominator: rail visits that actually had a ticket link to click
-  (a card click on an event with no ticket link can never convert).
-
-  `*_resale_surfaces` split TicketNetwork clicks by where they were clicked
-  ("list" vs "detail"); their totals are already in `this_week`/`prior_week`
-  under `event.resale_click`.
-
-  `resale_links_live` is the current exposure behind those clicks - how many
-  upcoming events carry a resale link at all. It is a point-in-time count, not a
-  windowed one, so it describes the state at send time rather than the period.
+  - `this_week` / `prior_week` - totals for the trailing 7 days and the 7 days
+    before that. Windows are rolling (relative to `reference`), not
+    calendar-aligned.
+  - `baseline` - weekly averages over the `baseline_weeks` weeks before this
+    week. A single week-over-week comparison is mostly noise at these volumes;
+    this gives a steadier reference point.
+  - `top_venues` / `top_events` - this week's ticket clicks, joined back to the
+    clicked event and its venue (deleted events still count - the click
+    happened).
+  - `ticket_coverage` - how many upcoming events carry a ticket link, right now.
+    It is a point-in-time count, so `prior_ticket_coverage` is the snapshot the
+    previous report saved (see `record_ticket_coverage/1`), or `nil` if there
+    isn't one yet.
   """
   @spec weekly_engagement(DateTime.t()) :: %{
           period_end: DateTime.t(),
           this_week_start: DateTime.t(),
           prior_week_start: DateTime.t(),
-          this_week: %{optional(String.t()) => non_neg_integer()},
-          prior_week: %{optional(String.t()) => non_neg_integer()},
-          this_week_conversions: %{optional(String.t() | nil) => non_neg_integer()},
-          prior_week_conversions: %{optional(String.t() | nil) => non_neg_integer()},
-          this_week_ticket_shown: %{optional(String.t() | nil) => non_neg_integer()},
-          prior_week_ticket_shown: %{optional(String.t() | nil) => non_neg_integer()},
-          this_week_resale_surfaces: %{optional(String.t() | nil) => non_neg_integer()},
-          prior_week_resale_surfaces: %{optional(String.t() | nil) => non_neg_integer()},
-          resale_links_live: non_neg_integer()
+          this_week: ticket_counts(),
+          prior_week: ticket_counts(),
+          baseline: ticket_counts(),
+          baseline_weeks: pos_integer(),
+          top_venues: [%{venue_name: String.t(), clicks: non_neg_integer()}],
+          top_events: [
+            %{
+              id: integer(),
+              title: String.t(),
+              date: Date.t(),
+              venue_name: String.t(),
+              clicks: non_neg_integer()
+            }
+          ],
+          ticket_coverage: coverage(),
+          prior_ticket_coverage: coverage() | nil
         }
   def weekly_engagement(reference \\ DateHelpers.now()) do
     this_week_start = DateTime.add(reference, -7, :day)
     prior_week_start = DateTime.add(reference, -14, :day)
+    baseline_start = DateTime.add(this_week_start, -7 * @baseline_weeks, :day)
 
     %{
       period_end: reference,
       this_week_start: this_week_start,
       prior_week_start: prior_week_start,
-      this_week: counts_between(this_week_start, reference),
-      prior_week: counts_between(prior_week_start, this_week_start),
-      this_week_conversions: ref_counts_between("event.ticket_click", this_week_start, reference),
-      prior_week_conversions:
-        ref_counts_between("event.ticket_click", prior_week_start, this_week_start),
-      this_week_ticket_shown:
-        ref_counts_between("event.ticket_link_shown", this_week_start, reference),
-      prior_week_ticket_shown:
-        ref_counts_between("event.ticket_link_shown", prior_week_start, this_week_start),
-      this_week_resale_surfaces:
-        metadata_counts_between("event.resale_click", "surface", this_week_start, reference),
-      prior_week_resale_surfaces:
-        metadata_counts_between(
-          "event.resale_click",
-          "surface",
-          prior_week_start,
-          this_week_start
-        ),
-      resale_links_live: Events.count_events_with_resale_link()
+      this_week: ticket_counts_between(this_week_start, reference),
+      prior_week: ticket_counts_between(prior_week_start, this_week_start),
+      baseline: weekly_average(baseline_start, this_week_start),
+      baseline_weeks: @baseline_weeks,
+      top_venues: top_venues_by_ticket_clicks(this_week_start, reference),
+      top_events: top_events_by_ticket_clicks(this_week_start, reference),
+      ticket_coverage: Events.ticket_link_coverage(),
+      # Any snapshot less than six days old was saved by a retry of this same
+      # report, not by last week's, so look for one older than that.
+      prior_ticket_coverage: latest_ticket_coverage_before(DateTime.add(reference, -6, :day))
     }
+  end
+
+  @doc """
+  Saves the ticket-link coverage a weekly report was sent with, so the next
+  report can show how it changed (coverage is current state, so it can't be
+  reconstructed for a past date).
+  """
+  @spec record_ticket_coverage(coverage()) ::
+          {:ok, AnalyticsEvent.t()} | {:error, Ecto.Changeset.t()}
+  def record_ticket_coverage(%{total: total, with_ticket_link: with_ticket_link}) do
+    record_event(@coverage_snapshot, %{"total" => total, "with_ticket_link" => with_ticket_link})
+  end
+
+  defp ticket_counts_between(from, to) do
+    counts = counts_between(from, to)
+
+    %{
+      clicks: Map.get(counts, @ticket_click, 0),
+      impressions: Map.get(counts, @ticket_link_shown, 0)
+    }
+  end
+
+  defp weekly_average(from, to) do
+    %{clicks: clicks, impressions: impressions} = ticket_counts_between(from, to)
+    %{clicks: clicks / @baseline_weeks, impressions: impressions / @baseline_weeks}
+  end
+
+  defp top_venues_by_ticket_clicks(from, to) do
+    from
+    |> ticket_clicks_with_events(to)
+    |> group_by([_click, _event, venue], [venue.id, venue.name])
+    |> select([click, _event, venue], %{venue_name: venue.name, clicks: count(click.id)})
+    |> order_by([click, _event, venue], desc: count(click.id), asc: venue.name)
+    |> limit(@top_n)
+    |> Repo.all()
+  end
+
+  defp top_events_by_ticket_clicks(from, to) do
+    from
+    |> ticket_clicks_with_events(to)
+    |> group_by([_click, event, venue], [event.id, venue.name])
+    |> select([click, event, venue], %{
+      id: event.id,
+      title: event.title,
+      date: event.date,
+      venue_name: venue.name,
+      clicks: count(click.id)
+    })
+    |> order_by([click, event], desc: count(click.id), asc: event.date, asc: event.title)
+    |> limit(@top_n)
+    |> Repo.all()
+  end
+
+  # The event id comes from the client (a phx-value), so it's compared as text
+  # rather than cast - a malformed id just fails to match instead of raising.
+  defp ticket_clicks_with_events(from, to) do
+    AnalyticsEvent
+    |> where([click], click.name == @ticket_click)
+    |> where([click], click.inserted_at >= ^from and click.inserted_at < ^to)
+    |> join(:inner, [click], event in Event,
+      on: fragment("?::text", event.id) == fragment("?->>'event_id'", click.metadata)
+    )
+    |> join(:inner, [_click, event], venue in assoc(event, :venue))
+  end
+
+  defp latest_ticket_coverage_before(cutoff) do
+    AnalyticsEvent
+    |> where([snapshot], snapshot.name == @coverage_snapshot)
+    |> where([snapshot], snapshot.inserted_at < ^cutoff)
+    |> order_by([snapshot], desc: snapshot.inserted_at, desc: snapshot.id)
+    |> limit(1)
+    |> Repo.one()
+    |> case do
+      %AnalyticsEvent{metadata: %{"total" => total, "with_ticket_link" => with_ticket_link}} ->
+        %{total: total, with_ticket_link: with_ticket_link}
+
+      _no_snapshot ->
+        nil
+    end
   end
 end

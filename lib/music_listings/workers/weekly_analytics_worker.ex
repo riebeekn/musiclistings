@@ -11,9 +11,14 @@ defmodule MusicListings.Workers.WeeklyAnalyticsWorker do
 
   @impl Oban.Worker
   def perform(_job) do
-    Analytics.weekly_engagement()
+    report = Analytics.weekly_engagement()
+
+    report
     |> WeeklyAnalytics.new_email()
     |> Mailer.deliver()
+
+    # Coverage is current state, so save it for next week's report to compare against.
+    Analytics.record_ticket_coverage(report.ticket_coverage)
 
     :ok
   end

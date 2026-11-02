@@ -1,20 +1,13 @@
 defmodule MusicListings.Emails.WeeklyAnalytics do
   @moduledoc """
-  Weekly admin email reporting site engagement: outbound ticket and TicketNetwork
-  (resale) clicks, plus traction on the "New This Week" rail. Covers the trailing
-  7 days with a prior-week comparison so we can judge whether things are gaining
-  traction.
+  Weekly admin email reporting outbound ticket engagement: clicks on the event
+  page's ticket button against how often it was shown, compared with the prior
+  week and a multi-week average, the venues and events driving those clicks, and
+  how many upcoming events carry a ticket link at all.
   """
   use MusicListings.Mailer
 
   alias MusicListingsUtilities.DateHelpers
-
-  @shown "new_this_week.shown"
-  @card_click "new_this_week.card_click"
-  @detail_ticket_click "event.ticket_click"
-  @detail_ticket_shown "event.ticket_link_shown"
-  @resale_click "event.resale_click"
-  @rail_ref "new_this_week"
 
   def new_email(report) do
     new()
@@ -24,51 +17,21 @@ defmodule MusicListings.Emails.WeeklyAnalytics do
     |> body(mjml(%{report: report}))
   end
 
-  defp subject_line(report) do
-    ticket = count(report.this_week, @detail_ticket_click)
-    resale = count(report.this_week, @resale_click)
-    card = count(report.this_week, @card_click)
-
-    "Weekly Analytics — #{ticket} ticket, #{resale} resale, #{card} rail #{pluralize(card, "click")} (last 7 days)"
+  defp subject_line(%{this_week: %{clicks: clicks, impressions: impressions}}) do
+    "Weekly Analytics — #{clicks} ticket #{pluralize(clicks, "click")}, " <>
+      "#{format_rate(rate(clicks, impressions))} CTR (last 7 days)"
   end
 
   defp mjml(assigns) do
     report = assigns.report
 
-    this_conversions = Map.get(report, :this_week_conversions, %{})
-    prior_conversions = Map.get(report, :prior_week_conversions, %{})
-    this_ticket_shown = Map.get(report, :this_week_ticket_shown, %{})
-    this_resale_surfaces = Map.get(report, :this_week_resale_surfaces, %{})
-
     assigns =
       assigns
-      |> Map.put(:this_shown, count(report.this_week, @shown))
-      |> Map.put(:this_card, count(report.this_week, @card_click))
-      |> Map.put(:prior_shown, count(report.prior_week, @shown))
-      |> Map.put(:prior_card, count(report.prior_week, @card_click))
-      # Rail conversion funnel: card click on the rail → an event page that
-      # actually showed a ticket link → ticket click (all attributed via
-      # ?ref=new_this_week). Conversion is measured against the rail's
-      # ticket-eligible views, not raw card clicks, so cards landing on events
-      # with no ticket link (which can never convert) don't depress the rate —
-      # mirroring the overall event-page CTR denominator below.
-      |> Map.put(:this_rail_conv, count(this_conversions, @rail_ref))
-      |> Map.put(:prior_rail_conv, count(prior_conversions, @rail_ref))
-      |> Map.put(:this_rail_shown, count(this_ticket_shown, @rail_ref))
-      # Overall detail-page ticket engagement (all referrers).
-      |> Map.put(:this_detail_ticket, count(report.this_week, @detail_ticket_click))
-      |> Map.put(:this_detail_shown, count(report.this_week, @detail_ticket_shown))
-      |> Map.put(:prior_detail_ticket, count(report.prior_week, @detail_ticket_click))
-      |> Map.put(:prior_detail_shown, count(report.prior_week, @detail_ticket_shown))
-      # TicketNetwork (resale) clicks, split by where they were clicked. The
-      # resale chip has no impression event, so there is no CTR here — just
-      # volume, which surface is driving it, and the count of events currently
-      # carrying a link as a stand-in for exposure.
-      |> Map.put(:this_resale, count(report.this_week, @resale_click))
-      |> Map.put(:prior_resale, count(report.prior_week, @resale_click))
-      |> Map.put(:this_resale_list, count(this_resale_surfaces, "list"))
-      |> Map.put(:this_resale_detail, count(this_resale_surfaces, "detail"))
-      |> Map.put(:resale_links_live, Map.get(report, :resale_links_live, 0))
+      |> Map.put(:this_ctr, rate(report.this_week.clicks, report.this_week.impressions))
+      |> Map.put(:prior_ctr, rate(report.prior_week.clicks, report.prior_week.impressions))
+      |> Map.put(:baseline_ctr, rate(report.baseline.clicks, report.baseline.impressions))
+      |> Map.put(:coverage, coverage_rate(report.ticket_coverage))
+      |> Map.put(:prior_coverage, coverage_rate(report.prior_ticket_coverage))
 
     ~H"""
     <.h1>Weekly Analytics</.h1>
@@ -78,43 +41,21 @@ defmodule MusicListings.Emails.WeeklyAnalytics do
       )}
     </.muted>
 
-    <.h2>Outbound clicks</.h2>
+    <.h2>Ticket clicks</.h2>
 
     <.stat_band>
-      <:stat label="Ticket clicks" accent="spotlight">{@this_detail_ticket}</:stat>
-      <:stat label="Resale clicks">{@this_resale}</:stat>
-      <:stat label="Resale from list">{@this_resale_list}</:stat>
-      <:stat label="Resale from detail">{@this_resale_detail}</:stat>
-      <:stat label="Events with a resale link">{@resale_links_live}</:stat>
+      <:stat label="Ticket clicks" accent="spotlight">{@report.this_week.clicks}</:stat>
+      <:stat label="Ticket link impressions">{@report.this_week.impressions}</:stat>
+      <:stat label="CTR">{format_rate(@this_ctr)}</:stat>
     </.stat_band>
 
     <.muted>
-      Ticket clicks are the primary ticket button on the event page: CTR {ctr(
-        @this_detail_ticket,
-        @this_detail_shown
-      )} of {@this_detail_shown} pages where a ticket link was shown, against {ctr(
-        @prior_detail_ticket,
-        @prior_detail_shown
-      )} of {@prior_detail_shown} the prior 7 days. Compare the rates, not the click counts -
-      adding ticket links to more venues raises both at once. Resale clicks are TicketNetwork
-      links, counted on both the listings and the event page, across the {@resale_links_live} upcoming
-      events currently carrying one. Resale {change_cell(@this_resale, @prior_resale)} vs prior 7 days
+      Ticket clicks are the primary ticket button on the event page; impressions count event
+      pages where a ticket link was shown. Compare the CTR, not the click counts - adding ticket
+      links to more venues raises clicks and impressions together. A single week is noisy at
+      these volumes, so weigh the change against the {@report.baseline_weeks}-week average too.
     </.muted>
 
-    <.h2>New This Week rail</.h2>
-
-    <.stat_band>
-      <:stat label="Views" accent="spotlight">{@this_shown}</:stat>
-      <:stat label="Card clicks">{@this_card}</:stat>
-    </.stat_band>
-
-    <.muted>
-      Views count once per browsing session the rail rendered in; card clicks count each
-      arrival on an event page via a rail link. Different denominators, so the ratio is not a
-      CTR - compare each against the prior 7 days below.
-    </.muted>
-
-    <.h2>This week vs prior week</.h2>
     <.table rows={metric_rows(assigns)}>
       <:col :let={row} label="Metric">
         <span style="color:#ece9e0;font-weight:700;">{row.label}</span>
@@ -125,70 +66,141 @@ defmodule MusicListings.Emails.WeeklyAnalytics do
       <:col :let={row} label="Prior week">
         <span style="color:#a8a49a;">{row.prior}</span>
       </:col>
-      <:col :let={row} label="Change">{change_cell(row.this, row.prior)}</:col>
+      <:col :let={row} label="Change">{row.change}</:col>
+      <:col :let={row} label={"#{@report.baseline_weeks}-wk avg"}>
+        <span style="color:#a8a49a;">{row.baseline}</span>
+      </:col>
     </.table>
 
-    <.h2>Rail conversions</.h2>
-    <.muted>
-      Full funnel: Rail card click → Event page with a ticket link → Ticket click
-    </.muted>
+    <.h2>Ticket link coverage</.h2>
 
     <.stat_band>
-      <:stat label="Card clicks">{@this_card}</:stat>
-      <:stat label="Ticket-eligible views">{@this_rail_shown}</:stat>
-      <:stat label="Ticket clicks" accent="spotlight">{@this_rail_conv}</:stat>
-      <:stat label="Conversion">{ctr(@this_rail_conv, @this_rail_shown)}</:stat>
+      <:stat label="Upcoming events with a ticket link" accent="spotlight">
+        {format_rate(@coverage)}
+      </:stat>
+      <:stat label="Events with a link">{@report.ticket_coverage.with_ticket_link}</:stat>
+      <:stat label="Upcoming events">{@report.ticket_coverage.total}</:stat>
     </.stat_band>
 
     <.muted>
-      Conversion is ticket clicks ÷ ticket-eligible views (rail cards that reached
-      an event with a ticket link). Rail conversions {change_cell(@this_rail_conv, @prior_rail_conv)} vs prior 7 days
+      <%= if @prior_coverage do %>
+        {rate_change_cell(@coverage, @prior_coverage)} vs {format_rate(@prior_coverage)} at the last report.
+      <% else %>
+        No earlier snapshot to compare against yet.
+      <% end %>
+      A drop here with no matching drop in CTR points at parsers no longer picking up ticket
+      links, not at visitors.
     </.muted>
+
+    <.h2>Top venues</.h2>
+    <%= if @report.top_venues == [] do %>
+      <.muted>No ticket clicks this week.</.muted>
+    <% else %>
+      <.table rows={@report.top_venues}>
+        <:col :let={venue} label="Venue">
+          <span style="color:#ece9e0;font-weight:700;">{venue.venue_name}</span>
+        </:col>
+        <:col :let={venue} label="Clicks">
+          <span style="color:#d8ff3e;font-weight:700;">{venue.clicks}</span>
+        </:col>
+      </.table>
+    <% end %>
+
+    <.h2>Top events</.h2>
+    <%= if @report.top_events == [] do %>
+      <.muted>No ticket clicks this week.</.muted>
+    <% else %>
+      <.table rows={@report.top_events}>
+        <:col :let={event} label="Event"><.event_link event={event} /></:col>
+        <:col :let={event} label="Venue">
+          <span style="color:#a8a49a;">{event.venue_name}</span>
+        </:col>
+        <:col :let={event} label="Date">
+          <span style="white-space:nowrap;">{DateHelpers.format_date(event.date)}</span>
+        </:col>
+        <:col :let={event} label="Clicks">
+          <span style="color:#d8ff3e;font-weight:700;">{event.clicks}</span>
+        </:col>
+      </.table>
+    <% end %>
     """
   end
 
   defp metric_rows(assigns) do
+    %{this_week: this_week, prior_week: prior_week, baseline: baseline} = assigns.report
+
     [
       %{
         label: "Ticket clicks",
-        this: assigns.this_detail_ticket,
-        prior: assigns.prior_detail_ticket
+        this: this_week.clicks,
+        prior: prior_week.clicks,
+        change: change_cell(this_week.clicks, prior_week.clicks),
+        baseline: round(baseline.clicks)
       },
       %{
         label: "Ticket link impressions",
-        this: assigns.this_detail_shown,
-        prior: assigns.prior_detail_shown
+        this: this_week.impressions,
+        prior: prior_week.impressions,
+        change: change_cell(this_week.impressions, prior_week.impressions),
+        baseline: round(baseline.impressions)
       },
-      %{label: "Resale clicks", this: assigns.this_resale, prior: assigns.prior_resale},
-      %{label: "Rail views", this: assigns.this_shown, prior: assigns.prior_shown},
-      %{label: "Rail card clicks", this: assigns.this_card, prior: assigns.prior_card}
+      %{
+        label: "CTR",
+        this: format_rate(assigns.this_ctr),
+        prior: format_rate(assigns.prior_ctr),
+        change: rate_change_cell(assigns.this_ctr, assigns.prior_ctr),
+        baseline: format_rate(assigns.baseline_ctr)
+      }
     ]
   end
 
-  # An HEX-rendering helper that returns the styled change cell. Positive change is
-  # spotlight, negative is ember, flat/undefined is dim.
+  # Styled change cell for a count. Positive change is spotlight, negative is
+  # ember, flat is dim.
   defp change_cell(current, previous) do
-    assigns = %{delta: current - previous, pct: pct_change(current, previous)}
+    delta = current - previous
+    trend_cell(delta, "#{signed(delta)} (#{pct_change(current, previous)})")
+  end
+
+  # Styled change cell for a rate, in percentage points.
+  defp rate_change_cell(current, previous) when is_nil(current) or is_nil(previous) do
+    assigns = %{}
+
+    ~H"""
+    <span style="color:#a8a49a;">n/a</span>
+    """
+  end
+
+  defp rate_change_cell(current, previous) do
+    delta = Float.round((current - previous) * 100, 1)
+    trend_cell(delta, "#{signed(delta)} pts")
+  end
+
+  defp trend_cell(delta, text) do
+    assigns = %{delta: delta, text: text}
 
     ~H"""
     <%= cond do %>
       <% @delta > 0 -> %>
-        <span style="color:#d8ff3e;font-weight:700;">▲ +{@delta} ({@pct})</span>
+        <span style="color:#d8ff3e;font-weight:700;">▲ {@text}</span>
       <% @delta < 0 -> %>
-        <span style="color:#ff5a36;font-weight:700;">▼ {@delta} ({@pct})</span>
+        <span style="color:#ff5a36;font-weight:700;">▼ {@text}</span>
       <% true -> %>
         <span style="color:#a8a49a;">— 0</span>
     <% end %>
     """
   end
 
-  defp count(counts, name), do: Map.get(counts, name, 0)
+  defp signed(number) when number > 0, do: "+#{number}"
+  defp signed(number), do: "#{number}"
 
-  defp ctr(_numerator, 0), do: "n/a"
+  defp rate(_numerator, denominator) when denominator == 0, do: nil
+  defp rate(numerator, denominator), do: numerator / denominator
 
-  defp ctr(numerator, denominator) do
-    "#{Float.round(numerator / denominator * 100, 1)}%"
-  end
+  defp coverage_rate(nil), do: nil
+  defp coverage_rate(%{with_ticket_link: with_link, total: total}), do: rate(with_link, total)
+
+  defp format_rate(nil), do: "n/a"
+  defp format_rate(rate), do: "#{Float.round(rate * 100, 1)}%"
 
   defp pct_change(_current, 0), do: "n/a"
 
@@ -203,27 +215,36 @@ defmodule MusicListings.Emails.WeeklyAnalytics do
       period_end: DateTime.utc_now(),
       this_week_start: DateTime.add(DateTime.utc_now(), -7, :day),
       prior_week_start: DateTime.add(DateTime.utc_now(), -14, :day),
-      this_week: %{
-        @shown => 412,
-        @card_click => 63,
-        @detail_ticket_click => 74,
-        @detail_ticket_shown => 190,
-        @resale_click => 21
-      },
-      prior_week: %{
-        @shown => 349,
-        @card_click => 58,
-        @detail_ticket_click => 61,
-        @detail_ticket_shown => 170,
-        @resale_click => 16
-      },
-      this_week_conversions: %{@rail_ref => 18, nil => 56},
-      prior_week_conversions: %{@rail_ref => 14, nil => 47},
-      this_week_ticket_shown: %{@rail_ref => 47, nil => 143},
-      prior_week_ticket_shown: %{@rail_ref => 39, nil => 131},
-      this_week_resale_surfaces: %{"list" => 15, "detail" => 6},
-      prior_week_resale_surfaces: %{"list" => 11, "detail" => 5},
-      resale_links_live: 38
+      this_week: %{clicks: 74, impressions: 1890},
+      prior_week: %{clicks: 61, impressions: 1700},
+      baseline: %{clicks: 66.5, impressions: 1745.25},
+      baseline_weeks: 4,
+      top_venues: [
+        %{venue_name: "Massey Hall", clicks: 18},
+        %{venue_name: "History", clicks: 11},
+        %{venue_name: "Horseshoe Tavern", clicks: 9},
+        %{venue_name: "Lee's Palace", clicks: 7},
+        %{venue_name: "The Danforth Music Hall", clicks: 5}
+      ],
+      top_events: [
+        %{
+          id: 1,
+          title: "Big Headliner",
+          date: Date.utc_today(),
+          venue_name: "Massey Hall",
+          clicks: 9
+        },
+        %{
+          id: 2,
+          title: "Indie Band",
+          date: Date.utc_today(),
+          venue_name: "Horseshoe Tavern",
+          clicks: 6
+        },
+        %{id: 3, title: "Touring Act", date: Date.utc_today(), venue_name: "History", clicks: 5}
+      ],
+      ticket_coverage: %{total: 1420, with_ticket_link: 1105},
+      prior_ticket_coverage: %{total: 1398, with_ticket_link: 1102}
     }
     |> new_email()
   end
@@ -231,7 +252,8 @@ defmodule MusicListings.Emails.WeeklyAnalytics do
   def preview_details do
     [
       title: "Weekly Analytics",
-      description: "Weekly digest of site engagement — ticket, resale and rail clicks",
+      description:
+        "Weekly digest of ticket clicks, CTR, top venues/events and ticket-link coverage",
       tags: [category: "Admin"]
     ]
   end

@@ -3,21 +3,23 @@ defmodule MusicListings.Emails.WeeklyAnalyticsTest do
 
   alias MusicListings.Emails.WeeklyAnalytics
 
-  defp report(this_week, prior_week, opts \\ []) do
-    %{
-      period_end: ~U[2024-08-01 12:00:00Z],
-      this_week_start: ~U[2024-07-25 12:00:00Z],
-      prior_week_start: ~U[2024-07-18 12:00:00Z],
-      this_week: this_week,
-      prior_week: prior_week,
-      this_week_conversions: Keyword.get(opts, :this_week_conversions, %{}),
-      prior_week_conversions: Keyword.get(opts, :prior_week_conversions, %{}),
-      this_week_ticket_shown: Keyword.get(opts, :this_week_ticket_shown, %{}),
-      prior_week_ticket_shown: Keyword.get(opts, :prior_week_ticket_shown, %{}),
-      this_week_resale_surfaces: Keyword.get(opts, :this_week_resale_surfaces, %{}),
-      prior_week_resale_surfaces: Keyword.get(opts, :prior_week_resale_surfaces, %{}),
-      resale_links_live: Keyword.get(opts, :resale_links_live, 0)
-    }
+  defp report(overrides \\ []) do
+    Map.merge(
+      %{
+        period_end: ~U[2024-08-01 12:00:00Z],
+        this_week_start: ~U[2024-07-25 12:00:00Z],
+        prior_week_start: ~U[2024-07-18 12:00:00Z],
+        this_week: %{clicks: 0, impressions: 0},
+        prior_week: %{clicks: 0, impressions: 0},
+        baseline: %{clicks: 0.0, impressions: 0.0},
+        baseline_weeks: 4,
+        top_venues: [],
+        top_events: [],
+        ticket_coverage: %{total: 0, with_ticket_link: 0},
+        prior_ticket_coverage: nil
+      },
+      Map.new(overrides)
+    )
   end
 
   describe "new_email/1" do
@@ -26,44 +28,103 @@ defmodule MusicListings.Emails.WeeklyAnalyticsTest do
       # nearly doubled - which is what happens the week ticket links are added to
       # a batch of venues. Reporting clicks alone reads that as engagement growth.
       email =
-        %{"event.ticket_click" => 150, "event.ticket_link_shown" => 2000}
-        |> report(%{"event.ticket_click" => 100, "event.ticket_link_shown" => 1000})
+        [
+          this_week: %{clicks: 150, impressions: 2000},
+          prior_week: %{clicks: 100, impressions: 1000}
+        ]
+        |> report()
         |> WeeklyAnalytics.new_email()
 
       assert email.html_body =~ "7.5%"
       assert email.html_body =~ "10.0%"
+      assert email.html_body =~ "-2.5 pts"
       assert email.html_body =~ "Ticket link impressions"
       assert email.text_body =~ "2000"
       assert email.text_body =~ "1000"
     end
 
-    test "reports how many events currently carry a resale link" do
+    test "shows the multi-week average alongside the prior week" do
       email =
-        %{"event.resale_click" => 12}
-        |> report(%{"event.resale_click" => 40}, resale_links_live: 38)
+        [
+          this_week: %{clicks: 80, impressions: 1000},
+          baseline: %{clicks: 66.5, impressions: 1745.25}
+        ]
+        |> report()
         |> WeeklyAnalytics.new_email()
 
-      assert email.html_body =~ "38"
-      assert email.html_body =~ "Events with a resale link"
+      assert email.html_body =~ "4-wk avg"
+      assert email.html_body =~ "67"
+      assert email.html_body =~ "1745"
+      # baseline CTR = 66.5 / 1745.25
+      assert email.html_body =~ "3.8%"
     end
 
-    test "does not present rail views over card clicks as a CTR" do
-      # Views count once per session, card clicks once per arrival; dividing one
-      # by the other produced a 94% "CTR" the week the rail stopped rendering.
+    test "summarises ticket clicks and CTR in the subject" do
       email =
-        %{"new_this_week.shown" => 208, "new_this_week.card_click" => 196}
-        |> report(%{"new_this_week.shown" => 2510, "new_this_week.card_click" => 275})
+        [this_week: %{clicks: 74, impressions: 1850}]
+        |> report()
         |> WeeklyAnalytics.new_email()
 
-      refute email.html_body =~ "Card CTR"
-      assert email.html_body =~ "Different denominators"
+      assert email.subject == "Weekly Analytics — 74 ticket clicks, 4.0% CTR (last 7 days)"
+    end
+
+    test "reports ticket-link coverage against the last snapshot" do
+      email =
+        [
+          ticket_coverage: %{total: 1000, with_ticket_link: 750},
+          prior_ticket_coverage: %{total: 1000, with_ticket_link: 800}
+        ]
+        |> report()
+        |> WeeklyAnalytics.new_email()
+
+      assert email.html_body =~ "Ticket link coverage"
+      assert email.html_body =~ "75.0%"
+      assert email.html_body =~ "80.0%"
+      assert email.html_body =~ "-5.0 pts"
+    end
+
+    test "says when there is no earlier coverage snapshot" do
+      email =
+        [ticket_coverage: %{total: 10, with_ticket_link: 5}]
+        |> report()
+        |> WeeklyAnalytics.new_email()
+
+      assert email.html_body =~ "No earlier snapshot"
+    end
+
+    test "lists the top venues and events by ticket clicks" do
+      email =
+        [
+          top_venues: [%{venue_name: "Horseshoe Tavern", clicks: 12}],
+          top_events: [
+            %{
+              id: 42,
+              title: "Big Headliner",
+              date: ~D[2024-08-10],
+              venue_name: "Horseshoe Tavern",
+              clicks: 7
+            }
+          ]
+        ]
+        |> report()
+        |> WeeklyAnalytics.new_email()
+
+      assert email.html_body =~ "Top venues"
+      assert email.html_body =~ "Horseshoe Tavern"
+      assert email.html_body =~ "Big Headliner"
+      assert email.html_body =~ "/events/42"
+      assert email.html_body =~ "Sat, Aug 10 2024"
+    end
+
+    test "no longer reports the rail or resale clicks" do
+      email = WeeklyAnalytics.new_email(report())
+
+      refute email.html_body =~ "New This Week"
+      refute email.html_body =~ "Resale"
     end
 
     test "addresses the email to the site admin from no-reply" do
-      email =
-        %{"new_this_week.shown" => 100, "new_this_week.card_click" => 10}
-        |> report(%{})
-        |> WeeklyAnalytics.new_email()
+      email = WeeklyAnalytics.new_email(report())
 
       admin_email = Application.get_env(:music_listings, :admin_email)
 
@@ -71,109 +132,14 @@ defmodule MusicListings.Emails.WeeklyAnalyticsTest do
       assert {"Toronto Music Listings", "no-reply@torontomusiclistings.com"} = email.from
     end
 
-    test "summarises this week's ticket, resale and rail clicks in the subject" do
-      email =
-        %{
-          "event.ticket_click" => 74,
-          "event.resale_click" => 21,
-          "new_this_week.card_click" => 63
-        }
-        |> report(%{"new_this_week.shown" => 349})
-        |> WeeklyAnalytics.new_email()
-
-      assert email.subject ==
-               "Weekly Analytics — 74 ticket, 21 resale, 63 rail clicks (last 7 days)"
-    end
-
-    test "renders both html and text bodies" do
-      email =
-        %{
-          "new_this_week.shown" => 412,
-          "new_this_week.card_click" => 63
-        }
-        |> report(%{
-          "new_this_week.shown" => 349,
-          "new_this_week.card_click" => 58
-        })
-        |> WeeklyAnalytics.new_email()
-
-      assert email.html_body =~ "Weekly Analytics"
-      assert email.html_body =~ "New This Week"
-      assert email.html_body =~ "412"
-      assert is_binary(email.text_body) and email.text_body != ""
-    end
-
     test "renders without raising when there is no activity (zero denominators)" do
-      email = %{} |> report(%{}) |> WeeklyAnalytics.new_email()
+      email = WeeklyAnalytics.new_email(report())
 
-      assert email.subject == "Weekly Analytics — 0 ticket, 0 resale, 0 rail clicks (last 7 days)"
+      assert email.subject == "Weekly Analytics — 0 ticket clicks, n/a CTR (last 7 days)"
       # CTR / pct-change guards should produce n/a rather than crash on divide-by-zero
       assert email.html_body =~ "n/a"
-    end
-
-    test "reports resale clicks split by the surface they were clicked from" do
-      email =
-        %{"event.resale_click" => 21}
-        |> report(
-          %{"event.resale_click" => 16},
-          this_week_resale_surfaces: %{"list" => 15, "detail" => 6},
-          prior_week_resale_surfaces: %{"list" => 11, "detail" => 5}
-        )
-        |> WeeklyAnalytics.new_email()
-
-      assert email.html_body =~ "Outbound clicks"
-      assert email.html_body =~ "Resale from list"
-      assert email.html_body =~ "Resale from detail"
-      assert email.html_body =~ "15"
-      assert email.html_body =~ "21"
-      # week over week: 21 vs 16
-      assert email.html_body =~ "+5"
-    end
-
-    test "measures rail conversion against ticket-eligible views, not raw card clicks" do
-      email =
-        %{
-          "new_this_week.card_click" => 50,
-          "event.ticket_click" => 44,
-          "event.ticket_link_shown" => 200
-        }
-        |> report(
-          %{"new_this_week.card_click" => 30},
-          this_week_conversions: %{"new_this_week" => 10, nil => 34},
-          prior_week_conversions: %{"new_this_week" => 6},
-          # Only 40 of the 50 rail card clicks reached an event with a ticket link;
-          # the other 10 can never convert and must not dilute the denominator.
-          this_week_ticket_shown: %{"new_this_week" => 40, nil => 160}
-        )
-        |> WeeklyAnalytics.new_email()
-
-      assert email.html_body =~ "Rail conversions"
-      # Conversion = rail ticket clicks (10) / rail ticket-eligible views (40) = 25.0%,
-      # NOT the misleading 10/50 = 20.0% against raw card clicks.
-      assert email.html_body =~ "25.0%"
-      refute email.html_body =~ "20.0%"
-      # Overall event-page ticket CTR = 44 / 200 = 22.0% is a separate figure.
-      assert email.html_body =~ "22.0%"
-    end
-
-    test "renders without raising when the newer report fields are absent" do
-      # Reports built before these fields existed (or with no activity) should
-      # still render — the email defaults the maps to empty.
-      email =
-        %{"new_this_week.shown" => 5}
-        |> report(%{})
-        |> Map.drop([
-          :this_week_conversions,
-          :prior_week_conversions,
-          :this_week_ticket_shown,
-          :prior_week_ticket_shown,
-          :this_week_resale_surfaces,
-          :prior_week_resale_surfaces
-        ])
-        |> WeeklyAnalytics.new_email()
-
-      assert email.html_body =~ "Outbound clicks"
-      assert email.html_body =~ "Rail conversions"
+      assert email.html_body =~ "No ticket clicks this week."
+      assert is_binary(email.text_body) and email.text_body != ""
     end
   end
 end

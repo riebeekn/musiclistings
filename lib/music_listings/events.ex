@@ -149,22 +149,25 @@ defmodule MusicListings.Events do
   end
 
   @doc """
-  Counts upcoming events currently carrying a TicketNetwork (resale) link.
+  Counts upcoming events, and how many of them carry a ticket link.
 
-  This is the exposure behind the resale click numbers in the weekly analytics
-  email: without it a fall in clicks can't be told apart from a fall in how many
-  events have a resale link at all, which matters while the catalog's
-  no-inventory rows are being filtered out.
+  Reported in the weekly analytics email: a fall in ticket clicks can come from
+  parsers no longer picking up ticket links rather than from visitors, and this
+  is what tells the two apart.
   """
-  @spec count_events_with_resale_link() :: non_neg_integer()
-  def count_events_with_resale_link do
+  @spec ticket_link_coverage() :: %{total: non_neg_integer(), with_ticket_link: non_neg_integer()}
+  def ticket_link_coverage do
     today = DateHelpers.effective_today_eastern()
 
     Event
     |> where([event], event.date >= ^today)
     |> where([event], is_nil(event.deleted_at))
-    |> where([event], not is_nil(event.ticketnetwork_url))
-    |> Repo.aggregate(:count)
+    |> select([event], %{
+      total: count(event.id),
+      with_ticket_link:
+        filter(count(event.id), not is_nil(event.ticket_url) and event.ticket_url != "")
+    })
+    |> Repo.one()
   end
 
   @doc """
