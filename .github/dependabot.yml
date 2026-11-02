@@ -4,6 +4,10 @@ updates:
     directory: "/"
     schedule:
       interval: daily
+    # Wait a week before proposing a new release, so a compromised or broken
+    # version has time to be caught and yanked first (zizmor dependabot-cooldown).
+    cooldown:
+      default-days: 7
     open-pull-requests-limit: 20
     # ignore heroicons as for some reason it errors out
     ignore:
@@ -12,3 +16,5 @@ updates:
     directory: "/"
     schedule:
       interval: weekly
+    cooldown:
+      default-days: 7
