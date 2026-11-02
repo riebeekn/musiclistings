@@ -9,7 +9,6 @@ defmodule MusicListings.Events do
   alias MusicListings.Events.EventInfo
   alias MusicListings.Events.EventSuggestion
   alias MusicListings.Events.PagedEvents
-  alias MusicListings.Events.RecentlyAddedRanker
   alias MusicListings.Events.ShowTimeInfo
   alias MusicListings.Repo
   alias MusicListingsSchema.CrawlSummary
@@ -86,54 +85,6 @@ defmodule MusicListings.Events do
       current_page: pagination_result.page_number,
       total_pages: pagination_result.total_pages
     }
-  end
-
-  # "Recently added" feed: how far back (by inserted_at) to consider, and the upper
-  # bound on candidate rows fetched before in-memory ranking (see RecentlyAddedRanker).
-  @default_lookback_days 5
-  @default_pool_size 500
-
-  @type list_recently_added_events_opt ::
-          {:lookback_days, pos_integer()}
-          | {:pool_size, pos_integer()}
-          | {:ticket_boost, number()}
-          | {:diversity_decay, number()}
-          | {:max_per_venue, pos_integer()}
-          | {:limit, pos_integer()}
-  @doc """
-  Lists recently added, still-upcoming events ranked for the "Recently Added" feed.
-
-  Fetches a bounded pool of events inserted within the last `:lookback_days` and delegates
-  ordering to `RecentlyAddedRanker`, which boosts ticketed shows and caps per-venue
-  representation so no single venue dominates. Returns a flat list of `EventInfo` structs
-  in ranked order (one per show). See `RecentlyAddedRanker` for the tuning options, all of
-  which are forwarded.
-  """
-  @spec list_recently_added_events([list_recently_added_events_opt]) :: [EventInfo.t()]
-  def list_recently_added_events(opts \\ []) do
-    lookback_days = Keyword.get(opts, :lookback_days, @default_lookback_days)
-    pool_size = Keyword.get(opts, :pool_size, @default_pool_size)
-
-    now = DateHelpers.now()
-    today = DateHelpers.effective_today_eastern()
-    inserted_since = DateTime.add(now, -lookback_days, :day)
-
-    candidates =
-      Event
-      |> join(:inner, [event], venue in assoc(event, :venue))
-      |> where([event], event.inserted_at >= ^inserted_since)
-      |> where([event], event.date >= ^today)
-      |> where([event], is_nil(event.deleted_at))
-      |> where([_event, venue], venue.include_in_recently_added_feed?)
-      |> order_by(desc: :inserted_at, desc: :id)
-      |> limit(^pool_size)
-      |> preload(:venue)
-      |> Repo.all()
-
-    candidates
-    |> RecentlyAddedRanker.rank(now, opts)
-    |> Enum.chunk_by(&{&1.venue_id, &1.date, &1.title})
-    |> Enum.map(&build_event_info/1)
   end
 
   @spec list_upcoming_events() :: [Event.t()]
@@ -217,7 +168,7 @@ defmodule MusicListings.Events do
   end
 
   # Collapse one show's events (sharing a date/title) into a single EventInfo, gathering
-  # their showtimes. Shared by the date-grouped listing and the recently added feed.
+  # their showtimes.
   defp build_event_info(events) do
     [first_show | _rest] = events
 

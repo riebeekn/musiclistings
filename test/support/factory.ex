@@ -45,7 +45,6 @@ defmodule MusicListings.Factory do
     %Venue{
       name: sequence(:venue_name, &"Test Venue #{&1}"),
       pull_events?: true,
-      include_in_recently_added_feed?: true,
       parser_module_name: "DanforthMusicHallParser",
       street: sequence(:venue_street, &"#{&1} Main Street"),
       city: "Toronto",

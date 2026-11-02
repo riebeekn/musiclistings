@@ -1395,182 +1395,6 @@ defmodule MusicListingsWeb.CustomComponents do
     """
   end
 
-  @doc """
-  Renders the "Just Added" rail like `recently_added_peek_rail/1` (slim peek on mobile,
-  full-size cards on desktop) but with tightened section/header margins on desktop so the
-  rail occupies less vertical space and the date-based listings sit higher. Renders
-  nothing when there are no events.
-
-  ## Example
-
-  <.recently_added_peek_rail_tight events={@new_this_week} current_user={@current_user} />
-  """
-  attr :events, :list, required: true
-  attr :current_user, :any, required: true
-
-  def recently_added_peek_rail_tight(assigns) do
-    ~H"""
-    <%!-- Mobile: slim one-line peek — identical to recently_added_peek_rail. --%>
-    <section
-      :if={@events != []}
-      id="new-this-week-mobile"
-      phx-hook="ScrollRail"
-      class="mb-6 md:hidden"
-    >
-      <div class="mb-2 flex items-baseline gap-3">
-        <p class="kicker flex items-center gap-2 tracking-widest">
-          <span class="inline-block h-2 w-2 bg-spotlight"></span>
-          New This Week <span class="text-paper-dim">· Highlights</span>
-        </p>
-        <button
-          type="button"
-          data-rail-next
-          aria-label="Show more"
-          class="kicker ml-auto flex shrink-0 items-center gap-1.5 whitespace-nowrap tracking-widest text-spotlight transition-opacity active:opacity-60 disabled:opacity-30"
-        >
-          More <MusicListingsWeb.CoreComponents.icon name="hero-arrow-long-right" class="size-4" />
-        </button>
-      </div>
-      <div class="relative">
-        <div data-rail-scroll class="overflow-x-auto pb-2 rail-scroll">
-          <div class="flex w-max snap-x snap-mandatory gap-2">
-            <.link
-              :for={event <- @events}
-              navigate={
-                ~p"/events/#{List.first(event.showtimes).event_id}/#{SEO.slugify(event.title || "event")}?ref=new_this_week"
-              }
-              class="group w-[44vw] max-w-44 shrink-0 snap-start border border-hairline bg-ink-2/40 px-3 py-2 transition-colors hover:border-paper-dim hover:bg-ink-2"
-            >
-              <p class="kicker truncate text-paper-dim">{event.venue.name}</p>
-              <p class="mt-0.5 truncate font-display text-base font-bold leading-tight text-paper transition-colors group-hover:text-spotlight">
-                {event.title}
-              </p>
-              <p class="mt-1 flex items-center gap-1 font-mono text-xs font-semibold text-spotlight-deep [font-variant-numeric:tabular-nums]">
-                <MusicListingsWeb.CoreComponents.icon
-                  name="hero-calendar-days-solid"
-                  class="size-3 text-spotlight"
-                />
-                {DateHelpers.format_date(event.date)}
-              </p>
-            </.link>
-          </div>
-        </div>
-        <div class="pointer-events-none absolute top-0 bottom-2 right-0 w-10 bg-gradient-to-l from-ink to-transparent">
-        </div>
-      </div>
-      <div
-        data-rail-indicator
-        aria-hidden="true"
-        class="relative mt-1.5 hidden h-[3px] w-full rounded-full bg-paper/10"
-      >
-        <div data-rail-thumb class="absolute top-0 left-0 h-full rounded-full bg-paper/30"></div>
-      </div>
-    </section>
-
-    <%!-- Desktop: the full-size cards, but with tighter section/header margins than
-          recently_added_rail (mb-10 -> mb-6, header mb-4/pt-5 -> mb-3/pt-4, pb-3 -> pb-2). --%>
-    <section
-      :if={@events != []}
-      id="new-this-week-desktop"
-      phx-hook="ScrollRail"
-      class="mb-6 hidden md:block"
-    >
-      <div class="mb-3 flex items-end gap-4 border-t border-hairline pt-4">
-        <p class="kicker flex items-center gap-2 tracking-widest">
-          <span class="inline-block h-2 w-2 bg-spotlight"></span>
-          New This Week <span class="text-paper-dim">· Highlights</span>
-        </p>
-        <div class="ml-auto flex items-center gap-2">
-          <button
-            type="button"
-            data-rail-prev
-            aria-label="Scroll left"
-            class="flex h-8 w-8 items-center justify-center border border-spotlight/40 text-spotlight transition-colors hover:border-spotlight hover:bg-spotlight hover:text-ink disabled:opacity-30 disabled:hover:border-spotlight/40 disabled:hover:bg-transparent disabled:hover:text-spotlight"
-          >
-            <MusicListingsWeb.CoreComponents.icon name="hero-chevron-left" class="size-4" />
-          </button>
-          <button
-            type="button"
-            data-rail-next
-            aria-label="Scroll right"
-            class="flex h-8 w-8 items-center justify-center border border-spotlight/40 text-spotlight transition-colors hover:border-spotlight hover:bg-spotlight hover:text-ink disabled:opacity-30 disabled:hover:border-spotlight/40 disabled:hover:bg-transparent disabled:hover:text-spotlight"
-          >
-            <MusicListingsWeb.CoreComponents.icon name="hero-chevron-right" class="size-4" />
-          </button>
-        </div>
-      </div>
-      <div class="relative">
-        <div data-rail-scroll class="overflow-x-auto pb-2 rail-scroll">
-          <div class="flex w-max snap-x snap-mandatory gap-3">
-            <.recently_added_card :for={event <- @events} event={event} />
-          </div>
-        </div>
-        <div class="pointer-events-none absolute top-0 bottom-2 right-0 w-16 bg-gradient-to-l from-ink to-transparent">
-        </div>
-      </div>
-      <div
-        data-rail-indicator
-        aria-hidden="true"
-        class="relative mt-1.5 hidden h-[3px] w-full rounded-full bg-paper/10"
-      >
-        <div data-rail-thumb class="absolute top-0 left-0 h-full rounded-full bg-paper/30"></div>
-      </div>
-    </section>
-    """
-  end
-
-  attr :event, :any, required: true
-
-  defp recently_added_card(assigns) do
-    first_show = List.first(assigns.event.showtimes)
-    event_id = first_show && first_show.event_id
-    slug = SEO.slugify(assigns.event.title || "event")
-
-    navigate =
-      event_id && ~p"/events/#{event_id}/#{slug}?#{[ref: "new_this_week"]}"
-
-    assigns = assign(assigns, navigate: navigate)
-
-    ~H"""
-    <.link
-      :if={@navigate}
-      navigate={@navigate}
-      class="group block w-60 shrink-0 snap-start border border-hairline bg-ink-2/40 p-4 transition-colors hover:border-paper-dim hover:bg-ink-2 sm:w-64"
-    >
-      <.recently_added_card_body event={@event} />
-    </.link>
-    <article
-      :if={!@navigate}
-      class="group w-60 shrink-0 snap-start border border-hairline bg-ink-2/40 p-4 transition-colors hover:border-paper-dim hover:bg-ink-2 sm:w-64"
-    >
-      <.recently_added_card_body event={@event} />
-    </article>
-    """
-  end
-
-  attr :event, :any, required: true
-
-  defp recently_added_card_body(assigns) do
-    ~H"""
-    <p class="kicker truncate text-paper-dim">{@event.venue.name}</p>
-    <h3 class="mt-2 line-clamp-2 min-h-[2lh] font-display text-xl font-bold leading-[1.05] text-paper transition-colors group-hover:text-spotlight sm:text-2xl">
-      {@event.title}
-    </h3>
-    <p class="mt-2 flex items-center gap-1.5 font-mono text-sm font-semibold text-spotlight-deep [font-variant-numeric:tabular-nums]">
-      <MusicListingsWeb.CoreComponents.icon
-        name="hero-calendar-days-solid"
-        class="size-3.5 text-spotlight"
-      />
-      {DateHelpers.format_date(@event.date)}
-    </p>
-    <div class="mt-3 flex items-center justify-between gap-2">
-      <span :if={@event.added_at} class="kicker text-paper-dim">
-        {DateHelpers.added_ago_in_words(@event.added_at)}
-      </span>
-    </div>
-    """
-  end
-
   attr :event, :any, required: true
   attr :current_user, :any, required: true
   attr :show_date, :boolean, default: false
@@ -1710,7 +1534,6 @@ defmodule MusicListingsWeb.CustomComponents do
   end
 
   attr :event_info, :any, required: true
-  attr :ref, :string, default: nil
   slot :inner_block, required: true
 
   defp event_title_link(assigns) do
@@ -1718,12 +1541,7 @@ defmodule MusicListingsWeb.CustomComponents do
     slug = SEO.slugify(assigns.event_info.title || "event")
     event_id = first_show && first_show.event_id
 
-    navigate =
-      cond do
-        is_nil(event_id) -> nil
-        assigns.ref -> ~p"/events/#{event_id}/#{slug}?#{[ref: assigns.ref]}"
-        true -> ~p"/events/#{event_id}/#{slug}"
-      end
+    navigate = event_id && ~p"/events/#{event_id}/#{slug}"
 
     assigns = assign(assigns, event_id: event_id, navigate: navigate)
 

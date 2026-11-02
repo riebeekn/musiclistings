@@ -14,8 +14,6 @@ defmodule MusicListings.Analytics.TelemetryHandler do
   @handler_id "music-listings-analytics"
 
   @events [
-    [:music_listings, :new_this_week, :shown],
-    [:music_listings, :new_this_week, :card_click],
     [:music_listings, :event, :ticket_link_shown],
     [:music_listings, :event, :ticket_click],
     [:music_listings, :event, :resale_click]
@@ -32,29 +30,13 @@ defmodule MusicListings.Analytics.TelemetryHandler do
   end
 
   @doc false
-  def handle_event([:music_listings, :new_this_week, :shown], _measurements, _metadata, _config) do
-    record("new_this_week.shown", %{})
-  end
-
-  def handle_event(
-        [:music_listings, :new_this_week, :card_click],
-        _measurements,
-        metadata,
-        _config
-      ) do
-    record("new_this_week.card_click", %{"event_id" => metadata[:event_id]})
-  end
-
   def handle_event(
         [:music_listings, :event, :ticket_link_shown],
         _measurements,
         metadata,
         _config
       ) do
-    record("event.ticket_link_shown", %{
-      "event_id" => metadata[:event_id],
-      "ref" => metadata[:ref]
-    })
+    record("event.ticket_link_shown", %{"event_id" => metadata[:event_id]})
   end
 
   def handle_event(
@@ -63,10 +45,7 @@ defmodule MusicListings.Analytics.TelemetryHandler do
         metadata,
         _config
       ) do
-    record("event.ticket_click", %{
-      "event_id" => metadata[:event_id],
-      "ref" => metadata[:ref]
-    })
+    record("event.ticket_click", %{"event_id" => metadata[:event_id]})
   end
 
   def handle_event(
@@ -77,8 +56,7 @@ defmodule MusicListings.Analytics.TelemetryHandler do
       ) do
     record("event.resale_click", %{
       "event_id" => metadata[:event_id],
-      "surface" => metadata[:surface],
-      "ref" => metadata[:ref]
+      "surface" => metadata[:surface]
     })
   end
 

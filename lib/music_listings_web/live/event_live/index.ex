@@ -31,7 +31,6 @@ defmodule MusicListingsWeb.EventLive.Index do
     |> assign(:venue_ids, venue_ids)
     |> assign(:selected_date, selected_date)
     |> assign(:sort_by, sort_by)
-    |> assign(:just_added_enabled, FunWithFlags.enabled?(:show_recently_added))
     |> assign(:resale_enabled, FunWithFlags.enabled?(:show_resale_tickets))
     |> assign(:venue_filtering_form, to_form(%{}))
     |> assign(:date_filtering_form, to_form(%{}))
@@ -44,7 +43,6 @@ defmodule MusicListingsWeb.EventLive.Index do
       "Browse upcoming live music events in Toronto — concerts, club shows, and festivals from dozens of venues, updated daily."
     )
     |> assign(:canonical_url, SEO.canonical_url("/events"))
-    |> assign(:new_this_week_tracked, false)
     |> ok()
   end
 
@@ -100,18 +98,13 @@ defmodule MusicListingsWeb.EventLive.Index do
         paged_events = list_events_for(socket, page: normalized_params[:page])
 
         if connected?(socket) do
-          recently_added = recently_added_events(socket)
-
           socket
           |> update_socket_assigns(paged_events, venue_ids)
-          |> assign(:new_this_week, recently_added)
           |> assign(:loading, false)
-          |> maybe_track_recently_added_shown(recently_added)
           |> noreply()
         else
           socket
           |> assign(:events, [])
-          |> assign(:new_this_week, [])
           |> assign(:current_page, 1)
           |> assign(:total_pages, 0)
           |> assign(:loading, true)
@@ -252,41 +245,14 @@ defmodule MusicListingsWeb.EventLive.Index do
 
     socket
     |> reload_events()
-    |> assign(:new_this_week, recently_added_events(socket))
     |> noreply()
   end
 
-  # Fired when a TicketNetwork (resale) chip in a list row is clicked. There is
-  # no `ref` on this page, so these are recorded with a nil referrer.
+  # Fired when a TicketNetwork (resale) chip in a list row is clicked.
   def handle_event("event_resale_click", params, socket) do
-    AnalyticsTracking.track_resale_click(params, socket.assigns[:ref])
+    AnalyticsTracking.track_resale_click(params)
 
     noreply(socket)
-  end
-
-  defp recently_added_events(socket) do
-    if socket.assigns.just_added_enabled do
-      MusicListings.list_recently_added_events(limit: 12)
-    else
-      []
-    end
-  end
-
-  # Records a single "rail shown" impression per connected session — guarded so
-  # pagination/filter patches (which re-run handle_params) don't re-count it.
-  defp maybe_track_recently_added_shown(socket, recently_added) do
-    if socket.assigns.just_added_enabled and recently_added != [] and
-         not socket.assigns.new_this_week_tracked do
-      :telemetry.execute(
-        [:music_listings, :new_this_week, :shown],
-        %{},
-        %{}
-      )
-
-      assign(socket, :new_this_week_tracked, true)
-    else
-      socket
-    end
   end
 
   # Single source of truth for the listing query.  Every filter is read back out of
@@ -363,17 +329,14 @@ defmodule MusicListingsWeb.EventLive.Index do
   def render(assigns) do
     ~H"""
     <%!-- MASTHEAD --%>
-    <section class={if @just_added_enabled, do: "mb-5", else: "mb-6"}>
+    <section class="mb-6">
       <p class="kicker flex items-center gap-2">
         <span class="inline-block h-2 w-8 bg-spotlight"></span> Toronto · Live Music Listings
       </p>
       <h1 class="headline mt-4 text-[3.25rem] text-paper sm:text-7xl lg:text-8xl">
         What's <span class="text-spotlight glow">On</span> <br class="hidden sm:block" />Tonight
       </h1>
-      <p class={[
-        "max-w-xl text-sm leading-relaxed text-paper-dim sm:text-base",
-        if(@just_added_enabled, do: "mt-4", else: "mt-5")
-      ]}>
+      <p class="mt-5 max-w-xl text-sm leading-relaxed text-paper-dim sm:text-base">
         Every show worth leaving the house for — concerts, club nights and DIY gigs
         from dozens of venues across the city, refreshed daily.
       </p>
@@ -381,7 +344,7 @@ defmodule MusicListingsWeb.EventLive.Index do
 
     <%!-- SEARCH: one block for both breakpoints, high enough on the page that the
           typeahead opens above the on-screen keyboard on a phone. --%>
-    <section class={if @just_added_enabled, do: "mb-6", else: "mb-8"}>
+    <section class="mb-8">
       <.search_bar
         for={@search_form}
         search_term={@search_term}
@@ -389,25 +352,15 @@ defmodule MusicListingsWeb.EventLive.Index do
       />
     </section>
 
-    <%!-- Just Added rail (feature-flagged) --%>
-    <.recently_added_peek_rail_tight
-      :if={@just_added_enabled}
-      events={@new_this_week}
-      current_user={@current_user}
-    />
-
     <%!-- Desktop filter bar --%>
     <div
-      class={["hidden md:block", if(@just_added_enabled, do: "mb-4", else: "mb-8")]}
+      class="hidden md:block mb-8"
       data-venue-filter-restore="true"
       data-storage-key="venue_ids"
       data-date-filter-restore="true"
       data-date-storage-key="selected_date"
     >
-      <div class={[
-        "flex flex-wrap items-end gap-5 border-t border-hairline",
-        if(@just_added_enabled, do: "pt-4", else: "pt-5")
-      ]}>
+      <div class="flex flex-wrap items-end gap-5 border-t border-hairline pt-5">
         <.filter_field label="Venues">
           <.venue_filter for={@venue_filtering_form} venues={@venues} venue_ids={@venue_ids} />
         </.filter_field>
@@ -426,10 +379,7 @@ defmodule MusicListingsWeb.EventLive.Index do
     </div>
 
     <%!-- Mobile filter button + chips: hidden on desktop --%>
-    <div class={[
-      "md:hidden flex items-start justify-between gap-3 border-t border-hairline",
-      if(@just_added_enabled, do: "mb-3 pt-4", else: "mb-4 pt-5")
-    ]}>
+    <div class="md:hidden flex items-start justify-between gap-3 border-t border-hairline mb-4 pt-5">
       <.mobile_filter_button />
       <.mobile_filter_chips
         venue_ids={@venue_ids}
@@ -461,10 +411,7 @@ defmodule MusicListingsWeb.EventLive.Index do
       show_resale={@resale_enabled}
     />
 
-    <div class={[
-      "border-t border-hairline",
-      if(@just_added_enabled, do: "mt-8 pt-5", else: "mt-10 pt-6")
-    ]}>
+    <div class="border-t border-hairline mt-10 pt-6">
       <.pager current_page={@current_page} total_pages={@total_pages} path={~p"/events"} />
     </div>
     """

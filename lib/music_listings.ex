@@ -6,7 +6,6 @@ defmodule MusicListings do
   alias MusicListings.Crawler
   alias MusicListings.Curation
   alias MusicListings.Events
-  alias MusicListings.Events.EventInfo
   alias MusicListings.Events.EventSuggestion
   alias MusicListings.Events.PagedEvents
   alias MusicListings.FeatureFlags
@@ -46,9 +45,6 @@ defmodule MusicListings do
 
   @spec search_event_titles(String.t() | nil, keyword()) :: [EventSuggestion.t()]
   defdelegate search_event_titles(search_term, opts \\ []), to: Events
-
-  @spec list_recently_added_events(keyword()) :: [EventInfo.t()]
-  defdelegate list_recently_added_events(opts \\ []), to: Events
 
   @spec list_upcoming_events() :: [Event.t()]
   defdelegate list_upcoming_events, to: Events

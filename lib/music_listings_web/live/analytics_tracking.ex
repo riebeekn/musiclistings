@@ -12,15 +12,14 @@ defmodule MusicListingsWeb.AnalyticsTracking do
   Emitted when a TicketNetwork (resale) link is clicked.
 
   `surface` distinguishes the detail-page button ("detail") from the list-row
-  chip ("list"). `ref` is the referrer captured from `?ref=` on the detail page
-  and is always `nil` on the list pages, which have no such assign.
+  chip ("list").
   """
-  @spec track_resale_click(map(), String.t() | nil) :: :ok
-  def track_resale_click(%{"id" => event_id, "surface" => surface}, ref) do
+  @spec track_resale_click(map()) :: :ok
+  def track_resale_click(%{"id" => event_id, "surface" => surface}) do
     :telemetry.execute(
       [:music_listings, :event, :resale_click],
       %{},
-      %{event_id: event_id, surface: surface, ref: ref}
+      %{event_id: event_id, surface: surface}
     )
   end
 end

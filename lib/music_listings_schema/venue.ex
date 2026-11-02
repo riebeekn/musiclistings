@@ -8,7 +8,6 @@ defmodule MusicListingsSchema.Venue do
           id: pos_integer(),
           name: String.t(),
           pull_events?: boolean(),
-          include_in_recently_added_feed?: boolean(),
           parser_module_name: String.t(),
           street: String.t(),
           city: String.t(),
@@ -22,8 +21,6 @@ defmodule MusicListingsSchema.Venue do
   schema "venues" do
     field :name, :string
     field :pull_events?, :boolean, source: :pull_events
-
-    field :include_in_recently_added_feed?, :boolean, source: :include_in_recently_added_feed
 
     field :parser_module_name, :string
     field :street, :string

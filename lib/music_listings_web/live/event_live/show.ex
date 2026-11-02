@@ -14,52 +14,36 @@ defmodule MusicListingsWeb.EventLive.Show do
       canonical_slug = SEO.event_slug(event)
 
       if params["slug"] == canonical_slug do
-        rail_enabled? = FunWithFlags.enabled?(:show_recently_added)
-
-        maybe_track_recently_added_click(socket, params, rail_enabled?)
-        maybe_track_ticket_link_shown(socket, event, params)
+        maybe_track_ticket_link_shown(socket, event)
 
         socket
-        |> assign(:ref, params["ref"])
         |> assign(:resale_enabled, FunWithFlags.enabled?(:show_resale_tickets))
         |> assign_flagged(event)
         |> assign_event_seo(event)
         |> ok()
       else
-        path = redirect_path(event.id, canonical_slug, params["ref"])
-        {:ok, push_navigate(socket, to: path, replace: true)}
+        {:ok, push_navigate(socket, to: ~p"/events/#{event.id}/#{canonical_slug}", replace: true)}
       end
     else
       _error -> raise Ecto.NoResultsError, queryable: MusicListingsSchema.Event
     end
   end
 
-  # Carries the ?ref referrer through the slug-canonicalisation redirect so rail
-  # attribution survives to the re-mounted (canonical) page. Only appends the
-  # param when present, keeping direct visits on a clean canonical URL.
-  defp redirect_path(id, slug, nil), do: ~p"/events/#{id}/#{slug}"
-  defp redirect_path(id, slug, ref), do: ~p"/events/#{id}/#{slug}?#{[ref: ref]}"
-
-  # Fired when the "Get Tickets" button on the detail page is clicked. The `ref`
-  # assign (captured in mount from ?ref=) distinguishes rail-referred visits
-  # ("new_this_week") from direct ones, letting us measure the rail conversion
-  # funnel: card_click (arrival) → ticket_click (this event).
+  # Fired when the "Get Tickets" button on the detail page is clicked.
   @impl true
   def handle_event("event_ticket_click", %{"id" => event_id}, socket) do
     :telemetry.execute(
       [:music_listings, :event, :ticket_click],
       %{},
-      %{event_id: event_id, ref: socket.assigns[:ref]}
+      %{event_id: event_id}
     )
 
     noreply(socket)
   end
 
   # Fired when the TicketNetwork (resale) link on the detail page is clicked.
-  # Carries the same `ref` as the primary ticket click so resale clicks can also
-  # be attributed to the rail.
   def handle_event("event_resale_click", params, socket) do
-    AnalyticsTracking.track_resale_click(params, socket.assigns[:ref])
+    AnalyticsTracking.track_resale_click(params)
 
     noreply(socket)
   end
@@ -116,48 +100,16 @@ defmodule MusicListingsWeb.EventLive.Show do
     assign(socket, :flagged?, flagged?)
   end
 
-  # Emitted when a visitor arrives via a "New This Week" rail card (the rail
-  # links carry ?ref=new_this_week). Guarded on connected?/1 so it counts once
-  # per arrival. Fired only from the canonical-slug branch of mount/3: the ref is
-  # preserved across the canonicalisation redirect (see redirect_path/3), so
-  # counting here attributes card_click, ticket_link_shown and ticket_click all
-  # to the same canonical mount and avoids double-counting a redirected arrival.
-  #
-  # Also gated on the rail's own feature flag. Without that, an arrival on a
-  # ?ref=new_this_week URL still in circulation - bookmarked, shared, or indexed -
-  # counts as a rail click long after the rail stopped rendering, which is exactly
-  # what produced a 94% "card CTR" in the week the flag went off. The flag is read
-  # once in mount/3 and passed in rather than checked here, per the project's
-  # rule on FunWithFlags lookups.
-  defp maybe_track_recently_added_click(
-         socket,
-         %{"ref" => "new_this_week", "id" => event_id},
-         true
-       ) do
-    if connected?(socket) do
-      :telemetry.execute(
-        [:music_listings, :new_this_week, :card_click],
-        %{},
-        %{event_id: event_id}
-      )
-    end
-
-    :ok
-  end
-
-  defp maybe_track_recently_added_click(_socket, _params, _rail_enabled?), do: :ok
-
   # Records that a ticket link was actually presented on the detail page (fires
   # only when the event has a ticket_url). Paired with the event.ticket_click
-  # event, this gives an overall detail-page ticket CTR; the `ref` also lets us
-  # split rail-referred impressions from direct ones. Guarded on connected?/1 so
-  # it counts once per page view, mirroring maybe_track_recently_added_click/2.
-  defp maybe_track_ticket_link_shown(socket, event, params) do
+  # event, this gives an overall detail-page ticket CTR. Guarded on connected?/1
+  # so it counts once per page view.
+  defp maybe_track_ticket_link_shown(socket, event) do
     if connected?(socket) and is_binary(event.ticket_url) do
       :telemetry.execute(
         [:music_listings, :event, :ticket_link_shown],
         %{},
-        %{event_id: to_string(event.id), ref: params["ref"]}
+        %{event_id: to_string(event.id)}
       )
     end
 

@@ -33,81 +33,24 @@ defmodule MusicListingsWeb.ClickAnalyticsTest do
     |> Repo.all()
   end
 
-  describe "shown impression" do
-    test "is recorded once when the rail renders with the flag on", %{conn: conn} do
-      FunWithFlags.enable(:show_recently_added)
-
-      {:ok, view, html} = live(conn, ~p"/events")
-      assert html =~ "New This Week"
-
-      assert [shown] = rows("new_this_week.shown")
-      assert shown.metadata == %{}
-
-      # Re-running handle_params (e.g. a filter/pagination patch) must not re-count.
-      render_patch(view, ~p"/events")
-      assert length(rows("new_this_week.shown")) == 1
-    end
-
-    test "is not recorded when the flag is off", %{conn: conn} do
-      {:ok, _view, html} = live(conn, ~p"/events")
-
-      refute html =~ "New This Week"
-      assert rows("new_this_week.shown") == []
-    end
-  end
-
-  describe "card click" do
-    setup do
-      FunWithFlags.enable(:show_recently_added)
-      :ok
-    end
-
-    test "is recorded when arriving via ?ref=new_this_week", %{conn: conn, event: event} do
-      {:ok, _view, _html} =
-        live(conn, "/events/#{event.id}/freshly-added-show?ref=new_this_week")
-
-      assert [click] = rows("new_this_week.card_click")
-      assert click.metadata["event_id"] == to_string(event.id)
-    end
-
-    test "is not recorded without the ref param", %{conn: conn, event: event} do
-      {:ok, _view, _html} = live(conn, ~p"/events/#{event.id}/freshly-added-show")
-
-      assert rows("new_this_week.card_click") == []
-    end
-
-    test "is not recorded when the rail flag is off", %{conn: conn, event: event} do
-      # ?ref=new_this_week URLs stay in circulation long after the rail stops
-      # rendering - bookmarked, shared, indexed - and counting those arrivals as
-      # rail clicks is what made the metric read a 94% card CTR with no rail.
-      FunWithFlags.disable(:show_recently_added)
-
-      {:ok, _view, _html} =
-        live(conn, "/events/#{event.id}/freshly-added-show?ref=new_this_week")
-
-      assert rows("new_this_week.card_click") == []
-    end
-
-    test "survives a non-canonical slug redirect (?ref is preserved)", %{conn: conn, event: event} do
-      # A rail link whose slug isn't canonical must redirect to the canonical
-      # slug *keeping* ?ref, otherwise the referrer is lost before any ticket
-      # click and the conversion can never be attributed to the rail.
+  describe "non-canonical slug" do
+    test "redirects to the canonical slug without carrying query params", %{
+      conn: conn,
+      event: event
+    } do
       conn = get(conn, "/events/#{event.id}/stale-slug?ref=new_this_week")
 
-      assert redirected_to(conn) ==
-               "/events/#{event.id}/freshly-added-show?ref=new_this_week"
+      assert redirected_to(conn) == "/events/#{event.id}/freshly-added-show"
     end
   end
 
   describe "detail-page ticket link shown impression" do
-    test "records an impression carrying the ref when the event has a ticket link",
+    test "records an impression when the event has a ticket link",
          %{conn: conn, event: event} do
-      {:ok, _view, _html} =
-        live(conn, "/events/#{event.id}/freshly-added-show?ref=new_this_week")
+      {:ok, _view, _html} = live(conn, ~p"/events/#{event.id}/freshly-added-show")
 
       assert [shown] = rows("event.ticket_link_shown")
-      assert shown.metadata["event_id"] == to_string(event.id)
-      assert shown.metadata["ref"] == "new_this_week"
+      assert shown.metadata == %{"event_id" => to_string(event.id)}
     end
 
     test "records no impression when the event has no ticket link", %{conn: conn} do
@@ -120,20 +63,7 @@ defmodule MusicListingsWeb.ClickAnalyticsTest do
   end
 
   describe "detail-page ticket click" do
-    test "records a click attributed to the rail referrer", %{conn: conn, event: event} do
-      {:ok, view, _html} =
-        live(conn, "/events/#{event.id}/freshly-added-show?ref=new_this_week")
-
-      view
-      |> element("a[phx-click='event_ticket_click']")
-      |> render_click()
-
-      assert [click] = rows("event.ticket_click")
-      assert click.metadata["event_id"] == to_string(event.id)
-      assert click.metadata["ref"] == "new_this_week"
-    end
-
-    test "records a nil ref for a direct (non-rail) visit", %{conn: conn, event: event} do
+    test "records a click with the event id", %{conn: conn, event: event} do
       {:ok, view, _html} = live(conn, ~p"/events/#{event.id}/freshly-added-show")
 
       view
@@ -141,7 +71,7 @@ defmodule MusicListingsWeb.ClickAnalyticsTest do
       |> render_click()
 
       assert [click] = rows("event.ticket_click")
-      assert click.metadata["ref"] == nil
+      assert click.metadata == %{"event_id" => to_string(event.id)}
     end
   end
 
@@ -160,10 +90,9 @@ defmodule MusicListingsWeb.ClickAnalyticsTest do
       %{resale_event: resale_event}
     end
 
-    test "is recorded from the event detail page with the rail referrer",
+    test "is recorded from the event detail page",
          %{conn: conn, resale_event: resale_event} do
-      {:ok, view, _html} =
-        live(conn, "/events/#{resale_event.id}/resale-show?ref=new_this_week")
+      {:ok, view, _html} = live(conn, ~p"/events/#{resale_event.id}/resale-show")
 
       view
       |> element("a[phx-click='event_resale_click']")
@@ -172,10 +101,9 @@ defmodule MusicListingsWeb.ClickAnalyticsTest do
       assert [click] = rows("event.resale_click")
       assert click.metadata["event_id"] == to_string(resale_event.id)
       assert click.metadata["surface"] == "detail"
-      assert click.metadata["ref"] == "new_this_week"
     end
 
-    test "is recorded from a listings row with a nil ref",
+    test "is recorded from a listings row",
          %{conn: conn, resale_event: resale_event} do
       {:ok, view, _html} = live(conn, ~p"/events")
 
@@ -186,7 +114,6 @@ defmodule MusicListingsWeb.ClickAnalyticsTest do
       assert [click] = rows("event.resale_click")
       assert click.metadata["event_id"] == to_string(resale_event.id)
       assert click.metadata["surface"] == "list"
-      assert click.metadata["ref"] == nil
     end
 
     test "is recorded from a venue page listings row",
