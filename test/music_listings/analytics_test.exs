@@ -188,74 +188,50 @@ defmodule MusicListings.AnalyticsTest do
   end
 
   describe "telemetry handler persists rows" do
-    test "shown event records an impression row" do
-      TelemetryHandler.handle_event(
-        [:music_listings, :new_this_week, :shown],
-        %{},
-        %{},
-        nil
-      )
-
-      assert [%AnalyticsEvent{name: "new_this_week.shown", metadata: %{}}] =
-               Repo.all(AnalyticsEvent)
-    end
-
-    test "card_click event stores the event id" do
-      TelemetryHandler.handle_event(
-        [:music_listings, :new_this_week, :card_click],
-        %{},
-        %{event_id: "42"},
-        nil
-      )
-
-      assert [%AnalyticsEvent{name: "new_this_week.card_click", metadata: %{"event_id" => "42"}}] =
-               Repo.all(AnalyticsEvent)
-    end
-
-    test "detail-page ticket_link_shown event stores the event id and ref" do
+    test "detail-page ticket_link_shown event stores the event id" do
       TelemetryHandler.handle_event(
         [:music_listings, :event, :ticket_link_shown],
         %{},
-        %{event_id: "42", ref: "new_this_week"},
+        %{event_id: "42"},
         nil
       )
 
       assert [
                %AnalyticsEvent{
                  name: "event.ticket_link_shown",
-                 metadata: %{"event_id" => "42", "ref" => "new_this_week"}
+                 metadata: %{"event_id" => "42"}
                }
              ] = Repo.all(AnalyticsEvent)
     end
 
-    test "detail-page ticket_click event stores the event id and a nil ref for direct visits" do
+    test "detail-page ticket_click event stores the event id" do
       TelemetryHandler.handle_event(
         [:music_listings, :event, :ticket_click],
         %{},
-        %{event_id: "42", ref: nil},
+        %{event_id: "42"},
         nil
       )
 
       assert [
                %AnalyticsEvent{
                  name: "event.ticket_click",
-                 metadata: %{"event_id" => "42", "ref" => nil}
+                 metadata: %{"event_id" => "42"}
                }
              ] = Repo.all(AnalyticsEvent)
     end
 
-    test "resale_click event stores the event id, surface and ref" do
+    test "resale_click event stores the event id and surface" do
       TelemetryHandler.handle_event(
         [:music_listings, :event, :resale_click],
         %{},
-        %{event_id: "42", surface: "list", ref: nil},
+        %{event_id: "42", surface: "list"},
         nil
       )
 
       assert [
                %AnalyticsEvent{
                  name: "event.resale_click",
-                 metadata: %{"event_id" => "42", "surface" => "list", "ref" => nil}
+                 metadata: %{"event_id" => "42", "surface" => "list"}
                }
              ] = Repo.all(AnalyticsEvent)
     end

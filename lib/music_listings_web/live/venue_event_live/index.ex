@@ -78,11 +78,10 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
     end
   end
 
-  # Fired when a TicketNetwork (resale) chip in a list row is clicked. There is
-  # no `ref` on this page, so these are recorded with a nil referrer.
+  # Fired when a TicketNetwork (resale) chip in a list row is clicked.
   @impl true
   def handle_event("event_resale_click", params, socket) do
-    AnalyticsTracking.track_resale_click(params, socket.assigns[:ref])
+    AnalyticsTracking.track_resale_click(params)
 
     noreply(socket)
   end
