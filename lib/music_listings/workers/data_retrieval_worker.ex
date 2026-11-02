@@ -7,7 +7,6 @@ defmodule MusicListings.Workers.DataRetrievalWorker do
 
   import Ecto.Query
 
-  alias MusicListings.Affiliates.TicketNetwork
   alias MusicListings.Crawler
   alias MusicListings.Curation
   alias MusicListings.Emails.LatestCrawlResults
@@ -24,19 +23,13 @@ defmodule MusicListings.Workers.DataRetrievalWorker do
     |> Crawler.crawl()
     |> case do
       {:ok, crawl_summary} ->
-        # Runs after the crawl so it matches against fresh event data.  Failures
-        # are logged and handed to the email to report rather than raised - a
-        # TicketNetwork outage must not cost us the crawl summary email.  Skipped
-        # if resale links are hidden on the site.
-        ticket_network_stats = TicketNetwork.run_if_enabled()
-
-        # Also after the crawl, for the same reason: it reviews what the crawl
-        # just wrote.  The return value is ignored - the email reads the open
-        # flags itself, so a failure here still reports the standing queue.
+        # Runs after the crawl, since it reviews what the crawl just wrote.  The
+        # return value is ignored - the email reads the open flags itself, so a
+        # failure here still reports the standing queue.
         Curation.run_quietly()
 
         crawl_summary
-        |> LatestCrawlResults.new_email(ticket_network_result: ticket_network_stats)
+        |> LatestCrawlResults.new_email()
         |> Mailer.deliver()
 
       _error ->

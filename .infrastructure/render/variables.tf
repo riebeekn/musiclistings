@@ -142,26 +142,6 @@ variable "app_firecrawl_api_key" {
   sensitive   = true
 }
 
-variable "app_ticket_network_account_sid" {
-  description = <<EOT
-Impact.com account SID for the TicketNetwork affiliate catalog. Doubles as the
-HTTP Basic username. Optional - leaving blank skips affiliate link matching.
-EOT
-  type        = string
-  default     = ""
-  sensitive   = true
-}
-
-variable "app_ticket_network_auth_token" {
-  description = <<EOT
-Impact.com auth token for the TicketNetwork affiliate catalog. Optional -
-leaving blank skips affiliate link matching.
-EOT
-  type        = string
-  default     = ""
-  sensitive   = true
-}
-
 variable "app_turnstile_site_key" {
   description = <<EOT
     Turnstile site key, optional, leaving blank will result in turnstile not being enabled, but will mean no forms can be submitted,

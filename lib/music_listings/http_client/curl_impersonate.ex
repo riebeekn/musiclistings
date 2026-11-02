@@ -45,7 +45,7 @@ defmodule MusicListings.HttpClient.CurlImpersonate do
   # curl needs none of the app's secrets, so don't leak them into its environment.
   @cleared_env Enum.map(
                  ~w(DATABASE_URL PROD_DB_URL SECRET_KEY_BASE BREVO_API_KEY TURNSTILE_SECRET_KEY
-                    TICKET_NETWORK_AUTH_TOKEN HONEYBADGER_API_KEY APPSIGNAL_PUSH_API_KEY),
+                    HONEYBADGER_API_KEY APPSIGNAL_PUSH_API_KEY),
                  &{&1, nil}
                )
 

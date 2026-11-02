@@ -68,19 +68,13 @@ defmodule Mix.Tasks.CrawlVenue do
     end
   end
 
-  # Mirrors the tail of DataRetrievalWorker, minus the TicketNetwork pass: that
-  # one refetches the whole affiliate catalog and rewrites links across every
-  # event, which is the nightly crawl's job - anything added here is picked up
-  # the following night.  Curation is cheap (database only) and reviews what
-  # this crawl just wrote, so it runs.
+  # Mirrors the tail of DataRetrievalWorker: curation reviews what this crawl
+  # just wrote, then the report is emailed.
   defp send_report(crawl_summary) do
     Curation.run_quietly()
 
     email =
-      LatestCrawlResults.new_email(crawl_summary,
-        title: "Local Crawl Report",
-        ticket_network_result: :skipped
-      )
+      LatestCrawlResults.new_email(crawl_summary, title: "Local Crawl Report")
 
     case Mailer.deliver(email) do
       {:ok, _metadata} ->

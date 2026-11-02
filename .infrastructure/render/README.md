@@ -132,16 +132,13 @@ terraform output -json db_connection_info
 
 The application's runtime environment variables are set by Terraform from the
 `app_*` variables in the `<workspace>.tfvars` note (see `variables.tf`) - admin email,
-Brevo, Turnstile, Honeybadger, AppSignal and the TicketNetwork affiliate credentials.
+Brevo, Turnstile, Honeybadger, AppSignal and Firecrawl.
 
 The split between the two services is deliberate:
 
 - `web_service.tf` - the Phoenix web service.
-- `cron.tf` - the nightly crawler.  It runs the same image with `CRAWL_AND_EXIT=true`,
-  and it is the only service given `TICKET_NETWORK_ACCOUNT_SID` /
-  `TICKET_NETWORK_AUTH_TOKEN`, since affiliate matching happens at the end of the
-  crawl and the web service never calls that API.  Its schedule comes from
-  `render_cron_service_schedule`.
+- `cron.tf` - the nightly crawler.  It runs the same image with `CRAWL_AND_EXIT=true`.
+  Its schedule comes from `render_cron_service_schedule`.
 
 Adding a new environment variable to the app therefore means adding it to
 `variables.tf`, to the relevant service's `env_vars` block, and to each workspace's

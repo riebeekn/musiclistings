@@ -48,14 +48,6 @@ resource "render_cron_job" "this" {
     },
     "FIRECRAWL_API_KEY" = {
       value = var.app_firecrawl_api_key
-    },
-    # Affiliate link matching runs at the end of the nightly crawl, so these
-    # only belong on the cron service - the web service never calls the API.
-    "TICKET_NETWORK_ACCOUNT_SID" = {
-      value = var.app_ticket_network_account_sid
-    },
-    "TICKET_NETWORK_AUTH_TOKEN" = {
-      value = var.app_ticket_network_auth_token
     }
   }
 }

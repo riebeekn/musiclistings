@@ -219,22 +219,6 @@ defmodule MusicListings.AnalyticsTest do
                }
              ] = Repo.all(AnalyticsEvent)
     end
-
-    test "resale_click event stores the event id and surface" do
-      TelemetryHandler.handle_event(
-        [:music_listings, :event, :resale_click],
-        %{},
-        %{event_id: "42", surface: "list"},
-        nil
-      )
-
-      assert [
-               %AnalyticsEvent{
-                 name: "event.resale_click",
-                 metadata: %{"event_id" => "42", "surface" => "list"}
-               }
-             ] = Repo.all(AnalyticsEvent)
-    end
   end
 
   defp click(event, inserted_at) do

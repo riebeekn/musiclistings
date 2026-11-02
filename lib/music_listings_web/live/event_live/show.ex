@@ -4,7 +4,6 @@ defmodule MusicListingsWeb.EventLive.Show do
 
   alias MusicListings.Accounts.User
   alias MusicListingsUtilities.DateHelpers
-  alias MusicListingsWeb.AnalyticsTracking
   alias MusicListingsWeb.SEO
 
   @impl true
@@ -17,7 +16,6 @@ defmodule MusicListingsWeb.EventLive.Show do
         maybe_track_ticket_link_shown(socket, event)
 
         socket
-        |> assign(:resale_enabled, FunWithFlags.enabled?(:show_resale_tickets))
         |> assign_flagged(event)
         |> assign_event_seo(event)
         |> ok()
@@ -37,13 +35,6 @@ defmodule MusicListingsWeb.EventLive.Show do
       %{},
       %{event_id: event_id}
     )
-
-    noreply(socket)
-  end
-
-  # Fired when the TicketNetwork (resale) link on the detail page is clicked.
-  def handle_event("event_resale_click", params, socket) do
-    AnalyticsTracking.track_resale_click(params)
 
     noreply(socket)
   end
@@ -143,7 +134,6 @@ defmodule MusicListingsWeb.EventLive.Show do
       <.event_details_list event={@event} />
       <.event_actions
         event={@event}
-        show_resale={@resale_enabled}
         current_user={@current_user}
         flagged?={@flagged?}
       />

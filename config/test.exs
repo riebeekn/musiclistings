@@ -55,12 +55,6 @@ config :music_listings, :firecrawl_req_options,
 
 config :music_listings, :firecrawl_retry_base_delay_ms, 0
 
-# Dummy TicketNetwork credentials so the affiliate matcher treats itself as
-# configured and serves its catalog from fixtures rather than skipping.
-config :music_listings, :ticket_network,
-  account_sid: "test_account_sid",
-  auth_token: "test_auth_token"
-
 # Oban test config
 config :music_listings, Oban, testing: :inline
 

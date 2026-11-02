@@ -35,18 +35,6 @@ crawl_and_exit? = System.get_env("CRAWL_AND_EXIT", "false")
 
 config :music_listings, :crawl_and_exit?, String.to_existing_atom(crawl_and_exit?)
 
-# TicketNetwork affiliate catalog (Impact.com).  Deliberately outside the :prod
-# block so `mix match_ticket_network` picks the credentials up from .envrc when
-# run locally.
-#
-# Excluded from :test, where config/test.exs supplies dummy credentials and the
-# catalog is served from fixtures.
-if config_env() != :test do
-  config :music_listings, :ticket_network,
-    account_sid: System.get_env("TICKET_NETWORK_ACCOUNT_SID"),
-    auth_token: System.get_env("TICKET_NETWORK_AUTH_TOKEN")
-end
-
 # Firecrawl, which fetches the mhrth.com venues (see MusicListings.HttpClient.Firecrawl).
 # Outside the :prod block so a local `bin/crawl-venue.sh` run uses the key from
 # .envrc.  Optional - without it requests go to Firecrawl unauthenticated.
