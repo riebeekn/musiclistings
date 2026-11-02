@@ -2,14 +2,12 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
   use MusicListingsWeb, :live_view
   use Goal
 
-  alias MusicListingsWeb.AnalyticsTracking
   alias MusicListingsWeb.SEO
 
   @impl true
   def mount(_params, _session, socket) do
     socket
     |> assign(:crawling?, false)
-    |> assign(:resale_enabled, FunWithFlags.enabled?(:show_resale_tickets))
     |> ok()
   end
 
@@ -76,14 +74,6 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
       _no_change ->
         noreply(socket)
     end
-  end
-
-  # Fired when a TicketNetwork (resale) chip in a list row is clicked.
-  @impl true
-  def handle_event("event_resale_click", params, socket) do
-    AnalyticsTracking.track_resale_click(params)
-
-    noreply(socket)
   end
 
   @impl true
@@ -162,7 +152,6 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
     <.venue_events_list
       events={@events}
       current_user={@current_user}
-      show_resale={@resale_enabled}
     />
 
     <div class="my-8">

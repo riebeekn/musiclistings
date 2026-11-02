@@ -3,7 +3,6 @@ defmodule MusicListingsWeb.EventLive.Index do
   use Goal
 
   alias MusicListingsUtilities.DateHelpers
-  alias MusicListingsWeb.AnalyticsTracking
   alias MusicListingsWeb.SEO
 
   # Cap on the free-text search term.  Anything longer is almost certainly not a real
@@ -31,7 +30,6 @@ defmodule MusicListingsWeb.EventLive.Index do
     |> assign(:venue_ids, venue_ids)
     |> assign(:selected_date, selected_date)
     |> assign(:sort_by, sort_by)
-    |> assign(:resale_enabled, FunWithFlags.enabled?(:show_resale_tickets))
     |> assign(:venue_filtering_form, to_form(%{}))
     |> assign(:date_filtering_form, to_form(%{}))
     |> assign(:search_form, to_form(%{}))
@@ -248,13 +246,6 @@ defmodule MusicListingsWeb.EventLive.Index do
     |> noreply()
   end
 
-  # Fired when a TicketNetwork (resale) chip in a list row is clicked.
-  def handle_event("event_resale_click", params, socket) do
-    AnalyticsTracking.track_resale_click(params)
-
-    noreply(socket)
-  end
-
   # Single source of truth for the listing query.  Every filter is read back out of
   # assigns, so a handler only has to assign the value it changed before calling this -
   # that is what stops a newly added filter from being silently dropped by the handlers
@@ -408,7 +399,6 @@ defmodule MusicListingsWeb.EventLive.Index do
       events={@events}
       current_user={@current_user}
       sort_by={@sort_by}
-      show_resale={@resale_enabled}
     />
 
     <div class="border-t border-hairline mt-10 pt-6">

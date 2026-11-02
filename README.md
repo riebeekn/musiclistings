@@ -19,7 +19,6 @@ written in [Elixir](https://elixir-lang.org/) and [Phoenix LiveView](https://hex
   - [Adding a new venue](#adding-a-new-venue)
   - [Venues Render can't reach](#venues-render-cant-reach)
   - [Venues behind a Cloudflare challenge](#venues-behind-a-cloudflare-challenge)
-- [Affiliate ticket links](#affiliate-ticket-links)
 - [Analytics](#analytics)
 - [Monitoring](#monitoring)
 - [Hosting and Infrastructure](#hosting-and-infrastructure)
@@ -44,7 +43,6 @@ Erlang / Elixir versions are pinned in `.tool-versions` ([asdf](https://asdf-vm.
 - Copy `.envrc_template` to `.envrc` and update / source the required environment variables (or install [direnv](https://direnv.net/docs/installation.html)):
   - `ADMIN_EMAIL` - the email address the application will send communications to.  The application sends an email summary of the nightly event population runs and also when an event is submitted via the UI.  In development these emails are not actually sent, they are available at [http://localhost:4000/dev/mailbox](http://localhost:4000/dev/mailbox) instead.  See [http://localhost:4000/dev/gallery](http://localhost:4000/dev/gallery) for a preview of the emails.
   - `PROD_DB_URL` - Render's **external** Postgres connection string.  Only needed for the [helper scripts](#helper-scripts) that talk to the production database (`bin/pull-prod-db.sh`, `bin/crawl-venue.sh`); the app itself doesn't need it.  Requires your IP to be on the Render database's inbound allowlist (see [Terraform](#terraform)).
-  - `TICKET_NETWORK_ACCOUNT_SID` / `TICKET_NETWORK_AUTH_TOKEN` - Impact.com credentials for the TicketNetwork affiliate catalog, see [Affiliate ticket links](#affiliate-ticket-links).  Optional - leave them unset and affiliate matching is skipped entirely.
 - Install dependencies and set up the database: `mix setup` (this runs `deps.get`, `ecto.setup` and builds assets).
 - Optional: `./bin/install-curl-impersonate.sh` fetches the `curl-impersonate` binary the crawler needs for the venues behind a Cloudflare challenge (see [Venues behind a Cloudflare challenge](#venues-behind-a-cloudflare-challenge)).  Without it those venues just report "No events found" locally; everything else works.
 - Run the server (`iex -S mix phx.server`).  Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
@@ -75,7 +73,6 @@ The scripts in `bin/` each document their own usage in a header comment:
 ### Mix tasks
 
 - `mix crawl_venue [VenueName]Parser ...` - crawls the given venues against whichever database the app is pointed at.  Venues are identified by `parser_module_name`, not id.  See [Venues Render can't reach](#venues-render-cant-reach).
-- `mix match_ticket_network [--dry-run] [--verbose]` - runs the TicketNetwork affiliate match by hand.  See [Affiliate ticket links](#affiliate-ticket-links).
 - `mix list_live_nation_venues` - dumps the LiveNation venues that actually have tracked events to a CSV.  LiveNation lists ~800 Toronto venues but only ~50 have events, so this is the shortlist worth writing parsers for.
 
 ## Admin functionality
@@ -99,10 +96,7 @@ Now you can login at `/users/log_in`.
 
 Feature flags are handled by [FunWithFlags](https://github.com/tompave/fun_with_flags), persisted via Ecto in the `feature_flags` table (no Redis).  The in-memory cache is deliberately **disabled** (see `config/config.exs`) so that toggles take effect immediately with no staleness and no need for cross-node cache busting.  The tradeoff is that every check hits the database, so check a flag once per request and reuse the boolean rather than calling `FunWithFlags.enabled?/1` in a loop.
 
-Flags can be toggled from the admin UI at `/feature_flags`.  The flags currently in use are:
-
-- `show_recently_added` - the "New This Week" rail on the events pages.
-- `show_resale_tickets` - the TicketNetwork resale ticket links, see [Affiliate ticket links](#affiliate-ticket-links).
+Flags can be toggled from the admin UI at `/feature_flags`.  There are currently no flags in use.
 
 ## HTTP Client config
 
@@ -143,7 +137,7 @@ Once event population has concluded an email is sent to the configured `ADMIN_EM
 Oban still runs inside the web service and handles the scheduled jobs that aren't the crawl (see the crontab in `config/config.exs`):
 
 - `ParserHealthWorker` - daily; scans recent crawl history for venues whose parser yield has dropped off and emails the findings to `ADMIN_EMAIL`.  This is how a silently broken parser gets noticed.
-- `WeeklyAnalyticsWorker` - Mondays; emails the weekly engagement digest built from the [analytics](#analytics) events - week over week pageviews, ticket link impressions, ticket clicks and resale clicks.
+- `WeeklyAnalyticsWorker` - Mondays; emails the weekly engagement digest built from the [analytics](#analytics) events - ticket clicks, ticket link impressions and CTR against the prior week and a 4-week average, the top venues and events by ticket clicks, and how many upcoming events carry a ticket link.
 - `PurgeEventsWorker` - purges historical events.  Currently switched off (its crontab entry is commented out).
 
 ### Parsing modules
@@ -187,28 +181,11 @@ Currently affected: **Wiggle Room** and **Junction Underground** (both on the sa
 
 The `Dockerfile` installs a pinned curl-impersonate release into the image, so the nightly crawl on Render needs nothing extra.  Locally, run `./bin/install-curl-impersonate.sh` once to fetch the binary for your machine into `bin/curl-impersonate/`; the client also honours `$CURL_IMPERSONATE_BIN` or a `curl-impersonate` on your `$PATH`.  Without it those three venues report "No events found" with a `:curl_impersonate_not_installed` error.  Keep the version and checksums in `bin/install-curl-impersonate.sh` and the `Dockerfile` in step when upgrading.
 
-## Affiliate ticket links
-
-Events can carry a resale ticket link from TicketNetwork, sourced from their [Impact.com](https://impact.com/) affiliate catalog and stored on `events.ticketnetwork_url`.  The code lives in `lib/music_listings/affiliates/ticket_network.ex` and `lib/music_listings/affiliates/ticket_network/`.
-
-Matching runs at the end of the nightly crawl - `DataRetrievalWorker` calls `TicketNetwork.run_quietly/1` once the crawl has finished, so it always matches against fresh event data.  The crawler itself deliberately leaves the column alone: re-parsing a venue page tells us nothing about TicketNetwork's inventory.  The pass is self-healing, in that every upcoming event at a covered venue is reconsidered on each run and any event that no longer matches has its link cleared, so a delisted product doesn't leave a dead link behind.  A TicketNetwork failure is logged and reported in the crawl summary email rather than raised - an outage there must not cost us the crawl summary.
-
-The catalog is only fetched when `TICKET_NETWORK_ACCOUNT_SID` and `TICKET_NETWORK_AUTH_TOKEN` are set; without them the pass reports that it was skipped and exits cleanly.  In production these are set on the Render **cron** service only, as the web service never calls the API.
-
-Which venues are eligible, and how a catalog item gets matched to one of our events, lives in `venue_map.ex` and `matcher.ex`.  After editing either, check the effect without writing anything:
-
-```
-mix match_ticket_network --dry-run
-mix match_ticket_network --dry-run --verbose
-```
-
-Whether the links are actually rendered is controlled by the `show_resale_tickets` [feature flag](#feature-flags).
-
 ## Analytics
 
 First-party product analytics live in `MusicListings.Analytics` and are stored in the `analytics_events` table as a name plus a free-form metadata map.  Call sites emit a `:telemetry` event and `MusicListings.Analytics.TelemetryHandler` (attached at boot in `lib/music_listings/application.ex`) persists it, which keeps the measurement layer decoupled from any particular storage or vendor.  The handler swallows and logs its own failures, since `:telemetry` permanently detaches a handler that raises.
 
-The events currently recorded are `new_this_week.shown`, `new_this_week.card_click`, `event.ticket_link_shown`, `event.ticket_click` and `event.resale_click`.
+The events currently recorded are `event.ticket_link_shown` and `event.ticket_click`.  `WeeklyAnalyticsWorker` also saves a `weekly.ticket_coverage` snapshot each time it sends, so the next report can show how ticket-link coverage changed.  Older `new_this_week.*` and `event.resale_click` rows are left over from the removed "New This Week" rail and TicketNetwork resale links.
 
 `WeeklyAnalyticsWorker` turns these into the Monday engagement email (see [Background jobs](#background-jobs)).  `MusicListings.Analytics.counts/0` is handy for a quick read from `iex`.
 

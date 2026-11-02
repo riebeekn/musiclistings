@@ -179,7 +179,6 @@ defmodule MusicListings.Events do
           event_id: event.id,
           time: event.time,
           ticket_url: event.ticket_url,
-          ticketnetwork_url: event.ticketnetwork_url,
           details_url: event.details_url
         }
       end)

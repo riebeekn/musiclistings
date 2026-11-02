@@ -2,23 +2,17 @@ defmodule MusicListings.TitleSimilarity do
   @moduledoc """
   Compares event titles that describe the same show but are written differently.
 
-  Two independent concerns need this. The TicketNetwork affiliate pass matches a
-  catalog item's name against our own title for the same night
-  (`MusicListings.Affiliates.TicketNetwork.Matcher`), and curation looks for the
-  same show listed twice on one date (`MusicListings.Curation`) - a venue and its
-  upstairs room both publishing "Slow Teeth w/ Waxlimbs" and "Slow Teeth with
-  Waxlimbs".
-
-  Both reduce to the same question, so the normalisation and scoring live here
-  and each caller keeps its own acceptance threshold: a wrong affiliate link is
-  worse than none, while a missed duplicate only costs a review.
+  Curation uses it to find the same show listed twice on one date
+  (`MusicListings.Curation`) - a venue and its upstairs room both publishing
+  "Slow Teeth w/ Waxlimbs" and "Slow Teeth with Waxlimbs". The caller keeps its
+  own acceptance threshold.
   """
 
   # Words that carry no identifying signal in an event title.
   @stopwords ~w(the a an and with w presents presented by live tour feat featuring ft)
 
   # Applied before anything else, to reconcile naming conventions that differ
-  # between TicketNetwork and the venue's own listings.
+  # between listings of the same act.
   @aliases %{"toronto symphony orchestra" => "tso"}
 
   # Substring containment is a strong signal for "Kevin Atwater" inside
@@ -81,8 +75,8 @@ defmodule MusicListings.TitleSimilarity do
     Enum.reduce(@aliases, string, fn {from, to}, acc -> String.replace(acc, from, to) end)
   end
 
-  # "Hugel - Artist" and "Cardinals - Band" are TicketNetwork's way of
-  # disambiguating acts whose name is an everyday word.
+  # "Hugel - Artist" and "Cardinals - Band" are how some listings disambiguate
+  # acts whose name is an everyday word.
   defp strip_role_suffix(string) do
     String.replace(string, ~r/\s+-\s+(artist|band)$/u, "")
   end

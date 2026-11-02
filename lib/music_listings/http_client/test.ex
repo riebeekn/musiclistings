@@ -127,12 +127,7 @@ defmodule MusicListings.HttpClient.Test do
       # Hugh's Room — the Showpass events API behind the site's widget.  Only
       # the first page has a fixture; the second is left unmatched on purpose.
       {"showpass.com/api/public/events/?ends_on__gte=2024-08-01T12:00:00Z&only_parents=true&ordering=starts_on,id&page=1&page_size=50&venue__in=5705",
-       "hughs_room/index.json"},
-      # TicketNetwork affiliate catalog — paged, so each page has its own fixture
-      {"api.impact.com/Mediapartners/test_account_sid/Catalogs/1872/Items?Query=Category+%3D+%27CONCERTS%27+AND+Gtin+%3D+%27Toronto%27&Page=1",
-       "ticket_network/page_1.json"},
-      {"api.impact.com/Mediapartners/test_account_sid/Catalogs/1872/Items?Query=Category+%3D+%27CONCERTS%27+AND+Gtin+%3D+%27Toronto%27&Page=2",
-       "ticket_network/page_2.json"}
+       "hughs_room/index.json"}
     ]
   end
 end

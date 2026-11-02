@@ -4,7 +4,6 @@ defmodule MusicListings.Emails.LatestCrawlResults do
   """
   use MusicListings.Mailer
 
-  alias MusicListings.Affiliates.TicketNetwork
   alias MusicListings.Curation
   alias MusicListings.Events
   alias MusicListings.Repo
@@ -29,10 +28,6 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     * `:added_events` - the events the crawl added.  Looked up from the crawl's
       time window unless passed in - `preview/0` supplies its own so it can
       render without touching the database.
-    * `:ticket_network_result` - the outcome of the affiliate matching pass that
-      runs after the crawl: its `Stats` on success, `{:error, reason}` when it
-      failed, or `:skipped`/`nil` when it never ran.  A failure is reported; a
-      skip is not.
     * `:review_flags` - the open curation flags.  Read from the database unless
       passed in.
   """
@@ -56,7 +51,6 @@ defmodule MusicListings.Emails.LatestCrawlResults do
         title: title,
         crawl_summary: crawl_summary,
         added_events: added_events,
-        ticket_network_result: Keyword.get(opts, :ticket_network_result),
         review_flags: review_flags
       })
     )
@@ -71,16 +65,12 @@ defmodule MusicListings.Emails.LatestCrawlResults do
   end
 
   defp mjml(assigns) do
-    ticket_network_result = assigns[:ticket_network_result]
-
     assigns =
       assigns
       |> Map.put(:venue_rows, sort_venues(assigns.crawl_summary.venue_crawl_summaries))
       |> Map.put(:error_count, Enum.count(assigns.crawl_summary.crawl_errors))
       |> Map.put(:added_event_count, Enum.count(assigns.added_events))
       |> Map.put(:unreachable_venues, unreachable_venues(assigns.crawl_summary.crawl_errors))
-      |> Map.put(:ticket_network_stats, ticket_network_stats(ticket_network_result))
-      |> Map.put(:ticket_network_error, ticket_network_error(ticket_network_result))
       |> Map.put(:title_flags, Enum.filter(assigns.review_flags, &(&1.type == :non_event_title)))
       |> Map.put(
         :duplicate_flags,
@@ -194,34 +184,6 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       </mj-text>
     <% end %>
 
-    <%= if @ticket_network_error do %>
-      <.h2>TicketNetwork affiliate links</.h2>
-      <mj-text padding="6px 0">
-        <div style="border-left:3px solid #ff5a36;background-color:#1c1c1d;border-radius:6px;padding:12px 14px;">
-          <div style="font-family:'Big Shoulders Display','Hanken Grotesk',Helvetica,Arial,sans-serif;font-size:15px;font-weight:700;color:#ff5a36;">
-            Matching did not run
-          </div>
-          <div style="color:#ece9e0;font-size:12px;line-height:1.5;padding-top:8px;">
-            {@ticket_network_error}
-          </div>
-          <div style="color:#a8a49a;font-size:11px;line-height:1.45;padding-top:8px;">
-            Existing affiliate links are untouched — the pass writes nothing unless it fetches the
-            whole catalog, so none were set or cleared tonight.
-          </div>
-        </div>
-      </mj-text>
-    <% end %>
-
-    <%= if @ticket_network_stats do %>
-      <.h2>TicketNetwork affiliate links</.h2>
-      <.muted>
-        {@ticket_network_stats.linked} set · {@ticket_network_stats.cleared} cleared · {@ticket_network_stats.matched} catalog {pluralize(
-          @ticket_network_stats.matched,
-          "item"
-        )} matched · {@ticket_network_stats.unmatched_items} unmatched · {@ticket_network_stats.untracked_items} at venues we don't track
-      </.muted>
-    <% end %>
-
     <%= if @title_flags != [] do %>
       <.h2>Needs review — not a show ({Enum.count(@title_flags)})</.h2>
       <.muted>
@@ -277,44 +239,6 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       </.table>
     <% end %>
     """
-  end
-
-  # The matching pass returns :skipped when no API credentials are configured -
-  # the normal state in dev - which isn't worth a word in the report.
-  defp ticket_network_stats(%TicketNetwork.Stats{} = stats), do: stats
-  defp ticket_network_stats(_other), do: nil
-
-  # A failure, on the other hand, has to be said out loud: the section simply
-  # going missing is indistinguishable from a night where nothing was skipped.
-  defp ticket_network_error({:error, reason}), do: describe_ticket_network_error(reason)
-  defp ticket_network_error(_other), do: nil
-
-  defp describe_ticket_network_error(%Req.TransportError{reason: :timeout}) do
-    "The catalog request timed out."
-  end
-
-  defp describe_ticket_network_error(%Req.TransportError{reason: reason}) do
-    "The catalog request failed to reach the API (#{inspect(reason)})."
-  end
-
-  defp describe_ticket_network_error({:unexpected_status, status}) do
-    "The catalog returned HTTP #{status}."
-  end
-
-  defp describe_ticket_network_error(:too_many_pages) do
-    "The catalog reported more pages than we are willing to fetch."
-  end
-
-  defp describe_ticket_network_error(:not_configured) do
-    "No API credentials are configured."
-  end
-
-  defp describe_ticket_network_error(error) when is_exception(error) do
-    "The pass crashed: #{Exception.message(error)}"
-  end
-
-  defp describe_ticket_network_error(other) do
-    "The pass failed: #{inspect(other)}"
   end
 
   defp unreachable_venues(crawl_errors) do
@@ -406,15 +330,6 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       build_event(v2, "Badge Époque Ensemble", ~D[2026-08-21])
     ]
 
-    ticket_network_stats = %TicketNetwork.Stats{
-      matched: 497,
-      linked: 12,
-      cleared: 3,
-      unmatched_items: 171,
-      untracked_items: 68,
-      venue_names: %{1 => v1.name, 2 => v2.name}
-    }
-
     # flags awaiting review
     review_flags = [
       build_title_flag(1, build_event(v1, "CLOSED MONDAY - WEDNESDAY", ~D[2026-08-31], 101)),
@@ -431,7 +346,6 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     |> Map.put(:venue_crawl_summaries, [vcs1, vcs2, vcs3, vcs4])
     |> new_email(
       added_events: added_events,
-      ticket_network_result: ticket_network_stats,
       review_flags: review_flags
     )
   end

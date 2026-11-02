@@ -15,8 +15,7 @@ defmodule MusicListings.Analytics.TelemetryHandler do
 
   @events [
     [:music_listings, :event, :ticket_link_shown],
-    [:music_listings, :event, :ticket_click],
-    [:music_listings, :event, :resale_click]
+    [:music_listings, :event, :ticket_click]
   ]
 
   @doc """
@@ -46,18 +45,6 @@ defmodule MusicListings.Analytics.TelemetryHandler do
         _config
       ) do
     record("event.ticket_click", %{"event_id" => metadata[:event_id]})
-  end
-
-  def handle_event(
-        [:music_listings, :event, :resale_click],
-        _measurements,
-        metadata,
-        _config
-      ) do
-    record("event.resale_click", %{
-      "event_id" => metadata[:event_id],
-      "surface" => metadata[:surface]
-    })
   end
 
   defp record(name, metadata) do
