@@ -54,6 +54,7 @@ config :music_listings, :firecrawl_req_options,
   plug: {Req.Test, MusicListings.HttpClient.Firecrawl}
 
 config :music_listings, :firecrawl_retry_base_delay_ms, 0
+config :music_listings, :firecrawl_rate_limit_window_ms, 0
 
 # Oban test config
 config :music_listings, Oban, testing: :inline

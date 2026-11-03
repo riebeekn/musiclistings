@@ -44,7 +44,11 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   require Logger
 
   # Pause before each request to the site, see the moduledoc.  Zero in test.
-  @default_request_interval_ms 500
+  # Also keeps us under Firecrawl's per-minute scrape limit (10/min on the free
+  # plan): a 6s pause alone caps us at 10 requests a minute, whatever the page
+  # load time.  The three venues are crawled one after another on one API key,
+  # so it's the pace across all of them that counts.
+  @default_request_interval_ms 6_000
 
   # Never more of the listing than this, however many pages it has
   @max_pages 5

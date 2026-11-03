@@ -73,6 +73,34 @@ defmodule MusicListings.HttpClient.FirecrawlTest do
     assert 2 == Agent.get(attempts, & &1)
   end
 
+  test "retries a rate-limited scrape once the window resets", %{stub: stub} do
+    {:ok, attempts} = Agent.start_link(fn -> 0 end)
+
+    stub.(fn conn ->
+      if Agent.get_and_update(attempts, &{&1, &1 + 1}) == 0 do
+        conn
+        |> Plug.Conn.put_resp_header("retry-after", "0")
+        |> Plug.Conn.put_status(429)
+        |> Req.Test.json(%{"success" => false, "error" => "Rate limit exceeded."})
+      else
+        Req.Test.json(conn, scrape_response(200, "<html>listing</html>"))
+      end
+    end)
+
+    assert {:ok, %Response{status: 200}} = Firecrawl.get(@url)
+    assert 2 == Agent.get(attempts, & &1)
+  end
+
+  test "a scrape still rate limited after its retries is an error", %{stub: stub} do
+    stub.(fn conn ->
+      conn
+      |> Plug.Conn.put_status(429)
+      |> Req.Test.json(%{"success" => false, "error" => "Rate limit exceeded."})
+    end)
+
+    assert {:error, {:firecrawl_failed, 429, "Rate limit exceeded."}} == Firecrawl.get(@url)
+  end
+
   test "authenticates with the API key when there is one", %{stub: stub} do
     stub.(&Req.Test.json(&1, scrape_response(200, "")))
 

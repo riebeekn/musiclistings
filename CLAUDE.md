@@ -202,7 +202,8 @@ IPs and return the rendered HTML.
   and only links a showing while it's on sale, so a looked-up time or ticket link can be `nil`.
 - A burst of requests can still draw the challenge, so `MhRthTdmhParser` parses one event at a
   time (the optional `max_concurrency/0` parser callback) and pauses before every request
-  (`:mhrth_request_interval_ms`, 500ms by default, 0 in test). A `403` trips
+  (`:mhrth_request_interval_ms`, 6s by default - which also keeps the crawl under Firecrawl's
+  10 requests/min free-plan scrape limit - 0 in test). A `403` trips
   `MusicListings.Parsing.ChallengeBreaker`, and `MhRthTdmhParser` skips its follow-up lookups
   until a listing page gets through again (the skipped events are reported as lookup failures).
 - Every request counts toward the challenge (and costs a credit), so the parser only follows

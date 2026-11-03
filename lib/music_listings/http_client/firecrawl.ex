@@ -38,6 +38,12 @@ defmodule MusicListings.HttpClient.Firecrawl do
   @default_max_retries 2
   @max_retry_delay_ms :timer.seconds(30)
 
+  # Firecrawl's scrape rate limit is per minute, and a 429 says to retry when
+  # the window resets (e.g. "retry after 12s") - a backoff of a second or two
+  # just burns the retries inside the same window.  So a 429 waits for the
+  # `Retry-After` header when there is one, otherwise for a whole window.
+  @rate_limit_window_ms :timer.minutes(1)
+
   @doc """
   Scrapes `url`. Honours `:receive_timeout` and `:max_retries`, as the Req
   client does.
@@ -83,6 +89,10 @@ defmodule MusicListings.HttpClient.Firecrawl do
 
   # As MusicListings.HttpClient.Req: a bounded backoff of our own rather than
   # Req's, which obeys an uncapped `Retry-After`.
+  defp retry?(_request, %Req.Response{status: 429} = response) do
+    {:delay, rate_limit_delay(response)}
+  end
+
   defp retry?(request, %Req.Response{status: status}) when status in @retry_statuses do
     {:delay, retry_delay(request)}
   end
@@ -94,5 +104,18 @@ defmodule MusicListings.HttpClient.Firecrawl do
     retry_count = Req.Request.get_private(request, :req_retry_count, 0)
     base_delay = Application.get_env(:music_listings, :firecrawl_retry_base_delay_ms, 1_000)
     min(Integer.pow(2, retry_count) * base_delay, @max_retry_delay_ms)
+  end
+
+  defp rate_limit_delay(response) do
+    window_ms =
+      Application.get_env(:music_listings, :firecrawl_rate_limit_window_ms, @rate_limit_window_ms)
+
+    with [value | _rest] <- Req.Response.get_header(response, "retry-after"),
+         {seconds, ""} <- value |> String.trim() |> Integer.parse() do
+      # A second over, so the retry lands after the reset rather than on it
+      min(:timer.seconds(seconds + 1), window_ms)
+    else
+      _no_usable_header -> window_ms
+    end
   end
 end
