@@ -5,9 +5,9 @@ defmodule MusicListings.HttpClient.Firecrawl do
   rendered HTML.
 
   The mhrth.com venues (Massey Hall, Roy Thomson Hall, TD Music Hall) sit behind a
-  Cloudflare challenge keyed on bot score. A real Chrome fingerprint
-  (`MusicListings.HttpClient.CurlImpersonate`) gets through from a residential IP
-  but not from Render's, so those venues are fetched through Firecrawl instead.
+  Cloudflare challenge keyed on bot score. A real Chrome fingerprint gets through
+  from a residential IP but not from Render's, so those venues are fetched through
+  Firecrawl instead. So is Linsmore Tavern, whose host challenges Render's IP.
   See `MusicListings.HttpClient.Req` for how to opt a request in (`firecrawl: true`).
 
   Because the page is rendered, content a site fills in with JavaScript is in

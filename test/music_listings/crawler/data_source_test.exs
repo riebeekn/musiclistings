@@ -76,10 +76,9 @@ defmodule MusicListings.Crawler.DataSourceTest do
     end
 
     test "reports a non-exception error reason as a fetch error" do
-      respond(@url, {:error, :curl_impersonate_not_installed})
+      respond(@url, {:error, {:firecrawl_failed, 402}})
 
-      assert {:error,
-              {:fetch_error, "Request to #{@url} failed: :curl_impersonate_not_installed"}, []} ==
+      assert {:error, {:fetch_error, "Request to #{@url} failed: {:firecrawl_failed, 402}"}, []} ==
                DataSource.retrieve_events(ScriptedParser, @url)
     end
 
