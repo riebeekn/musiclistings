@@ -25,7 +25,7 @@ defmodule MusicListingsWeb.ContactLiveTest do
       assert html =~ "Thank you for contacting us"
 
       assert_email_sent(fn email ->
-        assert email.from == {"Bob Mintzer", "bob@example.com"}
+        assert email.from == {"Toronto Music Listings", "no-reply@torontomusiclistings.com"}
         assert email.reply_to == {"Bob Mintzer", "bob@example.com"}
         assert email.subject == "Hi there!"
         assert email.html_body =~ "Hello, I have a question about..."

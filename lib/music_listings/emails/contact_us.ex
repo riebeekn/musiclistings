@@ -15,7 +15,7 @@ defmodule MusicListings.Emails.ContactUs do
 
     new()
     |> to_site_admin()
-    |> from({sender_name, sender_email})
+    |> from_noreply()
     |> reply_to({sender_name, sender_email})
     |> subject(subject)
     |> body(mjml(assigns))
