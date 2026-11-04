@@ -223,6 +223,16 @@ IPs and return the rendered HTML.
   `./bin/install-curl-impersonate.sh` puts the binary in gitignored `bin/curl-impersonate/`. Keep
   the version/checksums in the two in step.
 
+## Venues Behind a SiteGround Challenge
+
+**Linsmore Tavern** is hosted on SiteGround, which answers requests from Render's IP with a `202`
+whose body redirects to a proof-of-work challenge (`/.well-known/sgcaptcha/`). The block looks
+IP-based: the same request gets a `200` from a home connection. Headers, retrying on `202`, and a
+home-grown solver were all tried and reverted (`e194eb9`) - the solver found valid solutions, but the
+re-fetched page was just a new challenge. `LinsmoreParser` therefore fetches through Firecrawl
+(`firecrawl: true`), about 1 credit a night. If a nightly crawl reports a `fetch_error` for it, Firecrawl
+got challenged or failed that night; `./bin/crawl-venue.sh LinsmoreParser` is the fallback.
+
 ## Database Operations
 
 ### Common Ecto Commands

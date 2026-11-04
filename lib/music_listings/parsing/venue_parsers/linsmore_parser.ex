@@ -1,6 +1,9 @@
 defmodule MusicListings.Parsing.VenueParsers.LinsmoreParser do
   @moduledoc """
   Parser for extracing events from https://www.linsmoretavern.com/
+
+  The site's host, SiteGround, answers requests from Render's IP with a `202`
+  bot challenge instead of the page, so it's fetched through Firecrawl.
   """
   @behaviour MusicListings.Parsing.VenueParser
 
@@ -17,7 +20,7 @@ defmodule MusicListings.Parsing.VenueParsers.LinsmoreParser do
 
   @impl true
   def retrieve_events_fun do
-    fn url -> HttpClient.get(url) end
+    fn url -> HttpClient.get(url, [], firecrawl: true) end
   end
 
   @impl true
