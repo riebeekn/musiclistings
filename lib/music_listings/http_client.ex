@@ -29,14 +29,9 @@ defmodule MusicListings.HttpClient do
 
   `opts` carries per-request overrides for callers whose endpoint doesn't fit
   the crawler's defaults - see `MusicListings.HttpClient.Req` for the options
-  it honours. `browser: true` sends the request with a real browser TLS
-  fingerprint (via curl-impersonate) for venues whose bot protection rejects
-  the BEAM's; the test client ignores it.  With `browser: true`,
-  `no_retry_statuses:` lists statuses to return without retrying (see
-  `MusicListings.HttpClient.CurlImpersonate`).  `firecrawl: true` fetches the
-  page rendered by a real browser on Firecrawl's IPs, for bot protection that
-  rejects ours whatever the fingerprint (see `MusicListings.HttpClient.Firecrawl`);
-  the test client ignores that too.
+  it honours. `firecrawl: true` fetches the page rendered by a real browser on
+  Firecrawl's IPs, for bot protection that rejects our requests (see
+  `MusicListings.HttpClient.Firecrawl`); the test client ignores it.
   """
   @callback get(url :: String.t(), headers :: list() | nil, opts :: keyword()) ::
               {:ok, Response.t()} | {:error, any()}

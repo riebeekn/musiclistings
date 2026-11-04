@@ -218,10 +218,8 @@ IPs and return the rendered HTML.
   report then shows a `lookup_error` for the venue, and `EventStorage` keeps the stored ticket
   link/time instead of overwriting them with `nil`. Any parser whose follow-up requests can fail
   should record its failures the same way.
-- `MusicListings.HttpClient.CurlImpersonate` (`browser: true`) is no longer used by any parser but
-  is kept as a fallback. The `Dockerfile` installs a pinned release; locally
-  `./bin/install-curl-impersonate.sh` puts the binary in gitignored `bin/curl-impersonate/`. Keep
-  the version/checksums in the two in step.
+- A curl-impersonate HTTP client used to fetch these venues. It was removed because it can't get
+  through from Render's IP; it's in git history (added in `3f6e020`) if ever needed for local crawls.
 
 ## Venues Behind a SiteGround Challenge
 
