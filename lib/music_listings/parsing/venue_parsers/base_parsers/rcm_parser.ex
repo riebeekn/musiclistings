@@ -76,12 +76,27 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.RcmParser do
 
   # The numeric id in the ticket link is the site's own id for the
   # performance, so unlike title + date it survives two performances of the
-  # same programme on one day.  Note it can't be taken from the details url -
-  # some of those slugs omit it.
+  # same programme on one day.  A paid event can lose its ticket link while it's
+  # still listed, so the id in the details url comes next, otherwise the event
+  # would be stored again under a new id.  Not every details url has one.
   def event_id(event) do
+    ticket_id(event) || details_url_id(event) || fallback_event_id(event)
+  end
+
+  defp ticket_id(event) do
     case ticket_path(event) do
-      nil -> fallback_event_id(event)
+      nil -> nil
       ticket_path -> Path.basename(ticket_path)
+    end
+  end
+
+  # i.e. "/concert/sweeney-todd-in-concert-saturday-449002" or
+  # "/concert/taylor-academy-showcase-concert-450801-1".  The length matters, as
+  # the slugs of the free events can end in a short counter, i.e. "-recital-1".
+  defp details_url_id(event) do
+    case Regex.run(~r/-(\d{6})(?:-\d+)?$/, to_string(details_url(event))) do
+      [_match, id] -> id
+      nil -> nil
     end
   end
 

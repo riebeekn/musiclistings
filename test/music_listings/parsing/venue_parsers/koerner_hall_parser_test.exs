@@ -26,6 +26,28 @@ defmodule MusicListings.Parsing.VenueParsers.KoernerHallParserTest do
   defp event_with_title(events, title),
     do: Enum.find(events, &(KoernerHallParser.event_title(&1) == title))
 
+  defp card_without_ticket_link(details_path) do
+    """
+    <div id="tps-aws-results">
+      <div class="cell tps-card-item tps-card-item-2-buttons">
+        <div class="tps-card-item-inner">
+          <div class="tps-card-item-date">
+            <div class="tps-card-item-date-inner">Jan 16, 2027 8:00 PM</div>
+          </div>
+          <a class="tps-card-item-title h4 separator-left" href="#{details_path}">Sweeney Todd in Concert</a>
+          <div class="tps-card-item-text">
+            <div class="tps-card-item-actions">
+              <a class="tps-card-item-action button" href="#{details_path}">Learn More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    """
+    |> KoernerHallParser.events()
+    |> List.first()
+  end
+
   describe "source_url/0" do
     test "returns expected value" do
       assert @rcm_concerts_url == KoernerHallParser.source_url()
@@ -72,6 +94,25 @@ defmodule MusicListings.Parsing.VenueParsers.KoernerHallParserTest do
       event_ids = Enum.map(events, &KoernerHallParser.event_id/1)
 
       assert 12 == event_ids |> Enum.uniq() |> Enum.count()
+    end
+
+    test "keeps the id in the details url when the ticket link goes away" do
+      event = card_without_ticket_link("/concert/sweeney-todd-in-concert-saturday-449002")
+
+      assert "449002" == KoernerHallParser.event_id(event)
+      assert nil == KoernerHallParser.ticket_url(event)
+    end
+
+    test "ignores a counter after the id in the details url" do
+      event = card_without_ticket_link("/concert/taylor-academy-showcase-concert-450801-1")
+
+      assert "450801" == KoernerHallParser.event_id(event)
+    end
+
+    test "falls back to title, date and time when the details url has no id" do
+      event = card_without_ticket_link("/concert/sweeney-todd-in-concert-1")
+
+      assert "sweeney_todd_in_concert_2027_01_16_20_00_00" == KoernerHallParser.event_id(event)
     end
   end
 
