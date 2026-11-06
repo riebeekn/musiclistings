@@ -231,6 +231,16 @@ re-fetched page was just a new challenge. `LinsmoreParser` therefore fetches thr
 (`firecrawl: true`), about 1 credit a night. If a nightly crawl reports a `fetch_error` for it, Firecrawl
 got challenged or failed that night; `./bin/crawl-venue.sh LinsmoreParser` is the fallback.
 
+## Lee's Palace and The Dance Cave
+
+The Dance Cave is upstairs at Lee's Palace. Lee's calendar (`LeesPalaceParser`) lists both rooms and
+`DanceCaveParser` gets the upstairs shows from Live Nation, so most Dance Cave shows are crawled
+twice. Neither source can be dropped: each has shows the other lacks, and only Live Nation has times.
+After each crawl `Curation.remove_redundant_room_listings/0` soft-deletes the Lee's side of any open
+duplicate flag between the two, dismisses the flag, and the crawl email lists the removal. Clearing a
+listing's `deleted_at` restores it for good, since only open flags are acted on. A listing with
+`locked_from_updates` set is left for manual review. `mix curate_events` doesn't remove anything.
+
 ## Database Operations
 
 ### Common Ecto Commands

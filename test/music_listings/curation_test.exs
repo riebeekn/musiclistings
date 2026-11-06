@@ -196,6 +196,147 @@ defmodule MusicListings.CurationTest do
     end
   end
 
+  describe "remove_redundant_room_listings/0" do
+    # Named generically because the migrations seed the real venues.  The parser
+    # module name is what identifies them.
+    setup do
+      %{
+        lees: insert(:venue, parser_module_name: "LeesPalaceParser", street: "529 Bloor St W"),
+        cave:
+          insert(:venue, parser_module_name: "DanceCaveParser", street: "529 Bloor Street West")
+      }
+    end
+
+    defp duplicate_pair(lees, cave, lees_opts \\ []) do
+      date = upcoming_date()
+
+      {insert(:event, [venue: lees, title: "Mango Szn", date: date] ++ lees_opts),
+       insert(:event, venue: cave, title: "Mango Szn", date: date)}
+    end
+
+    test "soft-deletes the Lee's Palace listing and keeps The Dance Cave's", %{
+      lees: lees,
+      cave: cave
+    } do
+      {lees_event, cave_event} = duplicate_pair(lees, cave)
+      Curation.run()
+
+      assert [%{removed: removed, kept: kept}] = Curation.remove_redundant_room_listings()
+
+      assert removed.id == lees_event.id
+      assert kept.id == cave_event.id
+      assert Repo.reload!(lees_event).deleted_at
+      refute Repo.reload!(cave_event).deleted_at
+      assert [] == Curation.list_open_flags()
+    end
+
+    test "removes the Lee's Palace listing whichever event was crawled first", %{
+      lees: lees,
+      cave: cave
+    } do
+      date = upcoming_date()
+      cave_event = insert(:event, venue: cave, title: "Mango Szn", date: date)
+      lees_event = insert(:event, venue: lees, title: "Mango Szn", date: date)
+      Curation.run()
+
+      Curation.remove_redundant_room_listings()
+
+      assert Repo.reload!(lees_event).deleted_at
+      refute Repo.reload!(cave_event).deleted_at
+    end
+
+    test "reports a listing once when it duplicates two others", %{lees: lees, cave: cave} do
+      {lees_event, _cave_event} = duplicate_pair(lees, cave)
+      insert(:event, title: "Mango Szn", date: lees_event.date, venue: cave)
+      Curation.run()
+
+      assert [%{removed: removed}] = Curation.remove_redundant_room_listings()
+      assert removed.id == lees_event.id
+    end
+
+    test "leaves a restored listing alone", %{lees: lees, cave: cave} do
+      {lees_event, _cave_event} = duplicate_pair(lees, cave)
+      Curation.run()
+      Curation.remove_redundant_room_listings()
+
+      lees_event |> Repo.reload!() |> Ecto.Changeset.change(deleted_at: nil) |> Repo.update!()
+      Curation.run()
+
+      assert [] == Curation.remove_redundant_room_listings()
+      refute Repo.reload!(lees_event).deleted_at
+      assert [] == Curation.list_open_flags()
+    end
+
+    test "leaves a pair an admin has dismissed alone", %{lees: lees, cave: cave} do
+      {lees_event, _cave_event} = duplicate_pair(lees, cave)
+      Curation.run()
+      {:ok, 1} = Curation.dismiss_flags(admin(), lees_event.id)
+
+      assert [] == Curation.remove_redundant_room_listings()
+      refute Repo.reload!(lees_event).deleted_at
+    end
+
+    test "leaves a locked listing in the review queue", %{lees: lees, cave: cave} do
+      {lees_event, _cave_event} = duplicate_pair(lees, cave, locked_from_updates?: true)
+      Curation.run()
+
+      assert [] == Curation.remove_redundant_room_listings()
+      refute Repo.reload!(lees_event).deleted_at
+      assert [%EventFlag{}] = Curation.list_open_flags()
+    end
+
+    test "leaves different shows on the same date alone", %{lees: lees, cave: cave} do
+      date = upcoming_date()
+      lees_event = insert(:event, venue: lees, title: "Scott Helman", date: date)
+      insert(:event, venue: cave, title: "Soda Stereo Tribute", date: date)
+      Curation.run()
+
+      assert [] == Curation.remove_redundant_room_listings()
+      refute Repo.reload!(lees_event).deleted_at
+    end
+
+    test "leaves a Lee's Palace listing duplicated at Lee's Palace in the queue", %{lees: lees} do
+      date = upcoming_date()
+      older = insert(:event, venue: lees, title: "Mango Szn", date: date)
+      insert(:event, venue: lees, title: "Mango Szn", date: date)
+      Curation.run()
+
+      assert [] == Curation.remove_redundant_room_listings()
+      refute Repo.reload!(older).deleted_at
+      assert [%EventFlag{}] = Curation.list_open_flags()
+    end
+
+    test "leaves duplicates in other buildings in the queue" do
+      first = insert(:venue, parser_module_name: "RcmOneParser", street: "273 Bloor St W")
+      second = insert(:venue, parser_module_name: "RcmTwoParser", street: "273 Bloor Street West")
+      date = upcoming_date()
+      event = insert(:event, venue: first, title: "Mango Szn", date: date)
+      insert(:event, venue: second, title: "Mango Szn", date: date)
+      Curation.run()
+
+      assert [] == Curation.remove_redundant_room_listings()
+      refute Repo.reload!(event).deleted_at
+      assert [%EventFlag{}] = Curation.list_open_flags()
+    end
+  end
+
+  describe "remove_redundant_room_listings_quietly/0" do
+    test "returns what was removed" do
+      lees = insert(:venue, parser_module_name: "LeesPalaceParser", street: "529 Bloor St W")
+
+      cave =
+        insert(:venue, parser_module_name: "DanceCaveParser", street: "529 Bloor Street West")
+
+      date = upcoming_date()
+      insert(:event, venue: lees, title: "Mango Szn", date: date)
+      insert(:event, venue: cave, title: "Mango Szn", date: date)
+      Curation.run()
+
+      assert [%{removed: _removed, kept: _kept}] =
+               Curation.remove_redundant_room_listings_quietly()
+    end
+  end
+
   describe "dismiss_flags/2" do
     setup do
       event = insert(:event, title: "PRIVATE EVENT", date: upcoming_date())

@@ -10,7 +10,9 @@ defmodule MusicListingsSchema.EventFlag do
 
   A `:duplicate_event` flag describes a *pair*, and only one row is written for
   it: the flag hangs off the higher event id with `related_event_id` pointing at
-  the lower.  Either side can be deleted to resolve it.
+  the lower.  Either side can be deleted to resolve it.  A flag dismissed by
+  `MusicListings.Curation.remove_redundant_room_listings/0` has also had its
+  Lee's Palace listing soft-deleted.
   """
   use MusicListingsSchema.Schema
 

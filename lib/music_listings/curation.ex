@@ -17,10 +17,13 @@ defmodule MusicListings.Curation do
       upstairs at Lee's Palace and both parsers publish the same show, as "Slow
       Teeth w/ Waxlimbs" and "Slow Teeth with Waxlimbs".
 
-  Nothing here deletes anything.  `run/0` records what looks suspect, the crawl
-  summary email lists it, and an admin decides.  The rules are therefore tuned
-  for precision over recall: a queue that cries wolf stops being read, and a
-  missed listing costs far less than a deleted real one.
+  `run/0` deletes nothing.  It records what looks suspect, the crawl summary
+  email lists it, and an admin decides.  The rules are therefore tuned for
+  precision over recall: a queue that cries wolf stops being read, and a missed
+  listing costs far less than a deleted real one.
+
+  There is one deliberate exception, `remove_redundant_room_listings/0`, for the
+  one pair of venues where the admin's decision is always the same.
 
   ## Why flags are persisted
 
@@ -31,6 +34,7 @@ defmodule MusicListings.Curation do
   """
   import Ecto.Query
 
+  alias Ecto.Changeset
   alias MusicListings.Accounts.User
   alias MusicListings.Repo
   alias MusicListings.TitleSimilarity
@@ -58,7 +62,16 @@ defmodule MusicListings.Curation do
   # publishing a wrong ticket link, this one only costs a glance.
   @duplicate_threshold 0.85
 
+  # Lee's Palace's calendar lists both rooms, and The Dance Cave's Live Nation
+  # listing repeats the upstairs shows.  Of the pair the Live Nation row is the
+  # one to keep, as Lee's calendar has no show times.  Neither source can simply
+  # be dropped: each has shows the other doesn't.  Parser module names rather than
+  # ids, as venue ids differ between environments.
+  @redundant_room_parser "LeesPalaceParser"
+  @authoritative_room_parser "DanceCaveParser"
+
   @type flag_counts :: %{non_event_title: non_neg_integer(), duplicate_event: non_neg_integer()}
+  @type room_listing_removal :: %{removed: Event.t(), kept: Event.t()}
 
   @doc """
   Recomputes flags over all upcoming events and reconciles them with what is
@@ -100,6 +113,40 @@ defmodule MusicListings.Curation do
     error ->
       Logger.error("Curation run crashed: #{inspect(error)}")
       {:error, error}
+  end
+
+  @doc """
+  Soft-deletes the Lee's Palace side of each open Lee's Palace / Dance Cave
+  duplicate flag, and returns what it removed so that the crawl report can list
+  it.  Works from the flags `run/0` raised, so run that first.
+
+  The flag is dismissed along with the delete.  Only open flags are acted on, so
+  a listing restored by hand stays restored, and a pair an admin has already
+  dismissed is left alone.  A listing locked from updates has been edited by hand,
+  so it stays in the review queue for an admin to judge.
+  """
+  @spec remove_redundant_room_listings :: [room_listing_removal()]
+  def remove_redundant_room_listings do
+    removals = Enum.flat_map(list_open_flags(), &room_listing_removals/1)
+
+    Repo.transaction(fn -> Enum.each(removals, &remove_room_listing/1) end)
+
+    removals
+    |> Enum.uniq_by(& &1.removed.id)
+    |> Enum.map(&Map.take(&1, [:removed, :kept]))
+  end
+
+  @doc """
+  Removes redundant listings, logging rather than raising on failure, for the
+  same reason as `run_quietly/0`.
+  """
+  @spec remove_redundant_room_listings_quietly :: [room_listing_removal()]
+  def remove_redundant_room_listings_quietly do
+    remove_redundant_room_listings()
+  rescue
+    error ->
+      Logger.error("Removing redundant room listings crashed: #{inspect(error)}")
+      []
   end
 
   @doc """
@@ -158,6 +205,32 @@ defmodule MusicListings.Curation do
   end
 
   def dismiss_flags(_user, _event_id), do: {:error, :not_allowed}
+
+  # The flag hangs off the higher id, so either venue can be on either side.
+  defp room_listing_removals(flag) do
+    room_listing_removal(flag, flag.event, flag.related_event) ++
+      room_listing_removal(flag, flag.related_event, flag.event)
+  end
+
+  defp room_listing_removal(
+         flag,
+         %Event{
+           venue: %{parser_module_name: @redundant_room_parser},
+           locked_from_updates?: false
+         } = removed,
+         %Event{venue: %{parser_module_name: @authoritative_room_parser}} = kept
+       ) do
+    [%{flag: flag, removed: removed, kept: kept}]
+  end
+
+  defp room_listing_removal(_flag, _candidate, _other), do: []
+
+  defp remove_room_listing(%{flag: flag, removed: removed}) do
+    now = DateHelpers.now()
+
+    removed |> Changeset.change(deleted_at: now) |> Repo.update!()
+    flag |> Changeset.change(dismissed_at: now) |> Repo.update!()
+  end
 
   # A flag is identified by the triple the unique indexes are built on.
   defp key(%{event_id: event_id, type: type, related_event_id: related_event_id}) do

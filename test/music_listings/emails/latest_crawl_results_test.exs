@@ -187,6 +187,33 @@ defmodule MusicListings.Emails.LatestCrawlResultsTest do
     end
   end
 
+  describe "new_email/2 - removed listings" do
+    test "lists what curation removed" do
+      lees = insert(:venue, name: "Lees Test Room")
+      cave = insert(:venue, name: "Cave Test Room")
+      removed = insert(:event, venue: lees, title: "Removed Mango Szn", date: ~D[2026-12-11])
+      kept = insert(:event, venue: cave, title: "Kept Mango Szn", date: ~D[2026-12-11])
+
+      email =
+        []
+        |> crawl_summary()
+        |> LatestCrawlResults.new_email(removed_listings: [%{removed: removed, kept: kept}])
+
+      assert email.html_body =~ "Removed automatically"
+      assert email.html_body =~ "Removed Mango Szn"
+      assert email.html_body =~ "##{removed.id}"
+      assert email.html_body =~ "Lees Test Room"
+      assert email.html_body =~ "Kept Mango Szn"
+      assert email.html_body =~ "Cave Test Room"
+    end
+
+    test "omits the section when nothing was removed" do
+      email = [] |> crawl_summary() |> LatestCrawlResults.new_email()
+
+      refute email.html_body =~ "Removed automatically"
+    end
+  end
+
   describe "new_email/2 - title" do
     test "defaults to the nightly report" do
       email = [] |> crawl_summary() |> LatestCrawlResults.new_email()

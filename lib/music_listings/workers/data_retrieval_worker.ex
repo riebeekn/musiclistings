@@ -27,9 +27,10 @@ defmodule MusicListings.Workers.DataRetrievalWorker do
         # return value is ignored - the email reads the open flags itself, so a
         # failure here still reports the standing queue.
         Curation.run_quietly()
+        removed_listings = Curation.remove_redundant_room_listings_quietly()
 
         crawl_summary
-        |> LatestCrawlResults.new_email()
+        |> LatestCrawlResults.new_email(removed_listings: removed_listings)
         |> Mailer.deliver()
 
       _error ->

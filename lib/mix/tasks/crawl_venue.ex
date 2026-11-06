@@ -72,9 +72,13 @@ defmodule Mix.Tasks.CrawlVenue do
   # just wrote, then the report is emailed.
   defp send_report(crawl_summary) do
     Curation.run_quietly()
+    removed_listings = Curation.remove_redundant_room_listings_quietly()
 
     email =
-      LatestCrawlResults.new_email(crawl_summary, title: "Local Crawl Report")
+      LatestCrawlResults.new_email(crawl_summary,
+        title: "Local Crawl Report",
+        removed_listings: removed_listings
+      )
 
     case Mailer.deliver(email) do
       {:ok, _metadata} ->

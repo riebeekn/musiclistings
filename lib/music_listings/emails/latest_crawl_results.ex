@@ -30,6 +30,8 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       render without touching the database.
     * `:review_flags` - the open curation flags.  Read from the database unless
       passed in.
+    * `:removed_listings` - the listings curation removed after this crawl, from
+      `Curation.remove_redundant_room_listings/0`.  Defaults to none.
   """
   def new_email(crawl_summary, opts \\ []) do
     crawl_summary =
@@ -41,6 +43,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       Keyword.get(opts, :added_events) || Events.list_events_added_during_crawl(crawl_summary)
 
     review_flags = Keyword.get(opts, :review_flags) || Curation.list_open_flags()
+    removed_listings = Keyword.get(opts, :removed_listings, [])
 
     new()
     |> to_site_admin()
@@ -51,7 +54,8 @@ defmodule MusicListings.Emails.LatestCrawlResults do
         title: title,
         crawl_summary: crawl_summary,
         added_events: added_events,
-        review_flags: review_flags
+        review_flags: review_flags,
+        removed_listings: removed_listings
       })
     )
   end
@@ -224,6 +228,27 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       </.table>
     <% end %>
 
+    <%= if @removed_listings != [] do %>
+      <.h2>Removed automatically — listed in both rooms ({Enum.count(@removed_listings)})</.h2>
+      <.muted>
+        The same show was listed at both Lee's Palace and The Dance Cave, so the Lee's Palace
+        listing was soft-deleted. If one is wrong, clear its deleted_at and it stays restored.
+      </.muted>
+      <.table rows={@removed_listings}>
+        <:col :let={listing} label="Date">
+          <span style="white-space:nowrap;">{DateHelpers.format_date(listing.removed.date)}</span>
+        </:col>
+        <:col :let={listing} label="Removed">
+          <span style="color:#a8a49a;">{listing.removed.venue.name} · #{listing.removed.id}</span><br />
+          <span style="color:#ece9e0;">{listing.removed.title}</span>
+        </:col>
+        <:col :let={listing} label="Kept">
+          <span style="color:#a8a49a;">{listing.kept.venue.name}</span><br />
+          <.event_link event={listing.kept} />
+        </:col>
+      </.table>
+    <% end %>
+
     <%= if @added_event_count > 0 do %>
       <.h2>New events ({@added_event_count})</.h2>
       <.table rows={@added_events}>
@@ -341,12 +366,21 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       )
     ]
 
+    # listings curation removed after this crawl
+    removed_listings = [
+      %{
+        removed: build_event(v1, "Mango Szn", ~D[2026-09-11], 105),
+        kept: build_event(v2, "Mango Szn", ~D[2026-09-11], 106)
+      }
+    ]
+
     build_crawl_summary()
     |> Map.put(:crawl_errors, [ce1, ce2, ce3, ce4, ce5, ce6])
     |> Map.put(:venue_crawl_summaries, [vcs1, vcs2, vcs3, vcs4])
     |> new_email(
       added_events: added_events,
-      review_flags: review_flags
+      review_flags: review_flags,
+      removed_listings: removed_listings
     )
   end
 
