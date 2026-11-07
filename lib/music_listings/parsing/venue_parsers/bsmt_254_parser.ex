@@ -151,8 +151,8 @@ defmodule MusicListings.Parsing.VenueParsers.Bsmt254Parser do
   defp fetch_detail_info(_no_details_url), do: :error
 
   defp extract_detail_info(body) do
-    case Meeseeks.parse(body) do
-      %Meeseeks.Document{} = document ->
+    case Selectors.parse(body) do
+      {:ok, document} ->
         meta = event_meta(document)
 
         %{
@@ -161,7 +161,7 @@ defmodule MusicListings.Parsing.VenueParsers.Bsmt254Parser do
           price: meta |> Enum.at(1) |> extract_price()
         }
 
-      _unparseable ->
+      {:error, _unparseable} ->
         :error
     end
   end

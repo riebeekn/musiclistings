@@ -40,7 +40,7 @@ defmodule MusicListings.Parsing.VenueParsers.OnlyCafeParser do
     paragraphs =
       body
       |> Selectors.all_matches(css("p.zfr3Q"))
-      |> Enum.map(&Meeseeks.text/1)
+      |> Enum.map(&Selectors.text/1)
       |> Enum.map(&String.trim/1)
       |> Enum.reject(&(&1 == ""))
 

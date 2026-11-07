@@ -305,6 +305,9 @@ Check a flag once per request and reuse the boolean — don't call `FunWithFlags
 2. **Memory Management**: Crawling builds payloads in memory - be mindful of venue count
 3. **HTTP Client**: Configurable via `config :music_listings, :http_client`
 4. **LiveView Hooks**: Venue filter persistence uses JavaScript hooks in `assets/js/app.js`
+5. **HTML in Parsers**: Parsers never call Meeseeks directly - no `Meeseeks.parse/one/all/text/data`,
+   `Meeseeks.Result`, or matching on `%Meeseeks.Document{}`. Use `MusicListings.Parsing.Selectors`
+   (add a function there if it's missing one), importing `Meeseeks.CSS` only for `css/1`.
 
 ## Development Workflow
 

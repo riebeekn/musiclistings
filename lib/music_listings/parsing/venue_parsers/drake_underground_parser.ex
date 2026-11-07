@@ -134,16 +134,15 @@ defmodule MusicListings.Parsing.VenueParsers.DrakeUndergroundParser do
 
   defp fetch_detail_info(event) do
     with {:ok, %HttpClient.Response{status: 200, body: body}} <- HttpClient.get(event["link"]),
-         {:ok, anchor_date} <- published_on(event) do
-      extract_detail_info(body, anchor_date)
+         {:ok, anchor_date} <- published_on(event),
+         {:ok, document} <- Selectors.parse(body) do
+      extract_detail_info(document, body, anchor_date)
     else
       _error -> :error
     end
   end
 
-  defp extract_detail_info(body, anchor_date) do
-    document = Meeseeks.parse(body)
-
+  defp extract_detail_info(document, body, anchor_date) do
     document
     |> date_and_time_from_label(anchor_date)
     |> case do

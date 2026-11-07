@@ -1,0 +1,19 @@
+defmodule MusicListings.Parsing.SelectorsTest do
+  use ExUnit.Case, async: true
+
+  import Meeseeks.CSS
+
+  alias MusicListings.Parsing.Selectors
+
+  describe "parse/1" do
+    test "returns a document that can be queried" do
+      assert {:ok, document} = Selectors.parse("<p class=\"title\">Some Band</p>")
+
+      assert "Some Band" == document |> Selectors.match_one(css(".title")) |> Selectors.text()
+    end
+
+    test "returns an error for input that can't be parsed" do
+      assert {:error, _reason} = Selectors.parse(<<0xFF, 0xFE>>)
+    end
+  end
+end

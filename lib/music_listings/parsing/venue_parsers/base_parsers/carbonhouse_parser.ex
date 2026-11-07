@@ -213,13 +213,13 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.CarbonhouseParser do
   defp fetch_showings(_no_details_url), do: []
 
   defp parse_showings(body) do
-    case body |> ParseHelpers.clean_html() |> Meeseeks.parse() do
-      %Meeseeks.Document{} = document ->
+    case body |> ParseHelpers.clean_html() |> Selectors.parse() do
+      {:ok, document} ->
         document
         |> Selectors.all_matches(css(".event_showings .listItem"))
         |> Enum.flat_map(&showing/1)
 
-      _unparseable ->
+      {:error, _unparseable} ->
         []
     end
   end

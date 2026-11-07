@@ -224,7 +224,6 @@ defmodule MusicListings.Parsing.VenueParsers.BowlParser do
     |> String.split(~r/<br\s*\/?>/i)
     |> Enum.map(fn line ->
       line
-      |> Meeseeks.parse()
       |> Selectors.match_one(css("body"))
       |> Selectors.text()
       |> String.trim()

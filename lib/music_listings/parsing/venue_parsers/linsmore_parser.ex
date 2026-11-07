@@ -30,7 +30,7 @@ defmodule MusicListings.Parsing.VenueParsers.LinsmoreParser do
     script_content =
       body
       |> Selectors.match_one(css(".entry-content script"))
-      |> Meeseeks.data()
+      |> Selectors.data()
 
     regex_1 = ~r/events:\s*\[(.*)\]/s
 

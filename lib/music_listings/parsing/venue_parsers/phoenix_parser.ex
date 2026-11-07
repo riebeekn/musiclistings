@@ -147,11 +147,11 @@ defmodule MusicListings.Parsing.VenueParsers.PhoenixParser do
   defp fetch_detail_info(_no_details_url), do: :error
 
   defp extract_detail_info(body) do
-    case Meeseeks.parse(body) do
-      %Meeseeks.Document{} = document ->
+    case Selectors.parse(body) do
+      {:ok, document} ->
         %{ticket_url: extract_ticket_url(document), price: extract_price(document)}
 
-      _unparseable ->
+      {:error, _unparseable} ->
         :error
     end
   end

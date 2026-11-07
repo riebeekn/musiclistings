@@ -1,7 +1,20 @@
 defmodule MusicListings.Parsing.Selectors do
   @moduledoc """
-  Selector helpers
+  Selector helpers. Parsers go through this module rather than calling Meeseeks directly,
+  importing `Meeseeks.CSS` only for `css/1`.
   """
+
+  @doc """
+  Parses HTML into a document, for a page that's queried more than once. The other functions also
+  take raw HTML, parsing it on each call.
+  """
+  def parse(html) do
+    case Meeseeks.parse(html) do
+      {:error, _reason} = error -> error
+      document -> {:ok, document}
+    end
+  end
+
   def all_matches(content, selector) do
     Meeseeks.all(content, selector)
   end

@@ -45,7 +45,7 @@ defmodule MusicListings.Parsing.VenueParsers.SauceParser do
     text =
       body
       |> Selectors.match_one(css("body"))
-      |> Meeseeks.text()
+      |> Selectors.text()
       |> String.replace(" ", " ")
       |> String.replace(~r/\s+/, " ")
 
