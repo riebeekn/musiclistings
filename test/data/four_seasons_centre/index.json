@@ -1,0 +1,1724 @@
+[
+  {
+    "ID": 574,
+    "Link": "/tickets/2627-season/the-turn-of-the-screw",
+    "ProductionSeasonNumber": 2538,
+    "CustomBookingStatus": null,
+    "CustomBookingLink": null,
+    "Prefix": null,
+    "Title": "The Turn of the Screw",
+    "Suffix": "Benjamin Britten",
+    "DateDescription": "January 23 - February 17, 2027",
+    "PrimaryColor": "d9eaaf",
+    "SecondaryColor": "0a5864",
+    "StartDate": "2027-01-23T19:00:00-05:00",
+    "EndDate": "2027-02-17T22:00:00-05:00",
+    "Summary": "Never before seen on the COC mainstage, this season marks the arrival of one of the most chilling and psychologically charged operas of the 20th century",
+    "ListImage": {
+      "PublicID": "COC2627_Social_TurnOfTheScrew_1920x1080",
+      "W170": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_142,w_170/f_auto/q_auto/v1770227736/COC2627_Social_TurnOfTheScrew_1920x1080?_a=BAAASyDQ",
+      "W340": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_283,w_340/f_auto/q_auto/v1770227736/COC2627_Social_TurnOfTheScrew_1920x1080?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "COC2627_Social_TurnOfTheScrew_1920x1080"
+    },
+    "PopupImage": {
+      "PublicID": "COC2627_Social_TurnOfTheScrew_1920x1080",
+      "W250": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_150,w_250/f_auto/q_auto/v1770227736/COC2627_Social_TurnOfTheScrew_1920x1080?_a=BAAASyDQ",
+      "W300": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_180,w_300/f_auto/q_auto/v1770227736/COC2627_Social_TurnOfTheScrew_1920x1080?_a=BAAASyDQ",
+      "W500": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_300,w_500/f_auto/q_auto/v1770227736/COC2627_Social_TurnOfTheScrew_1920x1080?_a=BAAASyDQ",
+      "W1000": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_600,w_1000/f_auto/q_auto/v1770227736/COC2627_Social_TurnOfTheScrew_1920x1080?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "COC2627_Social_TurnOfTheScrew_1920x1080"
+    },
+    "Venue": {
+      "ID": 74,
+      "Title": "Four Seasons Centre for the Performing Arts",
+      "AddressLineOne": "145 Queen Street West",
+      "AddressLineTwo": "Toronto, ON M5H 4G1",
+      "AddressLink": "https://maps.app.goo.gl/Pg6oT797YJonEimi6",
+      "Image": {},
+      "Artwork": null,
+      "Link": "https://www.coc.ca/your-visit/our-buildings/four-seasons-centre-for-the-performing-arts"
+    },
+    "IsDuplicate": 0,
+    "AlternativeFCS": false,
+    "Performances": [
+      {
+        "PerformanceNumber": 2539,
+        "PerformanceDate": "2027-01-23T19:30:00-05:00",
+        "Availability": 867,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-15T00:00:00-04:00",
+        "OffSaleDate": "2027-01-23T19:45:00-05:00",
+        "ProductionTypes": [
+          {
+            "ID": 2,
+            "Title": "Main Stage"
+          }
+        ],
+        "Keywords": [
+          {
+            "ID": 83,
+            "Title": "Main Stage"
+          }
+        ]
+      },
+      {
+        "PerformanceNumber": 2547,
+        "PerformanceDate": "2027-01-30T16:30:00-05:00",
+        "Availability": 889,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-15T00:00:00-04:00",
+        "OffSaleDate": "2027-01-30T16:45:00-05:00",
+        "ProductionTypes": [
+          {
+            "ID": 2,
+            "Title": "Main Stage"
+          }
+        ],
+        "Keywords": [
+          {
+            "ID": 83,
+            "Title": "Main Stage"
+          }
+        ]
+      },
+      {
+        "PerformanceNumber": 2548,
+        "PerformanceDate": "2027-02-05T19:30:00-05:00",
+        "Availability": 1063,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-15T00:00:00-04:00",
+        "OffSaleDate": "2027-02-05T19:45:00-05:00",
+        "ProductionTypes": [
+          {
+            "ID": 2,
+            "Title": "Main Stage"
+          }
+        ],
+        "Keywords": [
+          {
+            "ID": 83,
+            "Title": "Main Stage"
+          }
+        ]
+      },
+      {
+        "PerformanceNumber": 2549,
+        "PerformanceDate": "2027-02-07T14:00:00-05:00",
+        "Availability": 777,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-15T00:00:00-04:00",
+        "OffSaleDate": "2027-02-07T14:15:00-05:00",
+        "ProductionTypes": [
+          {
+            "ID": 2,
+            "Title": "Main Stage"
+          }
+        ],
+        "Keywords": [
+          {
+            "ID": 83,
+            "Title": "Main Stage"
+          }
+        ]
+      },
+      {
+        "PerformanceNumber": 2550,
+        "PerformanceDate": "2027-02-09T19:30:00-05:00",
+        "Availability": 1428,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-15T00:00:00-04:00",
+        "OffSaleDate": "2027-02-09T19:45:00-05:00",
+        "ProductionTypes": [
+          {
+            "ID": 2,
+            "Title": "Main Stage"
+          }
+        ],
+        "Keywords": [
+          {
+            "ID": 83,
+            "Title": "Main Stage"
+          }
+        ]
+      },
+      {
+        "PerformanceNumber": 2551,
+        "PerformanceDate": "2027-02-11T19:30:00-05:00",
+        "Availability": 1138,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-15T00:00:00-04:00",
+        "OffSaleDate": "2027-02-11T19:45:00-05:00",
+        "ProductionTypes": [
+          {
+            "ID": 2,
+            "Title": "Main Stage"
+          }
+        ],
+        "Keywords": [
+          {
+            "ID": 83,
+            "Title": "Main Stage"
+          }
+        ]
+      },
+      {
+        "PerformanceNumber": 2552,
+        "PerformanceDate": "2027-02-17T19:30:00-05:00",
+        "Availability": 1200,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-15T00:00:00-04:00",
+        "OffSaleDate": "2027-02-17T19:45:00-05:00",
+        "ProductionTypes": [
+          {
+            "ID": 2,
+            "Title": "Main Stage"
+          }
+        ],
+        "Keywords": [
+          {
+            "ID": 83,
+            "Title": "Main Stage"
+          }
+        ]
+      },
+      {
+        "PerformanceNumber": 2630,
+        "PerformanceDate": "2027-01-19T19:00:00-05:00",
+        "Availability": 1348,
+        "IsOnSale": false,
+        "OnSaleDate": "0001-01-01T00:00:00-05:00",
+        "OffSaleDate": "0001-01-01T00:00:00-05:00",
+        "ProductionTypes": [
+          {
+            "ID": 4,
+            "Title": "Dress Rehearsal"
+          }
+        ],
+        "Keywords": []
+      }
+    ]
+  },
+  {
+    "ID": 575,
+    "Link": "/tickets/2627-season/ariadne-auf-naxos",
+    "ProductionSeasonNumber": 2555,
+    "CustomBookingStatus": null,
+    "CustomBookingLink": null,
+    "Prefix": null,
+    "Title": "Ariadne auf Naxos",
+    "Suffix": "Richard Strauss",
+    "DateDescription": "February 4 - 20, 2027",
+    "PrimaryColor": "ffca43",
+    "SecondaryColor": "0154ad",
+    "StartDate": "2027-02-04T19:00:00-05:00",
+    "EndDate": "2027-02-20T22:00:00-05:00",
+    "Summary": "A joyous, touching collision of tragedy and comedy, revealing both the absurdity and the beauty of making art.\r\n",
+    "ListImage": {
+      "PublicID": "COC2627_Social_AriadneAufNaxos_1920x1080",
+      "W170": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_142,w_170/f_auto/q_auto/v1770227736/COC2627_Social_AriadneAufNaxos_1920x1080?_a=BAAASyDQ",
+      "W340": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_283,w_340/f_auto/q_auto/v1770227736/COC2627_Social_AriadneAufNaxos_1920x1080?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "COC2627_Social_AriadneAufNaxos_1920x1080"
+    },
+    "PopupImage": {
+      "PublicID": "COC2627_Social_AriadneAufNaxos_1920x1080",
+      "W250": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_150,w_250/f_auto/q_auto/v1770227736/COC2627_Social_AriadneAufNaxos_1920x1080?_a=BAAASyDQ",
+      "W300": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_180,w_300/f_auto/q_auto/v1770227736/COC2627_Social_AriadneAufNaxos_1920x1080?_a=BAAASyDQ",
+      "W500": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_300,w_500/f_auto/q_auto/v1770227736/COC2627_Social_AriadneAufNaxos_1920x1080?_a=BAAASyDQ",
+      "W1000": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_600,w_1000/f_auto/q_auto/v1770227736/COC2627_Social_AriadneAufNaxos_1920x1080?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "COC2627_Social_AriadneAufNaxos_1920x1080"
+    },
+    "Venue": {
+      "ID": 74,
+      "Title": "Four Seasons Centre for the Performing Arts",
+      "AddressLineOne": "145 Queen Street West",
+      "AddressLineTwo": "Toronto, ON M5H 4G1",
+      "AddressLink": "https://maps.app.goo.gl/Pg6oT797YJonEimi6",
+      "Image": {},
+      "Artwork": null,
+      "Link": "https://www.coc.ca/your-visit/our-buildings/four-seasons-centre-for-the-performing-arts"
+    },
+    "IsDuplicate": 0,
+    "AlternativeFCS": false,
+    "Performances": [
+      {
+        "PerformanceNumber": 2556,
+        "PerformanceDate": "2027-02-04T19:30:00-05:00",
+        "Availability": 1010,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-15T00:00:00-04:00",
+        "OffSaleDate": "2027-02-04T19:45:00-05:00",
+        "ProductionTypes": [
+          {
+            "ID": 2,
+            "Title": "Main Stage"
+          }
+        ],
+        "Keywords": [
+          {
+            "ID": 83,
+            "Title": "Main Stage"
+          }
+        ]
+      },
+      {
+        "PerformanceNumber": 2557,
+        "PerformanceDate": "2027-02-06T19:30:00-05:00",
+        "Availability": 911,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-15T00:00:00-04:00",
+        "OffSaleDate": "2027-02-06T19:45:00-05:00",
+        "ProductionTypes": [
+          {
+            "ID": 2,
+            "Title": "Main Stage"
+          }
+        ],
+        "Keywords": [
+          {
+            "ID": 83,
+            "Title": "Main Stage"
+          }
+        ]
+      },
+      {
+        "PerformanceNumber": 2558,
+        "PerformanceDate": "2027-02-10T19:30:00-05:00",
+        "Availability": 1171,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-15T00:00:00-04:00",
+        "OffSaleDate": "2027-02-10T19:45:00-05:00",
+        "ProductionTypes": [
+          {
+            "ID": 2,
+            "Title": "Main Stage"
+          }
+        ],
+        "Keywords": [
+          {
+            "ID": 83,
+            "Title": "Main Stage"
+          }
+        ]
+      },
+      {
+        "PerformanceNumber": 2559,
+        "PerformanceDate": "2027-02-12T19:30:00-05:00",
+        "Availability": 1078,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-15T00:00:00-04:00",
+        "OffSaleDate": "2027-02-12T19:45:00-05:00",
+        "ProductionTypes": [
+          {
+            "ID": 2,
+            "Title": "Main Stage"
+          }
+        ],
+        "Keywords": [
+          {
+            "ID": 83,
+            "Title": "Main Stage"
+          }
+        ]
+      },
+      {
+        "PerformanceNumber": 2560,
+        "PerformanceDate": "2027-02-14T14:00:00-05:00",
+        "Availability": 725,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-15T00:00:00-04:00",
+        "OffSaleDate": "2027-02-14T14:15:00-05:00",
+        "ProductionTypes": [
+          {
+            "ID": 2,
+            "Title": "Main Stage"
+          }
+        ],
+        "Keywords": [
+          {
+            "ID": 83,
+            "Title": "Main Stage"
+          }
+        ]
+      },
+      {
+        "PerformanceNumber": 2561,
+        "PerformanceDate": "2027-02-16T19:30:00-05:00",
+        "Availability": 1387,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-15T00:00:00-04:00",
+        "OffSaleDate": "2027-02-16T19:45:00-05:00",
+        "ProductionTypes": [
+          {
+            "ID": 2,
+            "Title": "Main Stage"
+          }
+        ],
+        "Keywords": [
+          {
+            "ID": 83,
+            "Title": "Main Stage"
+          }
+        ]
+      },
+      {
+        "PerformanceNumber": 2562,
+        "PerformanceDate": "2027-02-20T16:30:00-05:00",
+        "Availability": 936,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-15T00:00:00-04:00",
+        "OffSaleDate": "2027-02-20T16:45:00-05:00",
+        "ProductionTypes": [
+          {
+            "ID": 2,
+            "Title": "Main Stage"
+          }
+        ],
+        "Keywords": [
+          {
+            "ID": 83,
+            "Title": "Main Stage"
+          }
+        ]
+      },
+      {
+        "PerformanceNumber": 2631,
+        "PerformanceDate": "2027-02-02T19:00:00-05:00",
+        "Availability": 1173,
+        "IsOnSale": false,
+        "OnSaleDate": "0001-01-01T00:00:00-05:00",
+        "OffSaleDate": "0001-01-01T00:00:00-05:00",
+        "ProductionTypes": [
+          {
+            "ID": 4,
+            "Title": "Dress Rehearsal"
+          }
+        ],
+        "Keywords": []
+      },
+      {
+        "PerformanceNumber": 2695,
+        "PerformanceDate": "2027-02-01T19:00:00-05:00",
+        "Availability": 154,
+        "IsOnSale": false,
+        "OnSaleDate": "0001-01-01T00:00:00-05:00",
+        "OffSaleDate": "0001-01-01T00:00:00-05:00",
+        "ProductionTypes": [
+          {
+            "ID": 5,
+            "Title": "Working Rehearsal"
+          }
+        ],
+        "Keywords": []
+      }
+    ]
+  },
+  {
+    "ID": 576,
+    "Link": "/tickets/2627-season/empire-of-wild",
+    "ProductionSeasonNumber": 2565,
+    "CustomBookingStatus": null,
+    "CustomBookingLink": null,
+    "Prefix": null,
+    "Title": "Empire of Wild",
+    "Suffix": "Ian Cusson/Cherie Dimaline",
+    "DateDescription": "May 1 - 21, 2027",
+    "PrimaryColor": "ffa256",
+    "SecondaryColor": "4e1729",
+    "StartDate": "2027-05-01T19:00:00-04:00",
+    "EndDate": "2027-05-21T22:00:00-04:00",
+    "Summary": "A fusion of myth, mystery, and raw human emotion, this new Canadian opera plunges audiences into a world where love, loss, and legend collide.",
+    "ListImage": {
+      "PublicID": "COC2627_Social_EmpireOfWild_1920x1080",
+      "W170": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_142,w_170/f_auto/q_auto/v1770227736/COC2627_Social_EmpireOfWild_1920x1080?_a=BAAASyDQ",
+      "W340": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_283,w_340/f_auto/q_auto/v1770227736/COC2627_Social_EmpireOfWild_1920x1080?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "COC2627_Social_EmpireOfWild_1920x1080"
+    },
+    "PopupImage": {
+      "PublicID": "COC2627_Social_EmpireOfWild_1920x1080",
+      "W250": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_150,w_250/f_auto/q_auto/v1770227736/COC2627_Social_EmpireOfWild_1920x1080?_a=BAAASyDQ",
+      "W300": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_180,w_300/f_auto/q_auto/v1770227736/COC2627_Social_EmpireOfWild_1920x1080?_a=BAAASyDQ",
+      "W500": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_300,w_500/f_auto/q_auto/v1770227736/COC2627_Social_EmpireOfWild_1920x1080?_a=BAAASyDQ",
+      "W1000": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_600,w_1000/f_auto/q_auto/v1770227736/COC2627_Social_EmpireOfWild_1920x1080?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "COC2627_Social_EmpireOfWild_1920x1080"
+    },
+    "Venue": {
+      "ID": 74,
+      "Title": "Four Seasons Centre for the Performing Arts",
+      "AddressLineOne": "145 Queen Street West",
+      "AddressLineTwo": "Toronto, ON M5H 4G1",
+      "AddressLink": "https://maps.app.goo.gl/Pg6oT797YJonEimi6",
+      "Image": {},
+      "Artwork": null,
+      "Link": "https://www.coc.ca/your-visit/our-buildings/four-seasons-centre-for-the-performing-arts"
+    },
+    "IsDuplicate": 0,
+    "AlternativeFCS": false,
+    "Performances": [
+      {
+        "PerformanceNumber": 2566,
+        "PerformanceDate": "2027-05-01T19:30:00-04:00",
+        "Availability": 878,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-15T00:00:00-04:00",
+        "OffSaleDate": "2027-05-01T19:45:00-04:00",
+        "ProductionTypes": [
+          {
+            "ID": 2,
+            "Title": "Main Stage"
+          }
+        ],
+        "Keywords": [
+          {
+            "ID": 83,
+            "Title": "Main Stage"
+          }
+        ]
+      },
+      {
+        "PerformanceNumber": 2567,
+        "PerformanceDate": "2027-05-09T14:00:00-04:00",
+        "Availability": 915,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-15T00:00:00-04:00",
+        "OffSaleDate": "2027-05-09T14:15:00-04:00",
+        "ProductionTypes": [
+          {
+            "ID": 2,
+            "Title": "Main Stage"
+          }
+        ],
+        "Keywords": [
+          {
+            "ID": 83,
+            "Title": "Main Stage"
+          }
+        ]
+      },
+      {
+        "PerformanceNumber": 2568,
+        "PerformanceDate": "2027-05-11T19:30:00-04:00",
+        "Availability": 1436,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-15T00:00:00-04:00",
+        "OffSaleDate": "2027-05-11T19:45:00-04:00",
+        "ProductionTypes": [
+          {
+            "ID": 2,
+            "Title": "Main Stage"
+          }
+        ],
+        "Keywords": [
+          {
+            "ID": 83,
+            "Title": "Main Stage"
+          }
+        ]
+      },
+      {
+        "PerformanceNumber": 2569,
+        "PerformanceDate": "2027-05-13T19:30:00-04:00",
+        "Availability": 1180,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-15T00:00:00-04:00",
+        "OffSaleDate": "2027-05-13T19:45:00-04:00",
+        "ProductionTypes": [
+          {
+            "ID": 2,
+            "Title": "Main Stage"
+          }
+        ],
+        "Keywords": [
+          {
+            "ID": 83,
+            "Title": "Main Stage"
+          }
+        ]
+      },
+      {
+        "PerformanceNumber": 2570,
+        "PerformanceDate": "2027-05-15T16:30:00-04:00",
+        "Availability": 1036,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-15T00:00:00-04:00",
+        "OffSaleDate": "2027-05-15T16:45:00-04:00",
+        "ProductionTypes": [
+          {
+            "ID": 2,
+            "Title": "Main Stage"
+          }
+        ],
+        "Keywords": [
+          {
+            "ID": 83,
+            "Title": "Main Stage"
+          }
+        ]
+      },
+      {
+        "PerformanceNumber": 2571,
+        "PerformanceDate": "2027-05-19T19:30:00-04:00",
+        "Availability": 1261,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-15T00:00:00-04:00",
+        "OffSaleDate": "2027-05-19T19:45:00-04:00",
+        "ProductionTypes": [
+          {
+            "ID": 2,
+            "Title": "Main Stage"
+          }
+        ],
+        "Keywords": [
+          {
+            "ID": 83,
+            "Title": "Main Stage"
+          }
+        ]
+      },
+      {
+        "PerformanceNumber": 2572,
+        "PerformanceDate": "2027-05-21T19:30:00-04:00",
+        "Availability": 1185,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-15T00:00:00-04:00",
+        "OffSaleDate": "2027-05-21T19:45:00-04:00",
+        "ProductionTypes": [
+          {
+            "ID": 2,
+            "Title": "Main Stage"
+          }
+        ],
+        "Keywords": [
+          {
+            "ID": 83,
+            "Title": "Main Stage"
+          }
+        ]
+      },
+      {
+        "PerformanceNumber": 2632,
+        "PerformanceDate": "2027-04-26T19:00:00-04:00",
+        "Availability": 1450,
+        "IsOnSale": false,
+        "OnSaleDate": "0001-01-01T00:00:00-05:00",
+        "OffSaleDate": "0001-01-01T00:00:00-05:00",
+        "ProductionTypes": [
+          {
+            "ID": 4,
+            "Title": "Dress Rehearsal"
+          }
+        ],
+        "Keywords": []
+      },
+      {
+        "PerformanceNumber": 2696,
+        "PerformanceDate": "2027-04-24T14:30:00-04:00",
+        "Availability": 176,
+        "IsOnSale": false,
+        "OnSaleDate": "0001-01-01T00:00:00-05:00",
+        "OffSaleDate": "0001-01-01T00:00:00-05:00",
+        "ProductionTypes": [
+          {
+            "ID": 5,
+            "Title": "Working Rehearsal"
+          }
+        ],
+        "Keywords": []
+      }
+    ]
+  },
+  {
+    "ID": 577,
+    "Link": "/tickets/2627-season/the-elixir-of-love",
+    "ProductionSeasonNumber": 2573,
+    "CustomBookingStatus": null,
+    "CustomBookingLink": null,
+    "Prefix": null,
+    "Title": "The Elixir of Love",
+    "Suffix": "Gaetano Donizetti",
+    "DateDescription": "May 8 - 29, 2027",
+    "PrimaryColor": "fe6579",
+    "SecondaryColor": "0d2066",
+    "StartDate": "2027-05-08T19:00:00-04:00",
+    "EndDate": "2027-05-29T22:00:00-04:00",
+    "Summary": "A hit at its premiere and beloved ever since, The Elixir of Love delights with its warmth, wit, and irresistible melody.",
+    "ListImage": {
+      "PublicID": "COC2627_Social_ElixirOfLove_1920x1080",
+      "W170": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_142,w_170/f_auto/q_auto/v1770227736/COC2627_Social_ElixirOfLove_1920x1080?_a=BAAASyDQ",
+      "W340": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_283,w_340/f_auto/q_auto/v1770227736/COC2627_Social_ElixirOfLove_1920x1080?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "COC2627_Social_ElixirOfLove_1920x1080"
+    },
+    "PopupImage": {
+      "PublicID": "COC2627_Social_ElixirOfLove_1920x1080",
+      "W250": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_150,w_250/f_auto/q_auto/v1770227736/COC2627_Social_ElixirOfLove_1920x1080?_a=BAAASyDQ",
+      "W300": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_180,w_300/f_auto/q_auto/v1770227736/COC2627_Social_ElixirOfLove_1920x1080?_a=BAAASyDQ",
+      "W500": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_300,w_500/f_auto/q_auto/v1770227736/COC2627_Social_ElixirOfLove_1920x1080?_a=BAAASyDQ",
+      "W1000": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_600,w_1000/f_auto/q_auto/v1770227736/COC2627_Social_ElixirOfLove_1920x1080?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "COC2627_Social_ElixirOfLove_1920x1080"
+    },
+    "Venue": {
+      "ID": 74,
+      "Title": "Four Seasons Centre for the Performing Arts",
+      "AddressLineOne": "145 Queen Street West",
+      "AddressLineTwo": "Toronto, ON M5H 4G1",
+      "AddressLink": "https://maps.app.goo.gl/Pg6oT797YJonEimi6",
+      "Image": {},
+      "Artwork": null,
+      "Link": "https://www.coc.ca/your-visit/our-buildings/four-seasons-centre-for-the-performing-arts"
+    },
+    "IsDuplicate": 0,
+    "AlternativeFCS": false,
+    "Performances": [
+      {
+        "PerformanceNumber": 2574,
+        "PerformanceDate": "2027-05-08T19:30:00-04:00",
+        "Availability": 748,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-15T00:00:00-04:00",
+        "OffSaleDate": "2027-05-08T19:45:00-04:00",
+        "ProductionTypes": [
+          {
+            "ID": 2,
+            "Title": "Main Stage"
+          }
+        ],
+        "Keywords": [
+          {
+            "ID": 83,
+            "Title": "Main Stage"
+          }
+        ]
+      },
+      {
+        "PerformanceNumber": 2575,
+        "PerformanceDate": "2027-05-14T19:30:00-04:00",
+        "Availability": 935,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-15T00:00:00-04:00",
+        "OffSaleDate": "2027-05-14T19:45:00-04:00",
+        "ProductionTypes": [
+          {
+            "ID": 2,
+            "Title": "Main Stage"
+          }
+        ],
+        "Keywords": [
+          {
+            "ID": 83,
+            "Title": "Main Stage"
+          }
+        ]
+      },
+      {
+        "PerformanceNumber": 2576,
+        "PerformanceDate": "2027-05-16T14:00:00-04:00",
+        "Availability": 587,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-15T00:00:00-04:00",
+        "OffSaleDate": "2027-05-16T14:15:00-04:00",
+        "ProductionTypes": [
+          {
+            "ID": 2,
+            "Title": "Main Stage"
+          }
+        ],
+        "Keywords": [
+          {
+            "ID": 83,
+            "Title": "Main Stage"
+          }
+        ]
+      },
+      {
+        "PerformanceNumber": 2577,
+        "PerformanceDate": "2027-05-18T19:30:00-04:00",
+        "Availability": 1350,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-15T00:00:00-04:00",
+        "OffSaleDate": "2027-05-18T19:45:00-04:00",
+        "ProductionTypes": [
+          {
+            "ID": 2,
+            "Title": "Main Stage"
+          }
+        ],
+        "Keywords": [
+          {
+            "ID": 83,
+            "Title": "Main Stage"
+          }
+        ]
+      },
+      {
+        "PerformanceNumber": 2578,
+        "PerformanceDate": "2027-05-20T19:30:00-04:00",
+        "Availability": 1053,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-15T00:00:00-04:00",
+        "OffSaleDate": "2027-05-20T19:45:00-04:00",
+        "ProductionTypes": [
+          {
+            "ID": 2,
+            "Title": "Main Stage"
+          }
+        ],
+        "Keywords": [
+          {
+            "ID": 83,
+            "Title": "Main Stage"
+          }
+        ]
+      },
+      {
+        "PerformanceNumber": 2579,
+        "PerformanceDate": "2027-05-26T19:30:00-04:00",
+        "Availability": 1198,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-15T00:00:00-04:00",
+        "OffSaleDate": "2027-05-26T19:45:00-04:00",
+        "ProductionTypes": [
+          {
+            "ID": 2,
+            "Title": "Main Stage"
+          }
+        ],
+        "Keywords": [
+          {
+            "ID": 83,
+            "Title": "Main Stage"
+          }
+        ]
+      },
+      {
+        "PerformanceNumber": 2580,
+        "PerformanceDate": "2027-05-29T16:30:00-04:00",
+        "Availability": 858,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-15T00:00:00-04:00",
+        "OffSaleDate": "2027-05-29T16:45:00-04:00",
+        "ProductionTypes": [
+          {
+            "ID": 2,
+            "Title": "Main Stage"
+          }
+        ],
+        "Keywords": [
+          {
+            "ID": 83,
+            "Title": "Main Stage"
+          }
+        ]
+      },
+      {
+        "PerformanceNumber": 2633,
+        "PerformanceDate": "2027-05-06T19:00:00-04:00",
+        "Availability": 1452,
+        "IsOnSale": false,
+        "OnSaleDate": "0001-01-01T00:00:00-05:00",
+        "OffSaleDate": "0001-01-01T00:00:00-05:00",
+        "ProductionTypes": [
+          {
+            "ID": 4,
+            "Title": "Dress Rehearsal"
+          }
+        ],
+        "Keywords": []
+      },
+      {
+        "PerformanceNumber": 2697,
+        "PerformanceDate": "2027-05-04T19:00:00-04:00",
+        "Availability": 147,
+        "IsOnSale": false,
+        "OnSaleDate": "0001-01-01T00:00:00-05:00",
+        "OffSaleDate": "0001-01-01T00:00:00-05:00",
+        "ProductionTypes": [
+          {
+            "ID": 5,
+            "Title": "Working Rehearsal"
+          }
+        ],
+        "Keywords": []
+      }
+    ]
+  },
+  {
+    "ID": 578,
+    "Link": "/tickets/2627-season/come-closer",
+    "ProductionSeasonNumber": 2618,
+    "CustomBookingStatus": "Buy Tickets",
+    "CustomBookingLink": "https://my.coc.ca/overview/2614",
+    "Prefix": null,
+    "Title": "Come Closer",
+    "Suffix": "Ryan Trew/Rachel Krehm",
+    "DateDescription": "June 18 - 20, 2027",
+    "PrimaryColor": "fda6cf",
+    "SecondaryColor": "282f99",
+    "StartDate": "2027-06-18T19:00:00-04:00",
+    "EndDate": "2027-06-20T22:00:00-04:00",
+    "Summary": "A moving new Canadian work from the COC’s Company-in-Residence invites audiences into an intimate exploration of love, loss, and healing.",
+    "ListImage": {
+      "PublicID": "COC2627_Social_ComeCloser_1920x1080",
+      "W170": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_142,w_170/f_auto/q_auto/v1770227737/COC2627_Social_ComeCloser_1920x1080?_a=BAAASyDQ",
+      "W340": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_283,w_340/f_auto/q_auto/v1770227737/COC2627_Social_ComeCloser_1920x1080?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "COC2627_Social_ComeCloser_1920x1080"
+    },
+    "PopupImage": {
+      "PublicID": "COC2627_Social_ComeCloser_1920x1080",
+      "W250": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_150,w_250/f_auto/q_auto/v1770227737/COC2627_Social_ComeCloser_1920x1080?_a=BAAASyDQ",
+      "W300": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_180,w_300/f_auto/q_auto/v1770227737/COC2627_Social_ComeCloser_1920x1080?_a=BAAASyDQ",
+      "W500": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_300,w_500/f_auto/q_auto/v1770227737/COC2627_Social_ComeCloser_1920x1080?_a=BAAASyDQ",
+      "W1000": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_600,w_1000/f_auto/q_auto/v1770227737/COC2627_Social_ComeCloser_1920x1080?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "COC2627_Social_ComeCloser_1920x1080"
+    },
+    "Venue": {
+      "ID": 84,
+      "Title": "Canadian Opera Company Theatre",
+      "AddressLineOne": "239 Front St E, Toronto",
+      "AddressLineTwo": "ON M5A 1E8",
+      "AddressLink": "https://maps.app.goo.gl/8fdGV6mhaXN9dWub9",
+      "Image": {},
+      "Artwork": null,
+      "Link": "https://www.coc.ca/your-visit/our-buildings/canadian-opera-company-theatre"
+    },
+    "IsDuplicate": 0,
+    "AlternativeFCS": false,
+    "Performances": [
+      {
+        "PerformanceNumber": 2619,
+        "PerformanceDate": "2027-06-18T19:30:00-04:00",
+        "Availability": 2223,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-03T09:40:48-04:00",
+        "OffSaleDate": "2027-06-18T19:30:00-04:00",
+        "ProductionTypes": [
+          {
+            "ID": 26,
+            "Title": "Second Stage"
+          }
+        ],
+        "Keywords": []
+      },
+      {
+        "PerformanceNumber": 2620,
+        "PerformanceDate": "2027-06-19T19:30:00-04:00",
+        "Availability": 2223,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-03T09:40:48-04:00",
+        "OffSaleDate": "2027-06-19T19:30:00-04:00",
+        "ProductionTypes": [
+          {
+            "ID": 26,
+            "Title": "Second Stage"
+          }
+        ],
+        "Keywords": []
+      },
+      {
+        "PerformanceNumber": 2621,
+        "PerformanceDate": "2027-06-20T14:00:00-04:00",
+        "Availability": 2223,
+        "IsOnSale": true,
+        "OnSaleDate": "2026-06-03T09:40:48-04:00",
+        "OffSaleDate": "2027-06-20T14:00:00-04:00",
+        "ProductionTypes": [
+          {
+            "ID": 26,
+            "Title": "Second Stage"
+          }
+        ],
+        "Keywords": []
+      }
+    ]
+  },
+  {
+    "ID": 735,
+    "Link": "/tickets/2627-season/under-25-night-the-turn-of-the-screw",
+    "ProductionSeasonNumber": null,
+    "CustomBookingStatus": "Buy Tickets",
+    "CustomBookingLink": "https://my.coc.ca/2634/2635",
+    "Prefix": null,
+    "Title": "Under 25 Night: The Turn of the Screw",
+    "Suffix": "Benjamin Britten",
+    "DateDescription": "Thursday, February 18 at 5 p.m.",
+    "PrimaryColor": "d9eaaf",
+    "SecondaryColor": "0a5864",
+    "StartDate": "2027-02-18T17:00:00-05:00",
+    "EndDate": "2027-02-18T21:00:00-05:00",
+    "Summary": "For the first time ever, the COC is hosting an Under 25 Night for young audiences to experience opera at its most thrilling: unplugged and utterly live!",
+    "ListImage": {
+      "PublicID": "turnhomepage",
+      "W170": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_142,w_170/f_auto/q_auto/v1792765958/turnhomepage?_a=BAAASyDQ",
+      "W340": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_283,w_340/f_auto/q_auto/v1792765958/turnhomepage?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "turnhomepage"
+    },
+    "PopupImage": {
+      "PublicID": "turnhomepage",
+      "W250": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_150,w_250/f_auto/q_auto/v1792765958/turnhomepage?_a=BAAASyDQ",
+      "W300": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_180,w_300/f_auto/q_auto/v1792765958/turnhomepage?_a=BAAASyDQ",
+      "W500": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_300,w_500/f_auto/q_auto/v1792765958/turnhomepage?_a=BAAASyDQ",
+      "W1000": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_600,w_1000/f_auto/q_auto/v1792765958/turnhomepage?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "turnhomepage"
+    },
+    "Venue": {
+      "ID": 74,
+      "Title": "Four Seasons Centre for the Performing Arts",
+      "AddressLineOne": "145 Queen Street West",
+      "AddressLineTwo": "Toronto, ON M5H 4G1",
+      "AddressLink": "https://maps.app.goo.gl/Pg6oT797YJonEimi6",
+      "Image": {},
+      "Artwork": null,
+      "Link": "https://www.coc.ca/your-visit/our-buildings/four-seasons-centre-for-the-performing-arts"
+    },
+    "IsDuplicate": 0,
+    "AlternativeFCS": false,
+    "Performances": [
+      {
+        "PerformanceNumber": 735,
+        "PerformanceDate": "2027-02-18T17:00:00-05:00",
+        "Availability": 999,
+        "IsOnSale": true,
+        "OnSaleDate": null,
+        "OffSaleDate": null,
+        "ProductionTypes": [],
+        "Keywords": []
+      }
+    ]
+  },
+  {
+    "ID": 665,
+    "Link": "/tickets/2627-season/operanation",
+    "ProductionSeasonNumber": null,
+    "CustomBookingStatus": "Buy Tickets",
+    "CustomBookingLink": "https://my.coc.ca/2729/2730",
+    "Prefix": null,
+    "Title": "OperaNation",
+    "Suffix": null,
+    "DateDescription": "Friday, May 28",
+    "PrimaryColor": null,
+    "SecondaryColor": null,
+    "StartDate": "2027-05-28T21:00:00-04:00",
+    "EndDate": "2027-05-28T23:30:00-04:00",
+    "Summary": "Canada's biggest opera party takes over the Four Seasons Centre for the Performing Arts for the first time in eight years.",
+    "ListImage": {
+      "PublicID": "Web_Banner_Image",
+      "W170": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_142,w_170/f_auto/q_auto/v1791988040/Web_Banner_Image?_a=BAAASyDQ",
+      "W340": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_283,w_340/f_auto/q_auto/v1791988040/Web_Banner_Image?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "Web Banner Image"
+    },
+    "PopupImage": {
+      "PublicID": "Web_Banner_Image",
+      "W250": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_150,w_250/f_auto/q_auto/v1791988040/Web_Banner_Image?_a=BAAASyDQ",
+      "W300": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_180,w_300/f_auto/q_auto/v1791988040/Web_Banner_Image?_a=BAAASyDQ",
+      "W500": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_300,w_500/f_auto/q_auto/v1791988040/Web_Banner_Image?_a=BAAASyDQ",
+      "W1000": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_600,w_1000/f_auto/q_auto/v1791988040/Web_Banner_Image?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "Web Banner Image"
+    },
+    "Venue": {
+      "ID": 74,
+      "Title": "Four Seasons Centre for the Performing Arts",
+      "AddressLineOne": "145 Queen Street West",
+      "AddressLineTwo": "Toronto, ON M5H 4G1",
+      "AddressLink": "https://maps.app.goo.gl/Pg6oT797YJonEimi6",
+      "Image": {},
+      "Artwork": null,
+      "Link": "https://www.coc.ca/your-visit/our-buildings/four-seasons-centre-for-the-performing-arts"
+    },
+    "IsDuplicate": 1,
+    "AlternativeFCS": false,
+    "Performances": [
+      {
+        "PerformanceNumber": 665,
+        "PerformanceDate": "2027-05-28T21:00:00-04:00",
+        "Availability": 999,
+        "IsOnSale": true,
+        "OnSaleDate": null,
+        "OffSaleDate": null,
+        "ProductionTypes": [],
+        "Keywords": []
+      }
+    ]
+  },
+  {
+    "ID": 691,
+    "Link": "/tickets/2627-season/osm-competition-2025-grand-prize-winner",
+    "ProductionSeasonNumber": null,
+    "CustomBookingStatus": "REGISTER",
+    "CustomBookingLink": "https://my.coc.ca/2693/2710",
+    "Prefix": "Free Concert Series / Lunchtime",
+    "Title": "OSM Competition 2025 Grand Prize Winner",
+    "Suffix": "Gabrielle Turgeon, soprano; Rachael Kerr, piano",
+    "DateDescription": "Friday, November 13 at 12 p.m.",
+    "PrimaryColor": "c9513d",
+    "SecondaryColor": "c9513d",
+    "StartDate": "2026-11-13T12:00:00-05:00",
+    "EndDate": "2026-11-13T13:00:00-05:00",
+    "Summary": "American/Canadian soprano Gabrielle Turgeon is the Grand First Prize Winner of the Orchestre symphonique de Montréal's 2025 competition. Enjoy an afternoon of vocal highlights as this Turgeon showcases her skill.  ",
+    "ListImage": {
+      "PublicID": "pattern-library/page-venue-rentals",
+      "W170": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_142,w_170/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W340": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_283,w_340/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "page-venue-rentals"
+    },
+    "PopupImage": {
+      "PublicID": "pattern-library/page-venue-rentals",
+      "W250": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_150,w_250/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W300": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_180,w_300/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W500": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_300,w_500/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W1000": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_600,w_1000/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "page-venue-rentals"
+    },
+    "Venue": {
+      "ID": 673,
+      "Title": "Richard Bradshaw Amphitheatre",
+      "AddressLineOne": "145 Queen St. W.",
+      "AddressLineTwo": "Toronto, Ontario M5H 4G1",
+      "AddressLink": "https://maps.app.goo.gl/Pg6oT797YJonEimi6",
+      "Image": {},
+      "Artwork": null,
+      "Link": "https://www.coc.ca/your-visit/our-buildings/richard-bradshaw-amphitheatre-2"
+    },
+    "IsDuplicate": 0,
+    "AlternativeFCS": true,
+    "Performances": [
+      {
+        "PerformanceNumber": 691,
+        "PerformanceDate": "2026-11-13T12:00:00-05:00",
+        "Availability": 999,
+        "IsOnSale": true,
+        "OnSaleDate": null,
+        "OffSaleDate": null,
+        "ProductionTypes": [
+          {
+            "ID": -999,
+            "Title": "Free Concert Series"
+          }
+        ],
+        "Keywords": []
+      }
+    ]
+  },
+  {
+    "ID": 692,
+    "Link": "/tickets/2627-season/coc-todmorden-mills",
+    "ProductionSeasonNumber": null,
+    "CustomBookingStatus": null,
+    "CustomBookingLink": null,
+    "Prefix": "Free Concert Series / Out in the City",
+    "Title": "COC @ Todmorden Mills",
+    "Suffix": "Cantala Choir",
+    "DateDescription": "Thursday, November 19 at 7 p.m.",
+    "PrimaryColor": "c9513d",
+    "SecondaryColor": "c9513d",
+    "StartDate": "2026-11-19T19:00:00-05:00",
+    "EndDate": "2026-11-19T20:00:00-05:00",
+    "Summary": "The Free Concert Series will be hosting a pop-up concert at Todmorden Mills Heritage Site, featuring award-winning treble ensemble, Cantala Choir. Guests can enjoy a festive light display on the museum grounds before taking in a performance by Cantala Choir, celebrating the beauty of winter. ",
+    "ListImage": {
+      "PublicID": "pattern-library/page-venue-rentals",
+      "W170": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_142,w_170/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W340": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_283,w_340/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "page-venue-rentals"
+    },
+    "PopupImage": {
+      "PublicID": "pattern-library/page-venue-rentals",
+      "W250": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_150,w_250/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W300": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_180,w_300/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W500": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_300,w_500/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W1000": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_600,w_1000/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "page-venue-rentals"
+    },
+    "Venue": {
+      "ID": null,
+      "Title": "Todmorden Mills",
+      "AddressLineOne": "67 Pottery Rd.",
+      "AddressLineTwo": "East York, ON M4K 2B9",
+      "AddressLink": "https://www.toronto.ca/explore-enjoy/history-art-culture/museums/todmorden-mills/",
+      "Image": {},
+      "Artwork": null
+    },
+    "IsDuplicate": 0,
+    "AlternativeFCS": true,
+    "Performances": [
+      {
+        "PerformanceNumber": 692,
+        "PerformanceDate": "2026-11-19T19:00:00-05:00",
+        "Availability": 999,
+        "IsOnSale": true,
+        "OnSaleDate": null,
+        "OffSaleDate": null,
+        "ProductionTypes": [
+          {
+            "ID": -999,
+            "Title": "Free Concert Series"
+          }
+        ],
+        "Keywords": []
+      }
+    ]
+  },
+  {
+    "ID": 693,
+    "Link": "/tickets/2627-season/poemes-en-musique",
+    "ProductionSeasonNumber": null,
+    "CustomBookingStatus": "REGISTER",
+    "CustomBookingLink": "https://my.coc.ca/2693/2711",
+    "Prefix": "Free Concert Series / Lunchtime",
+    "Title": "Poèmes en Musique",
+    "Suffix": "Students of The Glenn Gould School",
+    "DateDescription": "Friday, November 20 at 12 p.m.",
+    "PrimaryColor": "c9513d",
+    "SecondaryColor": "c9513d",
+    "StartDate": "2026-11-20T12:00:00-05:00",
+    "EndDate": "2026-11-20T13:00:00-05:00",
+    "Summary": "Presented by students of The Glenn Gould School’s Vocal Department, this recital showcases the elegance, colour, and expressive depth of the French art song tradition. Curated by Rosemarie Landry, Vocal Artist-in-Residence 2026/2027, the program will highlight a rich selection of French mélodies by some of the genre’s most celebrated composers.",
+    "ListImage": {
+      "PublicID": "pattern-library/page-venue-rentals",
+      "W170": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_142,w_170/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W340": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_283,w_340/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "page-venue-rentals"
+    },
+    "PopupImage": {
+      "PublicID": "pattern-library/page-venue-rentals",
+      "W250": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_150,w_250/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W300": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_180,w_300/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W500": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_300,w_500/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W1000": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_600,w_1000/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "page-venue-rentals"
+    },
+    "Venue": {
+      "ID": 673,
+      "Title": "Richard Bradshaw Amphitheatre",
+      "AddressLineOne": "145 Queen St. W.",
+      "AddressLineTwo": "Toronto, Ontario M5H 4G1",
+      "AddressLink": "https://maps.app.goo.gl/Pg6oT797YJonEimi6",
+      "Image": {},
+      "Artwork": null,
+      "Link": "https://www.coc.ca/your-visit/our-buildings/richard-bradshaw-amphitheatre-2"
+    },
+    "IsDuplicate": 0,
+    "AlternativeFCS": true,
+    "Performances": [
+      {
+        "PerformanceNumber": 693,
+        "PerformanceDate": "2026-11-20T12:00:00-05:00",
+        "Availability": 999,
+        "IsOnSale": true,
+        "OnSaleDate": null,
+        "OffSaleDate": null,
+        "ProductionTypes": [
+          {
+            "ID": -999,
+            "Title": "Free Concert Series"
+          }
+        ],
+        "Keywords": []
+      }
+    ]
+  },
+  {
+    "ID": 694,
+    "Link": "/tickets/2627-season/winter-in-paris",
+    "ProductionSeasonNumber": null,
+    "CustomBookingStatus": "REGISTER",
+    "CustomBookingLink": "https://my.coc.ca/2693/2712",
+    "Prefix": "Free Concert Series / Lunchtime",
+    "Title": "Winter in Paris",
+    "Suffix": "Artists of the COC Ensemble Studio",
+    "DateDescription": "Friday, November 27 at 12 p.m.",
+    "PrimaryColor": "c9513d",
+    "SecondaryColor": "c9513d",
+    "StartDate": "2026-11-27T12:00:00-05:00",
+    "EndDate": "2026-11-27T13:00:00-05:00",
+    "Summary": "Step into the world of French mélodie with the COC’s Ensemble Studio at the Free Concert Series. From intimate reflections to soaring expressions of love and longing, this program celebrates the beauty and nuance of French art song. ",
+    "ListImage": {
+      "PublicID": "pattern-library/page-venue-rentals",
+      "W170": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_142,w_170/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W340": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_283,w_340/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "page-venue-rentals"
+    },
+    "PopupImage": {
+      "PublicID": "pattern-library/page-venue-rentals",
+      "W250": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_150,w_250/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W300": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_180,w_300/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W500": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_300,w_500/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W1000": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_600,w_1000/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "page-venue-rentals"
+    },
+    "Venue": {
+      "ID": 673,
+      "Title": "Richard Bradshaw Amphitheatre",
+      "AddressLineOne": "145 Queen St. W.",
+      "AddressLineTwo": "Toronto, Ontario M5H 4G1",
+      "AddressLink": "https://maps.app.goo.gl/Pg6oT797YJonEimi6",
+      "Image": {},
+      "Artwork": null,
+      "Link": "https://www.coc.ca/your-visit/our-buildings/richard-bradshaw-amphitheatre-2"
+    },
+    "IsDuplicate": 0,
+    "AlternativeFCS": true,
+    "Performances": [
+      {
+        "PerformanceNumber": 694,
+        "PerformanceDate": "2026-11-27T12:00:00-05:00",
+        "Availability": 999,
+        "IsOnSale": true,
+        "OnSaleDate": null,
+        "OffSaleDate": null,
+        "ProductionTypes": [
+          {
+            "ID": -999,
+            "Title": "Free Concert Series"
+          }
+        ],
+        "Keywords": []
+      }
+    ]
+  },
+  {
+    "ID": 695,
+    "Link": "/tickets/2627-season/opera-5-presents-two-many-sopranos",
+    "ProductionSeasonNumber": null,
+    "CustomBookingStatus": "REGISTER",
+    "CustomBookingLink": "https://my.coc.ca/2693/2713",
+    "Prefix": "Free Concert Series / Lunchtime",
+    "Title": "Opera 5 presents: Two Many Sopranos!",
+    "Suffix": "Opera 5",
+    "DateDescription": "Thursday, January 7 at 12 p.m.",
+    "PrimaryColor": "c9513d",
+    "SecondaryColor": "c9513d",
+    "StartDate": "2027-01-07T12:00:00-05:00",
+    "EndDate": "2027-01-07T13:00:00-05:00",
+    "Summary": "Get to know the sopranos from COC’s Company-in-Residence, Opera 5: General Director Rachel Krehm and Programs Manager Jaclyn Grossman. Both of these sopranos balance a life of performing and administration, and sometimes they even get together and sing a little! The program will feature some of their favourite music, along with a battle-royale of the absolute best \"soprano\" pieces of all time (did anyone say \"mashup?\"), proving that there are never Two Many Sopranos on stage! ",
+    "ListImage": {
+      "PublicID": "pattern-library/page-venue-rentals",
+      "W170": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_142,w_170/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W340": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_283,w_340/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "page-venue-rentals"
+    },
+    "PopupImage": {
+      "PublicID": "pattern-library/page-venue-rentals",
+      "W250": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_150,w_250/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W300": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_180,w_300/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W500": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_300,w_500/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W1000": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_600,w_1000/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "page-venue-rentals"
+    },
+    "Venue": {
+      "ID": 673,
+      "Title": "Richard Bradshaw Amphitheatre",
+      "AddressLineOne": "145 Queen St. W.",
+      "AddressLineTwo": "Toronto, Ontario M5H 4G1",
+      "AddressLink": "https://maps.app.goo.gl/Pg6oT797YJonEimi6",
+      "Image": {},
+      "Artwork": null,
+      "Link": "https://www.coc.ca/your-visit/our-buildings/richard-bradshaw-amphitheatre-2"
+    },
+    "IsDuplicate": 0,
+    "AlternativeFCS": true,
+    "Performances": [
+      {
+        "PerformanceNumber": 695,
+        "PerformanceDate": "2027-01-07T12:00:00-05:00",
+        "Availability": 999,
+        "IsOnSale": true,
+        "OnSaleDate": null,
+        "OffSaleDate": null,
+        "ProductionTypes": [
+          {
+            "ID": -999,
+            "Title": "Free Concert Series"
+          }
+        ],
+        "Keywords": []
+      }
+    ]
+  },
+  {
+    "ID": 697,
+    "Link": "/tickets/2627-season/an-afternoon-of-cuban-jazz",
+    "ProductionSeasonNumber": null,
+    "CustomBookingStatus": "REGISTER",
+    "CustomBookingLink": "https://my.coc.ca/2693/2714",
+    "Prefix": "Free Concert Series / Lunchtime",
+    "Title": "An Afternoon of Cuban Jazz",
+    "Suffix": "Hilario Durán, piano",
+    "DateDescription": "Friday, January 8 at 12 p.m.",
+    "PrimaryColor": "c9513d",
+    "SecondaryColor": "c9513d",
+    "StartDate": "2027-01-08T12:00:00-05:00",
+    "EndDate": "2027-01-08T13:00:00-05:00",
+    "Summary": "JUNO Award-winning jazz pianist Hilario Durán invites audiences to an energetic solo concert. Featuring American jazz standards, Afro Cuban jazz, traditional Cuban music, and original compositions, Durán will highlight the full scope of his artistry. ",
+    "ListImage": {
+      "PublicID": "pattern-library/page-venue-rentals",
+      "W170": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_142,w_170/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W340": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_283,w_340/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "page-venue-rentals"
+    },
+    "PopupImage": {
+      "PublicID": "pattern-library/page-venue-rentals",
+      "W250": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_150,w_250/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W300": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_180,w_300/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W500": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_300,w_500/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W1000": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_600,w_1000/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "page-venue-rentals"
+    },
+    "Venue": {
+      "ID": 673,
+      "Title": "Richard Bradshaw Amphitheatre",
+      "AddressLineOne": "145 Queen St. W.",
+      "AddressLineTwo": "Toronto, Ontario M5H 4G1",
+      "AddressLink": "https://maps.app.goo.gl/Pg6oT797YJonEimi6",
+      "Image": {},
+      "Artwork": null,
+      "Link": "https://www.coc.ca/your-visit/our-buildings/richard-bradshaw-amphitheatre-2"
+    },
+    "IsDuplicate": 0,
+    "AlternativeFCS": true,
+    "Performances": [
+      {
+        "PerformanceNumber": 697,
+        "PerformanceDate": "2027-01-08T12:00:00-05:00",
+        "Availability": 999,
+        "IsOnSale": true,
+        "OnSaleDate": null,
+        "OffSaleDate": null,
+        "ProductionTypes": [
+          {
+            "ID": -999,
+            "Title": "Free Concert Series"
+          }
+        ],
+        "Keywords": []
+      }
+    ]
+  },
+  {
+    "ID": 698,
+    "Link": "/tickets/2627-season/musicians-of-the-rebanks-family-fellowship",
+    "ProductionSeasonNumber": null,
+    "CustomBookingStatus": "REGISTER",
+    "CustomBookingLink": "https://my.coc.ca/2693/2715",
+    "Prefix": "Free Concert Series / Lunchtime",
+    "Title": "Musicians of the Rebanks Family Fellowship",
+    "Suffix": "Artists of The Glenn Gould School",
+    "DateDescription": "Tuesday, January 12 at 12 p.m.",
+    "PrimaryColor": "c9513d",
+    "SecondaryColor": "c9513d",
+    "StartDate": "2027-01-12T12:00:00-05:00",
+    "EndDate": "2027-01-12T13:00:00-05:00",
+    "Summary": "This concert will showcase the artistry and musicianship of the 2026/2027 cohort of Rebanks Fellows including sopranos Diana Agasian and Katie Kirkpatrick, mezzo-soprano Kcenia Koutorjevski, flutist Joanne Lee, and violinists Jason Moon and Dabin Yang.",
+    "ListImage": {
+      "PublicID": "pattern-library/page-venue-rentals",
+      "W170": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_142,w_170/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W340": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_283,w_340/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "page-venue-rentals"
+    },
+    "PopupImage": {
+      "PublicID": "pattern-library/page-venue-rentals",
+      "W250": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_150,w_250/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W300": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_180,w_300/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W500": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_300,w_500/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W1000": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_600,w_1000/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "page-venue-rentals"
+    },
+    "Venue": {
+      "ID": 673,
+      "Title": "Richard Bradshaw Amphitheatre",
+      "AddressLineOne": "145 Queen St. W.",
+      "AddressLineTwo": "Toronto, Ontario M5H 4G1",
+      "AddressLink": "https://maps.app.goo.gl/Pg6oT797YJonEimi6",
+      "Image": {},
+      "Artwork": null,
+      "Link": "https://www.coc.ca/your-visit/our-buildings/richard-bradshaw-amphitheatre-2"
+    },
+    "IsDuplicate": 0,
+    "AlternativeFCS": true,
+    "Performances": [
+      {
+        "PerformanceNumber": 698,
+        "PerformanceDate": "2027-01-12T12:00:00-05:00",
+        "Availability": 999,
+        "IsOnSale": true,
+        "OnSaleDate": null,
+        "OffSaleDate": null,
+        "ProductionTypes": [
+          {
+            "ID": -999,
+            "Title": "Free Concert Series"
+          }
+        ],
+        "Keywords": []
+      }
+    ]
+  },
+  {
+    "ID": 699,
+    "Link": "/tickets/2627-season/roots-and-rhythms",
+    "ProductionSeasonNumber": null,
+    "CustomBookingStatus": "REGISTER",
+    "CustomBookingLink": "https://my.coc.ca/2693/2716",
+    "Prefix": "Free Concert Series / Lunchtime",
+    "Title": "Roots & Rhythms",
+    "Suffix": "York University Gospel Choir",
+    "DateDescription": "Tuesday, January 19 at 12 p.m.",
+    "PrimaryColor": "c9513d",
+    "SecondaryColor": "c9513d",
+    "StartDate": "2027-01-19T12:00:00-05:00",
+    "EndDate": "2027-01-19T13:00:00-05:00",
+    "Summary": "Get ready for the York University Gospel Choir as they present a high-energy gospel music experience.  Showcasing the powerful contemporary rhythms of classic gospel choir music, this electrifying group brings an infectious joy and raw passion that will leave you uplifted and inspired. ",
+    "ListImage": {
+      "PublicID": "pattern-library/page-venue-rentals",
+      "W170": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_142,w_170/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W340": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_283,w_340/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "page-venue-rentals"
+    },
+    "PopupImage": {
+      "PublicID": "pattern-library/page-venue-rentals",
+      "W250": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_150,w_250/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W300": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_180,w_300/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W500": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_300,w_500/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W1000": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_600,w_1000/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "page-venue-rentals"
+    },
+    "Venue": {
+      "ID": 673,
+      "Title": "Richard Bradshaw Amphitheatre",
+      "AddressLineOne": "145 Queen St. W.",
+      "AddressLineTwo": "Toronto, Ontario M5H 4G1",
+      "AddressLink": "https://maps.app.goo.gl/Pg6oT797YJonEimi6",
+      "Image": {},
+      "Artwork": null,
+      "Link": "https://www.coc.ca/your-visit/our-buildings/richard-bradshaw-amphitheatre-2"
+    },
+    "IsDuplicate": 0,
+    "AlternativeFCS": true,
+    "Performances": [
+      {
+        "PerformanceNumber": 699,
+        "PerformanceDate": "2027-01-19T12:00:00-05:00",
+        "Availability": 999,
+        "IsOnSale": true,
+        "OnSaleDate": null,
+        "OffSaleDate": null,
+        "ProductionTypes": [
+          {
+            "ID": -999,
+            "Title": "Free Concert Series"
+          }
+        ],
+        "Keywords": []
+      }
+    ]
+  },
+  {
+    "ID": 700,
+    "Link": "/tickets/2627-season/musicians-and-dancers-in-concert-new-inspirations",
+    "ProductionSeasonNumber": null,
+    "CustomBookingStatus": "REGISTER",
+    "CustomBookingLink": "https://my.coc.ca/2693/2717",
+    "Prefix": "Free Concert Series / Evening",
+    "Title": "Musicians and Dancers in Concert: New Inspirations",
+    "Suffix": "Joy of Music",
+    "DateDescription": "Friday, January 22 at 5:30 p.m.",
+    "PrimaryColor": "c9513d",
+    "SecondaryColor": "c9513d",
+    "StartDate": "2027-01-22T17:30:00-05:00",
+    "EndDate": "2027-01-22T18:30:00-05:00",
+    "Summary": "Artistic catalyst Joy of Music returns to the Free Concert Series with a gorgeous array of works for piano, violin and cello, brought vividly to life through new choreographic works by Peggy Baker and Jera Wolfe. Brilliant new generation classical musicians led by Artistic Director Chris Au are joined in performance by some of Toronto’s most compelling contemporary dancers. Be moved, uplifted, and inspired by these remarkable artists! ",
+    "ListImage": {
+      "PublicID": "pattern-library/page-venue-rentals",
+      "W170": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_142,w_170/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W340": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_283,w_340/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "page-venue-rentals"
+    },
+    "PopupImage": {
+      "PublicID": "pattern-library/page-venue-rentals",
+      "W250": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_150,w_250/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W300": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_180,w_300/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W500": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_300,w_500/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W1000": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_600,w_1000/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "page-venue-rentals"
+    },
+    "Venue": {
+      "ID": 673,
+      "Title": "Richard Bradshaw Amphitheatre",
+      "AddressLineOne": "145 Queen St. W.",
+      "AddressLineTwo": "Toronto, Ontario M5H 4G1",
+      "AddressLink": "https://maps.app.goo.gl/Pg6oT797YJonEimi6",
+      "Image": {},
+      "Artwork": null,
+      "Link": "https://www.coc.ca/your-visit/our-buildings/richard-bradshaw-amphitheatre-2"
+    },
+    "IsDuplicate": 0,
+    "AlternativeFCS": true,
+    "Performances": [
+      {
+        "PerformanceNumber": 700,
+        "PerformanceDate": "2027-01-22T17:30:00-05:00",
+        "Availability": 999,
+        "IsOnSale": true,
+        "OnSaleDate": null,
+        "OffSaleDate": null,
+        "ProductionTypes": [
+          {
+            "ID": -999,
+            "Title": "Free Concert Series"
+          }
+        ],
+        "Keywords": []
+      }
+    ]
+  },
+  {
+    "ID": 701,
+    "Link": "/tickets/2627-season/alchemy",
+    "ProductionSeasonNumber": null,
+    "CustomBookingStatus": "REGISTER",
+    "CustomBookingLink": "https://my.coc.ca/2693/2718",
+    "Prefix": "Free Concert Series / Lunchtime",
+    "Title": "Alchemy",
+    "Suffix": "Joelle Crigger, fiddle; Kerry Fitzgerald, piano; Alanna Lauzon, guitar ",
+    "DateDescription": "Monday, January 25 at 12 p.m.",
+    "PrimaryColor": "c9513d",
+    "SecondaryColor": "c9513d",
+    "StartDate": "2027-01-25T12:00:00-05:00",
+    "EndDate": "2027-01-25T13:00:00-05:00",
+    "Summary": "Celtic fusion group Alchemy features traditional music and dance genres as well as jazz, classical, and world music styles. Award-winning musicians Joelle Crigger, Kerry Fitzgerald, and Alanna Lauzon take centre stage in a dynamic, innovative Robbie Burns Day program blending contemporary and traditional fiddling styles with classical violin and jazz. In addition to toe-tapping music, the show will highlight Ottawa Valley step dancing, an exhilarating style of percussive dance merging Irish, Scottish, French-Canadian, and tap dancing. ",
+    "ListImage": {
+      "PublicID": "pattern-library/page-venue-rentals",
+      "W170": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_142,w_170/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W340": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_283,w_340/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "page-venue-rentals"
+    },
+    "PopupImage": {
+      "PublicID": "pattern-library/page-venue-rentals",
+      "W250": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_150,w_250/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W300": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_180,w_300/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W500": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_300,w_500/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W1000": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_600,w_1000/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "page-venue-rentals"
+    },
+    "Venue": {
+      "ID": 673,
+      "Title": "Richard Bradshaw Amphitheatre",
+      "AddressLineOne": "145 Queen St. W.",
+      "AddressLineTwo": "Toronto, Ontario M5H 4G1",
+      "AddressLink": "https://maps.app.goo.gl/Pg6oT797YJonEimi6",
+      "Image": {},
+      "Artwork": null,
+      "Link": "https://www.coc.ca/your-visit/our-buildings/richard-bradshaw-amphitheatre-2"
+    },
+    "IsDuplicate": 0,
+    "AlternativeFCS": true,
+    "Performances": [
+      {
+        "PerformanceNumber": 701,
+        "PerformanceDate": "2027-01-25T12:00:00-05:00",
+        "Availability": 999,
+        "IsOnSale": true,
+        "OnSaleDate": null,
+        "OffSaleDate": null,
+        "ProductionTypes": [
+          {
+            "ID": -999,
+            "Title": "Free Concert Series"
+          }
+        ],
+        "Keywords": []
+      }
+    ]
+  },
+  {
+    "ID": 702,
+    "Link": "/tickets/2627-season/nomadic-melodies-ravel-britten-evangelista",
+    "ProductionSeasonNumber": null,
+    "CustomBookingStatus": "REGISTER",
+    "CustomBookingLink": "https://my.coc.ca/2693/2719",
+    "Prefix": "Free Concert Series / Lunchtime",
+    "Title": "Nomadic Melodies: Ravel, Britten, Evangelista",
+    "Suffix": "CordaVox Duo",
+    "DateDescription": "Friday, January 29 at 12 p.m.",
+    "PrimaryColor": "c9513d",
+    "SecondaryColor": "c9513d",
+    "StartDate": "2027-01-29T12:00:00-05:00",
+    "EndDate": "2027-01-29T13:00:00-05:00",
+    "Summary": "The CordaVox Duo, made up of Bruno Gauthier-Bellerose on guitar and soprano Lucie St-Martin, invites audiences on a captivating journey with Nomadic Melodies: Ravel, Britten, Evangelista. This concert immerses the audience in a diverse repertoire, exploring the musical riches of Canada, England, Greece, Brazil, and Spain. Through iconic pieces from oral and folkloric traditions, discover melodies that expertly blend popular heritage with a classical touch. A unique exploration and a celebration of global sounds. ",
+    "ListImage": {
+      "PublicID": "pattern-library/page-venue-rentals",
+      "W170": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_142,w_170/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W340": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_283,w_340/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "page-venue-rentals"
+    },
+    "PopupImage": {
+      "PublicID": "pattern-library/page-venue-rentals",
+      "W250": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_150,w_250/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W300": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_180,w_300/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W500": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_300,w_500/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "W1000": "https://res.cloudinary.com/dpaedgweb/image/upload/c_fill,g_auto,h_600,w_1000/f_auto/q_auto/v1712917428/pattern-library/page-venue-rentals?_a=BAAASyDQ",
+      "Alt": null,
+      "Caption": "page-venue-rentals"
+    },
+    "Venue": {
+      "ID": 673,
+      "Title": "Richard Bradshaw Amphitheatre",
+      "AddressLineOne": "145 Queen St. W.",
+      "AddressLineTwo": "Toronto, Ontario M5H 4G1",
+      "AddressLink": "https://maps.app.goo.gl/Pg6oT797YJonEimi6",
+      "Image": {},
+      "Artwork": null,
+      "Link": "https://www.coc.ca/your-visit/our-buildings/richard-bradshaw-amphitheatre-2"
+    },
+    "IsDuplicate": 0,
+    "AlternativeFCS": true,
+    "Performances": [
+      {
+        "PerformanceNumber": 702,
+        "PerformanceDate": "2027-01-29T12:00:00-05:00",
+        "Availability": 999,
+        "IsOnSale": true,
+        "OnSaleDate": null,
+        "OffSaleDate": null,
+        "ProductionTypes": [
+          {
+            "ID": -999,
+            "Title": "Free Concert Series"
+          }
+        ],
+        "Keywords": []
+      }
+    ]
+  }
+]
