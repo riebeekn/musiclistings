@@ -35,6 +35,34 @@ defmodule MusicListings.Parsing.VenueParsers.SoundGarageParserTest do
 
       assert 12 = Enum.count(events)
     end
+
+    test "returns events whose headings are <strong> tags with abbreviated months" do
+      events =
+        "#{File.cwd!()}/test/data/sound_garage/index_strong_headings.html"
+        |> Path.expand()
+        |> File.read!()
+        |> SoundGarageParser.events()
+
+      assert [
+               {"SuperPsyched", "NOV", "7",
+                "https://www.ticketweb.ca/event/superpsyched-the-sound-garage-tickets/14363644?pl=writf"},
+               {"Arc Identity", "NOV", "12",
+                "https://www.ticketweb.ca/event/ark-identity-the-sound-garage-tickets/14367184?pl=writf"},
+               {"RESAVIOR", "NOV", "14",
+                "https://www.ticketweb.ca/event/resavoir-the-sound-garage-tickets/15013143?theme=WeAreInTheFuture"},
+               {"BRKN Love", "NOV", "27",
+                "https://www.ticketweb.ca/event/brkn-love-the-sound-garage-tickets/14385554?pl=writf"},
+               {"Iluka", "DEC", "5",
+                "https://www.ticketweb.ca/event/iluka-the-wings-the-sound-garage-tickets/14313704?theme=WeAreInTheFuture"},
+               {"Eliza McLamb", "Dec", "13",
+                "https://www.ticketweb.ca/event/eliza-mclamb-the-sound-garage-tickets/14319924?theme=WeAreInTheFuture"}
+             ] ==
+               Enum.map(
+                 events,
+                 &{SoundGarageParser.event_title(&1), &1["month"], &1["day"],
+                  SoundGarageParser.ticket_url(&1)}
+               )
+    end
   end
 
   describe "next_page_url/2" do

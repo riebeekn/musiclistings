@@ -1,6 +1,10 @@
 defmodule MusicListings.Parsing.VenueParsers.SoundGarageParser do
   @moduledoc """
   Parser for extracting events from https://www.bloodbrothersbrewing.com/pages/the-sound-garage-165-geary-ave
+
+  The page is edited by hand and has no consistent structure. An event is a heading holding its
+  title and date - an `<h1>` or a `<strong>`, with the month spelled out or abbreviated - followed
+  by its ticket link.
   """
   @behaviour MusicListings.Parsing.VenueParser
 
@@ -10,8 +14,9 @@ defmodule MusicListings.Parsing.VenueParsers.SoundGarageParser do
   alias MusicListings.Parsing.ParseHelpers
   alias MusicListings.Parsing.Performers
   alias MusicListings.Parsing.Price
+  alias MusicListings.Parsing.Selectors
 
-  @date_regex ~r/\b(january|february|march|april|may|june|july|august|september|october|november|december)\s+(\d{1,2})\b/i
+  @date_regex ~r/\b(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|june?|july?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)\.?\s+(\d{1,2})\b/i
 
   @impl true
   def source_url,
@@ -36,33 +41,34 @@ defmodule MusicListings.Parsing.VenueParsers.SoundGarageParser do
   end
 
   defp split_into_chunks(html) do
-    Regex.split(~r/(?=<h1[\s>])/i, html)
-    |> Enum.filter(&String.contains?(&1, "<h1"))
+    ~r/(?=<(?:h1|strong)[\s>])/i
+    |> Regex.split(html)
+    |> Enum.filter(&Regex.match?(~r/^<(?:h1|strong)[\s>]/i, &1))
   end
 
   defp build_events(chunks) do
     {events, _buffer} =
       Enum.reduce(chunks, {[], []}, fn chunk, {events, buffer} ->
-        h1_text = extract_h1_text(chunk)
-        process_chunk(h1_text, chunk, events, buffer)
+        heading_text = extract_heading_text(chunk)
+        process_chunk(heading_text, chunk, events, buffer)
       end)
 
     Enum.reverse(events)
   end
 
-  defp process_chunk(h1_text, chunk, events, buffer) do
-    case Regex.run(@date_regex, h1_text) do
+  defp process_chunk(heading_text, chunk, events, buffer) do
+    case Regex.run(@date_regex, heading_text) do
       [_match, month, day] ->
-        event = build_event(h1_text, month, day, chunk, buffer)
+        event = build_event(heading_text, month, day, chunk, buffer)
         {[event | events], []}
 
       nil ->
-        accumulate_title(h1_text, events, buffer)
+        accumulate_title(heading_text, events, buffer)
     end
   end
 
-  defp build_event(h1_text, month, day, chunk, buffer) do
-    title_text = remove_date(h1_text)
+  defp build_event(heading_text, month, day, chunk, buffer) do
+    title_text = remove_date(heading_text)
     title = buffer |> Enum.reverse() |> Kernel.++([title_text]) |> build_title()
 
     %{
@@ -73,29 +79,24 @@ defmodule MusicListings.Parsing.VenueParsers.SoundGarageParser do
     }
   end
 
-  defp accumulate_title(h1_text, events, buffer) do
-    if page_title?(h1_text) do
+  defp accumulate_title(heading_text, events, buffer) do
+    if page_title?(heading_text) do
       {events, buffer}
     else
-      {events, [clean_text(h1_text) | buffer]}
+      {events, [clean_text(heading_text) | buffer]}
     end
   end
 
-  defp extract_h1_text(chunk) do
+  defp extract_heading_text(chunk) do
     chunk
-    |> Meeseeks.parse()
-    |> Meeseeks.one(css("h1"))
-    |> case do
-      nil -> ""
-      result -> Meeseeks.text(result)
-    end
+    |> Selectors.match_one(css("h1, strong"))
+    |> Selectors.text()
   end
 
   defp extract_ticket_url(chunk) do
     chunk
-    |> Meeseeks.parse()
-    |> Meeseeks.all(css("a[href]"))
-    |> Enum.map(&Meeseeks.Result.attr(&1, "href"))
+    |> Selectors.all_matches(css("a[href]"))
+    |> Enum.map(&Selectors.attr(&1, "href"))
     |> Enum.find(&ticket_link?/1)
   end
 
@@ -107,7 +108,9 @@ defmodule MusicListings.Parsing.VenueParsers.SoundGarageParser do
   end
 
   defp remove_date(text) do
-    Regex.replace(@date_regex, text, "")
+    @date_regex
+    |> Regex.replace(text, "")
+    |> String.replace(~r/[\s\-–—:,|]+$/u, "")
   end
 
   defp clean_text(text) do
