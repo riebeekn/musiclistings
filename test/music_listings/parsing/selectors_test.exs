@@ -25,4 +25,11 @@ defmodule MusicListings.Parsing.SelectorsTest do
                html |> Selectors.match_one(css("p")) |> Selectors.text_lines()
     end
   end
+
+  describe "tag/1" do
+    test "returns the lowercased tag name" do
+      assert "p" ==
+               "<div><P>Text</P></div>" |> Selectors.match_one(css("div > *")) |> Selectors.tag()
+    end
+  end
 end

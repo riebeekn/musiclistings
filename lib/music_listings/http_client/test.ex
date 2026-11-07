@@ -114,6 +114,11 @@ defmodule MusicListings.HttpClient.Test do
       {"bsmt254.com/event/not-a-bbq-x-hit-play", "bsmt254/detail_no_ticket_link.html"},
       {"bsmt254.com/event/project-nowhere-night-1", "bsmt254/detail_pwyc_price.html"},
       {"bsmt254.com/event/project-nowhere-night-2", "bsmt254/detail_prose_price.html"},
+      # The Bad Angel - the home page links to the month's music page, which
+      # holds the shows.  The month's page must come first, the home page
+      # pattern matches it too.
+      {"badangelbar.com/musicnovember2026.html", "bad_angel/music.html"},
+      {"badangelbar.com/", "bad_angel/index.html"},
       # The Pilot - the listing's date carries no year, so it is read off the
       # event's own page.  Deliberately no catch-all: an event with no fixture
       # exercises the "couldn't reach the page" path.

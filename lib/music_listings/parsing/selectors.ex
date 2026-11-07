@@ -74,6 +74,15 @@ defmodule MusicListings.Parsing.Selectors do
     |> Enum.reject(&(&1 == ""))
   end
 
+  @doc """
+  Returns the element's tag name, lowercased, e.g. "h2".
+  """
+  def tag(%Meeseeks.Result{} = content) do
+    content
+    |> Meeseeks.tag()
+    |> String.downcase()
+  end
+
   def data(content) when is_list(content) do
     Enum.map(content, &Meeseeks.data/1)
   end
