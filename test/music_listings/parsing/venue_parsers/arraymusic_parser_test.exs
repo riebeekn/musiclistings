@@ -24,7 +24,7 @@ defmodule MusicListings.Parsing.VenueParsers.ArraymusicParserTest do
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://www.arraymusic.ca/current-season/25-26-season-at-a-glance/" ==
+      assert "https://www.arraymusic.ca/26-27-season-at-a-glance/" ==
                ArraymusicParser.source_url()
     end
   end
@@ -33,7 +33,7 @@ defmodule MusicListings.Parsing.VenueParsers.ArraymusicParserTest do
     test "returns expected events", %{index_html: index_html} do
       events = ArraymusicParser.events(index_html)
 
-      assert 9 = Enum.count(events)
+      assert 25 = Enum.count(events)
     end
   end
 
@@ -45,21 +45,21 @@ defmodule MusicListings.Parsing.VenueParsers.ArraymusicParserTest do
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "community_improvisation_workshops_with_allison_cameron_25_26_2025_09_29" ==
+      assert "ccmc_26_27_2026_09_24" ==
                ArraymusicParser.event_id(event)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "community_improvisation_workshops_with_allison_cameron_25_26_2025_09_29" ==
+      assert "ccmc_26_27_2026_09_24" ==
                ArraymusicParser.ignored_event_id(event)
     end
   end
 
   describe "event_title/1" do
     test "returns event title", %{event: event} do
-      assert "Community Improvisation Workshops with Allison Cameron 25|26" ==
+      assert "CCMC 26|27" ==
                ArraymusicParser.event_title(event)
     end
   end
@@ -67,7 +67,7 @@ defmodule MusicListings.Parsing.VenueParsers.ArraymusicParserTest do
   describe "performers/1" do
     test "returns the event performers", %{event: event} do
       assert %Performers{
-               headliner: "Community Improvisation Workshops with Allison Cameron 25|26",
+               headliner: "CCMC 26|27",
                openers: []
              } == ArraymusicParser.performers(event)
     end
@@ -75,28 +75,27 @@ defmodule MusicListings.Parsing.VenueParsers.ArraymusicParserTest do
 
   describe "event_date/1" do
     test "returns the event date", %{event: event} do
-      assert ~D[2025-09-29] == ArraymusicParser.event_date(event)
+      assert ~D[2026-09-24] == ArraymusicParser.event_date(event)
     end
   end
 
   describe "additional_dates/1" do
     test "returns a list of additional dates", %{event: event} do
       assert [
-               ~D[2025-10-27],
-               ~D[2025-11-24],
-               ~D[2026-01-26],
-               ~D[2026-02-23],
-               ~D[2026-03-30],
-               ~D[2026-04-27],
-               ~D[2026-05-25],
-               ~D[2026-06-29]
+               ~D[2026-10-29],
+               ~D[2026-11-26],
+               ~D[2027-02-25],
+               ~D[2027-03-25],
+               ~D[2027-04-29],
+               ~D[2027-05-27],
+               ~D[2027-06-24]
              ] == ArraymusicParser.additional_dates(event)
     end
   end
 
   describe "event_time/1" do
     test "returns the event start time", %{event: event} do
-      assert nil == ArraymusicParser.event_time(event)
+      assert ~T[19:30:00] == ArraymusicParser.event_time(event)
     end
   end
 
@@ -121,7 +120,7 @@ defmodule MusicListings.Parsing.VenueParsers.ArraymusicParserTest do
 
   describe "details_url/1" do
     test "returns the event details url", %{event: event} do
-      assert "https://www.arraymusic.ca/community-improvisation-workshops-with-allison-cameron-2526/" ==
+      assert "https://www.arraymusic.ca/ccmc-2627/" ==
                ArraymusicParser.details_url(event)
     end
   end

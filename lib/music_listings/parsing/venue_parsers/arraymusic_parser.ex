@@ -13,8 +13,14 @@ defmodule MusicListings.Parsing.VenueParsers.ArraymusicParser do
   alias MusicListings.Parsing.Selectors
   alias MusicListings.Parsing.VenueParsers.ArraymusicParser.DateParser
 
+  # Update each season, when Array posts the new season at a glance page
+  @season_start_year 2026
+
   @impl true
-  def source_url, do: "https://www.arraymusic.ca/current-season/25-26-season-at-a-glance/"
+  def source_url do
+    season = "#{rem(@season_start_year, 100)}-#{rem(@season_start_year + 1, 100)}"
+    "https://www.arraymusic.ca/#{season}-season-at-a-glance/"
+  end
 
   @impl true
   def retrieve_events_fun do
@@ -57,31 +63,29 @@ defmodule MusicListings.Parsing.VenueParsers.ArraymusicParser do
 
   @impl true
   def event_date(event) do
-    date_string = Selectors.text(event, css(".sp_pcp_ctf-event_date_time"))
-
-    parsed_dates =
-      event
-      |> event_title()
-      |> DateParser.parse_dates(date_string)
-
-    parsed_dates.date
+    parse_dates(event).date
   end
 
   @impl true
   def additional_dates(event) do
-    date_string = Selectors.text(event, css(".sp_pcp_ctf-event_date_time"))
+    parse_dates(event).additional_dates
+  end
 
-    parsed_dates =
-      event
-      |> event_title()
-      |> DateParser.parse_dates(date_string)
-
-    parsed_dates.additional_dates
+  defp parse_dates(event) do
+    event
+    |> date_time_string()
+    |> DateParser.parse_dates(@season_start_year)
   end
 
   @impl true
-  def event_time(_event) do
-    nil
+  def event_time(event) do
+    event
+    |> date_time_string()
+    |> DateParser.parse_time()
+  end
+
+  defp date_time_string(event) do
+    Selectors.text(event, css(".sp_pcp_ctf-event_date_time"))
   end
 
   @impl true
