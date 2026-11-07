@@ -16,4 +16,13 @@ defmodule MusicListings.Parsing.SelectorsTest do
       assert {:error, _reason} = Selectors.parse(<<0xFF, 0xFE>>)
     end
   end
+
+  describe "text_lines/1" do
+    test "returns each line of text broken up by <br>, skipping blank lines" do
+      html = "<p> First line<br /> <br />Second line <br />Third</p>"
+
+      assert ["First line", "Second line", "Third"] ==
+               html |> Selectors.match_one(css("p")) |> Selectors.text_lines()
+    end
+  end
 end

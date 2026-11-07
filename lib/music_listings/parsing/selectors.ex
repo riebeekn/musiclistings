@@ -3,6 +3,7 @@ defmodule MusicListings.Parsing.Selectors do
   Selector helpers. Parsers go through this module rather than calling Meeseeks directly,
   importing `Meeseeks.CSS` only for `css/1`.
   """
+  import Meeseeks.XPath
 
   @doc """
   Parses HTML into a document, for a page that's queried more than once. The other functions also
@@ -60,6 +61,17 @@ defmodule MusicListings.Parsing.Selectors do
 
   def text(content) do
     Meeseeks.text(content)
+  end
+
+  @doc """
+  Returns the element's text nodes as trimmed, non-empty strings: for text broken into lines with
+  `<br>`, which `text/1` joins into one string. Text inside a child tag comes back as its own line.
+  """
+  def text_lines(%Meeseeks.Result{} = content) do
+    content
+    |> Meeseeks.all(xpath("./text()"))
+    |> Enum.map(&(&1 |> Meeseeks.text() |> String.trim()))
+    |> Enum.reject(&(&1 == ""))
   end
 
   def data(content) when is_list(content) do
