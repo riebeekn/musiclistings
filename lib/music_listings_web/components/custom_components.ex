@@ -935,7 +935,7 @@ defmodule MusicListingsWeb.CustomComponents do
             </span>
           </a>
           <.when_admin current_user={@current_user}>
-            <div class="pb-4 sm:px-5">
+            <div class="flex flex-wrap gap-3 pb-4 sm:px-5">
               <MusicListingsWeb.CoreComponents.button
                 phx-click="crawl-venue"
                 phx-value-id={venue.id}
@@ -946,6 +946,27 @@ defmodule MusicListingsWeb.CustomComponents do
                   class={"size-4 #{if to_string(venue.id) == @crawling_venue_id, do: "animate-spin"}"}
                 /> Crawl
               </MusicListingsWeb.CoreComponents.button>
+              <%= if venue.pull_events? do %>
+                <MusicListingsWeb.CoreComponents.submit_button
+                  id={"pull-events-#{venue.id}"}
+                  phx-click="toggle-pull-events"
+                  phx-value-id={venue.id}
+                  phx-value-pull-events="false"
+                  title="Stop crawling this venue"
+                >
+                  Pulling events
+                </MusicListingsWeb.CoreComponents.submit_button>
+              <% else %>
+                <MusicListingsWeb.CoreComponents.button
+                  id={"pull-events-#{venue.id}"}
+                  phx-click="toggle-pull-events"
+                  phx-value-id={venue.id}
+                  phx-value-pull-events="true"
+                  title="Start crawling this venue"
+                >
+                  Not pulling events
+                </MusicListingsWeb.CoreComponents.button>
+              <% end %>
             </div>
           </.when_admin>
         </div>

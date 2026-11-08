@@ -30,6 +30,7 @@ defmodule MusicListings.Venues do
       id: venue.id,
       name: venue.name,
       street: venue.street,
+      pull_events?: venue.pull_events?,
       event_count: count(event.id)
     })
     |> Repo.all()
@@ -113,4 +114,24 @@ defmodule MusicListings.Venues do
   def create_venue(_user, _attrs) do
     {:error, :not_allowed}
   end
+
+  @doc """
+  Turns crawling a venue on or off.  Admin only.
+  """
+  @spec set_pull_events(User | nil, pos_integer() | String.t(), boolean()) ::
+          {:ok, Venue.t()} | {:error, Ecto.Changeset.t() | :not_allowed | :venue_not_found}
+  def set_pull_events(%User{role: :admin}, venue_id, pull_events?)
+      when is_boolean(pull_events?) do
+    case Repo.get(Venue, venue_id) do
+      nil ->
+        {:error, :venue_not_found}
+
+      venue ->
+        venue
+        |> Changeset.change(pull_events?: pull_events?)
+        |> Repo.update()
+    end
+  end
+
+  def set_pull_events(_user, _venue_id, _pull_events?), do: {:error, :not_allowed}
 end

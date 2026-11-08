@@ -152,4 +152,52 @@ defmodule MusicListings.VenuesTest do
              }
     end
   end
+
+  describe "list_venues/1 with restrict_to_pulled_venues?: false" do
+    test "includes venues not being crawled, flagged as such" do
+      Repo.delete_all(Event)
+      Repo.delete_all(Venue)
+      insert(:venue, name: "pulled", pull_events?: true)
+      insert(:venue, name: "not pulled", pull_events?: false)
+
+      assert [%VenueSummary{name: "pulled"}] = Venues.list_venues()
+
+      assert [
+               %VenueSummary{name: "not pulled", pull_events?: false},
+               %VenueSummary{name: "pulled", pull_events?: true}
+             ] = Venues.list_venues(restrict_to_pulled_venues?: false)
+    end
+  end
+
+  describe "set_pull_events/3" do
+    setup do
+      %{venue: insert(:venue, pull_events?: true)}
+    end
+
+    test "turns crawling a venue off and on", %{venue: venue} do
+      assert {:ok, %Venue{pull_events?: false}} =
+               Venues.set_pull_events(%User{role: :admin}, venue.id, false)
+
+      assert {:ok, %Venue{pull_events?: true}} =
+               Venues.set_pull_events(%User{role: :admin}, to_string(venue.id), true)
+
+      assert Repo.get!(Venue, venue.id).pull_events?
+    end
+
+    test "returns error when no user", %{venue: venue} do
+      assert {:error, :not_allowed} == Venues.set_pull_events(nil, venue.id, false)
+      assert Repo.get!(Venue, venue.id).pull_events?
+    end
+
+    test "returns error when user not an admin", %{venue: venue} do
+      assert {:error, :not_allowed} ==
+               Venues.set_pull_events(%User{role: :regular_user}, venue.id, false)
+
+      assert Repo.get!(Venue, venue.id).pull_events?
+    end
+
+    test "returns error when the venue doesn't exist" do
+      assert {:error, :venue_not_found} == Venues.set_pull_events(%User{role: :admin}, -1, false)
+    end
+  end
 end

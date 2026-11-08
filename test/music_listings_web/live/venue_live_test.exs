@@ -31,6 +31,16 @@ defmodule MusicListingsWeb.VenueLiveTest do
       assert html =~ "1 Upcoming Events"
     end
 
+    test "does not show venues that aren't crawled to anonymous visitors", %{conn: conn} do
+      insert(:venue, name: "Dormant Venue", pull_events?: false)
+
+      {:ok, view, html} = live(conn, ~p"/venues")
+
+      refute html =~ "Dormant Venue"
+      refute has_element?(view, "#inactive-venues")
+      refute has_element?(view, "button[phx-click='toggle-pull-events']")
+    end
+
     test "does not show crawl buttons to anonymous visitors", %{conn: conn} do
       {:ok, view, _html} = live(conn, ~p"/venues")
 
@@ -43,8 +53,9 @@ defmodule MusicListingsWeb.VenueLiveTest do
     setup :register_and_log_in_user
 
     setup do
-      insert(:venue, name: "Venue 1", street: "1 Street")
-      :ok
+      venue = insert(:venue, name: "Venue 1", street: "1 Street")
+      dormant_venue = insert(:venue, name: "Dormant Venue", pull_events?: false)
+      %{venue: venue, dormant_venue: dormant_venue}
     end
 
     test "shows crawl all and per-venue crawl buttons", %{conn: conn} do
@@ -52,6 +63,39 @@ defmodule MusicListingsWeb.VenueLiveTest do
 
       assert has_element?(view, "button[phx-click='crawl-all-venues']")
       assert has_element?(view, "button[phx-click='crawl-venue']")
+    end
+
+    test "lists venues that aren't crawled at the bottom", %{
+      conn: conn,
+      venue: venue,
+      dormant_venue: dormant_venue
+    } do
+      {:ok, view, _html} = live(conn, ~p"/venues")
+
+      assert has_element?(view, "#inactive-venues #venue-#{dormant_venue.id}")
+      refute has_element?(view, "#inactive-venues #venue-#{venue.id}")
+      assert has_element?(view, "#inactive-venues", "Not pulling events")
+    end
+
+    test "turns crawling a venue on", %{conn: conn, dormant_venue: dormant_venue} do
+      {:ok, view, _html} = live(conn, ~p"/venues")
+
+      html = view |> element("#pull-events-#{dormant_venue.id}") |> render_click()
+
+      assert html =~ "Now pulling events for Dormant Venue."
+      assert MusicListings.Repo.get!(MusicListingsSchema.Venue, dormant_venue.id).pull_events?
+      refute has_element?(view, "#inactive-venues #venue-#{dormant_venue.id}")
+      assert has_element?(view, "#venue-#{dormant_venue.id}")
+    end
+
+    test "turns crawling a venue off", %{conn: conn, venue: venue} do
+      {:ok, view, _html} = live(conn, ~p"/venues")
+
+      html = view |> element("#pull-events-#{venue.id}") |> render_click()
+
+      assert html =~ "Stopped pulling events for Venue 1."
+      refute MusicListings.Repo.get!(MusicListingsSchema.Venue, venue.id).pull_events?
+      assert has_element?(view, "#inactive-venues #venue-#{venue.id}")
     end
   end
 

@@ -130,4 +130,8 @@ defmodule MusicListings do
           }
         ) :: {:ok, Venue} | {:error, Ecto.Changeset.t() | :not_allowed}
   defdelegate create_venue(user, attrs), to: Venues
+
+  @spec set_pull_events(User | nil, pos_integer() | String.t(), boolean()) ::
+          {:ok, Venue.t()} | {:error, Ecto.Changeset.t() | :not_allowed | :venue_not_found}
+  defdelegate set_pull_events(user, venue_id, pull_events?), to: Venues
 end

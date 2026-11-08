@@ -1,17 +1,15 @@
 defmodule MusicListingsWeb.VenueLive.Index do
   use MusicListingsWeb, :live_view
 
+  alias MusicListings.Accounts.User
   alias MusicListingsWeb.SEO
 
   @impl true
   def mount(_params, _session, socket) do
-    venues = MusicListings.list_venues()
-
     socket
+    |> assign_venues()
     |> assign(
       page_title: "Venues",
-      venues: venues,
-      venue_count: Enum.count(venues),
       crawling?: false,
       crawling_venue_id: nil,
       meta_description:
@@ -51,13 +49,38 @@ defmodule MusicListingsWeb.VenueLive.Index do
   end
 
   @impl true
-  def handle_async(:crawl, {:ok, result}, socket) do
-    venues = MusicListings.list_venues()
+  def handle_event(
+        "toggle-pull-events",
+        %{"id" => venue_id, "pull-events" => pull_events},
+        socket
+      ) do
+    socket.assigns.current_user
+    |> MusicListings.set_pull_events(venue_id, pull_events == "true")
+    |> case do
+      {:ok, venue} ->
+        socket
+        |> assign_venues()
+        |> put_flash(:info, pull_events_flash(venue))
+        |> noreply()
 
+      {:error, :not_allowed} ->
+        socket
+        |> put_flash(:error, "Not allowed.")
+        |> noreply()
+
+      {:error, _reason} ->
+        socket
+        |> put_flash(:error, "Couldn't update the venue.")
+        |> noreply()
+    end
+  end
+
+  @impl true
+  def handle_async(:crawl, {:ok, result}, socket) do
     socket
     |> assign(:crawling?, false)
     |> assign(:crawling_venue_id, nil)
-    |> assign(:venues, venues)
+    |> assign_venues()
     |> crawl_flash(result)
     |> noreply()
   end
@@ -69,6 +92,30 @@ defmodule MusicListingsWeb.VenueLive.Index do
     |> put_flash(:error, "Crawl failed.")
     |> noreply()
   end
+
+  # Everyone sees the venues being crawled; an admin also sees the rest, to turn on
+  defp assign_venues(socket) do
+    {venues, inactive_venues} =
+      if admin?(socket.assigns.current_user) do
+        [restrict_to_pulled_venues?: false]
+        |> MusicListings.list_venues()
+        |> Enum.split_with(& &1.pull_events?)
+      else
+        {MusicListings.list_venues(), []}
+      end
+
+    assign(socket,
+      venues: venues,
+      venue_count: Enum.count(venues),
+      inactive_venues: inactive_venues
+    )
+  end
+
+  defp admin?(%User{role: :admin}), do: true
+  defp admin?(_user_or_nil), do: false
+
+  defp pull_events_flash(%{pull_events?: true, name: name}), do: "Now pulling events for #{name}."
+  defp pull_events_flash(%{name: name}), do: "Stopped pulling events for #{name}."
 
   defp crawl_flash(socket, {:ok, summary}) do
     put_flash(
@@ -107,6 +154,20 @@ defmodule MusicListingsWeb.VenueLive.Index do
       crawling?={@crawling?}
       crawling_venue_id={@crawling_venue_id}
     />
+    <.when_admin current_user={@current_user}>
+      <section :if={@inactive_venues != []} id="inactive-venues" class="mt-16">
+        <h2 class="headline text-3xl text-paper sm:text-4xl">Not pulling events</h2>
+        <p class="mt-3 max-w-xl text-sm leading-relaxed text-paper-dim">
+          {Enum.count(@inactive_venues)} venues aren't being crawled. Only admins see this list.
+        </p>
+        <.venue_summary
+          venues={@inactive_venues}
+          current_user={@current_user}
+          crawling?={@crawling?}
+          crawling_venue_id={@crawling_venue_id}
+        />
+      </section>
+    </.when_admin>
     """
   end
 end
