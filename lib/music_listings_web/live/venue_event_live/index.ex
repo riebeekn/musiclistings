@@ -92,6 +92,29 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
   end
 
   @impl true
+  def handle_event("toggle-pull-events", %{"pull-events" => pull_events}, socket) do
+    socket.assigns.current_user
+    |> MusicListings.set_pull_events(socket.assigns.venue.id, pull_events == "true")
+    |> case do
+      {:ok, venue} ->
+        socket
+        |> assign(:venue, venue)
+        |> put_flash(:info, pull_events_flash(venue))
+        |> noreply()
+
+      {:error, :not_allowed} ->
+        socket
+        |> put_flash(:error, "Not allowed.")
+        |> noreply()
+
+      {:error, _reason} ->
+        socket
+        |> put_flash(:error, "Couldn't update the venue.")
+        |> noreply()
+    end
+  end
+
+  @impl true
   def handle_async(:crawl, {:ok, result}, socket) do
     paged_events =
       MusicListings.list_events(
@@ -112,6 +135,9 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
     |> put_flash(:error, "Crawl failed.")
     |> noreply()
   end
+
+  defp pull_events_flash(%{pull_events?: true, name: name}), do: "Now pulling events for #{name}."
+  defp pull_events_flash(%{name: name}), do: "Stopped pulling events for #{name}."
 
   defp crawl_flash(socket, {:ok, summary}) do
     put_flash(
@@ -135,11 +161,12 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
     <div class="mb-10">
       <.venue_card venue={@venue} />
       <.when_admin current_user={@current_user}>
-        <div class="mt-4">
+        <div class="mt-4 flex flex-wrap items-center gap-3">
           <.button phx-click="crawl-venue" disabled={@crawling?}>
             <.icon name="hero-arrow-path" class={"size-4 #{if @crawling?, do: "animate-spin"}"} />
             {if @crawling?, do: "Crawling…", else: "Crawl this venue"}
           </.button>
+          <.pull_events_toggle venue={@venue} />
         </div>
       </.when_admin>
     </div>
