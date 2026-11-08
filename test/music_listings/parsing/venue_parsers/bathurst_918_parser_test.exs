@@ -6,115 +6,130 @@ defmodule MusicListings.Parsing.VenueParsers.Bathurst918ParserTest do
   alias MusicListings.Parsing.VenueParsers.Bathurst918Parser
 
   setup do
-    index_file_path = Path.expand("#{File.cwd!()}/test/data/bathurst_918/index.json")
-
-    single_event_file_path =
-      Path.expand("#{File.cwd!()}/test/data/bathurst_918/single_event.json")
-
-    index_body = File.read!(index_file_path)
-
-    event =
-      single_event_file_path
+    index_html =
+      "#{File.cwd!()}/test/data/bathurst_918/index.html"
+      |> Path.expand()
       |> File.read!()
-      |> Bathurst918Parser.events()
-      |> List.first()
 
-    %{index_body: index_body, event: event}
+    events = Bathurst918Parser.events(index_html)
+
+    event = Enum.find(events, &(&1.date == ~D[2026-11-27]))
+
+    %{index_html: index_html, events: events, event: event}
   end
 
   describe "source_url/0" do
     test "returns expected value" do
-      assert "https://partners-endpoint.dice.fm/api/v2/events?page%5Bsize%5D=100&types=linkout%2Cevent&filter%5Bvenues%5D%5B%5D=918+Bathurst+Centre&filter%5Bflags%5D%5B%5D=going_ahead&filter%5Bflags%5D%5B%5D=rescheduled" ==
-               Bathurst918Parser.source_url()
+      assert "https://www.918bathurst.com/events" == Bathurst918Parser.source_url()
     end
   end
 
   describe "events/1" do
-    test "returns expected events", %{index_body: index_body} do
-      events = Bathurst918Parser.events(index_body)
-      assert 1 = Enum.count(events)
+    test "returns the events in the upcoming events grid", %{events: events} do
+      assert [
+               {~D[2026-11-12], "Storytime - Chapter Love"},
+               {~D[2026-11-13], "Liana Zhen-Ai & Astrid Sonne \"Normal Dreams\""},
+               {~D[2026-11-15], "LIELOS By Levram"},
+               {~D[2026-11-20], "Swash & Serif Typography Conference"},
+               {~D[2026-11-27], "Westelaken - In it for the Lack - Album Release"},
+               {~D[2026-12-11],
+                "Hope for the Holidays: A Celebration of KLASSE Theatricals 1st Season"},
+               {~D[2026-12-21], "Jennifer Castle Winter Solstice Show"}
+             ] == Enum.map(events, &{&1.date, &1.title})
+    end
+
+    test "ignores the calendar's card for the selected day", %{events: events} do
+      # Nov 12 is in both the selected day's panel and the grid
+      assert 1 == Enum.count(events, &(&1.title == "Storytime - Chapter Love"))
+    end
+
+    test "returns no events for a page that hasn't rendered its listing" do
+      assert [] == Bathurst918Parser.events(~s(<html><body><div id="root"></div></body></html>))
     end
   end
 
   describe "next_page_url/2" do
-    test "returns nil", %{index_body: index_body} do
-      assert nil ==
-               Bathurst918Parser.next_page_url(
-                 index_body,
-                 "https://partners-endpoint.dice.fm/api/v2/events"
-               )
+    test "returns nil", %{index_html: index_html} do
+      assert nil == Bathurst918Parser.next_page_url(index_html, nil)
     end
   end
 
   describe "event_id/1" do
     test "returns event id", %{event: event} do
-      assert "918_bathurst_centre_695f2bef3dd34700019fcf79" ==
+      assert "918_bathurst_westelaken_in_it_for_the_lack_album_release_2026_11_27" ==
                Bathurst918Parser.event_id(event)
+    end
+
+    test "returns a unique id per event", %{events: events} do
+      ids = Enum.map(events, &Bathurst918Parser.event_id/1)
+
+      assert ids == Enum.uniq(ids)
     end
   end
 
   describe "ignored_event_id/1" do
     test "returns ignored event id", %{event: event} do
-      assert "918_bathurst_centre_695f2bef3dd34700019fcf79" ==
+      assert "918_bathurst_westelaken_in_it_for_the_lack_album_release_2026_11_27" ==
                Bathurst918Parser.ignored_event_id(event)
     end
   end
 
   describe "event_title/1" do
     test "returns event title", %{event: event} do
-      assert "The Messthetics and James Brandon Lewis" == Bathurst918Parser.event_title(event)
+      assert "Westelaken - In it for the Lack - Album Release" ==
+               Bathurst918Parser.event_title(event)
     end
   end
 
   describe "performers/1" do
     test "returns the event performers", %{event: event} do
       assert %Performers{
-               headliner: "The Messthetics",
-               openers: ["James Brandon Lewis"]
+               headliner: "Westelaken - In it for the Lack - Album Release",
+               openers: []
              } == Bathurst918Parser.performers(event)
     end
   end
 
   describe "event_date/1" do
     test "returns the event date", %{event: event} do
-      assert ~D[2026-05-02] == Bathurst918Parser.event_date(event)
+      assert ~D[2026-11-27] == Bathurst918Parser.event_date(event)
     end
   end
 
   describe "additional_dates/1" do
-    test "returns a list of additional dates", %{event: event} do
+    test "returns no additional dates", %{event: event} do
       assert [] == Bathurst918Parser.additional_dates(event)
     end
   end
 
   describe "event_time/1" do
-    test "returns the event start time", %{event: event} do
-      assert ~T[19:00:00] == Bathurst918Parser.event_time(event)
+    test "returns nil, as the time is only in the event's popup", %{event: event} do
+      assert nil == Bathurst918Parser.event_time(event)
     end
   end
 
   describe "price/1" do
     test "returns the event price", %{event: event} do
-      assert %Price{format: :fixed, lo: Decimal.new("26.55"), hi: Decimal.new("26.55")} ==
+      assert %Price{format: :fixed, lo: Decimal.new("20.00"), hi: Decimal.new("20.00")} ==
                Bathurst918Parser.price(event)
     end
   end
 
   describe "age_restriction/1" do
-    test "returns the event age restriction", %{event: event} do
-      assert :all_ages == Bathurst918Parser.age_restriction(event)
+    test "returns unknown", %{event: event} do
+      assert :unknown == Bathurst918Parser.age_restriction(event)
     end
   end
 
   describe "ticket_url/1" do
-    test "returns the event ticket url", %{event: event} do
-      assert "https://link.dice.fm/Y2c1374a5b0d" == Bathurst918Parser.ticket_url(event)
+    test "returns nil, as the ticket link is only in the event's popup", %{event: event} do
+      assert nil == Bathurst918Parser.ticket_url(event)
     end
   end
 
   describe "details_url/1" do
-    test "returns the event details url", %{event: event} do
-      assert "https://link.dice.fm/Y2c1374a5b0d" == Bathurst918Parser.details_url(event)
+    test "returns the events page", %{event: event} do
+      assert "https://www.918bathurst.com/events" == Bathurst918Parser.details_url(event)
     end
   end
 end
