@@ -21,12 +21,38 @@ defmodule MusicListings.HttpClient.Firecrawl do
 
   Request headers are not passed on: the browser sends its own.
 
+  When the account has run out of credits Firecrawl answers `402 Payment Required`
+  (code `insufficient_credits`) without scraping or charging anything, and every
+  request fails until the credits reset.  That comes back as an
+  `OutOfCreditsError`, so the crawl report can say a venue wasn't crawled for want
+  of credits rather than because its site couldn't be reached.
+
   Authenticates with `:firecrawl_api_key` (`$FIRECRAWL_API_KEY`) when set.
   Firecrawl also serves unauthenticated requests, so a missing key still works,
   at whatever rate Firecrawl allows anonymous use.
   """
 
   alias MusicListings.HttpClient.Response
+
+  defmodule OutOfCreditsError do
+    @moduledoc """
+    Firecrawl refused a request because the account is out of credits.
+    """
+    defexception [:detail]
+
+    @summary "Out of Firecrawl credits"
+
+    @doc """
+    The start of every message, for spotting the error in a report.
+    """
+    def summary, do: @summary
+
+    @impl true
+    def message(%{detail: detail}) when is_binary(detail) and detail != "",
+      do: "#{@summary} (Firecrawl said: #{detail})"
+
+    def message(_error), do: @summary
+  end
 
   @endpoint "https://api.firecrawl.dev/v2/scrape"
 
@@ -70,6 +96,12 @@ defmodule MusicListings.HttpClient.Firecrawl do
        }} ->
         {:ok, Response.new(status, html)}
 
+      {:ok, %Req.Response{status: 402} = response} ->
+        {:error, %OutOfCreditsError{detail: error_detail(response)}}
+
+      {:ok, %Req.Response{body: %{"code" => "insufficient_credits"}} = response} ->
+        {:error, %OutOfCreditsError{detail: error_detail(response)}}
+
       {:ok, %Req.Response{status: status, body: %{"error" => error}}} ->
         {:error, {:firecrawl_failed, status, error}}
 
@@ -80,6 +112,9 @@ defmodule MusicListings.HttpClient.Firecrawl do
         {:error, error}
     end
   end
+
+  defp error_detail(%Req.Response{body: %{"error" => error}}) when is_binary(error), do: error
+  defp error_detail(_response), do: nil
 
   defp auth_headers do
     case Application.get_env(:music_listings, :firecrawl_api_key) do

@@ -5,6 +5,7 @@ defmodule MusicListings.Crawler.DataSource do
   html for individual events in the form of a Meeseeks result
   """
   alias MusicListings.Crawler.Payload
+  alias MusicListings.HttpClient.Firecrawl.OutOfCreditsError
   alias MusicListings.HttpClient.Response
   alias MusicListings.Parsing.VenueParser
 
@@ -16,10 +17,15 @@ defmodule MusicListings.Crawler.DataSource do
     * `:fetch_error` - the page never came back as a 200: a non-200 status, a
       transport failure (e.g. a timeout from an origin that drops Render's IP),
       or a crash inside the parser's `retrieve_events_fun`.
+    * `:firecrawl_credits_error` - the page goes through Firecrawl, and the
+      account is out of credits.  Kept apart from `:fetch_error` because the
+      venue's site was never asked, and crawling it locally won't help: that
+      uses the same Firecrawl account.
     * `:page_parse_error` - the page was fetched but the parser's `events/1` or
       `next_page_url/2` blew up on it.
   """
-  @type error :: {:fetch_error | :page_parse_error, message :: String.t()}
+  @type error ::
+          {:fetch_error | :firecrawl_credits_error | :page_parse_error, message :: String.t()}
 
   @doc """
   Retrieves every page of events for the parser, starting at `url`.
@@ -60,6 +66,10 @@ defmodule MusicListings.Crawler.DataSource do
         # diagnose it the first time.
         Logger.warning("Body of HTTP #{status} from #{url}: #{body_snippet(body)}")
         {:error, {:fetch_error, "HTTP #{status} from #{url}"}}
+
+      {:error, %OutOfCreditsError{} = error} ->
+        {:error,
+         {:firecrawl_credits_error, "Not crawled: #{Exception.message(error)}. Requested #{url}"}}
 
       {:error, reason} ->
         {:error, {:fetch_error, "Request to #{url} failed: #{describe(reason)}"}}

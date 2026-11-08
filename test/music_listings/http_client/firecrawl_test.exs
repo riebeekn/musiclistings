@@ -48,6 +48,46 @@ defmodule MusicListings.HttpClient.FirecrawlTest do
     assert {:ok, %Response{status: 403}} = Firecrawl.get(@url)
   end
 
+  test "a 402 means the account is out of credits", %{stub: stub} do
+    stub.(fn conn ->
+      conn
+      |> Plug.Conn.put_status(402)
+      |> Req.Test.json(%{
+        "success" => false,
+        "code" => "insufficient_credits",
+        "error" => "Insufficient credits to perform this request."
+      })
+    end)
+
+    assert {:error, %Firecrawl.OutOfCreditsError{} = error} = Firecrawl.get(@url)
+
+    assert "Out of Firecrawl credits (Firecrawl said: Insufficient credits to perform this request.)" ==
+             Exception.message(error)
+  end
+
+  test "an insufficient_credits code is out of credits whatever the status", %{stub: stub} do
+    stub.(fn conn ->
+      conn
+      |> Plug.Conn.put_status(403)
+      |> Req.Test.json(%{"success" => false, "code" => "insufficient_credits"})
+    end)
+
+    assert {:error, %Firecrawl.OutOfCreditsError{detail: nil} = error} = Firecrawl.get(@url)
+    assert "Out of Firecrawl credits" == Exception.message(error)
+  end
+
+  test "a 402 is not retried", %{stub: stub} do
+    stub.(fn conn ->
+      conn
+      |> Plug.Conn.put_status(402)
+      |> Req.Test.json(%{"success" => false, "error" => "Payment required."})
+    end)
+
+    assert {:error, %Firecrawl.OutOfCreditsError{}} = Firecrawl.get(@url)
+    assert_received {:request, _authorization, _body}
+    refute_received {:request, _authorization, _body}
+  end
+
   test "a scrape Firecrawl couldn't carry out is an error", %{stub: stub} do
     stub.(fn conn ->
       conn

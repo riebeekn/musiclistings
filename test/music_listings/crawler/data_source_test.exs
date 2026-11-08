@@ -76,10 +76,23 @@ defmodule MusicListings.Crawler.DataSourceTest do
     end
 
     test "reports a non-exception error reason as a fetch error" do
-      respond(@url, {:error, {:firecrawl_failed, 402}})
+      respond(@url, {:error, {:firecrawl_failed, 500}})
 
-      assert {:error, {:fetch_error, "Request to #{@url} failed: {:firecrawl_failed, 402}"}, []} ==
+      assert {:error, {:fetch_error, "Request to #{@url} failed: {:firecrawl_failed, 500}"}, []} ==
                DataSource.retrieve_events(ScriptedParser, @url)
+    end
+
+    test "reports running out of Firecrawl credits apart from a fetch error" do
+      respond(
+        @url,
+        {:error,
+         %MusicListings.HttpClient.Firecrawl.OutOfCreditsError{detail: "Payment required."}}
+      )
+
+      assert {:error,
+              {:firecrawl_credits_error,
+               "Not crawled: Out of Firecrawl credits (Firecrawl said: Payment required.). " <>
+                 "Requested #{@url}"}, []} == DataSource.retrieve_events(ScriptedParser, @url)
     end
 
     test "reports a crash while fetching as a fetch error" do

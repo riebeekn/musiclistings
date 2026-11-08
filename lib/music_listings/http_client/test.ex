@@ -7,6 +7,7 @@ defmodule MusicListings.HttpClient.Test do
   """
   @behaviour MusicListings.HttpClient
 
+  alias MusicListings.HttpClient.Firecrawl.OutOfCreditsError
   alias MusicListings.HttpClient.Response
 
   @fixture_base "test/data"
@@ -15,11 +16,24 @@ defmodule MusicListings.HttpClient.Test do
   # has started serving a bot-mitigation challenge.
   @status_hosts [{"challenged.mhrth.test", 403}]
 
+  # Hosts whose every request fails as Firecrawl does once the account has run
+  # out of credits.
+  @out_of_credits_hosts ["out-of-credits.mhrth.test"]
+
   @impl true
   def get(url, _headers \\ [], _opts \\ []) do
-    case List.keyfind(@status_hosts, URI.parse(url).host, 0) do
-      {_host, status} -> {:ok, Response.new(status, "")}
-      nil -> get_fixture(url)
+    host = URI.parse(url).host
+
+    cond do
+      host in @out_of_credits_hosts ->
+        {:error, %OutOfCreditsError{detail: "Payment required to access this resource."}}
+
+      status_host = List.keyfind(@status_hosts, host, 0) ->
+        {_host, status} = status_host
+        {:ok, Response.new(status, "")}
+
+      true ->
+        get_fixture(url)
     end
   end
 

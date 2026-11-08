@@ -29,11 +29,15 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   remaining events fall back to the listing's dates and are reported as lookup
   failures.  A listing page that gets through again resets the breaker, so one
   venue's challenge doesn't cost the next venue its lookups.
+
+  Running out of Firecrawl credits stops the lookups the same way, but for the
+  rest of the whole crawl: the credits won't come back before it ends.
   """
   import Meeseeks.CSS
 
   alias MusicListings.Events
   alias MusicListings.HttpClient
+  alias MusicListings.HttpClient.Firecrawl.OutOfCreditsError
   alias MusicListings.Parsing.ChallengeBreaker
   alias MusicListings.Parsing.LookupFailures
   alias MusicListings.Parsing.ParseHelpers
@@ -49,6 +53,9 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   # load time.  The three venues are crawled one after another on one API key,
   # so it's the pace across all of them that counts.
   @default_request_interval_ms 6_000
+
+  # The breaker tripped when Firecrawl says the account is out of credits
+  @out_of_credits {__MODULE__, :firecrawl_out_of_credits}
 
   # Never more of the listing than this, however many pages it has
   @max_pages 5
@@ -80,23 +87,39 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParser do
   # a short reason - the response itself carries a whole challenge page, too
   # much for a crawl report.
   defp get_body(url) do
-    if ChallengeBreaker.tripped?(__MODULE__) do
-      {:error, "skipped the request to #{url}, an earlier one drew the Cloudflare challenge"}
-    else
-      url
-      |> get()
-      |> track_challenge()
-      |> case do
-        {:ok, %HttpClient.Response{status: 200, body: body}} -> {:ok, body}
-        {:ok, %HttpClient.Response{status: status}} -> {:error, "HTTP #{status} from #{url}"}
-        {:error, reason} -> {:error, "request to #{url} failed: #{inspect(reason)}"}
-      end
+    cond do
+      ChallengeBreaker.tripped?(@out_of_credits) ->
+        {:error,
+         "skipped the request to #{url}: #{OutOfCreditsError.summary()} since an earlier request"}
+
+      ChallengeBreaker.tripped?(__MODULE__) ->
+        {:error, "skipped the request to #{url}, an earlier one drew the Cloudflare challenge"}
+
+      true ->
+        url
+        |> get()
+        |> track_challenge()
+        |> case do
+          {:ok, %HttpClient.Response{status: 200, body: body}} -> {:ok, body}
+          {:ok, %HttpClient.Response{status: status}} -> {:error, "HTTP #{status} from #{url}"}
+          {:error, reason} -> {:error, "request to #{url} failed: #{describe(reason)}"}
+        end
     end
   end
+
+  defp describe(reason) when is_exception(reason), do: Exception.message(reason)
+  defp describe(reason), do: inspect(reason)
 
   # A 403 from mhrth.com is the Cloudflare challenge page
   defp track_challenge({:ok, %HttpClient.Response{status: 403}} = result) do
     ChallengeBreaker.trip(__MODULE__)
+    result
+  end
+
+  # Credits don't come back mid-crawl, and each refused request would still wait
+  # out the request interval, so stop asking for the rest of this crawl
+  defp track_challenge({:error, %OutOfCreditsError{}} = result) do
+    ChallengeBreaker.trip(@out_of_credits)
     result
   end
 

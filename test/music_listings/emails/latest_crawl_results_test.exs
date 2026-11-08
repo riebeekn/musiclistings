@@ -74,6 +74,75 @@ defmodule MusicListings.Emails.LatestCrawlResultsTest do
     }
   end
 
+  defp firecrawl_credits_error(venue) do
+    %CrawlError{
+      id: venue.id,
+      venue: venue,
+      venue_id: venue.id,
+      type: :firecrawl_credits_error,
+      error:
+        "Not crawled: Out of Firecrawl credits (Firecrawl said: Payment required.). " <>
+          "Requested https://example.com/events"
+    }
+  end
+
+  defp lookup_error(venue, message) do
+    %CrawlError{
+      id: venue.id,
+      venue: venue,
+      venue_id: venue.id,
+      type: :lookup_error,
+      error:
+        "1 lookup failed. Any values already stored for the affected fields were kept.\n" <>
+          message
+    }
+  end
+
+  describe "new_email/1 - out of Firecrawl credits" do
+    test "says which venues weren't crawled, and leaves them out of the local crawl command" do
+      venue = insert(:venue, name: "Rendered Hall", parser_module_name: "RenderedParser")
+
+      email =
+        [firecrawl_credits_error(venue)] |> crawl_summary() |> LatestCrawlResults.new_email()
+
+      assert email.html_body =~ "Out of Firecrawl credits"
+      assert email.html_body =~ "Rendered Hall"
+      assert email.html_body =~ "Not crawled: Out of Firecrawl credits"
+      refute email.html_body =~ "Crawl locally"
+      refute email.html_body =~ "RenderedParser"
+    end
+
+    test "includes a venue whose lookups were refused for credits" do
+      venue = insert(:venue, name: "Partly Crawled Hall")
+
+      email =
+        [
+          lookup_error(
+            venue,
+            "2026-11-20 A Show: Couldn't look up the dates for /tickets/a-show/: skipped the " <>
+              "request to https://example.com/tickets/a-show/: Out of Firecrawl credits since " <>
+              "an earlier request"
+          )
+        ]
+        |> crawl_summary()
+        |> LatestCrawlResults.new_email()
+
+      assert email.html_body =~ "Firecrawl refused requests tonight"
+      assert email.html_body =~ "Partly Crawled Hall"
+    end
+
+    test "isn't shown for other lookup failures" do
+      venue = insert(:venue, name: "Challenged Hall")
+
+      email =
+        [lookup_error(venue, "2026-11-20 A Show: Couldn't look up the dates: HTTP 403")]
+        |> crawl_summary()
+        |> LatestCrawlResults.new_email()
+
+      refute email.html_body =~ "Firecrawl refused requests tonight"
+    end
+  end
+
   describe "new_email/1 - fetch errors" do
     test "hands over the local crawl command, keyed by parser module name" do
       venue = insert(:venue, parser_module_name: "BlockedVenueParser")

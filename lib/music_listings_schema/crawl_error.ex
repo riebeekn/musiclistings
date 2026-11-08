@@ -13,6 +13,7 @@ defmodule MusicListingsSchema.CrawlError do
         :parse_error,
         :no_events_error,
         :fetch_error,
+        :firecrawl_credits_error,
         :page_parse_error,
         :lookup_error,
         :save_error,

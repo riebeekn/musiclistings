@@ -218,6 +218,12 @@ IPs and return the rendered HTML.
   report then shows a `lookup_error` for the venue, and `EventStorage` keeps the stored ticket
   link/time instead of overwriting them with `nil`. Any parser whose follow-up requests can fail
   should record its failures the same way.
+- Firecrawl's free plan is 1000 credits a month. Out of credits, it answers `402` (code
+  `insufficient_credits`) without scraping, which `Firecrawl.get/2` returns as an
+  `OutOfCreditsError`. A listing page refused that way is logged as a `firecrawl_credits_error`
+  (not a `fetch_error`, so the venue stays out of the email's crawl-locally command, since a local
+  crawl uses the same account), `MhRthTdmhParser` stops its lookups for the rest of the crawl, and
+  the crawl email lists the affected venues under "Out of Firecrawl credits".
 - A curl-impersonate HTTP client used to fetch these venues. It was removed because it can't get
   through from Render's IP; it's in git history (added in `3f6e020`) if ever needed for local crawls.
 

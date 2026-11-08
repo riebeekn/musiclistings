@@ -6,6 +6,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
 
   alias MusicListings.Curation
   alias MusicListings.Events
+  alias MusicListings.HttpClient.Firecrawl.OutOfCreditsError
   alias MusicListings.Repo
   alias MusicListingsSchema.CrawlError
   alias MusicListingsSchema.CrawlSummary
@@ -75,6 +76,10 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       |> Map.put(:error_count, Enum.count(assigns.crawl_summary.crawl_errors))
       |> Map.put(:added_event_count, Enum.count(assigns.added_events))
       |> Map.put(:unreachable_venues, unreachable_venues(assigns.crawl_summary.crawl_errors))
+      |> Map.put(
+        :out_of_credits_venues,
+        out_of_credits_venues(assigns.crawl_summary.crawl_errors)
+      )
       |> Map.put(:title_flags, Enum.filter(assigns.review_flags, &(&1.type == :non_event_title)))
       |> Map.put(
         :duplicate_flags,
@@ -145,6 +150,23 @@ defmodule MusicListings.Emails.LatestCrawlResults do
         <span style={if @crawl_summary.errors > 0, do: "color:#ff5a36;"}>{@crawl_summary.errors}</span>
       </:footer_col>
     </.table>
+
+    <%= if @out_of_credits_venues != [] do %>
+      <.h2>Out of Firecrawl credits</.h2>
+      <mj-text padding="6px 0">
+        <div style="border-left:3px solid #ff5a36;background-color:#1c1c1d;border-radius:6px;padding:12px 14px;">
+          <div style="color:#ece9e0;font-size:13px;line-height:1.5;">
+            Firecrawl refused requests tonight because the account is out of credits, so these
+            venues weren't crawled, or were only partly crawled. Their stored listings were left
+            as they were. Credits reset with the monthly plan; crawling locally won't help, as it
+            uses the same account.
+          </div>
+          <div style="color:#a8a49a;font-size:12px;line-height:1.45;padding-top:8px;">
+            {@out_of_credits_venues |> Enum.map_join(" · ", & &1.name)}
+          </div>
+        </div>
+      </mj-text>
+    <% end %>
 
     <%= if @error_count > 0 do %>
       <.h2>Errors ({@error_count})</.h2>
@@ -274,6 +296,21 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     |> Enum.sort_by(& &1.name)
   end
 
+  # Venues Firecrawl refused for want of credits: their listing page (a
+  # firecrawl_credits_error), or their follow-up lookups, which roll up into a
+  # lookup_error whose lines carry the out of credits message
+  defp out_of_credits_venues(crawl_errors) do
+    crawl_errors
+    |> Enum.filter(fn crawl_error ->
+      crawl_error.type == :firecrawl_credits_error or
+        (crawl_error.type == :lookup_error and
+           String.contains?(crawl_error.error || "", OutOfCreditsError.summary()))
+    end)
+    |> Enum.map(& &1.venue)
+    |> Enum.uniq_by(& &1.id)
+    |> Enum.sort_by(& &1.name)
+  end
+
   # A fetch error usually means the venue's origin blocks Render's egress IP (a
   # timeout) or its bot protection (a 403), and the fix starts by crawling it
   # from a machine that can reach it - so hand over a single command covering
@@ -302,6 +339,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     v2 = build_venue(2, "Second Venue", "SecondVenueParser")
     v3 = build_venue(3, "Quiet Venue", "QuietVenueParser")
     v4 = build_venue(4, "Blocked Venue", "BlockedVenueParser")
+    v5 = build_venue(5, "Rendered Venue", "RenderedVenueParser")
 
     # venue summaries
     vcs1 =
@@ -340,6 +378,15 @@ defmodule MusicListings.Emails.LatestCrawlResults do
         errors: 1
       })
 
+    vcs5 =
+      build_venue_crawl_summary(v5, %{
+        duplicate: 0,
+        ignored: 0,
+        new: 0,
+        updated: 0,
+        errors: 1
+      })
+
     # errors
     ce1 = build_crawl_error(1, v1)
     ce2 = build_crawl_error(2, v2)
@@ -347,6 +394,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     ce4 = build_no_events_error(4, v3)
     ce5 = build_fetch_error(5, v4)
     ce6 = build_lookup_error(6, v2)
+    ce7 = build_firecrawl_credits_error(7, v5)
 
     # events added by this crawl
     added_events = [
@@ -375,8 +423,8 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     ]
 
     build_crawl_summary()
-    |> Map.put(:crawl_errors, [ce1, ce2, ce3, ce4, ce5, ce6])
-    |> Map.put(:venue_crawl_summaries, [vcs1, vcs2, vcs3, vcs4])
+    |> Map.put(:crawl_errors, [ce1, ce2, ce3, ce4, ce5, ce6, ce7])
+    |> Map.put(:venue_crawl_summaries, [vcs1, vcs2, vcs3, vcs4, vcs5])
     |> new_email(
       added_events: added_events,
       review_flags: review_flags,
@@ -489,6 +537,18 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       venue_id: venue.id,
       type: :fetch_error,
       error: "Request to https://blocked.example.com/events failed: timeout"
+    }
+  end
+
+  defp build_firecrawl_credits_error(id, venue) do
+    %CrawlError{
+      id: id,
+      venue: venue,
+      venue_id: venue.id,
+      type: :firecrawl_credits_error,
+      error:
+        "Not crawled: Out of Firecrawl credits (Firecrawl said: Payment required to access " <>
+          "this resource.). Requested https://rendered.example.com/events"
     }
   end
 

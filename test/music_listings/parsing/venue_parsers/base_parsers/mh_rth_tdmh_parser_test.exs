@@ -8,6 +8,8 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParserTest do
   # Answers every request with a 403, see MusicListings.HttpClient.Test
   @challenged_url "https://challenged.mhrth.test"
   @base_url "https://masseyhall.mhrth.com"
+  # Answers every request as Firecrawl does when out of credits
+  @out_of_credits_url "https://out-of-credits.mhrth.test"
 
   setup do
     [challenged_event | _rest] =
@@ -228,6 +230,37 @@ defmodule MusicListings.Parsing.VenueParsers.BaseParsers.MhRthTdmhParserTest do
 
       assert ~T[20:00:00] == MhRthTdmhParser.event_time(event, @base_url)
       assert [] == LookupFailures.take()
+    end
+  end
+
+  describe "out of Firecrawl credits" do
+    test "a lookup refused for credits skips the lookups after it", %{
+      challenged_event: challenged_event,
+      event: event
+    } do
+      assert nil == MhRthTdmhParser.event_time(challenged_event, @out_of_credits_url)
+      assert [%{message: message}] = LookupFailures.take()
+      assert message =~ "Out of Firecrawl credits"
+
+      assert nil == MhRthTdmhParser.event_time(event, @base_url)
+      assert [%{message: message}] = LookupFailures.take()
+      assert message =~ "skipped"
+      assert message =~ "Out of Firecrawl credits"
+    end
+
+    test "a listing page that gets through doesn't reset it", %{
+      challenged_event: challenged_event,
+      event: event
+    } do
+      assert nil == MhRthTdmhParser.event_time(challenged_event, @out_of_credits_url)
+      LookupFailures.take()
+
+      assert {:ok, %Response{status: 200}} =
+               MhRthTdmhParser.retrieve_events_fun().("#{@base_url}/tickets/?page=1")
+
+      assert nil == MhRthTdmhParser.event_time(event, @base_url)
+      assert [%{message: message}] = LookupFailures.take()
+      assert message =~ "skipped"
     end
   end
 end
