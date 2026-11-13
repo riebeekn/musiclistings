@@ -1,5 +1,5 @@
-elixir 1.20.1-otp-29
-erlang 29.0.2
+elixir 1.20.5-otp-29
+erlang 29.1.2
 terraform 1.10.2
 awscli 2.25.1
 jq 1.7
