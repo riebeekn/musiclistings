@@ -254,6 +254,16 @@ defmodule MusicListings.Emails.LatestCrawlResultsTest do
 
       refute email.html_body =~ "New events"
     end
+
+    test "links each event's venue and title to their pages on the site" do
+      venue = insert(:venue, name: "Linked Test Hall")
+      event = insert(:event, venue: venue, title: "Linked Show")
+
+      email = [] |> crawl_summary() |> LatestCrawlResults.new_email()
+
+      assert email.html_body =~ "https://torontomusiclistings.com/events/venue/#{venue.id}"
+      assert email.html_body =~ "https://torontomusiclistings.com/events/#{event.id}"
+    end
   end
 
   describe "new_email/2 - removed listings" do

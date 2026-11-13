@@ -275,13 +275,13 @@ defmodule MusicListings.Emails.LatestCrawlResults do
       <.h2>New events ({@added_event_count})</.h2>
       <.table rows={@added_events}>
         <:col :let={event} label="Venue">
-          <span style="color:#a8a49a;">{event.venue.name}</span>
+          <.venue_link venue={event.venue} />
         </:col>
         <:col :let={event} label="Date">
           <span style="white-space:nowrap;">{DateHelpers.format_date(event.date)}</span>
         </:col>
         <:col :let={event} label="Event">
-          <span style="color:#ece9e0;font-weight:700;">{event.title}</span>
+          <.event_link event={event} />
         </:col>
       </.table>
     <% end %>
@@ -398,9 +398,9 @@ defmodule MusicListings.Emails.LatestCrawlResults do
 
     # events added by this crawl
     added_events = [
-      build_event(v1, "Sunset Rubdown", ~D[2026-08-14]),
-      build_event(v1, "The Weather Station", ~D[2026-09-02]),
-      build_event(v2, "Badge Époque Ensemble", ~D[2026-08-21])
+      build_event(v1, "Sunset Rubdown", ~D[2026-08-14], 201),
+      build_event(v1, "The Weather Station", ~D[2026-09-02], 202),
+      build_event(v2, "Badge Époque Ensemble", ~D[2026-08-21], 203)
     ]
 
     # flags awaiting review
@@ -488,7 +488,7 @@ defmodule MusicListings.Emails.LatestCrawlResults do
     }
   end
 
-  defp build_event(venue, title, date, id \\ nil) do
+  defp build_event(venue, title, date, id) do
     %Event{
       id: id,
       venue: venue,

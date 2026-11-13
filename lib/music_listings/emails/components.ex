@@ -25,6 +25,9 @@ defmodule MusicListings.Emails.Components do
   """
   def event_url(event_id), do: "#{@site_url}/events/#{event_id}"
 
+  @doc "Absolute URL of a venue's page on the site."
+  def venue_url(venue_id), do: "#{@site_url}/events/venue/#{venue_id}"
+
   @doc "Outer MJML shell: branded masthead, content card and footer."
   attr :inner_content, :any, required: true
 
@@ -99,6 +102,17 @@ defmodule MusicListings.Emails.Components do
     ~H"""
     <a href={event_url(@event.id)} style="color:#d8ff3e;font-weight:700;text-decoration:none;">
       {@event.title}
+    </a>
+    """
+  end
+
+  @doc "Links a venue name to its page on the site."
+  attr :venue, :any, required: true
+
+  def venue_link(assigns) do
+    ~H"""
+    <a href={venue_url(@venue.id)} style="color:#a8a49a;text-decoration:none;">
+      {@venue.name}
     </a>
     """
   end
