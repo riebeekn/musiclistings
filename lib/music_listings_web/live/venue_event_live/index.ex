@@ -92,6 +92,28 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
   end
 
   @impl true
+  def handle_event("clear-venue-events", _params, socket) do
+    venue = socket.assigns.venue
+
+    socket.assigns.current_user
+    |> MusicListings.clear_venue_events(venue.id)
+    |> case do
+      {:ok, count} ->
+        socket
+        |> assign(:events, [])
+        |> assign(:current_page, 1)
+        |> assign(:total_pages, 1)
+        |> put_flash(:info, "Cleared #{count} event(s) for #{venue.name}.")
+        |> noreply()
+
+      {:error, :not_allowed} ->
+        socket
+        |> put_flash(:error, "Not allowed.")
+        |> noreply()
+    end
+  end
+
+  @impl true
   def handle_event("toggle-pull-events", %{"pull-events" => pull_events}, socket) do
     socket.assigns.current_user
     |> MusicListings.set_pull_events(socket.assigns.venue.id, pull_events == "true")
@@ -165,6 +187,13 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
           <.button phx-click="crawl-venue" disabled={@crawling?}>
             <.icon name="hero-arrow-path" class={"size-4 #{if @crawling?, do: "animate-spin"}"} />
             {if @crawling?, do: "Crawling…", else: "Crawl this venue"}
+          </.button>
+          <.button
+            phx-click="clear-venue-events"
+            disabled={@crawling?}
+            data-confirm={"Permanently delete ALL events for #{@venue.name}, including past ones? This can't be undone."}
+          >
+            <.icon name="hero-trash" class="size-4" /> Clear all events
           </.button>
           <.pull_events_toggle venue={@venue} />
         </div>

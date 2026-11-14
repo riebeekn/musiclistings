@@ -13,6 +13,7 @@ defmodule MusicListings.Events do
   alias MusicListings.Repo
   alias MusicListingsSchema.CrawlSummary
   alias MusicListingsSchema.Event
+  alias MusicListingsSchema.EventFlag
   alias MusicListingsSchema.SubmittedEvent
   alias MusicListingsUtilities.DateHelpers
 
@@ -388,6 +389,40 @@ defmodule MusicListings.Events do
   end
 
   def delete_event(_user, _event_id) do
+    {:error, :not_allowed}
+  end
+
+  @doc """
+  Permanently deletes every event at a venue (past, upcoming and soft-deleted) along with
+  any event flags pointing at them, so the next crawl of the venue starts from scratch.
+
+  This is a hard delete on purpose: the crawler matches stored events on `external_id`, so
+  soft-deleted rows would still be matched and stay hidden instead of being re-added.
+  """
+  @spec clear_venue_events(User | nil, pos_integer()) ::
+          {:ok, non_neg_integer()} | {:error, :not_allowed}
+  def clear_venue_events(%User{role: :admin}, venue_id) do
+    venue_event_ids = from(event in Event, where: event.venue_id == ^venue_id, select: event.id)
+
+    Repo.transaction(fn ->
+      EventFlag
+      |> where(
+        [flag],
+        flag.event_id in subquery(venue_event_ids) or
+          flag.related_event_id in subquery(venue_event_ids)
+      )
+      |> Repo.delete_all()
+
+      {count, _result} =
+        Event
+        |> where([event], event.venue_id == ^venue_id)
+        |> Repo.delete_all()
+
+      count
+    end)
+  end
+
+  def clear_venue_events(_user, _venue_id) do
     {:error, :not_allowed}
   end
 

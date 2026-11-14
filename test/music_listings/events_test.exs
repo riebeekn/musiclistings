@@ -9,6 +9,7 @@ defmodule MusicListings.EventsTest do
   alias MusicListings.Events.ShowTimeInfo
   alias MusicListingsSchema.CrawlSummary
   alias MusicListingsSchema.Event
+  alias MusicListingsSchema.EventFlag
   alias MusicListingsSchema.SubmittedEvent
   alias MusicListingsSchema.Venue
   alias MusicListingsUtilities.DateHelpers
@@ -720,6 +721,65 @@ defmodule MusicListings.EventsTest do
 
       assert event.id == deleted_event.id
       assert deleted_event.deleted_at == DateHelpers.now()
+    end
+  end
+
+  describe "clear_venue_events/2" do
+    setup do
+      venue = insert(:venue)
+      other_venue = insert(:venue)
+
+      upcoming = insert(:event, venue: venue, date: ~D[2024-08-01])
+      past = insert(:event, venue: venue, date: ~D[2024-07-01])
+      deleted = insert(:event, venue: venue, deleted_at: DateHelpers.now())
+      other = insert(:event, venue: other_venue)
+
+      %{venue: venue, events: [upcoming, past, deleted], other: other}
+    end
+
+    test "returns error when no user", %{venue: venue} do
+      assert {:error, :not_allowed} == Events.clear_venue_events(nil, venue.id)
+    end
+
+    test "returns error when user not an admin", %{venue: venue} do
+      assert {:error, :not_allowed} ==
+               Events.clear_venue_events(%User{role: :regular_user}, venue.id)
+    end
+
+    test "hard deletes every event at the venue and nothing else", %{
+      venue: venue,
+      events: events,
+      other: other
+    } do
+      assert {:ok, 3} == Events.clear_venue_events(%User{role: :admin}, venue.id)
+
+      for event <- events, do: refute(Repo.get(Event, event.id))
+      assert Repo.get(Event, other.id)
+    end
+
+    test "deletes flags that reference the venue's events", %{
+      venue: venue,
+      events: [upcoming, past, _deleted],
+      other: other
+    } do
+      now = DateHelpers.now()
+
+      flag = fn attrs ->
+        %{type: :duplicate_event, reason: "dupe", inserted_at: now, updated_at: now}
+        |> Map.merge(attrs)
+        |> then(&struct(EventFlag, &1))
+        |> Repo.insert!()
+      end
+
+      own = flag.(%{event_id: upcoming.id, related_event_id: past.id})
+      cross = flag.(%{event_id: other.id, related_event_id: upcoming.id})
+      unrelated = flag.(%{event_id: other.id, type: :non_event_title, reason: "not an event"})
+
+      assert {:ok, 3} == Events.clear_venue_events(%User{role: :admin}, venue.id)
+
+      refute Repo.get(EventFlag, own.id)
+      refute Repo.get(EventFlag, cross.id)
+      assert Repo.get(EventFlag, unrelated.id)
     end
   end
 

@@ -51,6 +51,7 @@ defmodule MusicListingsWeb.VenueEventLiveTest do
 
       refute has_element?(view, "button[phx-click='crawl-venue']")
       refute has_element?(view, "button[phx-click='toggle-pull-events']")
+      refute has_element?(view, "button[phx-click='clear-venue-events']")
     end
   end
 
@@ -78,6 +79,22 @@ defmodule MusicListingsWeb.VenueEventLiveTest do
       {:ok, view, _html} = live(conn, ~p"/events/venue/#{venue_id}")
 
       assert has_element?(view, "button[phx-click='crawl-venue']")
+    end
+
+    test "clears all of the venue's events", %{
+      conn: conn,
+      venue_id: venue_id,
+      event_id: event_id
+    } do
+      {:ok, view, _html} = live(conn, ~p"/events/venue/#{venue_id}")
+
+      assert has_element?(view, "#event-#{event_id}")
+
+      assert view |> element("button[phx-click='clear-venue-events']") |> render_click() =~
+               "Cleared 1 event(s) for"
+
+      refute has_element?(view, "#event-#{event_id}")
+      refute MusicListings.Repo.get(MusicListingsSchema.Event, event_id)
     end
 
     test "turns pulling the venue's events off and back on", %{conn: conn, venue_id: venue_id} do

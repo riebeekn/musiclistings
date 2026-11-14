@@ -78,6 +78,10 @@ defmodule MusicListings do
   @spec delete_event(User | nil, pos_integer()) :: {:ok, Event} | {:error, :not_allowed}
   defdelegate delete_event(user, event_id), to: Events
 
+  @spec clear_venue_events(User | nil, pos_integer()) ::
+          {:ok, non_neg_integer()} | {:error, :not_allowed}
+  defdelegate clear_venue_events(user, venue_id), to: Events
+
   @spec event_flagged?(pos_integer()) :: boolean()
   defdelegate event_flagged?(event_id), to: Curation, as: :flagged?
 
