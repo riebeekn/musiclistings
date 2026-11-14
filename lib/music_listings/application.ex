@@ -47,7 +47,8 @@ defmodule MusicListings.Application do
 
       System.stop(0)
     else
-      {:ok, _migrated} = EctoBootMigration.migrate(:music_listings)
+      # Run pending migrations before anything that relies on the schema starts.
+      MusicListings.Release.migrate()
 
       children = [
         MusicListingsWeb.Telemetry,

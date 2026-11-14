@@ -15,7 +15,7 @@ defmodule MusicListings.MixProject do
       name: "Music Listings",
       docs: [
         main: "MusicListings",
-        source_url: "https://github.com/tbd",
+        source_url: "https://github.com/riebeekn/musiclistings",
         formatters: ["html"]
       ],
       dialyzer: [
@@ -90,12 +90,9 @@ defmodule MusicListings.MixProject do
       {:redirect, "~> 0.4.0"},
       {:goal, "~> 1.0"},
       {:phoenix_turnstile, "~> 1.0"},
-      # {:ecto_boot_migration, "~> 0.3.0"},
-      {:ecto_boot_migration,
-       git: "https://github.com/mwhitworth/ecto_boot_migration", branch: "elixir-1.17-fix"},
       {:nimble_csv, "~> 1.2"},
       {:fun_with_flags, "~> 1.13"},
-      {:honeybadger, "~>0.23"},
+      {:honeybadger, "~> 0.23"},
       {:appsignal_phoenix, "~> 2.0"},
       # build / dev / test related deps
       {:swoosh_gallery, "~> 0.2.0"},
