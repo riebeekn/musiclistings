@@ -130,12 +130,6 @@ variable "app_honeybadger_api_key" {
   sensitive   = true
 }
 
-variable "app_appsignal_push_api_key" {
-  description = "The AppSignal push API key"
-  type        = string
-  sensitive   = true
-}
-
 variable "app_firecrawl_api_key" {
   description = "Firecrawl API key"
   type        = string

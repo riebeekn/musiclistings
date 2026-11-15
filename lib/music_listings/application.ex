@@ -5,15 +5,11 @@ defmodule MusicListings.Application do
 
   use Application
 
-  alias Appsignal.CheckIn
-  alias Appsignal.Logger.Handler, as: AppsignalLogHandler
   alias MusicListings.Analytics.TelemetryHandler
   alias MusicListings.Workers.DataRetrievalWorker
 
   @impl true
   def start(_type, _args) do
-    appsignal_active? = Application.get_env(:appsignal, :config, [])[:active] == true
-
     if Application.get_env(:music_listings, :crawl_and_exit?) == true do
       children = [
         MusicListingsWeb.Telemetry,
@@ -34,16 +30,7 @@ defmodule MusicListings.Application do
       opts = [strategy: :one_for_one, name: MusicListings.Supervisor]
       Supervisor.start_link(children, opts)
 
-      if appsignal_active?, do: AppsignalLogHandler.add("crawler")
-
-      # Wrap the crawl in an AppSignal cron check-in (start + finish) so a
-      # missed or failed nightly run alerts. Falls back to a plain call when
-      # AppSignal is inactive (dev/test, or before the push key is set).
-      if appsignal_active? do
-        CheckIn.cron("daily_crawl", fn -> DataRetrievalWorker.perform(%{}) end)
-      else
-        DataRetrievalWorker.perform(%{})
-      end
+      DataRetrievalWorker.perform(%{})
 
       System.stop(0)
     else
@@ -78,18 +65,6 @@ defmodule MusicListings.Application do
 
       # Persist first-party product-analytics telemetry events to the database.
       TelemetryHandler.attach()
-
-      # HTTP requests, Ecto, Oban and Finch are auto-instrumented via the
-      # configured otp_app; log forwarding must be attached here.
-      #
-      # We deliberately do NOT call Appsignal.Phoenix.LiveView.attach/0. It hooks
-      # mount, handle_params, handle_event *and* render, and opens a root span for
-      # each — and AppSignal bills a root span as a request. On an all-LiveView app
-      # that bills ~7-10 requests per pageview, which blew the plan's request quota.
-      # LiveView errors are still reported via Honeybadger's logger backend.
-      if appsignal_active? do
-        AppsignalLogHandler.add("phoenix")
-      end
 
       result
     end

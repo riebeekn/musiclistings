@@ -66,26 +66,6 @@ config :honeybadger,
   # so without this a well-behaved refusal shows up in the daily digest as an app error.
   exclude_errors: [Phoenix.NotAcceptableError]
 
-# AppSignal (APM) base config — activated for prod in runtime.exs.
-# otp_app enables automatic Ecto / Oban / Finch (HTTP) instrumentation.
-config :appsignal, :config,
-  otp_app: :music_listings,
-  name: "Toronto Music Listings",
-  env: Mix.env(),
-  active: false,
-  # Safety net: application.ex intentionally skips Appsignal.Phoenix.LiveView.attach/0,
-  # so nothing should emit into this namespace. If someone re-adds attach/0, this keeps
-  # the per-callback spans (~7-10 per pageview) from silently eating the request quota.
-  ignore_namespaces: ["live_view"],
-  # Machine traffic we don't performance-tune. The "/" -> "/events" redirect goes through
-  # a plain plug rather than a Phoenix controller, so AppSignal names it by route pattern
-  # instead of Controller#action.
-  ignore_actions: [
-    "MusicListingsWeb.SitemapController#index",
-    "MusicListingsWeb.FeedController#index",
-    "GET /"
-  ]
-
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 

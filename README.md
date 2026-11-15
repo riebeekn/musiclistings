@@ -190,7 +190,6 @@ The events currently recorded are `event.ticket_link_shown` and `event.ticket_cl
 ## Monitoring
 
 - [Honeybadger](https://www.honeybadger.io/) for error reporting (`HONEYBADGER_API_KEY`).
-- [AppSignal](https://www.appsignal.com/) for APM, log forwarding and cron check-ins (`APPSIGNAL_PUSH_API_KEY`).  AppSignal is only activated when the push key is set, so it stays inactive in dev/test.  The nightly crawl is wrapped in an AppSignal cron check-in (`daily_crawl`) so a missed or failed run alerts.
 - Phoenix LiveDashboard is mounted in development only, at [http://localhost:4000/dev/dashboard](http://localhost:4000/dev/dashboard).
 
 ## Hosting and Infrastructure

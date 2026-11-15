@@ -132,7 +132,7 @@ terraform output -json db_connection_info
 
 The application's runtime environment variables are set by Terraform from the
 `app_*` variables in the `<workspace>.tfvars` note (see `variables.tf`) - admin email,
-Brevo, Turnstile, Honeybadger, AppSignal and Firecrawl.
+Brevo, Turnstile, Honeybadger and Firecrawl.
 
 The split between the two services is deliberate:
 
