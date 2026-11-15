@@ -141,7 +141,7 @@ defmodule MusicListings.MixProject do
         "compile --warnings-as-errors",
         "xref graph --label compile-connected --fail-above 0",
         "xref graph --format cycles --fail-above 2",
-        "dialyzer",
+        "dialyzer --list-unused-filters",
         "docs"
       ]
     ]

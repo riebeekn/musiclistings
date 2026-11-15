@@ -150,7 +150,7 @@ jobs:
             ${{ runner.os }}-Dialyzer-
 
       - name: Run Dialyzer
-        run: MIX_ENV=dev mix dialyzer
+        run: MIX_ENV=dev mix dialyzer --list-unused-filters
 
   # Perform various auditing tasks such as checking formatting etc.
   audit:
