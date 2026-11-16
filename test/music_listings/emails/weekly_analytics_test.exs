@@ -16,7 +16,10 @@ defmodule MusicListings.Emails.WeeklyAnalyticsTest do
         top_venues: [],
         top_events: [],
         ticket_coverage: %{total: 0, with_ticket_link: 0},
-        prior_ticket_coverage: nil
+        prior_ticket_coverage: nil,
+        ticket_coverage_by_venue: [],
+        coverage_drops: nil,
+        coverage_drop_threshold: 0.10
       },
       Map.new(overrides)
     )
@@ -41,6 +44,84 @@ defmodule MusicListings.Emails.WeeklyAnalyticsTest do
       assert email.html_body =~ "Ticket link impressions"
       assert email.text_body =~ "2000"
       assert email.text_body =~ "1000"
+    end
+
+    test "takes the CTR change between the rounded rates shown" do
+      # 10.66% vs 10.94% - shown as 10.7% and 10.9%. The unrounded change is
+      # -0.28, which would read -0.3 pts beside figures 0.2 apart.
+      email =
+        [
+          this_week: %{clicks: 1066, impressions: 10_000},
+          prior_week: %{clicks: 1094, impressions: 10_000}
+        ]
+        |> report()
+        |> WeeklyAnalytics.new_email()
+
+      assert email.html_body =~ "10.7%"
+      assert email.html_body =~ "10.9%"
+      assert email.html_body =~ "-0.2 pts"
+      refute email.html_body =~ "-0.3 pts"
+    end
+
+    test "shows the top event's share of clicks, and the week without it" do
+      email =
+        [
+          this_week: %{clicks: 780, impressions: 7319},
+          prior_week: %{clicks: 726, impressions: 6656},
+          baseline: %{clicks: 678.0, impressions: 6199.0},
+          top_events: [
+            %{id: 1, title: "Big Show", date: ~D[2024-08-10], venue_name: "Hall", clicks: 132},
+            %{id: 2, title: "Small Show", date: ~D[2024-08-11], venue_name: "Bar", clicks: 10}
+          ]
+        ]
+        |> report()
+        |> WeeklyAnalytics.new_email()
+
+      assert email.text_body =~ "The top event, Big Show, drew 132 of the week's 780 clicks (17%)"
+      assert email.text_body =~ "Without it the week had 648 clicks, against 726 the prior week"
+      assert email.text_body =~ "4-week average of 678"
+    end
+
+    test "leaves out the top event's share when there are no clicks" do
+      email = WeeklyAnalytics.new_email(report())
+
+      refute email.html_body =~ "The top event"
+    end
+
+    test "lists venues whose ticket-link coverage fell" do
+      email =
+        [
+          coverage_drops: [
+            %{
+              venue_name: "Horseshoe Tavern",
+              prior: %{total: 40, with_ticket_link: 38},
+              current: %{total: 44, with_ticket_link: 22}
+            }
+          ]
+        ]
+        |> report()
+        |> WeeklyAnalytics.new_email()
+
+      assert email.html_body =~ "fell by 10 pts or more"
+      assert email.html_body =~ "Horseshoe Tavern"
+      assert email.html_body =~ "95.0% (38/40)"
+      assert email.html_body =~ "50.0% (22/44)"
+      assert email.html_body =~ "-45.0 pts"
+    end
+
+    test "says when no venue's coverage fell" do
+      email =
+        [coverage_drops: []]
+        |> report()
+        |> WeeklyAnalytics.new_email()
+
+      assert email.text_body =~ "No venue's coverage fell by 10 pts or more"
+    end
+
+    test "says per-venue coverage starts next report when there is no per-venue snapshot" do
+      email = WeeklyAnalytics.new_email(report())
+
+      assert email.html_body =~ "Per-venue coverage changes start with the next report."
     end
 
     test "shows the multi-week average alongside the prior week" do

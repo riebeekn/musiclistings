@@ -172,18 +172,116 @@ defmodule MusicListings.AnalyticsTest do
     end
 
     test "has no prior coverage before the first snapshot is saved" do
-      assert Analytics.weekly_engagement(@reference).prior_ticket_coverage == nil
+      report = Analytics.weekly_engagement(@reference)
+
+      assert report.prior_ticket_coverage == nil
+      assert report.coverage_drops == nil
+    end
+
+    test "reports current ticket-link coverage per venue" do
+      venue_a = insert(:venue, name: "Venue A")
+      venue_b = insert(:venue, name: "Venue B")
+      insert(:event, venue: venue_a, date: ~D[2099-01-01])
+      insert(:event, venue: venue_a, date: ~D[2099-01-02], ticket_url: nil)
+      insert(:event, venue: venue_b, date: ~D[2099-01-03], ticket_url: "")
+      # past - excluded, so a venue with only past events isn't listed
+      insert(:event, venue: insert(:venue, name: "Venue C"), date: ~D[2000-01-01])
+
+      report = Analytics.weekly_engagement(@reference)
+
+      assert report.ticket_coverage_by_venue == [
+               %{venue_id: venue_a.id, venue_name: "Venue A", total: 2, with_ticket_link: 1},
+               %{venue_id: venue_b.id, venue_name: "Venue B", total: 1, with_ticket_link: 0}
+             ]
+    end
+
+    test "lists venues whose coverage fell by 10 pts or more, biggest fall first" do
+      # now: linked / upcoming events
+      falling = venue_with_events("Falling", 10, 4)
+      steep = venue_with_events("Steep", 10, 0)
+      edge = venue_with_events("Edge", 10, 5)
+      slight = venue_with_events("Slight", 100, 81)
+      rising = venue_with_events("Rising", 10, 10)
+      tiny = venue_with_events("Tiny", 4, 0)
+      # new since the last report - nothing to compare
+      _new = venue_with_events("New", 10, 0)
+
+      record_at("weekly.ticket_coverage", ~U[2024-07-25 12:00:00Z], %{
+        "total" => 0,
+        "with_ticket_link" => 0,
+        "venues" => %{
+          # 80% -> 40%
+          to_string(falling.id) => %{"total" => 10, "with_ticket_link" => 8},
+          # 90% -> 0%
+          to_string(steep.id) => %{"total" => 10, "with_ticket_link" => 9},
+          # 60% -> 50%: exactly the threshold, listed
+          to_string(edge.id) => %{"total" => 10, "with_ticket_link" => 6},
+          # 90% -> 81%: 9 pts, not listed
+          to_string(slight.id) => %{"total" => 100, "with_ticket_link" => 90},
+          # rose - not listed
+          to_string(rising.id) => %{"total" => 10, "with_ticket_link" => 5},
+          # 4 upcoming events now - too few to judge
+          to_string(tiny.id) => %{"total" => 10, "with_ticket_link" => 10}
+        }
+      })
+
+      report = Analytics.weekly_engagement(@reference)
+
+      assert report.coverage_drop_threshold == 0.10
+
+      assert report.coverage_drops == [
+               %{
+                 venue_name: "Steep",
+                 prior: %{total: 10, with_ticket_link: 9},
+                 current: %{total: 10, with_ticket_link: 0}
+               },
+               %{
+                 venue_name: "Falling",
+                 prior: %{total: 10, with_ticket_link: 8},
+                 current: %{total: 10, with_ticket_link: 4}
+               },
+               %{
+                 venue_name: "Edge",
+                 prior: %{total: 10, with_ticket_link: 6},
+                 current: %{total: 10, with_ticket_link: 5}
+               }
+             ]
+    end
+
+    test "has no per-venue drops when the prior snapshot predates per-venue counts" do
+      record_at("weekly.ticket_coverage", ~U[2024-07-25 12:00:00Z], %{
+        "total" => 100,
+        "with_ticket_link" => 50
+      })
+
+      report = Analytics.weekly_engagement(@reference)
+
+      assert report.prior_ticket_coverage == %{total: 100, with_ticket_link: 50}
+      assert report.coverage_drops == nil
     end
   end
 
   describe "record_ticket_coverage/1" do
     test "saves a snapshot the next report reads back" do
-      {:ok, _snapshot} = Analytics.record_ticket_coverage(%{total: 40, with_ticket_link: 30})
+      venue = venue_with_events("Venue A", 10, 2)
+
+      {:ok, _snapshot} =
+        Analytics.record_ticket_coverage(%{total: 40, with_ticket_link: 30}, [
+          %{venue_id: venue.id, venue_name: "Venue A", total: 10, with_ticket_link: 9}
+        ])
 
       next_week = DateTime.add(DateHelpers.now(), 7, :day)
+      report = Analytics.weekly_engagement(next_week)
 
-      assert Analytics.weekly_engagement(next_week).prior_ticket_coverage ==
-               %{total: 40, with_ticket_link: 30}
+      assert report.prior_ticket_coverage == %{total: 40, with_ticket_link: 30}
+
+      assert report.coverage_drops == [
+               %{
+                 venue_name: "Venue A",
+                 prior: %{total: 10, with_ticket_link: 9},
+                 current: %{total: 10, with_ticket_link: 2}
+               }
+             ]
     end
   end
 
@@ -227,6 +325,18 @@ defmodule MusicListings.AnalyticsTest do
 
   # Inserts an analytics event stamped at a specific `inserted_at` (record_event/2
   # always stamps "now", so we set the timestamp explicitly for window tests).
+  # A venue with `total` upcoming events, `with_ticket_link` of them linked.
+  defp venue_with_events(name, total, with_ticket_link) do
+    venue = insert(:venue, name: name)
+
+    for n <- 1..total do
+      ticket_url = if n <= with_ticket_link, do: "https://tickets.example.com/#{n}"
+      insert(:event, venue: venue, date: Date.add(~D[2099-01-01], n), ticket_url: ticket_url)
+    end
+
+    venue
+  end
+
   defp record_at(name, %DateTime{} = inserted_at, metadata \\ %{}) do
     Repo.insert!(%AnalyticsEvent{name: name, metadata: metadata, inserted_at: inserted_at})
   end

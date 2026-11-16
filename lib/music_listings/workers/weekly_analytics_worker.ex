@@ -18,7 +18,7 @@ defmodule MusicListings.Workers.WeeklyAnalyticsWorker do
     |> Mailer.deliver()
 
     # Coverage is current state, so save it for next week's report to compare against.
-    Analytics.record_ticket_coverage(report.ticket_coverage)
+    Analytics.record_ticket_coverage(report.ticket_coverage, report.ticket_coverage_by_venue)
 
     :ok
   end

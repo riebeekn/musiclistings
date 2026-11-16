@@ -123,6 +123,38 @@ defmodule MusicListings.Events do
   end
 
   @doc """
+  Like `ticket_link_coverage/0`, but per venue, so a fall in coverage can be
+  traced to the venue (and so the parser) behind it. Venues with no upcoming
+  events are left out.
+  """
+  @spec ticket_link_coverage_by_venue() :: [
+          %{
+            venue_id: integer(),
+            venue_name: String.t(),
+            total: non_neg_integer(),
+            with_ticket_link: non_neg_integer()
+          }
+        ]
+  def ticket_link_coverage_by_venue do
+    today = DateHelpers.effective_today_eastern()
+
+    Event
+    |> where([event], event.date >= ^today)
+    |> where([event], is_nil(event.deleted_at))
+    |> join(:inner, [event], venue in assoc(event, :venue))
+    |> group_by([_event, venue], [venue.id, venue.name])
+    |> select([event, venue], %{
+      venue_id: venue.id,
+      venue_name: venue.name,
+      total: count(event.id),
+      with_ticket_link:
+        filter(count(event.id), not is_nil(event.ticket_url) and event.ticket_url != "")
+    })
+    |> order_by([_event, venue], asc: venue.name)
+    |> Repo.all()
+  end
+
+  @doc """
   Lists the events created by a given crawl, sorted by venue.
 
   The crawl summary row is inserted when the crawl starts, so any event inserted

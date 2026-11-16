@@ -60,9 +60,22 @@ defmodule MusicListings.Analytics do
   @coverage_snapshot "weekly.ticket_coverage"
   @baseline_weeks 4
   @top_n 5
+  # A venue is listed as losing ticket links when its coverage falls by at least
+  # this much since the last report...
+  @coverage_drop_threshold 0.10
+  # ...and it had at least this many upcoming events both times. Below that, one
+  # newly listed show without a link yet swings the rate by tens of points.
+  @coverage_drop_min_events 5
 
   @type ticket_counts :: %{clicks: number(), impressions: number()}
   @type coverage :: %{total: non_neg_integer(), with_ticket_link: non_neg_integer()}
+  @type venue_coverage :: %{
+          venue_id: integer(),
+          venue_name: String.t(),
+          total: non_neg_integer(),
+          with_ticket_link: non_neg_integer()
+        }
+  @type coverage_drop :: %{venue_name: String.t(), prior: coverage(), current: coverage()}
 
   @doc """
   Builds the data for the weekly engagement email, built on the event page's
@@ -80,8 +93,16 @@ defmodule MusicListings.Analytics do
     happened).
   - `ticket_coverage` - how many upcoming events carry a ticket link, right now.
     It is a point-in-time count, so `prior_ticket_coverage` is the snapshot the
-    previous report saved (see `record_ticket_coverage/1`), or `nil` if there
+    previous report saved (see `record_ticket_coverage/2`), or `nil` if there
     isn't one yet.
+  - `ticket_coverage_by_venue` - the same count per venue, saved with the
+    snapshot.
+  - `coverage_drops` - venues whose coverage fell by at least
+    `coverage_drop_threshold` (as a fraction) since that snapshot, biggest fall
+    first. A drop like that usually means the venue's parser stopped picking up
+    ticket links. Venues with fewer than #{@coverage_drop_min_events} upcoming
+    events in either count are skipped as too noisy. `nil` when the prior
+    snapshot has no per-venue counts (snapshots saved before they were added).
   """
   @spec weekly_engagement(DateTime.t()) :: %{
           period_end: DateTime.t(),
@@ -102,12 +123,20 @@ defmodule MusicListings.Analytics do
             }
           ],
           ticket_coverage: coverage(),
-          prior_ticket_coverage: coverage() | nil
+          prior_ticket_coverage: coverage() | nil,
+          ticket_coverage_by_venue: [venue_coverage()],
+          coverage_drops: [coverage_drop()] | nil,
+          coverage_drop_threshold: float()
         }
   def weekly_engagement(reference \\ DateHelpers.now()) do
     this_week_start = DateTime.add(reference, -7, :day)
     prior_week_start = DateTime.add(reference, -14, :day)
     baseline_start = DateTime.add(this_week_start, -7 * @baseline_weeks, :day)
+    by_venue = Events.ticket_link_coverage_by_venue()
+
+    # Any snapshot less than six days old was saved by a retry of this same
+    # report, not by last week's, so look for one older than that.
+    prior_snapshot = latest_ticket_coverage_before(DateTime.add(reference, -6, :day))
 
     %{
       period_end: reference,
@@ -120,21 +149,33 @@ defmodule MusicListings.Analytics do
       top_venues: top_venues_by_ticket_clicks(this_week_start, reference),
       top_events: top_events_by_ticket_clicks(this_week_start, reference),
       ticket_coverage: Events.ticket_link_coverage(),
-      # Any snapshot less than six days old was saved by a retry of this same
-      # report, not by last week's, so look for one older than that.
-      prior_ticket_coverage: latest_ticket_coverage_before(DateTime.add(reference, -6, :day))
+      prior_ticket_coverage: prior_snapshot && prior_snapshot.coverage,
+      ticket_coverage_by_venue: by_venue,
+      coverage_drops: prior_snapshot && coverage_drops(prior_snapshot.by_venue, by_venue),
+      coverage_drop_threshold: @coverage_drop_threshold
     }
   end
 
   @doc """
-  Saves the ticket-link coverage a weekly report was sent with, so the next
-  report can show how it changed (coverage is current state, so it can't be
-  reconstructed for a past date).
+  Saves the ticket-link coverage a weekly report was sent with, overall and per
+  venue, so the next report can show how it changed (coverage is current state,
+  so it can't be reconstructed for a past date). Venues are keyed by id, so a
+  renamed venue still lines up.
   """
-  @spec record_ticket_coverage(coverage()) ::
+  @spec record_ticket_coverage(coverage(), [venue_coverage()]) ::
           {:ok, AnalyticsEvent.t()} | {:error, Ecto.Changeset.t()}
-  def record_ticket_coverage(%{total: total, with_ticket_link: with_ticket_link}) do
-    record_event(@coverage_snapshot, %{"total" => total, "with_ticket_link" => with_ticket_link})
+  def record_ticket_coverage(%{total: total, with_ticket_link: with_ticket_link}, by_venue) do
+    venues =
+      Map.new(by_venue, fn venue ->
+        {to_string(venue.venue_id),
+         %{"total" => venue.total, "with_ticket_link" => venue.with_ticket_link}}
+      end)
+
+    record_event(@coverage_snapshot, %{
+      "total" => total,
+      "with_ticket_link" => with_ticket_link,
+      "venues" => venues
+    })
   end
 
   defp ticket_counts_between(from, to) do
@@ -197,11 +238,52 @@ defmodule MusicListings.Analytics do
     |> limit(1)
     |> Repo.one()
     |> case do
-      %AnalyticsEvent{metadata: %{"total" => total, "with_ticket_link" => with_ticket_link}} ->
-        %{total: total, with_ticket_link: with_ticket_link}
+      %AnalyticsEvent{
+        metadata: %{"total" => total, "with_ticket_link" => with_ticket_link} = metadata
+      } ->
+        %{
+          coverage: %{total: total, with_ticket_link: with_ticket_link},
+          by_venue: snapshot_venues(metadata)
+        }
 
       _no_snapshot ->
         nil
     end
+  end
+
+  defp snapshot_venues(%{"venues" => venues}) do
+    Map.new(venues, fn {venue_id, %{"total" => total, "with_ticket_link" => with_ticket_link}} ->
+      {String.to_integer(venue_id), %{total: total, with_ticket_link: with_ticket_link}}
+    end)
+  end
+
+  defp snapshot_venues(_snapshot_without_venues), do: nil
+
+  defp coverage_drops(nil = _prior_by_venue, _current_by_venue), do: nil
+
+  defp coverage_drops(prior_by_venue, current_by_venue) do
+    current_by_venue
+    |> Enum.flat_map(fn venue ->
+      current = %{total: venue.total, with_ticket_link: venue.with_ticket_link}
+
+      case Map.fetch(prior_by_venue, venue.venue_id) do
+        {:ok, prior} -> [%{venue_name: venue.venue_name, prior: prior, current: current}]
+        :error -> []
+      end
+    end)
+    |> Enum.filter(fn %{prior: prior, current: current} ->
+      prior.total >= @coverage_drop_min_events and current.total >= @coverage_drop_min_events and
+        coverage_fall(prior, current) >= @coverage_drop_threshold
+    end)
+    |> Enum.sort_by(&coverage_fall(&1.prior, &1.current), :desc)
+  end
+
+  # Rounded so a fall of exactly the threshold (0.6 - 0.5 is 0.0999... as a
+  # float) counts as reaching it.
+  defp coverage_fall(prior, current) do
+    Float.round(
+      prior.with_ticket_link / prior.total - current.with_ticket_link / current.total,
+      6
+    )
   end
 end
