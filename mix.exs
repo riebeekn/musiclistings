@@ -5,7 +5,7 @@ defmodule MusicListings.MixProject do
     [
       app: :music_listings,
       version: "0.1.0",
-      elixir: "~> 1.14",
+      elixir: "~> 1.18",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
@@ -111,6 +111,7 @@ defmodule MusicListings.MixProject do
       {:excoveralls, "~> 0.10", only: :test},
       {:mix_audit, "~> 2.0", only: [:dev, :test], runtime: false},
       {:sobelow, "~> 0.13", only: [:dev, :test], runtime: false},
+      {:soundcheck, "== 0.2.1", only: [:dev, :test], runtime: false},
       {:eunomo, "~> 3.0.0", only: [:dev, :test], runtime: false},
       {:ex_machina, "~> 2.8.0", only: :test}
     ]
@@ -137,8 +138,8 @@ defmodule MusicListings.MixProject do
       ],
       check: [
         "format",
-        "credo --strict",
         "compile --warnings-as-errors",
+        "credo --strict",
         "xref graph --label compile-connected --fail-above 0",
         "xref graph --format cycles --fail-above 2",
         "dialyzer --list-unused-filters",
