@@ -6,6 +6,7 @@ defmodule MusicListingsWeb.UserAuth do
   import Plug.Conn
 
   alias MusicListings.Accounts
+  alias MusicListings.Accounts.User
 
   # Make the remember me cookie valid for 60 days.
   # If you want bump or reduce this value, also change
@@ -13,6 +14,9 @@ defmodule MusicListingsWeb.UserAuth do
   @max_age 60 * 60 * 24 * 60
   @remember_me_cookie "_music_listings_web_user_remember_me"
   @remember_me_options [sign: true, max_age: @max_age, same_site: "Lax"]
+
+  @not_authorised_message "You are not authorised to access this page."
+  @not_authorised_path "/events"
 
   @doc """
   Logs the user in.
@@ -125,6 +129,10 @@ defmodule MusicListingsWeb.UserAuth do
       on user_token.
       Redirects to login page if there's no logged user.
 
+    * `:ensure_admin` - Like `:ensure_authenticated`, but also requires the
+      current_user to be an admin. Redirects a logged-in non-admin to the
+      events page.
+
     * `:redirect_if_user_is_authenticated` - Authenticates the user from the session.
       Redirects to signed_in_path if there's a logged user.
 
@@ -162,6 +170,31 @@ defmodule MusicListingsWeb.UserAuth do
         |> Phoenix.LiveView.redirect(to: ~p"/users/log_in")
 
       {:halt, socket}
+    end
+  end
+
+  def on_mount(:ensure_admin, _params, session, socket) do
+    socket = mount_current_user(socket, session)
+
+    case socket.assigns.current_user do
+      %User{role: :admin} ->
+        {:cont, socket}
+
+      nil ->
+        socket =
+          socket
+          |> Phoenix.LiveView.put_flash(:error, "You must log in to access this page.")
+          |> Phoenix.LiveView.redirect(to: ~p"/users/log_in")
+
+        {:halt, socket}
+
+      _non_admin ->
+        socket =
+          socket
+          |> Phoenix.LiveView.put_flash(:error, @not_authorised_message)
+          |> Phoenix.LiveView.redirect(to: @not_authorised_path)
+
+        {:halt, socket}
     end
   end
 
@@ -211,6 +244,28 @@ defmodule MusicListingsWeb.UserAuth do
       |> maybe_store_return_to()
       |> redirect(to: ~p"/users/log_in")
       |> halt()
+    end
+  end
+
+  @doc """
+  Used for routes that require the user to be an admin.
+
+  Redirects to the login page if no user is logged in, and to the
+  events page if the logged-in user isn't an admin.
+  """
+  def require_admin_user(conn, _opts) do
+    case conn.assigns[:current_user] do
+      %User{role: :admin} ->
+        conn
+
+      nil ->
+        require_authenticated_user(conn, [])
+
+      _non_admin ->
+        conn
+        |> put_flash(:error, @not_authorised_message)
+        |> redirect(to: @not_authorised_path)
+        |> halt()
     end
   end
 

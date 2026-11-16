@@ -23,6 +23,13 @@ defmodule MusicListings.AccountsFixtures do
     user
   end
 
+  def regular_user_fixture(attrs \\ %{}) do
+    attrs
+    |> user_fixture()
+    |> Ecto.Changeset.change(role: :regular_user)
+    |> MusicListings.Repo.update!()
+  end
+
   def extract_user_token(fun) do
     {:ok, captured_email} = fun.(&"[TOKEN]#{&1}[TOKEN]")
     [_first, token | _rest] = String.split(captured_email.text_body, "[TOKEN]")

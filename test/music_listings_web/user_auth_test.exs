@@ -186,6 +186,60 @@ defmodule MusicListingsWeb.UserAuthTest do
     end
   end
 
+  describe "on_mount :ensure_admin" do
+    setup do
+      socket = %LiveView.Socket{
+        endpoint: MusicListingsWeb.Endpoint,
+        assigns: %{__changed__: %{}, flash: %{}}
+      }
+
+      %{socket: socket}
+    end
+
+    test "continues for an admin", %{conn: conn, user: user, socket: socket} do
+      user_token = Accounts.generate_user_session_token(user)
+      session = conn |> put_session(:user_token, user_token) |> get_session()
+
+      {:cont, updated_socket} = UserAuth.on_mount(:ensure_admin, %{}, session, socket)
+
+      assert updated_socket.assigns.current_user.id == user.id
+    end
+
+    test "redirects a non-admin to the events page", %{conn: conn, socket: socket} do
+      user = regular_user_fixture()
+      user_token = Accounts.generate_user_session_token(user)
+      session = conn |> put_session(:user_token, user_token) |> get_session()
+
+      {:halt, updated_socket} = UserAuth.on_mount(:ensure_admin, %{}, session, socket)
+
+      assert {:redirect, %{to: "/events"}} = updated_socket.redirected
+
+      assert Phoenix.Flash.get(updated_socket.assigns.flash, :error) ==
+               "You are not authorised to access this page."
+    end
+
+    test "redirects to login page if there isn't a valid user_token", %{
+      conn: conn,
+      socket: socket
+    } do
+      session = conn |> put_session(:user_token, "invalid_token") |> get_session()
+
+      {:halt, updated_socket} = UserAuth.on_mount(:ensure_admin, %{}, session, socket)
+
+      assert updated_socket.assigns.current_user == nil
+      assert {:redirect, %{to: "/users/log_in"}} = updated_socket.redirected
+    end
+
+    test "redirects to login page if there isn't a user_token", %{conn: conn, socket: socket} do
+      session = get_session(conn)
+
+      {:halt, updated_socket} = UserAuth.on_mount(:ensure_admin, %{}, session, socket)
+
+      assert updated_socket.assigns.current_user == nil
+      assert {:redirect, %{to: "/users/log_in"}} = updated_socket.redirected
+    end
+  end
+
   describe "on_mount :redirect_if_user_is_authenticated" do
     test "redirects if there is an authenticated  user ", %{conn: conn, user: user} do
       user_token = Accounts.generate_user_session_token(user)
@@ -266,6 +320,39 @@ defmodule MusicListingsWeb.UserAuthTest do
 
     test "does not redirect if user is authenticated", %{conn: conn, user: user} do
       conn = conn |> assign(:current_user, user) |> UserAuth.require_authenticated_user([])
+      refute conn.halted
+      refute conn.status
+    end
+  end
+
+  describe "require_admin_user/2" do
+    test "redirects to login if user is not authenticated", %{conn: conn} do
+      conn = conn |> fetch_flash() |> UserAuth.require_admin_user([])
+      assert conn.halted
+
+      assert redirected_to(conn) == ~p"/users/log_in"
+
+      assert Phoenix.Flash.get(conn.assigns.flash, :error) ==
+               "You must log in to access this page."
+    end
+
+    test "redirects a non-admin to the events page", %{conn: conn} do
+      conn =
+        conn
+        |> fetch_flash()
+        |> assign(:current_user, regular_user_fixture())
+        |> UserAuth.require_admin_user([])
+
+      assert conn.halted
+
+      assert redirected_to(conn) == ~p"/events"
+
+      assert Phoenix.Flash.get(conn.assigns.flash, :error) ==
+               "You are not authorised to access this page."
+    end
+
+    test "does not redirect an admin", %{conn: conn, user: user} do
+      conn = conn |> assign(:current_user, user) |> UserAuth.require_admin_user([])
       refute conn.halted
       refute conn.status
     end

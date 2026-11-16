@@ -185,7 +185,51 @@
           {Credo.Check.Refactor.NegatedIsNil, []},
           {Credo.Check.Refactor.VariableRebinding, []},
           {Credo.Check.Warning.LeakyEnvironment, []},
-          {Credo.Check.Warning.UnsafeToAtom, []}
+          {Credo.Check.Warning.UnsafeToAtom, []},
+
+          #
+          # Soundcheck LiveView checks (https://github.com/leonqadirie/soundcheck).
+          # Credo ignores a plugin's default checks when `enabled:` is given, so
+          # Soundcheck's default-on checks are listed here explicitly.
+          #
+          {Soundcheck.Check.Consistency.Configuration, []},
+          {Soundcheck.Check.Readability.InvalidSuppression, []},
+          {Soundcheck.Check.Warning.AssignSetOnlyWhenConnected, []},
+          {Soundcheck.Check.Warning.AsyncAssignFieldRead, []},
+          {Soundcheck.Check.Warning.HookWithoutId, []},
+          {Soundcheck.Check.Warning.InvalidLiveComponent, []},
+          {Soundcheck.Check.Warning.InvalidLiveRender, []},
+          {Soundcheck.Check.Warning.InvalidSendUpdate, []},
+          {Soundcheck.Check.Warning.LiteralLiveComponentIdInLoop, []},
+          {Soundcheck.Check.Warning.LiveViewCallbackInComponent, []},
+          {Soundcheck.Check.Warning.PatchToForeignLiveView, []},
+          {Soundcheck.Check.Warning.PatchWithoutHandleParams, []},
+          {Soundcheck.Check.Warning.StreamChildWithoutId, []},
+          {Soundcheck.Check.Warning.StreamConsumedOutsideFor, []},
+          {Soundcheck.Check.Warning.StreamContainerWithoutPhxUpdate, []},
+          {Soundcheck.Check.Warning.SubscribedWithoutHandleInfo, []},
+          {Soundcheck.Check.Warning.UndeclaredComponentAttr, []},
+          {Soundcheck.Check.Warning.UndefinedHook, []},
+          {Soundcheck.Check.Warning.UndefinedMountHook, []},
+          {Soundcheck.Check.Warning.UnguardedSubscribe, []},
+          {Soundcheck.Check.Warning.UnhandledAsyncResult, []},
+          {Soundcheck.Check.Warning.UnhandledEvent, []},
+
+          #
+          # Soundcheck opt-in checks
+          #
+          {Soundcheck.Check.Warning.LiveRouteWithoutAuthHook,
+           [
+             public_paths: [
+               "/events",
+               "/events/new",
+               "/events/venue/:venue_id",
+               "/events/:id",
+               "/events/:id/:slug",
+               "/venues",
+               "/contact"
+             ]
+           ]}
         ],
         disabled: [
           #

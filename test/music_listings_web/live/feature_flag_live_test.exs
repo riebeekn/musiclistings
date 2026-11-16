@@ -11,6 +11,16 @@ defmodule MusicListingsWeb.FeatureFlagLiveTest do
     end
   end
 
+  describe "index - logged in as a non-admin" do
+    test "redirects to the events page", %{conn: conn} do
+      conn = log_in_user(conn, MusicListings.AccountsFixtures.regular_user_fixture())
+
+      assert {:error, {:redirect, redirect_map}} = live(conn, ~p"/feature_flags")
+
+      assert redirect_map.to == "/events"
+    end
+  end
+
   describe "index - logged in" do
     setup :register_and_log_in_user
 

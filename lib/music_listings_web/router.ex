@@ -70,10 +70,10 @@ defmodule MusicListingsWeb.Router do
 
   ## Secured routes
   scope "/", MusicListingsWeb do
-    pipe_through [:browser, :require_authenticated_user]
+    pipe_through [:browser, :require_admin_user]
 
-    live_session :require_authenticated_user,
-      on_mount: [{MusicListingsWeb.UserAuth, :mount_current_user}] do
+    live_session :require_admin_user,
+      on_mount: [{MusicListingsWeb.UserAuth, :ensure_admin}] do
       live "/submitted_events", SubmittedEventLive.Index, :index
       live "/submitted_events/:id/edit", SubmittedEventLive.Edit, :edit
       live "/feature_flags", FeatureFlagLive.Index, :index
