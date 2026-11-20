@@ -111,7 +111,7 @@ defmodule MusicListings.MixProject do
       {:excoveralls, "~> 0.10", only: :test},
       {:mix_audit, "~> 2.0", only: [:dev, :test], runtime: false},
       {:sobelow, "~> 0.13", only: [:dev, :test], runtime: false},
-      {:soundcheck, "== 0.2.1", only: [:dev, :test], runtime: false},
+      {:soundcheck, "== 0.3.0", only: [:dev, :test], runtime: false},
       {:eunomo, "~> 3.0.0", only: [:dev, :test], runtime: false},
       {:ex_machina, "~> 2.8.0", only: :test}
     ]
