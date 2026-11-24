@@ -2,6 +2,8 @@ defmodule MusicListingsWeb.SubmittedEventLive.Index do
   use MusicListingsWeb, :live_view
   use Goal
 
+  alias MusicListingsUtilities.DateHelpers
+
   @impl true
   def mount(_params, _session, socket) do
     {:ok, socket}
@@ -154,6 +156,123 @@ defmodule MusicListingsWeb.SubmittedEventLive.Index do
 
     <div class="mt-6 pt-6 border-t border-hairline">
       <.pager current_page={@current_page} total_pages={@total_pages} path={~p"/submitted_events"} />
+    </div>
+    """
+  end
+
+  attr :submitted_events, :list, required: true
+  attr :selected_ids, :any, required: true
+
+  defp submitted_events(assigns) do
+    all_selected =
+      assigns.submitted_events != [] and
+        Enum.all?(assigns.submitted_events, &MapSet.member?(assigns.selected_ids, &1.id))
+
+    assigns = assign(assigns, :all_selected, all_selected)
+
+    ~H"""
+    <div>
+      <div class="flex items-center justify-between gap-4 border-b border-hairline pb-3">
+        <label class="inline-flex items-center gap-2 text-sm text-paper-dim cursor-pointer">
+          <input
+            type="checkbox"
+            checked={@all_selected}
+            phx-click="toggle-select-all"
+            aria-label="Select all"
+            class="h-4 w-4 rounded border-paper-dim bg-ink-2 text-spotlight focus:ring-spotlight cursor-pointer"
+          /> Select all
+        </label>
+        <button
+          phx-click="delete-selected"
+          data-confirm="Are you sure?"
+          disabled={MapSet.size(@selected_ids) == 0}
+          class="inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition-colors rounded-full py-1 px-3 bg-ember/10 text-ember ring-1 ring-inset ring-ember/30 hover:bg-ember hover:text-ink disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-ember/10 disabled:hover:text-ember"
+        >
+          Delete selected ({MapSet.size(@selected_ids)})
+        </button>
+      </div>
+
+      <p :if={@submitted_events == []} class="py-10 text-center text-sm text-paper-dim">
+        No submitted events.
+      </p>
+
+      <ul role="list" class="divide-y divide-hairline">
+        <li
+          :for={submitted_event <- @submitted_events}
+          id={"event-#{submitted_event.id}"}
+          class="py-5"
+        >
+          <div class="grid grid-cols-[auto_1fr] gap-x-3 gap-y-3 sm:grid-cols-[auto_1fr_auto] sm:items-start sm:gap-x-6">
+            <div class="pt-1">
+              <input
+                type="checkbox"
+                checked={MapSet.member?(@selected_ids, submitted_event.id)}
+                phx-click="toggle-select"
+                phx-value-id={submitted_event.id}
+                aria-label="Select submitted event"
+                class="h-4 w-4 rounded border-paper-dim bg-ink-2 text-spotlight focus:ring-spotlight cursor-pointer"
+              />
+            </div>
+
+            <div class="min-w-0">
+              <div class="font-display text-xl font-bold leading-tight text-paper">
+                {submitted_event.title}
+              </div>
+              <a
+                :if={submitted_event.url}
+                href={submitted_event.url}
+                target="_blank"
+                rel="noopener"
+                class="mt-0.5 block text-sm text-spotlight hover:text-spotlight-deep break-all"
+              >
+                {submitted_event.url}
+              </a>
+              <div class="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-paper-dim">
+                <span class="inline-flex items-center gap-1">
+                  <.icon name="hero-map-pin" class="size-3.5" />
+                  {submitted_event.venue}
+                </span>
+                <span aria-hidden="true">·</span>
+                <span>{DateHelpers.format_date(submitted_event.date)}</span>
+                <span :if={submitted_event.time} aria-hidden="true">·</span>
+                <span :if={submitted_event.time}>{submitted_event.time}</span>
+                <span :if={submitted_event.price} aria-hidden="true">·</span>
+                <span :if={submitted_event.price}>{submitted_event.price}</span>
+              </div>
+            </div>
+
+            <div class="col-span-2 sm:col-span-1">
+              <.submitted_event_actions submitted_event={submitted_event} />
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    """
+  end
+
+  defp submitted_event_actions(assigns) do
+    ~H"""
+    <div class="flex items-center gap-2 sm:justify-end">
+      <span :if={@submitted_event.approved?} class="text-sm font-medium text-amber-400">
+        Approved
+      </span>
+      <.link
+        :if={!@submitted_event.approved?}
+        navigate={~p"/submitted_events/#{@submitted_event.id}/edit"}
+        class="inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition-colors rounded-full py-1 px-3 text-paper-dim ring-1 ring-inset ring-hairline hover:text-paper hover:ring-paper-dim"
+      >
+        Edit
+      </.link>
+      <button
+        :if={!@submitted_event.approved?}
+        phx-click="approve-submitted-event"
+        phx-value-id={@submitted_event.id}
+        data-confirm="Are you sure?"
+        class="inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition-colors rounded-full py-1 px-3 bg-spotlight/10 text-spotlight ring-1 ring-inset ring-spotlight/30 hover:bg-spotlight hover:text-ink"
+      >
+        Approve
+      </button>
     </div>
     """
   end

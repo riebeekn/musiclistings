@@ -89,8 +89,6 @@ defmodule MusicListingsWeb do
       use Gettext, backend: MusicListingsWeb.Gettext
       # Core UI components and translation
       import MusicListingsWeb.CoreComponents
-      # Custom UI components
-      import MusicListingsWeb.CustomComponents
       # HTML escaping functionality
       import Phoenix.HTML
 

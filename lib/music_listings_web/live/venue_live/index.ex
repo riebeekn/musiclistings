@@ -1,6 +1,8 @@
 defmodule MusicListingsWeb.VenueLive.Index do
   use MusicListingsWeb, :live_view
 
+  import MusicListingsWeb.VenueComponents
+
   alias MusicListings.Accounts.User
   alias MusicListingsWeb.SEO
 
@@ -168,6 +170,52 @@ defmodule MusicListingsWeb.VenueLive.Index do
         />
       </section>
     </.when_admin>
+    """
+  end
+
+  attr :venues, :list, required: true
+  attr :current_user, :any, default: nil
+  attr :crawling?, :boolean, default: false
+  attr :crawling_venue_id, :any, default: nil
+
+  defp venue_summary(assigns) do
+    ~H"""
+    <div class="mt-8 grid grid-cols-1 border-t border-hairline sm:grid-cols-2">
+      <%= for venue <- @venues do %>
+        <div class="group relative border-b border-hairline transition-colors hover:bg-ink-2/60 sm:[&:nth-child(odd)]:border-r">
+          <a
+            href={~p"/events/venue/#{venue.id}"}
+            id={"venue-#{venue.id}"}
+            class="flex items-center justify-between gap-4 py-5 sm:px-5"
+          >
+            <div class="min-w-0 flex-1">
+              <h3 class="font-display text-2xl font-bold leading-none text-paper transition-colors group-hover:text-spotlight">
+                {venue.name}
+              </h3>
+              <p class="kicker mt-1.5">{venue.street}</p>
+            </div>
+            <span class="shrink-0 bg-spotlight/10 text-spotlight px-3 py-1 font-mono text-xs tabular-nums uppercase tracking-wider">
+              {venue.upcoming_event_count} Upcoming Events
+            </span>
+          </a>
+          <.when_admin current_user={@current_user}>
+            <div class="flex flex-wrap gap-3 pb-4 sm:px-5">
+              <.button
+                phx-click="crawl-venue"
+                phx-value-id={venue.id}
+                disabled={@crawling?}
+              >
+                <.icon
+                  name="hero-arrow-path"
+                  class={"size-4 #{if to_string(venue.id) == @crawling_venue_id, do: "animate-spin"}"}
+                /> Crawl
+              </.button>
+              <.pull_events_toggle venue={venue} />
+            </div>
+          </.when_admin>
+        </div>
+      <% end %>
+    </div>
     """
   end
 end

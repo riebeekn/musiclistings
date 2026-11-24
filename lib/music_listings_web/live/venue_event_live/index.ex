@@ -2,6 +2,9 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
   use MusicListingsWeb, :live_view
   use Goal
 
+  import MusicListingsWeb.EventComponents
+  import MusicListingsWeb.VenueComponents
+
   alias MusicListingsWeb.SEO
 
   @impl true
@@ -216,6 +219,57 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
         total_pages={@total_pages}
         path={~p"/events/venue/#{@venue.id}"}
       />
+    </div>
+    """
+  end
+
+  attr :venue, :map, required: true
+
+  defp venue_card(assigns) do
+    ~H"""
+    <div class="border-b border-hairline pb-8">
+      <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        <div class="flex-1">
+          <p class="kicker flex items-center gap-2">
+            <span class="inline-block h-2 w-8 bg-spotlight"></span> Venue
+          </p>
+          <h1 class="headline mt-3 text-5xl text-paper sm:text-6xl lg:text-7xl">
+            {@venue.name}
+          </h1>
+          <div class="mt-4 space-y-0.5 font-mono text-sm text-paper-dim">
+            <p>{@venue.street}</p>
+            <p>{"#{@venue.city} #{@venue.province} · #{@venue.country} #{@venue.postal_code}"}</p>
+          </div>
+          <a
+            href={@venue.website}
+            target="_blank"
+            rel="noopener"
+            class="mt-4 inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-spotlight transition-colors hover:text-spotlight-deep"
+          >
+            <.icon
+              name="hero-arrow-top-right-on-square"
+              class="size-4"
+            /> Visit website
+          </a>
+        </div>
+
+        <div class="h-48 w-full overflow-hidden border border-hairline grayscale transition-all duration-300 hover:grayscale-0 lg:w-96">
+          <iframe
+            id={"venue-map-#{@venue.id}"}
+            class="w-full h-full"
+            src={@venue.google_map_url}
+            frameborder="0"
+            style="border:0;"
+            allowfullscreen=""
+            aria-hidden="false"
+            tabindex="0"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+            phx-update="ignore"
+          ></iframe>
+        </div>
+      </div>
     </div>
     """
   end
