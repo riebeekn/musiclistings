@@ -146,4 +146,25 @@ defmodule MusicListingsWeb.EventLive.New do
     </div>
     """
   end
+
+  attr :header, :string, required: true
+  slot :inner_block, required: true
+
+  defp cta(assigns) do
+    ~H"""
+    <div class="relative px-6 pt-10 pb-8 lg:static lg:px-8 lg:py-32">
+      <div class="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
+        <p class="kicker flex items-center gap-2">
+          <span class="inline-block h-2 w-8 bg-spotlight"></span> Got a show?
+        </p>
+        <h1 class="headline mt-4 text-6xl text-paper sm:text-7xl">
+          {@header}
+        </h1>
+        <div class="mt-6 space-y-6 text-base leading-relaxed text-paper-dim lg:text-lg">
+          {render_slot(@inner_block)}
+        </div>
+      </div>
+    </div>
+    """
+  end
 end

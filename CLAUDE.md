@@ -299,6 +299,20 @@ MusicListings.Accounts.register_user(%{
   `terraform plan/apply/destroy`, nor the `tf_*.sh` wrappers, nor any other command
   that runs Terraform.
 
+## UI Components
+
+Keep `render/1` in LiveViews easy to scan, without scattering markup. Where UI goes:
+
+- **Used across pages** (`button`, `page_header`, `pager`, ...): `CoreComponents`, imported everywhere.
+- **Used by a few related pages**: a domain module (`EventComponents`, `VenueComponents`), imported
+  by the LiveViews that use it.
+- **Complex, used by one page**: a private function component (`defp`) in that LiveView. The
+  exception is a set large enough to swamp the page: the events page's search and filters are in
+  `FilterComponents`.
+- **Short one-off layout**: inline.
+
+Don't add a catch-all module like the old `CustomComponents`.
+
 ## Feature Flags
 
 Feature flags use [FunWithFlags](https://github.com/tompave/fun_with_flags), persisted via Ecto

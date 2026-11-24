@@ -1,14 +1,14 @@
-defmodule MusicListingsWeb.CustomComponentsTest do
+defmodule MusicListingsWeb.CoreComponentsTest do
   use MusicListingsWeb.ConnCase, async: true
 
   import Phoenix.LiveViewTest
 
-  alias MusicListingsWeb.CustomComponents
+  alias MusicListingsWeb.CoreComponents
 
   describe "pager/1" do
     test "links to the neighbouring pages" do
       html =
-        render_component(&CustomComponents.pager/1,
+        render_component(&CoreComponents.pager/1,
           current_page: 2,
           total_pages: 3,
           path: "/events"
@@ -20,7 +20,7 @@ defmodule MusicListingsWeb.CustomComponentsTest do
 
     test "omits the prev link on the first page and the next link on the last" do
       first =
-        render_component(&CustomComponents.pager/1,
+        render_component(&CoreComponents.pager/1,
           current_page: 1,
           total_pages: 2,
           path: "/events"
@@ -30,7 +30,7 @@ defmodule MusicListingsWeb.CustomComponentsTest do
       assert first =~ "Next page"
 
       last =
-        render_component(&CustomComponents.pager/1,
+        render_component(&CoreComponents.pager/1,
           current_page: 2,
           total_pages: 2,
           path: "/events"

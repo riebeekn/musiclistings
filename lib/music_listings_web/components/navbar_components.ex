@@ -9,8 +9,7 @@ defmodule MusicListingsWeb.NavbarComponents do
     router: MusicListingsWeb.Router,
     statics: MusicListingsWeb.static_paths()
 
-  import MusicListingsWeb.CoreComponents, only: [icon: 1]
-  import MusicListingsWeb.CustomComponents, only: [when_admin: 1]
+  import MusicListingsWeb.CoreComponents, only: [icon: 1, when_admin: 1]
   alias Phoenix.LiveView.JS
 
   @ticker_phrase "Toronto Live Music ◆ Concerts ◆ Club Shows ◆ DIY ◆ Jazz ◆ Punk ◆ Electronic ◆ Folk ◆ Updated Daily ◆ "

@@ -2,6 +2,9 @@ defmodule MusicListingsWeb.EventLive.Index do
   use MusicListingsWeb, :live_view
   use Goal
 
+  import MusicListingsWeb.EventComponents
+  import MusicListingsWeb.FilterComponents
+
   alias MusicListingsUtilities.DateHelpers
   alias MusicListingsWeb.SEO
 

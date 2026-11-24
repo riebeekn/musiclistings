@@ -2,6 +2,9 @@ defmodule MusicListingsWeb.EventLive.Show do
   use MusicListingsWeb, :live_view
   use Goal
 
+  import MusicListingsWeb.EventComponents,
+    only: [duplicate_event_urls?: 2, format_age_restriction: 1, format_price: 2]
+
   alias MusicListings.Accounts.User
   alias MusicListingsUtilities.DateHelpers
   alias MusicListingsWeb.SEO
@@ -152,5 +155,185 @@ defmodule MusicListingsWeb.EventLive.Show do
       true ->
         nil
     end
+  end
+
+  attr :message, :string, required: true
+
+  defp event_notice(assigns) do
+    ~H"""
+    <div
+      role="status"
+      class="mb-6 rounded border border-amber-400/50 bg-amber-400/10 px-4 py-3 font-mono text-sm text-amber-300"
+    >
+      {@message}
+    </div>
+    """
+  end
+
+  attr :event, :any, required: true
+
+  defp event_breadcrumb(assigns) do
+    ~H"""
+    <nav aria-label="Breadcrumb" class="kicker mb-6">
+      <ol class="flex flex-wrap items-center gap-2">
+        <li>
+          <.link navigate={~p"/events"} class="transition-colors hover:text-spotlight">Events</.link>
+        </li>
+        <li aria-hidden="true" class="text-spotlight">/</li>
+        <li :if={@event.venue}>
+          <.link
+            navigate={~p"/events/venue/#{@event.venue.id}"}
+            class="transition-colors hover:text-spotlight"
+          >
+            {@event.venue.name}
+          </.link>
+        </li>
+        <li :if={@event.venue} aria-hidden="true" class="text-spotlight">/</li>
+        <li class="max-w-[50vw] truncate text-paper">{@event.title}</li>
+      </ol>
+    </nav>
+    """
+  end
+
+  attr :event, :any, required: true
+
+  defp event_header(assigns) do
+    ~H"""
+    <p :if={@event.venue} class="kicker text-spotlight-deep">
+      <.link navigate={~p"/events/venue/#{@event.venue.id}"} class="hover:text-spotlight">
+        {@event.venue.name}
+      </.link>
+    </p>
+
+    <%!-- break-words is load-bearing on a phone: titles routinely carry unbreakable tokens
+          like "Belew/Vai/Levin/Bozzio", and browsers offer no break opportunity at a slash,
+          so at 48px one of those pushes the page wider than the screen.
+
+          leading-[1.05], not the tighter leading used by .headline: this title is mixed
+          case, so it has descenders. In Big Shoulders Display a 'g' reaches -0.140em and a
+          cap 'T' reaches +0.800em, so consecutive lines only clear when line-height >=
+          0.94em. The old leading-[0.9] overlapped them by 0.04em (~2px at text-5xl) and
+          "…: The / Tour" collided. 1.05 is the shared value for mixed-case display type
+          across the app (see the event card titles). .headline can stay far tighter because
+          it is uppercase — no descenders at all. --%>
+    <h1 class="mt-3 font-display text-5xl font-bold leading-[1.05] break-words text-paper sm:text-6xl lg:text-7xl">
+      {@event.title}
+    </h1>
+    <p
+      :if={@event.openers != []}
+      class="mt-3 font-display text-2xl font-medium break-words text-paper-dim"
+    >
+      with {Enum.join(@event.openers, ", ")}
+    </p>
+    """
+  end
+
+  attr :event, :any, required: true
+
+  defp event_details_list(assigns) do
+    ~H"""
+    <dl class="mt-8 grid grid-cols-2 border-t border-hairline sm:grid-cols-4">
+      <div class="border-b border-hairline py-4 pr-4 sm:[&:not(:nth-child(4n))]:border-r sm:[&:not(:nth-child(4n+1))]:pl-4">
+        <dt class="kicker">Date</dt>
+        <dd class="mt-1.5 font-display text-xl font-bold text-paper">
+          <time datetime={Date.to_iso8601(@event.date)}>
+            {DateHelpers.format_date(@event.date)}
+          </time>
+        </dd>
+      </div>
+      <div
+        :if={@event.time}
+        class="border-b border-hairline py-4 pr-4 sm:[&:not(:nth-child(4n))]:border-r sm:[&:not(:nth-child(4n+1))]:pl-4"
+      >
+        <dt class="kicker">Showtime</dt>
+        <dd class="mt-1.5 font-mono text-lg text-paper">{DateHelpers.format_time(@event.time)}</dd>
+      </div>
+      <div
+        :if={@event.price_format != :unknown}
+        class="border-b border-hairline py-4 pr-4 sm:[&:not(:nth-child(4n))]:border-r sm:[&:not(:nth-child(4n+1))]:pl-4"
+      >
+        <dt class="kicker">Price</dt>
+        <dd class="mt-1.5 font-mono text-lg text-spotlight">{format_price(@event, :long)}</dd>
+      </div>
+      <div
+        :if={@event.age_restriction != :unknown}
+        class="border-b border-hairline py-4 pr-4 sm:[&:not(:nth-child(4n))]:border-r sm:[&:not(:nth-child(4n+1))]:pl-4"
+      >
+        <dt class="kicker">Age</dt>
+        <dd class="mt-1.5 font-mono text-lg text-paper">
+          {format_age_restriction(@event.age_restriction)}
+        </dd>
+      </div>
+      <div :if={@event.venue} class="col-span-2 border-b border-hairline py-4 sm:col-span-4">
+        <dt class="kicker">Venue</dt>
+        <dd class="mt-1.5">
+          <.link
+            navigate={~p"/events/venue/#{@event.venue.id}"}
+            class="font-display text-xl font-bold text-paper transition-colors hover:text-spotlight"
+          >
+            {@event.venue.name}
+          </.link>
+          <div class="mt-0.5 font-mono text-sm text-paper-dim">
+            {@event.venue.street}, {@event.venue.city} {@event.venue.province}
+          </div>
+        </dd>
+      </div>
+    </dl>
+    """
+  end
+
+  attr :event, :any, required: true
+  attr :current_user, :any, default: nil
+  attr :flagged?, :boolean, default: false
+
+  defp event_actions(assigns) do
+    ~H"""
+    <div class="mt-8 flex flex-wrap items-center gap-3">
+      <a
+        :if={@event.ticket_url}
+        href={MusicListings.Affiliate.maybe_wrap_affiliate_link(@event.ticket_url)}
+        class="inline-flex h-9 items-center justify-center gap-x-2 rounded bg-spotlight px-4 font-mono text-xs font-medium uppercase tracking-widest text-ink transition-colors hover:bg-spotlight-deep"
+        target="_blank"
+        rel="noopener sponsored"
+        phx-click="event_ticket_click"
+        phx-value-id={@event.id}
+      >
+        <.icon name="hero-ticket-solid" class="size-4" /> Tickets
+      </a>
+      <a
+        :if={
+          @event.details_url &&
+            !duplicate_event_urls?(@event.ticket_url, @event.details_url)
+        }
+        href={@event.details_url}
+        class="inline-flex h-9 items-center justify-center gap-x-2 rounded border border-hairline bg-ink px-4 font-mono text-xs font-medium uppercase tracking-widest text-paper transition-colors hover:bg-ink-3"
+        target="_blank"
+        rel="noopener"
+      >
+        <.icon
+          name="hero-information-circle-solid"
+          class="size-4"
+        /> Venue page
+      </a>
+      <.when_admin current_user={@current_user}>
+        <button
+          phx-click="delete-event"
+          phx-value-id={@event.id}
+          data-confirm="Are you sure?"
+          class="inline-flex h-9 items-center justify-center rounded border border-hairline px-4 font-mono text-xs font-medium uppercase tracking-widest text-paper-dim transition-colors hover:border-ember hover:text-ember"
+        >
+          Delete
+        </button>
+        <button
+          :if={@flagged?}
+          phx-click="dismiss-event-flags"
+          phx-value-id={@event.id}
+          class="inline-flex h-9 items-center justify-center rounded border border-hairline px-4 font-mono text-xs font-medium uppercase tracking-widest text-paper-dim transition-colors hover:border-paper-dim hover:text-paper"
+        >
+          Not an issue
+        </button>
+      </.when_admin>
+    </div>
+    """
   end
 end

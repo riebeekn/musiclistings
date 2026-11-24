@@ -18,6 +18,7 @@ defmodule MusicListingsWeb.CoreComponents do
 
   use Gettext, backend: MusicListingsWeb.Gettext
 
+  alias MusicListings.Accounts.User
   alias Phoenix.LiveView.JS
 
   @doc """
@@ -716,5 +717,139 @@ defmodule MusicListingsWeb.CoreComponents do
   """
   def translate_errors(errors, field) when is_list(errors) do
     for {^field, {msg, opts}} <- errors, do: translate_error({msg, opts})
+  end
+
+  @doc """
+  Scopes the inner element to an admin user, declining to render
+  it for non-admin users
+
+  ## Examples
+
+  <.when_admin current_user={@current_user}>
+    I will only render if a user is logged in and is an admin.
+  </.when_admin>
+  """
+  attr :current_user, :any, required: true
+  slot :inner_block, required: true
+
+  def when_admin(assigns) do
+    ~H"""
+    <%= if admin?(@current_user) do %>
+      {render_slot(@inner_block)}
+    <% end %>
+    """
+  end
+
+  defp admin?(%User{role: :admin}), do: true
+  defp admin?(_user_or_nil), do: false
+
+  @doc """
+  Renders a page header with an optional description
+
+  ## Examples
+
+  <.page_header header="Events" />
+  <.page_header header="Venues" description="Tracking events for the following venues." />
+  """
+  attr :header, :string, required: true
+  attr :description, :string, default: nil
+
+  def page_header(assigns) do
+    ~H"""
+    <div class="mb-8 border-b border-hairline pb-6">
+      <p class="kicker flex items-center gap-2">
+        <span class="inline-block h-2 w-8 bg-spotlight"></span> Toronto Music Listings
+      </p>
+      <h1 class="headline mt-4 text-5xl text-paper sm:text-6xl">
+        {@header}
+      </h1>
+      <p :if={@description} class="mt-3 max-w-xl text-sm leading-relaxed text-paper-dim">
+        {@description}
+      </p>
+    </div>
+    """
+  end
+
+  @doc """
+  Renders a button link
+
+  ## Example
+
+  <.button_link label="Prev page" url={~p"/events"} icon_name="hero-arrow-left" icon_position={:left} />
+  """
+  attr :label, :string, required: true
+  attr :url, :string, required: true
+  attr :icon_name, :string, default: nil
+  attr :icon_position, :atom, default: :right
+
+  def button_link(assigns) do
+    ~H"""
+    <.link
+      patch={@url}
+      data-scroll="top"
+      class="inline-flex gap-1 items-center justify-center rounded-full py-1.5 px-4 font-mono text-xs uppercase tracking-wider transition-colors bg-spotlight/10 text-spotlight ring-1 ring-inset ring-spotlight/30 hover:bg-spotlight hover:text-ink"
+    >
+      <%= if @icon_name && @icon_position == :left do %>
+        <.icon name={@icon_name} class="size-3" />
+      <% end %>
+      {@label}
+      <%= if @icon_name && @icon_position == :right do %>
+        <.icon name={@icon_name} class="size-3" />
+      <% end %>
+    </.link>
+    """
+  end
+
+  @doc """
+  Renders a loading indicator
+
+  ## Example
+
+  <.loading_indicator />
+  """
+  def loading_indicator(assigns) do
+    ~H"""
+    <div class="flex justify-center mt-36 text-spotlight">
+      <.icon name="hero-cog-6-tooth" class="animate-spin size-24" />
+    </div>
+    """
+  end
+
+  @doc """
+  Renders a pager control
+
+  ## Example
+
+  <.pager
+    current_page={@current_page}
+    total_pages={@total_pages}
+    path={~p"/events/venue"}
+  />
+  """
+
+  attr :current_page, :integer, required: true
+  attr :total_pages, :integer, required: true
+  attr :path, :string, required: true
+
+  def pager(assigns) do
+    ~H"""
+    <div class="flex items-center gap-3">
+      <%= if @current_page > 1 do %>
+        <.button_link
+          label="Prev page"
+          url={"#{@path}?page=#{@current_page - 1}"}
+          icon_name="hero-arrow-left"
+          icon_position={:left}
+        />
+      <% end %>
+      <%= if @current_page < @total_pages do %>
+        <.button_link
+          label="Next page"
+          url={"#{@path}?page=#{@current_page + 1}"}
+          icon_name="hero-arrow-right"
+        />
+      <% end %>
+    </div>
+    """
   end
 end
