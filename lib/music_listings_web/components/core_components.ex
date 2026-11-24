@@ -744,6 +744,23 @@ defmodule MusicListingsWeb.CoreComponents do
   defp admin?(_user_or_nil), do: false
 
   @doc """
+  Renders the small label, led by a dash, that sits above a page's headline
+
+  ## Example
+
+  <.kicker>Got a show?</.kicker>
+  """
+  slot :inner_block, required: true
+
+  def kicker(assigns) do
+    ~H"""
+    <p class="kicker flex items-center gap-2">
+      <span class="inline-block h-2 w-8 bg-spotlight"></span> {render_slot(@inner_block)}
+    </p>
+    """
+  end
+
+  @doc """
   Renders a page header with an optional description
 
   ## Examples
@@ -757,9 +774,7 @@ defmodule MusicListingsWeb.CoreComponents do
   def page_header(assigns) do
     ~H"""
     <div class="mb-8 border-b border-hairline pb-6">
-      <p class="kicker flex items-center gap-2">
-        <span class="inline-block h-2 w-8 bg-spotlight"></span> Toronto Music Listings
-      </p>
+      <.kicker>Toronto Music Listings</.kicker>
       <h1 class="headline mt-4 text-5xl text-paper sm:text-6xl">
         {@header}
       </h1>

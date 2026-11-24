@@ -322,11 +322,8 @@ defmodule MusicListingsWeb.EventLive.Index do
   @impl true
   def render(assigns) do
     ~H"""
-    <%!-- MASTHEAD --%>
     <section class="mb-6">
-      <p class="kicker flex items-center gap-2">
-        <span class="inline-block h-2 w-8 bg-spotlight"></span> Toronto · Live Music Listings
-      </p>
+      <.kicker>Toronto · Live Music Listings</.kicker>
       <h1 class="headline mt-4 text-[3.25rem] text-paper sm:text-7xl lg:text-8xl">
         What's <span class="text-spotlight glow">On</span> <br class="hidden sm:block" />Tonight
       </h1>
@@ -346,51 +343,23 @@ defmodule MusicListingsWeb.EventLive.Index do
       />
     </section>
 
-    <%!-- Desktop filter bar --%>
-    <div
-      class="hidden md:block mb-8"
-      data-venue-filter-restore="true"
-      data-storage-key="venue_ids"
-      data-date-filter-restore="true"
-      data-date-storage-key="selected_date"
-    >
-      <div class="flex flex-wrap items-end gap-5 border-t border-hairline pt-5">
-        <.filter_field label="Venues">
-          <.venue_filter for={@venue_filtering_form} venues={@venues} venue_ids={@venue_ids} />
-        </.filter_field>
-        <.filter_field label="When">
-          <.date_filter for={@date_filtering_form} selected_date={@selected_date} />
-        </.filter_field>
-        <.filter_field label="Sort by">
-          <.sort_toggle sort_by={@sort_by} />
-        </.filter_field>
-      </div>
-    </div>
+    <.desktop_filters
+      venue_form={@venue_filtering_form}
+      date_form={@date_filtering_form}
+      venues={@venues}
+      venue_ids={@venue_ids}
+      selected_date={@selected_date}
+      sort_by={@sort_by}
+    />
 
-    <div class="hidden md:block">
-      <.venue_filter_status venue_ids={@venue_ids} />
-      <.date_filter_status selected_date={@selected_date} />
-    </div>
-
-    <%!-- Mobile filter button + chips: hidden on desktop --%>
-    <div class="md:hidden flex items-start justify-between gap-3 border-t border-hairline mb-4 pt-5">
-      <.mobile_filter_button />
-      <.mobile_filter_chips
-        venue_ids={@venue_ids}
-        selected_date={@selected_date}
-      />
-    </div>
-
-    <%!-- Mobile bottom sheet --%>
-    <.bottom_sheet id="mobile-filters">
-      <.mobile_venue_filter
-        for={@venue_filtering_form}
-        venues={@venues}
-        venue_ids={@venue_ids}
-      />
-      <.mobile_date_filter for={@date_filtering_form} selected_date={@selected_date} />
-      <.mobile_sort_toggle sort_by={@sort_by} />
-    </.bottom_sheet>
+    <.mobile_filters
+      venue_form={@venue_filtering_form}
+      date_form={@date_filtering_form}
+      venues={@venues}
+      venue_ids={@venue_ids}
+      selected_date={@selected_date}
+      sort_by={@sort_by}
+    />
 
     <%= if @loading do %>
       <.loading_indicator />
@@ -407,6 +376,71 @@ defmodule MusicListingsWeb.EventLive.Index do
     <div class="border-t border-hairline mt-10 pt-6">
       <.pager current_page={@current_page} total_pages={@total_pages} path={~p"/events"} />
     </div>
+    """
+  end
+
+  attr :venue_form, :any, required: true
+  attr :date_form, :any, required: true
+  attr :venues, :list, required: true
+  attr :venue_ids, :list, required: true
+  attr :selected_date, :string, required: true
+  attr :sort_by, :string, required: true
+
+  defp desktop_filters(assigns) do
+    ~H"""
+    <div
+      class="hidden md:block mb-8"
+      data-venue-filter-restore="true"
+      data-storage-key="venue_ids"
+      data-date-filter-restore="true"
+      data-date-storage-key="selected_date"
+    >
+      <div class="flex flex-wrap items-end gap-5 border-t border-hairline pt-5">
+        <.filter_field label="Venues">
+          <.venue_filter for={@venue_form} venues={@venues} venue_ids={@venue_ids} />
+        </.filter_field>
+        <.filter_field label="When">
+          <.date_filter for={@date_form} selected_date={@selected_date} />
+        </.filter_field>
+        <.filter_field label="Sort by">
+          <.sort_toggle sort_by={@sort_by} />
+        </.filter_field>
+      </div>
+    </div>
+
+    <div class="hidden md:block">
+      <.venue_filter_status venue_ids={@venue_ids} />
+      <.date_filter_status selected_date={@selected_date} />
+    </div>
+    """
+  end
+
+  attr :venue_form, :any, required: true
+  attr :date_form, :any, required: true
+  attr :venues, :list, required: true
+  attr :venue_ids, :list, required: true
+  attr :selected_date, :string, required: true
+  attr :sort_by, :string, required: true
+
+  defp mobile_filters(assigns) do
+    ~H"""
+    <div class="md:hidden flex items-start justify-between gap-3 border-t border-hairline mb-4 pt-5">
+      <.mobile_filter_button />
+      <.mobile_filter_chips
+        venue_ids={@venue_ids}
+        selected_date={@selected_date}
+      />
+    </div>
+
+    <.bottom_sheet id="mobile-filters">
+      <.mobile_venue_filter
+        for={@venue_form}
+        venues={@venues}
+        venue_ids={@venue_ids}
+      />
+      <.mobile_date_filter for={@date_form} selected_date={@selected_date} />
+      <.mobile_sort_toggle sort_by={@sort_by} />
+    </.bottom_sheet>
     """
   end
 

@@ -67,9 +67,7 @@ defmodule MusicListingsWeb.ContactLive.New do
     ~H"""
     <div class="max-w-5xl mx-auto">
       <div class="mb-14 border-b border-hairline pb-10">
-        <p class="kicker flex items-center gap-2">
-          <span class="inline-block h-2 w-8 bg-spotlight"></span> Toronto Music Listings
-        </p>
+        <.kicker>Toronto Music Listings</.kicker>
         <h1 class="headline mt-4 text-6xl text-paper sm:text-7xl">
           A field guide<br />to the city's stages
         </h1>
