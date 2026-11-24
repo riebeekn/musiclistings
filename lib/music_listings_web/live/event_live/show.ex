@@ -233,37 +233,28 @@ defmodule MusicListingsWeb.EventLive.Show do
   defp event_details_list(assigns) do
     ~H"""
     <dl class="mt-8 grid grid-cols-2 border-t border-hairline sm:grid-cols-4">
-      <div class="border-b border-hairline py-4 pr-4 sm:[&:not(:nth-child(4n))]:border-r sm:[&:not(:nth-child(4n+1))]:pl-4">
-        <dt class="kicker">Date</dt>
-        <dd class="mt-1.5 font-display text-xl font-bold text-paper">
-          <time datetime={Date.to_iso8601(@event.date)}>
-            {DateHelpers.format_date(@event.date)}
-          </time>
-        </dd>
-      </div>
-      <div
-        :if={@event.time}
-        class="border-b border-hairline py-4 pr-4 sm:[&:not(:nth-child(4n))]:border-r sm:[&:not(:nth-child(4n+1))]:pl-4"
-      >
-        <dt class="kicker">Showtime</dt>
-        <dd class="mt-1.5 font-mono text-lg text-paper">{DateHelpers.format_time(@event.time)}</dd>
-      </div>
-      <div
+      <.detail label="Date" class="font-display text-xl font-bold text-paper">
+        <time datetime={Date.to_iso8601(@event.date)}>
+          {DateHelpers.format_date(@event.date)}
+        </time>
+      </.detail>
+      <.detail :if={@event.time} label="Showtime" class="font-mono text-lg text-paper">
+        {DateHelpers.format_time(@event.time)}
+      </.detail>
+      <.detail
         :if={@event.price_format != :unknown}
-        class="border-b border-hairline py-4 pr-4 sm:[&:not(:nth-child(4n))]:border-r sm:[&:not(:nth-child(4n+1))]:pl-4"
+        label="Price"
+        class="font-mono text-lg text-spotlight"
       >
-        <dt class="kicker">Price</dt>
-        <dd class="mt-1.5 font-mono text-lg text-spotlight">{format_price(@event, :long)}</dd>
-      </div>
-      <div
+        {format_price(@event, :long)}
+      </.detail>
+      <.detail
         :if={@event.age_restriction != :unknown}
-        class="border-b border-hairline py-4 pr-4 sm:[&:not(:nth-child(4n))]:border-r sm:[&:not(:nth-child(4n+1))]:pl-4"
+        label="Age"
+        class="font-mono text-lg text-paper"
       >
-        <dt class="kicker">Age</dt>
-        <dd class="mt-1.5 font-mono text-lg text-paper">
-          {format_age_restriction(@event.age_restriction)}
-        </dd>
-      </div>
+        {format_age_restriction(@event.age_restriction)}
+      </.detail>
       <div :if={@event.venue} class="col-span-2 border-b border-hairline py-4 sm:col-span-4">
         <dt class="kicker">Venue</dt>
         <dd class="mt-1.5">
@@ -279,6 +270,19 @@ defmodule MusicListingsWeb.EventLive.Show do
         </dd>
       </div>
     </dl>
+    """
+  end
+
+  attr :label, :string, required: true
+  attr :class, :string, required: true, doc: "the value's font, size and colour"
+  slot :inner_block, required: true
+
+  defp detail(assigns) do
+    ~H"""
+    <div class="border-b border-hairline py-4 pr-4 sm:[&:not(:nth-child(4n))]:border-r sm:[&:not(:nth-child(4n+1))]:pl-4">
+      <dt class="kicker">{@label}</dt>
+      <dd class={["mt-1.5", @class]}>{render_slot(@inner_block)}</dd>
+    </div>
     """
   end
 

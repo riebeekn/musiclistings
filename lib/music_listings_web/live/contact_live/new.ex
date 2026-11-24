@@ -94,12 +94,7 @@ defmodule MusicListingsWeb.ContactLive.New do
         </.about_card>
       </div>
 
-      <div class="flex items-end gap-5 mb-10">
-        <h2 class="headline text-4xl sm:text-5xl text-paper whitespace-nowrap">
-          Get in touch
-        </h2>
-        <div class="mb-2.5 flex-1 h-px bg-hairline"></div>
-      </div>
+      <.section_heading class="mb-10">Get in touch</.section_heading>
 
       <p class="text-sm text-paper-dim mb-8 max-w-xl">
         Have a question, suggestion, or want to share an upcoming event?

@@ -133,27 +133,7 @@ defmodule MusicListingsWeb.EventComponents do
             with {@event.openers |> Enum.join(", ")}
           </p>
         </div>
-        <div class="flex flex-col gap-2 sm:items-end">
-          <%= for showtime <- @event.showtimes do %>
-            <div
-              id={"event-#{showtime.event_id}"}
-              class="flex flex-wrap items-center gap-2 sm:justify-end"
-            >
-              <.event_time time={showtime.time} />
-              <.event_ticket_url
-                ticket_url={showtime.ticket_url}
-                price_format={@event.price_format}
-                price_lo={@event.price_lo}
-                price_hi={@event.price_hi}
-              />
-              <.event_details_url
-                details_url={showtime.details_url}
-                ticket_url={showtime.ticket_url}
-              />
-              <.delete_event_link current_user={@current_user} event_id={showtime.event_id} />
-            </div>
-          <% end %>
-        </div>
+        <.showtimes event={@event} current_user={@current_user} />
       </div>
     </article>
     """
@@ -205,27 +185,36 @@ defmodule MusicListingsWeb.EventComponents do
           with {@event.openers |> Enum.join(", ")}
         </p>
       </div>
-      <div class="flex flex-col gap-2 sm:items-end">
-        <%= for showtime <- @event.showtimes do %>
-          <div
-            id={"event-#{showtime.event_id}"}
-            class="flex flex-wrap items-center gap-2 sm:justify-end"
-          >
-            <.event_time time={showtime.time} />
-            <.event_ticket_url
-              ticket_url={showtime.ticket_url}
-              price_format={@event.price_format}
-              price_lo={@event.price_lo}
-              price_hi={@event.price_hi}
-            />
-            <.event_details_url
-              details_url={showtime.details_url}
-              ticket_url={showtime.ticket_url}
-            />
-            <.delete_event_link current_user={@current_user} event_id={showtime.event_id} />
-          </div>
-        <% end %>
-      </div>
+      <.showtimes event={@event} current_user={@current_user} />
+    </div>
+    """
+  end
+
+  attr :event, :any, required: true
+  attr :current_user, :any, required: true
+
+  defp showtimes(assigns) do
+    ~H"""
+    <div class="flex flex-col gap-2 sm:items-end">
+      <%= for showtime <- @event.showtimes do %>
+        <div
+          id={"event-#{showtime.event_id}"}
+          class="flex flex-wrap items-center gap-2 sm:justify-end"
+        >
+          <.event_time time={showtime.time} />
+          <.event_ticket_url
+            ticket_url={showtime.ticket_url}
+            price_format={@event.price_format}
+            price_lo={@event.price_lo}
+            price_hi={@event.price_hi}
+          />
+          <.event_details_url
+            details_url={showtime.details_url}
+            ticket_url={showtime.ticket_url}
+          />
+          <.delete_event_link current_user={@current_user} event_id={showtime.event_id} />
+        </div>
+      <% end %>
     </div>
     """
   end

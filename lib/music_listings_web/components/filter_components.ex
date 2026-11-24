@@ -104,19 +104,33 @@ defmodule MusicListingsWeb.FilterComponents do
 
   def date_filter_status(assigns) do
     ~H"""
-    <%= if @selected_date && !today?(@selected_date) do %>
-      <div class="flex items-center gap-2 text-sm text-paper-dim -mt-2 mb-4">
-        <span>Showing events from {format_filter_date(@selected_date)} onwards.</span>
-        <a
-          id="clear-date-filter"
-          href="#"
-          phx-click="clear-date-filter"
-          class="text-spotlight hover:text-spotlight-deep underline underline-offset-2"
-        >
-          Clear
-        </a>
-      </div>
-    <% end %>
+    <.filter_status
+      :if={@selected_date && !today?(@selected_date)}
+      id="clear-date-filter"
+      on_clear="clear-date-filter"
+    >
+      Showing events from {format_filter_date(@selected_date)} onwards.
+    </.filter_status>
+    """
+  end
+
+  attr :id, :string, default: nil, doc: "the id of the clear link"
+  attr :on_clear, :string, required: true, doc: "the event that clears the filter"
+  slot :inner_block, required: true
+
+  defp filter_status(assigns) do
+    ~H"""
+    <div class="flex items-center gap-2 text-sm text-paper-dim -mt-2 mb-4">
+      <span>{render_slot(@inner_block)}</span>
+      <a
+        id={@id}
+        href="#"
+        phx-click={@on_clear}
+        class="text-spotlight hover:text-spotlight-deep underline underline-offset-2"
+      >
+        Clear
+      </a>
+    </div>
     """
   end
 
@@ -152,36 +166,35 @@ defmodule MusicListingsWeb.FilterComponents do
     ~H"""
     <div id="sort-by-component" phx-hook="SortBy" class="flex items-center">
       <div class="inline-flex rounded-lg border border-hairline bg-ink-2 p-0.5">
-        <button
-          type="button"
-          phx-click="sort-changed"
-          phx-value-sort-by="title"
-          class={[
-            "px-3 py-1.5 text-sm rounded-md transition-colors",
-            if(@sort_by == "title",
-              do: "bg-spotlight/10 text-spotlight ring-1 ring-inset ring-spotlight/30",
-              else: "text-paper-dim hover:text-paper"
-            )
-          ]}
-        >
-          By Title
-        </button>
-        <button
-          type="button"
-          phx-click="sort-changed"
-          phx-value-sort-by="venue"
-          class={[
-            "px-3 py-1.5 text-sm rounded-md transition-colors",
-            if(@sort_by == "venue",
-              do: "bg-spotlight/10 text-spotlight ring-1 ring-inset ring-spotlight/30",
-              else: "text-paper-dim hover:text-paper"
-            )
-          ]}
-        >
-          By Venue
-        </button>
+        <.sort_button value="title" sort_by={@sort_by} class="px-3 py-1.5">By Title</.sort_button>
+        <.sort_button value="venue" sort_by={@sort_by} class="px-3 py-1.5">By Venue</.sort_button>
       </div>
     </div>
+    """
+  end
+
+  attr :value, :string, required: true
+  attr :sort_by, :string, required: true
+  attr :class, :string, required: true, doc: "the button's padding"
+  slot :inner_block, required: true
+
+  defp sort_button(assigns) do
+    ~H"""
+    <button
+      type="button"
+      phx-click="sort-changed"
+      phx-value-sort-by={@value}
+      class={[
+        "text-sm rounded-md transition-colors",
+        @class,
+        if(@sort_by == @value,
+          do: "bg-spotlight/10 text-spotlight ring-1 ring-inset ring-spotlight/30",
+          else: "text-paper-dim hover:text-paper"
+        )
+      ]}
+    >
+      {render_slot(@inner_block)}
+    </button>
     """
   end
 
@@ -239,14 +252,7 @@ defmodule MusicListingsWeb.FilterComponents do
                   {venue.name}
                 </label>
                 <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                  <input
-                    id={"#{venue.id}"}
-                    name={venue.id}
-                    value="true"
-                    type="checkbox"
-                    checked={Integer.to_string(venue.id) in @venue_ids}
-                    class="rounded-sm border-hairline bg-ink-3 text-spotlight focus:ring-0 focus:ring-offset-0 cursor-pointer"
-                  />
+                  <.venue_checkbox id={"#{venue.id}"} venue={venue} venue_ids={@venue_ids} />
                 </span>
               </li>
             <% end %>
@@ -254,6 +260,23 @@ defmodule MusicListingsWeb.FilterComponents do
         </div>
       </.form>
     </div>
+    """
+  end
+
+  attr :id, :string, required: true
+  attr :venue, :map, required: true
+  attr :venue_ids, :list, required: true
+
+  defp venue_checkbox(assigns) do
+    ~H"""
+    <input
+      id={@id}
+      name={@venue.id}
+      value="true"
+      type="checkbox"
+      checked={Integer.to_string(@venue.id) in @venue_ids}
+      class="rounded-sm border-hairline bg-ink-3 text-spotlight focus:ring-0 focus:ring-offset-0 cursor-pointer"
+    />
     """
   end
 
@@ -278,18 +301,9 @@ defmodule MusicListingsWeb.FilterComponents do
 
   def venue_filter_status(assigns) do
     ~H"""
-    <%= if @venue_ids != [] do %>
-      <div class="flex items-center gap-2 text-sm text-paper-dim -mt-2 mb-4">
-        <span>Filtering by {Enum.count(@venue_ids)} venue(s).</span>
-        <a
-          href="#"
-          phx-click="clear-venue-filtering"
-          class="text-spotlight hover:text-spotlight-deep underline underline-offset-2"
-        >
-          Clear
-        </a>
-      </div>
-    <% end %>
+    <.filter_status :if={@venue_ids != []} on_clear="clear-venue-filtering">
+      Filtering by {Enum.count(@venue_ids)} venue(s).
+    </.filter_status>
     """
   end
 
@@ -426,25 +440,27 @@ defmodule MusicListingsWeb.FilterComponents do
       :if={@venue_ids != [] || @has_date_filter}
       class="flex flex-wrap justify-end gap-2"
     >
-      <span
-        :if={@venue_ids != []}
-        class="inline-flex items-center gap-1 text-xs font-medium bg-spotlight/10 text-spotlight ring-1 ring-inset ring-spotlight/30 px-2.5 py-1 rounded-full"
-      >
+      <.filter_chip :if={@venue_ids != []} on_clear="clear-venue-filtering">
         {Enum.count(@venue_ids)} venue(s)
-        <button type="button" phx-click="clear-venue-filtering" class="hover:text-spotlight-deep">
-          <.icon name="hero-x-mark" class="size-3" />
-        </button>
-      </span>
-      <span
-        :if={@has_date_filter}
-        class="inline-flex items-center gap-1 text-xs font-medium bg-spotlight/10 text-spotlight ring-1 ring-inset ring-spotlight/30 px-2.5 py-1 rounded-full"
-      >
+      </.filter_chip>
+      <.filter_chip :if={@has_date_filter} on_clear="clear-date-filter">
         From {format_filter_date(@selected_date)}
-        <button type="button" phx-click="clear-date-filter" class="hover:text-spotlight-deep">
-          <.icon name="hero-x-mark" class="size-3" />
-        </button>
-      </span>
+      </.filter_chip>
     </div>
+    """
+  end
+
+  attr :on_clear, :string, required: true, doc: "the event that clears the filter"
+  slot :inner_block, required: true
+
+  defp filter_chip(assigns) do
+    ~H"""
+    <span class="inline-flex items-center gap-1 text-xs font-medium bg-spotlight/10 text-spotlight ring-1 ring-inset ring-spotlight/30 px-2.5 py-1 rounded-full">
+      {render_slot(@inner_block)}
+      <button type="button" phx-click={@on_clear} class="hover:text-spotlight-deep">
+        <.icon name="hero-x-mark" class="size-3" />
+      </button>
+    </span>
     """
   end
 
@@ -472,14 +488,7 @@ defmodule MusicListingsWeb.FilterComponents do
                 {venue.name}
               </label>
               <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                <input
-                  id={"mobile-#{venue.id}"}
-                  name={venue.id}
-                  value="true"
-                  type="checkbox"
-                  checked={Integer.to_string(venue.id) in @venue_ids}
-                  class="rounded-sm border-hairline bg-ink-3 text-spotlight focus:ring-0 focus:ring-offset-0 cursor-pointer"
-                />
+                <.venue_checkbox id={"mobile-#{venue.id}"} venue={venue} venue_ids={@venue_ids} />
               </span>
             </li>
           <% end %>
@@ -648,34 +657,8 @@ defmodule MusicListingsWeb.FilterComponents do
     <div>
       <h3 class="kicker mb-3">Sort by</h3>
       <div class="inline-flex rounded-lg border border-hairline bg-ink-3 p-0.5">
-        <button
-          type="button"
-          phx-click="sort-changed"
-          phx-value-sort-by="title"
-          class={[
-            "px-4 py-2 text-sm rounded-md transition-colors",
-            if(@sort_by == "title",
-              do: "bg-spotlight/10 text-spotlight ring-1 ring-inset ring-spotlight/30",
-              else: "text-paper-dim hover:text-paper"
-            )
-          ]}
-        >
-          By Title
-        </button>
-        <button
-          type="button"
-          phx-click="sort-changed"
-          phx-value-sort-by="venue"
-          class={[
-            "px-4 py-2 text-sm rounded-md transition-colors",
-            if(@sort_by == "venue",
-              do: "bg-spotlight/10 text-spotlight ring-1 ring-inset ring-spotlight/30",
-              else: "text-paper-dim hover:text-paper"
-            )
-          ]}
-        >
-          By Venue
-        </button>
+        <.sort_button value="title" sort_by={@sort_by} class="px-4 py-2">By Title</.sort_button>
+        <.sort_button value="venue" sort_by={@sort_by} class="px-4 py-2">By Venue</.sort_button>
       </div>
     </div>
     """

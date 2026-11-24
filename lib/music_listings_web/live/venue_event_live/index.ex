@@ -203,10 +203,7 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
       </.when_admin>
     </div>
 
-    <div class="mb-2 flex items-end gap-5">
-      <h2 class="headline text-3xl whitespace-nowrap text-paper sm:text-4xl">Upcoming Events</h2>
-      <div class="mb-2 h-px flex-1 bg-hairline"></div>
-    </div>
+    <.section_heading class="mb-2">Upcoming Events</.section_heading>
 
     <.venue_events_list
       events={@events}
