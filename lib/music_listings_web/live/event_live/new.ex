@@ -77,48 +77,15 @@ defmodule MusicListingsWeb.EventLive.New do
             Know about an upcoming show that's not listed? Help us keep Toronto's music scene covered.
           </p>
           <div class="mt-4 space-y-4">
-            <div class="flex items-start gap-3">
-              <div class="mt-1 shrink-0 rounded-lg bg-spotlight/10 p-2">
-                <MusicListingsWeb.CoreComponents.icon
-                  name="hero-clock"
-                  class="size-5 text-spotlight"
-                />
-              </div>
-              <div>
-                <p class="text-sm font-semibold text-paper">Quick review</p>
-                <p class="text-sm text-paper-dim">
-                  Submissions are usually reviewed and approved within 24 hours.
-                </p>
-              </div>
-            </div>
-            <div class="flex items-start gap-3">
-              <div class="mt-1 shrink-0 rounded-lg bg-spotlight/10 p-2">
-                <MusicListingsWeb.CoreComponents.icon
-                  name="hero-musical-note"
-                  class="size-5 text-spotlight"
-                />
-              </div>
-              <div>
-                <p class="text-sm font-semibold text-paper">All genres welcome</p>
-                <p class="text-sm text-paper-dim">
-                  From jazz to punk, electronic to folk - if it's live music in Toronto, we want to list it.
-                </p>
-              </div>
-            </div>
-            <div class="flex items-start gap-3">
-              <div class="mt-1 shrink-0 rounded-lg bg-spotlight/10 p-2">
-                <MusicListingsWeb.CoreComponents.icon
-                  name="hero-information-circle"
-                  class="size-5 text-spotlight"
-                />
-              </div>
-              <div>
-                <p class="text-sm font-semibold text-paper">Just the basics</p>
-                <p class="text-sm text-paper-dim">
-                  Only the event title, venue, and date are required. Everything else is optional.
-                </p>
-              </div>
-            </div>
+            <.submission_tip icon="hero-clock" title="Quick review">
+              Submissions are usually reviewed and approved within 24 hours.
+            </.submission_tip>
+            <.submission_tip icon="hero-musical-note" title="All genres welcome">
+              From jazz to punk, electronic to folk - if it's live music in Toronto, we want to list it.
+            </.submission_tip>
+            <.submission_tip icon="hero-information-circle" title="Just the basics">
+              Only the event title, venue, and date are required. Everything else is optional.
+            </.submission_tip>
           </div>
         </.cta>
 
@@ -154,15 +121,33 @@ defmodule MusicListingsWeb.EventLive.New do
     ~H"""
     <div class="relative px-6 pt-10 pb-8 lg:static lg:px-8 lg:py-32">
       <div class="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
-        <p class="kicker flex items-center gap-2">
-          <span class="inline-block h-2 w-8 bg-spotlight"></span> Got a show?
-        </p>
+        <.kicker>Got a show?</.kicker>
         <h1 class="headline mt-4 text-6xl text-paper sm:text-7xl">
           {@header}
         </h1>
         <div class="mt-6 space-y-6 text-base leading-relaxed text-paper-dim lg:text-lg">
           {render_slot(@inner_block)}
         </div>
+      </div>
+    </div>
+    """
+  end
+
+  attr :icon, :string, required: true
+  attr :title, :string, required: true
+  slot :inner_block, required: true
+
+  defp submission_tip(assigns) do
+    ~H"""
+    <div class="flex items-start gap-3">
+      <div class="mt-1 shrink-0 rounded-lg bg-spotlight/10 p-2">
+        <.icon name={@icon} class="size-5 text-spotlight" />
+      </div>
+      <div>
+        <p class="text-sm font-semibold text-paper">{@title}</p>
+        <p class="text-sm text-paper-dim">
+          {render_slot(@inner_block)}
+        </p>
       </div>
     </div>
     """

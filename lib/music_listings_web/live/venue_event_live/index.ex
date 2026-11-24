@@ -230,9 +230,7 @@ defmodule MusicListingsWeb.VenueEventLive.Index do
     <div class="border-b border-hairline pb-8">
       <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
         <div class="flex-1">
-          <p class="kicker flex items-center gap-2">
-            <span class="inline-block h-2 w-8 bg-spotlight"></span> Venue
-          </p>
+          <.kicker>Venue</.kicker>
           <h1 class="headline mt-3 text-5xl text-paper sm:text-6xl lg:text-7xl">
             {@venue.name}
           </h1>
