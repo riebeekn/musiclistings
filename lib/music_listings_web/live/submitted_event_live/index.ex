@@ -174,19 +174,20 @@ defmodule MusicListingsWeb.SubmittedEventLive.Index do
     <div>
       <div class="flex items-center justify-between gap-4 border-b border-hairline pb-3">
         <label class="inline-flex items-center gap-2 text-sm text-paper-dim cursor-pointer">
-          <input
-            type="checkbox"
+          <.select_checkbox
             checked={@all_selected}
             phx-click="toggle-select-all"
             aria-label="Select all"
-            class="h-4 w-4 rounded border-paper-dim bg-ink-2 text-spotlight focus:ring-spotlight cursor-pointer"
           /> Select all
         </label>
         <button
           phx-click="delete-selected"
           data-confirm="Are you sure?"
           disabled={MapSet.size(@selected_ids) == 0}
-          class="inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition-colors rounded-full py-1 px-3 bg-ember/10 text-ember ring-1 ring-inset ring-ember/30 hover:bg-ember hover:text-ink disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-ember/10 disabled:hover:text-ember"
+          class={[
+            pill_class(),
+            "bg-ember/10 text-ember ring-1 ring-inset ring-ember/30 hover:bg-ember hover:text-ink disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-ember/10 disabled:hover:text-ember"
+          ]}
         >
           Delete selected ({MapSet.size(@selected_ids)})
         </button>
@@ -204,13 +205,11 @@ defmodule MusicListingsWeb.SubmittedEventLive.Index do
         >
           <div class="grid grid-cols-[auto_1fr] gap-x-3 gap-y-3 sm:grid-cols-[auto_1fr_auto] sm:items-start sm:gap-x-6">
             <div class="pt-1">
-              <input
-                type="checkbox"
+              <.select_checkbox
                 checked={MapSet.member?(@selected_ids, submitted_event.id)}
                 phx-click="toggle-select"
                 phx-value-id={submitted_event.id}
                 aria-label="Select submitted event"
-                class="h-4 w-4 rounded border-paper-dim bg-ink-2 text-spotlight focus:ring-spotlight cursor-pointer"
               />
             </div>
 
@@ -251,6 +250,24 @@ defmodule MusicListingsWeb.SubmittedEventLive.Index do
     """
   end
 
+  attr :checked, :boolean, required: true
+  attr :rest, :global
+
+  defp select_checkbox(assigns) do
+    ~H"""
+    <input
+      type="checkbox"
+      checked={@checked}
+      class="h-4 w-4 rounded border-paper-dim bg-ink-2 text-spotlight focus:ring-spotlight cursor-pointer"
+      {@rest}
+    />
+    """
+  end
+
+  defp pill_class do
+    "inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition-colors rounded-full py-1 px-3"
+  end
+
   defp submitted_event_actions(assigns) do
     ~H"""
     <div class="flex items-center gap-2 sm:justify-end">
@@ -260,7 +277,10 @@ defmodule MusicListingsWeb.SubmittedEventLive.Index do
       <.link
         :if={!@submitted_event.approved?}
         navigate={~p"/submitted_events/#{@submitted_event.id}/edit"}
-        class="inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition-colors rounded-full py-1 px-3 text-paper-dim ring-1 ring-inset ring-hairline hover:text-paper hover:ring-paper-dim"
+        class={[
+          pill_class(),
+          "text-paper-dim ring-1 ring-inset ring-hairline hover:text-paper hover:ring-paper-dim"
+        ]}
       >
         Edit
       </.link>
@@ -269,7 +289,10 @@ defmodule MusicListingsWeb.SubmittedEventLive.Index do
         phx-click="approve-submitted-event"
         phx-value-id={@submitted_event.id}
         data-confirm="Are you sure?"
-        class="inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition-colors rounded-full py-1 px-3 bg-spotlight/10 text-spotlight ring-1 ring-inset ring-spotlight/30 hover:bg-spotlight hover:text-ink"
+        class={[
+          pill_class(),
+          "bg-spotlight/10 text-spotlight ring-1 ring-inset ring-spotlight/30 hover:bg-spotlight hover:text-ink"
+        ]}
       >
         Approve
       </button>

@@ -786,6 +786,27 @@ defmodule MusicListingsWeb.CoreComponents do
   end
 
   @doc """
+  Renders a section's heading, followed by a line across the page
+
+  ## Example
+
+  <.section_heading class="mb-10">Get in touch</.section_heading>
+  """
+  attr :class, :string, default: nil, doc: "layout classes, e.g. margins"
+  slot :inner_block, required: true
+
+  def section_heading(assigns) do
+    ~H"""
+    <div class={["flex items-end gap-5", @class]}>
+      <h2 class="headline text-3xl whitespace-nowrap text-paper sm:text-4xl">
+        {render_slot(@inner_block)}
+      </h2>
+      <div class="mb-2 h-px flex-1 bg-hairline"></div>
+    </div>
+    """
+  end
+
+  @doc """
   Renders a button link
 
   ## Example
